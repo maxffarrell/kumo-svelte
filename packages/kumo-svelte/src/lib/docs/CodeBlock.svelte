@@ -11,16 +11,24 @@
   let copied = $state(false);
 
   const languageAliases: Record<string, string> = {
+    cjs: 'javascript',
+    cts: 'typescript',
+    gql: 'graphql',
+    js: 'javascript',
+    jsx: 'jsx',
+    md: 'markdown',
+    mjs: 'javascript',
+    mts: 'typescript',
+    py: 'python',
+    sh: 'bash',
+    shell: 'bash',
     svelte: 'svelte',
     ts: 'typescript',
     tsx: 'tsx',
-    js: 'javascript',
-    jsx: 'jsx',
-    sh: 'bash',
-    shell: 'bash',
+    txt: 'text',
+    yml: 'yaml',
     zsh: 'bash',
     jsonc: 'jsonc',
-    txt: 'text'
   };
 
   const normalizedCode = $derived(

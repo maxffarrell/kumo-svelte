@@ -27,4 +27,5 @@ jobs:
         run: pnpm build
 
       - name: Publish package preview
+        continue-on-error: true
         run: pnpm dlx pkg-pr-new publish --pnpm --compact --no-template ./packages/kumo-svelte

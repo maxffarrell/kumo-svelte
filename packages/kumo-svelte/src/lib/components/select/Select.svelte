@@ -123,7 +123,7 @@
         'inline-flex w-full items-center justify-between gap-2 bg-kumo-base text-left font-normal text-kumo-default shadow-xs outline-none ring ring-kumo-line transition focus:opacity-100 focus:ring-2 focus:ring-kumo-focus/50 focus-visible:ring-inset disabled:cursor-not-allowed disabled:opacity-50 *:in-focus:opacity-100',
         sizes[size],
         !value || (Array.isArray(value) && value.length === 0) ? 'text-kumo-placeholder' : undefined,
-        errorMessage ? '!ring-kumo-danger focus:ring-kumo-danger/50' : undefined,
+        errorMessage ? 'ring-kumo-danger! focus:ring-kumo-danger/50!' : undefined,
         className
       )}
       aria-label={rest['aria-label'] as string | undefined}

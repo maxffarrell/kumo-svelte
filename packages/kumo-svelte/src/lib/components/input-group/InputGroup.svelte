@@ -89,7 +89,7 @@
       focusMode === 'container'
         ? [
             'overflow-hidden bg-kumo-control ring ring-kumo-line',
-            'focus-within:ring-kumo-focus'
+            'focus-within:ring-kumo-focus/50 focus-within:ring-[1.5px]'
           ]
         : 'isolate overflow-visible bg-kumo-control ring-0 shadow-none',
       'has-[input[aria-invalid=true]]:ring-kumo-danger',

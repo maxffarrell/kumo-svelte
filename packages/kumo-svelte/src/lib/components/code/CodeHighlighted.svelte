@@ -14,14 +14,23 @@
   export type CodeHighlightedLang =
     | 'bash'
     | 'css'
+    | 'diff'
+    | 'graphql'
+    | 'hcl'
     | 'html'
     | 'javascript'
+    | 'jsx'
     | 'json'
     | 'jsonc'
+    | 'markdown'
+    | 'python'
+    | 'sql'
     | 'svelte'
+    | 'toml'
     | 'ts'
     | 'typescript'
-    | 'tsx';
+    | 'tsx'
+    | 'yaml';
 </script>
 
 <script lang="ts">
@@ -48,10 +57,18 @@
   }: Props = $props();
 
   const languageAliases: Record<string, string> = {
+    cjs: 'javascript',
+    cts: 'typescript',
+    gql: 'graphql',
     js: 'javascript',
+    md: 'markdown',
+    mjs: 'javascript',
+    mts: 'typescript',
+    py: 'python',
     sh: 'bash',
     shell: 'bash',
     ts: 'typescript',
+    yml: 'yaml',
     zsh: 'bash'
   };
 

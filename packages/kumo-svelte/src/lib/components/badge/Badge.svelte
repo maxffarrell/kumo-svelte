@@ -20,7 +20,20 @@
     blue: 'bg-kumo-badge-blue text-white'
   } as const;
 
+  export const KUMO_BADGE_APPEARANCES = {
+    filled: '',
+    dot: 'gap-1.5 bg-transparent text-kumo-default ring ring-kumo-hairline'
+  } as const;
+
+  export const KUMO_BADGE_DOT_COLORS = {
+    success: 'bg-kumo-badge-green',
+    warning: 'bg-kumo-badge-orange',
+    error: 'bg-kumo-badge-red',
+    neutral: 'bg-kumo-badge-neutral'
+  } as const;
+
   export type BadgeVariant = keyof typeof KUMO_BADGE_VARIANTS;
+  export type BadgeAppearance = keyof typeof KUMO_BADGE_APPEARANCES;
 </script>
 
 <script lang="ts">
@@ -31,12 +44,32 @@
     children?: Snippet;
     class?: string;
     variant?: BadgeVariant;
+    appearance?: BadgeAppearance;
     [key: string]: unknown;
   }
 
-  let { children, class: className, variant = 'primary', ...rest }: Props = $props();
+  let {
+    children,
+    class: className,
+    variant = 'primary',
+    appearance = 'filled',
+    ...rest
+  }: Props = $props();
+
+  const dotColor = $derived(appearance === 'dot' ? KUMO_BADGE_DOT_COLORS[variant as keyof typeof KUMO_BADGE_DOT_COLORS] : undefined);
 </script>
 
-<span class={cn(KUMO_BADGE_BASE_STYLES, KUMO_BADGE_VARIANTS[variant], className)} {...rest}>
+<span
+  class={cn(
+    KUMO_BADGE_BASE_STYLES,
+    appearance === 'dot' ? undefined : KUMO_BADGE_VARIANTS[variant],
+    KUMO_BADGE_APPEARANCES[appearance],
+    className
+  )}
+  {...rest}
+>
+  {#if dotColor}
+    <span aria-hidden="true" class={cn('size-1.75 shrink-0 rounded-full', dotColor)}></span>
+  {/if}
   {@render children?.()}
 </span>

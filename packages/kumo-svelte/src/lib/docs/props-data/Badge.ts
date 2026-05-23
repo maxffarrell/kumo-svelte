@@ -9,6 +9,13 @@ const rows: PropRow[] = [
     "description": "Visual variant."
   },
   {
+    "prop": "appearance",
+    "type": "'filled' | 'dot'",
+    "required": false,
+    "default": "\"filled\"",
+    "description": "Visual appearance. Dot renders an outlined badge with a small status indicator for success, warning, error, or neutral variants."
+  },
+  {
     "prop": "class",
     "type": "string",
     "required": false,

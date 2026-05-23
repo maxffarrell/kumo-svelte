@@ -108,7 +108,7 @@
   {/if}
 
   <TooltipPrimitive.Portal to={container}>
-    <TooltipPrimitive.Content class={popupClass} {side} {align} sideOffset={10}>
+    <TooltipPrimitive.Content class={cn('max-w-[var(--bits-floating-available-width)]', popupClass)} {side} {align} sideOffset={10}>
       <TooltipPrimitive.Arrow
         width={20}
         height={10}

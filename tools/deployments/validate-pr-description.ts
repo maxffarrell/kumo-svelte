@@ -43,23 +43,6 @@ export function validateDescription(
     return [];
   }
 
-  // Validate bonk review
-  // Flexible: allows optional leading whitespace/indentation
-  // Uses [ \t]* (space/tab only) after colon to require justification on same line
-  if (
-    !(
-      /^\s*-\s*\[x\]\s*bonk has reviewed the change/im.test(body) ||
-      /^\s*-\s*\[x\]\s*automated review not possible because:[ \t]*\S/im.test(
-        body,
-      )
-    )
-  ) {
-    errors.push(
-      "Your PR must have bonk review, or provide justification for why automated review is not possible. " +
-        "If providing a justification, it must be on the same line as the checkbox (e.g., '- [x] automated review not possible because: reason here').",
-    );
-  }
-
   // Validate tests
   // Flexible: allows optional leading whitespace/indentation
   // Uses [ \t]* (space/tab only) after colon to require justification on same line

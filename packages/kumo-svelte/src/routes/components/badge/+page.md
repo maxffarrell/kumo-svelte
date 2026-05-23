@@ -52,6 +52,12 @@ Other variants for specific products/use cases where the semantic badges aren't 
 
 <ComponentExample demo="BadgeColorVariantsDemo" />
 
+### Dot appearance
+
+Use `appearance="dot"` with `success`, `warning`, `error`, or `neutral` variants to show a compact status indicator.
+
+<ComponentExample demo="BadgeDotDemo" />
+
 ### In a sentence
 
 <ComponentExample demo="BadgeInSentenceDemo" />

@@ -9,6 +9,7 @@
     "changeset": "tsx ci/scripts/ensure-changeset-config.ts && changeset",
     "check": "pnpm --filter kumo-svelte check",
     "deploy": "pnpm --filter kumo-svelte deploy",
+    "deploy:preview": "pnpm --filter kumo-svelte exec wrangler versions upload",
     "deploy:kumo-docs-preview": "bash ci/versioning/deploy-kumo-docs-preview.sh",
     "deploy:kumo-docs-staging": "bash ci/versioning/deploy-kumo-docs-staging.sh",
     "dev": "pnpm --filter kumo-svelte dev",

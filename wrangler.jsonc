@@ -1,0 +1,21 @@
+{
+  "$schema": "./packages/kumo-svelte/node_modules/wrangler/config-schema.json",
+  "name": "kumo-svelte",
+  "main": "packages/kumo-svelte/.svelte-kit/cloudflare/_worker.js",
+  "account_id": "ecb6cf90208469786cff01f71ef0a8cd",
+  "compatibility_date": "2026-05-16",
+  "compatibility_flags": ["nodejs_als"],
+  "preview_urls": true,
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "packages/kumo-svelte/.svelte-kit/cloudflare",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [
+    {
+      "pattern": "kumo-svelte.com",
+      "custom_domain": true
+    }
+  ]
+}

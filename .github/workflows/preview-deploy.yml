@@ -47,8 +47,16 @@ jobs:
           COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           set -euo pipefail
+          if [ -z "${CLOUDFLARE_API_TOKEN}" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN repository secret is required to publish Worker previews"
+            exit 1
+          fi
+
           COMMIT_SHORT="${COMMIT_SHA:0:7}"
-          VERSION_OUTPUT="$(pnpm exec wrangler versions upload --env="" --message "PR #${PR_NUMBER} (${COMMIT_SHORT})" 2>&1)"
+          if ! VERSION_OUTPUT="$(pnpm exec wrangler versions upload --env="" --message "PR #${PR_NUMBER} (${COMMIT_SHORT})" 2>&1)"; then
+            printf '%s\n' "$VERSION_OUTPUT"
+            exit 1
+          fi
           printf '%s\n' "$VERSION_OUTPUT"
 
           PREVIEW_URL="$(printf '%s\n' "$VERSION_OUTPUT" | grep -Eo 'https://[^ ]+workers\.dev[^ ]*' | head -n 1 || true)"

@@ -10,6 +10,7 @@
   <meta name="kumo-version" content={__KUMO_VERSION__} />
   <meta name="docs-version" content={__DOCS_VERSION__} />
   <meta name="build-date" content={__BUILD_DATE__} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -32,7 +33,6 @@
     <div id="main-content" class="main-content mt-12 md:mt-0 md:ml-12 transition-[margin] duration-300">
       <slot />
     </div>
-    <div id="kumo-floating-root" class="contents"></div>
   </div>
 </TooltipProvider>
 

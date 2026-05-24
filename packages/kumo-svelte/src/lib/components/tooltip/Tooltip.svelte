@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Tooltip as TooltipPrimitive } from 'bits-ui';
-  import { onMount } from 'svelte';
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
 
@@ -65,11 +64,6 @@
   }: Props = $props();
 
   let internalOpen = $state(false);
-  let defaultContainer = $state<HTMLElement | undefined>();
-
-  onMount(() => {
-    defaultContainer = document.getElementById('kumo-floating-root') ?? undefined;
-  });
 
   function tooltipVariants({ side = KUMO_TOOLTIP_DEFAULT_VARIANTS.side }: { side?: TooltipSide } = {}) {
     return cn(
@@ -114,7 +108,7 @@
     <TooltipPrimitive.Trigger child={defaultTriggerChild} />
   {/if}
 
-  <TooltipPrimitive.Portal to={container ?? defaultContainer}>
+  <TooltipPrimitive.Portal to={container}>
     <TooltipPrimitive.Content class={cn('max-w-[var(--bits-floating-available-width)]', popupClass)} {side} {align} sideOffset={10}>
       <TooltipPrimitive.Arrow
         width={20}

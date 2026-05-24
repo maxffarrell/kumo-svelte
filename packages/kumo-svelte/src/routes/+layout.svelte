@@ -32,6 +32,7 @@
     <div id="main-content" class="main-content mt-12 md:mt-0 md:ml-12 transition-[margin] duration-300">
       <slot />
     </div>
+    <div id="kumo-floating-root" class="contents"></div>
   </div>
 </TooltipProvider>
 

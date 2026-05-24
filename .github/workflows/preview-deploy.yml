@@ -8,15 +8,19 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  issues: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-preview:
+  deploy-preview:
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 10
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository }}
+    outputs:
+      preview_url: ${{ steps.deploy.outputs.preview_url }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -27,9 +31,80 @@ jobs:
       - name: Build Worker assets
         run: pnpm build
 
-      - name: Upload Worker build
+      - name: Upload Worker artifact
         uses: actions/upload-artifact@v7
         with:
           name: kumo-svelte-worker
           path: packages/kumo-svelte/.svelte-kit/cloudflare
           retention-days: 7
+
+      - name: Upload Worker preview version
+        id: deploy
+        working-directory: packages/kumo-svelte
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.run_number }}
+          COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          COMMIT_SHORT="${COMMIT_SHA:0:7}"
+          VERSION_OUTPUT="$(pnpm exec wrangler versions upload --env="" --message "PR #${PR_NUMBER} (${COMMIT_SHORT})" 2>&1)"
+          printf '%s\n' "$VERSION_OUTPUT"
+
+          PREVIEW_URL="$(printf '%s\n' "$VERSION_OUTPUT" | grep -Eo 'https://[^ ]+workers\.dev[^ ]*' | head -n 1 || true)"
+          if [ -z "$PREVIEW_URL" ]; then
+            VERSION_ID="$(printf '%s\n' "$VERSION_OUTPUT" | grep -Eo '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' | head -n 1 || true)"
+            if [ -n "$VERSION_ID" ]; then
+              VERSION_PREFIX="$(printf '%s' "$VERSION_ID" | cut -c1-8)"
+              PREVIEW_URL="https://${VERSION_PREFIX}-kumo-svelte.maxffarrell.workers.dev"
+            fi
+          fi
+
+          if [ -z "$PREVIEW_URL" ]; then
+            echo "::error::Failed to determine Worker preview URL"
+            exit 1
+          fi
+
+          echo "preview_url=$PREVIEW_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment preview URL
+        uses: actions/github-script@v8
+        if: ${{ github.event_name == 'pull_request' && steps.deploy.outputs.preview_url != '' }}
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.preview_url }}
+        with:
+          script: |
+            const marker = '<!-- kumo-svelte-preview -->';
+            const previewUrl = process.env.PREVIEW_URL;
+            const body = [
+              marker,
+              '### Kumo Svelte Preview',
+              '',
+              `[View preview](${previewUrl})`,
+            ].join('\n');
+
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number,
+              per_page: 100,
+            });
+            const existing = comments.find((comment) => comment.body?.startsWith(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }

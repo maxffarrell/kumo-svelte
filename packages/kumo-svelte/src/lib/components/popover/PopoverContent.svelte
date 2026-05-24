@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Popover as PopoverPrimitive } from 'bits-ui';
-  import { onMount } from 'svelte';
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
 
@@ -37,12 +36,6 @@
     ...rest
   }: Props = $props();
 
-  let defaultContainer = $state<HTMLElement | undefined>();
-
-  onMount(() => {
-    defaultContainer = document.getElementById('kumo-floating-root') ?? undefined;
-  });
-
   let contentClass = $derived(
     cn(
       'kumo-popover-popup flex origin-(--bits-floating-transform-origin) flex-col rounded-lg bg-kumo-base px-4 py-3 text-sm text-kumo-default',
@@ -56,7 +49,7 @@
   );
 </script>
 
-<PopoverPrimitive.Portal to={container ?? defaultContainer}>
+<PopoverPrimitive.Portal to={container}>
   <PopoverPrimitive.Content
     class={contentClass}
     {side}

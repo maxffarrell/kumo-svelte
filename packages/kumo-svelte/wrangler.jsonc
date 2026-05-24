@@ -5,7 +5,7 @@
   "account_id": "ecb6cf90208469786cff01f71ef0a8cd",
   "compatibility_date": "2026-05-16",
   "compatibility_flags": ["nodejs_als"],
-  "preview_urls": false,
+  "preview_urls": true,
   "assets": {
     "binding": "ASSETS",
     "directory": ".svelte-kit/cloudflare",

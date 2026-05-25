@@ -315,11 +315,13 @@
                                 <div
                                     id="home-tooltip-add"
                                     role="tooltip"
-                                    class="kumo-tooltip-popup absolute bottom-[calc(100%+10px)] left-1/2 z-10 flex -translate-x-1/2 flex-col rounded-md bg-kumo-base px-2.5 py-1.5 text-sm whitespace-nowrap text-kumo-default shadow-lg shadow-kumo-tip-shadow outline outline-1 outline-kumo-fill"
+                                    data-side="top"
+                                    class="kumo-tooltip-popup absolute bottom-[calc(100%+10px)] left-1/2 z-10 flex -translate-x-1/2 flex-col rounded-md bg-kumo-base px-2.5 py-1.5 text-sm whitespace-nowrap text-kumo-default shadow-lg shadow-kumo-tip-shadow outline outline-kumo-fill"
                                 >
                                     Add
                                     <span
-                                        class="absolute bottom-[-8px] left-1/2 flex -translate-x-1/2 rotate-180"
+                                        class="kumo-tooltip-arrow absolute bottom-[-8px] left-1/2 flex -translate-x-1/2 rotate-180"
+                                        data-side="top"
                                         aria-hidden="true"
                                     >
                                         <svg

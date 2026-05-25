@@ -26,7 +26,7 @@
     class: className,
     side = 'bottom',
     align = 'center',
-    sideOffset = 8,
+    sideOffset = 0,
     alignOffset = 0,
     strategy,
     positionMethod,

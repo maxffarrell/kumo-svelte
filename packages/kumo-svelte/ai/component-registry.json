@@ -305,6 +305,16 @@
           "default": "primary",
           "description": "Visual variant."
         },
+        "appearance": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "filled",
+            "dot"
+          ],
+          "default": "filled",
+          "description": "Visual appearance. Dot renders an outlined badge with a small status indicator for success, warning, error, or neutral variants."
+        },
         "class": {
           "type": "string",
           "optional": true,
@@ -334,6 +344,7 @@
         "bg-kumo-warning-tint",
         "border-kumo-brand",
         "border-kumo-fill",
+        "ring-kumo-hairline",
         "text-kumo-badge-inverted",
         "text-kumo-badge-neutral-subtle",
         "text-kumo-badge-teal-subtle",
@@ -3865,6 +3876,7 @@
         "bg-kumo-base",
         "bg-kumo-tint",
         "ring-kumo-brand",
+        "ring-kumo-danger",
         "ring-kumo-focus",
         "ring-kumo-line",
         "text-kumo-default",

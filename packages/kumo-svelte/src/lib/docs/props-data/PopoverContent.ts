@@ -25,7 +25,7 @@ const rows: PropRow[] = [
     "prop": "sideOffset",
     "type": "number",
     "required": false,
-    "default": "8",
+    "default": "0",
     "description": "Distance from the anchor side."
   },
   {

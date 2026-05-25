@@ -159,34 +159,26 @@
 
 <style>
   :global(.kumo-tooltip-arrow[data-side='top']) {
-    top: calc(100% - 1px) !important;
-    right: auto !important;
-    bottom: auto !important;
-    left: calc(50% - 10px) !important;
-    transform: rotate(180deg) !important;
+    top: auto !important;
+    bottom: -8px !important;
+    transform: none !important;
   }
 
   :global(.kumo-tooltip-arrow[data-side='bottom']) {
-    top: auto !important;
-    right: auto !important;
-    bottom: calc(100% - 1px) !important;
-    left: calc(50% - 10px) !important;
+    top: -8px !important;
+    bottom: auto !important;
     transform: none !important;
   }
 
   :global(.kumo-tooltip-arrow[data-side='left']) {
-    top: calc(50% - 5px) !important;
     right: -13px !important;
-    bottom: auto !important;
     left: auto !important;
-    transform: rotate(90deg) !important;
+    transform: none !important;
   }
 
   :global(.kumo-tooltip-arrow[data-side='right']) {
-    top: calc(50% - 5px) !important;
     right: auto !important;
-    bottom: auto !important;
     left: -13px !important;
-    transform: rotate(-90deg) !important;
+    transform: none !important;
   }
 </style>

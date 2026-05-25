@@ -319,7 +319,7 @@
                                 >
                                     Add
                                     <span
-                                        class="absolute top-[calc(100%-1px)] left-1/2 flex -translate-x-1/2 rotate-180"
+                                        class="absolute bottom-[-8px] left-1/2 flex -translate-x-1/2 rotate-180"
                                         aria-hidden="true"
                                     >
                                         <svg

@@ -468,15 +468,11 @@
                         class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default"
                         >SkeletonLine</a
                     >
-                    <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
-                    >
-                        <div class="flex w-[200px] flex-col gap-2">
-                            <SkeletonLine minWidth={50} maxWidth={100} />
-                            <SkeletonLine minWidth={100} />
-                            <SkeletonLine minWidth={50} maxWidth={150} />
-                        </div>
-                    </div>
+                    <div class="flex w-[200px] flex-col gap-2">
+                              <SkeletonLine minWidth={50} maxWidth={100} />
+                              <SkeletonLine minWidth={100} />
+                              <SkeletonLine minWidth={50} maxWidth={150} />
+                            </div>
                 </li>
 
                 <li

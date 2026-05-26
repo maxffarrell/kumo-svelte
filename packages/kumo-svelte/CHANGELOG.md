@@ -1,5 +1,11 @@
 # kumo-svelte
 
+## 0.1.7
+
+### Patch Changes
+
+- 61c539e: Port May 15+ upstream Kumo updates including Badge dot appearance, broader code language aliases, tooltip viewport width constraints, and form error ring parity.
+
 ## 0.1.6
 
 ### Patch Changes

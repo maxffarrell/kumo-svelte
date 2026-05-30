@@ -11,18 +11,40 @@
 
   let { children, class: className, ...rest }: Props = $props();
   const sidebar = getSidebarContext('Sidebar');
-  const railWidth = $derived(sidebar.open ? 'var(--sidebar-width)' : sidebar.collapsible === 'icon' ? 'var(--sidebar-width-icon)' : '0px');
-  const contentWidth = $derived(sidebar.open || sidebar.isPeeking ? 'var(--sidebar-width)' : sidebar.collapsible === 'icon' ? 'var(--sidebar-width-icon)' : '0px');
+  const isAlwaysExpanded = $derived(sidebar.collapsible === 'none');
+  const isVisible = $derived(sidebar.open || sidebar.isPeeking || isAlwaysExpanded);
+  const railWidth = $derived(isAlwaysExpanded || sidebar.open ? 'var(--sidebar-width)' : sidebar.collapsible === 'icon' ? 'var(--sidebar-width-icon)' : '0px');
+  const contentWidth = $derived(isVisible ? 'var(--sidebar-width)' : sidebar.collapsible === 'icon' ? 'var(--sidebar-width-icon)' : '0px');
 </script>
+
+{#if sidebar.isMobile && sidebar.open}
+  <button
+    type="button"
+    aria-label="Close sidebar"
+    class="fixed inset-0 z-40 bg-black/40 md:hidden"
+    data-sidebar="mobile-backdrop"
+    data-kumo-component="Sidebar"
+    data-kumo-part="mobile-backdrop"
+    onclick={() => sidebar.setOpen(false)}
+  ></button>
+{/if}
 
 <aside
   data-state={sidebar.state}
   data-side={sidebar.side}
   data-variant={sidebar.variant}
   data-collapsible={sidebar.collapsible}
+  data-mobile={sidebar.isMobile ? '' : undefined}
   data-sidebar="sidebar"
   style:width={railWidth}
-  class={cn('group/sidebar relative h-full shrink-0 grow-0 overflow-visible transition-[width] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none', sidebar.variant === 'floating' && 'm-2 rounded-lg shadow-lg', className)}
+  class={cn(
+    'group/sidebar relative h-full shrink-0 grow-0 overflow-visible transition-[width] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none',
+    sidebar.isMobile && 'fixed inset-y-0 z-50 w-0 md:relative md:z-auto',
+    sidebar.isMobile && sidebar.side === 'left' && 'left-0',
+    sidebar.isMobile && sidebar.side === 'right' && 'right-0',
+    sidebar.variant === 'floating' && 'm-2 rounded-lg shadow-lg',
+    className
+  )}
   {...rest}
 >
   <div
@@ -34,19 +56,13 @@
       sidebar.variant === 'floating' && 'rounded-lg border border-kumo-line',
       !sidebar.open && 'absolute inset-y-0 z-40',
       !sidebar.open && sidebar.side === 'left' && 'left-0',
-      !sidebar.open && sidebar.side === 'right' && 'right-0'
+      !sidebar.open && sidebar.side === 'right' && 'right-0',
+      sidebar.isMobile && 'fixed inset-y-0 max-w-[85vw] shadow-xl md:static md:max-w-none md:shadow-none',
+      sidebar.isMobile && !sidebar.open && 'hidden md:flex',
+      sidebar.isMobile && sidebar.side === 'left' && 'left-0',
+      sidebar.isMobile && sidebar.side === 'right' && 'right-0'
     )}
   >
-    <div
-      data-sidebar="peek-zone"
-      class="flex min-h-0 flex-1 flex-col"
-      role="presentation"
-      onmouseenter={sidebar.startPeek}
-      onmouseleave={sidebar.stopPeek}
-      onfocus={sidebar.startPeek}
-      onblur={sidebar.stopPeek}
-    >
-      {@render children?.()}
-    </div>
+    {@render children?.()}
   </div>
 </aside>

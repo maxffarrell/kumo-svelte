@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { Tooltip as TooltipPrimitive } from 'bits-ui';
   import type { SeriesOption } from 'echarts';
   import type { EChartsType } from 'echarts/core';
   import Chart, { type ChartEvents, type KumoChartOption } from './Chart.svelte';
@@ -69,6 +70,7 @@
   let chartRef: EChartsType | null = $state(null);
   let detectedDarkMode = $state(false);
   let containerRef: HTMLDivElement;
+  let tooltipAnchor: HTMLSpanElement | null = $state(null);
   let tooltipState: { ts: number; rows: { name: string; value: number; color: string }[]; hiddenCount: number } | null = $state(null);
   let mousePos = $state({ x: 0, y: 0 });
   const effectiveDarkMode = $derived(isDarkMode ?? detectedDarkMode);
@@ -303,20 +305,15 @@
     mousePos = { x: event.clientX - rect.left, y: event.clientY - rect.top };
   }
 
-  const tooltipStyle = $derived.by(() => {
-    const tooltipWidth = 280;
-    const tooltipHeight = 180;
-    const sideOffset = 12;
-    const padding = 8;
-    let x = mousePos.x + sideOffset;
-    let y = tooltipFollowCursor === 'x' ? 12 : mousePos.y + sideOffset;
+  const tooltipAnchorStyle = $derived.by(() => {
+    const x = mousePos.x;
+    const y = tooltipFollowCursor === 'x' ? 12 : mousePos.y;
+    return `left:${x}px;top:${y}px;`;
+  });
 
-    if (tooltipBoundary !== undefined && containerRef) {
-      x = Math.min(Math.max(padding, x), Math.max(padding, containerRef.clientWidth - tooltipWidth - padding));
-      y = Math.min(Math.max(padding, y), Math.max(padding, containerRef.clientHeight - tooltipHeight - padding));
-    }
-
-    return `left:${x}px;top:${y}px;max-width:${tooltipWidth}px;`;
+  const tooltipCollisionBoundary = $derived.by(() => {
+    if (tooltipBoundary === undefined || tooltipBoundary === 'clipping-ancestors') return undefined;
+    return tooltipBoundary;
   });
 </script>
 
@@ -345,30 +342,42 @@
   {:else}
     <Chart {echarts} bind:chartRef options={options} {height} isDarkMode={effectiveDarkMode} onEvents={events} optionUpdateBehavior={optionUpdateBehavior as any} />
   {/if}
+  <span bind:this={tooltipAnchor} aria-hidden="true" class="pointer-events-none absolute size-px" style={tooltipAnchorStyle}></span>
   {#if tooltipState}
     {@const formatFn = tooltipValueFormat ?? yAxisTickLabelFormat}
-    <div
-      class="pointer-events-none absolute z-50 min-w-[150px] rounded-lg bg-kumo-base p-2 text-kumo-default shadow-lg shadow-kumo-tip-shadow outline outline-1 outline-kumo-fill"
-      style={tooltipStyle}
-      data-mode={effectiveDarkMode ? 'dark' : 'light'}
-      role="tooltip"
-      aria-label={`Values at ${formatAriaTimestamp(tooltipState.ts)}`}
-    >
-      <div class="mb-1 text-xs font-semibold text-kumo-default">{formatTimestamp(tooltipState.ts)}</div>
-      {#each tooltipState.rows as row (row.name)}
-        <div class="flex items-center justify-between gap-4 py-0.5">
-          <div class="flex min-w-0 items-center gap-2">
-            <span class="size-3 shrink-0 rounded-full" style:background-color={row.color}></span>
-            <span class="truncate text-xs font-medium text-kumo-default" title={row.name}>{row.name}</span>
-          </div>
-          <span class="shrink-0 text-xs font-semibold text-kumo-default">
-            {formatFn ? formatFn(row.value) : formatDefaultValue(row.value)}
-          </span>
-        </div>
-      {/each}
-      {#if tooltipState.hiddenCount > 0}
-        <div class="mt-1 text-xs text-kumo-subtle">+{tooltipState.hiddenCount} more</div>
-      {/if}
-    </div>
+    <TooltipPrimitive.Root open={true} delayDuration={0} disableHoverableContent>
+      <TooltipPrimitive.Portal>
+        <TooltipPrimitive.Content
+          class="pointer-events-none z-50 min-w-[150px] max-w-[280px] rounded-lg bg-kumo-base p-2 text-kumo-default shadow-lg shadow-kumo-tip-shadow outline outline-1 outline-kumo-fill"
+          customAnchor={tooltipAnchor}
+          side="right"
+          align="start"
+          sideOffset={12}
+          collisionPadding={8}
+          collisionBoundary={tooltipCollisionBoundary}
+          avoidCollisions
+          strategy="fixed"
+          updatePositionStrategy="always"
+          data-mode={effectiveDarkMode ? 'dark' : 'light'}
+          aria-label={`Values at ${formatAriaTimestamp(tooltipState.ts)}`}
+        >
+          <div class="mb-1 text-xs font-semibold text-kumo-default">{formatTimestamp(tooltipState.ts)}</div>
+          {#each tooltipState.rows as row (row.name)}
+            <div class="flex items-center justify-between gap-4 py-0.5">
+              <div class="flex min-w-0 items-center gap-2">
+                <span class="size-3 shrink-0 rounded-full" style:background-color={row.color}></span>
+                <span class="truncate text-xs font-medium text-kumo-default" title={row.name}>{row.name}</span>
+              </div>
+              <span class="shrink-0 text-xs font-semibold text-kumo-default">
+                {formatFn ? formatFn(row.value) : formatDefaultValue(row.value)}
+              </span>
+            </div>
+          {/each}
+          {#if tooltipState.hiddenCount > 0}
+            <div class="mt-1 text-xs text-kumo-subtle">+{tooltipState.hiddenCount} more</div>
+          {/if}
+        </TooltipPrimitive.Content>
+      </TooltipPrimitive.Portal>
+    </TooltipPrimitive.Root>
   {/if}
 </div>

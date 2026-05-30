@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
+  import { getSidebarMenuItemContext } from './context';
 
   interface Props {
     children?: Snippet;
@@ -14,6 +15,7 @@
   }
 
   let { children, class: className, icon: Icon, active = false, size = 'base', href, tooltip, ...rest }: Props = $props();
+  const menuItem = getSidebarMenuItemContext();
 
   const classes = $derived(
     cn(
@@ -28,7 +30,7 @@
   );
 </script>
 
-<li data-sidebar="menu-item" class="relative group-data-[state=collapsed]/sidebar:overflow-hidden">
+{#snippet control()}
   {#if href}
     <a
       class={cn(classes, 'no-underline!')}
@@ -39,6 +41,7 @@
       data-kumo-component="Sidebar"
       data-kumo-part="menu-button-link"
       data-size={size}
+      aria-label={tooltip}
       {...rest}
     >
       <span class="flex min-w-0 flex-1 items-center gap-3">
@@ -56,6 +59,7 @@
       data-kumo-component="Sidebar"
       data-kumo-part="menu-button"
       data-size={size}
+      aria-label={tooltip}
       {...rest}
     >
       <span class="flex min-w-0 flex-1 items-center gap-3">
@@ -64,4 +68,12 @@
       </span>
     </button>
   {/if}
-</li>
+{/snippet}
+
+{#if menuItem?.insideMenuItem}
+  {@render control()}
+{:else}
+  <li data-sidebar="menu-item" class="relative group-data-[state=collapsed]/sidebar:overflow-hidden">
+    {@render control()}
+  </li>
+{/if}

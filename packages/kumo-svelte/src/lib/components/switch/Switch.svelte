@@ -94,6 +94,7 @@
     id={controlId}
     aria-label={controlLabel}
     aria-busy={transitioning || undefined}
+    data-kumo-component="Switch"
     onCheckedChange={handleCheckedChange}
     class={cn(
       'relative inline-flex items-center ring cursor-pointer border-none p-0',
@@ -121,7 +122,7 @@
 {/snippet}
 
 {#if label || children}
-  <span class={cn('m-0 relative inline-flex items-center gap-2', !controlFirst && 'flex-row-reverse justify-end', disabled && 'opacity-50')}>
+  <span data-kumo-component="Switch" data-kumo-part="label" class={cn('m-0 relative inline-flex items-center gap-2', !controlFirst && 'flex-row-reverse justify-end', disabled && 'opacity-50')}>
     {@render control()}
     <label for={controlId} class={cn('text-base font-medium text-kumo-default', disabled ? 'cursor-not-allowed' : 'cursor-pointer')}>
       {#if label}{label}{:else}{@render children?.()}{/if}

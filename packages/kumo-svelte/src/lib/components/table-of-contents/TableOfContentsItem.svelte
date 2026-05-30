@@ -30,6 +30,8 @@
   {#if as === 'button'}
     <button
       aria-current={active ? 'true' : undefined}
+      data-kumo-component="TableOfContents"
+      data-kumo-part="item"
       class={itemClass}
       {...rest}
     >
@@ -39,6 +41,8 @@
     <a
       {href}
       aria-current={active ? 'true' : undefined}
+      data-kumo-component="TableOfContents"
+      data-kumo-part="item"
       class={itemClass}
       {...rest}
     >

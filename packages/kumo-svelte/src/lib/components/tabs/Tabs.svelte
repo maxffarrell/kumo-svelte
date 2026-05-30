@@ -263,6 +263,8 @@
         <TabsPrimitive.Trigger
           value={tab.value}
           disabled={tab.disabled}
+          data-kumo-component="Tabs"
+          data-kumo-part="tab"
           class={cn(
             'relative z-2 flex items-center rounded bg-transparent whitespace-nowrap focus:outline-none focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
             isOverflowing ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',

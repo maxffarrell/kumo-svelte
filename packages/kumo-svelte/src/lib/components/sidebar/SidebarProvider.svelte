@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import {
@@ -49,18 +50,39 @@
 
   let width: number = $state(256);
   let isPeeking: boolean = $state(false);
+  let isMobile: boolean = $state(false);
+  let openMobile: boolean = $state(false);
+  let isResizing: boolean = $state(false);
 
-  const sidebarState: SidebarState = $derived(isPeeking ? 'peeking' : open ? 'expanded' : 'collapsed');
+  const visibleOpen = $derived(isMobile ? openMobile : open);
+  const sidebarState: SidebarState = $derived(isPeeking ? 'peeking' : visibleOpen ? 'expanded' : 'collapsed');
   const sidebarWidth = $derived(resizable ? `${width}px` : '16.25rem');
+
+  onMount(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const update = () => {
+      isMobile = media.matches;
+      if (!media.matches) openMobile = false;
+    };
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  });
 
   $effect(() => {
     width = Math.min(maxWidth, Math.max(minWidth, defaultWidth));
   });
 
   function setOpen(nextOpen: boolean) {
-    open = nextOpen;
+    if (isMobile) openMobile = nextOpen;
+    else open = nextOpen;
     if (nextOpen) isPeeking = false;
     onOpenChange?.(nextOpen);
+  }
+
+  function setOpenMobile(nextOpen: boolean) {
+    openMobile = nextOpen;
+    if (nextOpen) isPeeking = false;
   }
 
   function setWidth(nextWidth: number) {
@@ -69,7 +91,7 @@
   }
 
   function toggleSidebar() {
-    setOpen(!open);
+    setOpen(!visibleOpen);
   }
 
   function startPeek() {
@@ -85,9 +107,16 @@
       return sidebarState;
     },
     get open() {
-      return open;
+      return visibleOpen;
     },
     setOpen,
+    get isMobile() {
+      return isMobile;
+    },
+    get openMobile() {
+      return openMobile;
+    },
+    setOpenMobile,
     get side() {
       return side;
     },
@@ -97,11 +126,23 @@
     get collapsible() {
       return collapsible;
     },
+    get contained() {
+      return contained;
+    },
+    get animationDuration() {
+      return animationDuration;
+    },
     get width() {
       return width;
     },
     get resizable() {
       return resizable;
+    },
+    get isResizing() {
+      return isResizing;
+    },
+    setIsResizing(nextIsResizing: boolean) {
+      isResizing = nextIsResizing;
     },
     get minWidth() {
       return minWidth;
@@ -126,6 +167,8 @@
   data-sidebar-wrapper
   data-state={sidebarState}
   data-side={side}
+  data-mobile={isMobile ? '' : undefined}
+  data-resizing={isResizing ? '' : undefined}
   data-contained={contained ? '' : undefined}
   style:--sidebar-width={sidebarWidth}
   style:--sidebar-width-icon="57px"

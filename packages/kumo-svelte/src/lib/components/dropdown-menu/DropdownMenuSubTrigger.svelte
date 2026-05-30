@@ -16,6 +16,8 @@
 </script>
 
 <DropdownMenuPrimitive.SubTrigger
+  data-kumo-component="DropdownMenu"
+  data-kumo-part="submenu-trigger"
   class={cn(
     'flex cursor-default items-center rounded-sm text-base outline-hidden select-none',
     'px-2 py-1.5',

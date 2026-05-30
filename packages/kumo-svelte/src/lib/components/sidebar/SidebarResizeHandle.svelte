@@ -10,6 +10,7 @@
   function onPointerDown(event: PointerEvent) {
     if (!sidebar.resizable) return;
     event.preventDefault();
+    sidebar.setIsResizing(true);
     startX = event.clientX;
     startWidth = sidebar.open ? sidebar.width : sidebar.minWidth;
 
@@ -24,6 +25,7 @@
       sidebar.setWidth(nextWidth);
     };
     const onUp = () => {
+      sidebar.setIsResizing(false);
       document.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerup', onUp);
     };

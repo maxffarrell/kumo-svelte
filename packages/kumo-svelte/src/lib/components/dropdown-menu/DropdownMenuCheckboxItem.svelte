@@ -18,6 +18,8 @@
 <DropdownMenuPrimitive.CheckboxItem
   bind:checked
   {onCheckedChange}
+  data-kumo-component="DropdownMenu"
+  data-kumo-part="checkbox-item"
   class={cn(
     'relative flex cursor-default items-center rounded-sm py-1.5 pr-2 pl-8 text-base outline-hidden transition-colors select-none focus:bg-kumo-tint focus:text-kumo-default focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
     className

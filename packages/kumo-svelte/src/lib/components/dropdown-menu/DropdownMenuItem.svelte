@@ -63,7 +63,7 @@
   );
 </script>
 
-<DropdownMenuPrimitive.Item class={itemClasses} {disabled} {...rest}>
+<DropdownMenuPrimitive.Item class={itemClasses} {disabled} data-kumo-component="DropdownMenu" data-kumo-part="item" {...rest}>
   {#if href}
     {#snippet child({ props }: { props: Record<string, unknown> })}
       <a
@@ -71,6 +71,8 @@
         {href}
         {target}
         rel={rel ?? (target === '_blank' ? 'noreferrer' : undefined)}
+        data-kumo-component="DropdownMenu"
+        data-kumo-part="link-item"
         class={cn('flex w-full items-center text-inherit no-underline', props.class as string | undefined)}
       >
         {#if Icon}<Icon class="mr-2 h-4 w-4" />{/if}

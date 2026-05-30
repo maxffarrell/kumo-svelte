@@ -74,6 +74,7 @@
     {id}
     aria-label={controlLabel}
     aria-labelledby={ariaLabelledBy}
+    data-kumo-component="Checkbox"
     {onCheckedChange}
     {onIndeterminateChange}
     class={cn(
@@ -94,7 +95,7 @@
 {/snippet}
 
 {#if label || children}
-  <label class={cn('!m-0 !min-h-0 !text-base inline-flex items-center gap-2', controlFirst ? 'flex-row' : 'flex-row-reverse justify-end', disabled ? 'cursor-not-allowed' : 'cursor-pointer')}>
+  <label data-kumo-component="Checkbox" data-kumo-part="label" class={cn('!m-0 !min-h-0 !text-base inline-flex items-center gap-2', controlFirst ? 'flex-row' : 'flex-row-reverse justify-end', disabled ? 'cursor-not-allowed' : 'cursor-pointer')}>
     {@render control()}
     <span class="inline-flex items-center gap-1 text-base font-medium text-kumo-default">
       {#if label}{label}{:else}{@render children?.()}{/if}

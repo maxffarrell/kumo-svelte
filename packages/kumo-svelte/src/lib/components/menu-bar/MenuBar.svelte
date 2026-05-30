@@ -122,6 +122,8 @@
       <button
         {...props}
         aria-label={option.tooltip}
+        data-kumo-component="MenuBar"
+        data-kumo-part="option"
         class={cn(
           'relative -ml-px flex h-full w-11 cursor-pointer items-center justify-center rounded-md border-none bg-kumo-recessed first:rounded-l-lg last:rounded-r-lg transition-colors focus:z-3 focus:outline-none focus:ring-kumo-focus/50 focus-visible:z-3 focus-visible:ring-2 focus-visible:ring-kumo-brand',
           isActive === id && 'z-2 bg-kumo-base shadow-xs transition-colors'

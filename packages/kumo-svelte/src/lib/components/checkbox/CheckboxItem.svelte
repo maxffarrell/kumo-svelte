@@ -44,6 +44,8 @@
 </script>
 
 <label
+  data-kumo-component="Checkbox"
+  data-kumo-part="item-label"
   class={cn(
     'm-0 relative inline-flex items-center gap-2',
     !(group?.controlFirst ?? true) && 'flex-row-reverse justify-end',
@@ -57,6 +59,8 @@
     {value}
     {name}
     {disabled}
+    data-kumo-component="Checkbox"
+    data-kumo-part="item"
     {onCheckedChange}
     {onIndeterminateChange}
     class={cn(

@@ -238,6 +238,8 @@
       class={containerClassName}
       role="button"
       tabindex={isMaskedWithValue && !disabled ? 0 : undefined}
+      data-kumo-component="SensitiveInput"
+      data-kumo-part="masked-container"
       aria-label={isMaskedWithValue ? `${ariaLabelFallback}, masked.` : undefined}
       aria-describedby={isMaskedWithValue ? `${maskedInstructionId} ${liveRegionId}` : undefined}
       aria-disabled={isMaskedWithValue && disabled ? true : undefined}
@@ -299,6 +301,8 @@
         onclick={handleToggleVisibility}
         onkeydown={(event) => event.stopPropagation()}
         aria-label={mode === 'revealed' ? 'Hide value' : 'Reveal value'}
+        data-kumo-component="SensitiveInput"
+        data-kumo-part="toggle-visibility"
         tabindex={showEyeButton ? 0 : -1}
         class={cn(
           'absolute top-1/2 right-0 inline-flex h-auto min-h-0 -translate-y-1/2 cursor-pointer items-center justify-center border-none bg-transparent p-0 m-0 text-kumo-subtle shadow-none hover:text-kumo-default focus:text-kumo-default focus:ring-kumo-focus/50 focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-kumo-brand',
@@ -323,6 +327,8 @@
           onclick={copyToClipboard}
           onkeydown={(event) => event.stopPropagation()}
           aria-label={copied ? 'Copied' : 'Copy to clipboard'}
+          data-kumo-component="SensitiveInput"
+          data-kumo-part="copy"
           class="absolute -top-px right-2 m-0 h-auto min-h-0 -translate-y-full cursor-pointer rounded-t-md border-none bg-kumo-brand px-2 py-0.5 text-xs text-white opacity-0 shadow-none transition-opacity hover:brightness-120 focus:ring-kumo-focus/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-kumo-brand group-focus-within/container:opacity-100 group-hover/container:opacity-100"
         >
           {copied ? 'Copied' : 'Copy'}

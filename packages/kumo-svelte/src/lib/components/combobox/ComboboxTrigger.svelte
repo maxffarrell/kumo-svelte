@@ -17,6 +17,8 @@
   type="button"
   class={cn('inline-flex items-center gap-2', className)}
   disabled={context.disabled}
+  data-kumo-component="Combobox"
+  data-kumo-part="trigger"
   onclick={() => (context.open = !context.open)}
   {...rest}
 >

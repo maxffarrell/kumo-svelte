@@ -41,6 +41,8 @@
     className
   )}
   disabled={context.disabled}
+  data-kumo-component="Combobox"
+  data-kumo-part="trigger"
   onclick={() => (context.open = !context.open)}
   {...rest}
 >

@@ -152,7 +152,7 @@
 </script>
 
 {#snippet triggerChild({ props }: { props: Record<string, unknown> })}
-  {@render trigger?.(props)}
+  {@render trigger?.({ ...props, 'data-kumo-component': 'Dialog', 'data-kumo-part': 'trigger' })}
 {/snippet}
 
 {#if role === 'alertdialog'}

@@ -7,6 +7,9 @@
   setContext('kumo-sidebar-sliding-view', {
     get activeKey() {
       return activeKey;
+    },
+    get direction() {
+      return direction;
     }
   });
 </script>

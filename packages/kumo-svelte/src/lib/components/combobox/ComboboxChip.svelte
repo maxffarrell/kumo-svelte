@@ -27,6 +27,8 @@
   <button
     type="button"
     aria-label={removeLabel}
+    data-kumo-component="Combobox"
+    data-kumo-part="chip-remove"
     class="flex cursor-pointer rounded-md bg-transparent p-1 hover:bg-kumo-fill-hover"
     onclick={() => context.remove(value)}
   >

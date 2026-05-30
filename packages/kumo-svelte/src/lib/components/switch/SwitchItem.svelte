@@ -41,6 +41,8 @@
 </script>
 
 <span
+  data-kumo-component="Switch"
+  data-kumo-part="item-label"
   class={cn(
     'm-0 relative inline-flex items-center gap-2',
     !controlFirst && 'flex-row-reverse justify-end',
@@ -54,6 +56,8 @@
     {disabled}
     aria-busy={transitioning || undefined}
     aria-label={label}
+    data-kumo-component="Switch"
+    data-kumo-part="item"
     onCheckedChange={handleCheckedChange}
     class={cn(
       'relative inline-flex items-center ring cursor-pointer border-none p-0',

@@ -43,6 +43,8 @@
   <RadioGroupPrimitive.Item
     {value}
     {disabled}
+    data-kumo-component="Radio"
+    data-kumo-part="item"
     class={cn(
       isCard
         ? 'relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring ring-2 focus:outline-none focus:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-brand'
@@ -73,6 +75,8 @@
 
 {#if isCard}
   <label
+    data-kumo-component="Radio"
+    data-kumo-part="item-label"
     class={cn(
       'm-0 group relative flex items-start gap-3 rounded-lg border border-kumo-hairline bg-kumo-base p-3 transition-colors has-[[data-state=checked]]:border-kumo-interact has-[[data-state=checked]]:bg-kumo-tint',
       controlAtStart && 'flex-row-reverse',
@@ -102,6 +106,8 @@
   </label>
 {:else}
   <label
+    data-kumo-component="Radio"
+    data-kumo-part="item-label"
     class={cn(
       'm-0 group relative inline-flex items-center gap-2',
       effectiveControlPosition === 'end' && 'flex-row-reverse justify-end',

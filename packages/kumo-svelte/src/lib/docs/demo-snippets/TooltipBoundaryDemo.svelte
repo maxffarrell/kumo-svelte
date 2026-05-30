@@ -5,6 +5,7 @@
   import { buildSeriesData, getIsDarkMode } from './chart-color-demo-data';
 
   let isDarkMode = $state(false);
+  let boundary: HTMLDivElement | undefined = $state();
 
   const data: { name: string; color: string; data: [number, number][] }[] = $derived([
     {
@@ -40,12 +41,12 @@
   });
 </script>
 
-<div class="w-full overflow-hidden rounded-md border border-kumo-line p-3">
+<div bind:this={boundary} class="w-full overflow-hidden rounded-md border border-kumo-line p-3">
   <TimeseriesChart
     {echarts}
     {data}
     {isDarkMode}
-    tooltipBoundary="clipping-ancestors"
+    tooltipBoundary={boundary}
     tooltipMaxItems={4}
     xAxisName="Time (UTC)"
     yAxisName="Requests"

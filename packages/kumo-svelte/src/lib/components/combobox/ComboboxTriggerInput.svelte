@@ -80,6 +80,8 @@
   <button
     type="button"
     aria-label={clearLabel}
+    data-kumo-component="Combobox"
+    data-kumo-part="clear"
     class={cn(
       'absolute top-1/2 flex -translate-y-1/2 cursor-pointer bg-transparent p-0 text-kumo-default',
       'disabled:pointer-events-none disabled:opacity-0',
@@ -94,6 +96,8 @@
   <button
     type="button"
     aria-label={showOptionsLabel}
+    data-kumo-component="Combobox"
+    data-kumo-part="trigger"
     class={cn(
       'absolute top-1/2 m-0 flex -translate-y-1/2 cursor-pointer items-center justify-center bg-transparent p-0 text-kumo-subtle',
       caretRight[resolvedSize]

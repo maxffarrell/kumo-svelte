@@ -22,6 +22,8 @@
     <a
       {href}
       aria-current={active ? 'true' : undefined}
+      data-kumo-component="TableOfContents"
+      data-kumo-part="group-link"
       class={cn(
         ITEM_BASE,
         active

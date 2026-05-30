@@ -1,5 +1,5 @@
 {
-  "version": "0.1.6",
+  "version": "0.1.7",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -340,6 +340,7 @@
         "bg-kumo-danger-tint",
         "bg-kumo-fill",
         "bg-kumo-info-tint",
+        "bg-kumo-success",
         "bg-kumo-success-tint",
         "bg-kumo-warning-tint",
         "border-kumo-brand",
@@ -412,14 +413,13 @@
         }
       },
       "colors": [
+        "bg-kumo-banner-info",
+        "bg-kumo-banner-warning",
+        "bg-kumo-contrast",
         "bg-kumo-danger-tint",
-        "bg-kumo-info-tint",
-        "bg-kumo-warning-tint",
-        "border-kumo-danger",
-        "border-kumo-info",
-        "border-kumo-warning",
         "text-kumo-danger",
         "text-kumo-info",
+        "text-kumo-subtle",
         "text-kumo-warning"
       ]
     },

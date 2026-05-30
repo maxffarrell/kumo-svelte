@@ -2,24 +2,29 @@
   import { cn } from '$lib/utils/cn';
 
   export const KUMO_BANNER_BASE_STYLES =
-    'flex w-full items-start gap-3 rounded-lg border px-4 py-3 text-base';
+    'flex w-full items-start gap-3 rounded-lg px-4 py-3 text-base';
 
   export const KUMO_BANNER_VARIANTS = {
     variant: {
       default: {
-        classes: 'bg-kumo-info-tint/30 border-kumo-info/50 text-kumo-info',
+        classes: 'bg-kumo-banner-info text-kumo-info',
         iconClasses: 'text-kumo-info',
         description: 'Informational banner for general messages'
       },
       alert: {
-        classes: 'bg-kumo-warning-tint/15 border-kumo-warning/50 text-kumo-warning',
+        classes: 'bg-kumo-banner-warning text-kumo-warning',
         iconClasses: 'text-kumo-warning',
         description: 'Warning banner for cautionary messages'
       },
       error: {
-        classes: 'bg-kumo-danger-tint/15 border-kumo-danger/50 text-kumo-danger',
+        classes: 'bg-kumo-danger-tint/60 text-kumo-danger',
         iconClasses: 'text-kumo-danger',
         description: 'Error banner for critical issues'
+      },
+      secondary: {
+        classes: 'bg-kumo-contrast/5 text-kumo-subtle',
+        iconClasses: 'text-kumo-subtle',
+        description: 'Neutral banner for secondary messages'
       }
     }
   } as const;
@@ -85,7 +90,7 @@
         <IconComponent weight="fill" />
       </span>
     {/if}
-    <div class="flex min-w-0 flex-1 items-center justify-between gap-3">
+    <div class={cn('flex min-w-0 flex-1 items-center justify-between gap-3', !title && 'pt-px')}>
       <div class="flex flex-col gap-0.5">
         {#if title}<p class="font-medium leading-snug">{title}</p>{/if}
         {#if description}

@@ -186,6 +186,46 @@ Display validation errors with the error prop.
 
 <ComponentSection>
 
+## Filtering
+
+Filtering is case- and accent-insensitive by default, powered by
+`Intl.Collator` under the hood. For string items, no custom `filter` is needed.
+
+When filtering on a property of object items, use `Combobox.useFilter()` to
+preserve the built-in accent-insensitive matching:
+
+```svelte
+<script lang="ts">
+  import { Combobox } from "kumo-svelte";
+
+  const { contains } = Combobox.useFilter();
+
+  const languages = [
+    { value: "pt", label: "Portuguese", emoji: "🇵🇹" },
+    { value: "es", label: "Spanish", emoji: "🇪🇸" }
+  ];
+
+  const filter = (item, query) => contains(item.label, query);
+</script>
+
+<Combobox items={languages} {filter}>
+  <!-- ... -->
+</Combobox>
+```
+
+To disable filtering entirely (for example, when results come from a server),
+pass `filter={null}`:
+
+```svelte
+<Combobox items={results} filter={null}>
+  <!-- ... -->
+</Combobox>
+```
+
+</ComponentSection>
+
+<ComponentSection>
+
 ## Customizing Dropdown Height
 
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Banner } from '$lib';
-  import { Info, Warning, WarningCircle } from 'phosphor-svelte';
+  import { Info, Warning, WarningCircle, DotsThreeCircle } from 'phosphor-svelte';
 </script>
 
 <div class="w-full space-y-3">
@@ -16,5 +16,11 @@
     variant="error"
     title="Save failed"
     description="We couldn't save your changes. Please try again."
+  />
+  <Banner
+    icon={DotsThreeCircle}
+    variant="secondary"
+    title="Sync paused"
+    description="Changes will resume when your connection is restored."
   />
 </div>

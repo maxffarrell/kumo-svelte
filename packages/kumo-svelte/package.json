@@ -63,10 +63,14 @@
   },
   "peerDependencies": {
     "@sveltejs/kit": "^2.60.1",
+    "echarts": "^6.0.0",
     "svelte": "^5.55.7"
   },
   "peerDependenciesMeta": {
     "@sveltejs/kit": {
+      "optional": true
+    },
+    "echarts": {
       "optional": true
     }
   },
@@ -74,7 +78,6 @@
     "@internationalized/date": "^3.12.1",
     "bits-ui": "^2.18.1",
     "clsx": "^2.1.1",
-    "echarts": "^6.0.0",
     "esm-env": "^1.2.2",
     "phosphor-svelte": "^3.1.0",
     "shiki": "^4.0.2",

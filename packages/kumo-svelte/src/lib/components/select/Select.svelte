@@ -112,6 +112,7 @@
   });
 
   function displayValue(selectionValue: Value) {
+    if (!selectionValue || (Array.isArray(selectionValue) && selectionValue.length === 0)) return placeholder;
     if (renderValue) return renderValue(selectionValue);
     return selectedLabels || placeholder;
   }

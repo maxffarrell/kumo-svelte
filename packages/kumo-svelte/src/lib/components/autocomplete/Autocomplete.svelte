@@ -11,6 +11,7 @@
     type AutocompleteValue,
     type NormalizedAutocompleteItem
   } from './context';
+  import { createKumoFilter } from '../filter';
 
   type FieldError = string | { message?: string; match?: boolean };
 
@@ -55,6 +56,7 @@
   let query = $state(Array.isArray(value) ? value.join(', ') : String(value ?? ''));
   let hasTypedSinceFocus = $state(false);
   let rootElement: HTMLDivElement;
+  const { contains } = createKumoFilter();
 
   const normalizedItems = $derived(items.map(normalizeAutocompleteItem));
   const errorMessage = $derived(
@@ -67,7 +69,7 @@
 
     return normalizedItems.filter((item) => {
       if (filter) return filter(item.raw, query);
-      return item.label.toLowerCase().includes(term) || String(item.value).toLowerCase().includes(term);
+      return contains(item.label, term) || contains(String(item.value), term);
     });
   });
 

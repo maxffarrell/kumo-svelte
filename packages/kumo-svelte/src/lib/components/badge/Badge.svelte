@@ -26,7 +26,7 @@
   } as const;
 
   export const KUMO_BADGE_DOT_COLORS = {
-    success: 'bg-kumo-badge-green',
+    success: 'bg-kumo-success',
     warning: 'bg-kumo-badge-orange',
     error: 'bg-kumo-badge-red',
     neutral: 'bg-kumo-badge-neutral'

@@ -114,6 +114,48 @@ The `size` prop on `Autocomplete.InputGroup` supports four variants matching the
 
 <ComponentSection>
 
+## Filtering
+
+Filtering is case- and accent-insensitive by default, powered by
+`Intl.Collator` under the hood. For string items, no custom `filter` is needed.
+
+When filtering on a property of object items, use `Autocomplete.useFilter()` to
+preserve the built-in accent-insensitive matching:
+
+```svelte
+<script lang="ts">
+  import { Autocomplete } from "kumo-svelte";
+
+  const { contains } = Autocomplete.useFilter();
+
+  const languages = [
+    { value: "pt", label: "Portuguese", emoji: "🇵🇹" },
+    { value: "es", label: "Spanish", emoji: "🇪🇸" }
+  ];
+
+  const filter = (item, query) => contains(item.label, query);
+</script>
+
+<Autocomplete items={languages} {filter}>
+  <!-- ... -->
+</Autocomplete>
+```
+
+To disable filtering entirely (for example, when results come from a server),
+pass `filter={null}`:
+
+```svelte
+<Autocomplete items={results} filter={null}>
+  <!-- ... -->
+</Autocomplete>
+```
+
+</ComponentSection>
+
+<!-- API Reference -->
+
+<ComponentSection>
+
 ## API Reference
 
 ### Autocomplete

@@ -78,6 +78,10 @@ import { Info } from "phosphor-svelte";
 
 <ComponentExample demo="BannerErrorDemo" />
 
+#### Secondary
+
+<ComponentExample demo="BannerSecondaryDemo" />
+
 ### With icon
 
 <ComponentExample demo="BannerWithIconDemo" />

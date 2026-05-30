@@ -7,6 +7,7 @@ import Group from './AutocompleteGroup.svelte';
 import GroupLabel from './AutocompleteGroupLabel.svelte';
 import Collection from './AutocompleteCollection.svelte';
 import Separator from './AutocompleteSeparator.svelte';
+import { createKumoFilter } from '../filter';
 
 export const Autocomplete = Object.assign(Root, {
   InputGroup,
@@ -16,7 +17,8 @@ export const Autocomplete = Object.assign(Root, {
   Group,
   GroupLabel,
   Collection,
-  Separator
+  Separator,
+  useFilter: createKumoFilter
 });
 
 export {

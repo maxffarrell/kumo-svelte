@@ -9,6 +9,7 @@
     type ComboboxSize,
     type NormalizedComboboxItem
   } from './context';
+  import { createKumoFilter } from '../filter';
 
   type FieldError = string | { message?: string; match?: boolean };
 
@@ -60,6 +61,7 @@
 
   let query = $state('');
   let rootElement: HTMLDivElement | null = $state(null);
+  const { contains } = createKumoFilter();
 
   const sourceItems = $derived(items ?? options);
   const normalizedItems = $derived(sourceItems.map(normalizeComboboxItem));
@@ -73,7 +75,7 @@
 
     return normalizedItems.filter((item) => {
       if (filter) return filter(item.raw, query);
-      return item.label.toLowerCase().includes(term) || String(item.value).toLowerCase().includes(term);
+      return contains(item.label, term) || contains(String(item.value), term);
     });
   });
 

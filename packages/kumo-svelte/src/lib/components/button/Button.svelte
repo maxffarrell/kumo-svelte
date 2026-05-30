@@ -1,8 +1,11 @@
-<script lang="ts">
+<script module lang="ts">
   import type { Component, Snippet } from 'svelte';
+  import { ArrowClockwise } from 'phosphor-svelte';
   import { cn } from '$lib/utils/cn';
   import { Loader } from '$lib/components/loader';
   import { Tooltip } from '$lib/components/tooltip';
+
+  export { LinkButton, RefreshButton };
 
   export const KUMO_BUTTON_VARIANTS = {
     shape: {
@@ -79,18 +82,18 @@
     variant: 'secondary'
   } as const;
 
-  type Shape = keyof typeof KUMO_BUTTON_VARIANTS.shape;
-  type Size = keyof typeof KUMO_BUTTON_VARIANTS.size;
-  type Variant = keyof typeof KUMO_BUTTON_VARIANTS.variant;
+  export type ButtonShape = keyof typeof KUMO_BUTTON_VARIANTS.shape;
+  export type ButtonSize = keyof typeof KUMO_BUTTON_VARIANTS.size;
+  export type ButtonVariant = keyof typeof KUMO_BUTTON_VARIANTS.variant;
 
   export function buttonVariants({
     variant = KUMO_BUTTON_DEFAULT_VARIANTS.variant,
     size = KUMO_BUTTON_DEFAULT_VARIANTS.size,
     shape = KUMO_BUTTON_DEFAULT_VARIANTS.shape
   }: {
-    shape?: Shape;
-    size?: Size;
-    variant?: Variant;
+    shape?: ButtonShape;
+    size?: ButtonSize;
+    variant?: ButtonVariant;
   } = {}) {
     const isCompactShape = shape === 'square' || shape === 'circle';
 
@@ -107,7 +110,7 @@
     );
   }
 
-  interface Props {
+  export interface ButtonProps {
     children?: Snippet;
     class?: string;
     icon?: Component;
@@ -115,15 +118,36 @@
     external?: boolean;
     type?: 'button' | 'submit' | 'reset';
     disabled?: boolean;
-    shape?: Shape;
-    size?: Size;
-    variant?: Variant;
+    shape?: ButtonShape;
+    size?: ButtonSize;
+    variant?: ButtonVariant;
     loading?: boolean;
     title?: string;
     [key: string]: unknown;
   }
 
-  let {
+  export interface LinkButtonProps extends Omit<ButtonProps, 'type' | 'disabled' | 'loading' | 'title'> {
+    external?: boolean;
+    linksExternal?: boolean;
+    variant?: ButtonVariant;
+  }
+
+  export interface RefreshButtonProps {
+    class?: string;
+    loading?: boolean;
+    size?: ButtonSize;
+    variant?: ButtonVariant;
+    'aria-label'?: string;
+    [key: string]: unknown;
+  }
+</script>
+
+<script lang="ts">
+  let props: ButtonProps = $props();
+</script>
+
+{#snippet ButtonElement(props: ButtonProps)}
+  {@const {
     children,
     class: className,
     icon: IconComponent,
@@ -135,24 +159,17 @@
     size = 'base',
     variant = 'secondary',
     loading = false,
-    title,
     ...rest
-  }: Props = $props();
+  } = props}
+  {@const classes = cn(
+    buttonVariants({ variant, size, shape }),
+    disabled && 'cursor-not-allowed opacity-50',
+    href && 'flex items-center no-underline!',
+    className
+  )}
+  {@const loaderSize = size === 'lg' ? 16 : 14}
+  {@const externalProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
 
-  let classes = $derived(
-    cn(
-      buttonVariants({ variant, size, shape }),
-      disabled && 'cursor-not-allowed opacity-50',
-      href && 'flex items-center no-underline!',
-      className
-    )
-  );
-
-  const loaderSize = $derived(size === 'lg' ? 16 : 14);
-  const externalProps = $derived(external ? { target: '_blank', rel: 'noopener noreferrer' } : {});
-</script>
-
-{#snippet buttonElement()}
   <svelte:element
     this={href ? 'a' : 'button'}
     class={classes}
@@ -176,8 +193,70 @@
   </svelte:element>
 {/snippet}
 
-{#if title}
-  <Tooltip trigger={buttonElement}>{title}</Tooltip>
-{:else}
-  {@render buttonElement()}
-{/if}
+{#snippet ButtonSnippet(props: ButtonProps)}
+  {@const { title } = props}
+
+  {#if title}
+    {#snippet trigger()}
+      {@render ButtonElement(props)}
+    {/snippet}
+    <Tooltip trigger={trigger}>{title}</Tooltip>
+  {:else}
+    {@render ButtonElement(props)}
+  {/if}
+{/snippet}
+
+{#snippet LinkButton(props: LinkButtonProps)}
+  {@const {
+    class: className,
+    external = false,
+    linksExternal,
+    shape = 'base',
+    size = 'base',
+    variant = 'ghost',
+    ...rest
+  } = props}
+
+  {@render ButtonSnippet({
+    ...rest,
+    external,
+    shape: shape as ButtonShape,
+    size: size as ButtonSize,
+    variant: variant as ButtonVariant,
+    class: className as string | undefined
+  })}
+{/snippet}
+
+{#snippet RefreshButton(props: RefreshButtonProps)}
+  {@const {
+    class: className,
+    loading = false,
+    size = 'base',
+    variant = 'secondary',
+    'aria-label': ariaLabel = 'Refresh',
+    ...rest
+  } = props}
+
+  {#snippet refreshIcon()}
+    <ArrowClockwise
+      class={cn({
+        'animate-refresh': loading,
+        'size-4.5': size === 'base',
+        'size-4': size === 'sm' || size === 'xs',
+        'size-5': size === 'lg'
+      })}
+    />
+  {/snippet}
+
+  {@render ButtonSnippet({
+    ...rest,
+    shape: 'square',
+    size,
+    variant,
+    'aria-label': ariaLabel,
+    class: className,
+    children: refreshIcon
+  })}
+{/snippet}
+
+{@render ButtonSnippet(props)}

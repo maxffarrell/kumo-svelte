@@ -29,6 +29,9 @@ export {
   KUMO_BREADCRUMBS_VARIANTS,
   KUMO_BREADCRUMBS_DEFAULT_VARIANTS,
   type BreadcrumbsItem,
+  type BreadcrumbsCurrentSnippetProps,
+  type BreadcrumbsLinkSnippetProps,
+  type BreadcrumbsSeparatorSnippetProps,
   type KumoBreadcrumbsSize,
   type KumoBreadcrumbsVariantsProps
 } from './Breadcrumbs.svelte';

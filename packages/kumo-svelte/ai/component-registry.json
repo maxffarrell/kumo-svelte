@@ -4035,7 +4035,7 @@
       "name": "Sidebar",
       "type": "component",
       "category": "Navigation",
-      "description": "A composable sidebar navigation component with collapsible groups, icon-only mode, and responsive mobile support.",
+      "description": "A composable sidebar navigation component with contained layouts, peeking, sliding views, resizing, icon-only mode, and responsive mobile support.",
       "importPath": "kumo-svelte/components/sidebar",
       "sourceFile": "components/sidebar",
       "props": {
@@ -4084,11 +4084,16 @@
         }
       },
       "colors": [
-        "bg-kumo-fill",
-        "bg-kumo-surface",
+        "bg-kumo-brand",
+        "bg-kumo-hairline",
+        "bg-kumo-line",
+        "bg-kumo-recessed",
         "bg-kumo-tint",
         "border-kumo-line",
-        "text-kumo-default"
+        "ring-kumo-brand",
+        "text-kumo-default",
+        "text-kumo-strong",
+        "text-kumo-subtle"
       ],
       "subComponents": {
         "Input": {
@@ -4268,6 +4273,24 @@
               "type": "(width: number) => void",
               "optional": true,
               "description": "Callback when width changes during resize."
+            },
+            "contained": {
+              "type": "boolean",
+              "optional": true,
+              "default": "false",
+              "description": "Keeps the provider scoped to its parent container instead of using full viewport height."
+            },
+            "peekable": {
+              "type": "boolean",
+              "optional": true,
+              "default": "false",
+              "description": "Allows collapsed sidebars to temporarily reveal full content while hovered or focused."
+            },
+            "animationDuration": {
+              "type": "number",
+              "optional": true,
+              "default": "250",
+              "description": "Transition duration in milliseconds for width and peek animations."
             },
             "children": {
               "type": "Snippet",

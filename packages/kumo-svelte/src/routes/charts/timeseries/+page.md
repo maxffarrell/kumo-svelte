@@ -86,6 +86,27 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
+### Tooltip Cursor Tracking
+
+  Use <code>tooltipFollowCursor</code> to choose whether the tooltip follows both cursor axes or only tracks the x position.
+  Set <code>tooltipMode="single"</code> when dense charts should show only the series nearest to the pointer.
+
+<ComponentExample demo="TooltipFollowCursorDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
+### Tooltip Boundary
+
+  Set <code>tooltipBoundary</code> to keep the native tooltip within the chart container instead of letting it overflow the visual frame.
+
+<ComponentExample demo="TooltipBoundaryDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
 ### Loading State
 
   Set <code>loading</code> to <code>true</code> to display an animated sine-wave

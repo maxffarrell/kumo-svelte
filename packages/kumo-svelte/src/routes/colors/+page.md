@@ -200,7 +200,7 @@ Surfaces establish depth and layering in the UI. Use them in order from the oute
 
 ### Semantic Status Colors
 
-Each status color comes in two variants: a solid color for icons and indicators, and a `-tint` variant for background fills behind content (i.e. `Badge` or `Banner`).
+Each status color comes in two variants: a solid color for icons and indicators, and a `-tint` variant for background fills behind content such as `Badge` or `Banner`. Pair status text with the same semantic family so contrast stays consistent in light and dark mode.
 
   <table>
     <colgroup>
@@ -234,6 +234,8 @@ Each status color comes in two variants: a solid color for icons and indicators,
   </table>
 
 Use the solid token on icons, status dots, borders and rings. Banners and badges use the `-tint` variant with varying opacity values for the different instances.
+
+<ComponentExample demo="StatusBannerDemo" />
 
 ```svelte
 // Banner with tinted background and solid icon

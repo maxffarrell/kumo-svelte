@@ -10,6 +10,33 @@
   --svelte-orange: oklch(0.6385 0.1991 34.99);
 }
 
+:where(
+    a[href],
+    button,
+    input[type="button"],
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="submit"],
+    input[type="reset"],
+    label[for],
+    select,
+    summary,
+    [role="button"],
+    [role="link"],
+    [role="menuitem"],
+    [role="menuitemcheckbox"],
+    [role="menuitemradio"],
+    [role="option"],
+    [role="tab"],
+    [role="checkbox"],
+    [role="radio"],
+    [role="switch"]
+  ):where([data-kumo-component], [data-kumo-part]):where(:not(:disabled)):where(:not([disabled])):where(
+    :not([aria-disabled="true"])
+  ):where(:not([data-disabled])) {
+  cursor: pointer;
+}
+
 /* Scroll-fade: gradient masks that appear on the edges of a horizontally
    scrollable container based on scroll position. Activated by the
    data-overflowing attribute set from Tabs overflow measurement. */

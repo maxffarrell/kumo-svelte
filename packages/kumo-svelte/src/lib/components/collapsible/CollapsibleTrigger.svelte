@@ -21,6 +21,8 @@
 </script>
 
 <CollapsiblePrimitive.Trigger
+  data-kumo-component="Collapsible"
+  data-kumo-part="trigger"
   class={cn('cursor-pointer', className)}
   {disabled}
   {type}

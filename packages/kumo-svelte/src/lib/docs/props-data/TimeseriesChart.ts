@@ -69,6 +69,33 @@ const rows: PropRow[] = [
     "description": "Custom formatter for tooltip values. Takes precedence over yAxisTickLabelFormat."
   },
   {
+    "prop": "tooltipMode",
+    "type": "'all' | 'single'",
+    "required": false,
+    "default": "\"all\"",
+    "description": "Controls whether the native tooltip lists all series at the active timestamp or only the nearest series."
+  },
+  {
+    "prop": "tooltipMaxItems",
+    "type": "number",
+    "required": false,
+    "default": "10",
+    "description": "Maximum number of series rows shown when tooltipMode is 'all'."
+  },
+  {
+    "prop": "tooltipBoundary",
+    "type": "'clipping-ancestors' | Element | Element[]",
+    "required": false,
+    "description": "Constrains tooltip placement to the chart container when provided."
+  },
+  {
+    "prop": "tooltipFollowCursor",
+    "type": "'both' | 'x'",
+    "required": false,
+    "default": "\"both\"",
+    "description": "Controls whether the tooltip follows both cursor axes or locks to the chart top while following x."
+  },
+  {
     "prop": "incomplete",
     "type": "{ before?: number; after?: number }",
     "required": false,

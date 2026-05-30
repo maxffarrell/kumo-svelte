@@ -66,6 +66,8 @@
     </div>
   {/if}
   <button
+    data-kumo-component="Toast"
+    data-kumo-part="close"
     class="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded border-none bg-transparent text-current/50 hover:bg-kumo-contrast/10 hover:text-current"
     aria-label="Close"
     type="button"

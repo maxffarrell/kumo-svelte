@@ -260,7 +260,7 @@ A masked input for sensitive values like API keys and passwords. Click to reveal
 
 ## Sidebar
 
-A composable sidebar navigation component with collapsible groups, icon-only mode, and responsive mobile support.
+A composable sidebar navigation component with contained layouts, peeking, sliding views, resizing, icon-only mode, and responsive mobile support.
 
 - Category: Navigation
 - Import: `import { Sidebar } from "kumo-svelte/components/sidebar";`

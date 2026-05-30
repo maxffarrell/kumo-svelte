@@ -27,7 +27,7 @@
 </script>
 
 {#snippet defaultTriggerChild({ props }: { props: Record<string, unknown> })}
-  <button {...props} class={cn('inline-flex', className, props.class as string | undefined)} {type}>
+  <button {...props} class={cn('inline-flex', className, props.class as string | undefined)} {type} data-kumo-component="Popover" data-kumo-part="trigger">
     {@render children?.()}
   </button>
 {/snippet}

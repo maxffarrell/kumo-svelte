@@ -160,6 +160,8 @@
     type={href ? undefined : type}
     disabled={href ? undefined : disabled || loading}
     aria-busy={loading || undefined}
+    data-kumo-component="Button"
+    data-kumo-part={href ? 'link-button' : 'button'}
     {...externalProps}
     {...rest}
   >

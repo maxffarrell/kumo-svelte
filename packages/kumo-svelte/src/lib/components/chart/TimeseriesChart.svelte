@@ -22,6 +22,10 @@
     yAxisName?: string;
     yAxisTickCount?: number;
     tooltipValueFormat?: (value: number) => string;
+    tooltipMode?: 'all' | 'single';
+    tooltipMaxItems?: number;
+    tooltipBoundary?: 'clipping-ancestors' | Element | Element[];
+    tooltipFollowCursor?: 'both' | 'x';
     incomplete?: { before?: number; after?: number };
     height?: number;
     onTimeRangeChange?: (from: number, to: number) => void;
@@ -46,6 +50,10 @@
     yAxisName,
     yAxisTickCount,
     tooltipValueFormat,
+    tooltipMode = 'all',
+    tooltipMaxItems = 10,
+    tooltipBoundary,
+    tooltipFollowCursor = 'both',
     incomplete,
     height = 350,
     onTimeRangeChange,
@@ -60,6 +68,9 @@
 
   let chartRef: EChartsType | null = $state(null);
   let detectedDarkMode = $state(false);
+  let containerRef: HTMLDivElement;
+  let tooltipState: { ts: number; rows: { name: string; value: number; color: string }[]; hiddenCount: number } | null = $state(null);
+  let mousePos = $state({ x: 0, y: 0 });
   const effectiveDarkMode = $derived(isDarkMode ?? detectedDarkMode);
 
   onMount(() => {
@@ -95,10 +106,38 @@
     return `rgba(${parseInt(hex.slice(0, 2), 16)}, ${parseInt(hex.slice(2, 4), 16)}, ${parseInt(hex.slice(4, 6), 16)}, ${a})`;
   };
 
+  const tooltipDateFormat = new Intl.DateTimeFormat(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  });
+  const defaultNumberFormat = new Intl.NumberFormat(undefined, { maximumFractionDigits: 3 });
   const pad = (n: number) => n.toString().padStart(2, '0');
   const formatTimestamp = (ts: number | string | Date): string => {
+    return tooltipDateFormat.format(new Date(ts));
+  };
+  const formatAriaTimestamp = (ts: number | string | Date): string => {
     const d = new Date(ts);
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  };
+  const findNearest = (points: [number, number][], ts: number) => {
+    if (points.length === 0) return null;
+    let lo = 0;
+    let hi = points.length - 1;
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      if (points[mid][0] < ts) lo = mid + 1;
+      else hi = mid;
+    }
+    if (lo > 0 && Math.abs(points[lo - 1][0] - ts) < Math.abs(points[lo][0] - ts)) lo -= 1;
+    return points[lo][1];
+  };
+  const formatDefaultValue = (value: number) => {
+    if (Number.isInteger(value)) return String(value);
+    return defaultNumberFormat.format(value);
   };
 
   let options = $derived.by(() => {
@@ -156,32 +195,8 @@
       },
       tooltip: {
         trigger: 'axis',
-        appendTo: 'body',
-        axisPointer: { type: 'shadow' },
-        backgroundColor: effectiveDarkMode ? '#3A3E44' : '#FFFFFF',
-        borderColor: effectiveDarkMode ? '#5B5E64' : '#DDDDDD',
-        textStyle: { color: effectiveDarkMode ? '#B3B4B7' : '#1F1F1F' },
-        extraCssText: `color: ${effectiveDarkMode ? '#B3B4B7' : '#1F1F1F'};`,
-        dangerousHtmlFormatter: (params: any) => {
-          const items = Array.isArray(params) ? params : [params];
-          const seenNames = new Set<string>();
-          const filtered = items.filter((param: any) => {
-            if (seenNames.has(param.seriesName)) return false;
-            seenNames.add(param.seriesName);
-            return true;
-          });
-          const ts = filtered[0]?.value?.[0] ?? filtered[0]?.axisValue;
-          const header = ts != null ? `<div style="font-weight:600;margin-bottom:4px;">${echarts.format.encodeHTML(formatTimestamp(ts))}</div>` : '';
-          const rows = filtered
-            .map((param: any) => {
-              const value = param?.value?.[1];
-              const formatFn = tooltipValueFormat ?? yAxisTickLabelFormat;
-              const formattedValue = formatFn ? echarts.format.encodeHTML(String(formatFn(value))) : echarts.format.encodeHTML(String(value));
-              return `${param.marker} ${echarts.format.encodeHTML(param.seriesName)}: <strong>${formattedValue}</strong>`;
-            })
-            .join('<br/>');
-          return `${header}${rows}`;
-        }
+        showContent: false,
+        axisPointer: { type: 'shadow' }
       },
       backgroundColor: 'transparent',
       animation,
@@ -216,16 +231,54 @@
   });
 
   let events = $derived<Partial<ChartEvents>>(
-    onTimeRangeChange
-      ? {
-          brushend: (params: any) => {
-            const range = params.areas?.[0]?.coordRange;
-            if (!range) return;
-            onTimeRangeChange(range[0], range[1]);
-            chartRef?.dispatchAction({ type: 'brush', areas: [] });
-          }
+    {
+      updateaxispointer: (params: any) => {
+        const ts: number | undefined = params?.axesInfo?.[0]?.value;
+        if (ts == null) return;
+        const seenNames = new Set<string>();
+        const allRows: { name: string; value: number; color: string }[] = [];
+
+        for (const series of data) {
+          if (seenNames.has(series.name)) continue;
+          seenNames.add(series.name);
+          const value = findNearest(series.data, ts);
+          if (value != null) allRows.push({ name: series.name, value, color: series.color });
         }
-      : {}
+
+        allRows.sort((a, b) => b.value - a.value);
+        let rows: { name: string; value: number; color: string }[];
+        let hiddenCount = 0;
+        if (tooltipMode === 'single') {
+          const cursorValue = chartRef ? (chartRef.convertFromPixel('grid', [0, mousePos.y]) as [number, number] | undefined)?.[1] : null;
+          if (cursorValue != null && allRows.length > 0) {
+            rows = [
+              allRows.reduce((best, row) =>
+                Math.abs(row.value - cursorValue) < Math.abs(best.value - cursorValue) ? row : best
+              )
+            ];
+          } else {
+            rows = allRows.slice(0, 1);
+          }
+        } else {
+          rows = allRows.slice(0, tooltipMaxItems);
+          hiddenCount = Math.max(0, allRows.length - tooltipMaxItems);
+        }
+        tooltipState = { ts, rows, hiddenCount };
+      },
+      globalout: () => {
+        tooltipState = null;
+      },
+      ...(onTimeRangeChange
+        ? {
+            brushend: (params: any) => {
+              const range = params.areas?.[0]?.coordRange;
+              if (!range) return;
+              onTimeRangeChange(range[0], range[1]);
+              chartRef?.dispatchAction({ type: 'brush', areas: [] });
+            }
+          }
+        : {})
+    }
   );
 
   $effect(() => {
@@ -235,11 +288,39 @@
         key: 'brush',
         brushOption: { brushType: 'lineX', brushMode: 'single' }
       });
+      return () => {
+        chartRef?.dispatchAction({
+          type: 'takeGlobalCursor',
+          key: 'brush',
+          brushOption: { brushType: false }
+        });
+      };
     }
+  });
+
+  function updateMousePosition(event: MouseEvent) {
+    const rect = containerRef.getBoundingClientRect();
+    mousePos = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+  }
+
+  const tooltipStyle = $derived.by(() => {
+    const tooltipWidth = 280;
+    const tooltipHeight = 180;
+    const sideOffset = 12;
+    const padding = 8;
+    let x = mousePos.x + sideOffset;
+    let y = tooltipFollowCursor === 'x' ? 12 : mousePos.y + sideOffset;
+
+    if (tooltipBoundary !== undefined && containerRef) {
+      x = Math.min(Math.max(padding, x), Math.max(padding, containerRef.clientWidth - tooltipWidth - padding));
+      y = Math.min(Math.max(padding, y), Math.max(padding, containerRef.clientHeight - tooltipHeight - padding));
+    }
+
+    return `left:${x}px;top:${y}px;max-width:${tooltipWidth}px;`;
   });
 </script>
 
-<div class="relative w-full" style:height={`${height}px`}>
+<div bind:this={containerRef} class="relative w-full" style:height={`${height}px`} role="presentation" onmousemove={updateMousePosition}>
   {#if loading}
     {@const mid = height / 2}
     {@const amp = Math.min(height * 0.12, 28)}
@@ -263,5 +344,31 @@
     </div>
   {:else}
     <Chart {echarts} bind:chartRef options={options} {height} isDarkMode={effectiveDarkMode} onEvents={events} optionUpdateBehavior={optionUpdateBehavior as any} />
+  {/if}
+  {#if tooltipState}
+    {@const formatFn = tooltipValueFormat ?? yAxisTickLabelFormat}
+    <div
+      class="pointer-events-none absolute z-50 min-w-[150px] rounded-lg bg-kumo-base p-2 text-kumo-default shadow-lg shadow-kumo-tip-shadow outline outline-1 outline-kumo-fill"
+      style={tooltipStyle}
+      data-mode={effectiveDarkMode ? 'dark' : 'light'}
+      role="tooltip"
+      aria-label={`Values at ${formatAriaTimestamp(tooltipState.ts)}`}
+    >
+      <div class="mb-1 text-xs font-semibold text-kumo-default">{formatTimestamp(tooltipState.ts)}</div>
+      {#each tooltipState.rows as row (row.name)}
+        <div class="flex items-center justify-between gap-4 py-0.5">
+          <div class="flex min-w-0 items-center gap-2">
+            <span class="size-3 shrink-0 rounded-full" style:background-color={row.color}></span>
+            <span class="truncate text-xs font-medium text-kumo-default" title={row.name}>{row.name}</span>
+          </div>
+          <span class="shrink-0 text-xs font-semibold text-kumo-default">
+            {formatFn ? formatFn(row.value) : formatDefaultValue(row.value)}
+          </span>
+        </div>
+      {/each}
+      {#if tooltipState.hiddenCount > 0}
+        <div class="mt-1 text-xs text-kumo-subtle">+{tooltipState.hiddenCount} more</div>
+      {/if}
+    </div>
   {/if}
 </div>

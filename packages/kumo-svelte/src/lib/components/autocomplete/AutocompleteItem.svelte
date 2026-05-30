@@ -23,6 +23,8 @@
 <button
   type="button"
   disabled={item.disabled}
+  data-kumo-component="Autocomplete"
+  data-kumo-part="item"
   class={cn(
     'group mx-1.5 grid w-[calc(100%-0.75rem)] cursor-pointer grid-cols-[1fr_16px] gap-2 rounded px-2 py-1.5 text-left text-base outline-none',
     'hover:bg-kumo-overlay focus-visible:z-50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-kumo-brand',

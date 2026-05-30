@@ -129,6 +129,8 @@
       )}
       aria-label={rest['aria-label'] as string | undefined}
       aria-invalid={Boolean(errorMessage) || undefined}
+      data-kumo-component="Select"
+      data-kumo-part="trigger"
     >
       {#if loading}
         <span class="inline-flex min-w-0 flex-1 items-center">
@@ -169,6 +171,8 @@
                 value={option.value}
                 label={option.label}
                 disabled={option.disabled}
+                data-kumo-component="Select"
+                data-kumo-part="option"
                 class={cn(
                   'group mx-1.5 flex cursor-pointer items-center justify-between gap-2 rounded px-2 py-1.5 text-base outline-none',
                   'focus-visible:z-50 focus-visible:ring-2 focus-visible:ring-kumo-brand focus-visible:ring-inset',

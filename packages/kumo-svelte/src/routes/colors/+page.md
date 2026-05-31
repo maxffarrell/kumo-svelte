@@ -4,12 +4,9 @@ description: "Kumo uses semantic color tokens that automatically adapt to light 
 ---
 
 <script>
-  import Callout from '$lib/docs/Callout.svelte';
   import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
-  import CodeBlock from '$lib/docs/CodeBlock.svelte';
-  import PropsTable from '$lib/docs/PropsTable.svelte';
   import TailwindColorTokens from '$lib/docs/TailwindColorTokens.svelte';
+  import { Badge } from '$lib';
 </script>
 
 
@@ -118,6 +115,7 @@ export const THEME_CONFIG: ThemeConfig = {
     // ... other tokens
   },
 };
+
 // Add to available themes
 export const AVAILABLE_THEMES = ["kumo", "fedramp", "myTheme"] as const;
 ```
@@ -134,6 +132,7 @@ Semantic tokens are named by **role**, not by hue. A token like `bg-kumo-danger`
 
 Surfaces establish depth and layering in the UI. Use them in order from the outermost background inward.
 
+<div style="overflow-x: auto;">
   <table>
     <colgroup>
       <col style="width: 22ch;" />
@@ -172,9 +171,11 @@ Surfaces establish depth and layering in the UI. Use them in order from the oute
       </tr>
     </tbody>
   </table>
+</div>
 
 ### Brand
 
+<div style="overflow-x: auto;">
   <table>
     <colgroup>
       <col style="width: 22ch;" />
@@ -197,11 +198,13 @@ Surfaces establish depth and layering in the UI. Use them in order from the oute
       </tr>
     </tbody>
   </table>
+</div>
 
 ### Semantic Status Colors
 
-Each status color provides solid tokens for icons and indicators plus contextual surface tokens for backgrounds, such as `*-tint` in many components and `bg-kumo-banner-*` in Banner. Pair status text with the same semantic family so contrast stays consistent in light and dark mode.
+Each status color comes in two variants: a solid color for icons and indicators, and a `-tint` variant for background fills behind content (i.e. `Badge` or `Banner`).
 
+<div style="overflow-x: auto;">
   <table>
     <colgroup>
       <col style="width: 22ch;" />
@@ -216,7 +219,7 @@ Each status color provides solid tokens for icons and indicators plus contextual
     <tbody>
       <tr>
         <td><code>bg-kumo-info</code></td>
-        <td>Info indicator (icon, dot, bar)</td>
+        <td>Info indicator</td>
       </tr>
       <tr>
         <td><code>bg-kumo-success</code></td>
@@ -232,8 +235,9 @@ Each status color provides solid tokens for icons and indicators plus contextual
       </tr>
     </tbody>
   </table>
+</div>
 
-Use the solid token on icons, status dots, borders and rings. Banners and badges use the `-tint` variant with varying opacity values for the different instances.
+Use the solid token `bg-kumo-*` for status dots, `fill-kumo-*` for icons, and `border-kumo-*`, `ring-kumo-*` for borders and rings. Banners and badges use the `-tint` variant with varying opacity values.
 
 <ComponentExample demo="StatusBannerDemo" />
 
@@ -247,6 +251,7 @@ Use the solid token on icons, status dots, borders and rings. Banners and badges
 
 ### Text Colors
 
+<div style="overflow-x: auto;">
   <table>
     <colgroup>
       <col style="width: 22ch;" />
@@ -305,9 +310,13 @@ Use the solid token on icons, status dots, borders and rings. Banners and badges
       </tr>
     </tbody>
   </table>
+</div>
+
+> Semantic text colors (i.e. <code>text-kumo-success</code>) are darker by default to provide better contrast and readability against <code>tint-*</code> backgrounds.
 
 ### Borders & Rings
 
+<div style="overflow-x: auto;">
   <table>
     <colgroup>
       <col style="width: 22ch;" />
@@ -321,7 +330,12 @@ Use the solid token on icons, status dots, borders and rings. Banners and badges
     </thead>
     <tbody>
       <tr>
-        <td><code>kumo-hairline</code><div class="not-prose my-4 rounded-lg border border-kumo-hairline bg-kumo-canvas p-4 text-sm text-kumo-subtle">New</div></td>
+        <td>
+          <span class="inline-flex items-center gap-2">
+            <code>kumo-hairline</code>
+            <Badge variant="info">New</Badge>
+          </span>
+        </td>
         <td>A border/ring color to distinguish between flat surfaces where no shadow is present (i.e. <code>LayerCard</code>).</td>
       </tr>
       <tr>
@@ -330,6 +344,7 @@ Use the solid token on icons, status dots, borders and rings. Banners and badges
       </tr>
     </tbody>
   </table>
+</div>
 
 ## Token Reference
 

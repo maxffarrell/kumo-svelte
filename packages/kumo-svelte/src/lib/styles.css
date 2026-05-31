@@ -823,11 +823,17 @@ kbd,
 
 /* Table styling */
 .kumo-prose :where(table) {
+  border-collapse: collapse;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  margin: 2rem 0;
+  table-layout: auto;
   width: 100%;
 }
 
 /* Table header border */
 .kumo-prose :where(thead) {
+  border-bottom: 1px solid var(--color-kumo-hairline);
   border-bottom-color: var(--color-kumo-hairline);
 }
 
@@ -835,6 +841,34 @@ kbd,
 .kumo-prose :where(thead th) {
   color: var(--text-color-kumo-strong);
   font-weight: 600;
+  padding: 0 1.5rem 1rem 0;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.kumo-prose :where(thead th:last-child) {
+  padding-right: 0;
+}
+
+.kumo-prose :where(tbody tr) {
+  border-bottom: 1px solid var(--color-kumo-hairline);
+}
+
+.kumo-prose :where(tbody tr:last-child) {
+  border-bottom-width: 0;
+}
+
+.kumo-prose :where(tbody td) {
+  padding: 1rem 1.5rem 1rem 0;
+  vertical-align: top;
+}
+
+.kumo-prose :where(tbody td:last-child) {
+  padding-right: 0;
+}
+
+.kumo-prose :where(th, td):first-child {
+  width: 22ch;
 }
 
 /* Blockquote */

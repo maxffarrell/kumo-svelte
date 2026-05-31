@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { Banner } from '$lib';
-  import { CheckCircle, Info, Warning, WarningCircle } from 'phosphor-svelte';
+  import { Warning } from 'phosphor-svelte';
 </script>
 
-<div class="w-full space-y-3">
-  <Banner icon={Info} title="Information" description="Neutral system context uses the info status tokens." />
-  <Banner icon={CheckCircle} title="Deployment complete" description="Successful states use success tokens for indicators." />
-  <Banner icon={Warning} variant="alert" title="Usage approaching limit" description="Warnings use attention tokens with tinted surfaces." />
-  <Banner icon={WarningCircle} variant="error" title="Request failed" description="Destructive states use danger tokens for icon and contrast." />
+<div class="flex items-center gap-2 rounded-lg bg-kumo-danger-tint/70 p-4">
+  <Warning weight="fill" class="fill-kumo-danger" />
+  <span class="text-sm text-kumo-danger">Something went wrong.</span>
 </div>

@@ -42,18 +42,35 @@ jobs:
       name: kumo-svelte-preview-pr-${{ github.event.pull_request.number }}
       url: ${{ steps.deploy.outputs.preview_url }}
     steps:
+      - name: Check Cloudflare credentials
+        id: cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "has_credentials=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_credentials=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipping docs preview deploy because CLOUDFLARE_API_TOKEN and/or CLOUDFLARE_ACCOUNT_ID are not configured for this repository."
+          fi
+
       - name: Set PR number
         id: set-pr
+        if: steps.cloudflare.outputs.has_credentials == 'true'
         run: echo "pr_number=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
 
       - uses: actions/checkout@v6
+        if: steps.cloudflare.outputs.has_credentials == 'true'
         with:
           fetch-depth: 1
 
       - uses: ./.github/actions/install-dependencies
+        if: steps.cloudflare.outputs.has_credentials == 'true'
 
       - name: Deploy docs preview
         id: deploy
+        if: steps.cloudflare.outputs.has_credentials == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

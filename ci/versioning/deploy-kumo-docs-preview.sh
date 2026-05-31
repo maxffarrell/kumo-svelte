@@ -12,7 +12,7 @@ set -euo pipefail
 echo "Starting kumo-svelte preview deployment..."
 
 # Verify Cloudflare credentials
-if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+if [ -z "${CLOUDFLARE_API_TOKEN:-}" ] || [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then
   echo "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are required"
   exit 1
 fi

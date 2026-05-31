@@ -76,7 +76,7 @@
       </Popover.Description>
       <div class="mt-3">
         <Popover.Close>
-          {#snippet child({ props })}
+          {#snippet child({ props }: { props: Record<string, unknown> })}
             <Button size="sm" variant="secondary" {...props}>Close</Button>
           {/snippet}
         </Popover.Close>

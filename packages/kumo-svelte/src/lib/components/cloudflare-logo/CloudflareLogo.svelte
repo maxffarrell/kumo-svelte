@@ -50,6 +50,8 @@
     color: 'color'
   } as const;
 
+  export { PoweredByCloudflare };
+
   export type CloudflareLogoVariant = keyof typeof KUMO_CLOUDFLARE_LOGO_VARIANTS.variant;
   export type CloudflareLogoColor = keyof typeof KUMO_CLOUDFLARE_LOGO_VARIANTS.color;
   export type CloudflareLogoSvgVariant = 'glyph' | 'full';
@@ -184,3 +186,47 @@ ${wordmarkPaths}
     {/each}
   </svg>
 {/if}
+
+{#snippet PoweredByCloudflare({
+  class: className,
+  color = 'color',
+  href = 'https://www.cloudflare.com',
+  ...rest
+}: {
+  class?: string;
+  color?: CloudflareLogoColor;
+  href?: string;
+  [key: string]: unknown;
+})}
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    class={cn(
+      'inline-flex items-center gap-2 rounded-lg py-2 pl-2.5 pr-3 text-sm font-medium',
+      'ring-1 ring-inset transition-all hover:shadow-sm',
+      color === 'color' && 'bg-kumo-base text-kumo-default ring-kumo-hairline',
+      color === 'black' && 'bg-white text-black ring-black/20',
+      color === 'white' && 'bg-black text-white ring-white/20',
+      className
+    )}
+    {...rest}
+  >
+    <svg
+      viewBox={CLOUDFLARE_GLYPH_VIEWBOX}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Cloudflare logo"
+      class={cn(
+        'h-4 w-auto',
+        color === 'white' && 'text-white',
+        color === 'black' && 'text-black'
+      )}
+    >
+      <path d={CLOUDFLARE_GLYPH_ORANGE_PATH} fill={color === 'color' ? CLOUDFLARE_ORANGE : 'currentColor'} />
+      <path d={CLOUDFLARE_GLYPH_YELLOW_PATH} fill={color === 'color' ? CLOUDFLARE_YELLOW : 'currentColor'} />
+    </svg>
+    <span>Powered by <span class="font-semibold">Cloudflare</span></span>
+  </a>
+{/snippet}

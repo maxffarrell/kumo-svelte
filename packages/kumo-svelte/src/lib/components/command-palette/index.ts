@@ -1,33 +1,52 @@
 import { Command as CommandPrimitive } from 'bits-ui';
-import CommandPaletteRoot from './CommandPalette.svelte';
-import CommandPaletteDialog from './CommandPaletteDialog.svelte';
-import CommandPalettePanel from './CommandPalettePanel.svelte';
-import CommandPaletteInput from './CommandPaletteInput.svelte';
-import CommandPaletteList from './CommandPaletteList.svelte';
-import CommandPaletteGroup from './CommandPaletteGroup.svelte';
-import CommandPaletteGroupLabel from './CommandPaletteGroupLabel.svelte';
-import CommandPaletteItems from './CommandPaletteItems.svelte';
-import CommandPaletteItem from './CommandPaletteItem.svelte';
-import CommandPaletteResultItem from './CommandPaletteResultItem.svelte';
-import CommandPaletteHighlightedText from './CommandPaletteHighlightedText.svelte';
-import CommandPaletteEmpty from './CommandPaletteEmpty.svelte';
-import CommandPaletteLoading from './CommandPaletteLoading.svelte';
-import CommandPaletteFooter from './CommandPaletteFooter.svelte';
+import CommandPaletteRoot, {
+  Dialog,
+  Empty,
+  Footer,
+  Group,
+  GroupLabel,
+  HighlightedText,
+  Input,
+  Item,
+  Items,
+  List,
+  Loading,
+  Panel,
+  ResultItem
+} from './CommandPalette.svelte';
+
+type CommandPalettePart = typeof CommandPaletteRoot;
+
+const CommandPaletteDialog = Dialog as unknown as CommandPalettePart;
+const CommandPaletteEmpty = Empty as unknown as CommandPalettePart;
+const CommandPaletteFooter = Footer as unknown as CommandPalettePart;
+const CommandPaletteGroup = Group as unknown as CommandPalettePart;
+const CommandPaletteGroupLabel = GroupLabel as unknown as CommandPalettePart;
+const CommandPaletteHighlightedText = HighlightedText as unknown as CommandPalettePart;
+const CommandPaletteInput = Input as unknown as CommandPalettePart;
+const CommandPaletteItem = Item as unknown as CommandPalettePart;
+const CommandPaletteItems = Items as unknown as CommandPalettePart;
+const CommandPaletteList = List as unknown as CommandPalettePart;
+const CommandPaletteLoading = Loading as unknown as CommandPalettePart;
+const CommandPalettePanel = Panel as unknown as CommandPalettePart;
+const CommandPaletteResultItem = ResultItem as unknown as CommandPalettePart;
 
 export { default as CommandPaletteRoot } from './CommandPalette.svelte';
-export { default as CommandPaletteDialog } from './CommandPaletteDialog.svelte';
-export { default as CommandPalettePanel } from './CommandPalettePanel.svelte';
-export { default as CommandPaletteInput } from './CommandPaletteInput.svelte';
-export { default as CommandPaletteList } from './CommandPaletteList.svelte';
-export { default as CommandPaletteGroup } from './CommandPaletteGroup.svelte';
-export { default as CommandPaletteGroupLabel } from './CommandPaletteGroupLabel.svelte';
-export { default as CommandPaletteItems } from './CommandPaletteItems.svelte';
-export { default as CommandPaletteItem } from './CommandPaletteItem.svelte';
-export { default as CommandPaletteResultItem } from './CommandPaletteResultItem.svelte';
-export { default as CommandPaletteHighlightedText } from './CommandPaletteHighlightedText.svelte';
-export { default as CommandPaletteEmpty } from './CommandPaletteEmpty.svelte';
-export { default as CommandPaletteLoading } from './CommandPaletteLoading.svelte';
-export { default as CommandPaletteFooter } from './CommandPaletteFooter.svelte';
+export {
+  CommandPaletteDialog,
+  CommandPaletteEmpty,
+  CommandPaletteFooter,
+  CommandPaletteGroup,
+  CommandPaletteGroupLabel,
+  CommandPaletteHighlightedText,
+  CommandPaletteInput,
+  CommandPaletteItem,
+  CommandPaletteItems,
+  CommandPaletteList,
+  CommandPaletteLoading,
+  CommandPalettePanel,
+  CommandPaletteResultItem
+};
 export type { CommandPaletteCommand } from './CommandPalette.svelte';
 
 export const CommandPalette = Object.assign(CommandPaletteRoot, {

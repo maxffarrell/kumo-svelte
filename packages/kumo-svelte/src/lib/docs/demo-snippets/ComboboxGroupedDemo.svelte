@@ -12,11 +12,11 @@
   <Combobox.Content>
     <Combobox.Empty />
     <Combobox.List>
-      {#snippet children(group)}
+      {#snippet children(group: any)}
         <Combobox.Group items={group.items}>
           <Combobox.GroupLabel>{group.value}</Combobox.GroupLabel>
           <Combobox.Collection>
-            {#snippet children(item)}
+            {#snippet children(item: any)}
               <Combobox.Item value={item}>{item.label}</Combobox.Item>
             {/snippet}
           </Combobox.Collection>

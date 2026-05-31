@@ -185,7 +185,7 @@
                             />
                             <Autocomplete.Content>
                                 <Autocomplete.List>
-                                    {#snippet children(item)}
+                                    {#snippet children(item: any)}
                                         <Autocomplete.Item value={item}
                                             >{item}</Autocomplete.Item
                                         >
@@ -218,7 +218,7 @@
                             />
                             <Combobox.Content>
                                 <Combobox.List>
-                                    {#snippet children(item)}
+                                    {#snippet children(item: any)}
                                         <Combobox.Item value={item.value}
                                             >{item.value}</Combobox.Item
                                         >

@@ -5,7 +5,7 @@
 
 <Popover.Root>
   <Popover.Trigger>
-    {#snippet child({ props })}
+    {#snippet child({ props }: { props: Record<string, unknown> })}
       <Button shape="square" icon={Bell} aria-label="Notifications" {...props} />
     {/snippet}
   </Popover.Trigger>

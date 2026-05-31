@@ -57,11 +57,10 @@
           <CommandPalette.GroupLabel>{group.label}</CommandPalette.GroupLabel>
           <CommandPalette.Items>
             {#each group.items as item (item.id)}
-              {@const Icon = item.icon}
               <CommandPalette.Item value={item.title} onSelect={() => ((open = false), (search = ''))}>
                 <span class="flex items-center gap-3">
                   <span class="text-kumo-subtle">
-                    <Icon size={16} />
+                    <item.icon size={16} />
                   </span>
                   <span>{item.title}</span>
                 </span>

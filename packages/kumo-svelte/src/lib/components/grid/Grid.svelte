@@ -73,6 +73,8 @@
     variant?: KumoGridVariant;
   }
 
+  export type KumoGridPart = 'root' | 'item';
+
   export function gridVariants({
     variant,
     gap = KUMO_GRID_DEFAULT_VARIANTS.gap
@@ -101,10 +103,17 @@
 </script>
 
 <script lang="ts">
-  import { setContext } from 'svelte';
+  import { getContext, setContext } from 'svelte';
   import type { Snippet } from 'svelte';
 
-  interface Props extends KumoGridVariantsProps {
+  interface GridContextValue {
+    variant?: KumoGridVariant;
+    gap: KumoGridGap;
+    mobileDivider?: boolean;
+  }
+
+  export interface Props extends KumoGridVariantsProps {
+    __part?: KumoGridPart;
     children?: Snippet;
     class?: string;
     mobileDivider?: boolean;
@@ -112,6 +121,7 @@
   }
 
   let {
+    __part = 'root',
     children,
     class: className,
     mobileDivider,
@@ -120,8 +130,27 @@
     ...rest
   }: Props = $props();
 
-  setContext('kumo-grid', () => ({ variant, gap, mobileDivider }));
-  const classes = $derived(cn(gridVariants({ variant, gap }), className));
+  const isRootPart = () => __part === 'root';
+  const isItemPart = () => __part === 'item';
+
+  if (isRootPart()) {
+    setContext('kumo-grid', () => ({ variant, gap, mobileDivider }));
+  }
+
+  const getGridContext =
+    isItemPart() ? getContext<() => GridContextValue>('kumo-grid') : undefined;
+  const context = $derived(getGridContext?.());
+  const classes = $derived(
+    cn(
+      __part === 'item'
+        ? gridItemVariants({
+            variant: context?.variant,
+            mobileDivider: context?.mobileDivider
+          })
+        : gridVariants({ variant, gap }),
+      className
+    )
+  );
 </script>
 
 <div class={classes} {...rest}>

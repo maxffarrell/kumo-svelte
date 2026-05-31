@@ -1,20 +1,38 @@
 import Root from './Combobox.svelte';
-import Content from './ComboboxContent.svelte';
-import TriggerInput from './ComboboxTriggerInput.svelte';
-import TriggerValue from './ComboboxTriggerValue.svelte';
-import TriggerMultipleWithInput from './ComboboxTriggerMultipleWithInput.svelte';
-import Item from './ComboboxItem.svelte';
-import Chip from './ComboboxChip.svelte';
-import Input from './ComboboxInput.svelte';
-import Empty from './ComboboxEmpty.svelte';
-import GroupLabel from './ComboboxGroupLabel.svelte';
-import Group from './ComboboxGroup.svelte';
-import List from './ComboboxList.svelte';
-import Collection from './ComboboxCollection.svelte';
-import Trigger from './ComboboxTrigger.svelte';
-import Value from './ComboboxValue.svelte';
-import Icon from './ComboboxIcon.svelte';
+import {
+  Chip as ChipSnippet,
+  Collection as CollectionSnippet,
+  Content as ContentSnippet,
+  Empty as EmptySnippet,
+  Group as GroupSnippet,
+  GroupLabel as GroupLabelSnippet,
+  Icon as IconSnippet,
+  Input as InputSnippet,
+  Item as ItemSnippet,
+  List as ListSnippet,
+  Trigger as TriggerSnippet,
+  TriggerInput as TriggerInputSnippet,
+  TriggerMultipleWithInput as TriggerMultipleWithInputSnippet,
+  TriggerValue as TriggerValueSnippet,
+  Value as ValueSnippet
+} from './Combobox.svelte';
 import { createKumoFilter } from '../filter';
+
+const Content = ContentSnippet as any;
+const TriggerInput = TriggerInputSnippet as any;
+const TriggerValue = TriggerValueSnippet as any;
+const TriggerMultipleWithInput = TriggerMultipleWithInputSnippet as any;
+const Item = ItemSnippet as any;
+const Chip = ChipSnippet as any;
+const Input = InputSnippet as any;
+const Empty = EmptySnippet as any;
+const GroupLabel = GroupLabelSnippet as any;
+const Group = GroupSnippet as any;
+const List = ListSnippet as any;
+const Collection = CollectionSnippet as any;
+const Trigger = TriggerSnippet as any;
+const Value = ValueSnippet as any;
+const Icon = IconSnippet as any;
 
 export const Combobox = Object.assign(Root, {
   Content,
@@ -54,4 +72,8 @@ export {
   Icon as ComboboxIcon
 };
 
-export type { ComboboxInputSide, ComboboxItem as ComboboxOption, ComboboxSize } from './context';
+export type {
+  ComboboxInputSide,
+  ComboboxItem as ComboboxOption,
+  ComboboxSize
+} from './context';

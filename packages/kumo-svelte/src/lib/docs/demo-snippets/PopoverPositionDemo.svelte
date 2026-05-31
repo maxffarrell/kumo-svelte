@@ -5,7 +5,7 @@
 <div class="flex flex-wrap gap-4">
   <Popover.Root>
     <Popover.Trigger>
-      {#snippet child({ props })}
+      {#snippet child({ props }: { props: Record<string, unknown> })}
         <Button variant="secondary" {...props}>Bottom</Button>
       {/snippet}
     </Popover.Trigger>
@@ -17,7 +17,7 @@
 
   <Popover.Root>
     <Popover.Trigger>
-      {#snippet child({ props })}
+      {#snippet child({ props }: { props: Record<string, unknown> })}
         <Button variant="secondary" {...props}>Top</Button>
       {/snippet}
     </Popover.Trigger>
@@ -29,7 +29,7 @@
 
   <Popover.Root>
     <Popover.Trigger>
-      {#snippet child({ props })}
+      {#snippet child({ props }: { props: Record<string, unknown> })}
         <Button variant="secondary" {...props}>Left</Button>
       {/snippet}
     </Popover.Trigger>
@@ -41,7 +41,7 @@
 
   <Popover.Root>
     <Popover.Trigger>
-      {#snippet child({ props })}
+      {#snippet child({ props }: { props: Record<string, unknown> })}
         <Button variant="secondary" {...props}>Right</Button>
       {/snippet}
     </Popover.Trigger>

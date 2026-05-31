@@ -4,7 +4,7 @@
 
 <Popover.Root>
   <Popover.Trigger openOnHover openDelay={200}>
-    {#snippet child({ props })}
+    {#snippet child({ props }: { props: Record<string, unknown> })}
       <Button variant="secondary" {...props}>Hover Me</Button>
     {/snippet}
   </Popover.Trigger>
@@ -16,7 +16,7 @@
     </Popover.Description>
     <div class="mt-3">
       <Popover.Close>
-        {#snippet child({ props })}
+        {#snippet child({ props }: { props: Record<string, unknown> })}
           <Button variant="secondary" size="sm" {...props}>Got it</Button>
         {/snippet}
       </Popover.Close>

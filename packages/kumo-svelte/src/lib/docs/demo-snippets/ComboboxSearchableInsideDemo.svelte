@@ -17,7 +17,7 @@
     <Combobox.Input placeholder="Search languages" />
     <Combobox.Empty />
     <Combobox.List>
-      {#snippet children(item)}
+      {#snippet children(item: any)}
         <Combobox.Item value={item}>{item.emoji} {item.label}</Combobox.Item>
       {/snippet}
     </Combobox.List>

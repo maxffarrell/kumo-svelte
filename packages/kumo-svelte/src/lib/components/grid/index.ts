@@ -1,5 +1,14 @@
 import Root from './Grid.svelte';
-import Item from './GridItem.svelte';
+import type { KumoGridPart } from './Grid.svelte';
+
+const part = (part: KumoGridPart) =>
+  ((anchor, props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as typeof Root;
+
+const Item = part('item');
 
 const Grid = Object.assign(Root, {
   Root,
@@ -15,6 +24,7 @@ export {
   gridVariants,
   KUMO_GRID_DEFAULT_VARIANTS,
   KUMO_GRID_VARIANTS,
+  type KumoGridPart,
   type KumoGridGap,
   type KumoGridVariant,
   type KumoGridVariantsProps

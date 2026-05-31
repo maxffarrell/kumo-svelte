@@ -92,7 +92,6 @@
           {#if accountMenuOpen}
             <div class="absolute left-2 right-2 top-[calc(100%-0.5rem)] z-20 rounded-lg border border-kumo-hairline bg-kumo-base p-1 text-sm text-kumo-default shadow-lg">
               {#each accounts as account (account.id)}
-                {@const AccountIcon = account.icon}
                 <button
                   class="flex min-h-[34px] w-full items-center gap-2 rounded-md px-2 py-1 text-left hover:bg-kumo-tint"
                   role="menuitem"
@@ -101,7 +100,7 @@
                     accountMenuOpen = false;
                   }}
                 >
-                  <AccountIcon class="size-4 text-kumo-brand" weight="fill" />
+                  <account.icon class="size-4 text-kumo-brand" weight="fill" />
                   <span>{account.name}</span>
                   {#if account.id === activeAccount.id}
                     <Check class="ml-auto size-4" />

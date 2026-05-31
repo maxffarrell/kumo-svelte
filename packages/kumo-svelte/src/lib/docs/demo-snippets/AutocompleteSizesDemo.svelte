@@ -43,7 +43,7 @@
     <Autocomplete.InputGroup size="xs" placeholder="xs" />
     <Autocomplete.Content>
       <Autocomplete.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Autocomplete.Item value={item}>{item}</Autocomplete.Item>
         {/snippet}
       </Autocomplete.List>
@@ -53,7 +53,7 @@
     <Autocomplete.InputGroup size="sm" placeholder="sm" />
     <Autocomplete.Content>
       <Autocomplete.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Autocomplete.Item value={item}>{item}</Autocomplete.Item>
         {/snippet}
       </Autocomplete.List>
@@ -63,7 +63,7 @@
     <Autocomplete.InputGroup size="base" placeholder="base (default)" />
     <Autocomplete.Content>
       <Autocomplete.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Autocomplete.Item value={item}>{item}</Autocomplete.Item>
         {/snippet}
       </Autocomplete.List>
@@ -73,7 +73,7 @@
     <Autocomplete.InputGroup size="lg" placeholder="lg" />
     <Autocomplete.Content>
       <Autocomplete.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Autocomplete.Item value={item}>{item}</Autocomplete.Item>
         {/snippet}
       </Autocomplete.List>

@@ -1,4 +1,10 @@
 <script module lang="ts">
+  import { Checkbox as CheckboxPrimitive } from 'bits-ui';
+  import { Check, Minus } from 'phosphor-svelte';
+  import { getContext, setContext } from 'svelte';
+  import type { Snippet } from 'svelte';
+  import { cn } from '$lib/utils/cn';
+
   export type CheckboxVariant = 'default' | 'error';
 
   export function checkboxVariantClasses(variant: CheckboxVariant = 'default') {
@@ -10,14 +16,57 @@
 
   export const checkboxInteractiveClasses =
     'hover:ring-kumo-hairline focus:ring-kumo-focus focus:ring-2 focus-visible:ring-2 focus-visible:ring-kumo-brand';
+
+  interface CheckboxGroupContext {
+    readonly controlFirst: boolean;
+  }
+
+  interface GroupProps {
+    children?: Snippet;
+    legend?: string;
+    description?: string | Snippet;
+    error?: string;
+    value?: string[];
+    disabled?: boolean;
+    required?: boolean;
+    name?: string;
+    controlFirst?: boolean;
+    class?: string;
+    onValueChange?: (value: string[]) => void;
+  }
+
+  interface ItemProps {
+    class?: string;
+    checked?: boolean;
+    indeterminate?: boolean;
+    disabled?: boolean;
+    variant?: CheckboxVariant;
+    label: string;
+    value?: string;
+    name?: string;
+    onCheckedChange?: (checked: boolean) => void;
+    onIndeterminateChange?: (indeterminate: boolean) => void;
+  }
+
+  interface LegendProps {
+    children?: Snippet;
+    class?: string;
+  }
+
+  function setCheckboxGroupContext(controlFirst: boolean) {
+    setContext('kumo-checkbox-group', { get controlFirst() { return controlFirst; } });
+    return '';
+  }
+
+  function getCheckboxGroupContext() {
+    return getContext<CheckboxGroupContext | undefined>('kumo-checkbox-group');
+  }
+
+  // @ts-ignore Svelte declaration tags are exportable from module script.
+  export { Group, Item, Legend };
 </script>
 
 <script lang="ts">
-  import { Checkbox as CheckboxPrimitive } from 'bits-ui';
-  import { Check, Minus } from 'phosphor-svelte';
-  import { cn } from '$lib/utils/cn';
-  import type { Snippet } from 'svelte';
-
   interface Props {
     children?: Snippet;
     class?: string;
@@ -63,6 +112,95 @@
   let visibleLabel = $derived(label ?? (children ? undefined : undefined));
   let controlLabel = $derived(ariaLabel ?? visibleLabel ?? undefined);
 </script>
+
+{#snippet Group({
+  children,
+  legend,
+  description,
+  error,
+  value,
+  disabled = false,
+  required,
+  name,
+  controlFirst = true,
+  class: className,
+  onValueChange
+}: GroupProps)}
+  {setCheckboxGroupContext(controlFirst)}
+
+  <CheckboxPrimitive.Group {value} {disabled} {required} {name} {onValueChange}>
+    <fieldset class={cn('flex flex-col gap-4', className)} {disabled}>
+      {#if legend}
+        <legend class="text-base font-medium text-kumo-default">{legend}</legend>
+      {/if}
+      <div class="flex flex-col gap-2">
+        {@render children?.()}
+      </div>
+      {#if error}
+        <p class="text-sm text-kumo-danger">{error}</p>
+      {:else if description}
+        <p class="text-sm text-kumo-subtle">
+          {#if typeof description === 'string'}{description}{:else}{@render description()}{/if}
+        </p>
+      {/if}
+    </fieldset>
+  </CheckboxPrimitive.Group>
+{/snippet}
+
+{#snippet Item({
+  class: className,
+  checked,
+  indeterminate = false,
+  disabled = false,
+  variant = 'default',
+  label,
+  value,
+  name,
+  onCheckedChange,
+  onIndeterminateChange
+}: ItemProps)}
+  <label
+    data-kumo-component="Checkbox"
+    data-kumo-part="item-label"
+    class={cn(
+      'm-0 relative inline-flex items-center gap-2',
+      !(getCheckboxGroupContext()?.controlFirst ?? true) && 'flex-row-reverse justify-end',
+      disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+      className
+    )}
+  >
+    <CheckboxPrimitive.Root
+      {checked}
+      {indeterminate}
+      {value}
+      {name}
+      {disabled}
+      data-kumo-component="Checkbox"
+      data-kumo-part="item"
+      {onCheckedChange}
+      {onIndeterminateChange}
+      class={cn(
+        'peer',
+        checkboxControlClasses,
+        checkboxVariantClasses(variant),
+        !disabled && checkboxInteractiveClasses
+      )}
+    >
+      {#if indeterminate}
+        <Minus class="h-3 w-3 text-kumo-inverse" weight="bold" aria-hidden="true" />
+      {:else if checked}
+        <Check class="h-3 w-3 text-kumo-inverse" weight="bold" aria-hidden="true" />
+      {/if}
+    </CheckboxPrimitive.Root>
+    <span class="text-base text-kumo-default">{label}</span>
+  </label>
+{/snippet}
+
+{#snippet Legend({ children, class: className }: LegendProps)}
+  <legend class={cn('text-base font-medium text-kumo-default', className)}>
+    {@render children?.()}
+  </legend>
+{/snippet}
 
 {#snippet control()}
   <CheckboxPrimitive.Root

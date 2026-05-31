@@ -1,5 +1,4 @@
-export { default as CloudflareLogo } from './CloudflareLogo.svelte';
-export { default as PoweredByCloudflare } from './PoweredByCloudflare.svelte';
+export { default as CloudflareLogo, PoweredByCloudflare } from './CloudflareLogo.svelte';
 export {
   KUMO_CLOUDFLARE_LOGO_DEFAULT_VARIANTS,
   KUMO_CLOUDFLARE_LOGO_VARIANTS,

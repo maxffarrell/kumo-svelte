@@ -1,28 +1,36 @@
+import type { Component } from 'svelte';
 import Root from './InputGroup.svelte';
-import Input from './InputGroupInput.svelte';
-import Addon from './InputGroupAddon.svelte';
-import Button from './InputGroupButton.svelte';
-import Suffix from './InputGroupSuffix.svelte';
+
+type InputGroupComponent = Component<Record<string, unknown>>;
+
+const InputComponent: InputGroupComponent = (internals, props) =>
+  Root(internals, { ...props, __part: 'input' });
+const AddonComponent: InputGroupComponent = (internals, props) =>
+  Root(internals, { ...props, __part: 'addon' });
+const ButtonComponent: InputGroupComponent = (internals, props) =>
+  Root(internals, { ...props, __part: 'button' });
+const SuffixComponent: InputGroupComponent = (internals, props) =>
+  Root(internals, { ...props, __part: 'suffix' });
 
 const InputGroup = Object.assign(Root, {
   Root,
-  Input,
-  Addon,
-  Button,
-  Suffix
+  Input: InputComponent,
+  Addon: AddonComponent,
+  Button: ButtonComponent,
+  Suffix: SuffixComponent
 }) as typeof Root & {
   Root: typeof Root;
-  Input: typeof Input;
-  Addon: typeof Addon;
-  Button: typeof Button;
-  Suffix: typeof Suffix;
+  Input: typeof InputComponent;
+  Addon: typeof AddonComponent;
+  Button: typeof ButtonComponent;
+  Suffix: typeof SuffixComponent;
 };
 
 export {
   InputGroup,
-  Input as InputGroupInput,
-  Addon as InputGroupAddon,
-  Button as InputGroupButton,
-  Suffix as InputGroupSuffix
+  InputComponent as InputGroupInput,
+  AddonComponent as InputGroupAddon,
+  ButtonComponent as InputGroupButton,
+  SuffixComponent as InputGroupSuffix
 };
 export type { FieldError, InputGroupFocusMode, InputGroupSize } from './context';

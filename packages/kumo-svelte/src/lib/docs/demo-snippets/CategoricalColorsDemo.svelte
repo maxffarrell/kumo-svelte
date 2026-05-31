@@ -5,6 +5,8 @@
 
   let isDarkMode = $state(false);
 
+  const colorFor = (colorIndex: number) => ChartPalette.categorical(colorIndex, isDarkMode);
+
   onMount(() => {
     const update = () => {
       isDarkMode = getIsDarkMode();
@@ -43,11 +45,10 @@
       <Table.Body>
         <Table.Row>
           {#each categoricalColorIndices as colorIndex}
-            {@const color = ChartPalette.categorical(colorIndex, isDarkMode)}
             <Table.Cell class="w-1/6">
               <div class="flex items-center gap-2">
-                <div style:background-color={color} class="size-5 rounded"></div>
-                <span class="font-mono text-xs">{color}</span>
+                <div style:background-color={colorFor(colorIndex)} class="size-5 rounded"></div>
+                <span class="font-mono text-xs">{colorFor(colorIndex)}</span>
               </div>
             </Table.Cell>
           {/each}

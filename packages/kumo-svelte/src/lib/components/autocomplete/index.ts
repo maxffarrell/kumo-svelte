@@ -1,13 +1,21 @@
-import Root from './Autocomplete.svelte';
-import InputGroup from './AutocompleteInputGroup.svelte';
-import Content from './AutocompleteContent.svelte';
-import List from './AutocompleteList.svelte';
-import Item from './AutocompleteItem.svelte';
-import Group from './AutocompleteGroup.svelte';
-import GroupLabel from './AutocompleteGroupLabel.svelte';
-import Collection from './AutocompleteCollection.svelte';
-import Separator from './AutocompleteSeparator.svelte';
+import Root, { type KumoAutocompletePart } from './Autocomplete.svelte';
 import { createKumoFilter } from '../filter';
+
+const part = (part: KumoAutocompletePart) =>
+  ((anchor, props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as typeof Root;
+
+const InputGroup = part('input-group');
+const Content = part('content');
+const List = part('list');
+const Item = part('item');
+const Group = part('group');
+const GroupLabel = part('group-label');
+const Collection = part('collection');
+const Separator = part('separator');
 
 export const Autocomplete = Object.assign(Root, {
   InputGroup,
@@ -34,3 +42,4 @@ export {
 };
 
 export type { AutocompleteItem as AutocompleteOption, AutocompleteSize } from './context';
+export type { KumoAutocompletePart } from './Autocomplete.svelte';

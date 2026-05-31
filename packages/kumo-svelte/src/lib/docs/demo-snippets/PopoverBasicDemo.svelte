@@ -4,7 +4,7 @@
 
 <Popover.Root>
   <Popover.Trigger>
-    {#snippet child({ props })}
+    {#snippet child({ props }: { props: Record<string, unknown> })}
       <Button {...props}>Open Popover</Button>
     {/snippet}
   </Popover.Trigger>

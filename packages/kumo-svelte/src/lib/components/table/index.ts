@@ -1,13 +1,4 @@
-import Root from './Table.svelte';
-import Body from './TableBody.svelte';
-import Cell from './TableCell.svelte';
-import CheckCell from './TableCheckCell.svelte';
-import CheckHead from './TableCheckHead.svelte';
-import Footer from './TableFooter.svelte';
-import Head from './TableHead.svelte';
-import Header from './TableHeader.svelte';
-import ResizeHandle from './TableResizeHandle.svelte';
-import Row from './TableRow.svelte';
+import Root, { Body, Cell, CheckCell, CheckHead, Footer, Head, Header, ResizeHandle, Row } from './Table.svelte';
 
 const Table = Object.assign(Root, {
   Root,

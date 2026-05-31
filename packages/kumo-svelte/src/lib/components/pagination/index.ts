@@ -1,15 +1,23 @@
-import Root from './Pagination.svelte';
-import Info from './PaginationInfo.svelte';
-import PageSize from './PaginationPageSize.svelte';
-import Controls from './PaginationControls.svelte';
-import Separator from './PaginationSeparator.svelte';
+import Root, {
+  PaginationControls,
+  PaginationInfo,
+  PaginationPageSize,
+  PaginationSeparator,
+} from "./Pagination.svelte";
+
+type PaginationPart = typeof Root;
+
+const Info = PaginationInfo as unknown as PaginationPart;
+const PageSize = PaginationPageSize as unknown as PaginationPart;
+const Controls = PaginationControls as unknown as PaginationPart;
+const Separator = PaginationSeparator as unknown as PaginationPart;
 
 const Pagination = Object.assign(Root, {
   Root,
   Info,
   PageSize,
   Controls,
-  Separator
+  Separator,
 }) as typeof Root & {
   Root: typeof Root;
   Info: typeof Info;
@@ -23,6 +31,6 @@ export {
   Info as PaginationInfo,
   PageSize as PaginationPageSize,
   Controls as PaginationControls,
-  Separator as PaginationSeparator
+  Separator as PaginationSeparator,
 };
-export type { PaginationLabels } from './context';
+export type { PaginationLabels } from "./context";

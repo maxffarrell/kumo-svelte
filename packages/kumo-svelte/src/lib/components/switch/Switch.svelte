@@ -1,6 +1,13 @@
 <script module lang="ts">
+  import { Switch as SwitchPrimitive } from 'bits-ui';
+  import { Info } from 'phosphor-svelte';
+  import { getContext, setContext } from 'svelte';
+  import type { Snippet } from 'svelte';
+  import { cn } from '$lib/utils/cn';
+
   export type SwitchSize = 'sm' | 'base' | 'lg';
   export type SwitchVariant = 'default' | 'neutral';
+  export type KumoSwitchPart = 'root' | 'group' | 'item' | 'legend';
 
   export const switchSizeStyles: Record<SwitchSize, { track: string; thumb: string; slide: string }> = {
     sm: { track: 'h-4 w-8', thumb: 'w-4', slide: 'left-4' },
@@ -29,15 +36,39 @@
 
     return checked ? 'bg-kumo-base dark:bg-blue-300' : 'bg-kumo-base dark:bg-neutral-850';
   };
-</script>
 
-<script lang="ts">
-  import { Switch as SwitchPrimitive } from 'bits-ui';
-  import type { Snippet } from 'svelte';
-  import { Info } from 'phosphor-svelte';
-  import { cn } from '$lib/utils/cn';
+  interface SwitchGroupContext {
+    readonly controlFirst: boolean;
+  }
 
-  interface Props {
+  interface GroupProps {
+    children?: Snippet;
+    legend?: string;
+    description?: string;
+    error?: string;
+    disabled?: boolean;
+    controlFirst?: boolean;
+    class?: string;
+  }
+
+  interface ItemProps {
+    class?: string;
+    disabled?: boolean;
+    size?: SwitchSize;
+    variant?: SwitchVariant;
+    label: string;
+    transitioning?: boolean;
+    onchange?: (checked: boolean) => void;
+    onCheckedChange?: (checked: boolean) => void;
+  }
+
+  interface LegendProps {
+    children?: Snippet;
+    class?: string;
+  }
+
+  export interface Props {
+    __part?: KumoSwitchPart;
     class?: string;
     checked?: boolean;
     disabled?: boolean;
@@ -48,6 +79,9 @@
     required?: boolean;
     controlFirst?: boolean;
     transitioning?: boolean;
+    legend?: string;
+    description?: string;
+    error?: string;
     id?: string;
     'aria-label'?: string;
     children?: Snippet;
@@ -56,7 +90,29 @@
     [key: string]: unknown;
   }
 
+  function setSwitchGroupContext(controlFirst: boolean) {
+    setContext('kumo-switch-group', { get controlFirst() { return controlFirst; } });
+    return '';
+  }
+
+  function getSwitchGroupContext() {
+    return getContext<SwitchGroupContext | undefined>('kumo-switch-group');
+  }
+
+  function handleSwitchCheckedChange(
+    nextChecked: boolean,
+    onchange?: (checked: boolean) => void,
+    onCheckedChange?: (checked: boolean) => void
+  ) {
+    onchange?.(nextChecked);
+    onCheckedChange?.(nextChecked);
+  }
+
+</script>
+
+<script lang="ts">
   let {
+    __part = 'root',
     class: className,
     checked = $bindable(false),
     disabled = false,
@@ -67,6 +123,9 @@
     required,
     controlFirst = true,
     transitioning,
+    legend,
+    description,
+    error,
     id,
     'aria-label': ariaLabel,
     children,
@@ -82,10 +141,96 @@
   let controlLabel = $derived(ariaLabel ?? displayLabel ?? 'Switch');
 
   function handleCheckedChange(nextChecked: boolean) {
-    onchange?.(nextChecked);
-    onCheckedChange?.(nextChecked);
+    handleSwitchCheckedChange(nextChecked, onchange, onCheckedChange);
   }
 </script>
+
+{#snippet Group({
+  children,
+  legend,
+  description,
+  error,
+  disabled = false,
+  controlFirst = true,
+  class: className
+}: GroupProps)}
+  {setSwitchGroupContext(controlFirst)}
+
+  <fieldset class={cn('flex flex-col gap-4', className)} {disabled}>
+    {#if legend}
+      <legend class="text-base font-medium text-kumo-default">{legend}</legend>
+    {/if}
+    <div class="flex flex-col gap-2">
+      {@render children?.()}
+    </div>
+    {#if error}
+      <p class="text-sm text-kumo-danger">{error}</p>
+    {/if}
+    {#if description}
+      <p class="text-sm text-kumo-subtle">{description}</p>
+    {/if}
+  </fieldset>
+{/snippet}
+
+{#snippet Item({
+  class: className,
+  disabled = false,
+  size = 'base',
+  variant = 'default',
+  label,
+  transitioning,
+  onchange,
+  onCheckedChange
+}: ItemProps)}
+  <span
+    data-kumo-component="Switch"
+    data-kumo-part="item-label"
+    class={cn(
+      'm-0 relative inline-flex items-center gap-2',
+      !(getSwitchGroupContext()?.controlFirst ?? true) && 'flex-row-reverse justify-end',
+      disabled && 'opacity-50',
+      className
+    )}
+  >
+    <SwitchPrimitive.Root
+      bind:checked
+      id={controlId}
+      {disabled}
+      aria-busy={transitioning || undefined}
+      aria-label={label}
+      data-kumo-component="Switch"
+      data-kumo-part="item"
+      onCheckedChange={(nextChecked) => handleSwitchCheckedChange(nextChecked, onchange, onCheckedChange)}
+      class={cn(
+        'relative inline-flex items-center ring cursor-pointer border-none p-0',
+        'focus:outline-none focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
+        'transition-colors duration-150 ease-out motion-reduce:transition-none',
+        'disabled:cursor-not-allowed disabled:opacity-50',
+        s.track,
+        switchSquircleRadius,
+        switchTrackColors(variant, checked)
+      )}
+    >
+      <SwitchPrimitive.Thumb
+        class={cn(
+          'absolute top-0 bottom-0 shadow-[0_0_1px_0.5px_var(--color-kumo-shadow-edge),0_1px_2px_var(--color-kumo-shadow-drop)]',
+          s.thumb,
+          switchSquircleRadius,
+          switchThumbColors(variant, checked),
+          'transition-all duration-150 ease-out motion-reduce:transition-none',
+          checked ? s.slide : 'left-0'
+        )}
+      />
+    </SwitchPrimitive.Root>
+    <label for={controlId} class={cn('text-base font-medium text-kumo-default', disabled ? 'cursor-not-allowed' : 'cursor-pointer')}>{label}</label>
+  </span>
+{/snippet}
+
+{#snippet Legend({ children, class: className }: LegendProps)}
+  <legend class={cn('text-base font-medium text-kumo-default', className)}>
+    {@render children?.()}
+  </legend>
+{/snippet}
 
 {#snippet control()}
   <SwitchPrimitive.Root
@@ -121,7 +266,13 @@
   </SwitchPrimitive.Root>
 {/snippet}
 
-{#if label || children}
+{#if __part === 'group'}
+  {@render Group({ children, legend, description, error, disabled, controlFirst, class: className })}
+{:else if __part === 'item'}
+  {@render Item({ class: className, disabled, size, variant, label: label ?? '', transitioning, onchange, onCheckedChange })}
+{:else if __part === 'legend'}
+  {@render Legend({ children, class: className })}
+{:else if label || children}
   <span data-kumo-component="Switch" data-kumo-part="label" class={cn('m-0 relative inline-flex items-center gap-2', !controlFirst && 'flex-row-reverse justify-end', disabled && 'opacity-50')}>
     {@render control()}
     <label for={controlId} class={cn('text-base font-medium text-kumo-default', disabled ? 'cursor-not-allowed' : 'cursor-pointer')}>

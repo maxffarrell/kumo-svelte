@@ -24,7 +24,7 @@
     <Autocomplete.InputGroup placeholder="Search countries…" />
     <Autocomplete.Content>
       <Autocomplete.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Autocomplete.Item value={item}>{item.label}</Autocomplete.Item>
         {/snippet}
       </Autocomplete.List>

@@ -12,14 +12,14 @@
 <div class="flex gap-2">
   <Combobox bind:value items={bots} multiple>
     <Combobox.TriggerMultipleWithInput class="w-[400px]" placeholder="Select bots">
-      {#snippet children(selected)}
+      {#snippet children(selected: any)}
         <Combobox.Chip value={selected}>{selected.label}</Combobox.Chip>
       {/snippet}
     </Combobox.TriggerMultipleWithInput>
     <Combobox.Content class="max-h-[200px] min-w-auto overflow-y-auto">
       <Combobox.Empty />
       <Combobox.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Combobox.Item value={item}>
             <div class="flex gap-2">
               <Text>{item.label}</Text>

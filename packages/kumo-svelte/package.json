@@ -60,6 +60,7 @@
     "dev": "pnpm codegen:registry && vite dev",
     "preview": "vite preview",
     "test": "pnpm build && node --test --import tsx tests/imports/*.test.ts tests/build/*.test.ts tests/lint/*.test.ts",
+    "test:components": "vitest run",
     "typecheck": "pnpm check"
   },
   "peerDependencies": {
@@ -91,7 +92,10 @@
     "@sveltejs/package": "^2.5.7",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@tailwindcss/vite": "^4.3.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/svelte": "^5.3.1",
     "@types/node": "^24.12.4",
+    "happy-dom": "^20.9.0",
     "mdsx": "^0.0.7",
     "svelte": "^5.56.0",
     "svelte-check": "^4.4.8",
@@ -99,6 +103,7 @@
     "tsx": "^4.20.6",
     "typescript": "^6.0.3",
     "vite": "^8.0.13",
+    "vitest": "^4.1.7",
     "wrangler": "^4.91.0"
   }
 }

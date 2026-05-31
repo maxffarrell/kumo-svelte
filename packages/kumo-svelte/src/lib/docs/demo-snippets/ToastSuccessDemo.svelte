@@ -3,7 +3,7 @@
 </script>
 
 <Toasty>
-  {#snippet children(toastManager)}
+  {#snippet children(toastManager: any)}
     <Button
       variant="primary"
       onclick={() =>

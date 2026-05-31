@@ -16,7 +16,7 @@
     <Combobox.Content>
       <Combobox.Empty />
       <Combobox.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Combobox.Item value={item} disabled={item.disabled}>
             <span>
               {item.label}

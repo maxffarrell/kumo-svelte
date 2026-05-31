@@ -42,7 +42,7 @@
   <Autocomplete.InputGroup placeholder="Search fruits…" />
   <Autocomplete.Content>
     <Autocomplete.List>
-      {#snippet children(item)}
+      {#snippet children(item: any)}
         <Autocomplete.Item value={item}>{item}</Autocomplete.Item>
       {/snippet}
     </Autocomplete.List>

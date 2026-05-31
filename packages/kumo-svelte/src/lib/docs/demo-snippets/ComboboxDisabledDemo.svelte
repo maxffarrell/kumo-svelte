@@ -49,7 +49,7 @@
     <Combobox.Content>
       <Combobox.Empty />
       <Combobox.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Combobox.Item value={item}>{item}</Combobox.Item>
         {/snippet}
       </Combobox.List>
@@ -62,7 +62,7 @@
       <Combobox.Input placeholder="Search" />
       <Combobox.Empty />
       <Combobox.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Combobox.Item value={item}>{item.emoji} {item.label}</Combobox.Item>
         {/snippet}
       </Combobox.List>

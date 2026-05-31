@@ -1,7 +1,16 @@
 import Root from './Switch.svelte';
-import Group from './SwitchGroup.svelte';
-import Item from './SwitchItem.svelte';
-import Legend from './SwitchLegend.svelte';
+import type { KumoSwitchPart } from './Switch.svelte';
+
+const part = (part: KumoSwitchPart) =>
+  ((anchor, props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as typeof Root;
+
+const Group = part('group');
+const Item = part('item');
+const Legend = part('legend');
 
 const Switch = Object.assign(Root, {
   Root,

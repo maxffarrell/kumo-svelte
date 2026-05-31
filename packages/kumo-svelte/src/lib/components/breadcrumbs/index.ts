@@ -1,8 +1,17 @@
 import Root from './Breadcrumbs.svelte';
-import Link from './BreadcrumbsLink.svelte';
-import Current from './BreadcrumbsCurrent.svelte';
-import Separator from './BreadcrumbsSeparator.svelte';
-import Clipboard from './BreadcrumbsClipboard.svelte';
+import type { KumoBreadcrumbsPart } from './Breadcrumbs.svelte';
+
+const part = (part: KumoBreadcrumbsPart) =>
+  ((anchor, props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as typeof Root;
+
+const Link = part('link');
+const Current = part('current');
+const Separator = part('separator');
+const Clipboard = part('clipboard');
 
 export const Breadcrumbs = Object.assign(Root, {
   Link,
@@ -32,6 +41,7 @@ export {
   type BreadcrumbsCurrentSnippetProps,
   type BreadcrumbsLinkSnippetProps,
   type BreadcrumbsSeparatorSnippetProps,
+  type KumoBreadcrumbsPart,
   type KumoBreadcrumbsSize,
   type KumoBreadcrumbsVariantsProps
 } from './Breadcrumbs.svelte';

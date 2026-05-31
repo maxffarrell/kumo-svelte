@@ -334,14 +334,13 @@
               <div class="mb-2 px-2 pt-1 text-xs font-semibold text-kumo-subtle">{group.label}</div>
               <div>
                 {#each group.items as item (item.url)}
-                  {@const index = flatItems.indexOf(item)}
                   <button
                     class={cn(
                       'group flex w-full items-center gap-3 px-2 py-1.5 text-left text-base transition-colors',
                       'cursor-pointer rounded-lg',
-                      index === activeIndex ? 'bg-kumo-overlay' : undefined
+                      flatItems.indexOf(item) === activeIndex ? 'bg-kumo-overlay' : undefined
                     )}
-                    onmouseenter={() => (activeIndex = index)}
+                    onmouseenter={() => (activeIndex = flatItems.indexOf(item))}
                     onclick={(event) => openItem(item, event.metaKey || event.ctrlKey)}
                   >
                     <div class="flex w-full items-center gap-3">

@@ -4,7 +4,7 @@
 
 <Popover.Root>
   <Popover.Trigger>
-    {#snippet child({ props })}
+    {#snippet child({ props }: { props: Record<string, unknown> })}
       <Button {...props}>Open Settings</Button>
     {/snippet}
   </Popover.Trigger>
@@ -13,7 +13,7 @@
     <Popover.Description>Configure your preferences below.</Popover.Description>
     <div class="mt-3">
       <Popover.Close>
-        {#snippet child({ props })}
+        {#snippet child({ props }: { props: Record<string, unknown> })}
           <Button variant="secondary" size="sm" {...props}>Close</Button>
         {/snippet}
       </Popover.Close>

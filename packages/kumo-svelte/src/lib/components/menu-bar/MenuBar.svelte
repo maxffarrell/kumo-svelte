@@ -111,13 +111,12 @@
     menuRef?.removeEventListener('focusout', handleFocusOut);
     removeKeyListener();
   });
+
+  const optionId = (option: MenuOptionProps, index: number) => (optionIds ? option.id : index);
 </script>
 
 <nav class={classes} bind:this={menuRef} {...rest}>
   {#each options as option, index (optionIds ? option.id : index)}
-    {@const id = optionIds ? option.id : index}
-    {@const Icon = option.icon}
-
     {#snippet menuButton(props: Record<string, unknown>)}
       <button
         {...props}
@@ -126,11 +125,11 @@
         data-kumo-part="option"
         class={cn(
           'relative -ml-px flex h-full w-11 cursor-pointer items-center justify-center rounded-md border-none bg-kumo-recessed first:rounded-l-lg last:rounded-r-lg transition-colors focus:z-3 focus:outline-none focus:ring-kumo-focus/50 focus-visible:z-3 focus-visible:ring-2 focus-visible:ring-kumo-brand',
-          isActive === id && 'z-2 bg-kumo-base shadow-xs transition-colors'
+          isActive === optionId(option, index) && 'z-2 bg-kumo-base shadow-xs transition-colors'
         )}
         onclick={option.onClick}
       >
-        <Icon size={18} />
+        <option.icon size={18} />
       </button>
     {/snippet}
 

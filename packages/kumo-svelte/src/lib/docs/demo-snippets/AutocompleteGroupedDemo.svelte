@@ -36,11 +36,11 @@
   <Autocomplete.InputGroup placeholder="Select region…" />
   <Autocomplete.Content>
     <Autocomplete.List>
-      {#snippet children(group)}
+      {#snippet children(group: any)}
         <Autocomplete.Group items={group.items}>
           <Autocomplete.GroupLabel>{group.label}</Autocomplete.GroupLabel>
           <Autocomplete.Collection>
-            {#snippet children(item)}
+            {#snippet children(item: any)}
               <Autocomplete.Item value={item}>{item.label}</Autocomplete.Item>
             {/snippet}
           </Autocomplete.Collection>

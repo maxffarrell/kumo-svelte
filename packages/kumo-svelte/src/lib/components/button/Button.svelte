@@ -140,74 +140,55 @@
     'aria-label'?: string;
     [key: string]: unknown;
   }
-</script>
 
-<script lang="ts">
-  let props: ButtonProps = $props();
-</script>
+  function buttonElementClasses(props: ButtonProps) {
+    return cn(
+      buttonVariants({
+        variant: props.variant ?? 'secondary',
+        size: props.size ?? 'base',
+        shape: props.shape ?? 'base'
+      }),
+      (props.disabled ?? false) && 'cursor-not-allowed opacity-50',
+      props.href && 'flex items-center no-underline!',
+      props.class
+    );
+  }
 
-{#snippet ButtonElement(props: ButtonProps)}
-  {@const {
+  function buttonExternalProps(props: ButtonProps) {
+    return props.external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+  }
+
+  function buttonRestProps({
     children,
     class: className,
-    icon: IconComponent,
+    icon,
     href,
-    external = false,
-    type = 'button',
-    disabled = false,
-    shape = 'base',
-    size = 'base',
-    variant = 'secondary',
-    loading = false,
+    external,
+    type,
+    disabled,
+    shape,
+    size,
+    variant,
+    loading,
+    title,
     ...rest
-  } = props}
-  {@const classes = cn(
-    buttonVariants({ variant, size, shape }),
-    disabled && 'cursor-not-allowed opacity-50',
-    href && 'flex items-center no-underline!',
-    className
-  )}
-  {@const loaderSize = size === 'lg' ? 16 : 14}
-  {@const externalProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+  }: ButtonProps) {
+    void children;
+    void className;
+    void icon;
+    void href;
+    void external;
+    void type;
+    void disabled;
+    void shape;
+    void size;
+    void variant;
+    void loading;
+    void title;
+    return rest;
+  }
 
-  <svelte:element
-    this={href ? 'a' : 'button'}
-    class={classes}
-    href={href}
-    type={href ? undefined : type}
-    disabled={href ? undefined : disabled || loading}
-    aria-busy={loading || undefined}
-    data-kumo-component="Button"
-    data-kumo-part={href ? 'link-button' : 'button'}
-    {...externalProps}
-    {...rest}
-  >
-    {#if loading}
-      <Loader size={loaderSize} />
-    {:else if IconComponent}
-      <IconComponent />
-    {/if}
-    {#if children}
-      <span class="contents">{@render children()}</span>
-    {/if}
-  </svelte:element>
-{/snippet}
-
-{#snippet ButtonSnippet(props: ButtonProps)}
-  {@const { title } = props}
-
-  {#if title}
-    {#snippet trigger()}
-      {@render ButtonElement(props)}
-    {/snippet}
-    <Tooltip trigger={trigger}>{title}</Tooltip>
-  {:else}
-    {@render ButtonElement(props)}
-  {/if}
-{/snippet}
-
-{#snippet LinkButton(props: LinkButtonProps)}
-  {@const {
+  function linkButtonProps({
     class: className,
     external = false,
     linksExternal = false,
@@ -215,47 +196,88 @@
     size = 'base',
     variant = 'ghost',
     ...rest
-  } = props}
+  }: LinkButtonProps): ButtonProps {
+    return {
+      ...rest,
+      external: external || linksExternal,
+      shape: shape as ButtonShape,
+      size: size as ButtonSize,
+      variant: variant as ButtonVariant,
+      class: className as string | undefined
+    };
+  }
 
-  {@render ButtonSnippet({
-    ...rest,
-    external: external || linksExternal,
-    shape: shape as ButtonShape,
-    size: size as ButtonSize,
-    variant: variant as ButtonVariant,
-    class: className as string | undefined
-  })}
+  function refreshIconClass(loading: boolean, size: ButtonSize) {
+    return cn({
+      'animate-refresh': loading,
+      'size-4.5': size === 'base',
+      'size-4': size === 'sm' || size === 'xs',
+      'size-5': size === 'lg'
+    });
+  }
+</script>
+
+<script lang="ts">
+  let props: ButtonProps = $props();
+</script>
+
+{#snippet ButtonElement(props: ButtonProps)}
+  <svelte:element
+    this={props.href ? 'a' : 'button'}
+    class={buttonElementClasses(props)}
+    href={props.href}
+    type={props.href ? undefined : (props.type ?? 'button')}
+    disabled={props.href ? undefined : (props.disabled ?? false) || (props.loading ?? false)}
+    aria-busy={props.loading || undefined}
+    data-kumo-component="Button"
+    data-kumo-part={props.href ? 'link-button' : 'button'}
+    {...buttonExternalProps(props)}
+    {...buttonRestProps(props)}
+  >
+    {#if props.loading}
+      <Loader size={props.size === 'lg' ? 16 : 14} />
+    {:else if props.icon}
+      <props.icon />
+    {/if}
+    {#if props.children}
+      <span class="contents">{@render props.children()}</span>
+    {/if}
+  </svelte:element>
+{/snippet}
+
+{#snippet ButtonSnippet(props: ButtonProps)}
+  {#if props.title}
+    {#snippet trigger()}
+      {@render ButtonElement(props)}
+    {/snippet}
+    <Tooltip trigger={trigger}>{props.title}</Tooltip>
+  {:else}
+    {@render ButtonElement(props)}
+  {/if}
+{/snippet}
+
+{#snippet LinkButton(props: LinkButtonProps)}
+  {@render ButtonSnippet(linkButtonProps(props))}
 {/snippet}
 
 {#snippet RefreshButton(props: RefreshButtonProps)}
-  {@const {
-    class: className,
-    loading = false,
-    size = 'base',
-    variant = 'secondary',
-    'aria-label': ariaLabel = 'Refresh',
-    ...rest
-  } = props}
-
-  {#snippet refreshIcon()}
+  {#snippet refreshIcon({ loading, size }: { loading: boolean; size: ButtonSize })}
     <ArrowClockwise
-      class={cn({
-        'animate-refresh': loading,
-        'size-4.5': size === 'base',
-        'size-4': size === 'sm' || size === 'xs',
-        'size-5': size === 'lg'
-      })}
+      class={refreshIconClass(loading, size)}
     />
   {/snippet}
 
   {@render ButtonSnippet({
-    ...rest,
+    ...props,
     shape: 'square',
-    size,
-    variant,
-    'aria-label': ariaLabel,
-    class: className,
-    children: refreshIcon
+    size: props.size ?? 'base',
+    variant: props.variant ?? 'secondary',
+    'aria-label': props['aria-label'] ?? 'Refresh',
+    class: props.class,
+    children: () => refreshIcon({
+      loading: props.loading ?? false,
+      size: props.size ?? 'base'
+    })
   })}
 {/snippet}
 

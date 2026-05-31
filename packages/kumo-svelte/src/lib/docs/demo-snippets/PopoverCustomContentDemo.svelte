@@ -4,7 +4,7 @@
 
 <Popover.Root>
   <Popover.Trigger>
-    {#snippet child({ props })}
+    {#snippet child({ props }: { props: Record<string, unknown> })}
       <Button {...props}>User Profile</Button>
     {/snippet}
   </Popover.Trigger>
@@ -19,7 +19,7 @@
     <div class="mt-3 flex gap-2 border-t border-kumo-line pt-3">
       <Button variant="secondary" size="sm" class="flex-1">Profile</Button>
       <Popover.Close>
-        {#snippet child({ props })}
+        {#snippet child({ props }: { props: Record<string, unknown> })}
           <Button variant="ghost" size="sm" class="flex-1" {...props}>Sign Out</Button>
         {/snippet}
       </Popover.Close>

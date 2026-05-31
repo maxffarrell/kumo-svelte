@@ -1,22 +1,35 @@
 import { DropdownMenu as DropdownMenuPrimitive } from 'bits-ui';
-import DropdownMenuRoot from './DropdownMenu.svelte';
-import DropdownMenuTrigger from './DropdownMenuTrigger.svelte';
-import DropdownMenuContent from './DropdownMenuContent.svelte';
-import DropdownMenuItem from './DropdownMenuItem.svelte';
-import DropdownMenuCheckboxItem from './DropdownMenuCheckboxItem.svelte';
-import DropdownMenuLabel from './DropdownMenuLabel.svelte';
-import DropdownMenuRadioItem from './DropdownMenuRadioItem.svelte';
-import DropdownMenuRadioItemIndicator from './DropdownMenuRadioItemIndicator.svelte';
-import DropdownMenuSeparator from './DropdownMenuSeparator.svelte';
-import DropdownMenuShortcut from './DropdownMenuShortcut.svelte';
-import DropdownMenuSubContent from './DropdownMenuSubContent.svelte';
-import DropdownMenuSubTrigger from './DropdownMenuSubTrigger.svelte';
+import DropdownMenuRoot, {
+  KUMO_DROPDOWN_DEFAULT_VARIANTS,
+  KUMO_DROPDOWN_VARIANTS,
+  type KumoDropdownPart,
+  type KumoDropdownVariant
+} from './DropdownMenu.svelte';
 
 export {
   KUMO_DROPDOWN_DEFAULT_VARIANTS,
   KUMO_DROPDOWN_VARIANTS,
   type KumoDropdownVariant
-} from './DropdownMenuItem.svelte';
+};
+
+const part = (part: KumoDropdownPart) =>
+  ((anchor, props = {}) =>
+    DropdownMenuRoot(anchor, {
+      ...props,
+      __part: part
+    })) as typeof DropdownMenuRoot;
+
+const DropdownMenuTrigger = part('trigger');
+const DropdownMenuContent = part('content');
+const DropdownMenuItem = part('item');
+const DropdownMenuCheckboxItem = part('checkbox-item');
+const DropdownMenuLabel = part('label');
+const DropdownMenuRadioItem = part('radio-item');
+const DropdownMenuRadioItemIndicator = part('radio-item-indicator');
+const DropdownMenuSeparator = part('separator');
+const DropdownMenuShortcut = part('shortcut');
+const DropdownMenuSubContent = part('sub-content');
+const DropdownMenuSubTrigger = part('sub-trigger');
 
 export const DropdownMenu = Object.assign(DropdownMenuRoot, {
   Trigger: DropdownMenuTrigger,
@@ -37,22 +50,22 @@ export const DropdownMenu = Object.assign(DropdownMenuRoot, {
   Shortcut: DropdownMenuShortcut,
   Group: DropdownMenuPrimitive.Group
 }) as typeof DropdownMenuRoot & {
-  Trigger: typeof DropdownMenuTrigger;
+  Trigger: typeof DropdownMenuRoot;
   Portal: typeof DropdownMenuPrimitive.Portal;
   Sub: typeof DropdownMenuPrimitive.Sub;
-  SubTrigger: typeof DropdownMenuSubTrigger;
-  SubContent: typeof DropdownMenuSubContent;
-  Content: typeof DropdownMenuContent;
-  Item: typeof DropdownMenuItem;
-  LinkItem: typeof DropdownMenuItem;
-  CheckboxItem: typeof DropdownMenuCheckboxItem;
+  SubTrigger: typeof DropdownMenuRoot;
+  SubContent: typeof DropdownMenuRoot;
+  Content: typeof DropdownMenuRoot;
+  Item: typeof DropdownMenuRoot;
+  LinkItem: typeof DropdownMenuRoot;
+  CheckboxItem: typeof DropdownMenuRoot;
   CheckboxGroup: typeof DropdownMenuPrimitive.CheckboxGroup;
   RadioGroup: typeof DropdownMenuPrimitive.RadioGroup;
-  RadioItem: typeof DropdownMenuRadioItem;
-  RadioItemIndicator: typeof DropdownMenuRadioItemIndicator;
-  Label: typeof DropdownMenuLabel;
-  Separator: typeof DropdownMenuSeparator;
-  Shortcut: typeof DropdownMenuShortcut;
+  RadioItem: typeof DropdownMenuRoot;
+  RadioItemIndicator: typeof DropdownMenuRoot;
+  Label: typeof DropdownMenuRoot;
+  Separator: typeof DropdownMenuRoot;
+  Shortcut: typeof DropdownMenuRoot;
   Group: typeof DropdownMenuPrimitive.Group;
 };
 

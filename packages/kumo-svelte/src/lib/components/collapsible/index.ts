@@ -1,9 +1,18 @@
 import Root from './Collapsible.svelte';
-import CollapsibleRoot from './CollapsibleRoot.svelte';
-import Trigger from './CollapsibleTrigger.svelte';
-import Panel from './CollapsiblePanel.svelte';
-import DefaultTrigger from './CollapsibleDefaultTrigger.svelte';
-import DefaultPanel from './CollapsibleDefaultPanel.svelte';
+import type { KumoCollapsiblePart } from './Collapsible.svelte';
+
+const part = (part: KumoCollapsiblePart) =>
+  ((anchor: any, props: Record<string, unknown> = {}) =>
+    (Root as any)(anchor, {
+      ...props,
+      __part: part
+    })) as unknown as typeof Root;
+
+const CollapsibleRoot = part('root');
+const Trigger = part('trigger');
+const Panel = part('panel');
+const DefaultTrigger = part('default-trigger');
+const DefaultPanel = part('default-panel');
 
 const Collapsible = Object.assign(Root, {
   Root: CollapsibleRoot,

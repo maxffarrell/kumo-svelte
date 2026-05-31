@@ -4,7 +4,7 @@
 </script>
 
 <Toasty>
-  {#snippet children(toastManager)}
+  {#snippet children(toastManager: any)}
     {#snippet content()}
       <div class="flex items-center gap-2">
         <CheckCircle class="size-4" />

@@ -1,27 +1,53 @@
-import Root from './Sidebar.svelte';
-import Provider from './SidebarProvider.svelte';
-import Header from './SidebarHeader.svelte';
-import Content from './SidebarContent.svelte';
-import Footer from './SidebarFooter.svelte';
-import Group from './SidebarGroup.svelte';
-import GroupLabel from './SidebarGroupLabel.svelte';
-import Menu from './SidebarMenu.svelte';
-import MenuItem from './SidebarMenuItem.svelte';
-import MenuButton from './SidebarMenuButton.svelte';
-import MenuBadge from './SidebarMenuBadge.svelte';
-import MenuSub from './SidebarMenuSub.svelte';
-import MenuSubItem from './SidebarMenuSubItem.svelte';
-import MenuSubButton from './SidebarMenuSubButton.svelte';
-import Separator from './SidebarSeparator.svelte';
-import Trigger from './SidebarTrigger.svelte';
-import Rail from './SidebarRail.svelte';
-import ResizeHandle from './SidebarResizeHandle.svelte';
-import MenuChevron from './SidebarMenuChevron.svelte';
-import Collapsible from './SidebarCollapsible.svelte';
-import CollapsibleTrigger from './SidebarCollapsibleTrigger.svelte';
-import CollapsibleContent from './SidebarCollapsibleContent.svelte';
-import SlidingViews from './SidebarSlidingViews.svelte';
-import SlidingView from './SidebarSlidingView.svelte';
+import type { Component } from 'svelte';
+import Root, {
+  SidebarCollapsibleContent,
+  SidebarCollapsibleRoot,
+  SidebarCollapsibleTrigger,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuChevron,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarProvider,
+  SidebarRail,
+  SidebarResizeHandle,
+  SidebarSeparator,
+  SidebarSlidingView,
+  SidebarSlidingViews,
+  SidebarTrigger
+} from './Sidebar.svelte';
+
+const Provider = SidebarProvider as unknown as Component;
+const Header = SidebarHeader as unknown as Component;
+const Content = SidebarContent as unknown as Component;
+const Footer = SidebarFooter as unknown as Component;
+const Group = SidebarGroup as unknown as Component;
+const GroupLabel = SidebarGroupLabel as unknown as Component;
+const Menu = SidebarMenu as unknown as Component;
+const MenuItem = SidebarMenuItem as unknown as Component;
+const MenuButton = SidebarMenuButton as unknown as Component;
+const MenuBadge = SidebarMenuBadge as unknown as Component;
+const MenuSub = SidebarMenuSub as unknown as Component;
+const MenuSubItem = SidebarMenuSubItem as unknown as Component;
+const MenuSubButton = SidebarMenuSubButton as unknown as Component;
+const Separator = SidebarSeparator as unknown as Component;
+const Trigger = SidebarTrigger as unknown as Component;
+const Rail = SidebarRail as unknown as Component;
+const ResizeHandle = SidebarResizeHandle as unknown as Component;
+const MenuChevron = SidebarMenuChevron as unknown as Component;
+const Collapsible = SidebarCollapsibleRoot as unknown as Component;
+const CollapsibleTrigger = SidebarCollapsibleTrigger as unknown as Component;
+const CollapsibleContent = SidebarCollapsibleContent as unknown as Component;
+const SlidingViews = SidebarSlidingViews as unknown as Component;
+const SlidingView = SidebarSlidingView as unknown as Component;
 
 export const Sidebar: typeof Root & {
   Provider: typeof Provider;

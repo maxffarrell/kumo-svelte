@@ -18,7 +18,7 @@
     <Combobox.Content>
       <Combobox.Empty />
       <Combobox.List>
-        {#snippet children(item)}
+        {#snippet children(item: any)}
           <Combobox.Item value={item}>{item.label}</Combobox.Item>
         {/snippet}
       </Combobox.List>

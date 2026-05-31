@@ -330,22 +330,29 @@
     if (tooltipBoundary === undefined || tooltipBoundary === 'clipping-ancestors') return undefined;
     return tooltipBoundary;
   });
+
+  const loadingWave = $derived.by(() => {
+    const mid = height / 2;
+    const amp = Math.min(height * 0.12, 28);
+    const period = 400;
+    const path = Array.from({ length: 121 }, (_, i) => {
+      const x = -period + (i / 120) * period * 3;
+      const y = mid + Math.sin((i / 120) * 2 * Math.PI * 3) * amp;
+      return `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`;
+    }).join(' ');
+
+    return { path, period };
+  });
+
+  const tooltipFormatFn = $derived(tooltipValueFormat ?? yAxisTickLabelFormat);
 </script>
 
 <div bind:this={containerRef} class="relative w-full" style:height={`${height}px`} role="presentation" onmousemove={updateMousePosition}>
   {#if loading}
-    {@const mid = height / 2}
-    {@const amp = Math.min(height * 0.12, 28)}
-    {@const period = 400}
-    {@const wavePath = Array.from({ length: 121 }, (_, i) => {
-      const x = -period + (i / 120) * period * 3;
-      const y = mid + Math.sin((i / 120) * 2 * Math.PI * 3) * amp;
-      return `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`;
-    }).join(' ')}
     <div aria-hidden="true" class="absolute inset-0 overflow-hidden" style:height={`${height}px`}>
-      <svg width="100%" height={height} viewBox={`0 0 ${period} ${height}`} preserveAspectRatio="none" class="w-full animate-pulse">
+      <svg width="100%" height={height} viewBox={`0 0 ${loadingWave.period} ${height}`} preserveAspectRatio="none" class="w-full animate-pulse">
         <path
-          d={wavePath}
+          d={loadingWave.path}
           fill="none"
           stroke={effectiveDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.2)'}
           stroke-width="2"
@@ -359,7 +366,6 @@
   {/if}
   <span bind:this={tooltipAnchor} aria-hidden="true" class="pointer-events-none absolute size-px" style={tooltipAnchorStyle}></span>
   {#if tooltipState}
-    {@const formatFn = tooltipValueFormat ?? yAxisTickLabelFormat}
     <TooltipPrimitive.Root open={true} delayDuration={0} disableHoverableContent>
       <TooltipPrimitive.Portal>
         <TooltipPrimitive.Content
@@ -384,7 +390,7 @@
                 <span class="truncate text-xs font-medium text-kumo-default" title={row.name}>{row.name}</span>
               </div>
               <span class="shrink-0 text-xs font-semibold text-kumo-default">
-                {formatFn ? formatFn(row.value) : formatDefaultValue(row.value)}
+                {tooltipFormatFn ? tooltipFormatFn(row.value) : formatDefaultValue(row.value)}
               </span>
             </div>
           {/each}

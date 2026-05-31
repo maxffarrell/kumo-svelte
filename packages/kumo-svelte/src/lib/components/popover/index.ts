@@ -1,10 +1,12 @@
-import Root from './Popover.svelte';
-import PopoverRoot from './PopoverRoot.svelte';
-import Trigger from './PopoverTrigger.svelte';
-import Content from './PopoverContent.svelte';
-import Title from './PopoverTitle.svelte';
-import Description from './PopoverDescription.svelte';
-import Close from './PopoverClose.svelte';
+import Root, {
+  PopoverTrigger as Trigger,
+  PopoverContent as Content,
+  PopoverTitle as Title,
+  PopoverDescription as Description,
+  PopoverClose as Close
+} from './Popover.svelte';
+
+const PopoverRoot = Root;
 
 const Popover = Object.assign(Root, {
   Root: PopoverRoot,

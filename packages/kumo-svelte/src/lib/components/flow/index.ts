@@ -1,14 +1,19 @@
 import FlowRoot from './Flow.svelte';
-import FlowAnchor from './FlowAnchor.svelte';
-import FlowList from './FlowList.svelte';
-import FlowNode from './FlowNode.svelte';
-import FlowParallel from './FlowParallel.svelte';
+import type { KumoFlowPart } from './Flow.svelte';
 
 export { default as FlowRoot } from './Flow.svelte';
-export { default as FlowAnchor } from './FlowAnchor.svelte';
-export { default as FlowList } from './FlowList.svelte';
-export { default as FlowNode } from './FlowNode.svelte';
-export { default as FlowParallel } from './FlowParallel.svelte';
+
+const part = (part: KumoFlowPart) =>
+  ((anchor: Element, props: Record<string, unknown> = {}) =>
+    (FlowRoot as unknown as (anchor: Element, props: Record<string, unknown>) => ReturnType<typeof FlowRoot>)(anchor, {
+      ...props,
+      __part: part
+    })) as unknown as typeof FlowRoot;
+
+const FlowNode = part('node');
+const FlowParallel = part('parallel');
+const FlowList = part('list');
+const FlowAnchor = part('anchor');
 
 export const Flow = Object.assign(FlowRoot, {
   Node: FlowNode,
@@ -21,5 +26,7 @@ export const Flow = Object.assign(FlowRoot, {
   List: typeof FlowList;
   Anchor: typeof FlowAnchor;
 };
+
+export { FlowAnchor, FlowList, FlowNode, FlowParallel };
 
 export type { FlowAlign, FlowOrientation } from './context';

@@ -521,6 +521,10 @@ Examples:
     inputRef?.focus({ preventScroll: true });
   }
 
+  function isFirstOutputAfterInput(index: number, line: TerminalLine) {
+    return line.type !== 'input' && lines[index - 1]?.type === 'input';
+  }
+
   function handleSubmit() {
     if (!currentInput.trim() && !currentInput) {
       lines = [...lines, { type: 'input', content: '' }];
@@ -618,9 +622,7 @@ Examples:
     class="relative h-[500px] w-full max-w-[800px] cursor-text overflow-x-auto overflow-y-auto overscroll-contain rounded-lg bg-black p-4 font-mono text-sm text-white"
   >
     {#each lines as line, index}
-      {@const previousLine = lines[index - 1]}
-      {@const isFirstOutputAfterInput = line.type !== 'input' && previousLine?.type === 'input'}
-      <div class="whitespace-pre-wrap" class:mt-1={isFirstOutputAfterInput}>
+      <div class="whitespace-pre-wrap" class:mt-1={isFirstOutputAfterInput(index, line)}>
         {#if line.type === 'input'}
           <span class="text-kumo-success"><span>$</span> {line.content}</span>
         {:else if line.type === 'error'}

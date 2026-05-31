@@ -125,6 +125,8 @@
     return disabled(day);
   }
 
+  const isOutsideMonth = (day: Date, month: Date) => day.getMonth() !== month.getMonth();
+
   function isSelected(day: Date) {
     if (mode === 'multiple') {
       return Array.isArray(selected) && selected.some((date) => isSameDay(date, day));
@@ -252,19 +254,17 @@
               {#each getWeeks(visibleMonth) as week (week[0].toISOString())}
                 <tr class="rdp-week">
                   {#each week as day (day.toISOString())}
-                    {@const outside = day.getMonth() !== visibleMonth.getMonth()}
-                    {@const dayDisabled = isDisabled(day)}
                     <td
                       class={cn(
                         'rdp-day',
-                        outside && 'rdp-outside',
+                        isOutsideMonth(day, visibleMonth) && 'rdp-outside',
                         isSameDay(day, today) && 'rdp-today',
                         isSelected(day) && 'rdp-selected',
-                        dayDisabled && 'rdp-disabled',
+                        isDisabled(day) && 'rdp-disabled',
                         isRangeStart(day) && 'rdp-range_start',
                         isRangeMiddle(day) && 'rdp-range_middle',
                         isRangeEnd(day) && 'rdp-range_end',
-                        !dayDisabled && 'rdp-focusable',
+                        !isDisabled(day) && 'rdp-focusable',
                         classNames?.day
                       )}
                       data-day={day.toISOString()}
@@ -272,7 +272,7 @@
                       <button
                         type="button"
                         class={cn('rdp-day_button', classNames?.day_button)}
-                        disabled={dayDisabled}
+                        disabled={isDisabled(day)}
                         aria-label={day.toLocaleDateString(locale, { dateStyle: 'full' })}
                         aria-pressed={isSelected(day)}
                         onclick={() => handleDayClick(day)}

@@ -1,7 +1,12 @@
-import Root from './Checkbox.svelte';
-import Group from './CheckboxGroup.svelte';
-import Item from './CheckboxItem.svelte';
-import Legend from './CheckboxLegend.svelte';
+import Root, {
+  Group as GroupSnippet,
+  Item as ItemSnippet,
+  Legend as LegendSnippet
+} from './Checkbox.svelte';
+
+const Group = GroupSnippet as unknown as typeof Root;
+const Item = ItemSnippet as unknown as typeof Root;
+const Legend = LegendSnippet as unknown as typeof Root;
 
 const Checkbox = Object.assign(Root, {
   Root,
@@ -15,5 +20,10 @@ const Checkbox = Object.assign(Root, {
   Legend: typeof Legend;
 };
 
-export { Checkbox, Group as CheckboxGroup, Item as CheckboxItem, Legend as CheckboxLegend };
+export {
+  Checkbox,
+  Group as CheckboxGroup,
+  Item as CheckboxItem,
+  Legend as CheckboxLegend
+};
 export type { CheckboxVariant } from './Checkbox.svelte';

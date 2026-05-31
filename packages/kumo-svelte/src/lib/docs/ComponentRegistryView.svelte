@@ -146,7 +146,6 @@
 
   <div class="space-y-2">
     {#each filteredComponents as component (component.name)}
-      {@const variants = variantProps(component)}
       <div class="rounded-lg border border-kumo-hairline bg-kumo-base">
         <button
           type="button"
@@ -169,11 +168,11 @@
               </code>
             </div>
 
-            {#if variants.length > 0}
+            {#if variantProps(component).length > 0}
               <div class="mb-4">
                 <h4 class="mb-2 text-xs font-medium text-kumo-subtle uppercase">Variants</h4>
                 <div class="space-y-2">
-                  {#each variants as [propName, prop] (propName)}
+                  {#each variantProps(component) as [propName, prop] (propName)}
                     <div>
                       <span class="font-mono text-sm text-kumo-default">{propName}</span>
                       {#if prop.default}

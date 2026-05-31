@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { Dialog as DialogPrimitive } from 'bits-ui';
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
+  import { TooltipProvider } from '$lib/components/tooltip';
   import { getSidebarContext } from './context';
 
   interface Props {
@@ -15,42 +17,8 @@
   const isVisible = $derived(sidebar.open || sidebar.isPeeking || isAlwaysExpanded);
   const railWidth = $derived(isAlwaysExpanded || sidebar.open ? 'var(--sidebar-width)' : sidebar.collapsible === 'icon' ? 'var(--sidebar-width-icon)' : '0px');
   const contentWidth = $derived(isVisible ? 'var(--sidebar-width)' : sidebar.collapsible === 'icon' ? 'var(--sidebar-width-icon)' : '0px');
-</script>
-
-{#if sidebar.isMobile && sidebar.open}
-  <button
-    type="button"
-    aria-label="Close sidebar"
-    class="fixed inset-0 z-40 bg-black/40 md:hidden"
-    data-sidebar="mobile-backdrop"
-    data-kumo-component="Sidebar"
-    data-kumo-part="mobile-backdrop"
-    onclick={() => sidebar.setOpen(false)}
-  ></button>
-{/if}
-
-<aside
-  data-state={sidebar.state}
-  data-side={sidebar.side}
-  data-variant={sidebar.variant}
-  data-collapsible={sidebar.collapsible}
-  data-mobile={sidebar.isMobile ? '' : undefined}
-  data-sidebar="sidebar"
-  style:width={railWidth}
-  class={cn(
-    'group/sidebar relative h-full shrink-0 grow-0 overflow-visible transition-[width] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none',
-    sidebar.isMobile && 'fixed inset-y-0 z-50 w-0 md:relative md:z-auto',
-    sidebar.isMobile && sidebar.side === 'left' && 'left-0',
-    sidebar.isMobile && sidebar.side === 'right' && 'right-0',
-    sidebar.variant === 'floating' && 'm-2 rounded-lg shadow-lg',
-    className
-  )}
-  {...rest}
->
-  <div
-    data-sidebar="content-container"
-    style:width={contentWidth}
-    class={cn(
+  const contentClasses = $derived(
+    cn(
       'flex h-full min-w-0 flex-col overflow-hidden whitespace-nowrap bg-(--sidebar-bg) text-kumo-default transition-[width] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none',
       sidebar.variant === 'sidebar' && (sidebar.side === 'left' ? 'border-r border-kumo-line' : 'border-l border-kumo-line'),
       sidebar.variant === 'floating' && 'rounded-lg border border-kumo-line',
@@ -61,8 +29,67 @@
       sidebar.isMobile && !sidebar.open && 'hidden md:flex',
       sidebar.isMobile && sidebar.side === 'left' && 'left-0',
       sidebar.isMobile && sidebar.side === 'right' && 'right-0'
-    )}
-  >
+    )
+  );
+</script>
+
+{#snippet sidebarContent()}
+  <TooltipProvider>
     {@render children?.()}
-  </div>
-</aside>
+  </TooltipProvider>
+{/snippet}
+
+{#if sidebar.isMobile}
+  <DialogPrimitive.Root open={sidebar.openMobile} onOpenChange={(open) => sidebar.setOpenMobile(open)}>
+    <DialogPrimitive.Portal>
+      <DialogPrimitive.Overlay
+        data-sidebar-backdrop
+        data-kumo-component="Sidebar"
+        data-kumo-part="mobile-backdrop"
+        class="fixed inset-0 z-40 bg-black/50 transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
+      />
+      <DialogPrimitive.Content
+        data-sidebar-popup
+        aria-label="Sidebar"
+        class={cn(
+          'fixed inset-y-0 z-50 flex w-(--sidebar-width) flex-col bg-kumo-base p-0 duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0',
+          sidebar.side === 'left' && 'left-0 data-ending-style:-translate-x-full data-starting-style:-translate-x-full',
+          sidebar.side === 'right' && 'right-0 data-ending-style:translate-x-full data-starting-style:translate-x-full'
+        )}
+        style="transition-property: transform, opacity; transition-timing-function: var(--default-transition-timing-function);"
+      >
+        <div
+          data-state="expanded"
+          data-side={sidebar.side}
+          data-variant={sidebar.variant}
+          data-collapsible={sidebar.collapsible}
+          data-mobile="true"
+          data-sidebar="sidebar"
+          class={cn('group/sidebar flex h-full w-full flex-col bg-kumo-base text-kumo-default', className)}
+          {...rest}
+        >
+          {@render sidebarContent()}
+        </div>
+      </DialogPrimitive.Content>
+    </DialogPrimitive.Portal>
+  </DialogPrimitive.Root>
+{:else}
+  <aside
+    data-state={sidebar.state}
+    data-side={sidebar.side}
+    data-variant={sidebar.variant}
+    data-collapsible={sidebar.collapsible}
+    data-sidebar="sidebar"
+    style:width={railWidth}
+    class={cn(
+      'group/sidebar relative h-full shrink-0 grow-0 overflow-visible transition-[width] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none',
+      sidebar.variant === 'floating' && 'm-2 rounded-lg shadow-lg',
+      className
+    )}
+    {...rest}
+  >
+    <div data-sidebar="content-container" style:width={contentWidth} class={contentClasses}>
+      {@render sidebarContent()}
+    </div>
+  </aside>
+{/if}

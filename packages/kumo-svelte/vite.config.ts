@@ -23,5 +23,10 @@ export default defineConfig({
     __DOCS_VERSION__: JSON.stringify(packageJson.version ?? 'dev'),
     __BUILD_DATE__: JSON.stringify(buildDate)
   },
-  plugins: [kumoRegistryPlugin(), tailwindcss(), sveltekit()]
+  plugins: [kumoRegistryPlugin(), tailwindcss(), sveltekit()],
+  resolve: process.env.VITEST
+    ? {
+        conditions: ['browser']
+      }
+    : undefined
 });

@@ -4084,6 +4084,7 @@
         }
       },
       "colors": [
+        "bg-kumo-base",
         "bg-kumo-brand",
         "bg-kumo-hairline",
         "bg-kumo-line",

@@ -80,4 +80,4 @@ jobs:
         with:
           fetch-depth: 1
       - uses: ./.github/actions/install-dependencies
-      - run: pnpm test:tools
+      - run: pnpm test

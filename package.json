@@ -20,6 +20,7 @@
     "publish:beta": "bash ci/versioning/publish-beta.sh",
     "release": "pnpm build:all && changeset publish",
     "release:beta": "changeset publish --no-git-tag --tag beta",
+    "test": "pnpm --filter kumo-svelte test && pnpm test:tools",
     "typecheck": "pnpm --filter kumo-svelte typecheck",
     "version": "changeset version",
     "version:beta": "bash ci/versioning/version-beta.sh",

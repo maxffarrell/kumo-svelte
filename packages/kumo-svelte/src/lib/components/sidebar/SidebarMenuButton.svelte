@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
-  import { getSidebarMenuItemContext } from './context';
+  import { Tooltip } from '$lib/components/tooltip';
+  import { getSidebarContext, getSidebarMenuItemContext } from './context';
 
   interface Props {
     children?: Snippet;
@@ -16,6 +17,13 @@
 
   let { children, class: className, icon: Icon, active = false, size = 'base', href, tooltip, ...rest }: Props = $props();
   const menuItem = getSidebarMenuItemContext();
+  let sidebar = $state<ReturnType<typeof getSidebarContext> | undefined>();
+
+  try {
+    sidebar = getSidebarContext('Sidebar.MenuButton');
+  } catch {
+    sidebar = undefined;
+  }
 
   const classes = $derived(
     cn(
@@ -28,6 +36,7 @@
       className
     )
   );
+  const showTooltip = $derived(Boolean(tooltip && sidebar?.state === 'collapsed' && !sidebar.peekable));
 </script>
 
 {#snippet control()}
@@ -35,7 +44,6 @@
     <a
       class={cn(classes, 'no-underline!')}
       {href}
-      title={tooltip}
       data-active={active || undefined}
       data-sidebar="menu-button"
       data-kumo-component="Sidebar"
@@ -53,7 +61,6 @@
     <button
       type="button"
       class={classes}
-      title={tooltip}
       data-active={active || undefined}
       data-sidebar="menu-button"
       data-kumo-component="Sidebar"
@@ -70,10 +77,18 @@
   {/if}
 {/snippet}
 
+{#snippet controlWithTooltip()}
+  {#if tooltip && sidebar}
+    <Tooltip content={showTooltip ? tooltip : undefined} side="right" trigger={control} />
+  {:else}
+    {@render control()}
+  {/if}
+{/snippet}
+
 {#if menuItem?.insideMenuItem}
-  {@render control()}
+  {@render controlWithTooltip()}
 {:else}
   <li data-sidebar="menu-item" class="relative group-data-[state=collapsed]/sidebar:overflow-hidden">
-    {@render control()}
+    {@render controlWithTooltip()}
   </li>
 {/if}

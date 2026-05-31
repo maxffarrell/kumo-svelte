@@ -27,7 +27,7 @@ Known Svelte difference:
 
 ### Sidebar
 
-Status: substantially ported, with one deliberate Svelte simplification remaining.
+Status: ported as closely as Svelte/bits-ui allows.
 
 Ported:
 
@@ -39,16 +39,14 @@ Ported:
 - Collapsible content remains mounted and now uses `aria-controls`, `role="region"`, `aria-hidden`, `inert`, and grid-row animation.
 - Sliding views remain mounted and inactive views are marked `aria-hidden` / `inert`.
 - Menu button and menu sub-button auto-wrapping now avoids nested `<li>` markup when consumers explicitly use `Sidebar.MenuItem` or `Sidebar.MenuSubItem`.
+- Collapsed `Sidebar.MenuButton` tooltips use the local Tooltip component and only expose tooltip content when the sidebar is collapsed and not peekable.
+- Mobile sidebar rendering now uses a dialog portal/overlay/content path for focus-trap, escape, modal, and portal semantics.
 - Resize handle tracks resizing state during pointer drag and supports keyboard resizing.
 - Docs now describe the current compound API and include peeking and sliding views demos.
 
-Remaining omission:
-
-- Collapsed `Sidebar.MenuButton` tooltips still use the native `title` attribute instead of the upstream Tooltip component behavior. This is functional but not at full visual/interaction parity.
-
 Known Svelte differences:
 
-- Mobile behavior is implemented as a Svelte sheet/backdrop path rather than the upstream React Dialog composition. It now covers the core mobile open/close behavior, but it does not yet provide the same focus-trap semantics as a dialog primitive.
+- Mobile behavior uses bits-ui Dialog primitives rather than upstream Base UI Dialog primitives.
 - Sliding views preserve mounted inactive panels and inert state, but they use Svelte-friendly per-panel transforms instead of upstream's indexed React child transform model.
 
 ### Status Token Docs And Badge Demo
@@ -66,16 +64,18 @@ No known remaining omissions for the upstream 2026-05-25 status docs and badge d
 
 ### Clickable Cursor Scoping
 
-Status: broadly ported; only lower-priority specialty controls remain to audit.
+Status: ported.
 
 Ported:
 
 - `styles.css` scopes pointer cursors to Kumo-owned interactive elements with `data-kumo-component` or `data-kumo-part`, excluding disabled states.
 - Data ownership attributes now cover the previously identified core components: Button, Link, Select trigger/options, AutocompleteItem, Combobox item/trigger/clear/chip controls, CollapsibleTrigger, PopoverTrigger fallback button, Toast close button, Sidebar controls, Checkbox, Radio, Switch, DropdownMenu items, Dialog triggers, Tabs triggers, MenuBar options, Breadcrumb links, TableOfContents items, and SensitiveInput masked/toggle/copy controls.
+- Date picker internals use the same `.rdp-*` cursor styling approach as upstream.
+- Pagination controls are covered by Kumo Button data attributes; native selects keep browser-native cursor behavior.
 
-Remaining omission:
+Known Svelte difference:
 
-- Date picker internals and pagination controls should still receive a dedicated follow-up audit for complete data-attribute coverage.
+- Pagination page-size and page-number native selects do not use upstream's React Select composition. This is a Svelte implementation difference rather than a cursor-scoping omission.
 
 ## Non-Applicable Upstream Changes
 
@@ -95,5 +95,8 @@ Upstream added and removed temporary backport release dispatch workflows on 2026
 
 After this parity pass:
 
+- `git -C /private/tmp/cloudflare-kumo-current fetch origin main` passed on 2026-05-31; `HEAD`, `origin/main`, and `FETCH_HEAD` are all `5ceace9`.
+- No upstream `main` commits exist after the previous 2026-05-30 audit. The newer Wizard work is only on `origin/feat/wizard-component`, not `main`.
+- `pnpm --filter kumo-svelte test` passed with 23 tests.
 - `pnpm --filter kumo-svelte check` passed with 0 errors and 0 warnings.
 - `pnpm --filter kumo-svelte build` passed.

@@ -66,6 +66,10 @@ echo "Version uploaded successfully"
 export KUMO_DOCS_PREVIEW_URL="$PREVIEW_URL"
 echo "Kumo Svelte preview available: $KUMO_DOCS_PREVIEW_URL"
 
+if [ -n "${GITHUB_OUTPUT:-}" ]; then
+  echo "preview_url=$PREVIEW_URL" >> "$GITHUB_OUTPUT"
+fi
+
 # Output report artifact for the PR reporter job
 echo "Writing report artifact..."
 pnpm tsx ci/scripts/write-kumo-docs-report.ts

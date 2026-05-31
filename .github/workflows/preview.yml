@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: read
+  deployments: write
   pull-requests: write
 
 concurrency:
@@ -29,3 +30,32 @@ jobs:
       - name: Publish package preview
         continue-on-error: true
         run: pnpm dlx pkg-pr-new publish --pnpm --compact --no-template ./packages/kumo-svelte
+
+  docs-deploy:
+    name: Docs Deploy
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 10
+    outputs:
+      preview_url: ${{ steps.deploy.outputs.preview_url }}
+      pr_number: ${{ steps.set-pr.outputs.pr_number }}
+    environment:
+      name: kumo-svelte-preview-pr-${{ github.event.pull_request.number }}
+      url: ${{ steps.deploy.outputs.preview_url }}
+    steps:
+      - name: Set PR number
+        id: set-pr
+        run: echo "pr_number=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - uses: ./.github/actions/install-dependencies
+
+      - name: Deploy docs preview
+        id: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GITHUB_PR_NUMBER: ${{ steps.set-pr.outputs.pr_number }}
+        run: pnpm deploy:kumo-docs-preview

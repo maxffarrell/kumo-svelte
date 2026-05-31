@@ -15,7 +15,7 @@ const bannedApis: BannedAPI[] = [
   { name: 'Array.prototype.toSpliced()', pattern: /\.toSpliced\(/ },
   { name: 'Array.prototype.findLast()', pattern: /\.findLast\(/ },
   { name: 'Array.prototype.findLastIndex()', pattern: /\.findLastIndex\(/ },
-  { name: 'Array.prototype.with()', pattern: /(?:[\])]|\w)\.with\(\s*\d/ },
+  { name: 'Array.prototype.with()', pattern: /(?:[\]\)\w])\.with\(\s*/ },
   { name: 'structuredClone()', pattern: /\bstructuredClone\(/ },
   { name: 'Array.fromAsync()', pattern: /\bArray\.fromAsync\(/ },
   { name: 'Object.groupBy()', pattern: /\bObject\.groupBy\(/ },

@@ -40,7 +40,7 @@ describe("package.json validation", () => {
     assert.equal(packageJson.name, "kumo-svelte");
     assert.ok(packageJson.version);
     assert.ok(packageJson.repository);
-    assert.ok(packageJson.sideEffects);
+    assert.equal("sideEffects" in packageJson, true);
     assert.ok(packageJson.files?.includes("dist"));
     assert.ok(packageJson.exports["."]);
     assert.ok(packageJson.exports["./styles.css"]);

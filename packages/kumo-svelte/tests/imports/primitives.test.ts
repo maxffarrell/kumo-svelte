@@ -41,6 +41,6 @@ describe("primitives export", () => {
       "utf-8",
     );
 
-    assert.match(source, /export \* from 'bits-ui';/);
+    assert.match(source, /export\s+\*\s+from\s+['"]bits-ui['"]\s*;?/);
   });
 });

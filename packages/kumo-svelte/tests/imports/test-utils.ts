@@ -46,10 +46,11 @@ export function getComponentExportConfig(packageJson = readPackageJson()) {
 function parseExportedNames(source: string): string[] {
   const names = new Set<string>();
 
-  for (const match of source.matchAll(/export\s+\{([^}]+)\}/g)) {
-    for (const specifier of match[1].split(",")) {
+  function addExportSpecifiers(specifiers: string) {
+    for (const specifier of specifiers.split(",")) {
       const cleaned = specifier
         .trim()
+        .replace(/^type\s+/, "")
         .replace(/\s+as\s+/g, " ")
         .split(/\s+/)
         .at(-1);
@@ -58,10 +59,34 @@ function parseExportedNames(source: string): string[] {
     }
   }
 
+  for (const match of source.matchAll(/export\s+\{([^}]+)\}/g)) {
+    addExportSpecifiers(match[1]);
+  }
+
   for (const match of source.matchAll(
     /export\s+\*\s+as\s+([A-Za-z_$][\w$]*)/g,
   )) {
     names.add(match[1]);
+  }
+
+  if (/\bexport\s+default\b/.test(source)) {
+    names.add("default");
+  }
+
+  for (const match of source.matchAll(
+    /\bexport\s+(?:declare\s+)?(?:async\s+)?(?:function|class|enum|type|interface)\s+([A-Za-z_$][\w$]*)/g,
+  )) {
+    names.add(match[1]);
+  }
+
+  for (const match of source.matchAll(
+    /\bexport\s+(?:declare\s+)?(?:const|let|var)\s+([^;]+)/g,
+  )) {
+    for (const declarator of match[1].split(",")) {
+      const name = declarator.trim().match(/^([A-Za-z_$][\w$]*)/)?.[1];
+
+      if (name) names.add(name);
+    }
   }
 
   return [...names].sort();

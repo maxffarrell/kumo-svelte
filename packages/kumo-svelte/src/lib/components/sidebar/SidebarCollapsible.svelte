@@ -4,7 +4,7 @@
   import { cn } from '$lib/utils/cn';
   interface Props { children?: Snippet; class?: string; defaultOpen?: boolean; open?: boolean; onOpenChange?: (open: boolean) => void; [key: string]: unknown; }
   let { children, class: className, defaultOpen = false, open = $bindable(defaultOpen), onOpenChange, ...rest }: Props = $props();
-  const contentId = `kumo-sidebar-collapsible-${Math.random().toString(36).slice(2)}`;
+  const contentId = $props.id();
   const context = {
     get open() {
       return open;

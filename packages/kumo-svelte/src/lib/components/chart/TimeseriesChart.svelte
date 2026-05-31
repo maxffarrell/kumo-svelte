@@ -7,6 +7,7 @@
 
   export interface TimeseriesData {
     name: string;
+    /** Points are normalized to timestamp-ascending order before rendering. */
     data: [number, number][];
     color: string;
   }
@@ -141,6 +142,20 @@
     if (Number.isInteger(value)) return String(value);
     return defaultNumberFormat.format(value);
   };
+  const sortSeriesData = (points: [number, number][]) => {
+    for (let index = 1; index < points.length; index += 1) {
+      if (points[index - 1][0] > points[index][0]) {
+        return [...points].sort((a, b) => a[0] - b[0]);
+      }
+    }
+    return points;
+  };
+  const normalizedData = $derived(
+    data.map((series) => ({
+      ...series,
+      data: sortSeriesData(series.data)
+    }))
+  );
 
   let options = $derived.by(() => {
     const incompleteBefore = incomplete?.before;
@@ -148,7 +163,7 @@
     const series: SeriesOption[] = [];
     const seriesType = type === 'bar' ? ({ type: 'bar', stack: 'total' } as const) : ({ type: 'line', showSymbol: false } as const);
 
-    for (const s of data) {
+    for (const s of normalizedData) {
       const incompleteBeforePoints = incompleteBefore && type === 'line' ? s.data.filter((point) => point[0] <= incompleteBefore) : [];
       const incompleteAfterPoints = incompleteAfter && type === 'line' ? s.data.filter((point) => point[0] >= incompleteAfter) : [];
       const completePoints =
@@ -240,7 +255,7 @@
         const seenNames = new Set<string>();
         const allRows: { name: string; value: number; color: string }[] = [];
 
-        for (const series of data) {
+        for (const series of normalizedData) {
           if (seenNames.has(series.name)) continue;
           seenNames.add(series.name);
           const value = findNearest(series.data, ts);

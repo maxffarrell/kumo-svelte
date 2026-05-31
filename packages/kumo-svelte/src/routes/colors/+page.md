@@ -200,7 +200,7 @@ Surfaces establish depth and layering in the UI. Use them in order from the oute
 
 ### Semantic Status Colors
 
-Each status color comes in two variants: a solid color for icons and indicators, and a `-tint` variant for background fills behind content such as `Badge` or `Banner`. Pair status text with the same semantic family so contrast stays consistent in light and dark mode.
+Each status color provides solid tokens for icons and indicators plus contextual surface tokens for backgrounds, such as `*-tint` in many components and `bg-kumo-banner-*` in Banner. Pair status text with the same semantic family so contrast stays consistent in light and dark mode.
 
   <table>
     <colgroup>

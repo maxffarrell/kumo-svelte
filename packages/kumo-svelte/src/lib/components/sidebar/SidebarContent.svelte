@@ -13,8 +13,8 @@
   role="presentation"
   onmouseenter={sidebar.startPeek}
   onmouseleave={sidebar.stopPeek}
-  onfocus={sidebar.startPeek}
-  onblur={sidebar.stopPeek}
+  onfocusin={sidebar.startPeek}
+  onfocusout={sidebar.stopPeek}
   {...rest}
 >
   <div class="flex min-w-0 flex-col gap-2">

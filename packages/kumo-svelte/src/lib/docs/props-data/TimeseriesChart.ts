@@ -73,7 +73,7 @@ const rows: PropRow[] = [
     "type": "'all' | 'single'",
     "required": false,
     "default": "\"all\"",
-    "description": "Controls whether the native tooltip lists all series at the active timestamp or only the nearest series."
+    "description": "Controls whether the tooltip lists all series at the active timestamp or only the nearest series."
   },
   {
     "prop": "tooltipMaxItems",
@@ -86,7 +86,7 @@ const rows: PropRow[] = [
     "prop": "tooltipBoundary",
     "type": "'clipping-ancestors' | Element | Element[]",
     "required": false,
-    "description": "Constrains tooltip placement to the chart container when provided."
+    "description": "Constrains tooltip placement to the given boundary (for example, the chart container) when provided."
   },
   {
     "prop": "tooltipFollowCursor",

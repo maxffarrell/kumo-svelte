@@ -210,7 +210,7 @@
   {@const {
     class: className,
     external = false,
-    linksExternal,
+    linksExternal = false,
     shape = 'base',
     size = 'base',
     variant = 'ghost',
@@ -219,7 +219,7 @@
 
   {@render ButtonSnippet({
     ...rest,
-    external,
+    external: external || linksExternal,
     shape: shape as ButtonShape,
     size: size as ButtonSize,
     variant: variant as ButtonVariant,

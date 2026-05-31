@@ -12,7 +12,7 @@ set -euo pipefail
 echo "Starting kumo-svelte preview deployment..."
 
 # Verify Cloudflare credentials
-if [ -z "${CLOUDFLARE_API_TOKEN:-}" ] || [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then
+if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
   echo "CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are required"
   exit 1
 fi
@@ -65,10 +65,6 @@ echo "Version uploaded successfully"
 
 export KUMO_DOCS_PREVIEW_URL="$PREVIEW_URL"
 echo "Kumo Svelte preview available: $KUMO_DOCS_PREVIEW_URL"
-
-if [ -n "${GITHUB_OUTPUT:-}" ]; then
-  echo "preview_url=$PREVIEW_URL" >> "$GITHUB_OUTPUT"
-fi
 
 # Output report artifact for the PR reporter job
 echo "Writing report artifact..."

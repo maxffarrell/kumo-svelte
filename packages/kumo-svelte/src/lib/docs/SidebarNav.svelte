@@ -231,6 +231,7 @@
 </div>
 
 <aside
+    data-docs-sidebar
     data-sidebar-open={sidebarOpen}
     class={cn(
         "fixed inset-y-0 left-12 z-40 hidden w-64 flex-col bg-kumo-canvas md:flex",

@@ -1,28 +1,17 @@
-import TableOfContentsRoot, { Group, Item, List, Title } from './TableOfContents.svelte';
-import type { Component, Snippet } from 'svelte';
+import TableOfContentsRoot, { type KumoTableOfContentsPart } from './TableOfContents.svelte';
+export type { KumoTableOfContentsPart };
 
-type BaseProps = {
-  children?: Snippet;
-  class?: string;
-  [key: string]: unknown;
-};
+const part = (part: KumoTableOfContentsPart) =>
+  ((anchor: Parameters<typeof TableOfContentsRoot>[0], props = {}) =>
+    TableOfContentsRoot(anchor, {
+      ...props,
+      __part: part
+    })) as any;
 
-type ItemProps = BaseProps & {
-  active?: boolean;
-  href?: string;
-  as?: 'a' | 'button';
-};
-
-type GroupProps = BaseProps & {
-  label: string;
-  href?: string;
-  active?: boolean;
-};
-
-const TableOfContentsTitle = Title as unknown as Component<BaseProps>;
-const TableOfContentsList = List as unknown as Component<BaseProps>;
-const TableOfContentsItem = Item as unknown as Component<ItemProps>;
-const TableOfContentsGroup = Group as unknown as Component<GroupProps>;
+const TableOfContentsTitle = part('title') as any;
+const TableOfContentsList = part('list') as any;
+const TableOfContentsItem = part('item') as any;
+const TableOfContentsGroup = part('group') as any;
 
 export const TableOfContents = Object.assign(TableOfContentsRoot, {
   Title: TableOfContentsTitle,

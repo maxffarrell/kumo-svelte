@@ -86,8 +86,8 @@
     __part = 'root',
     children,
     options = [],
-    value = $bindable(),
     defaultValue,
+    value = $bindable(),
     name,
     disabled = false,
     required,
@@ -114,11 +114,6 @@
     });
   }
 
-  $effect(() => {
-    if ((__part === 'root' || __part === 'group') && value === undefined && defaultValue !== undefined) {
-      value = defaultValue;
-    }
-  });
 </script>
 
 {#snippet Group({
@@ -136,7 +131,17 @@
   class: className,
   onValueChange
 }: Props)}
-  <RadioGroupPrimitive.Root bind:value {orientation} {disabled} {required} {name} {onValueChange}>
+  <RadioGroupPrimitive.Root
+    value={value ?? defaultValue ?? ''}
+    {orientation}
+    {disabled}
+    {required}
+    {name}
+    onValueChange={(nextValue) => {
+      value = nextValue;
+      onValueChange?.(nextValue);
+    }}
+  >
     <fieldset class={cn('flex flex-col gap-4', className)} {disabled}>
       {#if legend}
         <legend class="mb-4 text-base font-medium text-kumo-default">

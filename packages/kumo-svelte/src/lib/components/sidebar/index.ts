@@ -1,53 +1,39 @@
-import type { Component } from 'svelte';
 import Root, {
-  SidebarCollapsibleContent,
-  SidebarCollapsibleRoot,
-  SidebarCollapsibleTrigger,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuBadge,
-  SidebarMenuButton,
-  SidebarMenuChevron,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-  SidebarProvider,
-  SidebarRail,
-  SidebarResizeHandle,
-  SidebarSeparator,
-  SidebarSlidingView,
-  SidebarSlidingViews,
-  SidebarTrigger
+  type KumoSidebarPart
 } from './Sidebar.svelte';
 
-const Provider = SidebarProvider as unknown as Component;
-const Header = SidebarHeader as unknown as Component;
-const Content = SidebarContent as unknown as Component;
-const Footer = SidebarFooter as unknown as Component;
-const Group = SidebarGroup as unknown as Component;
-const GroupLabel = SidebarGroupLabel as unknown as Component;
-const Menu = SidebarMenu as unknown as Component;
-const MenuItem = SidebarMenuItem as unknown as Component;
-const MenuButton = SidebarMenuButton as unknown as Component;
-const MenuBadge = SidebarMenuBadge as unknown as Component;
-const MenuSub = SidebarMenuSub as unknown as Component;
-const MenuSubItem = SidebarMenuSubItem as unknown as Component;
-const MenuSubButton = SidebarMenuSubButton as unknown as Component;
-const Separator = SidebarSeparator as unknown as Component;
-const Trigger = SidebarTrigger as unknown as Component;
-const Rail = SidebarRail as unknown as Component;
-const ResizeHandle = SidebarResizeHandle as unknown as Component;
-const MenuChevron = SidebarMenuChevron as unknown as Component;
-const Collapsible = SidebarCollapsibleRoot as unknown as Component;
-const CollapsibleTrigger = SidebarCollapsibleTrigger as unknown as Component;
-const CollapsibleContent = SidebarCollapsibleContent as unknown as Component;
-const SlidingViews = SidebarSlidingViews as unknown as Component;
-const SlidingView = SidebarSlidingView as unknown as Component;
+export type { KumoSidebarPart };
+
+const part = (part: KumoSidebarPart) =>
+  ((anchor, props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as typeof Root;
+
+const Provider = part('provider');
+const Header = part('header');
+const Content = part('content');
+const Footer = part('footer');
+const Group = part('group');
+const GroupLabel = part('group-label');
+const Menu = part('menu');
+const MenuItem = part('menu-item');
+const MenuButton = part('menu-button');
+const MenuBadge = part('menu-badge');
+const MenuSub = part('menu-sub');
+const MenuSubItem = part('menu-sub-item');
+const MenuSubButton = part('menu-sub-button');
+const Separator = part('separator');
+const Trigger = part('trigger');
+const Rail = part('rail');
+const ResizeHandle = part('resize-handle');
+const MenuChevron = part('menu-chevron');
+const Collapsible = part('collapsible');
+const CollapsibleTrigger = part('collapsible-trigger');
+const CollapsibleContent = part('collapsible-content');
+const SlidingViews = part('sliding-views');
+const SlidingView = part('sliding-view');
 
 export const Sidebar: typeof Root & {
   Provider: typeof Provider;

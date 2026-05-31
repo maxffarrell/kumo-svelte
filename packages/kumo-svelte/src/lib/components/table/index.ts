@@ -1,4 +1,23 @@
-import Root, { Body, Cell, CheckCell, CheckHead, Footer, Head, Header, ResizeHandle, Row } from './Table.svelte';
+import Root, { type KumoTablePart } from './Table.svelte';
+
+export type { KumoTablePart };
+
+const part = (part: KumoTablePart) =>
+  ((anchor: Parameters<typeof Root>[0], props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as any;
+
+const Body = part('body');
+const Cell = part('cell');
+const CheckCell = part('check-cell');
+const CheckHead = part('check-head');
+const Footer = part('footer');
+const Head = part('head');
+const Header = part('header');
+const ResizeHandle = part('resize-handle');
+const Row = part('row');
 
 const Table = Object.assign(Root, {
   Root,

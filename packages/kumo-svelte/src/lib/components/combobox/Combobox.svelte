@@ -18,6 +18,23 @@
   type ComboboxContentAlign = 'start' | 'center' | 'end';
   type ComboboxContentSide = 'top' | 'right' | 'bottom' | 'left';
   type Offset = number | string;
+  export type KumoComboboxPart =
+    | 'root'
+    | 'content'
+    | 'trigger-input'
+    | 'trigger-value'
+    | 'trigger-multiple-with-input'
+    | 'item'
+    | 'chip'
+    | 'input'
+    | 'empty'
+    | 'group'
+    | 'group-label'
+    | 'list'
+    | 'collection'
+    | 'trigger'
+    | 'value'
+    | 'icon';
 
   export {
     Chip,
@@ -38,6 +55,7 @@
   };
 
   export interface Props {
+    __part?: KumoComboboxPart;
     children?: Snippet;
     class?: string;
     items?: ComboboxItem[];
@@ -274,6 +292,7 @@
   import { createKumoFilter } from '../filter';
 
   let {
+    __part = 'root',
     children,
     class: className,
     items,
@@ -295,6 +314,28 @@
     onOpenChange,
     ...rest
   }: Props = $props();
+  const partProps = $derived({
+    children,
+    class: className,
+    items,
+    options,
+    defaultValue,
+    value,
+    open,
+    multiple,
+    disabled,
+    size,
+    label,
+    labelTooltip,
+    description,
+    error,
+    required,
+    filter,
+    isItemEqualToValue,
+    onValueChange,
+    onOpenChange,
+    ...rest
+  } as never);
 
   let query = $state('');
   let rootElement: HTMLDivElement | null = $state(null);
@@ -403,50 +444,52 @@
     };
   });
 
-  setComboboxContext({
-    get items() {
-      return normalizedItems;
-    },
-    get filteredItems() {
-      return filteredItems;
-    },
-    get query() {
-      return query;
-    },
-    set query(nextQuery: string) {
-      query = nextQuery;
-    },
-    get value() {
-      return value;
-    },
-    set value(nextValue: unknown) {
-      emit(nextValue);
-    },
-    get open() {
-      return open;
-    },
-    set open(nextOpen: boolean) {
-      open = nextOpen;
-      if (!nextOpen) query = '';
-      onOpenChange?.(nextOpen);
-    },
-    get multiple() {
-      return multiple;
-    },
-    get disabled() {
-      return disabled;
-    },
-    get size() {
-      return size;
-    },
-    get invalid() {
-      return Boolean(errorMessage);
-    },
-    isSelected,
-    select,
-    remove,
-    labelFor
-  });
+  if (__part === 'root') {
+    setComboboxContext({
+      get items() {
+        return normalizedItems;
+      },
+      get filteredItems() {
+        return filteredItems;
+      },
+      get query() {
+        return query;
+      },
+      set query(nextQuery: string) {
+        query = nextQuery;
+      },
+      get value() {
+        return value;
+      },
+      set value(nextValue: unknown) {
+        emit(nextValue);
+      },
+      get open() {
+        return open;
+      },
+      set open(nextOpen: boolean) {
+        open = nextOpen;
+        if (!nextOpen) query = '';
+        onOpenChange?.(nextOpen);
+      },
+      get multiple() {
+        return multiple;
+      },
+      get disabled() {
+        return disabled;
+      },
+      get size() {
+        return size;
+      },
+      get invalid() {
+        return Boolean(errorMessage);
+      },
+      isSelected,
+      select,
+      remove,
+      labelFor
+    });
+  }
 </script>
 
 {#snippet Content({
@@ -770,7 +813,37 @@
   </div>
 {/snippet}
 
-{#if label || description || errorMessage}
+{#if __part === 'content'}
+  {@render Content(partProps)}
+{:else if __part === 'trigger-input'}
+  {@render TriggerInput(partProps)}
+{:else if __part === 'trigger-value'}
+  {@render TriggerValue(partProps)}
+{:else if __part === 'trigger-multiple-with-input'}
+  {@render TriggerMultipleWithInput(partProps)}
+{:else if __part === 'item'}
+  {@render Item(partProps)}
+{:else if __part === 'chip'}
+  {@render Chip(partProps)}
+{:else if __part === 'input'}
+  {@render Input(partProps)}
+{:else if __part === 'empty'}
+  {@render Empty(partProps)}
+{:else if __part === 'group'}
+  {@render Group(partProps)}
+{:else if __part === 'group-label'}
+  {@render GroupLabel(partProps)}
+{:else if __part === 'list'}
+  {@render List(partProps)}
+{:else if __part === 'collection'}
+  {@render Collection(partProps)}
+{:else if __part === 'trigger'}
+  {@render Trigger(partProps)}
+{:else if __part === 'value'}
+  {@render Value(partProps)}
+{:else if __part === 'icon'}
+  {@render Icon(partProps)}
+{:else if label || description || errorMessage}
   <Field {label} {labelTooltip} {description} error={errorMessage} {required}>
     {@render control()}
   </Field>

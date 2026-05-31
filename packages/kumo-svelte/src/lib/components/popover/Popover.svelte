@@ -5,6 +5,7 @@
 
   type PopoverSide = 'top' | 'bottom' | 'left' | 'right';
   type PopoverAlign = 'start' | 'center' | 'end';
+  export type KumoPopoverPart = 'root' | 'trigger' | 'content' | 'title' | 'description' | 'close';
 
   interface TriggerProps {
     children?: Snippet;
@@ -53,6 +54,7 @@
 <script lang="ts">
 
   export interface Props {
+    __part?: KumoPopoverPart;
     trigger?: Snippet<[Record<string, unknown>]>;
     children?: Snippet;
     class?: string;
@@ -69,6 +71,7 @@
   }
 
   let {
+    __part = 'root',
     trigger,
     children,
     class: className,
@@ -85,24 +88,26 @@
   }: Props = $props();
 
   let contentClass = $derived(cn('min-w-48', className));
+  const partProps = $derived({
+    trigger,
+    children,
+    class: className,
+    open,
+    title,
+    description,
+    side,
+    align,
+    sideOffset,
+    alignOffset,
+    openOnHover,
+    delay,
+    ...rest
+  } as never);
 </script>
 
 {#snippet triggerChild({ props }: { props: Record<string, unknown> })}
   {@render trigger?.(props)}
 {/snippet}
-
-<PopoverPrimitive.Root bind:open {...rest}>
-  {#if trigger}
-    <PopoverPrimitive.Trigger openOnHover={openOnHover} openDelay={delay} child={triggerChild} />
-    <PopoverContent class={contentClass} {side} {align} {sideOffset} {alignOffset}>
-      {#if title}<PopoverTitle>{title}</PopoverTitle>{/if}
-      {#if description}<PopoverDescription>{description}</PopoverDescription>{/if}
-      {@render children?.()}
-    </PopoverContent>
-  {:else}
-    {@render children?.()}
-  {/if}
-</PopoverPrimitive.Root>
 
 {#snippet PopoverTrigger({
   children,
@@ -231,6 +236,31 @@
     child={renderChild ?? defaultCloseChild}
   />
 {/snippet}
+
+{#if __part === 'trigger'}
+  {@render PopoverTrigger(partProps)}
+{:else if __part === 'content'}
+  {@render PopoverContent(partProps)}
+{:else if __part === 'title'}
+  {@render PopoverTitle(partProps)}
+{:else if __part === 'description'}
+  {@render PopoverDescription(partProps)}
+{:else if __part === 'close'}
+  {@render PopoverClose(partProps)}
+{:else}
+  <PopoverPrimitive.Root bind:open {...rest}>
+    {#if trigger}
+      <PopoverPrimitive.Trigger openOnHover={openOnHover} openDelay={delay} child={triggerChild} />
+      <PopoverContent class={contentClass} {side} {align} {sideOffset} {alignOffset}>
+        {#if title}<PopoverTitle>{title}</PopoverTitle>{/if}
+        {#if description}<PopoverDescription>{description}</PopoverDescription>{/if}
+        {@render children?.()}
+      </PopoverContent>
+    {:else}
+      {@render children?.()}
+    {/if}
+  </PopoverPrimitive.Root>
+{/if}
 
 <style>
   :global(.kumo-popover-arrow[data-side='top']) {

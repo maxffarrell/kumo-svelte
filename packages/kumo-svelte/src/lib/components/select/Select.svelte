@@ -1,3 +1,7 @@
+<script module lang="ts">
+  export type KumoSelectPart = 'root' | 'option' | 'group' | 'group-label' | 'separator';
+</script>
+
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { CaretUpDown, Check } from 'phosphor-svelte';
@@ -19,6 +23,7 @@
   type Items = Record<string, ItemDescriptor> | Option[];
 
   interface Props {
+    __part?: KumoSelectPart;
     class?: string;
     options?: Option[];
     items?: Items;
@@ -36,13 +41,15 @@
     error?: string | { message?: string };
     name?: string;
     required?: boolean;
-    children?: Snippet;
+    children?: Snippet<[]>;
     renderValue?: (value: Value) => unknown;
     container?: HTMLElement | string;
+    labelValue?: string;
     [key: string]: unknown;
   }
 
   let {
+    __part = 'root',
     class: className,
     options = [],
     items,
@@ -60,9 +67,10 @@
     error,
     name,
     required = false,
-    children,
+    children: content,
     renderValue,
     container,
+    labelValue,
     ...rest
   }: Props = $props();
 
@@ -116,6 +124,16 @@
     if (renderValue) return renderValue(selectionValue);
     return selectedLabels || placeholder;
   }
+
+  const optionClasses = $derived(
+    cn(
+      'group mx-1.5 flex cursor-pointer items-center justify-between gap-2 rounded px-2 py-1.5 text-base outline-none',
+      'focus-visible:z-50 focus-visible:ring-2 focus-visible:ring-kumo-brand focus-visible:ring-inset',
+      'data-[highlighted]:bg-kumo-tint',
+      'data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
+      className
+    )
+  );
 </script>
 
 {#snippet selectContent()}
@@ -163,8 +181,8 @@
         sideOffset={4}
       >
         <SelectPrimitive.Viewport class="min-h-0 flex-1 overflow-y-auto overscroll-none scroll-pb-2 scroll-pt-2">
-          {#if children}
-            {@render children()}
+          {#if content}
+            {@render content()}
           {:else}
             {#each normalizedOptions as option (option.value)}
               <SelectPrimitive.Item
@@ -173,12 +191,7 @@
                 disabled={option.disabled}
                 data-kumo-component="Select"
                 data-kumo-part="option"
-                class={cn(
-                  'group mx-1.5 flex cursor-pointer items-center justify-between gap-2 rounded px-2 py-1.5 text-base outline-none',
-                  'focus-visible:z-50 focus-visible:ring-2 focus-visible:ring-kumo-brand focus-visible:ring-inset',
-                  'data-[highlighted]:bg-kumo-tint',
-                  'data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50'
-                )}
+                class={optionClasses}
               >
                 {#snippet children({ selected })}
                   <span class="min-w-0 truncate">{option.label}</span>
@@ -194,46 +207,77 @@
   </SelectPrimitive.Portal>
 {/snippet}
 
-<Field
-  class={cn(!label || hideLabel ? 'contents' : undefined)}
-  label={!hideLabel ? label : undefined}
-  {description}
-  error={errorMessage}
-  {required}
->
-  {#if label && hideLabel}
-    <span class="sr-only">{label}</span>
-  {/if}
+{#if __part === 'root'}
+  <Field
+    class={cn(!label || hideLabel ? 'contents' : undefined)}
+    label={!hideLabel ? label : undefined}
+    {description}
+    error={errorMessage}
+    {required}
+  >
+    {#if label && hideLabel}
+      <span class="sr-only">{label}</span>
+    {/if}
 
-  {#if labelTooltip && !hideLabel}
-    <span class="sr-only">{labelTooltip}</span>
-  {/if}
+    {#if labelTooltip && !hideLabel}
+      <span class="sr-only">{labelTooltip}</span>
+    {/if}
 
-  {#if multiple}
-    <SelectPrimitive.Root
-      type="multiple"
-      value={Array.isArray(value) ? value : []}
-      onValueChange={(nextValue) => (value = nextValue)}
-      items={selectItems}
-      disabled={isDisabled}
-      {name}
-      {required}
-      {...rest}
-    >
-      {@render (selectContent as Snippet)()}
-    </SelectPrimitive.Root>
-  {:else}
-    <SelectPrimitive.Root
-      type="single"
-      value={Array.isArray(value) ? (value[0] ?? '') : value}
-      onValueChange={(nextValue) => (value = nextValue)}
-      items={selectItems}
-      disabled={isDisabled}
-      {name}
-      {required}
-      {...rest}
-    >
-      {@render (selectContent as Snippet)()}
-    </SelectPrimitive.Root>
-  {/if}
-</Field>
+    {#if multiple}
+      <SelectPrimitive.Root
+        type="multiple"
+        value={Array.isArray(value) ? value : []}
+        onValueChange={(nextValue) => (value = nextValue)}
+        items={selectItems}
+        disabled={isDisabled}
+        {name}
+        {required}
+        {...rest}
+      >
+        {@render (selectContent as Snippet)()}
+      </SelectPrimitive.Root>
+    {:else}
+      <SelectPrimitive.Root
+        type="single"
+        value={Array.isArray(value) ? (value[0] ?? '') : value}
+        onValueChange={(nextValue) => (value = nextValue)}
+        items={selectItems}
+        disabled={isDisabled}
+        {name}
+        {required}
+        {...rest}
+      >
+        {@render (selectContent as Snippet)()}
+      </SelectPrimitive.Root>
+    {/if}
+  </Field>
+{:else if __part === 'option'}
+  <SelectPrimitive.Item
+    value={String(value)}
+    label={labelValue}
+    {disabled}
+    data-kumo-component="Select"
+    data-kumo-part="option"
+    class={optionClasses}
+    {...rest}
+  >
+    {#snippet children({ selected })}
+      <span class="min-w-0 truncate">
+        {@render content?.()}
+      </span>
+      {#if selected}
+        <Check class="size-4 shrink-0 text-kumo-default" aria-hidden="true" />
+      {/if}
+    {/snippet}
+  </SelectPrimitive.Item>
+{:else if __part === 'group'}
+  <SelectPrimitive.Group class={className} {...rest}>
+    {@render content?.()}
+  </SelectPrimitive.Group>
+{:else if __part === 'group-label'}
+  <SelectPrimitive.GroupHeading class={cn('px-3 py-1.5 text-xs font-semibold text-kumo-subtle', className)} {...rest}>
+    {@render content?.()}
+  </SelectPrimitive.GroupHeading>
+{:else if __part === 'separator'}
+  <div role="separator" aria-orientation="horizontal" class={cn('mx-1.5 my-1 h-px bg-kumo-hairline', className)} {...rest}></div>
+{/if}

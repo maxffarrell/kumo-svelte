@@ -1,12 +1,17 @@
-import Root, {
-  Group as GroupSnippet,
-  Item as ItemSnippet,
-  Legend as LegendSnippet
-} from './Checkbox.svelte';
+import Root, { type KumoCheckboxPart } from './Checkbox.svelte';
 
-const Group = GroupSnippet as unknown as typeof Root;
-const Item = ItemSnippet as unknown as typeof Root;
-const Legend = LegendSnippet as unknown as typeof Root;
+export type { KumoCheckboxPart };
+
+const part = (part: KumoCheckboxPart) =>
+  ((anchor: Parameters<typeof Root>[0], props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as any;
+
+const Group = part('group');
+const Item = part('item');
+const Legend = part('legend');
 
 const Checkbox = Object.assign(Root, {
   Root,

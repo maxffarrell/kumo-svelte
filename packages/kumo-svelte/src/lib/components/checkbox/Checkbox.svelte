@@ -6,6 +6,7 @@
   import { cn } from '$lib/utils/cn';
 
   export type CheckboxVariant = 'default' | 'error';
+  export type KumoCheckboxPart = 'root' | 'group' | 'item' | 'legend';
 
   export function checkboxVariantClasses(variant: CheckboxVariant = 'default') {
     return variant === 'error' ? 'ring-kumo-danger' : 'ring-kumo-hairline';
@@ -53,21 +54,8 @@
     class?: string;
   }
 
-  function setCheckboxGroupContext(controlFirst: boolean) {
-    setContext('kumo-checkbox-group', { get controlFirst() { return controlFirst; } });
-    return '';
-  }
-
-  function getCheckboxGroupContext() {
-    return getContext<CheckboxGroupContext | undefined>('kumo-checkbox-group');
-  }
-
-  // @ts-ignore Svelte declaration tags are exportable from module script.
-  export { Group, Item, Legend };
-</script>
-
-<script lang="ts">
   interface Props {
+    __part?: KumoCheckboxPart;
     children?: Snippet;
     class?: string;
     checked?: boolean;
@@ -88,7 +76,22 @@
     [key: string]: unknown;
   }
 
+  function setCheckboxGroupContext(controlFirst: boolean) {
+    setContext('kumo-checkbox-group', { get controlFirst() { return controlFirst; } });
+    return '';
+  }
+
+  function getCheckboxGroupContext() {
+    return getContext<CheckboxGroupContext | undefined>('kumo-checkbox-group');
+  }
+
+  // @ts-ignore Svelte declaration tags are exportable from module script.
+  export { Group, Item, Legend };
+</script>
+
+<script lang="ts">
   let {
+    __part = 'root',
     children,
     class: className,
     checked = $bindable(false),
@@ -111,6 +114,26 @@
 
   let visibleLabel = $derived(label ?? (children ? undefined : undefined));
   let controlLabel = $derived(ariaLabel ?? visibleLabel ?? undefined);
+  const partProps = $derived({
+    children,
+    class: className,
+    checked,
+    indeterminate,
+    disabled,
+    variant,
+    label,
+    labelTooltip,
+    controlFirst,
+    required,
+    name,
+    value,
+    id,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    onCheckedChange,
+    onIndeterminateChange,
+    ...rest
+  } as never);
 </script>
 
 {#snippet Group({
@@ -232,7 +255,13 @@
   </CheckboxPrimitive.Root>
 {/snippet}
 
-{#if label || children}
+{#if __part === 'group'}
+  {@render Group(partProps)}
+{:else if __part === 'item'}
+  {@render Item(partProps)}
+{:else if __part === 'legend'}
+  {@render Legend(partProps)}
+{:else if label || children}
   <label data-kumo-component="Checkbox" data-kumo-part="label" class={cn('!m-0 !min-h-0 !text-base inline-flex items-center gap-2', controlFirst ? 'flex-row' : 'flex-row-reverse justify-end', disabled ? 'cursor-not-allowed' : 'cursor-pointer')}>
     {@render control()}
     <span class="inline-flex items-center gap-1 text-base font-medium text-kumo-default">

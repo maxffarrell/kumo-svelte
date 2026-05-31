@@ -19,7 +19,9 @@
     let headerRef: HTMLElement;
 
     onMount(() => {
-        const sidebar = document.querySelector("aside[data-sidebar-open]");
+        const sidebar = document.querySelector(
+            "aside[data-docs-sidebar][data-sidebar-open]",
+        );
         const checkSidebarState = () => {
             if (sidebar)
                 sidebarOpen =

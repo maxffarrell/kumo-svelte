@@ -1,12 +1,21 @@
-import Root, {
-  PopoverTrigger as Trigger,
-  PopoverContent as Content,
-  PopoverTitle as Title,
-  PopoverDescription as Description,
-  PopoverClose as Close
-} from './Popover.svelte';
+import Root, { type KumoPopoverPart } from './Popover.svelte';
 
 const PopoverRoot = Root;
+
+export type { KumoPopoverPart };
+
+const part = (part: KumoPopoverPart) =>
+  ((anchor: Parameters<typeof Root>[0], props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as any;
+
+const Trigger = part('trigger');
+const Content = part('content');
+const Title = part('title');
+const Description = part('description');
+const Close = part('close');
 
 const Popover = Object.assign(Root, {
   Root: PopoverRoot,

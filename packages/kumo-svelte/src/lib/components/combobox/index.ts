@@ -1,38 +1,30 @@
-import Root from './Combobox.svelte';
-import {
-  Chip as ChipSnippet,
-  Collection as CollectionSnippet,
-  Content as ContentSnippet,
-  Empty as EmptySnippet,
-  Group as GroupSnippet,
-  GroupLabel as GroupLabelSnippet,
-  Icon as IconSnippet,
-  Input as InputSnippet,
-  Item as ItemSnippet,
-  List as ListSnippet,
-  Trigger as TriggerSnippet,
-  TriggerInput as TriggerInputSnippet,
-  TriggerMultipleWithInput as TriggerMultipleWithInputSnippet,
-  TriggerValue as TriggerValueSnippet,
-  Value as ValueSnippet
-} from './Combobox.svelte';
+import Root, { type KumoComboboxPart } from './Combobox.svelte';
 import { createKumoFilter } from '../filter';
 
-const Content = ContentSnippet as any;
-const TriggerInput = TriggerInputSnippet as any;
-const TriggerValue = TriggerValueSnippet as any;
-const TriggerMultipleWithInput = TriggerMultipleWithInputSnippet as any;
-const Item = ItemSnippet as any;
-const Chip = ChipSnippet as any;
-const Input = InputSnippet as any;
-const Empty = EmptySnippet as any;
-const GroupLabel = GroupLabelSnippet as any;
-const Group = GroupSnippet as any;
-const List = ListSnippet as any;
-const Collection = CollectionSnippet as any;
-const Trigger = TriggerSnippet as any;
-const Value = ValueSnippet as any;
-const Icon = IconSnippet as any;
+export type { KumoComboboxPart };
+
+const part = (part: KumoComboboxPart) =>
+  ((anchor: Parameters<typeof Root>[0], props = {}) =>
+    Root(anchor, {
+      ...props,
+      __part: part
+    })) as any;
+
+const Content = part('content');
+const TriggerInput = part('trigger-input');
+const TriggerValue = part('trigger-value');
+const TriggerMultipleWithInput = part('trigger-multiple-with-input');
+const Item = part('item');
+const Chip = part('chip');
+const Input = part('input');
+const Empty = part('empty');
+const GroupLabel = part('group-label');
+const Group = part('group');
+const List = part('list');
+const Collection = part('collection');
+const Trigger = part('trigger');
+const Value = part('value');
+const Icon = part('icon');
 
 export const Combobox = Object.assign(Root, {
   Content,

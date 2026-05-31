@@ -71,7 +71,34 @@
     mobile: { breakpoint: 768 }
   } as const;
 
-  interface BaseProps {
+  export type KumoSidebarPart =
+    | 'root'
+    | 'provider'
+    | 'header'
+    | 'content'
+    | 'footer'
+    | 'group'
+    | 'group-label'
+    | 'menu'
+    | 'menu-item'
+    | 'menu-button'
+    | 'menu-badge'
+    | 'menu-sub'
+    | 'menu-sub-item'
+    | 'menu-sub-button'
+    | 'separator'
+    | 'trigger'
+    | 'rail'
+    | 'resize-handle'
+    | 'menu-chevron'
+    | 'collapsible'
+    | 'collapsible-trigger'
+    | 'collapsible-content'
+    | 'sliding-views'
+    | 'sliding-view';
+
+  export interface BaseProps {
+    __part?: KumoSidebarPart;
     children?: Snippet;
     class?: string;
     [key: string]: unknown;
@@ -329,7 +356,8 @@
 </script>
 
 <script lang="ts">
-  let rootProps: BaseProps = $props();
+  let { __part = 'root', ...rootProps }: BaseProps = $props();
+  const partProps = $derived(rootProps as never);
 </script>
 
 {#snippet SidebarProvider({
@@ -767,4 +795,52 @@
   </div>
 {/snippet}
 
-{@render SidebarRoot(rootProps)}
+{#if __part === 'provider'}
+  {@render SidebarProvider(partProps)}
+{:else if __part === 'header'}
+  {@render SidebarHeader(partProps)}
+{:else if __part === 'content'}
+  {@render SidebarContent(partProps)}
+{:else if __part === 'footer'}
+  {@render SidebarFooter(partProps)}
+{:else if __part === 'group'}
+  {@render SidebarGroup(partProps)}
+{:else if __part === 'group-label'}
+  {@render SidebarGroupLabel(partProps)}
+{:else if __part === 'menu'}
+  {@render SidebarMenu(partProps)}
+{:else if __part === 'menu-item'}
+  {@render SidebarMenuItem(partProps)}
+{:else if __part === 'menu-button'}
+  {@render SidebarMenuButton(partProps)}
+{:else if __part === 'menu-badge'}
+  {@render SidebarMenuBadge(partProps)}
+{:else if __part === 'menu-sub'}
+  {@render SidebarMenuSub(partProps)}
+{:else if __part === 'menu-sub-item'}
+  {@render SidebarMenuSubItem(partProps)}
+{:else if __part === 'menu-sub-button'}
+  {@render SidebarMenuSubButton(partProps)}
+{:else if __part === 'separator'}
+  {@render SidebarSeparator(partProps)}
+{:else if __part === 'trigger'}
+  {@render SidebarTrigger(partProps)}
+{:else if __part === 'rail'}
+  {@render SidebarRail(partProps)}
+{:else if __part === 'resize-handle'}
+  {@render SidebarResizeHandle(partProps)}
+{:else if __part === 'menu-chevron'}
+  {@render SidebarMenuChevron(partProps)}
+{:else if __part === 'collapsible'}
+  {@render SidebarCollapsibleRoot(partProps)}
+{:else if __part === 'collapsible-trigger'}
+  {@render SidebarCollapsibleTrigger(partProps)}
+{:else if __part === 'collapsible-content'}
+  {@render SidebarCollapsibleContent(partProps)}
+{:else if __part === 'sliding-views'}
+  {@render SidebarSlidingViews(partProps)}
+{:else if __part === 'sliding-view'}
+  {@render SidebarSlidingView(partProps)}
+{:else}
+  {@render SidebarRoot(partProps)}
+{/if}

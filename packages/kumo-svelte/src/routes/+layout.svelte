@@ -38,11 +38,11 @@
 
 <style>
   @media (min-width: 768px) {
-    :global(body:has(aside[data-sidebar-open='true']) .main-content) {
+    :global(body:has(aside[data-docs-sidebar][data-sidebar-open='true']) .main-content) {
       margin-left: 304px;
     }
 
-    :global(body:has(aside[data-sidebar-open='false']) .main-content) {
+    :global(body:has(aside[data-docs-sidebar][data-sidebar-open='false']) .main-content) {
       margin-left: 48px;
     }
   }

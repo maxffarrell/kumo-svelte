@@ -32,7 +32,7 @@ import { Tooltip, TooltipProvider } from "kumo-svelte";
 ### Granular
 
 ```svelte
-import { Tooltip, TooltipProvider } from "kumo-svelte";
+import { Tooltip, TooltipProvider } from "kumo-svelte/components/tooltip";
 ```
 
 </ComponentSection>
@@ -100,9 +100,7 @@ Use `delay` to control how long to wait before opening (default: 600ms) and
 
 // Then use Tooltip anywhere inside
 <Tooltip content="Add">
-  <Button shape="square" aria-label="Add">
-    <PlusIcon />
-  </Button>
+  <Button shape="square" icon={PlusIcon} aria-label="Add" />
 </Tooltip>
 ```
 

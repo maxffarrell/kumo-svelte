@@ -44,6 +44,17 @@
   export type KumoTableStickyColumn = keyof typeof KUMO_TABLE_VARIANTS.sticky;
   export type KumoTableRowVariant = keyof typeof KUMO_TABLE_VARIANTS.variant;
   export type KumoTableLayout = keyof typeof KUMO_TABLE_VARIANTS.layout;
+  export type KumoTablePart =
+    | 'root'
+    | 'body'
+    | 'cell'
+    | 'check-cell'
+    | 'check-head'
+    | 'footer'
+    | 'head'
+    | 'header'
+    | 'resize-handle'
+    | 'row';
 
   type RestProps = Record<string, unknown>;
 
@@ -141,30 +152,26 @@
 
 <script lang="ts">
   interface Props {
+    __part?: KumoTablePart;
     children?: Snippet;
     class?: string;
     layout?: KumoTableLayout;
     [key: string]: unknown;
   }
 
-  let { children, class: className, layout = KUMO_TABLE_DEFAULT_VARIANTS.layout, ...rest }: Props = $props();
+  let props: Props = $props();
+  let {
+    __part = 'root',
+    children,
+    class: className,
+    layout = KUMO_TABLE_DEFAULT_VARIANTS.layout,
+    ...rest
+  }: Props = props;
+  const partProps = $derived.by(() => {
+    const { __part: _part, ...nextProps } = props;
+    return nextProps as never;
+  });
 </script>
-
-<table
-  class={cn(
-    'isolate w-full',
-    KUMO_TABLE_VARIANTS.layout[layout].classes,
-    '[&_td]:border-b [&_td]:border-kumo-fill [&_tr:last-child_td]:border-b-0',
-    '[&_td]:p-3',
-    '[&_th]:border-b [&_th]:border-kumo-fill [&_th]:p-3 [&_th]:font-semibold [&_th]:text-base',
-    '[&_th]:bg-kumo-base',
-    'text-base text-left text-kumo-default',
-    className
-  )}
-  {...rest}
->
-  {@render children?.()}
-</table>
 
 {#snippet Header({
   children,
@@ -261,3 +268,39 @@
     <span class="h-5 w-[2px] rounded bg-kumo-hairline"></span>
   </button>
 {/snippet}
+
+{#if __part === 'body'}
+  {@render Body(partProps)}
+{:else if __part === 'cell'}
+  {@render Cell(partProps)}
+{:else if __part === 'check-cell'}
+  {@render CheckCell(partProps)}
+{:else if __part === 'check-head'}
+  {@render CheckHead(partProps)}
+{:else if __part === 'footer'}
+  {@render Footer(partProps)}
+{:else if __part === 'head'}
+  {@render Head(partProps)}
+{:else if __part === 'header'}
+  {@render Header(partProps)}
+{:else if __part === 'resize-handle'}
+  {@render ResizeHandle(partProps)}
+{:else if __part === 'row'}
+  {@render Row(partProps)}
+{:else}
+  <table
+    class={cn(
+      'isolate w-full',
+      KUMO_TABLE_VARIANTS.layout[layout].classes,
+      '[&_td]:border-b [&_td]:border-kumo-fill [&_tr:last-child_td]:border-b-0',
+      '[&_td]:p-3',
+      '[&_th]:border-b [&_th]:border-kumo-fill [&_th]:p-3 [&_th]:font-semibold [&_th]:text-base',
+      '[&_th]:bg-kumo-base',
+      'text-base text-left text-kumo-default',
+      className
+    )}
+    {...rest}
+  >
+    {@render children?.()}
+  </table>
+{/if}

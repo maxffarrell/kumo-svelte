@@ -81,9 +81,12 @@
     [key: string]: unknown;
   }
 
+  export type KumoPaginationPart = 'root' | 'info' | 'page-size' | 'controls' | 'separator';
+
   interface Props {
     children?: Snippet;
     class?: string;
+    __part?: KumoPaginationPart;
     page?: number;
     setPage?: (page: number) => void;
     perPage?: number;
@@ -149,6 +152,7 @@
   let {
     children,
     class: className,
+    __part = 'root',
     page = $bindable(1),
     setPage: setPageProp,
     perPage,
@@ -207,6 +211,8 @@
       return labels;
     }
   });
+
+  const partProps = $derived({ children, class: className, ...rest } as never);
 </script>
 
 {#snippet PaginationInfo({ children, class: className, text, ...rest }: PaginationInfoProps)}
@@ -336,11 +342,21 @@
   <div data-slot="pagination-separator" class={cn('mx-2 h-6 border-l border-kumo-hairline', className)} {...rest}></div>
 {/snippet}
 
-<div data-slot="pagination" class={cn('flex w-full items-center gap-2', className)} {...rest}>
-  {#if children}
-    {@render children()}
-  {:else}
-    <PaginationInfo aria-live="polite" aria-atomic="true" class="grow" {text} />
-    <PaginationControls {controls} />
-  {/if}
-</div>
+{#if __part === 'info'}
+  {@render PaginationInfo(partProps)}
+{:else if __part === 'page-size'}
+  {@render PaginationPageSize(partProps)}
+{:else if __part === 'controls'}
+  {@render PaginationControls(partProps)}
+{:else if __part === 'separator'}
+  {@render PaginationSeparator(partProps)}
+{:else}
+  <div data-slot="pagination" class={cn('flex w-full items-center gap-2', className)} {...rest}>
+    {#if children}
+      {@render children()}
+    {:else}
+      {@render PaginationInfo({ 'aria-live': 'polite', 'aria-atomic': 'true', class: 'grow', text } as never)}
+      {@render PaginationControls({ controls } as never)}
+    {/if}
+  </div>
+{/if}

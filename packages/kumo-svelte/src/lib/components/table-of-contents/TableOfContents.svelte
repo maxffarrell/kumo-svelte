@@ -3,12 +3,20 @@
   import { cn } from '$lib/utils/cn';
 
   export { Group, Item, List, Title };
+  export type KumoTableOfContentsPart = 'root' | 'group' | 'item' | 'list' | 'title';
 
   const ITEM_BASE = 'block w-full truncate border-l-2 border-transparent py-0.5 pl-4 text-left text-sm no-underline';
   const NESTED_UL_CLASSES = 'flex flex-col gap-2 border-l-2 border-kumo-hairline [&>li>a]:pl-7 [&>li>button]:pl-7';
 
   interface TocItem { title: string; href: string; depth?: number; }
-  interface Props { class?: string; items?: TocItem[]; children?: Snippet; 'aria-label'?: string; [key: string]: unknown; }
+  interface Props {
+    __part?: KumoTableOfContentsPart;
+    class?: string;
+    items?: TocItem[];
+    children?: Snippet;
+    'aria-label'?: string;
+    [key: string]: unknown;
+  }
 
   interface BaseProps {
     children?: Snippet;
@@ -30,7 +38,19 @@
 </script>
 
 <script lang="ts">
-  let { class: className, items = [], children, 'aria-label': ariaLabel = 'Table of contents', ...rest }: Props = $props();
+  let props: Props = $props();
+  let {
+    __part = 'root',
+    class: className,
+    items = [],
+    children,
+    'aria-label': ariaLabel = 'Table of contents',
+    ...rest
+  }: Props = props;
+  const partProps = $derived.by(() => {
+    const { __part: _part, ...nextProps } = props;
+    return nextProps as never;
+  });
 </script>
 
 {#snippet Title({ children, class: className, ...rest }: BaseProps)}
@@ -110,22 +130,32 @@
   </li>
 {/snippet}
 
-<nav class={className} aria-label={ariaLabel} {...rest}>
-  {#if children}
-    {@render children()}
-  {:else}
-    <ul class="flex flex-col gap-2 border-l-2 border-kumo-hairline">
-      {#each items as item (item.href)}
-        <li class="-ml-0.5">
-          <a
-            class="block w-full truncate border-l-2 border-transparent py-0.5 pl-4 text-left text-sm text-kumo-subtle no-underline hover:border-kumo-line hover:font-medium hover:text-kumo-default"
-            style={`padding-left: ${(item.depth ?? 1) * 0.5 + 0.5}rem`}
-            href={item.href}
-          >
-            <span class="block min-w-0 leading-5">{item.title}</span>
-          </a>
-        </li>
-      {/each}
-    </ul>
-  {/if}
-</nav>
+{#if __part === 'group'}
+  {@render Group(partProps)}
+{:else if __part === 'item'}
+  {@render Item(partProps)}
+{:else if __part === 'list'}
+  {@render List(partProps)}
+{:else if __part === 'title'}
+  {@render Title(partProps)}
+{:else}
+  <nav class={className} aria-label={ariaLabel} {...rest}>
+    {#if children}
+      {@render children()}
+    {:else}
+      <ul class="flex flex-col gap-2 border-l-2 border-kumo-hairline">
+        {#each items as item (item.href)}
+          <li class="-ml-0.5">
+            <a
+              class="block w-full truncate border-l-2 border-transparent py-0.5 pl-4 text-left text-sm text-kumo-subtle no-underline hover:border-kumo-line hover:font-medium hover:text-kumo-default"
+              style={`padding-left: ${(item.depth ?? 1) * 0.5 + 0.5}rem`}
+              href={item.href}
+            >
+              <span class="block min-w-0 leading-5">{item.title}</span>
+            </a>
+          </li>
+        {/each}
+      </ul>
+    {/if}
+  </nav>
+{/if}

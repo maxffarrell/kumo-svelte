@@ -4,11 +4,6 @@
 
 <div class="flex min-h-24 w-full items-center justify-center">
   <div class="w-full max-w-xs space-y-2">
-    <Select
-      class="w-[200px]"
-      label="Favorite Fruit"
-      loading
-      options={[{ label: 'Apple', value: 'apple' }, { label: 'Banana', value: 'banana' }, { label: 'Cherry', value: 'cherry' }]}
-    />
+    <Select class="w-[200px]" aria-label="Loading select" loading />
   </div>
 </div>

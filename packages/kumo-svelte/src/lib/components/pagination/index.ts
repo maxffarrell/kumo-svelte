@@ -1,16 +1,14 @@
-import Root, {
-  PaginationControls,
-  PaginationInfo,
-  PaginationPageSize,
-  PaginationSeparator,
-} from "./Pagination.svelte";
+import Root, { type KumoPaginationPart } from "./Pagination.svelte";
 
-type PaginationPart = typeof Root;
+export type { KumoPaginationPart };
 
-const Info = PaginationInfo as unknown as PaginationPart;
-const PageSize = PaginationPageSize as unknown as PaginationPart;
-const Controls = PaginationControls as unknown as PaginationPart;
-const Separator = PaginationSeparator as unknown as PaginationPart;
+const part = (part: KumoPaginationPart) =>
+  ((anchor: Parameters<typeof Root>[0], props = {}) => Root(anchor, { ...props, __part: part })) as any;
+
+const Info = part('info');
+const PageSize = part('page-size');
+const Controls = part('controls');
+const Separator = part('separator');
 
 const Pagination = Object.assign(Root, {
   Root,

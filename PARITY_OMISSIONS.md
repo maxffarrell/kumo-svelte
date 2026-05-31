@@ -1,8 +1,8 @@
 # Kumo Svelte Parity Audit
 
-Last audited: 2026-05-30
+Last audited: 2026-05-31
 
-Compared against `cloudflare/kumo` at `/private/tmp/cloudflare-kumo-current` for upstream changes on or after 2026-05-25. This audit reflects the current `codex/may-30` worktree after the second parity pass.
+Compared against `cloudflare/kumo` at `/private/tmp/cloudflare-kumo-current` for upstream changes on or after 2026-05-25. This audit reflects the current `codex/may-30` worktree after the second parity pass and the follow-up docs/test parity gap cleanup.
 
 ## Current Parity Status
 
@@ -76,6 +76,22 @@ Ported:
 Known Svelte difference:
 
 - Pagination page-size and page-number native selects do not use upstream's React Select composition. This is a Svelte implementation difference rather than a cursor-scoping omission.
+
+### Docs Demo Coverage And Import Validation
+
+Status: follow-up gaps partially closed.
+
+Ported:
+
+- CodeHighlighted docs now include language variant and alias demos in addition to the existing TypeScript and copy-button examples.
+- Link docs now include a `plain` variant demo alongside inline/current/external examples.
+- Import validation now includes a deep import test for representative built component paths: `code-highlighted`, `link`, `select`, and `tooltip`.
+- Contributing docs now point at local `kumo-svelte` paths instead of upstream React package and docs-site paths.
+
+Remaining bounded follow-up:
+
+- Select and Tooltip have broad demo coverage, including grouped, disabled, long-list, label-tooltip, delay, multiple, follow-cursor, and boundary demos. No new edge demos were added in this pass because the straightforward high-value cases already existed.
+- No browser-test infrastructure was added. The existing Vitest import test layer covers the requested deep import validation without introducing new dependencies.
 
 ## Non-Applicable Upstream Changes
 

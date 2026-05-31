@@ -117,6 +117,12 @@ colored contexts like alerts.
 
 <ComponentExample demo="LinkCurrentVariantDemo" />
 
+### Plain Variant
+
+Use the `plain` variant for compact navigation surfaces where underlines would add visual noise.
+
+<ComponentExample demo="LinkPlainVariantDemo" />
+
 </ComponentSection>
 
 <!-- API Reference -->

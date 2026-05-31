@@ -2592,6 +2592,8 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
+        "bg-kumo-hairline",
         "ring-kumo-line",
         "text-kumo-inactive"
       ],

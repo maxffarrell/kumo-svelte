@@ -36,6 +36,7 @@
   {shape}
   {size}
   {variant}
+  componentName="LinkButton"
   class={className}
   {...rest}
 >

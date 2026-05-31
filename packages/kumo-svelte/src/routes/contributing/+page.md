@@ -60,9 +60,9 @@ If you do not have write access, contact your manager or Kumo maintainers.
 
 Use this to decide where your change belongs:
 
-- **Component**: reusable UI primitive in `packages/kumo/src/components/`
-- **Block**: installable composition pattern in `packages/kumo/src/blocks/`
-- **Docs only**: docs/demo/navigation updates in `packages/kumo-docs-astro/`
+- **Component**: reusable UI primitive in `packages/kumo-svelte/src/lib/components/`
+- **Block**: documented composition pattern in `packages/kumo-svelte/src/routes/blocks/` with any supporting code kept near the local docs/component surface
+- **Docs only**: docs pages, demo snippets, and navigation updates in `packages/kumo-svelte/src/routes/` or `packages/kumo-svelte/src/lib/docs/`
 
 When adding a new **component**, scaffold it (do not create files manually):
 
@@ -92,15 +92,15 @@ This gives you a fast loop while verifying your change in the actual docs enviro
 
 Typical internal change flow:
 
-1. Build the feature in `packages/kumo/src/...`.
-2. Add or update demos in `packages/kumo-docs-astro/src/components/demos/`.
-3. Add/update tests in `packages/kumo`.
-4. Add or update docs pages in `packages/kumo-docs-astro/src/pages/`.
+1. Build the feature in `packages/kumo-svelte/src/lib/...`.
+2. Add or update demos in `packages/kumo-svelte/src/lib/docs/demo-snippets/`.
+3. Add/update tests in `packages/kumo-svelte`.
+4. Add or update docs pages in `packages/kumo-svelte/src/routes/`.
 
 If your demos should appear in registry metadata, keep demo naming exact:
 
 - File: `&#123;Component&#125;Demo.svelte`
-- Export names must end with `Demo`
+- Demo component names should end with `Demo`
 
 Implementation expectations:
 
@@ -139,7 +139,7 @@ Windsurf and hooks catch additional issues, but you should still run checks loca
 
 ## 6. Handle Changesets Correctly
 
-If your change touches `packages/kumo/` and should ship, add a changeset:
+If your change touches `packages/kumo-svelte/` and should ship, add a changeset:
 
 ```bash
 pnpm changeset
@@ -177,7 +177,7 @@ PR review is required before merge.
 
 - PRs publish prerelease artifacts via `pkg.pr.new` links in CI comments.
 - Every PR should include tests for behavior changes.
-- Most Kumo tests are Vitest-based and live under `packages/kumo`.
+- Most Kumo Svelte tests are Vitest-based and live under `packages/kumo-svelte`.
 
 ---
 
@@ -200,10 +200,10 @@ Common pitfalls to avoid:
 
 - Do not scaffold components manually; use `new:component`.
 - Do not rely on raw Tailwind color classes (`bg-blue-500`, etc.).
-- Do not skip changesets for releasable `packages/kumo` changes.
+- Do not skip changesets for releasable `packages/kumo-svelte` changes.
 
 ---
 
 ## Related Docs
 
-Follow the [changeset guide](https://github.com/cloudflare/kumo/blob/main/.changeset/README.md) to document releasable library changes and see the [AGENTS.md](https://github.com/cloudflare/kumo/blob/main/packages/kumo/AGENTS.md) for conventions and patterns.
+Follow the local `.changeset/README.md` to document releasable library changes and see this repo's `AGENTS.md` files for conventions and patterns.

@@ -120,6 +120,7 @@
     variant?: Variant;
     loading?: boolean;
     title?: string;
+    componentName?: 'Button' | 'LinkButton';
     [key: string]: unknown;
   }
 
@@ -136,6 +137,7 @@
     variant = 'secondary',
     loading = false,
     title,
+    componentName = 'Button',
     ...rest
   }: Props = $props();
 
@@ -160,7 +162,7 @@
     type={href ? undefined : type}
     disabled={href ? undefined : disabled || loading}
     aria-busy={loading || undefined}
-    data-kumo-component="Button"
+    data-kumo-component={componentName}
     data-kumo-part={href ? 'link-button' : 'button'}
     {...externalProps}
     {...rest}

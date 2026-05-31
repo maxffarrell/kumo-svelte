@@ -64,6 +64,18 @@ sourceFile: "components/code-highlighted"
 
 <ComponentExample demo="CodeHighlightedCopyButtonDemo" />
 
+### Language Variants
+
+Use supported Shiki languages for framework, data, shell, and config examples.
+
+<ComponentExample demo="CodeHighlightedLanguageVariantsDemo" />
+
+### Language Aliases
+
+Common aliases such as `js`, `ts`, `md`, and `yml` normalize to the matching highlighter language.
+
+<ComponentExample demo="CodeHighlightedAliasesDemo" />
+
 </ComponentSection>
 
 <ComponentSection>

@@ -21,6 +21,7 @@
     "release": "pnpm build:all && changeset publish",
     "release:beta": "changeset publish --no-git-tag --tag beta",
     "typecheck": "pnpm --filter kumo-svelte typecheck",
+    "test:kumo": "pnpm --filter kumo-svelte test",
     "version": "changeset version",
     "version:beta": "bash ci/versioning/version-beta.sh",
     "ci:post-pr-report": "tsx ci/scripts/post-pr-report.ts",

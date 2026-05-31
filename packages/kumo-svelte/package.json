@@ -59,6 +59,7 @@
     "deploy": "pnpm build && wrangler deploy",
     "dev": "pnpm codegen:registry && vite dev",
     "preview": "vite preview",
+    "test": "pnpm build && node --test --import tsx tests/imports/*.test.ts tests/build/*.test.ts tests/lint/*.test.ts",
     "typecheck": "pnpm check"
   },
   "peerDependencies": {

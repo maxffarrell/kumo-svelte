@@ -43,8 +43,10 @@ import { Banner } from 'kumo-svelte/components/banner';
 ## Usage
 
 ```svelte
+<script lang="ts">
 import { Banner } from "kumo-svelte";
 import { Info } from "phosphor-svelte";
+</script>
 
 <Banner
   icon={Info}

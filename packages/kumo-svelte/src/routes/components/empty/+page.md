@@ -43,8 +43,10 @@ import { Empty } from 'kumo-svelte/components/empty';
 ## Usage
 
 ```svelte
+<script lang="ts">
 import { Empty } from "kumo-svelte";
 import { Package } from "phosphor-svelte";
+</script>
 
 <Empty
   title="No packages found"

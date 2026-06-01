@@ -44,7 +44,9 @@ import { Tooltip, TooltipProvider } from 'kumo-svelte/components/tooltip';
 ## Usage
 
 ```svelte
+<script lang="ts">
 import { Tooltip, Button } from "kumo-svelte";
+</script>
 
 <Tooltip content="Tooltip text">
   <Button>Hover me</Button>

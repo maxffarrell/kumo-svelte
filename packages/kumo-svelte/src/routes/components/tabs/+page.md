@@ -44,7 +44,9 @@ import { Tabs } from 'kumo-svelte/components/tabs';
 ## Usage
 
 ```svelte
+<script lang="ts">
 import { Tabs } from "kumo-svelte";
+</script>
 
 <Tabs
   tabs={[

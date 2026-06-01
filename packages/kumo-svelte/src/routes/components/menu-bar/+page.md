@@ -43,8 +43,10 @@ import { MenuBar } from 'kumo-svelte/components/menu-bar';
 ## Usage
 
 ```svelte
+<script lang="ts">
 import { MenuBar } from "kumo-svelte";
 import { TextB } from "phosphor-svelte";
+</script>
 
 <MenuBar
   options={[

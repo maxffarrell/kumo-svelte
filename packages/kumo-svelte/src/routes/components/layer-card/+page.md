@@ -43,7 +43,9 @@ import { LayerCard } from 'kumo-svelte/components/layer-card';
 ## Usage
 
 ```svelte
+<script lang="ts">
 import { LayerCard } from "kumo-svelte";
+</script>
 
     <LayerCard class="w-[250px]">
       <LayerCard.Secondary>Documentation</LayerCard.Secondary>
@@ -59,7 +61,9 @@ import { LayerCard } from "kumo-svelte";
 
 
 ```svelte
+<script lang="ts">
 import { LayerCard } from "kumo-svelte";
+</script>
 
     <LayerCard class="w-[250px] p-4">
       Learn how to use Kumo components

@@ -24,14 +24,14 @@ sourceFile: "components/flow"
 
 ### Barrel
 
-```svelte
-import { Flow } from "kumo-svelte";
+```typescript
+import { Flow, FlowAnchor, FlowList, FlowNode, FlowParallel, FlowRoot } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-import { Flow } from "kumo-svelte";
+```typescript
+import { Flow, FlowAnchor, FlowList, FlowNode, FlowParallel, FlowRoot } from 'kumo-svelte/components/flow';
 ```
 
 </ComponentSection>

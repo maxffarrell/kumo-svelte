@@ -48,7 +48,7 @@
     class={cn(
       isCard
         ? 'relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring ring-2 focus:outline-none focus:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-brand'
-        : 'relative flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring focus:outline-none after:absolute after:-inset-x-3 after:-inset-y-2',
+        : 'relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring focus:outline-none after:absolute after:-inset-x-3 after:-inset-y-2',
       variant === 'error' ? 'ring-kumo-danger' : 'ring-kumo-line',
       !disabled &&
         variant !== 'error' &&
@@ -109,7 +109,7 @@
     data-kumo-component="Radio"
     data-kumo-part="item-label"
     class={cn(
-      'm-0 group relative inline-flex items-center gap-2',
+      'm-0 group relative inline-flex items-start gap-2',
       effectiveControlPosition === 'end' && 'flex-row-reverse justify-end',
       disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
       className

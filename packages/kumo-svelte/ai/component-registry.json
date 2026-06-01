@@ -9,16 +9,6 @@
       "importPath": "kumo-svelte/components/autocomplete",
       "sourceFile": "components/autocomplete",
       "props": {
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Child snippet rendered by the component."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
         "items": {
           "type": "unknown[]",
           "optional": false,
@@ -30,21 +20,31 @@
           "optional": true,
           "description": "Controlled input value."
         },
-        "defaultValue": {
-          "type": "string | number | string[]",
-          "optional": true,
-          "description": "Uncontrolled default input value."
-        },
         "open": {
           "type": "boolean",
           "optional": true,
           "default": "false",
           "description": "Controlled open state."
         },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Child snippet rendered by the component."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
         "label": {
           "type": "string | Snippet",
           "optional": true,
           "description": "Visible label content."
+        },
+        "required": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Marks the field as required."
         },
         "labelTooltip": {
           "type": "string | Snippet",
@@ -61,10 +61,10 @@
           "optional": true,
           "description": "Validation error message or matcher."
         },
-        "required": {
-          "type": "boolean",
+        "defaultValue": {
+          "type": "string | number | string[]",
           "optional": true,
-          "description": "Marks the field as required."
+          "description": "Uncontrolled default input value."
         },
         "onValueChange": {
           "type": "(value: string | number | string[]) => void",
@@ -200,11 +200,6 @@
               "optional": true,
               "description": "Additional classes merged onto the root element."
             },
-            "placeholder": {
-              "type": "string",
-              "optional": true,
-              "description": "Placeholder text."
-            },
             "size": {
               "type": "enum",
               "optional": true,
@@ -216,6 +211,11 @@
               ],
               "default": "base",
               "description": "Size of the autocomplete input. Matches Input component sizes."
+            },
+            "placeholder": {
+              "type": "string",
+              "optional": true,
+              "description": "Placeholder text."
             }
           }
         },
@@ -525,32 +525,6 @@
       "importPath": "kumo-svelte/components/button",
       "sourceFile": "components/button",
       "props": {
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Child snippet rendered by the component."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
-        "icon": {
-          "type": "Component",
-          "optional": true,
-          "description": "Icon rendered by the component."
-        },
-        "loading": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Loading state."
-        },
-        "title": {
-          "type": "string",
-          "optional": true,
-          "description": "Tooltip content shown when hovering the button."
-        },
         "shape": {
           "type": "enum",
           "optional": true,
@@ -587,6 +561,32 @@
           ],
           "default": "secondary",
           "description": "Visual variant."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Child snippet rendered by the component."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
+        "icon": {
+          "type": "Component",
+          "optional": true,
+          "description": "Icon rendered by the component."
+        },
+        "loading": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Loading state."
+        },
+        "title": {
+          "type": "string",
+          "optional": true,
+          "description": "Tooltip content shown when hovering the button."
         },
         "disabled": {
           "type": "boolean",
@@ -703,34 +703,6 @@
       "importPath": "kumo-svelte/components/checkbox",
       "sourceFile": "components/checkbox",
       "props": {
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Child snippet rendered by the component."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
-        "checked": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Checked state."
-        },
-        "indeterminate": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Indeterminate checked state."
-        },
-        "disabled": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Disables the component."
-        },
         "variant": {
           "type": "enum",
           "optional": true,
@@ -757,15 +729,38 @@
           "default": "true",
           "description": "Renders the control before label content."
         },
-        "required": {
+        "checked": {
           "type": "boolean",
           "optional": true,
-          "description": "Marks the field as required."
+          "default": "false",
+          "description": "Checked state."
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Indeterminate checked state."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Disables the component."
         },
         "name": {
           "type": "string",
           "optional": true,
           "description": "Form field name."
+        },
+        "required": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Marks the field as required."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
         },
         "value": {
           "type": "string",
@@ -796,6 +791,11 @@
           "type": "(indeterminate: boolean) => void",
           "optional": true,
           "description": "Called when indeterminate changes."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Child snippet rendered by the component."
         }
       },
       "colors": [
@@ -815,25 +815,20 @@
         "Group": {
           "description": "Checkbox.Group",
           "props": {
-            "children": {
-              "type": "Snippet",
-              "optional": true,
-              "description": "Child snippet rendered by the component."
-            },
             "legend": {
               "type": "string",
               "optional": true,
               "description": "legend prop."
             },
-            "description": {
-              "type": "string | Snippet",
-              "optional": true,
-              "description": "Supporting description text."
-            },
             "error": {
               "type": "string",
               "optional": true,
               "description": "Validation error message or matcher."
+            },
+            "description": {
+              "type": "string | Snippet",
+              "optional": true,
+              "description": "Supporting description text."
             },
             "value": {
               "type": "string[]",
@@ -847,16 +842,6 @@
               "default": "false",
               "description": "Disables the component."
             },
-            "required": {
-              "type": "boolean",
-              "optional": true,
-              "description": "Marks the field as required."
-            },
-            "name": {
-              "type": "string",
-              "optional": true,
-              "description": "Form field name."
-            },
             "controlFirst": {
               "type": "boolean",
               "optional": true,
@@ -868,10 +853,25 @@
               "optional": true,
               "description": "Additional classes merged onto the root element."
             },
+            "required": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Marks the field as required."
+            },
+            "name": {
+              "type": "string",
+              "optional": true,
+              "description": "Form field name."
+            },
             "onValueChange": {
               "type": "(value: string[]) => void",
               "optional": true,
               "description": "Called when the value changes."
+            },
+            "children": {
+              "type": "Snippet",
+              "optional": true,
+              "description": "Child snippet rendered by the component."
             }
           }
         },
@@ -963,10 +963,16 @@
       "importPath": "kumo-svelte/components/clipboard-text",
       "sourceFile": "components/clipboard-text",
       "props": {
-        "class": {
-          "type": "string",
+        "size": {
+          "type": "enum",
           "optional": true,
-          "description": "Additional classes merged onto the root element."
+          "values": [
+            "sm",
+            "base",
+            "lg"
+          ],
+          "default": "lg",
+          "description": "Size preset."
         },
         "text": {
           "type": "string",
@@ -979,21 +985,10 @@
           "optional": true,
           "description": "Alternate text copied to the clipboard."
         },
-        "size": {
-          "type": "enum",
+        "class": {
+          "type": "string",
           "optional": true,
-          "values": [
-            "sm",
-            "base",
-            "lg"
-          ],
-          "default": "lg",
-          "description": "Size preset."
-        },
-        "onCopy": {
-          "type": "() => void",
-          "optional": true,
-          "description": "Called after copying succeeds."
+          "description": "Additional classes merged onto the root element."
         },
         "tooltip": {
           "type": "{ text?: string; copiedText?: string; side?: TooltipSide; }",
@@ -1004,6 +999,11 @@
           "type": "{ copyAction?: string; }",
           "optional": true,
           "description": "Accessible labels for internationalization."
+        },
+        "onCopy": {
+          "type": "() => void",
+          "optional": true,
+          "description": "Called after copying succeeds."
         }
       },
       "colors": [
@@ -1307,16 +1307,6 @@
         "Root": {
           "description": "Collapsible.Root",
           "props": {
-            "children": {
-              "type": "Snippet",
-              "optional": true,
-              "description": "Child snippet rendered by the component."
-            },
-            "class": {
-              "type": "string",
-              "optional": true,
-              "description": "Additional classes merged onto the root element."
-            },
             "open": {
               "type": "boolean",
               "optional": true,
@@ -1328,21 +1318,31 @@
               "default": "false",
               "description": "Initial uncontrolled open state."
             },
+            "onOpenChange": {
+              "type": "(open: boolean) => void",
+              "optional": true,
+              "description": "Called when open state changes."
+            },
             "disabled": {
               "type": "boolean",
               "optional": true,
               "default": "false",
               "description": "Disables the component."
             },
-            "onOpenChange": {
-              "type": "(open: boolean) => void",
-              "optional": true,
-              "description": "Called when open state changes."
-            },
             "onOpenChangeComplete": {
               "type": "(open: boolean) => void",
               "optional": true,
               "description": "Called after the open-state transition completes."
+            },
+            "children": {
+              "type": "Snippet",
+              "optional": true,
+              "description": "Child snippet rendered by the component."
+            },
+            "class": {
+              "type": "string",
+              "optional": true,
+              "description": "Additional classes merged onto the root element."
             }
           }
         },
@@ -1388,33 +1388,6 @@
       "importPath": "kumo-svelte/components/combobox",
       "sourceFile": "components/combobox",
       "props": {
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Child snippet rendered by the component."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
-        "items": {
-          "type": "unknown[]",
-          "optional": false,
-          "required": true,
-          "description": "Array of items to display in the dropdown."
-        },
-        "value": {
-          "type": "unknown",
-          "optional": true,
-          "description": "Controlled value."
-        },
-        "multiple": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Enables multiple selection."
-        },
         "size": {
           "type": "enum",
           "optional": true,
@@ -1427,10 +1400,36 @@
           "default": "base",
           "description": "Size preset."
         },
+        "items": {
+          "type": "unknown[]",
+          "optional": false,
+          "required": true,
+          "description": "Array of items to display in the dropdown."
+        },
+        "value": {
+          "type": "unknown",
+          "optional": true,
+          "description": "Controlled value."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Child snippet rendered by the component."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
         "label": {
           "type": "string | Snippet",
           "optional": true,
           "description": "Visible label content."
+        },
+        "required": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Marks the field as required."
         },
         "labelTooltip": {
           "type": "string | Snippet",
@@ -1447,15 +1446,16 @@
           "optional": true,
           "description": "Validation error message or matcher."
         },
-        "required": {
-          "type": "boolean",
-          "optional": true,
-          "description": "Marks the field as required."
-        },
         "onValueChange": {
           "type": "(value: unknown) => void",
           "optional": true,
           "description": "Called when the value changes."
+        },
+        "multiple": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Enables multiple selection."
         },
         "onOpenChange": {
           "type": "(open: boolean) => void",
@@ -2021,6 +2021,23 @@
       "importPath": "kumo-svelte/components/dialog",
       "sourceFile": "components/dialog",
       "props": {
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the dialog content."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": false,
+          "required": true,
+          "description": "Dialog content, typically title, description, close, and action buttons."
+        },
+        "container": {
+          "type": "HTMLElement | string",
+          "optional": true,
+          "default": "document.body",
+          "description": "Portal container for custom roots or Shadow DOM."
+        },
         "size": {
           "type": "enum",
           "optional": true,
@@ -2033,27 +2050,10 @@
           "default": "base",
           "description": "Dialog width preset."
         },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the dialog content."
-        },
-        "children": {
-          "type": "Snippet",
-          "optional": false,
-          "required": true,
-          "description": "Dialog content, typically title, description, close, and action buttons."
-        },
         "style": {
           "type": "string",
           "optional": true,
           "description": "Inline styles for the dialog content."
-        },
-        "container": {
-          "type": "HTMLElement | string",
-          "optional": true,
-          "default": "document.body",
-          "description": "Portal container for custom roots or Shadow DOM."
         }
       },
       "colors": [
@@ -2263,32 +2263,15 @@
         "Item": {
           "description": "DropdownMenu.Item",
           "props": {
-            "children": {
-              "type": "Snippet",
-              "optional": true,
-              "description": "Child snippet rendered by the component."
-            },
-            "class": {
+            "href": {
               "type": "string",
               "optional": true,
-              "description": "Additional classes merged onto the root element."
-            },
-            "inset": {
-              "type": "boolean",
-              "optional": true,
-              "default": "false",
-              "description": "Indents the item content."
+              "description": "Deprecated destination URL for legacy link items."
             },
             "icon": {
               "type": "Component",
               "optional": true,
               "description": "Icon rendered by the component."
-            },
-            "selected": {
-              "type": "boolean",
-              "optional": true,
-              "default": "false",
-              "description": "Shows a trailing selected check indicator."
             },
             "variant": {
               "type": "enum",
@@ -2300,21 +2283,23 @@
               "default": "default",
               "description": "Visual variant."
             },
-            "href": {
-              "type": "string",
+            "selected": {
+              "type": "boolean",
               "optional": true,
-              "description": "Deprecated destination URL for legacy link items."
+              "default": "false",
+              "description": "Shows a trailing selected check indicator."
+            },
+            "inset": {
+              "type": "boolean",
+              "optional": true,
+              "default": "false",
+              "description": "Indents the item content."
             },
             "disabled": {
               "type": "boolean",
               "optional": true,
               "description": "Disables the component."
-            }
-          }
-        },
-        "RadioItem": {
-          "description": "DropdownMenu.RadioItem",
-          "props": {
+            },
             "children": {
               "type": "Snippet",
               "optional": true,
@@ -2324,6 +2309,22 @@
               "type": "string",
               "optional": true,
               "description": "Additional classes merged onto the root element."
+            }
+          }
+        },
+        "RadioItem": {
+          "description": "DropdownMenu.RadioItem",
+          "props": {
+            "value": {
+              "type": "string",
+              "optional": false,
+              "required": true,
+              "description": "Controlled value."
+            },
+            "icon": {
+              "type": "Component",
+              "optional": true,
+              "description": "Icon rendered by the component."
             },
             "inset": {
               "type": "boolean",
@@ -2331,16 +2332,15 @@
               "default": "false",
               "description": "Indents the item content."
             },
-            "icon": {
-              "type": "Component",
+            "children": {
+              "type": "Snippet",
               "optional": true,
-              "description": "Icon rendered by the component."
+              "description": "Child snippet rendered by the component."
             },
-            "value": {
+            "class": {
               "type": "string",
-              "optional": false,
-              "required": true,
-              "description": "Controlled value."
+              "optional": true,
+              "description": "Additional classes merged onto the root element."
             }
           }
         },
@@ -2420,6 +2420,17 @@
         "SubTrigger": {
           "description": "DropdownMenu.SubTrigger",
           "props": {
+            "icon": {
+              "type": "Component",
+              "optional": true,
+              "description": "Icon rendered by the component."
+            },
+            "inset": {
+              "type": "boolean",
+              "optional": true,
+              "default": "false",
+              "description": "Indents the item content."
+            },
             "children": {
               "type": "Snippet",
               "optional": true,
@@ -2429,17 +2440,6 @@
               "type": "string",
               "optional": true,
               "description": "Additional classes merged onto the root element."
-            },
-            "inset": {
-              "type": "boolean",
-              "optional": true,
-              "default": "false",
-              "description": "Indents the item content."
-            },
-            "icon": {
-              "type": "Component",
-              "optional": true,
-              "description": "Icon rendered by the component."
             }
           }
         },
@@ -2495,16 +2495,6 @@
           "default": "base",
           "description": "Size preset."
         },
-        "contents": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Custom empty-state content."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
         "icon": {
           "type": "Snippet",
           "optional": true,
@@ -2525,6 +2515,16 @@
           "type": "string",
           "optional": true,
           "description": "Shell command displayed in a copyable code block."
+        },
+        "contents": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Custom empty-state content."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
         }
       },
       "colors": [
@@ -2693,6 +2693,21 @@
       "importPath": "kumo-svelte/components/grid",
       "sourceFile": "components/grid",
       "props": {
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Grid items to render."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
+        "mobileDivider": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Show dividers between grid items on mobile. Only applies with the 4up variant."
+        },
         "gap": {
           "type": "enum",
           "optional": true,
@@ -2720,21 +2735,6 @@
             "1-2-4up"
           ],
           "description": "Responsive column layout variant."
-        },
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Grid items to render."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
-        "mobileDivider": {
-          "type": "boolean",
-          "optional": true,
-          "description": "Show dividers between grid items on mobile. Only applies with the 4up variant."
         }
       },
       "colors": [
@@ -2766,10 +2766,25 @@
       "importPath": "kumo-svelte/components/input",
       "sourceFile": "components/input",
       "props": {
-        "class": {
-          "type": "string",
+        "label": {
+          "type": "string | Snippet",
           "optional": true,
-          "description": "Additional classes merged onto the root element."
+          "description": "Visible label content."
+        },
+        "labelTooltip": {
+          "type": "string | Snippet",
+          "optional": true,
+          "description": "Optional help content for the label."
+        },
+        "description": {
+          "type": "string | Snippet",
+          "optional": true,
+          "description": "Supporting description text."
+        },
+        "error": {
+          "type": "FieldError",
+          "optional": true,
+          "description": "Validation error message or matcher."
         },
         "size": {
           "type": "enum",
@@ -2793,25 +2808,10 @@
           "default": "default",
           "description": "Visual variant."
         },
-        "label": {
-          "type": "string | Snippet",
+        "class": {
+          "type": "string",
           "optional": true,
-          "description": "Visible label content."
-        },
-        "labelTooltip": {
-          "type": "string | Snippet",
-          "optional": true,
-          "description": "Optional help content for the label."
-        },
-        "description": {
-          "type": "string | Snippet",
-          "optional": true,
-          "description": "Supporting description text."
-        },
-        "error": {
-          "type": "FieldError",
-          "optional": true,
-          "description": "Validation error message or matcher."
+          "description": "Additional classes merged onto the root element."
         },
         "passwordManagerIgnore": {
           "type": "boolean",
@@ -2923,49 +2923,10 @@
       "importPath": "kumo-svelte/components/input-group",
       "sourceFile": "components/input-group",
       "props": {
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Child snippet rendered by the component."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
-        "size": {
-          "type": "enum",
-          "optional": true,
-          "values": [
-            "xs",
-            "sm",
-            "base",
-            "lg"
-          ],
-          "default": "base",
-          "description": "Size preset."
-        },
-        "focusMode": {
-          "type": "InputGroupFocusMode",
-          "optional": true,
-          "default": "container",
-          "description": "focusMode prop."
-        },
-        "disabled": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Disables the component."
-        },
         "label": {
           "type": "string | Snippet",
           "optional": true,
           "description": "Visible label content."
-        },
-        "labelTooltip": {
-          "type": "string | Snippet",
-          "optional": true,
-          "description": "Optional help content for the label."
         },
         "description": {
           "type": "string",
@@ -2982,15 +2943,55 @@
           "optional": true,
           "description": "Marks the field as required."
         },
+        "labelTooltip": {
+          "type": "string | Snippet",
+          "optional": true,
+          "description": "Optional help content for the label."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Child snippet rendered by the component."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
         "id": {
           "type": "string",
           "optional": true,
           "description": "Element id."
+        },
+        "size": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "xs",
+            "sm",
+            "base",
+            "lg"
+          ],
+          "default": "base",
+          "description": "Size preset."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Disables the component."
+        },
+        "focusMode": {
+          "type": "InputGroupFocusMode",
+          "optional": true,
+          "default": "container",
+          "description": "focusMode prop."
         }
       },
       "colors": [
         "bg-kumo-control",
         "bg-kumo-overlay",
+        "border-kumo-focus",
         "border-kumo-line",
         "ring-kumo-danger",
         "ring-kumo-focus",
@@ -3017,16 +3018,6 @@
           "required": true,
           "description": "The label content."
         },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
-        "htmlFor": {
-          "type": "string",
-          "optional": true,
-          "description": "The id of the form element this label is associated with."
-        },
         "showOptional": {
           "type": "boolean",
           "optional": true,
@@ -3037,6 +3028,16 @@
           "type": "string | Snippet",
           "optional": true,
           "description": "Tooltip content displayed next to the label."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
+        "htmlFor": {
+          "type": "string",
+          "optional": true,
+          "description": "The id of the form element this label is associated with."
         },
         "asContent": {
           "type": "boolean",
@@ -3113,15 +3114,15 @@
           "optional": true,
           "description": "Deprecated routing destination. Use href instead."
         },
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Content rendered inside the link."
-        },
         "class": {
           "type": "string",
           "optional": true,
           "description": "Additional classes merged onto the root element."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Content rendered inside the link."
         }
       },
       "colors": [
@@ -3203,29 +3204,6 @@
       "importPath": "kumo-svelte/components/meter",
       "sourceFile": "components/meter",
       "props": {
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
-        "value": {
-          "type": "number",
-          "optional": true,
-          "default": "0",
-          "description": "Controlled value."
-        },
-        "min": {
-          "type": "number",
-          "optional": true,
-          "default": "0",
-          "description": "Minimum value."
-        },
-        "max": {
-          "type": "number",
-          "optional": true,
-          "default": "100",
-          "description": "Maximum value."
-        },
         "customValue": {
           "type": "string",
           "optional": true,
@@ -3252,6 +3230,29 @@
           "type": "string",
           "optional": true,
           "description": "Class for the meter indicator."
+        },
+        "value": {
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "Controlled value."
+        },
+        "max": {
+          "type": "number",
+          "optional": true,
+          "default": "100",
+          "description": "Maximum value."
+        },
+        "min": {
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "Minimum value."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
         }
       },
       "colors": [
@@ -3268,26 +3269,16 @@
       "importPath": "kumo-svelte/components/pagination",
       "sourceFile": "components/pagination",
       "props": {
-        "children": {
-          "type": "Snippet",
+        "setPage": {
+          "type": "(page: number) => void",
           "optional": true,
-          "description": "Compound component children for custom layouts."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
+          "description": "Callback fired when the current page changes. In Svelte, bind:page can be used instead."
         },
         "page": {
           "type": "number",
           "optional": true,
           "default": "1",
           "description": "Current page number (1-indexed)."
-        },
-        "setPage": {
-          "type": "(page: number) => void",
-          "optional": true,
-          "description": "Callback fired when the current page changes. In Svelte, bind:page can be used instead."
         },
         "perPage": {
           "type": "number",
@@ -3298,6 +3289,21 @@
           "type": "number",
           "optional": true,
           "description": "Total number of items across all pages."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
+        "labels": {
+          "type": "PaginationLabels",
+          "optional": true,
+          "description": "Labels for internationalization of aria-labels."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Compound component children for custom layouts."
         },
         "controls": {
           "type": "enum",
@@ -3313,20 +3319,11 @@
           "type": "(props: { page?: number; perPage?: number; totalCount?: number; pageShowingRange: string }) => unknown",
           "optional": true,
           "description": "Deprecated legacy render function for the info text. Prefer Pagination.Info children."
-        },
-        "labels": {
-          "type": "PaginationLabels",
-          "optional": true,
-          "description": "Labels for internationalization of aria-labels."
         }
       },
       "colors": [
-        "bg-kumo-base",
         "border-kumo-hairline",
-        "ring-kumo-focus",
         "ring-kumo-hairline",
-        "ring-kumo-line",
-        "text-kumo-default",
         "text-kumo-subtle"
       ],
       "subComponents": {
@@ -3590,15 +3587,15 @@
         "Group": {
           "description": "Radio.Group",
           "props": {
-            "children": {
-              "type": "Snippet",
-              "optional": true,
-              "description": "Child snippet rendered by the component."
-            },
             "legend": {
               "type": "string",
               "optional": true,
               "description": "legend prop."
+            },
+            "children": {
+              "type": "Snippet",
+              "optional": true,
+              "description": "Child snippet rendered by the component."
             },
             "orientation": {
               "type": "enum",
@@ -3635,21 +3632,11 @@
               "optional": true,
               "description": "Controlled value."
             },
-            "defaultValue": {
-              "type": "string",
-              "optional": true,
-              "description": "Initial uncontrolled value."
-            },
             "disabled": {
               "type": "boolean",
               "optional": true,
               "default": "false",
               "description": "Disables the component."
-            },
-            "required": {
-              "type": "boolean",
-              "optional": true,
-              "description": "Marks the field as required."
             },
             "controlPosition": {
               "type": "enum",
@@ -3669,6 +3656,16 @@
               "type": "string",
               "optional": true,
               "description": "Additional classes merged onto the root element."
+            },
+            "defaultValue": {
+              "type": "string",
+              "optional": true,
+              "description": "Initial uncontrolled value."
+            },
+            "required": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Marks the field as required."
             },
             "onValueChange": {
               "type": "(value: string) => void",
@@ -3764,51 +3761,6 @@
           "optional": true,
           "description": "Additional classes merged onto the root element."
         },
-        "options": {
-          "type": "Option[]",
-          "optional": true,
-          "default": "[]",
-          "description": "Options rendered by the component."
-        },
-        "items": {
-          "type": "Record<string, SelectItemValue> | { label: Snippet | string; value: Value }[]",
-          "optional": true,
-          "description": "Items rendered by the component."
-        },
-        "value": {
-          "type": "Value",
-          "optional": true,
-          "description": "Controlled value."
-        },
-        "defaultValue": {
-          "type": "Value",
-          "optional": true,
-          "description": "Initial uncontrolled value."
-        },
-        "placeholder": {
-          "type": "string",
-          "optional": true,
-          "default": "Select...",
-          "description": "Placeholder text."
-        },
-        "disabled": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Disables the component."
-        },
-        "loading": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Loading state."
-        },
-        "multiple": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Enables multiple selection."
-        },
         "size": {
           "type": "enum",
           "optional": true,
@@ -3832,10 +3784,44 @@
           "default": "false",
           "description": "hideLabel prop."
         },
+        "placeholder": {
+          "type": "string",
+          "optional": true,
+          "default": "Select...",
+          "description": "Placeholder text."
+        },
+        "loading": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Loading state."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Disables the component."
+        },
+        "required": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Marks the field as required."
+        },
         "labelTooltip": {
           "type": "string | Snippet",
           "optional": true,
           "description": "Optional help content for the label."
+        },
+        "value": {
+          "type": "Value",
+          "optional": true,
+          "description": "Controlled value."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Child snippet rendered by the component."
         },
         "description": {
           "type": "string | Snippet",
@@ -3847,26 +3833,37 @@
           "optional": true,
           "description": "Validation error message or matcher."
         },
-        "name": {
-          "type": "string",
+        "defaultValue": {
+          "type": "Value",
           "optional": true,
-          "description": "Form field name."
-        },
-        "required": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Marks the field as required."
-        },
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Child snippet rendered by the component."
+          "description": "Initial uncontrolled value."
         },
         "renderValue": {
           "type": "(value: Value) => unknown",
           "optional": true,
           "description": "Custom selected-value renderer."
+        },
+        "items": {
+          "type": "Record<string, SelectItemValue> | { label: Snippet | string; value: Value }[]",
+          "optional": true,
+          "description": "Items rendered by the component."
+        },
+        "options": {
+          "type": "Option[]",
+          "optional": true,
+          "default": "[]",
+          "description": "Options rendered by the component."
+        },
+        "multiple": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Enables multiple selection."
+        },
+        "name": {
+          "type": "string",
+          "optional": true,
+          "description": "Form field name."
         },
         "container": {
           "type": "HTMLElement | string",
@@ -3894,26 +3891,43 @@
       "importPath": "kumo-svelte/components/sensitive-input",
       "sourceFile": "components/sensitive-input",
       "props": {
+        "autoComplete": {
+          "type": "string",
+          "optional": true,
+          "default": "off",
+          "description": "Autocomplete attribute."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Disables the component."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Makes the input read-only."
+        },
+        "required": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Marks the field as required."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
+        "id": {
+          "type": "string",
+          "optional": true,
+          "description": "Element id."
+        },
         "value": {
           "type": "string",
           "optional": true,
           "description": "Controlled value."
-        },
-        "defaultValue": {
-          "type": "string",
-          "optional": true,
-          "default": "",
-          "description": "Initial uncontrolled value."
-        },
-        "onValueChange": {
-          "type": "(value: string) => void",
-          "optional": true,
-          "description": "Called when the value changes."
-        },
-        "onCopy": {
-          "type": "() => void",
-          "optional": true,
-          "description": "Called after copying succeeds."
         },
         "size": {
           "type": "enum",
@@ -3957,27 +3971,21 @@
           "optional": true,
           "description": "Validation error message or matcher."
         },
-        "class": {
+        "defaultValue": {
           "type": "string",
           "optional": true,
-          "description": "Additional classes merged onto the root element."
+          "default": "",
+          "description": "Initial uncontrolled value."
         },
-        "id": {
-          "type": "string",
+        "onValueChange": {
+          "type": "(value: string) => void",
           "optional": true,
-          "description": "Element id."
+          "description": "Called when the value changes."
         },
-        "disabled": {
-          "type": "boolean",
+        "onCopy": {
+          "type": "() => void",
           "optional": true,
-          "default": "false",
-          "description": "Disables the component."
-        },
-        "readOnly": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Makes the input read-only."
+          "description": "Called after copying succeeds."
         },
         "readonly": {
           "type": "boolean",
@@ -3985,20 +3993,9 @@
           "default": "false",
           "description": "Makes the input read-only."
         },
-        "required": {
-          "type": "boolean",
-          "optional": true,
-          "description": "Marks the field as required."
-        },
         "autocomplete": {
           "type": "string",
           "optional": true,
-          "description": "Autocomplete attribute."
-        },
-        "autoComplete": {
-          "type": "string",
-          "optional": true,
-          "default": "off",
           "description": "Autocomplete attribute."
         },
         "oninput": {
@@ -4041,17 +4038,6 @@
       "importPath": "kumo-svelte/components/sidebar",
       "sourceFile": "components/sidebar",
       "props": {
-        "children": {
-          "type": "Snippet",
-          "optional": false,
-          "required": true,
-          "description": "Sidebar content — Header, Content, Footer, groups, menus, and related slots."
-        },
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes for the sidebar element."
-        },
         "variant": {
           "type": "enum",
           "optional": true,
@@ -4083,6 +4069,17 @@
           ],
           "default": "icon",
           "description": "Collapse behavior inherited from Provider."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": false,
+          "required": true,
+          "description": "Sidebar content — Header, Content, Footer, groups, menus, and related slots."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes for the sidebar element."
         }
       },
       "colors": [
@@ -4375,34 +4372,6 @@
       "importPath": "kumo-svelte/components/switch",
       "sourceFile": "components/switch",
       "props": {
-        "class": {
-          "type": "string",
-          "optional": true,
-          "description": "Additional classes merged onto the root element."
-        },
-        "checked": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Checked state."
-        },
-        "disabled": {
-          "type": "boolean",
-          "optional": true,
-          "default": "false",
-          "description": "Disables the component."
-        },
-        "size": {
-          "type": "enum",
-          "optional": true,
-          "values": [
-            "sm",
-            "base",
-            "lg"
-          ],
-          "default": "base",
-          "description": "Size preset."
-        },
         "variant": {
           "type": "enum",
           "optional": true,
@@ -4434,10 +4403,38 @@
           "default": "true",
           "description": "Renders the control before label content."
         },
+        "size": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "sm",
+            "base",
+            "lg"
+          ],
+          "default": "base",
+          "description": "Size preset."
+        },
+        "checked": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Checked state."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Disables the component."
+        },
         "transitioning": {
           "type": "boolean",
           "optional": true,
           "description": "transitioning prop."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
         },
         "id": {
           "type": "string",
@@ -4449,11 +4446,6 @@
           "optional": true,
           "description": "Accessible label."
         },
-        "children": {
-          "type": "Snippet",
-          "optional": true,
-          "description": "Child snippet rendered by the component."
-        },
         "onchange": {
           "type": "(checked: boolean) => void",
           "optional": true,
@@ -4463,6 +4455,11 @@
           "type": "(checked: boolean) => void",
           "optional": true,
           "description": "Called when checked changes."
+        },
+        "children": {
+          "type": "Snippet",
+          "optional": true,
+          "description": "Child snippet rendered by the component."
         }
       },
       "colors": [
@@ -4479,25 +4476,25 @@
         "Group": {
           "description": "Switch.Group",
           "props": {
-            "children": {
-              "type": "Snippet",
-              "optional": true,
-              "description": "Child snippet rendered by the component."
-            },
             "legend": {
               "type": "string",
               "optional": true,
               "description": "legend prop."
             },
-            "description": {
-              "type": "string",
+            "children": {
+              "type": "Snippet",
               "optional": true,
-              "description": "Supporting description text."
+              "description": "Child snippet rendered by the component."
             },
             "error": {
               "type": "string",
               "optional": true,
               "description": "Validation error message or matcher."
+            },
+            "description": {
+              "type": "string",
+              "optional": true,
+              "description": "Supporting description text."
             },
             "disabled": {
               "type": "boolean",
@@ -5183,10 +5180,22 @@
       "importPath": "kumo-svelte/components/tooltip",
       "sourceFile": "components/tooltip",
       "props": {
-        "trigger": {
-          "type": "Snippet<[Record<string, unknown>]>",
+        "side": {
+          "type": "enum",
           "optional": true,
-          "description": "trigger prop."
+          "values": [
+            "top",
+            "right",
+            "bottom",
+            "left"
+          ],
+          "default": "top",
+          "description": "Preferred floating side."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the tooltip popup."
         },
         "children": {
           "type": "Snippet",
@@ -5199,10 +5208,10 @@
           "required": true,
           "description": "Content to display inside the tooltip popup."
         },
-        "class": {
-          "type": "string",
+        "trigger": {
+          "type": "Snippet<[Record<string, unknown>]>",
           "optional": true,
-          "description": "Additional classes merged onto the tooltip popup."
+          "description": "trigger prop."
         },
         "open": {
           "type": "boolean",
@@ -5213,18 +5222,6 @@
           "type": "(open: boolean) => void",
           "optional": true,
           "description": "Called when open state changes."
-        },
-        "side": {
-          "type": "enum",
-          "optional": true,
-          "values": [
-            "top",
-            "right",
-            "bottom",
-            "left"
-          ],
-          "default": "top",
-          "description": "Preferred floating side."
         },
         "align": {
           "type": "enum",

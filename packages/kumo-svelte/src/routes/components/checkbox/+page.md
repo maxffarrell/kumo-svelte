@@ -25,15 +25,14 @@ baseUIComponent: "checkbox"
 
 ### Barrel
 
+```typescript
+import { Checkbox, CheckboxGroup, CheckboxItem, CheckboxLegend } from 'kumo-svelte';
+```
 
-```svelte
-<script lang="ts">
-  import { Checkbox } from 'kumo-svelte';
+### Granular
 
-  let checked = $state(false);
-</script>
-
-<Checkbox label="Accept terms" bind:checked />
+```typescript
+import { Checkbox, CheckboxGroup, CheckboxItem, CheckboxLegend } from 'kumo-svelte/components/checkbox';
 ```
 
 </ComponentSection>

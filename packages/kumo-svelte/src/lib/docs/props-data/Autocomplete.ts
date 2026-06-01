@@ -2,18 +2,6 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "children",
-    "type": "Snippet",
-    "required": false,
-    "description": "Child snippet rendered by the component."
-  },
-  {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
-  },
-  {
     "prop": "items",
     "type": "unknown[]",
     "required": true,
@@ -26,12 +14,6 @@ const rows: PropRow[] = [
     "description": "Controlled input value."
   },
   {
-    "prop": "defaultValue",
-    "type": "string | number | string[]",
-    "required": false,
-    "description": "Uncontrolled default input value."
-  },
-  {
     "prop": "open",
     "type": "boolean",
     "required": false,
@@ -39,10 +21,28 @@ const rows: PropRow[] = [
     "description": "Controlled open state."
   },
   {
+    "prop": "children",
+    "type": "Snippet",
+    "required": false,
+    "description": "Child snippet rendered by the component."
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the root element."
+  },
+  {
     "prop": "label",
     "type": "string | Snippet",
     "required": false,
     "description": "Visible label content."
+  },
+  {
+    "prop": "required",
+    "type": "boolean",
+    "required": false,
+    "description": "Marks the field as required."
   },
   {
     "prop": "labelTooltip",
@@ -63,10 +63,10 @@ const rows: PropRow[] = [
     "description": "Validation error message or matcher."
   },
   {
-    "prop": "required",
-    "type": "boolean",
+    "prop": "defaultValue",
+    "type": "string | number | string[]",
     "required": false,
-    "description": "Marks the field as required."
+    "description": "Uncontrolled default input value."
   },
   {
     "prop": "onValueChange",

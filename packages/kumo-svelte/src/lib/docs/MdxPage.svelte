@@ -25,6 +25,7 @@
   const sourceFile = $derived(
     typeof metadata.sourceFile === 'string' ? metadata.sourceFile : undefined
   );
+  const wideContent = $derived(metadata.contentLayout === 'wide');
   const bitsUIComponent = $derived(
     typeof metadata.bitsUIComponent === 'string'
       ? metadata.bitsUIComponent
@@ -172,22 +173,28 @@
 
   <main class="flex grow flex-col md:pr-12">
     <div class="mx-auto w-full grow md:border-r md:border-kumo-hairline">
-      <div class="sticky top-24 z-1 border-b border-kumo-hairline bg-kumo-canvas xl:hidden md:top-12">
+      <div
+        class={wideContent
+          ? 'hidden'
+          : 'sticky top-24 z-1 border-b border-kumo-hairline bg-kumo-canvas xl:hidden md:top-12'}
+      >
         <div class="mx-auto max-w-7xl px-2 py-3 md:px-3">
           <TableOfContents layout="select" headings={tocHeadings} />
         </div>
       </div>
 
       <div class="mx-auto max-w-7xl p-12 pr-10">
-        <div class="grid grid-cols-1 gap-16 xl:grid-cols-[3fr_1fr]">
+        <div class={wideContent ? 'grid grid-cols-1' : 'grid grid-cols-1 gap-16 xl:grid-cols-[3fr_1fr]'}>
           <div class="kumo-prose prose min-w-0 max-w-none">
             {@render children?.()}
           </div>
-          <aside class="hidden min-w-0 xl:block">
-            <div class="sticky top-24">
-              <TableOfContents headings={tocHeadings} />
-            </div>
-          </aside>
+          {#if !wideContent}
+            <aside class="hidden min-w-0 xl:block">
+              <div class="sticky top-24">
+                <TableOfContents headings={tocHeadings} />
+              </div>
+            </aside>
+          {/if}
         </div>
       </div>
     </div>

@@ -24,18 +24,14 @@ sourceFile: "components/label"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Label } from 'kumo-svelte';
-</script>
+```typescript
+import { Label } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Label } from 'kumo-svelte';
-</script>
+```typescript
+import { Label } from 'kumo-svelte/components/label';
 ```
 
 </ComponentSection>

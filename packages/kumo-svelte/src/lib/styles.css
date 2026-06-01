@@ -827,8 +827,8 @@ kbd,
   table-layout: fixed;
   border-collapse: collapse;
   margin: 3rem 0 2rem;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
 }
 
 .kumo-prose :where(table):not(:where(.not-prose, .not-prose *)) :where(th:first-child, td:first-child) {

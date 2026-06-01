@@ -8,7 +8,7 @@
     <InputGroup.Input aria-label="Subdomain" value="kumo" maxlength={20} />
     <InputGroup.Suffix>.workers.dev</InputGroup.Suffix>
     <InputGroup.Addon align="end">
-      <CheckCircle class="text-kumo-success" />
+      <CheckCircle weight="duotone" class="text-kumo-success" />
     </InputGroup.Addon>
   </InputGroup>
 
@@ -19,7 +19,7 @@
     <InputGroup.Input aria-label="Subdomain" value="kumo" maxlength={20} />
     <InputGroup.Suffix>.workers.dev</InputGroup.Suffix>
     <InputGroup.Addon align="end">
-      <XCircle class="text-kumo-danger" />
+      <XCircle weight="duotone" class="text-kumo-danger" />
     </InputGroup.Addon>
   </InputGroup>
 </div>

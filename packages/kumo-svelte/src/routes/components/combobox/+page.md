@@ -25,19 +25,14 @@ baseUIComponent: "combobox"
 
 ### Barrel
 
-
-```svelte
-<script lang="ts">
-  import { Combobox } from 'kumo-svelte';
-</script>
+```typescript
+import { Combobox } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Combobox } from 'kumo-svelte';
-</script>
+```typescript
+import { Combobox } from 'kumo-svelte/components/combobox';
 ```
 
 </ComponentSection>

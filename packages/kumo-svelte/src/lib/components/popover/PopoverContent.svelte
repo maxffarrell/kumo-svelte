@@ -39,6 +39,7 @@
   let contentClass = $derived(
     cn(
       'kumo-popover-popup flex origin-(--bits-floating-transform-origin) flex-col rounded-lg bg-kumo-base px-4 py-3 text-sm text-kumo-default',
+      'z-50',
       'shadow-lg shadow-kumo-tip-shadow outline outline-kumo-fill',
       'transition-[transform,scale,opacity] duration-150',
       'data-starting-style:scale-90 data-starting-style:opacity-0',
@@ -106,12 +107,14 @@
   :global(.kumo-popover-arrow[data-side='left']) {
     right: -13px !important;
     left: auto !important;
+    transform-origin: center center !important;
     transform: none !important;
   }
 
   :global(.kumo-popover-arrow[data-side='right']) {
     right: auto !important;
     left: -13px !important;
+    transform-origin: center center !important;
     transform: none !important;
   }
 </style>

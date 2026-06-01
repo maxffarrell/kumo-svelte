@@ -2,33 +2,6 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
-  },
-  {
-    "prop": "value",
-    "type": "number",
-    "required": false,
-    "default": "0",
-    "description": "Controlled value."
-  },
-  {
-    "prop": "min",
-    "type": "number",
-    "required": false,
-    "default": "0",
-    "description": "Minimum value."
-  },
-  {
-    "prop": "max",
-    "type": "number",
-    "required": false,
-    "default": "100",
-    "description": "Maximum value."
-  },
-  {
     "prop": "customValue",
     "type": "string",
     "required": false,
@@ -58,6 +31,33 @@ const rows: PropRow[] = [
     "type": "string",
     "required": false,
     "description": "Class for the meter indicator."
+  },
+  {
+    "prop": "value",
+    "type": "number",
+    "required": false,
+    "default": "0",
+    "description": "Controlled value."
+  },
+  {
+    "prop": "max",
+    "type": "number",
+    "required": false,
+    "default": "100",
+    "description": "Maximum value."
+  },
+  {
+    "prop": "min",
+    "type": "number",
+    "required": false,
+    "default": "0",
+    "description": "Minimum value."
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the root element."
   }
 ];
 

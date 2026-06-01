@@ -1,20 +1,11 @@
 <script lang="ts">
-  import { ChartLegend, ChartPalette } from 'kumo-svelte';
+  import { Radio } from '$lib';
+
+  let value = $state('all');
 </script>
 
-<div class="flex flex-wrap gap-4">
-  <ChartLegend
-    variant="large"
-    name="Requests"
-    color={ChartPalette.semantic('Neutral')}
-    value="1,234"
-    unit="req/s"
-  />
-  <ChartLegend
-    variant="large"
-    name="Storage"
-    color={ChartPalette.semantic('Attention')}
-    value="56"
-    unit="GB"
-  />
-</div>
+<Radio.Group defaultValue="all" bind:value>
+  <Radio.Legend class="sr-only">Paths</Radio.Legend>
+  <Radio.Item label="Allow all paths" value="all" />
+  <Radio.Item label="Restrict to specific paths" value="specific" />
+</Radio.Group>

@@ -23,18 +23,14 @@ sourceFile: "components/link"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Link } from 'kumo-svelte';
-</script>
+```typescript
+import { Link, LinkExternalIcon } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Link, LinkExternalIcon } from 'kumo-svelte';
-</script>
+```typescript
+import { Link, LinkExternalIcon } from 'kumo-svelte/components/link';
 ```
 
 </ComponentSection>
@@ -51,7 +47,7 @@ The default Link component renders an underlined anchor with primary color styli
 
 ```svelte
 <script lang="ts">
-  import { Link } from 'kumo-svelte';
+import { Link } from 'kumo-svelte';
 </script>
 
 <p>
@@ -65,7 +61,7 @@ Use `LinkExternalIcon` to indicate links that open in a new tab.
 
 ```svelte
 <script lang="ts">
-  import { Link, LinkExternalIcon } from 'kumo-svelte';
+import { Link, LinkExternalIcon } from 'kumo-svelte';
 </script>
 
 <Link
@@ -84,7 +80,7 @@ with `href`.
 
 ```svelte
 <script lang="ts">
-  import { Link } from 'kumo-svelte';
+import { Link } from 'kumo-svelte';
 </script>
 
 <Link href="/dashboard" variant="inline">Dashboard</Link>
@@ -116,12 +112,6 @@ The `current` variant inherits color from its parent, useful for links within
 colored contexts like alerts.
 
 <ComponentExample demo="LinkCurrentVariantDemo" />
-
-### Plain Variant
-
-Use the `plain` variant for compact navigation surfaces where underlines would add visual noise.
-
-<ComponentExample demo="LinkPlainVariantDemo" />
 
 </ComponentSection>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Link, Text } from '$lib';
+  import { Link, LinkExternalIcon } from 'kumo-svelte';
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-<Text>Read the <Link href="/installation">installation guide</Link> before deploying.</Text>
-</div>
+<Link href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" class="text-base">
+  Visit Cloudflare <LinkExternalIcon />
+</Link>

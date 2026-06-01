@@ -24,18 +24,14 @@ sourceFile: "components/text"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Text } from 'kumo-svelte';
-</script>
+```typescript
+import { Text } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Text } from 'kumo-svelte';
-</script>
+```typescript
+import { Text } from 'kumo-svelte/components/text';
 ```
 
 </ComponentSection>

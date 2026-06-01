@@ -30,7 +30,7 @@
         {#if status === 'loading'}
           <Loader />
         {:else}
-          <CheckCircle class="text-kumo-success" />
+          <CheckCircle weight="duotone" class="text-kumo-success" />
         {/if}
       </InputGroup.Addon>
     {/if}

@@ -2,28 +2,28 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "children",
-    "type": "Snippet",
-    "required": false,
-    "description": "Child snippet rendered by the component."
-  },
-  {
     "prop": "legend",
     "type": "string",
     "required": false,
     "description": "legend prop."
   },
   {
-    "prop": "description",
-    "type": "string",
+    "prop": "children",
+    "type": "Snippet",
     "required": false,
-    "description": "Supporting description text."
+    "description": "Child snippet rendered by the component."
   },
   {
     "prop": "error",
     "type": "string",
     "required": false,
     "description": "Validation error message or matcher."
+  },
+  {
+    "prop": "description",
+    "type": "string",
+    "required": false,
+    "description": "Supporting description text."
   },
   {
     "prop": "disabled",

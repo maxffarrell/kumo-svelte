@@ -2,33 +2,6 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
-  },
-  {
-    "prop": "checked",
-    "type": "boolean",
-    "required": false,
-    "default": "false",
-    "description": "Checked state."
-  },
-  {
-    "prop": "disabled",
-    "type": "boolean",
-    "required": false,
-    "default": "false",
-    "description": "Disables the component."
-  },
-  {
-    "prop": "size",
-    "type": "'sm' | 'base' | 'lg'",
-    "required": false,
-    "default": "\"base\"",
-    "description": "Size preset."
-  },
-  {
     "prop": "variant",
     "type": "'default' | 'neutral'",
     "required": false,
@@ -61,10 +34,37 @@ const rows: PropRow[] = [
     "description": "Renders the control before label content."
   },
   {
+    "prop": "size",
+    "type": "'sm' | 'base' | 'lg'",
+    "required": false,
+    "default": "\"base\"",
+    "description": "Size preset."
+  },
+  {
+    "prop": "checked",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Checked state."
+  },
+  {
+    "prop": "disabled",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Disables the component."
+  },
+  {
     "prop": "transitioning",
     "type": "boolean",
     "required": false,
     "description": "transitioning prop."
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the root element."
   },
   {
     "prop": "id",
@@ -79,12 +79,6 @@ const rows: PropRow[] = [
     "description": "Accessible label."
   },
   {
-    "prop": "children",
-    "type": "Snippet",
-    "required": false,
-    "description": "Child snippet rendered by the component."
-  },
-  {
     "prop": "onchange",
     "type": "(checked: boolean) => void",
     "required": false,
@@ -95,6 +89,12 @@ const rows: PropRow[] = [
     "type": "(checked: boolean) => void",
     "required": false,
     "description": "Called when checked changes."
+  },
+  {
+    "prop": "children",
+    "type": "Snippet",
+    "required": false,
+    "description": "Child snippet rendered by the component."
   }
 ];
 

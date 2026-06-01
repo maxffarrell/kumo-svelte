@@ -14,24 +14,22 @@ sourceFile: "components/code-highlighted"
   <ComponentExample demo="CodeHighlightedBasicDemo" />
 </ComponentSection>
 
+<!-- Installation -->
+
 <ComponentSection>
 
 ## Installation
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { CodeHighlighted } from 'kumo-svelte';
-</script>
+```typescript
+import { CodeHighlighted } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { CodeHighlighted } from 'kumo-svelte';
-</script>
+```typescript
+import { CodeHighlighted } from 'kumo-svelte/components/code-highlighted';
 ```
 
 </ComponentSection>

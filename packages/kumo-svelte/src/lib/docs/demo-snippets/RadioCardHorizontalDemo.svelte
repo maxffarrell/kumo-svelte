@@ -1,17 +1,28 @@
 <script lang="ts">
   import { Radio } from '$lib';
 
-  const radioOptions = [
-      { label: 'Production', value: 'production', description: 'Route live traffic.' },
-      { label: 'Preview', value: 'preview', description: 'Test before release.' },
-      { label: 'Disabled', value: 'disabled', disabled: true }
-    ];
+  let value = $state('free');
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-<div class={'flex gap-4'}>
-      {#if !false}<p class={'text-sm font-medium text-kumo-default'}>{'Plan'}</p>{/if}
-      <Radio options={radioOptions} value={'production'} />
-      
-    </div>
-</div>
+<Radio.Group legend="Choose a plan" appearance="card" orientation="horizontal" bind:value>
+  <Radio.Item
+    label="Free"
+    description="For personal or hobby projects that aren't business-critical."
+    value="free"
+  />
+  <Radio.Item
+    label="Pro"
+    description="For professional websites that aren't business-critical."
+    value="pro"
+  />
+  <Radio.Item
+    label="Business"
+    description="For small businesses operating online."
+    value="business"
+  />
+  <Radio.Item
+    label="Contract"
+    description="For mission-critical applications that are core to your business."
+    value="contract"
+  />
+</Radio.Group>

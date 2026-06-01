@@ -25,15 +25,14 @@ baseUIComponent: "dialog"
 
 ### Barrel
 
-```svelte
-import { Dialog } from "kumo-svelte";
+```typescript
+import { Dialog } from 'kumo-svelte';
 ```
-
 
 ### Granular
 
-```svelte
-import { Dialog } from "kumo-svelte";
+```typescript
+import { Dialog } from 'kumo-svelte/components/dialog';
 ```
 
 </ComponentSection>

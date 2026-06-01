@@ -1,6 +1,7 @@
 <script lang="ts">
   import { CaretDoubleLeft, CaretDoubleRight, CaretLeft, CaretRight } from 'phosphor-svelte';
   import { InputGroup, InputGroupButton, InputGroupInput } from '$lib/components/input-group';
+  import { Select } from '$lib/components/select';
   import { cn } from '$lib/utils/cn';
   import { clamp, getPaginationContext } from './context';
 
@@ -19,7 +20,7 @@
   const pageOptions = $derived(
     Array.from({ length: context.maxPage }, (_, index) => {
       const page = index + 1;
-      return { label: String(page), value: String(page) };
+      return { label: String(page), value: page };
     })
   );
 
@@ -31,6 +32,10 @@
 
   function commitEditingPage() {
     commitPage(context.editingPage);
+  }
+
+  function commitSelectedPage(nextPage: unknown) {
+    commitPage(Number(nextPage));
   }
 </script>
 
@@ -57,16 +62,13 @@
       </InputGroupButton>
       {#if controls === 'full'}
         {#if pageSelector === 'dropdown'}
-          <select
+          <Select
             aria-label={context.labels.pageNumber}
-            class="h-9 rounded-none bg-kumo-base px-3 text-base text-kumo-default shadow-xs outline-none ring ring-kumo-hairline focus:ring-2 focus:ring-kumo-focus/50"
+            class="w-max rounded-none ring-kumo-hairline"
             value={context.page}
-            onchange={(event) => commitPage(Number(event.currentTarget.value))}
-          >
-            {#each pageOptions as option (option.value)}
-              <option value={option.value}>{option.label}</option>
-            {/each}
-          </select>
+            options={pageOptions}
+            onValueChange={commitSelectedPage}
+          />
         {:else}
           <InputGroupInput
             style="width: 50px"

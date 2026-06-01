@@ -25,14 +25,14 @@ bitsUIComponent: "dropdown-menu"
 
 ### Barrel
 
-```svelte
-import { DropdownMenu } from "kumo-svelte";
+```typescript
+import { DropdownMenu } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-import { DropdownMenu } from "kumo-svelte";
+```typescript
+import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
 ```
 
 </ComponentSection>

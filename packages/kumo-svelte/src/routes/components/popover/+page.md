@@ -25,14 +25,14 @@ baseUIComponent: "popover"
 
 ### Barrel
 
-```svelte
-import { Popover } from "kumo-svelte";
+```typescript
+import { Popover, PopoverClose, PopoverContent, PopoverDescription, PopoverRoot, PopoverTitle, PopoverTrigger } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-import { Popover } from "kumo-svelte/components/popover";
+```typescript
+import { Popover, PopoverClose, PopoverContent, PopoverDescription, PopoverRoot, PopoverTitle, PopoverTrigger } from 'kumo-svelte/components/popover';
 ```
 
 </ComponentSection>

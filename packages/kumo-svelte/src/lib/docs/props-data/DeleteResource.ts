@@ -2,16 +2,17 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
+    "prop": "size",
+    "type": "'sm' | 'base'",
+    "required": false,
+    "default": "\"base\"",
+    "description": "Dialog size preset."
+  },
+  {
     "prop": "open",
     "type": "boolean",
     "required": true,
     "description": "Whether the dialog is open."
-  },
-  {
-    "prop": "onOpenChange",
-    "type": "(open: boolean) => void",
-    "required": true,
-    "description": "Callback fired when the open state changes."
   },
   {
     "prop": "resourceType",
@@ -24,12 +25,6 @@ const rows: PropRow[] = [
     "type": "string",
     "required": true,
     "description": "Name of the resource users must type to confirm deletion."
-  },
-  {
-    "prop": "onDelete",
-    "type": "() => void | Promise<void>",
-    "required": true,
-    "description": "Callback fired when the delete action is confirmed."
   },
   {
     "prop": "isDeleting",
@@ -64,11 +59,16 @@ const rows: PropRow[] = [
     "description": "Error message displayed above the confirmation copy."
   },
   {
-    "prop": "size",
-    "type": "'sm' | 'base'",
-    "required": false,
-    "default": "\"base\"",
-    "description": "Dialog size preset."
+    "prop": "onOpenChange",
+    "type": "(open: boolean) => void",
+    "required": true,
+    "description": "Callback fired when the open state changes."
+  },
+  {
+    "prop": "onDelete",
+    "type": "() => void | Promise<void>",
+    "required": true,
+    "description": "Callback fired when the delete action is confirmed."
   }
 ];
 

@@ -2,6 +2,27 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
+    "prop": "shape",
+    "type": "'base' | 'square' | 'circle'",
+    "required": false,
+    "default": "\"base\"",
+    "description": "Shape preset."
+  },
+  {
+    "prop": "size",
+    "type": "'xs' | 'sm' | 'base' | 'lg'",
+    "required": false,
+    "default": "\"base\"",
+    "description": "Size preset."
+  },
+  {
+    "prop": "variant",
+    "type": "'primary' | 'secondary' | 'ghost' | 'destructive' | 'secondary-destructive' | 'outline'",
+    "required": false,
+    "default": "\"secondary\"",
+    "description": "Visual variant."
+  },
+  {
     "prop": "children",
     "type": "Snippet",
     "required": false,
@@ -31,27 +52,6 @@ const rows: PropRow[] = [
     "type": "string",
     "required": false,
     "description": "Tooltip content shown when hovering the button."
-  },
-  {
-    "prop": "shape",
-    "type": "'base' | 'square' | 'circle'",
-    "required": false,
-    "default": "\"base\"",
-    "description": "Shape preset."
-  },
-  {
-    "prop": "size",
-    "type": "'xs' | 'sm' | 'base' | 'lg'",
-    "required": false,
-    "default": "\"base\"",
-    "description": "Size preset."
-  },
-  {
-    "prop": "variant",
-    "type": "'primary' | 'secondary' | 'ghost' | 'destructive' | 'secondary-destructive' | 'outline'",
-    "required": false,
-    "default": "\"secondary\"",
-    "description": "Visual variant."
   },
   {
     "prop": "disabled",

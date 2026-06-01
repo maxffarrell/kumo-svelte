@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { Link, Text } from '$lib';
+  import { Link } from 'kumo-svelte';
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-<Text>Read the <Link href="/installation">installation guide</Link> before deploying.</Text>
-</div>
+<p class="mx-auto max-w-md text-base leading-relaxed text-kumo-default">
+  This is a paragraph with an <Link href="#">inline link</Link> that flows naturally with the surrounding
+  text. Links maintain proper underline offset for readability.
+</p>

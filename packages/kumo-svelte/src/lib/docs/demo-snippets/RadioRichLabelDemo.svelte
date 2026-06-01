@@ -1,12 +1,24 @@
 <script lang="ts">
-  import { Checkbox, Input, Label, Select, Tooltip } from '$lib';
+  import { Badge, Radio } from '$lib';
+
+  let value = $state('pro');
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
+{#snippet freeLabel()}
+  <span class="flex items-center gap-2">
+    Free
+    <Badge variant="neutral">$0</Badge>
+  </span>
+{/snippet}
 
-      <div class="w-full max-w-sm space-y-2">
-        <Label for="label-demo">API token</Label>
-        <Input id="label-demo" placeholder="Enter token" />
-      </div>
-    
-</div>
+{#snippet proLabel()}
+  <span class="flex items-center gap-2">
+    Pro
+    <Badge variant="primary">Popular</Badge>
+  </span>
+{/snippet}
+
+<Radio.Group legend="Choose a plan" appearance="card" bind:value>
+  <Radio.Item label={freeLabel} description="For personal or hobby projects." value="free" />
+  <Radio.Item label={proLabel} description="For professional websites." value="pro" />
+</Radio.Group>

@@ -24,18 +24,14 @@ sourceFile: "components/toast"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Toasty, useKumoToastManager } from 'kumo-svelte';
-</script>
+```typescript
+import { Toasty } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Toasty, useKumoToastManager } from 'kumo-svelte';
-</script>
+```typescript
+import { Toasty } from 'kumo-svelte/components/toasty';
 ```
 
 </ComponentSection>

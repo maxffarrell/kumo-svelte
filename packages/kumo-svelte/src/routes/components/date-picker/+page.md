@@ -23,21 +23,14 @@ sourceFile: "components/date-picker"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { DatePicker, type DateRange } from 'kumo-svelte';
-</script>
+```typescript
+import { DatePicker } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import {
-    DatePicker,
-    type DateRange
-  } from 'kumo-svelte';
-</script>
+```typescript
+import { DatePicker } from 'kumo-svelte/components/date-picker';
 ```
 
 </ComponentSection>

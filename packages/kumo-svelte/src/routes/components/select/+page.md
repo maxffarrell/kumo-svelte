@@ -25,19 +25,14 @@ baseUIComponent: "select"
 
 ### Barrel
 
-
-```svelte
-<script lang="ts">
-  import { Select } from 'kumo-svelte';
-</script>
+```typescript
+import { Select } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Select } from 'kumo-svelte';
-</script>
+```typescript
+import { Select } from 'kumo-svelte/components/select';
 ```
 
 </ComponentSection>

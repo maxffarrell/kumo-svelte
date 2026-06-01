@@ -22,8 +22,16 @@ sourceFile: "components/empty"
 
 ## Installation
 
-```svelte
-import { Empty } from "kumo-svelte";
+### Barrel
+
+```typescript
+import { Empty } from 'kumo-svelte';
+```
+
+### Granular
+
+```typescript
+import { Empty } from 'kumo-svelte/components/empty';
 ```
 
 </ComponentSection>

@@ -8,18 +8,6 @@ const rows: PropRow[] = [
     "description": "The label content."
   },
   {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
-  },
-  {
-    "prop": "htmlFor",
-    "type": "string",
-    "required": false,
-    "description": "The id of the form element this label is associated with."
-  },
-  {
     "prop": "showOptional",
     "type": "boolean",
     "required": false,
@@ -31,6 +19,18 @@ const rows: PropRow[] = [
     "type": "string | Snippet",
     "required": false,
     "description": "Tooltip content displayed next to the label."
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the root element."
+  },
+  {
+    "prop": "htmlFor",
+    "type": "string",
+    "required": false,
+    "description": "The id of the form element this label is associated with."
   },
   {
     "prop": "asContent",

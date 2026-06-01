@@ -610,6 +610,10 @@ Examples:
     tabindex="0"
     onclick={focusInput}
     onkeydown={(event) => {
+      if (event.target !== event.currentTarget) {
+        return;
+      }
+
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         focusInput();

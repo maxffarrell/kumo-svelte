@@ -25,14 +25,14 @@ baseUIComponent: "radio-group"
 
 ### Barrel
 
-```svelte
-import { Radio } from "kumo-svelte";
+```typescript
+import { Radio, RadioGroup, RadioItem, RadioLegend } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-import { Radio } from "kumo-svelte";
+```typescript
+import { Radio, RadioGroup, RadioItem, RadioLegend } from 'kumo-svelte/components/radio';
 ```
 
 </ComponentSection>
@@ -44,12 +44,14 @@ import { Radio } from "kumo-svelte";
 ## Usage
 
 ```svelte
+<script lang="ts">
 import { Radio } from "kumo-svelte";
+</script>
 
-    <Radio.Group legend="Choose an option" defaultValue="a">
-      <Radio.Item label="Option A" value="a" />
-      <Radio.Item label="Option B" value="b" />
-    </Radio.Group>
+<Radio.Group legend="Choose an option" defaultValue="a">
+  <Radio.Item label="Option A" value="a" />
+  <Radio.Item label="Option B" value="b" />
+</Radio.Group>
 ```
 
 </ComponentSection>

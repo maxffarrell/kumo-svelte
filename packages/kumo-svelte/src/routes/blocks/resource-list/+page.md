@@ -5,7 +5,6 @@ sourceFile: "blocks/resource-list"
 ---
 
 <script>
-  import Callout from '$lib/docs/Callout.svelte';
   import ComponentExample from '$lib/docs/ComponentExample.svelte';
   import ComponentSection from '$lib/docs/ComponentSection.svelte';
 </script>
@@ -46,9 +45,10 @@ npx kumo-svelte add ResourceListPage
 </script>
 ```
 
-<Callout type="info">
-  <strong>Why blocks?</strong> Blocks give you full ownership of the code, allowing you to customize layouts to fit your specific needs. They're ideal for page-level patterns that often need project-specific modifications.
-</Callout>
+> <strong>Why blocks?</strong> Blocks give you full ownership of the code,
+> allowing you to customize layouts to fit your specific needs.
+> They're ideal for page-level patterns that often need project-specific
+> modifications.
 
 </ComponentSection>
 

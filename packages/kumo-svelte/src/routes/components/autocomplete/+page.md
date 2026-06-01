@@ -9,9 +9,6 @@ sourceFile: "components/autocomplete"
   import ComponentExample from '$lib/docs/ComponentExample.svelte';
   import ComponentSection from '$lib/docs/ComponentSection.svelte';
   import PropsTable from '$lib/docs/PropsTable.svelte';
-
-  const barrelImport = `import { Autocomplete } from "kumo-svelte";`;
-  const granularImport = `import { Autocomplete } from "kumo-svelte";`;
 </script>
 
 <!-- Hero Demo -->
@@ -28,11 +25,15 @@ sourceFile: "components/autocomplete"
 
 ### Barrel
 
-<CodeBlock code={barrelImport} lang="svelte" />
+```typescript
+import { Autocomplete } from 'kumo-svelte';
+```
 
 ### Granular
 
-<CodeBlock code={granularImport} lang="svelte" />
+```typescript
+import { Autocomplete } from 'kumo-svelte/components/autocomplete';
+```
 
 </ComponentSection>
 

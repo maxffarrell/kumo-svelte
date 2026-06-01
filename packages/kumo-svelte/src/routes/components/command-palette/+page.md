@@ -25,18 +25,14 @@ baseUIComponent: "command"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { CommandPalette } from 'kumo-svelte';
-</script>
+```typescript
+import { CommandPalette } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { CommandPalette } from 'kumo-svelte/components/command-palette';
-</script>
+```typescript
+import { CommandPalette } from 'kumo-svelte/components/command-palette';
 ```
 
 </ComponentSection>

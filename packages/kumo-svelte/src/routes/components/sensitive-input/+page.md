@@ -24,18 +24,14 @@ sourceFile: "components/sensitive-input"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { SensitiveInput } from 'kumo-svelte';
-</script>
+```typescript
+import { SensitiveInput } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { SensitiveInput } from 'kumo-svelte';
-</script>
+```typescript
+import { SensitiveInput } from 'kumo-svelte/components/sensitive-input';
 ```
 
 </ComponentSection>

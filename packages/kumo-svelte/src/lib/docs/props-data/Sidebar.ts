@@ -2,18 +2,6 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "children",
-    "type": "Snippet",
-    "required": true,
-    "description": "Sidebar content — Header, Content, Footer, groups, menus, and related slots."
-  },
-  {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes for the sidebar element."
-  },
-  {
     "prop": "variant",
     "type": "\"sidebar\" | \"floating\" | \"inset\"",
     "default": "\"sidebar\"",
@@ -33,6 +21,18 @@ const rows: PropRow[] = [
     "default": "\"icon\"",
     "required": false,
     "description": "Collapse behavior inherited from Provider."
+  },
+  {
+    "prop": "children",
+    "type": "Snippet",
+    "required": true,
+    "description": "Sidebar content — Header, Content, Footer, groups, menus, and related slots."
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes for the sidebar element."
   }
 ];
 

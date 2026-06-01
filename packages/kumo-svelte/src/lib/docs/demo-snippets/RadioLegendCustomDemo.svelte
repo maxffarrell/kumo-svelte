@@ -1,20 +1,14 @@
 <script lang="ts">
-  import { ChartLegend, ChartPalette } from 'kumo-svelte';
+  import { Radio } from '$lib';
+
+  let value = $state('email');
 </script>
 
-<div class="flex flex-wrap gap-4">
-  <ChartLegend
-    variant="large"
-    name="Requests"
-    color={ChartPalette.semantic('Neutral')}
-    value="1,234"
-    unit="req/s"
-  />
-  <ChartLegend
-    variant="large"
-    name="Storage"
-    color={ChartPalette.semantic('Attention')}
-    value="56"
-    unit="GB"
-  />
-</div>
+<Radio.Group bind:value>
+  <Radio.Legend class="text-sm font-normal text-kumo-subtle">
+    Notification preference
+  </Radio.Legend>
+  <Radio.Item label="Email" value="email" />
+  <Radio.Item label="SMS" value="sms" />
+  <Radio.Item label="Push notification" value="push" />
+</Radio.Group>

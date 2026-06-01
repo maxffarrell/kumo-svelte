@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { Link, Text } from '$lib';
+  import { Link } from 'kumo-svelte';
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-<Text>Read the <Link href="/installation">installation guide</Link> before deploying.</Text>
-</div>
+<p class="text-base text-kumo-danger">
+  This error message contains a <Link href="#" variant="current">link</Link> that inherits the red color
+  from its parent.
+</p>

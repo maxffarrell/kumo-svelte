@@ -25,29 +25,14 @@ baseUIComponent: "collapsible"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import {
-    Collapsible
-  } from 'kumo-svelte';
-</script>
-
-<Collapsible.Root open>
-  <Collapsible.DefaultTrigger>Show details</Collapsible.DefaultTrigger>
-  <Collapsible.DefaultPanel>
-    Content with border-left accent styling.
-  </Collapsible.DefaultPanel>
-</Collapsible.Root>
+```typescript
+import { Collapsible } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import {
-    Collapsible
-  } from 'kumo-svelte';
-</script>
+```typescript
+import { Collapsible } from 'kumo-svelte/components/collapsible';
 ```
 
 </ComponentSection>

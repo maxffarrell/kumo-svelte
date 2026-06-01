@@ -24,22 +24,14 @@ sourceFile: "components/loader"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Loader } from 'kumo-svelte';
-</script>
-
-<Loader />
+```typescript
+import { Loader } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Loader } from 'kumo-svelte';
-</script>
-
-<Loader />
+```typescript
+import { Loader } from 'kumo-svelte/components/loader';
 ```
 
 </ComponentSection>

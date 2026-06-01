@@ -2,16 +2,26 @@
   import { Pagination } from '$lib';
 
   let paginationPage = $state(1);
+  let paginationPerPage = $state(25);
 
   function setPaginationPage(nextPage: number) {
     paginationPage = nextPage;
   }
+
+  function setPaginationPerPage(nextPerPage: number) {
+    paginationPerPage = nextPerPage;
+  }
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-  <Pagination page={paginationPage} setPage={setPaginationPage} perPage={10} totalCount={100}>
-    <Pagination.Info />
-    <Pagination.Separator />
-    <Pagination.Controls pageSelector="dropdown" />
-  </Pagination>
-</div>
+<Pagination page={paginationPage} setPage={setPaginationPage} perPage={paginationPerPage} totalCount={500}>
+  <Pagination.Info />
+  <Pagination.Separator />
+  <Pagination.PageSize
+    value={paginationPerPage}
+    onChange={(size) => {
+      setPaginationPerPage(size);
+      setPaginationPage(1);
+    }}
+  />
+  <Pagination.Controls pageSelector="dropdown" />
+</Pagination>

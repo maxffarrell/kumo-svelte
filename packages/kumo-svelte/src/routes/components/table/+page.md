@@ -24,18 +24,14 @@ sourceFile: "components/table"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Table } from 'kumo-svelte';
-</script>
+```typescript
+import { Table, TableBody, TableCell, TableCheckCell, TableCheckHead, TableFooter, TableHead, TableHeader, TableResizeHandle, TableRow } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Table } from 'kumo-svelte/components/table';
-</script>
+```typescript
+import { Table, TableBody, TableCell, TableCheckCell, TableCheckHead, TableFooter, TableHead, TableHeader, TableResizeHandle, TableRow } from 'kumo-svelte/components/table';
 ```
 
 </ComponentSection>

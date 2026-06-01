@@ -22,8 +22,16 @@ sourceFile: "components/grid"
 
 ## Installation
 
-```svelte
-import { Grid } from "kumo-svelte";
+### Barrel
+
+```typescript
+import { Grid, GridItem } from 'kumo-svelte';
+```
+
+### Granular
+
+```typescript
+import { Grid, GridItem } from 'kumo-svelte/components/grid';
 ```
 
 </ComponentSection>

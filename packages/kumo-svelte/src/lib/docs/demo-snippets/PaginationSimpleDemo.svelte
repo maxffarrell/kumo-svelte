@@ -8,6 +8,4 @@
   }
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-  <Pagination page={paginationPage} setPage={setPaginationPage} perPage={10} totalCount={100} controls="simple" />
-</div>
+<Pagination page={paginationPage} setPage={setPaginationPage} perPage={10} totalCount={100} controls="simple" />

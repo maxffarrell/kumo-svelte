@@ -26,14 +26,14 @@ sourceFile: "components/table-of-contents"
 
 ### Barrel
 
-```svelte
-import { TableOfContents } from "kumo-svelte";
+```typescript
+import { TableOfContents } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-import { TableOfContents } from "kumo-svelte";
+```typescript
+import { TableOfContents } from 'kumo-svelte/components/table-of-contents';
 ```
 
 </ComponentSection>
@@ -47,7 +47,9 @@ import { TableOfContents } from "kumo-svelte";
 ## Usage
 
 ```svelte
+<script lang="ts">
 import { TableOfContents } from "kumo-svelte";
+</script>
 
     <TableOfContents>
       <TableOfContents.Title>On this page</TableOfContents.Title>
@@ -155,28 +157,28 @@ import Link from "next/link";
 
 ## API Reference
 
-### `TableOfContents`
+### TableOfContents
 
 
 Root nav container with a default `aria-label` of "Table of contents".
 
 <PropsTable component="TableOfContents" />
 
-### `TableOfContents.Title`
+### TableOfContents.Title
 
 
 Optional uppercase heading displayed above the list (renders a `<p>`).
 
 <PropsTable component="TableOfContents.Title" />
 
-### `TableOfContents.List`
+### TableOfContents.List
 
 
 List container with a left border rail.
 
 <PropsTable component="TableOfContents.List" />
 
-### `TableOfContents.Item`
+### TableOfContents.Item
 
 
 Individual navigation link. Set `active` for the current section. Use the
@@ -184,7 +186,7 @@ Individual navigation link. Set `active` for the current section. Use the
 
 <PropsTable component="TableOfContents.Item" />
 
-### `TableOfContents.Group`
+### TableOfContents.Group
 
 
 Groups items under a labeled section with indented children. Pass `href` to make the label a clickable link, or omit for a plain title.

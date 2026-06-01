@@ -12,23 +12,27 @@ sourceFile: "components/badge"
 
 <ComponentExample demo="BadgeSemanticVariantsDemo" />
 
+<!-- Installation -->
+
+<ComponentSection>
+
 ## Installation
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Badge } from 'kumo-svelte';
-</script>
+```typescript
+import { Badge } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Badge } from 'kumo-svelte';
-</script>
+```typescript
+import { Badge } from 'kumo-svelte/components/badge';
 ```
+
+</ComponentSection>
+
+<ComponentSection>
 
 ## Usage
 
@@ -65,3 +69,5 @@ Use `appearance="dot"` with `success`, `warning`, `error`, or `neutral` variants
 ## API Reference
 
 <PropsTable component="Badge" />
+
+</ComponentSection>

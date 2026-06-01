@@ -24,14 +24,14 @@ sourceFile: "components/layer-card"
 
 ### Barrel
 
-```svelte
-import { LayerCard } from "kumo-svelte";
+```typescript
+import { LayerCard } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-import { LayerCard } from "kumo-svelte";
+```typescript
+import { LayerCard } from 'kumo-svelte/components/layer-card';
 ```
 
 </ComponentSection>

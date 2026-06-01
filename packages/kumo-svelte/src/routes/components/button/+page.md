@@ -24,19 +24,14 @@ sourceFile: "components/button"
 
 ### Barrel
 
-
-```svelte
-<script lang="ts">
-  import { Button } from 'kumo-svelte';
-</script>
+```typescript
+import { Button, LinkButton, RefreshButton } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Button, LinkButton, RefreshButton } from 'kumo-svelte';
-</script>
+```typescript
+import { Button, LinkButton, RefreshButton } from 'kumo-svelte/components/button';
 ```
 
 </ComponentSection>

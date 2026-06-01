@@ -2,29 +2,49 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
+    "prop": "autoComplete",
+    "type": "string",
+    "required": false,
+    "default": "\"off\"",
+    "description": "Autocomplete attribute."
+  },
+  {
+    "prop": "disabled",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Disables the component."
+  },
+  {
+    "prop": "readOnly",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Makes the input read-only."
+  },
+  {
+    "prop": "required",
+    "type": "boolean",
+    "required": false,
+    "description": "Marks the field as required."
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the root element."
+  },
+  {
+    "prop": "id",
+    "type": "string",
+    "required": false,
+    "description": "Element id."
+  },
+  {
     "prop": "value",
     "type": "string",
     "required": false,
     "description": "Controlled value."
-  },
-  {
-    "prop": "defaultValue",
-    "type": "string",
-    "required": false,
-    "default": "\"\"",
-    "description": "Initial uncontrolled value."
-  },
-  {
-    "prop": "onValueChange",
-    "type": "(value: string) => void",
-    "required": false,
-    "description": "Called when the value changes."
-  },
-  {
-    "prop": "onCopy",
-    "type": "() => void",
-    "required": false,
-    "description": "Called after copying succeeds."
   },
   {
     "prop": "size",
@@ -65,30 +85,23 @@ const rows: PropRow[] = [
     "description": "Validation error message or matcher."
   },
   {
-    "prop": "class",
+    "prop": "defaultValue",
     "type": "string",
     "required": false,
-    "description": "Additional classes merged onto the root element."
+    "default": "\"\"",
+    "description": "Initial uncontrolled value."
   },
   {
-    "prop": "id",
-    "type": "string",
+    "prop": "onValueChange",
+    "type": "(value: string) => void",
     "required": false,
-    "description": "Element id."
+    "description": "Called when the value changes."
   },
   {
-    "prop": "disabled",
-    "type": "boolean",
+    "prop": "onCopy",
+    "type": "() => void",
     "required": false,
-    "default": "false",
-    "description": "Disables the component."
-  },
-  {
-    "prop": "readOnly",
-    "type": "boolean",
-    "required": false,
-    "default": "false",
-    "description": "Makes the input read-only."
+    "description": "Called after copying succeeds."
   },
   {
     "prop": "readonly",
@@ -98,22 +111,9 @@ const rows: PropRow[] = [
     "description": "Makes the input read-only."
   },
   {
-    "prop": "required",
-    "type": "boolean",
-    "required": false,
-    "description": "Marks the field as required."
-  },
-  {
     "prop": "autocomplete",
     "type": "string",
     "required": false,
-    "description": "Autocomplete attribute."
-  },
-  {
-    "prop": "autoComplete",
-    "type": "string",
-    "required": false,
-    "default": "\"off\"",
     "description": "Autocomplete attribute."
   },
   {

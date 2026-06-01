@@ -25,6 +25,9 @@
     'relative z-[1] pointer-events-none flex shrink-0 items-center gap-1.5 text-kumo-subtle',
     '*:pointer-events-auto',
     tokens.fontSize,
+    tokens.addonIconSize,
+    tokens.addonLoaderSize,
+    '[&>svg]:shrink-0',
     align === 'start'
       ? cn('-order-1 pr-0', containsButton ? tokens.addonButtonOuterStart : tokens.addonOuterStart)
       : cn('order-1 pl-0', containsButton ? tokens.addonButtonOuterEnd : tokens.addonOuterEnd),

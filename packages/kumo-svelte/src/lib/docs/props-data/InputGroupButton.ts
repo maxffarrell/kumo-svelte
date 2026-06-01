@@ -2,22 +2,16 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "children",
-    "type": "Snippet",
-    "required": false,
-    "description": "Child snippet rendered by the component."
-  },
-  {
-    "prop": "class",
+    "prop": "tooltip",
     "type": "string",
     "required": false,
-    "description": "Additional classes merged onto the root element."
+    "description": "Tooltip content."
   },
   {
-    "prop": "icon",
-    "type": "Component",
+    "prop": "tooltipSide",
+    "type": "string",
     "required": false,
-    "description": "Icon rendered by the component."
+    "description": "tooltipSide prop."
   },
   {
     "prop": "variant",
@@ -33,6 +27,12 @@ const rows: PropRow[] = [
     "description": "Size preset."
   },
   {
+    "prop": "icon",
+    "type": "Component",
+    "required": false,
+    "description": "Icon rendered by the component."
+  },
+  {
     "prop": "shape",
     "type": "'base' | 'square' | 'circle'",
     "required": false,
@@ -45,16 +45,16 @@ const rows: PropRow[] = [
     "description": "Disables the component."
   },
   {
-    "prop": "tooltip",
-    "type": "string",
+    "prop": "children",
+    "type": "Snippet",
     "required": false,
-    "description": "Tooltip content."
+    "description": "Child snippet rendered by the component."
   },
   {
-    "prop": "tooltipSide",
+    "prop": "class",
     "type": "string",
     "required": false,
-    "description": "tooltipSide prop."
+    "description": "Additional classes merged onto the root element."
   }
 ];
 

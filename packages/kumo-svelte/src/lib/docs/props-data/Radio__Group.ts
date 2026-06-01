@@ -2,16 +2,16 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "children",
-    "type": "Snippet",
-    "required": false,
-    "description": "Child snippet rendered by the component."
-  },
-  {
     "prop": "legend",
     "type": "string",
     "required": false,
     "description": "legend prop."
+  },
+  {
+    "prop": "children",
+    "type": "Snippet",
+    "required": false,
+    "description": "Child snippet rendered by the component."
   },
   {
     "prop": "orientation",
@@ -46,23 +46,11 @@ const rows: PropRow[] = [
     "description": "Controlled value."
   },
   {
-    "prop": "defaultValue",
-    "type": "string",
-    "required": false,
-    "description": "Initial uncontrolled value."
-  },
-  {
     "prop": "disabled",
     "type": "boolean",
     "required": false,
     "default": "false",
     "description": "Disables the component."
-  },
-  {
-    "prop": "required",
-    "type": "boolean",
-    "required": false,
-    "description": "Marks the field as required."
   },
   {
     "prop": "controlPosition",
@@ -81,6 +69,18 @@ const rows: PropRow[] = [
     "type": "string",
     "required": false,
     "description": "Additional classes merged onto the root element."
+  },
+  {
+    "prop": "defaultValue",
+    "type": "string",
+    "required": false,
+    "description": "Initial uncontrolled value."
+  },
+  {
+    "prop": "required",
+    "type": "boolean",
+    "required": false,
+    "description": "Marks the field as required."
   },
   {
     "prop": "onValueChange",

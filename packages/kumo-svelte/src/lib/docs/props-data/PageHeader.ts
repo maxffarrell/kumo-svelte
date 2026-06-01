@@ -2,6 +2,13 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
+    "prop": "spacing",
+    "type": "'compact' | 'base' | 'relaxed'",
+    "required": false,
+    "default": "\"base\"",
+    "description": "Spacing preset between header rows."
+  },
+  {
     "prop": "breadcrumbContent",
     "type": "Snippet",
     "required": true,
@@ -32,10 +39,10 @@ const rows: PropRow[] = [
     "description": "Initial selected tab value."
   },
   {
-    "prop": "onValueChange",
-    "type": "(value: string) => void",
+    "prop": "class",
+    "type": "string",
     "required": false,
-    "description": "Callback fired when the active tab changes."
+    "description": "Additional classes merged onto the root element."
   },
   {
     "prop": "children",
@@ -44,17 +51,10 @@ const rows: PropRow[] = [
     "description": "Action content rendered on the right side of the tabs row."
   },
   {
-    "prop": "spacing",
-    "type": "'compact' | 'base' | 'relaxed'",
+    "prop": "onValueChange",
+    "type": "(value: string) => void",
     "required": false,
-    "default": "\"base\"",
-    "description": "Spacing preset between header rows."
-  },
-  {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
+    "description": "Callback fired when the active tab changes."
   }
 ];
 

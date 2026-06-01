@@ -24,18 +24,14 @@ sourceFile: "components/pagination"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Pagination } from 'kumo-svelte';
-</script>
+```typescript
+import { Pagination, PaginationControls, PaginationInfo, PaginationPageSize, PaginationSeparator } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Pagination } from 'kumo-svelte';
-</script>
+```typescript
+import { Pagination, PaginationControls, PaginationInfo, PaginationPageSize, PaginationSeparator } from 'kumo-svelte/components/pagination';
 ```
 
 </ComponentSection>

@@ -2,16 +2,10 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "children",
-    "type": "Snippet",
+    "prop": "setPage",
+    "type": "(page: number) => void",
     "required": false,
-    "description": "Compound component children for custom layouts."
-  },
-  {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
+    "description": "Callback fired when the current page changes. In Svelte, bind:page can be used instead."
   },
   {
     "prop": "page",
@@ -19,12 +13,6 @@ const rows: PropRow[] = [
     "required": false,
     "default": "1",
     "description": "Current page number (1-indexed)."
-  },
-  {
-    "prop": "setPage",
-    "type": "(page: number) => void",
-    "required": false,
-    "description": "Callback fired when the current page changes. In Svelte, bind:page can be used instead."
   },
   {
     "prop": "perPage",
@@ -39,6 +27,24 @@ const rows: PropRow[] = [
     "description": "Total number of items across all pages."
   },
   {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the root element."
+  },
+  {
+    "prop": "labels",
+    "type": "PaginationLabels",
+    "required": false,
+    "description": "Labels for internationalization of aria-labels."
+  },
+  {
+    "prop": "children",
+    "type": "Snippet",
+    "required": false,
+    "description": "Compound component children for custom layouts."
+  },
+  {
     "prop": "controls",
     "type": "'full' | 'simple'",
     "required": false,
@@ -50,12 +56,6 @@ const rows: PropRow[] = [
     "type": "(props: { page?: number; perPage?: number; totalCount?: number; pageShowingRange: string }) => unknown",
     "required": false,
     "description": "Deprecated legacy render function for the info text. Prefer Pagination.Info children."
-  },
-  {
-    "prop": "labels",
-    "type": "PaginationLabels",
-    "required": false,
-    "description": "Labels for internationalization of aria-labels."
   }
 ];
 

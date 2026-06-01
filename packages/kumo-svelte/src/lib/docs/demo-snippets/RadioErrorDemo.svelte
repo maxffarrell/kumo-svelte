@@ -1,17 +1,28 @@
 <script lang="ts">
   import { Radio } from '$lib';
-
-  const radioOptions = [
-      { label: 'Production', value: 'production', description: 'Route live traffic.' },
-      { label: 'Preview', value: 'preview', description: 'Test before release.' },
-      { label: 'Disabled', value: 'disabled', disabled: true }
-    ];
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-<div class={'grid gap-3'}>
-      {#if !false}<p class={'text-sm font-medium text-kumo-default'}>{'Environment'}</p>{/if}
-      <Radio options={radioOptions} value={'production'} />
-      <p class="text-sm text-kumo-danger">Choose an environment to continue.</p>
-    </div>
+<div class="grid grid-cols-2 gap-6">
+  <Radio.Group legend="Payment method" error="Please select a payment method to continue">
+    <Radio.Item label="Credit Card" value="card" variant="error" />
+    <Radio.Item label="PayPal" value="paypal" variant="error" />
+  </Radio.Group>
+  <Radio.Group
+    legend="Payment method"
+    appearance="card"
+    error="Please select a payment method to continue"
+  >
+    <Radio.Item
+      label="Credit Card"
+      description="Pay with Visa, Mastercard, American Express, or Elo."
+      value="card"
+      variant="error"
+    />
+    <Radio.Item
+      label="PayPal"
+      description="Pay with your PayPal account."
+      value="paypal"
+      variant="error"
+    />
+  </Radio.Group>
 </div>

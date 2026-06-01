@@ -14,23 +14,22 @@ sourceFile: "components/input-group"
   <ComponentExample demo="InputGroupDemo" />
 </ComponentSection>
 
+<!-- Installation -->
+
 <ComponentSection>
 
 ## Installation
 
 ### Barrel
 
-
-```svelte
-import { InputGroup } from "kumo-svelte";
+```typescript
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupSuffix } from 'kumo-svelte';
 ```
-
 
 ### Granular
 
-
-```svelte
-import { InputGroup } from "kumo-svelte";
+```typescript
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupSuffix } from 'kumo-svelte/components/input-group';
 ```
 
 </ComponentSection>
@@ -49,8 +48,8 @@ Pass the `label` prop to InputGroup to enable the built-in Field wrapper with
 
 
 ```svelte
-<script>
-  import { MagnifyingGlass } from "phosphor-svelte";
+<script lang="ts">
+import { MagnifyingGlass } from "phosphor-svelte";
   import { InputGroup } from "kumo-svelte";
 </script>
 
@@ -70,8 +69,8 @@ For custom form layouts, use InputGroup without `label`. Must provide
 
 
 ```svelte
-<script>
-  import { MagnifyingGlass } from "phosphor-svelte";
+<script lang="ts">
+import { MagnifyingGlass } from "phosphor-svelte";
   import { InputGroup } from "kumo-svelte";
 </script>
 
@@ -164,7 +163,7 @@ Various input states including error, disabled, and with description. Pass `labe
 
 ## API Reference
 
-### `InputGroup`
+### InputGroup
 
 
 The root container that provides context to all child components. Accepts
@@ -173,7 +172,7 @@ The root container that provides context to all child components. Accepts
 
 <PropsTable component="InputGroup" />
 
-### `InputGroup.Input`
+### InputGroup.Input
 
 
 The text input element. Inherits `size`, `disabled`, and `error` from
@@ -182,7 +181,7 @@ The text input element. Inherits `size`, `disabled`, and `error` from
 
 <PropsTable component="InputGroup.Input" />
 
-### `InputGroup.Addon`
+### InputGroup.Addon
 
 
 Container for icons, text, or compact buttons positioned at the start or end
@@ -190,7 +189,7 @@ Container for icons, text, or compact buttons positioned at the start or end
 
 <PropsTable component="InputGroup.Addon" />
 
-### `InputGroup.Button`
+### InputGroup.Button
 
 
 Button for secondary actions like toggle, copy, or help. Renders inside an
@@ -198,7 +197,7 @@ Button for secondary actions like toggle, copy, or help. Renders inside an
 
 <PropsTable component="InputGroup.Button" />
 
-### `InputGroup.Suffix`
+### InputGroup.Suffix
 
 
 Inline text that flows seamlessly next to the typed value (e.g.,

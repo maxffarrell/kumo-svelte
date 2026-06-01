@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link, Text } from '$lib';
+  import { Link, Text } from 'kumo-svelte';
 </script>
 
 <nav class="flex gap-4 text-sm" aria-label="Product links">

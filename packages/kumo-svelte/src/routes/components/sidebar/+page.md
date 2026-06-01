@@ -28,11 +28,6 @@ sourceFile: "components/sidebar"
     </Sidebar.Content>
   </Sidebar>
 </Sidebar.Provider>`;
-
-  const installBarrel = `import { Sidebar } from "kumo-svelte";`;
-
-  const installGranular = `import { Sidebar } from "kumo-svelte/components/sidebar";`;
-
   const usageCode = `<script lang="ts">
   import { Sidebar } from 'kumo-svelte';
   import { Code, Gear, House } from 'phosphor-svelte';
@@ -166,11 +161,15 @@ sourceFile: "components/sidebar"
 
 ### Barrel
 
-<CodeBlock code={installBarrel} lang="ts" />
+```typescript
+import { Sidebar } from 'kumo-svelte';
+```
 
 ### Granular
 
-<CodeBlock code={installGranular} lang="ts" />
+```typescript
+import { Sidebar } from 'kumo-svelte/components/sidebar';
+```
 
 </ComponentSection>
 
@@ -268,47 +267,47 @@ sourceFile: "components/sidebar"
 
 ## API Reference
 
-### `Sidebar`
+### Sidebar
 
 The main sidebar container. Renders as `<aside>` on desktop and as a dialog sheet on mobile.
 
 <PropsTable component="Sidebar" />
 
-### `Sidebar.Provider`
+### Sidebar.Provider
 
 Context provider managing expand/collapse state and mobile detection.
 
 <PropsTable component="Sidebar.Provider" />
 
-### `Sidebar.Content`
+### Sidebar.Content
 
 Scrollable middle section (`flex-1 overflow-y-auto`). Use `Header` / `Footer` to pin content above or below this scroll area.
 
-### `Sidebar.MenuButton`
+### Sidebar.MenuButton
 
 Primary interactive element. Supports icons, active state, links, and auto-tooltip when collapsed.
 
 <PropsTable component="Sidebar.MenuButton" />
 
-### `Sidebar.MenuSubButton`
+### Sidebar.MenuSubButton
 
 Button inside a sub-menu for nested navigation.
 
 <PropsTable component="Sidebar.MenuSubButton" />
 
-### `Sidebar.Trigger`
+### Sidebar.Trigger
 
 Button that toggles provider open state.
 
-### `Sidebar.ResizeHandle`
+### Sidebar.ResizeHandle
 
 Keyboard and pointer resize control for resizable sidebars.
 
-### `Sidebar.SlidingViews`
+### Sidebar.SlidingViews
 
 Container for keyed sliding sidebar panels.
 
-### `Sidebar.SlidingView`
+### Sidebar.SlidingView
 
 Panel rendered when its `value` matches the parent `activeKey`.
 

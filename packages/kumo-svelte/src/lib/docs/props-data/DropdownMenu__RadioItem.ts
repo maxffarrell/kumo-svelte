@@ -2,6 +2,25 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
+    "prop": "value",
+    "type": "string",
+    "required": true,
+    "description": "Controlled value."
+  },
+  {
+    "prop": "icon",
+    "type": "Component",
+    "required": false,
+    "description": "Icon rendered by the component."
+  },
+  {
+    "prop": "inset",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Indents the item content."
+  },
+  {
     "prop": "children",
     "type": "Snippet",
     "required": false,
@@ -12,25 +31,6 @@ const rows: PropRow[] = [
     "type": "string",
     "required": false,
     "description": "Additional classes merged onto the root element."
-  },
-  {
-    "prop": "inset",
-    "type": "boolean",
-    "required": false,
-    "default": "false",
-    "description": "Indents the item content."
-  },
-  {
-    "prop": "icon",
-    "type": "Component",
-    "required": false,
-    "description": "Icon rendered by the component."
-  },
-  {
-    "prop": "value",
-    "type": "string",
-    "required": true,
-    "description": "Controlled value."
   }
 ];
 

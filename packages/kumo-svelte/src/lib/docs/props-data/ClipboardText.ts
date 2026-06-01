@@ -2,10 +2,11 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "class",
-    "type": "string",
+    "prop": "size",
+    "type": "'sm' | 'base' | 'lg'",
     "required": false,
-    "description": "Additional classes merged onto the root element."
+    "description": "Size preset.",
+    "default": "\"lg\""
   },
   {
     "prop": "text",
@@ -20,17 +21,10 @@ const rows: PropRow[] = [
     "description": "Alternate text copied to the clipboard."
   },
   {
-    "prop": "size",
-    "type": "'sm' | 'base' | 'lg'",
+    "prop": "class",
+    "type": "string",
     "required": false,
-    "description": "Size preset.",
-    "default": "\"lg\""
-  },
-  {
-    "prop": "onCopy",
-    "type": "() => void",
-    "required": false,
-    "description": "Called after copying succeeds."
+    "description": "Additional classes merged onto the root element."
   },
   {
     "prop": "tooltip",
@@ -43,6 +37,12 @@ const rows: PropRow[] = [
     "type": "{ copyAction?: string; }",
     "required": false,
     "description": "Accessible labels for internationalization."
+  },
+  {
+    "prop": "onCopy",
+    "type": "() => void",
+    "required": false,
+    "description": "Called after copying succeeds."
   }
 ];
 

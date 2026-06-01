@@ -24,18 +24,14 @@ sourceFile: "components/meter"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Meter } from 'kumo-svelte';
-</script>
+```typescript
+import { Meter } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Meter } from 'kumo-svelte';
-</script>
+```typescript
+import { Meter } from 'kumo-svelte/components/meter';
 ```
 
 </ComponentSection>

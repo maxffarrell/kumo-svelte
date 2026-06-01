@@ -21,16 +21,16 @@ const rows: PropRow[] = [
     "description": "Deprecated routing destination. Use href instead."
   },
   {
-    "prop": "children",
-    "type": "Snippet",
-    "required": false,
-    "description": "Content rendered inside the link."
-  },
-  {
     "prop": "class",
     "type": "string",
     "required": false,
     "description": "Additional classes merged onto the root element."
+  },
+  {
+    "prop": "children",
+    "type": "Snippet",
+    "required": false,
+    "description": "Content rendered inside the link."
   }
 ];
 

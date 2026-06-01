@@ -22,12 +22,16 @@ sourceFile: "primitives/skeleton-line"
 
 ## Installation
 
-```svelte
-<script lang="ts">
-  import { SkeletonLine } from 'kumo-svelte';
-</script>
+### Barrel
 
-<SkeletonLine />
+```typescript
+import { SkeletonLine } from 'kumo-svelte';
+```
+
+### Granular
+
+```typescript
+import { SkeletonLine } from 'kumo-svelte/components/loader';
 ```
 
 </ComponentSection>

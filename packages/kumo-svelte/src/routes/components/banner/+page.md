@@ -24,17 +24,14 @@ sourceFile: "components/banner"
 
 ### Barrel
 
-
-```svelte
-import { Banner } from "kumo-svelte";
+```typescript
+import { Banner } from 'kumo-svelte';
 ```
-
 
 ### Granular
 
-
-```svelte
-import { Banner } from "kumo-svelte";
+```typescript
+import { Banner } from 'kumo-svelte/components/banner';
 ```
 
 </ComponentSection>

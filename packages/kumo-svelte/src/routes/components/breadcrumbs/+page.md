@@ -14,13 +14,22 @@ sourceFile: "components/breadcrumbs"
   <ComponentExample demo="BreadcrumbsWithIconsDemo" />
 </ComponentSection>
 
+<!-- Installation -->
+
 <ComponentSection>
 
 ## Installation
 
+### Barrel
 
-```svelte
+```typescript
 import { Breadcrumbs } from 'kumo-svelte';
+```
+
+### Granular
+
+```typescript
+import { Breadcrumbs } from 'kumo-svelte/components/breadcrumbs';
 ```
 
 </ComponentSection>

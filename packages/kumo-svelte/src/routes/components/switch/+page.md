@@ -25,22 +25,14 @@ baseUIComponent: "switch"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Switch } from 'kumo-svelte';
-
-  let checked = $state(false);
-</script>
-
-<Switch label="Enable feature" bind:checked />
+```typescript
+import { Switch, SwitchGroup, SwitchItem, SwitchLegend } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Switch } from 'kumo-svelte';
-</script>
+```typescript
+import { Switch, SwitchGroup, SwitchItem, SwitchLegend } from 'kumo-svelte/components/switch';
 ```
 
 </ComponentSection>

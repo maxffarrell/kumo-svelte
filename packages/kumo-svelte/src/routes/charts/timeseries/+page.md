@@ -18,7 +18,7 @@ The timeseries chart is a specialized chart for displaying time-based data.
 
 <ComponentSection>
 
-### Basic Line Chart
+## Basic Line Chart
 
 A simple line chart displaying multiple data series over time.
 
@@ -28,7 +28,7 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
-### Custom X-Axis Label Format
+## Custom X-Axis Label Format
 
   Use the <code>xAxisTickLabelFormat</code> prop to control how x-axis tick
   labels are rendered. The formatter receives the raw timestamp in milliseconds
@@ -40,7 +40,7 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
-### Gradient Fill
+## Gradient Fill
 
   Set <code>gradient</code> to <code>true</code> to render a vertical gradient
   fill beneath each line series. The fill fades from the series color at the top
@@ -53,7 +53,7 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
-### Incomplete Data
+## Incomplete Data
 
   Use the <code>incomplete</code> prop to indicate regions where data may be
   incomplete or still being collected.
@@ -64,7 +64,7 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
-### Time Range Selection
+## Time Range Selection
 
   Enable time range selection by providing the <code>onTimeRangeChange</code>
   callback. Users can click and drag on the chart to select a time range.
@@ -75,18 +75,7 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
-### Bar Chart
-
-  Set <code>type="bar"</code> to render series as stacked bars instead of lines.
-  All other props — axes, tooltips, colors — work identically.
-
-<ComponentExample demo="BarChartDemo" />
-
-</ComponentSection>
-
-<ComponentSection>
-
-### Tooltip Cursor Tracking
+## Tooltip Cursor Tracking
 
   Use <code>tooltipFollowCursor</code> to choose whether the tooltip follows both cursor axes or only tracks the x position.
   Set <code>tooltipMode="single"</code> when dense charts should show only the series nearest to the pointer.
@@ -97,7 +86,7 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
-### Tooltip Boundary
+## Tooltip Boundary
 
   Set <code>tooltipBoundary</code> to keep the native tooltip within the chart container instead of letting it overflow the visual frame.
 
@@ -107,7 +96,18 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
-### Loading State
+## Bar Chart
+
+  Set <code>type="bar"</code> to render series as stacked bars instead of lines.
+  All other props — axes, tooltips, colors — work identically.
+
+<ComponentExample demo="BarChartDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
+## Loading State
 
   Set <code>loading</code> to <code>true</code> to display an animated sine-wave
   skeleton while data is being fetched. The chart canvas is hidden until loading

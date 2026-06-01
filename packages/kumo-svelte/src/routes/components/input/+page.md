@@ -24,18 +24,14 @@ sourceFile: "components/input"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { Input } from 'kumo-svelte';
-</script>
+```typescript
+import { Input, Textarea } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { Input } from 'kumo-svelte';
-</script>
+```typescript
+import { Input, Textarea } from 'kumo-svelte/components/input';
 ```
 
 </ComponentSection>

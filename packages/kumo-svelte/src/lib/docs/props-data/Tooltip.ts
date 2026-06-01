@@ -2,10 +2,17 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "trigger",
-    "type": "Snippet<[Record<string, unknown>]>",
+    "prop": "side",
+    "type": "'top' | 'right' | 'bottom' | 'left'",
     "required": false,
-    "description": "trigger prop."
+    "description": "Preferred floating side.",
+    "default": "\"top\""
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the tooltip popup."
   },
   {
     "prop": "children",
@@ -20,10 +27,10 @@ const rows: PropRow[] = [
     "description": "Content to display inside the tooltip popup."
   },
   {
-    "prop": "class",
-    "type": "string",
+    "prop": "trigger",
+    "type": "Snippet<[Record<string, unknown>]>",
     "required": false,
-    "description": "Additional classes merged onto the tooltip popup."
+    "description": "trigger prop."
   },
   {
     "prop": "open",
@@ -36,13 +43,6 @@ const rows: PropRow[] = [
     "type": "(open: boolean) => void",
     "required": false,
     "description": "Called when open state changes."
-  },
-  {
-    "prop": "side",
-    "type": "'top' | 'right' | 'bottom' | 'left'",
-    "required": false,
-    "description": "Preferred floating side.",
-    "default": "\"top\""
   },
   {
     "prop": "align",

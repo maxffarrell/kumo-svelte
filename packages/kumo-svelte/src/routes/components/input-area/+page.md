@@ -24,13 +24,52 @@ sourceFile: "components/input"
 
 ### Barrel
 
+```typescript
+import { InputArea } from 'kumo-svelte';
+```
+
+### Granular
+
+```typescript
+import { InputArea } from 'kumo-svelte/components/input-area';
+```
+
+</ComponentSection>
+
+<!-- Usage -->
+
+<ComponentSection>
+
+## Usage
+
+### With Built-in Field (Recommended)
+
+Use the `label` prop to enable the built-in Field wrapper with label,
+description, and error support.
+
 ```svelte
 <script lang="ts">
-  import { InputArea, Label } from 'kumo-svelte';
+import { InputArea } from 'kumo-svelte';
 </script>
 
-<Label>Description</Label>
-<InputArea placeholder="Describe the rollout..." />
+<InputArea
+  label="Description"
+  placeholder="Enter a description..."
+  description="Provide details about your project"
+/>
+```
+
+### Bare InputArea (Custom Layouts)
+
+For custom form layouts, use InputArea without `label`. Must provide
+`aria-label` or `aria-labelledby` for accessibility.
+
+```svelte
+<script lang="ts">
+import { InputArea } from 'kumo-svelte';
+</script>
+
+<InputArea placeholder="Add notes..." aria-label="Notes" rows={3} />
 ```
 
 </ComponentSection>

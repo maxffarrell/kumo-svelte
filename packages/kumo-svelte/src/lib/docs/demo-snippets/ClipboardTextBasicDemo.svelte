@@ -3,5 +3,5 @@
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">
-  <ClipboardText text="api-edge" />
+  <ClipboardText text="0c239dd2" />
 </div>

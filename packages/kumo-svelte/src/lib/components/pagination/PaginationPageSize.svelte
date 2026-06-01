@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { Select } from '$lib/components/select';
   import { cn } from '$lib/utils/cn';
   import { getPaginationContext } from './context';
 
@@ -24,9 +25,9 @@
   }: Props = $props();
 
   const context = getPaginationContext();
-  const selectOptions = $derived(options.map((size) => ({ label: String(size), value: String(size) })));
+  const selectOptions = $derived(options.map((size) => ({ label: String(size), value: size })));
 
-  function handleChange(nextValue: string) {
+  function handleChange(nextValue: unknown) {
     const nextSize = Number(nextValue);
     value = nextSize;
     onChange(nextSize);
@@ -43,14 +44,11 @@
       {/if}
     </span>
   {/if}
-  <select
+  <Select
     aria-label={context.labels.pageSize}
-    class="h-9 rounded-lg bg-kumo-base px-3 text-base text-kumo-default shadow-xs outline-none ring ring-kumo-line focus:ring-2 focus:ring-kumo-focus/50"
+    class="w-max ring-kumo-hairline"
     {value}
-    onchange={(event) => handleChange(event.currentTarget.value)}
-  >
-    {#each selectOptions as option (option.value)}
-      <option value={option.value}>{option.label}</option>
-    {/each}
-  </select>
+    options={selectOptions}
+    onValueChange={handleChange}
+  />
 </div>

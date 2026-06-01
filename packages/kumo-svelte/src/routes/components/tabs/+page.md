@@ -25,14 +25,14 @@ bitsUIComponent: "tabs"
 
 ### Barrel
 
-```svelte
-import { Tabs } from "kumo-svelte";
+```typescript
+import { Tabs } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-import { Tabs } from "kumo-svelte";
+```typescript
+import { Tabs } from 'kumo-svelte/components/tabs';
 ```
 
 </ComponentSection>

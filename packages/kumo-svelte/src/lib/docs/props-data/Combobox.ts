@@ -2,16 +2,11 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "children",
-    "type": "Snippet",
+    "prop": "size",
+    "type": "'xs' | 'sm' | 'base' | 'lg'",
     "required": false,
-    "description": "Child snippet rendered by the component."
-  },
-  {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
+    "default": "\"base\"",
+    "description": "Size preset."
   },
   {
     "prop": "items",
@@ -26,24 +21,28 @@ const rows: PropRow[] = [
     "description": "Controlled value."
   },
   {
-    "prop": "multiple",
-    "type": "boolean",
+    "prop": "children",
+    "type": "Snippet",
     "required": false,
-    "default": "false",
-    "description": "Enables multiple selection."
+    "description": "Child snippet rendered by the component."
   },
   {
-    "prop": "size",
-    "type": "'xs' | 'sm' | 'base' | 'lg'",
+    "prop": "class",
+    "type": "string",
     "required": false,
-    "default": "\"base\"",
-    "description": "Size preset."
+    "description": "Additional classes merged onto the root element."
   },
   {
     "prop": "label",
     "type": "string | Snippet",
     "required": false,
     "description": "Visible label content."
+  },
+  {
+    "prop": "required",
+    "type": "boolean",
+    "required": false,
+    "description": "Marks the field as required."
   },
   {
     "prop": "labelTooltip",
@@ -64,16 +63,17 @@ const rows: PropRow[] = [
     "description": "Validation error message or matcher."
   },
   {
-    "prop": "required",
-    "type": "boolean",
-    "required": false,
-    "description": "Marks the field as required."
-  },
-  {
     "prop": "onValueChange",
     "type": "(value: unknown) => void",
     "required": false,
     "description": "Called when the value changes."
+  },
+  {
+    "prop": "multiple",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Enables multiple selection."
   },
   {
     "prop": "onOpenChange",

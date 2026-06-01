@@ -25,20 +25,14 @@ sourceFile: "components/clipboard-text"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { ClipboardText } from 'kumo-svelte';
-</script>
-
-<ClipboardText text="Copy this text" />
+```typescript
+import { ClipboardText } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import { ClipboardText } from 'kumo-svelte';
-</script>
+```typescript
+import { ClipboardText } from 'kumo-svelte/components/clipboard-text';
 ```
 
 </ComponentSection>

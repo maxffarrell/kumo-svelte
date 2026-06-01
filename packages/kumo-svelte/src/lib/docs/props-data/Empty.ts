@@ -9,18 +9,6 @@ const rows: PropRow[] = [
     "description": "Size preset."
   },
   {
-    "prop": "contents",
-    "type": "Snippet",
-    "required": false,
-    "description": "Custom empty-state content."
-  },
-  {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
-  },
-  {
     "prop": "icon",
     "type": "Snippet",
     "required": false,
@@ -43,6 +31,18 @@ const rows: PropRow[] = [
     "type": "string",
     "required": false,
     "description": "Shell command displayed in a copyable code block."
+  },
+  {
+    "prop": "contents",
+    "type": "Snippet",
+    "required": false,
+    "description": "Custom empty-state content."
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the root element."
   }
 ];
 

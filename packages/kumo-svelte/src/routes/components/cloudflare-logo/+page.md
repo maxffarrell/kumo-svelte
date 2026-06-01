@@ -24,24 +24,14 @@ sourceFile: "components/cloudflare-logo"
 
 ### Barrel
 
-```svelte
-<script lang="ts">
-  import { CloudflareLogo } from 'kumo-svelte';
-</script>
-
-<CloudflareLogo />
+```typescript
+import { CloudflareLogo, PoweredByCloudflare } from 'kumo-svelte';
 ```
 
 ### Granular
 
-```svelte
-<script lang="ts">
-  import {
-    CloudflareLogo,
-    PoweredByCloudflare,
-    generateCloudflareLogoSvg
-  } from 'kumo-svelte';
-</script>
+```typescript
+import { CloudflareLogo, PoweredByCloudflare } from 'kumo-svelte/components/cloudflare-logo';
 ```
 
 </ComponentSection>

@@ -2,39 +2,6 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
-    "prop": "children",
-    "type": "Snippet",
-    "required": false,
-    "description": "Child snippet rendered by the component."
-  },
-  {
-    "prop": "class",
-    "type": "string",
-    "required": false,
-    "description": "Additional classes merged onto the root element."
-  },
-  {
-    "prop": "checked",
-    "type": "boolean",
-    "required": false,
-    "default": "false",
-    "description": "Checked state."
-  },
-  {
-    "prop": "indeterminate",
-    "type": "boolean",
-    "required": false,
-    "default": "false",
-    "description": "Indeterminate checked state."
-  },
-  {
-    "prop": "disabled",
-    "type": "boolean",
-    "required": false,
-    "default": "false",
-    "description": "Disables the component."
-  },
-  {
     "prop": "variant",
     "type": "'default' | 'error'",
     "required": false,
@@ -61,16 +28,43 @@ const rows: PropRow[] = [
     "description": "Renders the control before label content."
   },
   {
-    "prop": "required",
+    "prop": "checked",
     "type": "boolean",
     "required": false,
-    "description": "Marks the field as required."
+    "default": "false",
+    "description": "Checked state."
+  },
+  {
+    "prop": "indeterminate",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Indeterminate checked state."
+  },
+  {
+    "prop": "disabled",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Disables the component."
   },
   {
     "prop": "name",
     "type": "string",
     "required": false,
     "description": "Form field name."
+  },
+  {
+    "prop": "required",
+    "type": "boolean",
+    "required": false,
+    "description": "Marks the field as required."
+  },
+  {
+    "prop": "class",
+    "type": "string",
+    "required": false,
+    "description": "Additional classes merged onto the root element."
   },
   {
     "prop": "value",
@@ -107,6 +101,12 @@ const rows: PropRow[] = [
     "type": "(indeterminate: boolean) => void",
     "required": false,
     "description": "Called when indeterminate changes."
+  },
+  {
+    "prop": "children",
+    "type": "Snippet",
+    "required": false,
+    "description": "Child snippet rendered by the component."
   }
 ];
 

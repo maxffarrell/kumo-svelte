@@ -53,9 +53,9 @@
       ? [
           'relative ring-0 border border-kumo-line',
           'first:rounded-l-[inherit] last:rounded-r-[inherit]',
-          'not-first:border-l-0',
-          'hover:z-[1] hover:border-kumo-line',
-          'focus:z-[2] focus:border-kumo-line focus:[outline:solid_1px_var(--color-kumo-focus)] focus:[outline-offset:-1px]'
+          'not-first:-ml-px',
+          'hover:z-1 hover:border-kumo-line',
+          'focus:z-2 focus:border-kumo-focus/50'
         ]
       : 'relative z-[1] ring-0! shadow-none focus:ring-0! focus:outline-none',
     className

@@ -28,10 +28,12 @@
   const classes = $derived(
     cn(
       'group/menu-button relative flex w-full min-w-0 cursor-pointer items-center gap-2.5 rounded-lg text-kumo-default outline-none transition-[color,background-color,box-shadow,outline] duration-(--sidebar-animation-duration)',
+      'before:absolute before:inset-x-0 before:-inset-y-px',
       size === 'base' && 'min-h-8.5 px-3 py-0 text-sm font-medium',
       size === 'sm' && 'min-h-7 px-2 py-0 text-sm',
       !active && 'hover:bg-kumo-tint',
       active && 'bg-kumo-tint',
+      'has-[[data-active]]:bg-transparent has-[[data-active]]:hover:bg-kumo-tint',
       'focus:outline-none focus-visible:bg-kumo-tint focus-visible:text-kumo-strong',
       className
     )
@@ -52,9 +54,11 @@
       aria-label={tooltip}
       {...rest}
     >
-      <span class="flex min-w-0 flex-1 items-center gap-3">
+      <span class="flex min-w-0 flex-1 items-center gap-3 translate-x-[-3px] transition-transform duration-(--sidebar-animation-duration) group-not-data-[state=collapsed]/sidebar:translate-x-0">
         {#if Icon}<Icon class={cn('shrink-0 opacity-50', size === 'base' ? 'size-4' : 'size-3.5')} />{/if}
-        <span class="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">{@render children?.()}</span>
+        <span class="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">
+          {@render children?.()}
+        </span>
       </span>
     </a>
   {:else}
@@ -69,9 +73,11 @@
       aria-label={tooltip}
       {...rest}
     >
-      <span class="flex min-w-0 flex-1 items-center gap-3">
+      <span class="flex min-w-0 flex-1 items-center gap-3 translate-x-[-3px] transition-transform duration-(--sidebar-animation-duration) group-not-data-[state=collapsed]/sidebar:translate-x-0">
         {#if Icon}<Icon class={cn('shrink-0 opacity-50', size === 'base' ? 'size-4' : 'size-3.5')} />{/if}
-        <span class="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">{@render children?.()}</span>
+        <span class="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">
+          {@render children?.()}
+        </span>
       </span>
     </button>
   {/if}

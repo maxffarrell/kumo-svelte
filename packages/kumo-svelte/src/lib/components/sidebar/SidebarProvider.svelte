@@ -175,7 +175,13 @@
   style:--sidebar-animation-duration={`${animationDuration}ms`}
   style:--sidebar-easing="cubic-bezier(0.77, 0, 0.175, 1)"
   style:--sidebar-bg="var(--color-kumo-base)"
-  class={cn('group/sidebar-wrapper isolate flex w-full', !contained && 'min-h-svh', variant === 'inset' && 'bg-kumo-recessed', className)}
+  class={cn(
+    'group/sidebar-wrapper isolate flex w-full',
+    !contained && 'min-h-svh',
+    variant === 'inset' && 'bg-kumo-recessed',
+    isResizing && 'select-none',
+    className
+  )}
 >
   {@render children()}
 </div>

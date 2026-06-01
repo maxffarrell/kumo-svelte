@@ -85,21 +85,6 @@ sourceFile: "components/sidebar"
   </Sidebar>
 </Sidebar.Provider>`;
 
-  const collapsibleCode = `<Sidebar.MenuItem>
-  <Sidebar.Collapsible defaultOpen>
-    <Sidebar.CollapsibleTrigger>
-      <Sidebar.MenuButton icon={Code}>
-        Compute <Sidebar.MenuChevron />
-      </Sidebar.MenuButton>
-    </Sidebar.CollapsibleTrigger>
-    <Sidebar.CollapsibleContent>
-      <Sidebar.MenuSub>
-        <Sidebar.MenuSubButton>Workers</Sidebar.MenuSubButton>
-      </Sidebar.MenuSub>
-    </Sidebar.CollapsibleContent>
-  </Sidebar.Collapsible>
-</Sidebar.MenuItem>`;
-
   const toggleCode = `<Sidebar.MenuButton icon={House} tooltip="Home" active>
   Home
 </Sidebar.MenuButton>
@@ -226,16 +211,6 @@ sourceFile: "components/sidebar"
 
 <ComponentExample demo="SidebarBasicDemo" code={basicCode} vrSection="basic" vrTitle="Basic" />
 
-### Collapsible Sub-Menus
-
-<p class="mb-3 text-sm text-kumo-strong">
-  Use <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">Collapsible</code>,
-  <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">CollapsibleTrigger</code>, and
-  <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">CollapsibleContent</code> around nested menus.
-</p>
-
-<ComponentExample demo="SidebarCollapsibleGroupDemo" code={collapsibleCode} vrSection="collapsible-sub-menus" vrTitle="Collapsible Sub-Menus" />
-
 ### Toggle & Collapsed State
 
 <p class="mb-3 text-sm text-kumo-strong">
@@ -244,14 +219,6 @@ sourceFile: "components/sidebar"
 
 <ComponentExample demo="SidebarToggleDemo" code={toggleCode} vrSection="toggle" vrTitle="Toggle & Collapsed State" />
 
-### Full Example
-
-<p class="mb-3 text-sm text-kumo-strong">
-  Kitchen sink: header with account switcher, search input, badges, collapsible sub-menus, and a footer action.
-</p>
-
-<ComponentExample demo="SidebarFullDemo" code={fullCode} vrSection="full-example" vrTitle="Full Example" />
-
 ### Resizable
 
 <p class="mb-3 text-sm text-kumo-strong">
@@ -259,6 +226,14 @@ sourceFile: "components/sidebar"
 </p>
 
 <ComponentExample demo="SidebarResizableDemo" code={resizableCode} vrSection="resizable" vrTitle="Resizable" />
+
+### Right Side
+
+<p class="mb-3 text-sm text-kumo-strong">
+  Use <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">side="right"</code> for a sidebar on the right edge. Place <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">&lt;main&gt;</code> before <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">&lt;Sidebar&gt;</code> in the DOM.
+</p>
+
+<ComponentExample demo="SidebarRightDemo" code={rightCode} vrSection="right-side" vrTitle="Right Side" />
 
 ### Peeking
 
@@ -277,13 +252,13 @@ sourceFile: "components/sidebar"
 
 <ComponentExample demo="SidebarSlidingViewsDemo" code={slidingCode} vrSection="sliding-views" vrTitle="Sliding Views" />
 
-### Right Side
+### Full Example
 
 <p class="mb-3 text-sm text-kumo-strong">
-  Use <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">side="right"</code> for a sidebar on the right edge. Place <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">&lt;main&gt;</code> before <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">&lt;Sidebar&gt;</code> in the DOM.
+  Kitchen sink: header with account switcher, search input, badges, collapsible sub-menus, and a footer action.
 </p>
 
-<ComponentExample demo="SidebarRightDemo" code={rightCode} vrSection="right-side" vrTitle="Right Side" />
+<ComponentExample demo="SidebarFullDemo" code={fullCode} vrSection="full-example" vrTitle="Full Example" />
 
 </ComponentSection>
 

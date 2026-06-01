@@ -22,9 +22,12 @@
       'flex h-full min-w-0 flex-col overflow-hidden whitespace-nowrap bg-(--sidebar-bg) text-kumo-default transition-[width] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none',
       sidebar.variant === 'sidebar' && (sidebar.side === 'left' ? 'border-r border-kumo-line' : 'border-l border-kumo-line'),
       sidebar.variant === 'floating' && 'rounded-lg border border-kumo-line',
-      !sidebar.open && 'absolute inset-y-0 z-40',
+      sidebar.isResizing && 'transition-none!',
+      !sidebar.open && (sidebar.contained ? 'absolute' : 'fixed'),
+      !sidebar.open && 'inset-y-0 z-40',
       !sidebar.open && sidebar.side === 'left' && 'left-0',
       !sidebar.open && sidebar.side === 'right' && 'right-0',
+      sidebar.open && 'relative',
       sidebar.isMobile && 'fixed inset-y-0 max-w-[85vw] shadow-xl md:static md:max-w-none md:shadow-none',
       sidebar.isMobile && !sidebar.open && 'hidden md:flex',
       sidebar.isMobile && sidebar.side === 'left' && 'left-0',
@@ -88,7 +91,16 @@
     )}
     {...rest}
   >
-    <div data-sidebar="content-container" style:width={contentWidth} class={contentClasses}>
+    <div
+      data-sidebar="content-container"
+      role="presentation"
+      style:width={contentWidth}
+      class={contentClasses}
+      onmouseenter={sidebar.startPeek}
+      onmouseleave={sidebar.stopPeek}
+      onfocus={sidebar.startPeek}
+      onblur={sidebar.stopPeek}
+    >
       {@render sidebarContent()}
     </div>
   </aside>

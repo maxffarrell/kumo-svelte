@@ -1,5 +1,5 @@
 {
-  "version": "2.4.0",
+  "version": "0.1.8",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -1477,6 +1477,7 @@
         "ring-kumo-line",
         "text-kumo-default",
         "text-kumo-disabled",
+        "text-kumo-muted",
         "text-kumo-placeholder",
         "text-kumo-subtle"
       ],

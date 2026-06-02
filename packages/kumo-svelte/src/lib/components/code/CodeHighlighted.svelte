@@ -41,7 +41,13 @@
   interface Props {
     code: string;
     lang?: CodeHighlightedLang;
+    highlightLines?: number[];
+    labels?: {
+      copy?: string;
+      copied?: string;
+    };
     showCopyButton?: boolean;
+    showLineNumbers?: boolean;
     class?: string;
     style?: string;
     [key: string]: unknown;
@@ -50,8 +56,11 @@
   let {
     code,
     class: className,
+    highlightLines = [],
     lang = 'typescript',
+    labels = {},
     showCopyButton = false,
+    showLineNumbers = false,
     style,
     ...rest
   }: Props = $props();
@@ -79,13 +88,24 @@
       .replace(/(<script\b[^>]*>)\n{2,}/g, '$1\n')
       .replace(/\n{2,}(<\/script>)/g, '\n$1')
   );
+  const highlightLineSet = $derived(new Set(highlightLines));
+
+  function decorateHighlightedLines(html: string) {
+    let lineNumber = 0;
+
+    return html.replace(/<span class="line">/g, () => {
+      lineNumber += 1;
+      return `<span class="line${highlightLineSet.has(lineNumber) ? ' line-highlighted' : ''}" data-line="${lineNumber}">`;
+    });
+  }
+
   const highlightedCode = $derived(
     codeToHtml(normalizedCode, {
       lang: languageAliases[lang] ?? lang,
       themes: KUMO_CODE_HIGHLIGHTED_STYLING.themes,
       defaultColor: false
     }).then((html) =>
-      html
+      decorateHighlightedLines(html)
         .replace(/\s+tabindex="0"/g, '')
         .replace(/(<\/span>)\n(?=<span class="line")/g, '$1')
     )
@@ -98,7 +118,15 @@
   }
 </script>
 
-<div class={cn('not-prose group relative m-0 w-full min-w-0 rounded-md border border-kumo-fill bg-kumo-base p-0', className)} {style} {...rest}>
+<div
+  class={cn(
+    'not-prose group relative m-0 w-full min-w-0 rounded-md border border-kumo-fill bg-kumo-base p-0',
+    showLineNumbers && 'kumo-shiki-line-numbers',
+    className
+  )}
+  {style}
+  {...rest}
+>
   {#await highlightedCode}
     <pre class="m-0 min-w-0 flex-1 overflow-x-auto p-4 font-mono text-sm leading-relaxed text-kumo-subtle"><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
   {:then html}
@@ -114,7 +142,8 @@
       class="code-block-copy-btn"
       class:copied
       data-copied={copied ? '' : undefined}
-      aria-label="Copy code to clipboard"
+      aria-label={copied ? (labels.copied ?? 'Copied!') : (labels.copy ?? 'Copy code to clipboard')}
+      title={copied ? (labels.copied ?? 'Copied!') : (labels.copy ?? 'Copy')}
       onclick={copyCode}
     >
       <span class="code-block-copy-btn__icons">

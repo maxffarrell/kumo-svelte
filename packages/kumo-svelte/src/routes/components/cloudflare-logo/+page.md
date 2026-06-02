@@ -127,7 +127,7 @@ A pre-built "Powered by Cloudflare" badge component for footers and attribution.
 Use <code>generateCloudflareLogoSvg()</code> to get copy-paste ready SVG markup for non-React contexts.
 
 
-```svelte
+```ts
 import { generateCloudflareLogoSvg } from "kumo-svelte";
 
 // Generate glyph SVG (cloud only)

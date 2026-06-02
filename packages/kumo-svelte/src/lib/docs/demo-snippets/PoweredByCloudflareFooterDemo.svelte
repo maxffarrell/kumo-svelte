@@ -1,22 +1,8 @@
 <script lang="ts">
-  import { CloudflareLogo, DropdownMenu } from '$lib';
-  import { ArrowSquareOut as ExternalLink, Cloud, Code as Code2, Copy, Download } from 'phosphor-svelte';
-  import { generateCloudflareLogoSvg } from '$lib/components/cloudflare-logo';
   import { PoweredByCloudflare } from '$lib/components/cloudflare-logo';
-
-  let copiedCloudflareLogo = $state<string | undefined>();
-
-  async function copyCloudflareLogo(variant: 'glyph' | 'full') {
-      await navigator.clipboard.writeText(generateCloudflareLogoSvg({ variant }));
-      copiedCloudflareLogo = variant;
-      setTimeout(() => {
-        copiedCloudflareLogo = undefined;
-      }, 2000);
-    }
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-
-      <PoweredByCloudflare />
-    
-</div>
+<footer class="flex w-full items-center justify-between rounded-lg border border-kumo-hairline bg-kumo-elevated px-6 py-4">
+  <span class="text-sm text-kumo-subtle">&copy; 2026 Your Company. All rights reserved.</span>
+  <PoweredByCloudflare />
+</footer>

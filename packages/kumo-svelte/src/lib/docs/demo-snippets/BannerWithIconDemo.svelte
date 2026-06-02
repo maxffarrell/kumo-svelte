@@ -6,6 +6,6 @@
 <Banner
   icon={Warning}
   variant="alert"
-  title="Session expiring"
-  description="Your session will expire in 5 minutes."
+  title="Review required"
+  description="Please review your billing information before proceeding."
 />

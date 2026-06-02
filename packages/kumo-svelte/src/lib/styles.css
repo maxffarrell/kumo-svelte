@@ -824,15 +824,10 @@ kbd,
 /* Table styling */
 .kumo-prose :where(table):not(:where(.not-prose, .not-prose *)) {
   width: 100%;
-  table-layout: fixed;
   border-collapse: collapse;
   margin: 3rem 0 2rem;
   font-size: var(--text-sm);
   line-height: var(--text-sm--line-height);
-}
-
-.kumo-prose :where(table):not(:where(.not-prose, .not-prose *)) :where(th:first-child, td:first-child) {
-  width: 24%;
 }
 
 /* Table header border */
@@ -1008,6 +1003,48 @@ pre.shiki {
   border: 0 !important;
   margin: 0 !important;
   padding: 0 1rem 0 0 !important;
+}
+
+.kumo-shiki .line {
+  min-height: 1.625em;
+  padding-right: 1rem;
+}
+
+.kumo-shiki .line-highlighted {
+  margin-right: -1rem;
+  margin-left: -1rem;
+  padding-right: 2rem;
+  padding-left: 1rem;
+  background-color: var(--kumo-code-highlight-bg, color-mix(in srgb, var(--color-kumo-brand) 12%, transparent)) !important;
+}
+
+.kumo-shiki-line-numbers .kumo-shiki pre {
+  counter-reset: kumo-code-line;
+  padding-left: 0 !important;
+}
+
+.kumo-shiki-line-numbers .kumo-shiki code {
+  padding-right: 0 !important;
+}
+
+.kumo-shiki-line-numbers .kumo-shiki .line {
+  counter-increment: kumo-code-line;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  min-width: max-content;
+}
+
+.kumo-shiki-line-numbers .kumo-shiki .line::before {
+  content: counter(kumo-code-line);
+  padding-right: 1rem;
+  color: var(--text-color-kumo-placeholder);
+  text-align: right;
+  user-select: none;
+}
+
+.kumo-shiki-line-numbers .kumo-shiki .line-highlighted {
+  margin-left: 0;
+  padding-left: 0;
 }
 
 [data-mode="dark"] .kumo-shiki span:not(.line-highlighted) {

@@ -44,7 +44,7 @@
 >
   {#if inputSide === 'top'}
     <input
-      class="w-full border-0 bg-inherit px-2 py-1 outline-none placeholder:text-kumo-placeholder"
+      class="w-full border-0 bg-inherit px-2 py-1 outline-none placeholder:text-kumo-muted"
       {placeholder}
       value={context.query}
       disabled={context.disabled}
@@ -61,7 +61,7 @@
     {/each}
     {#if inputSide === 'right'}
       <input
-        class="min-w-[100px] flex-1 border-0 bg-inherit px-2 py-1 outline-none placeholder:text-kumo-placeholder"
+        class="min-w-[100px] flex-1 border-0 bg-inherit px-2 py-1 outline-none placeholder:text-kumo-muted"
         {placeholder}
         value={context.query}
         disabled={context.disabled}

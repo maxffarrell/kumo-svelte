@@ -1,10 +1,14 @@
 <script lang="ts">
-  import { Collapsible } from '$lib';
+  import { Collapsible, Text } from '$lib';
+
+  let isOpen = $state(true);
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
-<Collapsible open={true}>
-      {#snippet trigger()}Build details{/snippet}
-      <p class="text-sm text-kumo-subtle">Dependencies installed, routes generated, and static assets uploaded.</p>
-    </Collapsible>
+<div class="w-full">
+  <Collapsible.Root bind:open={isOpen}>
+    <Collapsible.DefaultTrigger>What is Kumo?</Collapsible.DefaultTrigger>
+    <Collapsible.DefaultPanel>
+      <Text>Kumo is Cloudflare's new design system.</Text>
+    </Collapsible.DefaultPanel>
+  </Collapsible.Root>
 </div>

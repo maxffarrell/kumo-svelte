@@ -3,9 +3,7 @@
 </script>
 
 <CodeHighlighted
-  code={`interface WorkerRoute {
-  pattern: string;
-  script: string;
-}`}
+  code={`const greeting = "Hello, World!";
+console.log(greeting);`}
   lang="typescript"
 />

@@ -1,11 +1,11 @@
 <script lang="ts">
   import { Banner } from '$lib';
-  import { DotsThreeCircle } from 'phosphor-svelte';
+  import { Info } from 'phosphor-svelte';
 </script>
 
 <Banner
-  icon={DotsThreeCircle}
+  icon={Info}
   variant="secondary"
-  title="Sync paused"
-  description="Changes will resume when your connection is restored."
+  title="Maintenance scheduled"
+  description="This service will be unavailable for 10 minutes."
 />

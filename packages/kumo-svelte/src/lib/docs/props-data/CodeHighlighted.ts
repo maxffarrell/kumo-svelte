@@ -15,11 +15,31 @@ const rows: PropRow[] = [
     "description": "Code language."
   },
   {
+    "prop": "highlightLines",
+    "type": "number[]",
+    "required": false,
+    "default": "[]",
+    "description": "One-indexed line numbers to emphasize."
+  },
+  {
+    "prop": "showLineNumbers",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Displays line numbers."
+  },
+  {
     "prop": "showCopyButton",
     "type": "boolean",
     "required": false,
     "default": "false",
     "description": "Shows the copy button."
+  },
+  {
+    "prop": "labels",
+    "type": "{ copy?: string; copied?: string }",
+    "required": false,
+    "description": "Accessible copy button labels."
   },
   {
     "prop": "class",

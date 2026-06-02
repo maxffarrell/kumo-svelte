@@ -81,7 +81,7 @@
     bind:value
     id={inputId}
     class={cn(
-      'border-0 bg-kumo-control text-kumo-default ring ring-kumo-line outline-none focus:outline-none',
+      'block w-full border-0 bg-kumo-control text-kumo-default ring ring-kumo-line outline-none focus:outline-none',
       'placeholder:text-kumo-muted disabled:text-kumo-disabled',
       sizes[size],
       normalizedVariant === 'error'

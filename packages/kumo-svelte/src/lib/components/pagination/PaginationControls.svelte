@@ -34,9 +34,6 @@
     commitPage(context.editingPage);
   }
 
-  function commitSelectedPage(nextPage: unknown) {
-    commitPage(Number(nextPage));
-  }
 </script>
 
 <div data-slot="pagination-controls" class={cn('grow flex flex-col items-end', className)} {...rest}>
@@ -64,10 +61,15 @@
         {#if pageSelector === 'dropdown'}
           <Select
             aria-label={context.labels.pageNumber}
-            class="w-max rounded-none ring-kumo-hairline"
+            class="rounded-none ring-kumo-hairline"
+            contentClass="max-h-56"
             value={context.page}
             options={pageOptions}
-            onValueChange={commitSelectedPage}
+            onValueChange={(nextPage) => {
+              const page = Number(nextPage);
+              context.setPage(page);
+              context.setEditingPage(page);
+            }}
           />
         {:else}
           <InputGroupInput

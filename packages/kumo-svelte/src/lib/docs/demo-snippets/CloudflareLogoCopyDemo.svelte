@@ -1,22 +1,58 @@
 <script lang="ts">
   import { CloudflareLogo, DropdownMenu } from '$lib';
-  import { ArrowSquareOut as ExternalLink, Cloud, Code as Code2, Copy, Download } from 'phosphor-svelte';
+  import { ArrowSquareOut, Cloud, Code, DownloadSimple } from 'phosphor-svelte';
   import { generateCloudflareLogoSvg } from '$lib/components/cloudflare-logo';
-  import { PoweredByCloudflare } from '$lib/components/cloudflare-logo';
 
-  let copiedCloudflareLogo = $state<string | undefined>();
+  let copied = $state<string | null>(null);
 
-  async function copyCloudflareLogo(variant: 'glyph' | 'full') {
-      await navigator.clipboard.writeText(generateCloudflareLogoSvg({ variant }));
-      copiedCloudflareLogo = variant;
-      setTimeout(() => {
-        copiedCloudflareLogo = undefined;
-      }, 2000);
-    }
+  async function copyToClipboard(text: string, label: string) {
+    await navigator.clipboard.writeText(text);
+    copied = label;
+    setTimeout(() => {
+      copied = null;
+    }, 2000);
+  }
 </script>
 
-<div class="flex min-h-24 w-full items-center justify-center">
+<div class="flex items-center gap-4">
+  <DropdownMenu>
+    <DropdownMenu.Trigger>
+      <button
+        type="button"
+        class="flex items-center gap-2 rounded-lg bg-black px-4 py-3 text-white transition-opacity hover:opacity-80"
+      >
+        <CloudflareLogo variant="glyph" color="white" class="w-8" />
+        <span class="font-medium">Logo</span>
+      </button>
+    </DropdownMenu.Trigger>
+    <DropdownMenu.Content>
+      <DropdownMenu.Item
+        icon={Cloud}
+        onSelect={() => copyToClipboard(generateCloudflareLogoSvg({ variant: 'glyph' }), 'glyph')}
+      >
+        {copied === 'glyph' ? 'Copied!' : 'Copy logo as SVG'}
+      </DropdownMenu.Item>
+      <DropdownMenu.Item
+        icon={Code}
+        onSelect={() => copyToClipboard(generateCloudflareLogoSvg({ variant: 'full' }), 'full')}
+      >
+        {copied === 'full' ? 'Copied!' : 'Copy full logo as SVG'}
+      </DropdownMenu.Item>
+      <DropdownMenu.Item
+        icon={DownloadSimple}
+        onSelect={() => window.open('https://www.cloudflare.com/press-kit/', '_blank', 'noopener')}
+      >
+        Download brand assets
+      </DropdownMenu.Item>
+      <DropdownMenu.Separator />
+      <DropdownMenu.Item
+        icon={ArrowSquareOut}
+        onSelect={() => window.open('https://www.cloudflare.com/brand-assets/', '_blank', 'noopener')}
+      >
+        Visit brand guidelines
+      </DropdownMenu.Item>
+    </DropdownMenu.Content>
+  </DropdownMenu>
 
-      <PoweredByCloudflare />
-    
+  <span class="text-sm text-kumo-subtle">Click to open the brand assets menu</span>
 </div>

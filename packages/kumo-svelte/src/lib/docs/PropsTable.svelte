@@ -57,7 +57,7 @@
     Empty: ['title'],
     Label: ['children'],
     ClipboardText: ['text'],
-    CodeHighlighted: ['code', 'lang'],
+    CodeHighlighted: ['code'],
     DatePicker: ['mode'],
     'Collapsible.DefaultTrigger': ['children'],
     'Collapsible.DefaultPanel': ['children'],

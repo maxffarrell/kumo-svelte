@@ -59,7 +59,7 @@
     class={cn(
       inputStyles[resolvedSize],
       'w-full border-0 bg-kumo-control text-kumo-default shadow-xs ring ring-kumo-line outline-none',
-      'placeholder:text-kumo-placeholder disabled:cursor-not-allowed disabled:text-kumo-disabled',
+      'placeholder:text-kumo-muted disabled:cursor-not-allowed disabled:text-kumo-disabled',
       context.invalid
         ? '!ring-kumo-danger focus:ring-kumo-danger/50 focus:ring-[1.5px]'
         : 'focus:ring-kumo-focus/50 focus:ring-[1.5px]',

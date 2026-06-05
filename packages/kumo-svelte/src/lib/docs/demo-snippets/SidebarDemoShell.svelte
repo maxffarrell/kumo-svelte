@@ -22,7 +22,7 @@
     User
   } from 'phosphor-svelte';
 
-  type Demo = 'basic' | 'collapsible' | 'toggle' | 'full' | 'resizable' | 'right' | 'peeking' | 'sliding';
+  type Demo = 'basic' | 'collapsible' | 'toggle' | 'full' | 'resizable' | 'right' | 'peeking' | 'auto-scroll' | 'sliding' | 'mobile';
 
   interface Props {
     demo?: Demo;
@@ -47,7 +47,8 @@
     defaultWidth: 240,
     minWidth: 180,
     maxWidth: 400,
-    peekable: demo === 'full' || demo === 'peeking'
+    peekable: demo === 'full' || demo === 'peeking',
+    mobileBreakpoint: demo === 'mobile' ? 9999 : 768
   });
 
   const ActiveAccountIcon = $derived(selectedAccount.icon);
@@ -64,7 +65,7 @@
 {/snippet}
 
 {#snippet brandLogo()}
-  <div class="flex w-full min-w-0 items-center gap-2 px-3 transition-[padding] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) group-data-[state=collapsed]/sidebar:px-2">
+  <div class="flex w-full min-w-0 items-center gap-2 px-3 transition-[padding] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) group-data-[state=collapsed]/sidebar:px-2 group-data-[mobile=true]/sidebar:px-3">
     <Cube class="size-4 shrink-0 text-kumo-brand" weight="duotone" />
     <span class="flex-1 truncate text-sm font-semibold text-kumo-strong">Company</span>
   </div>
@@ -72,7 +73,7 @@
 
 {#snippet accountSwitcher()}
   <DropdownMenu>
-    <DropdownMenu.Trigger class="flex w-full min-w-0 cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-kumo-default outline-none transition-[padding] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) hover:bg-kumo-tint focus-visible:ring-1 focus-visible:ring-kumo-line group-data-[state=collapsed]/sidebar:px-1.5">
+    <DropdownMenu.Trigger class="flex w-full min-w-0 cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-kumo-default outline-none transition-[padding] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) hover:bg-kumo-tint focus-visible:ring-1 focus-visible:ring-kumo-line group-data-[state=collapsed]/sidebar:px-1.5 group-data-[mobile=true]/sidebar:px-3">
       <ActiveAccountIcon class="size-4 shrink-0 text-kumo-brand" weight="duotone" />
       <span class="flex min-w-0 flex-1 items-center overflow-hidden text-left">{selectedAccount.name}</span>
       <span class="w-4 shrink-0 overflow-hidden transition-[width] duration-(--sidebar-animation-duration) ease-(--sidebar-easing) group-data-[state=collapsed]/sidebar:w-0">
@@ -213,13 +214,70 @@
   </Sidebar.Content>
 {/snippet}
 
-<div class="relative h-[540px] w-full overflow-hidden rounded-lg border border-kumo-line bg-kumo-base">
+{#snippet autoScrollSurface()}
+  <Sidebar.Content>
+    <Sidebar.Group>
+      <Sidebar.GroupLabel>Overview</Sidebar.GroupLabel>
+      <Sidebar.Menu>
+        <Sidebar.MenuButton icon={House} active>Home</Sidebar.MenuButton>
+        <Sidebar.MenuButton icon={ChartBar}>Analytics</Sidebar.MenuButton>
+        <Sidebar.MenuButton icon={Globe}>Domains</Sidebar.MenuButton>
+      </Sidebar.Menu>
+    </Sidebar.Group>
+
+    <Sidebar.Group>
+      <Sidebar.GroupLabel>Platform</Sidebar.GroupLabel>
+      <Sidebar.Menu>
+        <Sidebar.MenuButton icon={Database}>Storage</Sidebar.MenuButton>
+        <Sidebar.MenuButton icon={ShieldCheck}>Security</Sidebar.MenuButton>
+        <Sidebar.MenuButton icon={Lock}>Zero Trust</Sidebar.MenuButton>
+        <Sidebar.MenuButton icon={Gear}>Settings</Sidebar.MenuButton>
+      </Sidebar.Menu>
+    </Sidebar.Group>
+
+    <Sidebar.Group>
+      <Sidebar.GroupLabel>Build</Sidebar.GroupLabel>
+      <Sidebar.Menu>
+        <Sidebar.MenuItem>
+          <Sidebar.Collapsible autoScrollOnOpen>
+            <Sidebar.CollapsibleTrigger
+              class="group/menu-button relative flex min-h-8.5 w-full min-w-0 cursor-pointer items-center gap-2.5 rounded-lg px-3 py-0 text-sm font-medium text-kumo-default outline-none transition-[color,box-shadow,outline] duration-(--sidebar-animation-duration) hover:bg-(--sidebar-active-bg) focus:outline-none focus-visible:bg-(--sidebar-active-bg) focus-visible:text-kumo-strong"
+            >
+              <span class="flex min-w-0 flex-1 items-center gap-3 translate-x-[-3px] transition-transform duration-(--sidebar-animation-duration) group-not-data-[state=collapsed]/sidebar:translate-x-0">
+                <Code class="size-4 shrink-0 opacity-40" />
+                <span class="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">
+                  Workers
+                  <Sidebar.MenuChevron />
+                </span>
+              </span>
+            </Sidebar.CollapsibleTrigger>
+            <Sidebar.CollapsibleContent>
+              <Sidebar.MenuSub>
+                <Sidebar.MenuSubButton>Overview</Sidebar.MenuSubButton>
+                <Sidebar.MenuSubButton>Deployments</Sidebar.MenuSubButton>
+                <Sidebar.MenuSubButton>Observability</Sidebar.MenuSubButton>
+                <Sidebar.MenuSubButton>Settings</Sidebar.MenuSubButton>
+              </Sidebar.MenuSub>
+            </Sidebar.CollapsibleContent>
+          </Sidebar.Collapsible>
+        </Sidebar.MenuItem>
+        <Sidebar.MenuButton icon={Cube}>
+          Containers
+          <Sidebar.MenuBadge>Beta</Sidebar.MenuBadge>
+        </Sidebar.MenuButton>
+      </Sidebar.Menu>
+    </Sidebar.Group>
+  </Sidebar.Content>
+{/snippet}
+
+<div class={demo === 'auto-scroll' ? 'relative h-[420px] w-full overflow-hidden rounded-lg border border-kumo-line bg-kumo-base' : 'relative h-[540px] w-full overflow-hidden rounded-lg border border-kumo-line bg-kumo-base'}>
   <Sidebar.Provider
     class="min-h-0! h-full"
     contained={providerProps.contained}
     bind:open
     defaultOpen={providerProps.defaultOpen}
     side={providerProps.side}
+    mobileBreakpoint={providerProps.mobileBreakpoint}
     resizable={providerProps.resizable}
     defaultWidth={providerProps.defaultWidth}
     minWidth={providerProps.minWidth}
@@ -242,7 +300,7 @@
       </Sidebar>
     {:else}
       <Sidebar>
-        {#if demo === 'toggle' || demo === 'resizable' || demo === 'peeking'}
+        {#if demo === 'toggle' || demo === 'resizable' || demo === 'peeking' || demo === 'auto-scroll' || demo === 'mobile'}
           <Sidebar.Header>{@render brandLogo()}</Sidebar.Header>
         {:else if demo === 'full'}
           <Sidebar.Header>{@render accountSwitcher()}</Sidebar.Header>
@@ -293,11 +351,13 @@
             <Sidebar.SlidingView value="account">{@render accountSurface()}</Sidebar.SlidingView>
             <Sidebar.SlidingView value="domain">{@render domainSurface()}</Sidebar.SlidingView>
           </Sidebar.SlidingViews>
+        {:else if demo === 'auto-scroll'}
+          {@render autoScrollSurface()}
         {:else}
           {@render accountSurface()}
         {/if}
 
-        {#if demo === 'toggle' || demo === 'resizable' || demo === 'full' || demo === 'peeking'}
+        {#if demo === 'toggle' || demo === 'resizable' || demo === 'full' || demo === 'peeking' || demo === 'auto-scroll' || demo === 'mobile'}
           <Sidebar.Footer><Sidebar.Trigger /></Sidebar.Footer>
         {/if}
 
@@ -312,8 +372,12 @@
         {@render demoMain(resizableContent)}
       {:else if demo === 'peeking'}
         {@render demoMain(peekingContent)}
+      {:else if demo === 'auto-scroll'}
+        {@render demoMain(autoScrollContent)}
       {:else if demo === 'sliding'}
         {@render demoMain(slidingContent)}
+      {:else if demo === 'mobile'}
+        {@render demoMain(mobileContent)}
       {:else}
         {@render demoMain()}
       {/if}
@@ -348,4 +412,20 @@
     <p class="font-medium text-kumo-default">Active: {surface === 'account' ? 'Account' : 'Zone'} surface</p>
     <p>Click the header button to slide between views</p>
   </div>
+{/snippet}
+
+{#snippet autoScrollContent()}
+  <p>Open Workers near the bottom of the list</p>
+{/snippet}
+
+{#snippet mobileContent()}
+  <button
+    type="button"
+    class="cursor-pointer rounded-lg border border-kumo-line bg-kumo-base px-3 py-1.5 text-base text-kumo-default transition-colors hover:bg-kumo-tint"
+    onclick={() => (open = !open)}
+  >
+    {open ? 'Close sidebar' : 'Open sidebar'}
+  </button>
+  <p>Click the button to open the mobile sidebar</p>
+  <p class="text-sm text-kumo-subtle">Press Escape or click the backdrop to close</p>
 {/snippet}

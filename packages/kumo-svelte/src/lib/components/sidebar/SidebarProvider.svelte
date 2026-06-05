@@ -27,6 +27,7 @@
     contained?: boolean;
     peekable?: boolean;
     animationDuration?: number;
+    mobileBreakpoint?: number;
   }
 
   let {
@@ -45,7 +46,8 @@
     onWidthChange,
     contained = false,
     peekable = false,
-    animationDuration = 250
+    animationDuration = 250,
+    mobileBreakpoint = 768
   }: Props = $props();
 
   let width: number = $state(256);
@@ -59,7 +61,7 @@
   const sidebarWidth = $derived(resizable ? `${width}px` : '16.25rem');
 
   onMount(() => {
-    const media = window.matchMedia('(max-width: 767px)');
+    const media = window.matchMedia(`(max-width: ${mobileBreakpoint - 1}px)`);
     const update = () => {
       isMobile = media.matches;
       if (!media.matches) openMobile = false;
@@ -82,7 +84,9 @@
 
   function setOpenMobile(nextOpen: boolean) {
     openMobile = nextOpen;
+    open = nextOpen;
     if (nextOpen) isPeeking = false;
+    onOpenChange?.(nextOpen);
   }
 
   function setWidth(nextWidth: number) {
@@ -101,6 +105,12 @@
   function stopPeek() {
     isPeeking = false;
   }
+
+  $effect(() => {
+    if (isMobile && openMobile !== open) {
+      openMobile = open;
+    }
+  });
 
   setSidebarContext({
     get state() {
@@ -131,6 +141,9 @@
     },
     get animationDuration() {
       return animationDuration;
+    },
+    get mobileBreakpoint() {
+      return mobileBreakpoint;
     },
     get width() {
       return width;
@@ -175,9 +188,10 @@
   style:--sidebar-animation-duration={`${animationDuration}ms`}
   style:--sidebar-easing="cubic-bezier(0.77, 0, 0.175, 1)"
   style:--sidebar-bg="var(--color-kumo-base)"
+  style:--sidebar-active-bg="var(--color-kumo-tint)"
   class={cn(
-    'group/sidebar-wrapper isolate flex w-full',
-    !contained && 'min-h-svh',
+    'group/sidebar-wrapper relative isolate flex w-full',
+    !contained && !isMobile && 'min-h-svh',
     variant === 'inset' && 'bg-kumo-recessed',
     isResizing && 'select-none',
     className

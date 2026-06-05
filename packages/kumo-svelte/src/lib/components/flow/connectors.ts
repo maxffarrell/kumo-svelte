@@ -1,4 +1,4 @@
-import type { FlowOrientation } from './context';
+import type { FlowOrientation } from "./context";
 
 export interface Connector {
   x1: number;
@@ -31,15 +31,15 @@ export function createRoundedPath(
     arrowheadOffset = 8,
     isBottom = false,
     single = false,
-    orientation = 'vertical'
-  }: PathProps = {}
+    orientation = "vertical",
+  }: PathProps = {},
 ) {
   const cornerRadius = Math.min(
     maxCornerRadius,
-    Math.abs(orientation === 'horizontal' ? (y2 - y1) / 2 : (x2 - x1) / 2)
+    Math.abs(orientation === "horizontal" ? (y2 - y1) / 2 : (x2 - x1) / 2),
   );
 
-  if (orientation === 'horizontal') {
+  if (orientation === "horizontal") {
     if (Math.abs(y2 - y1) <= FLAT_THRESHOLD) {
       return `M ${x1} ${y1} L ${x2 - arrowheadOffset} ${y2}`;
     }
@@ -58,7 +58,7 @@ export function createRoundedPath(
       `Q ${verticalX} ${y1} ${verticalX} ${verticalStart}`,
       single
         ? `L ${verticalX} ${verticalEnd} Q ${verticalX} ${y2} ${secondHorizontalStart} ${y2}`
-        : `L ${verticalX} ${y2}`
+        : `L ${verticalX} ${y2}`,
     ];
 
     const topCurveCommands = [
@@ -66,12 +66,14 @@ export function createRoundedPath(
         ? `L ${firstHorizontalEnd} ${y1} Q ${verticalX} ${y1} ${verticalX} ${verticalStart}`
         : `L ${verticalX} ${y1}`,
       `L ${verticalX} ${verticalEnd}`,
-      `Q ${verticalX} ${y2} ${secondHorizontalStart} ${y2}`
+      `Q ${verticalX} ${y2} ${secondHorizontalStart} ${y2}`,
     ];
 
-    return [`M ${x1} ${y1}`, isBottom ? bottomCurveCommands : topCurveCommands, `L ${pathEndX} ${y2}`].join(
-      ' '
-    );
+    return [
+      `M ${x1} ${y1}`,
+      ...(isBottom ? bottomCurveCommands : topCurveCommands),
+      `L ${pathEndX} ${y2}`,
+    ].join(" ");
   }
 
   if (Math.abs(x2 - x1) <= FLAT_THRESHOLD) {
@@ -90,16 +92,18 @@ export function createRoundedPath(
   const bottomCurveCommands = [
     `L ${x1} ${firstVerticalEnd}`,
     `Q ${x1} ${horizontalY} ${horizontalStart} ${horizontalY}`,
-    `L ${x2} ${horizontalY}`
+    `L ${x2} ${horizontalY}`,
   ];
 
   const topCurveCommands = [
     `L ${x1} ${horizontalY}`,
     `L ${horizontalEnd} ${horizontalY}`,
-    `Q ${x2} ${horizontalY} ${x2} ${secondVerticalStart}`
+    `Q ${x2} ${horizontalY} ${x2} ${secondVerticalStart}`,
   ];
 
-  return [`M ${x1} ${y1}`, isBottom ? bottomCurveCommands : topCurveCommands, `L ${x2} ${pathEndY}`].join(
-    ' '
-  );
+  return [
+    `M ${x1} ${y1}`,
+    ...(isBottom ? bottomCurveCommands : topCurveCommands),
+    `L ${x2} ${pathEndY}`,
+  ].join(" ");
 }

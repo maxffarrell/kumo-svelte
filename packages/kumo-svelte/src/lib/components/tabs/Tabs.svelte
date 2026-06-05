@@ -199,6 +199,17 @@
     shouldSuppressClick = false;
   }
 
+  function handleTriggerClick(event: MouseEvent) {
+    const trigger = event.currentTarget;
+    if (!(trigger instanceof HTMLElement)) return;
+
+    trigger.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'nearest'
+    });
+  }
+
   $effect(() => {
     if (normalizedItems.length === 0) return;
     value ??= selectedValue ?? normalizedItems[0]?.value;
@@ -233,7 +244,12 @@
     bind:value
     onValueChange={handleValueChange}
     {activationMode}
-    class={cn('relative isolate min-w-0 font-medium', className, classNameAlias)}
+    class={cn(
+      'relative isolate min-w-0 font-medium',
+      isSegmented && (isSm ? 'rounded-md' : 'rounded-lg') + ' ring ring-kumo-hairline/70',
+      className,
+      classNameAlias
+    )}
     {...rest}
   >
     {#if isSegmented}
@@ -250,7 +266,7 @@
       class={cn(
         'relative flex min-w-0 shrink items-stretch',
         isSegmented &&
-          'kumo-tabs-list overflow-x-auto rounded-lg bg-kumo-recessed px-0.5 ring ring-kumo-hairline/70 [--scroll-fade-width:3rem]',
+          'kumo-tabs-list overflow-x-auto rounded-lg bg-kumo-recessed px-0.5 [--scroll-fade-width:3rem] scroll-px-(--scroll-fade-width)',
         isSegmented && (isSm ? 'h-6.5 rounded-md' : 'h-9'),
         isOverflowing && 'cursor-grab active:cursor-grabbing',
         isUnderline && 'gap-4 border-b border-kumo-hairline pb-2',
@@ -265,13 +281,14 @@
           disabled={tab.disabled}
           data-kumo-component="Tabs"
           data-kumo-part="tab"
+          onclick={handleTriggerClick}
           class={cn(
             'relative z-2 flex items-center rounded bg-transparent whitespace-nowrap focus:outline-none focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
             isOverflowing ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',
             isSm ? 'text-xs' : 'text-base',
             isSegmented &&
-              'my-0.5 rounded-md text-kumo-subtle hover:text-kumo-default data-[state=active]:text-kumo-default focus-visible:ring-inset',
-            isSegmented && (isSm ? 'px-2' : 'px-2.5'),
+              'my-0.5 text-kumo-subtle hover:text-kumo-default data-[state=active]:text-kumo-default focus-visible:ring-inset',
+            isSegmented && (isSm ? 'px-2 rounded-sm' : 'px-2.5 rounded-md'),
             isUnderline &&
               'text-kumo-subtle hover:bg-kumo-tint hover:text-kumo-default data-[state=active]:hover:bg-kumo-tint data-[state=active]:font-medium data-[state=active]:text-kumo-default',
             isUnderline && (isSm ? 'px-1.5 py-2.5' : 'px-2 py-3'),

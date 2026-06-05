@@ -11,11 +11,12 @@
     active?: boolean;
     size?: 'base' | 'sm';
     href?: string;
+    target?: string;
     tooltip?: string;
     [key: string]: unknown;
   }
 
-  let { children, class: className, icon: Icon, active = false, size = 'base', href, tooltip, ...rest }: Props = $props();
+  let { children, class: className, icon: Icon, active = false, size = 'base', href, target, tooltip, ...rest }: Props = $props();
   const menuItem = getSidebarMenuItemContext();
   let sidebar = $state<ReturnType<typeof getSidebarContext> | undefined>();
 
@@ -27,14 +28,14 @@
 
   const classes = $derived(
     cn(
-      'group/menu-button relative flex w-full min-w-0 cursor-pointer items-center gap-2.5 rounded-lg text-kumo-default outline-none transition-[color,background-color,box-shadow,outline] duration-(--sidebar-animation-duration)',
+      'group/menu-button relative flex w-full min-w-0 cursor-pointer items-center gap-2.5 rounded-lg text-kumo-default outline-none transition-[color,box-shadow,outline] duration-(--sidebar-animation-duration)',
       'before:absolute before:inset-x-0 before:-inset-y-px',
       size === 'base' && 'min-h-8.5 px-3 py-0 text-sm font-medium',
       size === 'sm' && 'min-h-7 px-2 py-0 text-sm',
-      !active && 'hover:bg-kumo-tint',
-      active && 'bg-kumo-tint',
-      'has-[[data-active]]:bg-transparent has-[[data-active]]:hover:bg-kumo-tint',
-      'focus:outline-none focus-visible:bg-kumo-tint focus-visible:text-kumo-strong',
+      !active && 'hover:bg-(--sidebar-active-bg)',
+      active && 'bg-(--sidebar-active-bg)',
+      'has-[[data-active]]:bg-transparent has-[[data-active]]:hover:bg-(--sidebar-active-bg)',
+      'focus:outline-none focus-visible:bg-(--sidebar-active-bg) focus-visible:text-kumo-strong',
       className
     )
   );
@@ -46,6 +47,7 @@
     <a
       class={cn(classes, 'no-underline!')}
       {href}
+      {target}
       data-active={active || undefined}
       data-sidebar="menu-button"
       data-kumo-component="Sidebar"
@@ -55,7 +57,7 @@
       {...rest}
     >
       <span class="flex min-w-0 flex-1 items-center gap-3 translate-x-[-3px] transition-transform duration-(--sidebar-animation-duration) group-not-data-[state=collapsed]/sidebar:translate-x-0">
-        {#if Icon}<Icon class={cn('shrink-0 opacity-50', size === 'base' ? 'size-4' : 'size-3.5')} />{/if}
+        {#if Icon}<Icon class={cn('shrink-0 opacity-40', size === 'base' ? 'size-4' : 'size-3.5')} />{/if}
         <span class="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">
           {@render children?.()}
         </span>
@@ -74,7 +76,7 @@
       {...rest}
     >
       <span class="flex min-w-0 flex-1 items-center gap-3 translate-x-[-3px] transition-transform duration-(--sidebar-animation-duration) group-not-data-[state=collapsed]/sidebar:translate-x-0">
-        {#if Icon}<Icon class={cn('shrink-0 opacity-50', size === 'base' ? 'size-4' : 'size-3.5')} />{/if}
+        {#if Icon}<Icon class={cn('shrink-0 opacity-40', size === 'base' ? 'size-4' : 'size-3.5')} />{/if}
         <span class="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">
           {@render children?.()}
         </span>

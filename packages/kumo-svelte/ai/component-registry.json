@@ -1206,6 +1206,12 @@
           "optional": true,
           "description": "Called when open state changes."
         },
+        "autoScrollOnOpen": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Scrolls newly expanded sidebar content into view after opening."
+        },
         "onOpenChangeComplete": {
           "type": "(open: boolean) => void",
           "optional": true,
@@ -4077,6 +4083,11 @@
           "required": true,
           "description": "Sidebar content — Header, Content, Footer, groups, menus, and related slots."
         },
+        "contentClass": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes for the desktop content container."
+        },
         "class": {
           "type": "string",
           "optional": true,
@@ -4084,7 +4095,6 @@
         }
       },
       "colors": [
-        "bg-kumo-base",
         "bg-kumo-brand",
         "bg-kumo-hairline",
         "bg-kumo-line",
@@ -4292,6 +4302,12 @@
               "optional": true,
               "default": "250",
               "description": "Transition duration in milliseconds for width and peek animations."
+            },
+            "mobileBreakpoint": {
+              "type": "number",
+              "optional": true,
+              "default": "768",
+              "description": "Viewport width below which the sidebar renders as a mobile navigation drawer."
             },
             "children": {
               "type": "Snippet",

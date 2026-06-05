@@ -14,6 +14,6 @@
   });
 </script>
 
-<div data-sidebar="sliding-views" data-direction={direction} class={cn('relative min-h-0 flex-1 overflow-hidden', className)} {...rest}>
+<div data-sidebar="sliding-views" data-direction={direction} class={cn('relative min-h-0 max-w-(--sidebar-width) flex-1 overflow-hidden', className)} {...rest}>
   {@render children?.()}
 </div>

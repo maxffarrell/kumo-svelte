@@ -22,7 +22,7 @@
   });
 </script>
 
-<svg width="100%" height="100%" aria-hidden="true" class="text-kumo-inactive overflow-visible">
+<svg width="100%" height="100%" overflow="visible" aria-hidden="true" class="text-kumo-inactive overflow-visible">
   <defs>
     {#if markerId}
       <marker

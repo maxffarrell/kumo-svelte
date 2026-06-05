@@ -122,6 +122,17 @@ sourceFile: "components/sidebar"
   </Sidebar>
 </Sidebar.Provider>`;
 
+  const autoScrollCode = `<Sidebar.Collapsible autoScrollOnOpen>
+  <Sidebar.CollapsibleTrigger>
+    <Sidebar.MenuButton icon={Code}>
+      Workers <Sidebar.MenuChevron />
+    </Sidebar.MenuButton>
+  </Sidebar.CollapsibleTrigger>
+  <Sidebar.CollapsibleContent>
+    <Sidebar.MenuSub>...</Sidebar.MenuSub>
+  </Sidebar.CollapsibleContent>
+</Sidebar.Collapsible>`;
+
   const slidingCode = `<Sidebar.Provider contained>
   <Sidebar>
     <Sidebar.SlidingViews activeKey={view}>
@@ -145,6 +156,12 @@ sourceFile: "components/sidebar"
     </Sidebar.Content>
   </Sidebar>
 </Sidebar.Provider>`;
+
+  const mobileCode = `<Sidebar.Provider mobileBreakpoint={9999}>
+  <Sidebar>
+    <Sidebar.Content>...</Sidebar.Content>
+  </Sidebar>
+</Sidebar.Provider>`;
 </script>
 
 <!-- Demo -->
@@ -162,13 +179,13 @@ sourceFile: "components/sidebar"
 ### Barrel
 
 ```typescript
-import { Sidebar } from 'kumo-svelte';
+import { Sidebar } from "kumo-svelte";
 ```
 
 ### Granular
 
 ```typescript
-import { Sidebar } from 'kumo-svelte/components/sidebar';
+import { Sidebar } from "kumo-svelte/components/sidebar";
 ```
 
 </ComponentSection>
@@ -242,6 +259,14 @@ import { Sidebar } from 'kumo-svelte/components/sidebar';
 
 <ComponentExample demo="SidebarPeekingDemo" code={peekingCode} vrSection="peeking" vrTitle="Peeking" />
 
+### Auto Scroll
+
+<p class="mb-3 text-sm text-kumo-strong">
+  Use <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">autoScrollOnOpen</code> on long collapsible sections to keep newly revealed content in view.
+</p>
+
+<ComponentExample demo="SidebarAutoScrollDemo" code={autoScrollCode} vrSection="auto-scroll" vrTitle="Auto Scroll" />
+
 ### Sliding Views
 
 <p class="mb-3 text-sm text-kumo-strong">
@@ -259,6 +284,14 @@ import { Sidebar } from 'kumo-svelte/components/sidebar';
 
 <ComponentExample demo="SidebarFullDemo" code={fullCode} vrSection="full-example" vrTitle="Full Example" />
 
+### Mobile
+
+<p class="mb-3 text-sm text-kumo-strong">
+  On narrow viewports the sidebar renders as a navigation drawer. Use <code class="rounded bg-kumo-control px-1 py-0.5 text-xs">mobileBreakpoint</code> to control the threshold.
+</p>
+
+<ComponentExample demo="SidebarMobileDemo" code={mobileCode} vrSection="mobile" vrTitle="Mobile" />
+
 </ComponentSection>
 
 <!-- API Reference -->
@@ -269,7 +302,7 @@ import { Sidebar } from 'kumo-svelte/components/sidebar';
 
 ### Sidebar
 
-The main sidebar container. Renders as `<aside>` on desktop and as a dialog sheet on mobile.
+The main sidebar container. Renders as `<aside>` on desktop and a navigation drawer on mobile.
 
 <PropsTable component="Sidebar" />
 

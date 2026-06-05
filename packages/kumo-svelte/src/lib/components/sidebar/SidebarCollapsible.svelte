@@ -2,8 +2,24 @@
   import type { Snippet } from 'svelte';
   import { setContext } from 'svelte';
   import { cn } from '$lib/utils/cn';
-  interface Props { children?: Snippet; class?: string; defaultOpen?: boolean; open?: boolean; onOpenChange?: (open: boolean) => void; [key: string]: unknown; }
-  let { children, class: className, defaultOpen = false, open = $bindable(defaultOpen), onOpenChange, ...rest }: Props = $props();
+  interface Props {
+    children?: Snippet;
+    class?: string;
+    defaultOpen?: boolean;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    autoScrollOnOpen?: boolean;
+    [key: string]: unknown;
+  }
+  let {
+    children,
+    class: className,
+    defaultOpen = false,
+    open = $bindable(defaultOpen),
+    onOpenChange,
+    autoScrollOnOpen = false,
+    ...rest
+  }: Props = $props();
   const contentId = `kumo-sidebar-collapsible-${Math.random().toString(36).slice(2)}`;
   const context = {
     get open() {
@@ -11,6 +27,9 @@
     },
     get contentId() {
       return contentId;
+    },
+    get autoScrollOnOpen() {
+      return autoScrollOnOpen;
     },
     toggle() {
       open = !open;

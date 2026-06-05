@@ -73,6 +73,8 @@
 
   const prepareChartOptions = (rawOptions: KumoChartOption, suppressAnimation = false): EChartsOption => {
     const optionsWithTheme = {
+      backgroundColor: 'transparent',
+      color: effectiveDarkMode ? CHART_DARK_COLORS : CHART_LIGHT_COLORS,
       ...rawOptions,
       ...(suppressAnimation ? { animation: false } : {}),
       textStyle: {
@@ -123,8 +125,7 @@
   const initChart = () => {
     if (!el) return;
     chart?.dispose();
-    const theme = effectiveDarkMode ? { darkMode: true, color: CHART_DARK_COLORS } : { color: CHART_LIGHT_COLORS };
-    const nextChart = echarts.init(el, theme, { renderer: 'canvas' });
+    const nextChart = echarts.init(el, effectiveDarkMode ? 'dark' : undefined, { renderer: 'canvas' });
     chart = nextChart;
     updateOptions();
   };

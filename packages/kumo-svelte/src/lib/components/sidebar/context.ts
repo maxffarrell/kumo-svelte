@@ -1,9 +1,9 @@
-import { getContext, setContext } from 'svelte';
+import { getContext, setContext } from "svelte";
 
-export type SidebarState = 'expanded' | 'collapsed' | 'peeking';
-export type SidebarSide = 'left' | 'right';
-export type SidebarVariant = 'sidebar' | 'floating' | 'inset';
-export type SidebarCollapsible = 'icon' | 'offcanvas' | 'none';
+export type SidebarState = "expanded" | "collapsed" | "peeking";
+export type SidebarSide = "left" | "right";
+export type SidebarVariant = "sidebar" | "floating" | "inset";
+export type SidebarCollapsible = "icon" | "offcanvas" | "none";
 
 export interface SidebarContextValue {
   get state(): SidebarState;
@@ -17,6 +17,7 @@ export interface SidebarContextValue {
   get collapsible(): SidebarCollapsible;
   get contained(): boolean;
   get animationDuration(): number;
+  get mobileBreakpoint(): number;
   get width(): number;
   get resizable(): boolean;
   get isResizing(): boolean;
@@ -39,9 +40,9 @@ export interface SidebarMenuSubItemContextValue {
   get insideMenuSubItem(): boolean;
 }
 
-const SIDEBAR_CONTEXT = Symbol('kumo-sidebar');
-const SIDEBAR_MENU_ITEM_CONTEXT = Symbol('kumo-sidebar-menu-item');
-const SIDEBAR_MENU_SUB_ITEM_CONTEXT = Symbol('kumo-sidebar-menu-sub-item');
+const SIDEBAR_CONTEXT = Symbol("kumo-sidebar");
+const SIDEBAR_MENU_ITEM_CONTEXT = Symbol("kumo-sidebar-menu-item");
+const SIDEBAR_MENU_SUB_ITEM_CONTEXT = Symbol("kumo-sidebar-menu-sub-item");
 
 export function setSidebarContext(context: SidebarContextValue) {
   setContext(SIDEBAR_CONTEXT, context);
@@ -49,22 +50,31 @@ export function setSidebarContext(context: SidebarContextValue) {
 
 export function getSidebarContext(component: string) {
   const context = getContext<SidebarContextValue | undefined>(SIDEBAR_CONTEXT);
-  if (!context) throw new Error(`${component} must be used inside <Sidebar.Provider>.`);
+  if (!context)
+    throw new Error(`${component} must be used inside <Sidebar.Provider>.`);
   return context;
 }
 
-export function setSidebarMenuItemContext(context: SidebarMenuItemContextValue) {
+export function setSidebarMenuItemContext(
+  context: SidebarMenuItemContextValue,
+) {
   setContext(SIDEBAR_MENU_ITEM_CONTEXT, context);
 }
 
 export function getSidebarMenuItemContext() {
-  return getContext<SidebarMenuItemContextValue | undefined>(SIDEBAR_MENU_ITEM_CONTEXT);
+  return getContext<SidebarMenuItemContextValue | undefined>(
+    SIDEBAR_MENU_ITEM_CONTEXT,
+  );
 }
 
-export function setSidebarMenuSubItemContext(context: SidebarMenuSubItemContextValue) {
+export function setSidebarMenuSubItemContext(
+  context: SidebarMenuSubItemContextValue,
+) {
   setContext(SIDEBAR_MENU_SUB_ITEM_CONTEXT, context);
 }
 
 export function getSidebarMenuSubItemContext() {
-  return getContext<SidebarMenuSubItemContextValue | undefined>(SIDEBAR_MENU_SUB_ITEM_CONTEXT);
+  return getContext<SidebarMenuSubItemContextValue | undefined>(
+    SIDEBAR_MENU_SUB_ITEM_CONTEXT,
+  );
 }

@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import { getContext } from 'svelte';
   import { cn } from '$lib/utils/cn';
-  interface CollapsibleContext { get open(): boolean; get contentId(): string; toggle(): void; }
+  interface CollapsibleContext { get open(): boolean; get contentId(): string; get autoScrollOnOpen(): boolean; toggle(): void; }
   interface Props { children?: Snippet; class?: string; [key: string]: unknown; }
   let { children, class: className, ...rest }: Props = $props();
   const collapsible = getContext<CollapsibleContext>('kumo-sidebar-collapsible');

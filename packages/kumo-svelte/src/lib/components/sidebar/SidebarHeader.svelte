@@ -5,6 +5,6 @@
   let { children, class: className, ...rest }: Props = $props();
 </script>
 
-<div data-sidebar="header" class={cn('flex h-[58px] items-center gap-1 overflow-hidden border-b border-kumo-line px-3.5', className)} {...rest}>
+<div data-sidebar="header" class={cn('flex h-[58px] shrink-0 items-center gap-1 overflow-hidden border-b border-kumo-line px-3', className)} {...rest}>
   {@render children?.()}
 </div>

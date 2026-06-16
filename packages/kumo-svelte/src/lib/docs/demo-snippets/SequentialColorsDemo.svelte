@@ -29,7 +29,7 @@
 
 <LayerCard>
   <LayerCard.Secondary class="!m-0 !p-0">
-    <Table layout="fixed" class="!m-0 !p-0">
+    <Table layout="fixed" class="!m-0 !p-0 [&_td]:!px-6 [&_td]:!py-6">
       <Table.Body>
         <Table.Row>
           {#each scale as _, index}
@@ -40,7 +40,7 @@
     </Table>
   </LayerCard.Secondary>
   <LayerCard.Primary class="!m-0 !p-0">
-    <Table layout="fixed" class="!m-0 !p-0">
+    <Table layout="fixed" class="!m-0 !p-0 [&_td]:!px-6 [&_td]:!py-8">
       <Table.Body>
         <Table.Row>
           {#each scale as hex}

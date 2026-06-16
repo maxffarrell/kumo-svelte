@@ -5,7 +5,7 @@
 
 <LayerCard>
   <LayerCard.Secondary class="!m-0 !p-0" />
-  <Table class="!m-0 !p-0 [&_tbody]:text-sm [&_tbody]:font-medium [&_tbody]:text-kumo-default">
+  <Table class="!m-0 !p-0 [&_tbody]:text-sm [&_tbody]:font-medium [&_tbody]:text-kumo-default [&_td]:!px-6 [&_td]:!py-6">
     <colgroup>
       <col class="w-[14%]" />
       <col class="w-[38%]" />
@@ -22,7 +22,7 @@
     </Table.Body>
   </Table>
   <LayerCard.Primary class="!m-0 !p-0">
-    <Table layout="fixed" class="!m-0 !p-0 w-full [&_td]:align-top [&_td]:text-kumo-default">
+    <Table layout="fixed" class="!m-0 !p-0 w-full [&_td]:!px-6 [&_td]:!py-8 [&_td]:align-top [&_td]:text-kumo-default">
       <colgroup>
         <col class="w-[14%]" />
         <col class="w-[38%]" />

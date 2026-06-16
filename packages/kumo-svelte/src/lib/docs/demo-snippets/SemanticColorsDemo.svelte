@@ -45,9 +45,9 @@
           {#each semanticColorNames as name}
             {@const color = semantic(name, isDarkMode)}
             <Table.Cell class="w-1/6">
-              <div class="flex items-center gap-2">
-                <div style:background-color={color} class="size-5 rounded"></div>
-                <span class="font-mono text-xs">{color}</span>
+              <div class="flex items-center gap-4">
+                <div style:background-color={color} class="size-10 rounded-lg"></div>
+                <span class="font-mono text-xl">{color}</span>
               </div>
             </Table.Cell>
           {/each}

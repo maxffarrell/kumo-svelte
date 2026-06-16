@@ -45,9 +45,9 @@
         <Table.Row>
           {#each scale as hex}
             <Table.Cell class="w-1/5">
-              <div class="flex items-center gap-2">
-                <div style:background-color={hex} class="size-5 rounded"></div>
-                <span class="font-mono text-xs">{hex}</span>
+              <div class="flex items-center gap-4">
+                <div style:background-color={hex} class="size-10 rounded-lg"></div>
+                <span class="font-mono text-xl">{hex}</span>
               </div>
             </Table.Cell>
           {/each}

@@ -62,9 +62,13 @@
             'primitives/skeleton-line': 'components/loader'
           };
           const sourcePath = sourceMap[sourceFile] ?? sourceFile;
-          if (sourcePath.startsWith('blocks/')) return `${repo}/tree/main/src/${sourcePath}`;
-          if (/\.\w+$/.test(sourceFile)) return `${repo}/blob/main/src/lib/${sourcePath}`;
-          return `${repo}/tree/main/src/lib/${sourcePath}`;
+          if (sourcePath.startsWith('blocks/')) {
+            return `${repo}/tree/main/packages/kumo-svelte/src/${sourcePath}`;
+          }
+          if (/\.\w+$/.test(sourcePath)) {
+            return `${repo}/blob/main/packages/kumo-svelte/src/lib/${sourcePath}`;
+          }
+          return `${repo}/tree/main/packages/kumo-svelte/src/lib/${sourcePath}`;
         })()
       : null
   );

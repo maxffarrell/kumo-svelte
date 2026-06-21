@@ -40,13 +40,13 @@
     </Table>
   </LayerCard.Secondary>
   <LayerCard.Primary class="!m-0 !p-0">
-    <Table layout="fixed" class="!m-0 !p-0 [&_td]:!px-6 [&_td]:!py-8">
+    <Table layout="fixed" class="!m-0 !p-0 [&_td]:!px-6 [&_td]:!py-6">
       <Table.Body>
         <Table.Row>
           {#each scale as hex}
             <Table.Cell class="w-1/5">
               <div class="flex items-center gap-4">
-                <div style:background-color={hex} class="size-10 rounded-lg"></div>
+                <div style:background-color={hex} class="size-10 shrink-0 rounded-lg"></div>
                 <span class="font-mono text-xl">{hex}</span>
               </div>
             </Table.Cell>

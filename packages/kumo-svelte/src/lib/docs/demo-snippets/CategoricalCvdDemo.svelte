@@ -31,7 +31,7 @@
 
 <LayerCard>
   <LayerCard.Secondary class="!m-0 !p-0">
-    <Table layout="fixed" class="!m-0 !p-0 [&_td]:!px-6 [&_td]:!py-6">
+    <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
           {#each categoricalColorIndices as colorIndex}
@@ -42,14 +42,14 @@
     </Table>
   </LayerCard.Secondary>
   <LayerCard.Primary class="!m-0 !p-0">
-    <Table layout="fixed" class="!m-0 !p-0 [&_td]:!px-6 [&_td]:!py-6">
+    <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
           {#each simulatedColors as color}
-            <Table.Cell class="w-1/6">
-              <div class="flex items-center gap-4">
-                <div style:background-color={color} class="size-10 shrink-0 rounded-lg"></div>
-                <span class="font-mono text-xl">{color}</span>
+            <Table.Cell class="w-1/6 text-center">
+              <div class="flex items-center gap-2">
+                <div style:background-color={color} class="size-5 rounded"></div>
+                <span class="font-mono text-xs">{color}</span>
               </div>
             </Table.Cell>
           {/each}

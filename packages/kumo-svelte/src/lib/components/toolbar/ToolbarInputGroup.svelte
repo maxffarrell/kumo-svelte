@@ -15,6 +15,6 @@
   const size = $derived(toolbar?.size ?? 'base');
 </script>
 
-<InputGroup class={toolbarControlClassName(className)} {size} {...rest}>
+<InputGroup {...rest} class={toolbarControlClassName(className)} {size} wrapLabel={false}>
   {@render children?.()}
 </InputGroup>

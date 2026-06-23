@@ -8,6 +8,7 @@
     onValueChange?: (value: string) => void;
     oninput?: (event: Event) => void;
     id?: string;
+    'aria-label'?: string;
     disabled?: boolean;
     [key: string]: unknown;
   }
@@ -18,6 +19,7 @@
     onValueChange,
     oninput,
     id,
+    'aria-label': ariaLabel,
     disabled,
     ...rest
   }: Props = $props();
@@ -27,6 +29,7 @@
   const tokens = $derived(INPUT_GROUP_SIZE[size]);
   const isIndividual = $derived(context?.focusMode === 'individual');
   const inputId = $derived(id ?? context?.inputId);
+  const effectiveAriaLabel = $derived(ariaLabel ?? context?.ariaLabel);
   const isDisabled = $derived(disabled ?? context?.disabled);
   const hasError = $derived(Boolean(context?.error));
   const describedBy = $derived(context?.describedBy);
@@ -41,6 +44,7 @@
 <input
   bind:value
   id={inputId}
+  aria-label={effectiveAriaLabel}
   disabled={isDisabled}
   aria-invalid={hasError || undefined}
   aria-describedby={describedBy}

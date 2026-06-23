@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -5224,7 +5224,6 @@
         "bg-kumo-control",
         "border-kumo-line",
         "ring-kumo-brand",
-        "ring-kumo-focus",
         "ring-kumo-line"
       ],
       "subComponents": {

@@ -28,6 +28,7 @@
     error?: FieldError;
     required?: boolean;
     id?: string;
+    wrapLabel?: boolean;
     [key: string]: unknown;
   }
 
@@ -43,6 +44,7 @@
     error,
     required,
     id,
+    wrapLabel = true,
     ...rest
   }: Props = $props();
 
@@ -50,6 +52,7 @@
   const inputId = $derived(id ?? generatedId);
   const descriptionId = $derived(description ? `${inputId}-description` : undefined);
   const errorId = $derived(error ? `${inputId}-error` : undefined);
+  const ariaLabel = $derived(typeof rest['aria-label'] === 'string' ? rest['aria-label'] : undefined);
   const showError = $derived(typeof error === 'string' ? error : error?.message);
   const hasField = $derived(Boolean(label || description || showError));
 
@@ -68,6 +71,9 @@
     },
     get inputId() {
       return inputId;
+    },
+    get ariaLabel() {
+      return ariaLabel;
     },
     get describedBy() {
       return [descriptionId, errorId].filter(Boolean).join(' ') || undefined;
@@ -134,7 +140,7 @@
     {/if}
   </div>
 {:else}
-  {#if focusMode === 'container'}
+  {#if focusMode === 'container' && wrapLabel}
     <label class="!mb-0 block w-full">
       {@render control()}
     </label>

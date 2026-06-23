@@ -47,8 +47,8 @@ export function toolbarControlClassName(className?: string) {
     'relative min-w-0 border-0 bg-transparent shadow-none ring-0 focus:z-2 focus-within:z-2 focus-visible:z-2',
     'rounded-none first:rounded-l-lg last:rounded-r-lg only:rounded-lg',
     'not-first:border-l not-first:border-kumo-line',
-    'focus:ring-kumo-focus/50 focus:ring-[1.5px] focus-visible:ring-2 focus-visible:ring-kumo-brand',
-    'focus-within:ring-kumo-focus/50 focus-within:ring-[1.5px]',
+    'focus:ring-2 focus:ring-kumo-brand focus-visible:ring-2 focus-visible:ring-kumo-brand',
+    'focus-within:ring-2 focus-within:ring-kumo-brand',
     className
   );
 }

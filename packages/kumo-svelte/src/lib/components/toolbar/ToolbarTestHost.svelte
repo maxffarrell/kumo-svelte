@@ -26,3 +26,11 @@
   <Toolbar.Button aria-label="Filter">Filter</Toolbar.Button>
   <Toolbar.Button aria-label="Settings">Settings</Toolbar.Button>
 </Toolbar>
+
+<Toolbar>
+  <Toolbar.InputGroup aria-label="Worker subdomain">
+    <InputGroup.Input placeholder="my-worker" />
+    <InputGroup.Suffix>.workers.dev</InputGroup.Suffix>
+  </Toolbar.InputGroup>
+  <Toolbar.Button>Visit</Toolbar.Button>
+</Toolbar>

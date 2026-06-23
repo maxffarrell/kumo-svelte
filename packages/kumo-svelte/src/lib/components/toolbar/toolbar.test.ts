@@ -61,4 +61,17 @@ describe('Toolbar', () => {
     await fireEvent.keyDown(filter, { key: 'ArrowRight' });
     expect(document.activeElement).toBe(settings);
   });
+
+  it('moves focus from Toolbar.InputGroup input with suffix to the next toolbar button', async () => {
+    render(ToolbarTestHost);
+
+    const input = screen.getByRole('textbox', { name: 'Worker subdomain' });
+    const visit = screen.getByRole('button', { name: 'Visit' });
+
+    input.focus();
+    expect(document.activeElement).toBe(input);
+
+    await fireEvent.keyDown(input, { key: 'ArrowRight' });
+    expect(document.activeElement).toBe(visit);
+  });
 });

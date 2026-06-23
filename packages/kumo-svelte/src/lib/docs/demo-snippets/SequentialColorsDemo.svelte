@@ -33,7 +33,7 @@
       <Table.Body>
         <Table.Row>
           {#each scale as _, index}
-            <Table.Cell class="w-1/5 whitespace-nowrap">Step {index + 1}</Table.Cell>
+            <Table.Cell class={index === 0 ? 'w-1/5 whitespace-nowrap !pl-6' : 'w-1/5 whitespace-nowrap'}>Step {index + 1}</Table.Cell>
           {/each}
         </Table.Row>
       </Table.Body>
@@ -43,8 +43,8 @@
     <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
-          {#each scale as hex}
-            <Table.Cell class="w-1/5">
+          {#each scale as hex, index}
+            <Table.Cell class={index === 0 ? 'w-1/5 !pl-6' : 'w-1/5'}>
               <div class="flex items-center gap-2">
                 <div style:background-color={hex} class="size-5 rounded"></div>
                 <span class="font-mono text-xs">{hex}</span>

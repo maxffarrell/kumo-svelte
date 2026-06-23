@@ -34,8 +34,8 @@
     <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
-          {#each categoricalColorIndices as colorIndex}
-            <Table.Cell class="w-1/6 whitespace-nowrap">{colorIndex}</Table.Cell>
+          {#each categoricalColorIndices as colorIndex, index}
+            <Table.Cell class={index === 0 ? 'w-1/6 whitespace-nowrap !pl-6' : 'w-1/6 whitespace-nowrap'}>{colorIndex}</Table.Cell>
           {/each}
         </Table.Row>
       </Table.Body>
@@ -45,8 +45,8 @@
     <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
-          {#each simulatedColors as color}
-            <Table.Cell class="w-1/6 text-center">
+          {#each simulatedColors as color, index}
+            <Table.Cell class={index === 0 ? 'w-1/6 text-center !pl-6' : 'w-1/6 text-center'}>
               <div class="flex items-center gap-2">
                 <div style:background-color={color} class="size-5 rounded"></div>
                 <span class="font-mono text-xs">{color}</span>

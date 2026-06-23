@@ -31,8 +31,8 @@
     <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
-          {#each categoricalColorIndices as colorIndex}
-            <Table.Cell class="w-1/6 whitespace-nowrap">{colorIndex}</Table.Cell>
+          {#each categoricalColorIndices as colorIndex, index}
+            <Table.Cell class={index === 0 ? 'w-1/6 whitespace-nowrap !pl-6' : 'w-1/6 whitespace-nowrap'}>{colorIndex}</Table.Cell>
           {/each}
         </Table.Row>
       </Table.Body>
@@ -42,9 +42,9 @@
     <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
-          {#each categoricalColorIndices as colorIndex}
+          {#each categoricalColorIndices as colorIndex, index}
             {@const color = ChartPalette.categorical(colorIndex, isDarkMode)}
-            <Table.Cell class="w-1/6">
+            <Table.Cell class={index === 0 ? 'w-1/6 !pl-6' : 'w-1/6'}>
               <div class="flex items-center gap-2">
                 <div style:background-color={color} class="size-5 rounded"></div>
                 <span class="font-mono text-xs">{color}</span>

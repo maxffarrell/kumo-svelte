@@ -14,7 +14,7 @@
     </colgroup>
     <Table.Body>
       <Table.Row>
-        <Table.Cell>System</Table.Cell>
+        <Table.Cell class="!pl-6">System</Table.Cell>
         <Table.Cell>When to use</Table.Cell>
         <Table.Cell>User task</Table.Cell>
         <Table.Cell>Examples</Table.Cell>
@@ -32,7 +32,7 @@
       <Table.Body>
         {#each colorSystemRows as { system, when, task, examples }}
           <Table.Row>
-            <Table.Cell>{system}</Table.Cell>
+            <Table.Cell class="!pl-6">{system}</Table.Cell>
             <Table.Cell>{when}</Table.Cell>
             <Table.Cell>{task}</Table.Cell>
             <Table.Cell>{examples}</Table.Cell>

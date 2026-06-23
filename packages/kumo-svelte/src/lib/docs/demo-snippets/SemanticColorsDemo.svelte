@@ -31,8 +31,8 @@
     <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
-          {#each semanticColorNames as name}
-            <Table.Cell class="w-1/6 whitespace-nowrap">{name}</Table.Cell>
+          {#each semanticColorNames as name, index}
+            <Table.Cell class={index === 0 ? 'w-1/6 whitespace-nowrap !pl-6' : 'w-1/6 whitespace-nowrap'}>{name}</Table.Cell>
           {/each}
         </Table.Row>
       </Table.Body>
@@ -42,9 +42,9 @@
     <Table layout="fixed" class="!m-0 !p-0">
       <Table.Body>
         <Table.Row>
-          {#each semanticColorNames as name}
+          {#each semanticColorNames as name, index}
             {@const color = semantic(name, isDarkMode)}
-            <Table.Cell class="w-1/6">
+            <Table.Cell class={index === 0 ? 'w-1/6 !pl-6' : 'w-1/6'}>
               <div class="flex items-center gap-2">
                 <div style:background-color={color} class="size-5 rounded"></div>
                 <span class="font-mono text-xs">{color}</span>

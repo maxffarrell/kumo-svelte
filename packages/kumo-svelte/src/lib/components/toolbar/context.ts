@@ -48,6 +48,7 @@ export function toolbarControlClassName(className?: string) {
     'rounded-none first:rounded-l-lg last:rounded-r-lg only:rounded-lg',
     'not-first:border-l not-first:border-kumo-line',
     'focus:ring-kumo-focus/50 focus:ring-[1.5px] focus-visible:ring-2 focus-visible:ring-kumo-brand',
+    'focus-within:ring-kumo-focus/50 focus-within:ring-[1.5px]',
     className
   );
 }

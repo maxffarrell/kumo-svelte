@@ -42,6 +42,9 @@ describe('Toolbar', () => {
 
     expect(toolbarGroup.className).toContain('h-7');
     expect(toolbarGroup.className).toContain('rounded-none');
+    expect(toolbarGroup.className).toContain('first:rounded-l-lg');
+    expect(toolbarGroup.className).toContain('last:rounded-r-lg');
+    expect(toolbarGroup.className).toContain('focus-within:ring-kumo-focus/50');
     expect(plainGroup.className).not.toContain('rounded-none');
   });
 

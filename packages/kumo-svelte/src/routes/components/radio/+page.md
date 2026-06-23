@@ -157,6 +157,13 @@ Use `Radio.Legend` with `class="sr-only"` to keep the legend accessible to
 
 <ComponentExample demo="RadioLegendCustomDemo" />
 
+### Typed Values
+
+Use generic values when radio options are numbers, enums, or other non-string
+  values.
+
+<ComponentExample demo="RadioTypedValueDemo" />
+
 </ComponentSection>
 
 <!-- API Reference -->

@@ -37,7 +37,9 @@
     name,
     class: className,
     onValueChange
-  }: Props = $props();
+  }: Props<Value> = $props();
+
+  const serializedValues = new Map<string, unknown>();
 
   $effect(() => {
     if (value === undefined && defaultValue !== undefined) {
@@ -45,17 +47,44 @@
     }
   });
 
+  function serializeValue(itemValue: unknown) {
+    if (typeof itemValue === 'string') return itemValue;
+
+    const serialized = `kumo-radio:${typeof itemValue}:${String(itemValue)}`;
+    serializedValues.set(serialized, itemValue);
+    return serialized;
+  }
+
+  function deserializeValue(serializedValue: string) {
+    return serializedValues.has(serializedValue) ? serializedValues.get(serializedValue) : serializedValue;
+  }
+
+  const primitiveValue = $derived(value === undefined ? undefined : serializeValue(value));
+  function handleValueChange(nextValue: string, eventDetails?: unknown) {
+    const deserializedValue = deserializeValue(nextValue) as Value;
+    value = deserializedValue;
+    onValueChange?.(deserializedValue, eventDetails);
+  }
+
   setContext('kumo-radio-group', {
     get controlPosition() {
       return controlPosition;
     },
     get appearance() {
       return appearance;
-    }
+    },
+    serializeValue
   });
 </script>
 
-<RadioGroupPrimitive.Root bind:value {orientation} {disabled} {required} {name} {onValueChange}>
+<RadioGroupPrimitive.Root
+  value={primitiveValue}
+  {orientation}
+  {disabled}
+  {required}
+  {name}
+  onValueChange={handleValueChange}
+>
   <fieldset class={cn('flex flex-col gap-4', className)} {disabled}>
     {#if legend}
       <legend class="text-base font-medium text-kumo-default">

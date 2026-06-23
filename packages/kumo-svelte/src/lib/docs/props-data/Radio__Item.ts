@@ -47,7 +47,7 @@ const rows: PropRow[] = [
   },
   {
     "prop": "value",
-    "type": "string",
+    "type": "Value",
     "required": true,
     "description": "Controlled value."
   }

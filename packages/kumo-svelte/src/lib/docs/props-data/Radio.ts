@@ -98,7 +98,7 @@ const rows: PropRow[] = [
   },
   {
     "prop": "onValueChange",
-    "type": "(value: string) => void",
+    "type": "(value: string, eventDetails?: unknown) => void",
     "required": false,
     "description": "Called when the value changes."
   }

@@ -150,6 +150,12 @@ For confirmation dialogs that should not be dismissed by clicking outside, use
 
 <ComponentExample demo="DialogWithActionsDemo" />
 
+### Custom Max Width
+
+Dialog max width can be customized with utility classes like `max-w-lg`.
+
+<ComponentExample demo="DialogMaxWidthDemo" />
+
 ### With Select
 
 

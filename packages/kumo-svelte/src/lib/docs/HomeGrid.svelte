@@ -61,6 +61,7 @@
         Tabs,
         Text,
         Toasty,
+        Toolbar,
         createKumoToastManager,
         Tooltip,
     } from "$lib";
@@ -125,6 +126,33 @@
                             >
                             <Button loading>Create Worker</Button>
                         </div>
+                    </div>
+                </li>
+
+                <li
+                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                >
+                    <a
+                        id="toolbar"
+                        href="/components/toolbar"
+                        class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default"
+                        >Toolbar</a
+                    >
+                    <div
+                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                    >
+                        <Toolbar class="w-full max-w-md">
+                            <Toolbar.InputGroup
+                                aria-label="Search DNS records"
+                                class="flex-1"
+                            >
+                                <InputGroupAddon>
+                                    <MagnifyingGlass class="size-4" />
+                                </InputGroupAddon>
+                                <InputGroupInput placeholder="Search" />
+                            </Toolbar.InputGroup>
+                            <Toolbar.Button icon={Plus} aria-label="Add" />
+                        </Toolbar>
                     </div>
                 </li>
 

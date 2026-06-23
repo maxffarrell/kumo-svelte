@@ -3568,7 +3568,7 @@
           "description": "Additional classes merged onto the root element."
         },
         "onValueChange": {
-          "type": "(value: string) => void",
+          "type": "(value: string, eventDetails?: unknown) => void",
           "optional": true,
           "description": "Called when the value changes."
         }
@@ -3634,7 +3634,7 @@
               "description": "Supporting description text."
             },
             "value": {
-              "type": "string",
+              "type": "Value",
               "optional": true,
               "description": "Controlled value."
             },
@@ -3664,7 +3664,7 @@
               "description": "Additional classes merged onto the root element."
             },
             "defaultValue": {
-              "type": "string",
+              "type": "Value",
               "optional": true,
               "description": "Initial uncontrolled value."
             },
@@ -3674,7 +3674,7 @@
               "description": "Marks the field as required."
             },
             "onValueChange": {
-              "type": "(value: string) => void",
+              "type": "(value: Value, eventDetails?: unknown) => void",
               "optional": true,
               "description": "Called when the value changes."
             }
@@ -3730,7 +3730,7 @@
               "description": "Supporting description text."
             },
             "value": {
-              "type": "string",
+              "type": "Value",
               "optional": false,
               "required": true,
               "description": "Controlled value."

@@ -1,4 +1,4 @@
-<script lang="ts" generics="Value = string">
+<script lang="ts" generics="Value = unknown">
   import { RadioGroup as RadioGroupPrimitive } from 'bits-ui';
   import { getContext } from 'svelte';
   import type { Snippet } from 'svelte';
@@ -8,9 +8,10 @@
   interface RadioGroupContext {
     readonly controlPosition: RadioControlPosition | undefined;
     readonly appearance: RadioAppearance;
+    serializeValue: (value: unknown) => string;
   }
 
-  export interface Props<Value = string> {
+  export interface Props<Value = unknown> {
     children?: Snippet;
     class?: string;
     disabled?: boolean;
@@ -30,18 +31,19 @@
     label,
     description,
     value
-  }: Props = $props();
+  }: Props<Value> = $props();
 
   const group = getContext<RadioGroupContext | undefined>('kumo-radio-group');
   const appearance = $derived(appearanceProp ?? group?.appearance ?? 'default');
   const isCard = $derived(appearance === 'card');
   const effectiveControlPosition = $derived(group?.controlPosition ?? (isCard ? 'end' : 'start'));
   const controlAtStart = $derived(effectiveControlPosition === 'start');
+  const primitiveValue = $derived(group?.serializeValue(value) ?? (typeof value === 'string' ? value : String(value)));
 </script>
 
 {#snippet control()}
   <RadioGroupPrimitive.Item
-    {value}
+    value={primitiveValue}
     {disabled}
     data-kumo-component="Radio"
     data-kumo-part="item"

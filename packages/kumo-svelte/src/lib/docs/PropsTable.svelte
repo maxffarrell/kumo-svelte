@@ -4,9 +4,10 @@
   interface Props {
     component?: string;
     sourceFile?: string;
+    hiddenProps?: string[];
   }
 
-  let { component, sourceFile }: Props = $props();
+  let { component, sourceFile, hiddenProps = [] }: Props = $props();
 
   const propModules = import.meta.glob('./props-data/*.ts', {
     eager: true,
@@ -165,6 +166,7 @@
     const omitted = new Set([
       ...(omittedProps[key] ?? omittedProps[resolvedKey] ?? []),
       ...(snippetPropsOmittedByComponent[key] ?? snippetPropsOmittedByComponent[resolvedKey] ?? []),
+      ...hiddenProps,
       ...(isTopLevelComponent ? [] : ['class', 'children'])
     ]);
     const required = new Set(requiredProps[key] ?? requiredProps[resolvedKey] ?? []);

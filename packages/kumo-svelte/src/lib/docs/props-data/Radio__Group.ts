@@ -41,7 +41,7 @@ const rows: PropRow[] = [
   },
   {
     "prop": "value",
-    "type": "string",
+    "type": "Value",
     "required": false,
     "description": "Controlled value."
   },
@@ -72,7 +72,7 @@ const rows: PropRow[] = [
   },
   {
     "prop": "defaultValue",
-    "type": "string",
+    "type": "Value",
     "required": false,
     "description": "Initial uncontrolled value."
   },
@@ -84,7 +84,7 @@ const rows: PropRow[] = [
   },
   {
     "prop": "onValueChange",
-    "type": "(value: string) => void",
+    "type": "(value: Value, eventDetails?: unknown) => void",
     "required": false,
     "description": "Called when the value changes."
   }

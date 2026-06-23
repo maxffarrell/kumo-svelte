@@ -76,7 +76,7 @@
     description?: string | Snippet;
     error?: string;
     class?: string;
-    onValueChange?: (value: string) => void;
+    onValueChange?: (value: string, eventDetails?: unknown) => void;
   }
 
   let {

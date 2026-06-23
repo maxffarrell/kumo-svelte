@@ -1,5 +1,16 @@
 # kumo-svelte
 
+## 0.3.0
+
+### Minor Changes
+
+- 1d9c207: Port Kumo 2.6 updates, including Toolbar, chart legend interactions, button token styling, sidebar overflow fixes, and typed radio values.
+
+### Patch Changes
+
+- 33173c8: Fix documentation GitHub source links so they point to files under the package directory.
+- 652e979: Update dependencies under the three-day minimum release age policy and refresh security overrides for transitive advisories.
+
 ## 0.2.0
 
 ### Minor Changes

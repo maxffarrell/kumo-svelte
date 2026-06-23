@@ -1095,6 +1095,10 @@ pre.shiki {
   outline: solid 1px var(--color-kumo-focus);
 }
 
+[role="toolbar"] > [data-slot="input-group"][data-focus-mode="container"]:has(:focus-visible) {
+  outline: none;
+}
+
 /* InputGroup hybrid mode uses the same 1px active outline as individual controls. */
 [data-slot="input-group-container-zone"]:has(:focus-visible) {
   outline: solid 1px var(--color-kumo-focus);

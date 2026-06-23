@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="Value = string">
   import { RadioGroup as RadioGroupPrimitive } from 'bits-ui';
   import { getContext } from 'svelte';
   import type { Snippet } from 'svelte';
@@ -10,7 +10,7 @@
     readonly appearance: RadioAppearance;
   }
 
-  interface Props {
+  export interface Props<Value = string> {
     children?: Snippet;
     class?: string;
     disabled?: boolean;
@@ -18,7 +18,7 @@
     appearance?: RadioAppearance;
     label: string | Snippet;
     description?: string | Snippet;
-    value: string;
+    value: Value;
   }
 
   let {

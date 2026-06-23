@@ -55,6 +55,7 @@ export const componentItems: NavItem[] = [
   { label: 'Table of Contents', href: '/components/table-of-contents' },
   { label: 'Tabs', href: '/components/tabs' },
   { label: 'Text', href: '/components/text' },
+  { label: 'Toolbar', href: '/components/toolbar' },
   { label: 'Toast', href: '/components/toast' },
   { label: 'Tooltip', href: '/components/tooltip' }
 ];

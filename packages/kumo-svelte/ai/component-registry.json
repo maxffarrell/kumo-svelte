@@ -608,15 +608,14 @@
       },
       "colors": [
         "bg-kumo-base",
-        "bg-kumo-brand",
-        "bg-kumo-brand-hover",
-        "bg-kumo-danger",
         "bg-kumo-tint",
         "ring-kumo-brand",
+        "ring-kumo-danger",
         "ring-kumo-focus",
-        "ring-kumo-hairline",
+        "ring-kumo-line",
         "text-kumo-danger",
         "text-kumo-default",
+        "text-kumo-strong",
         "text-kumo-subtle"
       ],
       "subComponents": {
@@ -5189,6 +5188,119 @@
       "props": {},
       "colors": []
     },
+    "Toolbar": {
+      "name": "Toolbar",
+      "type": "component",
+      "category": "Action",
+      "description": "Compose explicit toolbar controls into one clean grouped card.",
+      "importPath": "kumo-svelte/components/toolbar",
+      "sourceFile": "components/toolbar",
+      "props": {
+        "children": {
+          "type": "Snippet",
+          "optional": false,
+          "required": true,
+          "description": "Toolbar controls rendered as one grouped card."
+        },
+        "size": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "xs",
+            "sm",
+            "base",
+            "lg"
+          ],
+          "default": "base",
+          "description": "Locks every supported toolbar item to this size."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the toolbar root."
+        }
+      },
+      "colors": [
+        "bg-kumo-control",
+        "border-kumo-line",
+        "ring-kumo-brand",
+        "ring-kumo-focus",
+        "ring-kumo-line"
+      ],
+      "subComponents": {
+        "Button": {
+          "description": "Toolbar.Button",
+          "props": {
+            "children": {
+              "type": "Snippet",
+              "optional": true,
+              "description": "Optional visible button label."
+            },
+            "icon": {
+              "type": "Component",
+              "optional": true,
+              "description": "Optional icon component rendered before the label."
+            },
+            "shape": {
+              "type": "enum",
+              "optional": true,
+              "values": [
+                "base",
+                "square",
+                "circle"
+              ],
+              "description": "Button shape. Icon-only toolbar buttons default to square."
+            },
+            "disabled": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Disables the toolbar button."
+            },
+            "loading": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Shows a loading indicator and disables the toolbar button."
+            }
+          }
+        },
+        "Input": {
+          "description": "Toolbar.Input",
+          "props": {
+            "value": {
+              "type": "string | number",
+              "optional": true,
+              "description": "Input value, bindable with `bind:value`."
+            },
+            "onValueChange": {
+              "type": "(value: string) => void",
+              "optional": true,
+              "description": "Called when the input value changes."
+            },
+            "class": {
+              "type": "string",
+              "optional": true,
+              "description": "Additional classes merged onto the toolbar input."
+            }
+          }
+        },
+        "InputGroup": {
+          "description": "Toolbar.InputGroup",
+          "props": {
+            "children": {
+              "type": "Snippet",
+              "optional": false,
+              "required": true,
+              "description": "InputGroup children rendered as one toolbar item."
+            },
+            "class": {
+              "type": "string",
+              "optional": true,
+              "description": "Additional classes merged onto the toolbar input group."
+            }
+          }
+        }
+      }
+    },
     "Tooltip": {
       "name": "Tooltip",
       "type": "component",
@@ -5362,12 +5474,14 @@
       "Tabs",
       "Text",
       "Toast",
+      "Toolbar",
       "Tooltip"
     ],
     "byCategory": {
       "Action": [
         "Button",
-        "Link"
+        "Link",
+        "Toolbar"
       ],
       "Display": [
         "Badge",
@@ -5465,6 +5579,7 @@
         "Tabs",
         "Text",
         "Toast",
+        "Toolbar",
         "Tooltip"
       ],
       "block": [

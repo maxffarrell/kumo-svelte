@@ -15,7 +15,7 @@
   {...rest}
 >
   <div class="min-h-0 min-w-0">
-    <div class="truncate px-3 mt-6 mb-2 text-sm font-medium text-kumo-subtle [[data-sidebar=group]:first-child_&]:mt-2">
+    <div class="truncate px-3 mt-4 mb-2 text-sm font-medium text-kumo-subtle [[data-sidebar=group]:first-child_&]:mt-2">
       {@render children?.()}
     </div>
   </div>

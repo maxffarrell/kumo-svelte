@@ -322,6 +322,14 @@ A notification system for displaying brief, non-intrusive messages to users.
 - Import: `import { Toast } from "kumo-svelte/components/toast";`
 - Source: `components/toast`
 
+## Toolbar
+
+Compose explicit toolbar controls into one clean grouped card.
+
+- Category: Action
+- Import: `import { Toolbar } from "kumo-svelte/components/toolbar";`
+- Source: `components/toolbar`
+
 ## Tooltip
 
 A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.

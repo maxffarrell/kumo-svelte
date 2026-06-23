@@ -28,7 +28,10 @@ type RegistryComponent = {
   sourceFile: string;
   props: Record<string, RegistryProp>;
   colors: string[];
-  subComponents?: Record<string, { description: string; props: Record<string, RegistryProp> }>;
+  subComponents?: Record<
+    string,
+    { description: string; props: Record<string, RegistryProp> }
+  >;
 };
 
 type Registry = {
@@ -54,6 +57,7 @@ const outputDir = join(packageRoot, 'ai');
 
 const categoryByName: Record<string, string> = {
   Button: 'Action',
+  Toolbar: 'Action',
   Link: 'Action',
   Badge: 'Display',
   ClipboardText: 'Display',
@@ -139,7 +143,9 @@ function normalizeDefault(value: string | undefined) {
 }
 
 function enumValues(type: string) {
-  const values = [...type.matchAll(/'([^']+)'|"([^"]+)"/g)].map((match) => match[1] ?? match[2]);
+  const values = [...type.matchAll(/'([^']+)'|"([^"]+)"/g)].map(
+    (match) => match[1] ?? match[2]
+  );
   return values.length > 0 ? values : undefined;
 }
 
@@ -188,7 +194,10 @@ async function loadSubComponents(componentName: string) {
 }
 
 function componentColors(sourceFile: string) {
-  const componentPath = join(componentsDir, sourceFile.replace(/^components\//, ''));
+  const componentPath = join(
+    componentsDir,
+    sourceFile.replace(/^components\//, '')
+  );
   const files = existsSync(componentPath)
     ? readdirSync(componentPath)
         .filter((file) => file.endsWith('.svelte') || file.endsWith('.ts'))
@@ -198,7 +207,9 @@ function componentColors(sourceFile: string) {
 
   for (const file of files) {
     const source = readFileSync(file, 'utf8');
-    for (const match of source.matchAll(/\b(?:bg|text|border|ring|fill|stroke)-kumo-[a-z-]+/g)) {
+    for (const match of source.matchAll(
+      /\b(?:bg|text|border|ring|fill|stroke)-kumo-[a-z-]+/g
+    )) {
       colors.add(match[0]);
     }
   }
@@ -215,7 +226,8 @@ async function buildRegistry() {
 
     const source = readFileSync(page, 'utf8');
     const frontmatter = parseFrontmatter(source);
-    const name = displayNameByRoute[route] ?? frontmatter.title ?? titleCaseRoute(route);
+    const name =
+      displayNameByRoute[route] ?? frontmatter.title ?? titleCaseRoute(route);
     const sourceFile = frontmatter.sourceFile ?? `components/${route}`;
     const props = propRowsToRegistry(await loadPropRows(name));
 
@@ -241,20 +253,28 @@ async function buildRegistry() {
   for (const names of Object.values(byCategory)) names.sort();
 
   const byName = Object.keys(components).sort();
-  const packageJson = JSON.parse(readFileSync(join(packageRoot, 'package.json'), 'utf8')) as { version?: string };
+  const packageJson = JSON.parse(
+    readFileSync(join(packageRoot, 'package.json'), 'utf8')
+  ) as { version?: string };
 
   const previousRegistryPath = join(outputDir, 'component-registry.json');
   const previous = existsSync(previousRegistryPath)
-    ? (JSON.parse(readFileSync(previousRegistryPath, 'utf8')) as Partial<Registry>)
+    ? (JSON.parse(
+        readFileSync(previousRegistryPath, 'utf8')
+      ) as Partial<Registry>)
     : {};
 
   const registry: Registry = {
     version: packageJson.version ?? previous.version ?? '0.0.0',
-    components: Object.fromEntries(Object.entries(components).sort(([a], [b]) => a.localeCompare(b))),
+    components: Object.fromEntries(
+      Object.entries(components).sort(([a], [b]) => a.localeCompare(b))
+    ),
     blocks: previous.blocks ?? {},
     search: {
       byName,
-      byCategory: Object.fromEntries(Object.entries(byCategory).sort(([a], [b]) => a.localeCompare(b))),
+      byCategory: Object.fromEntries(
+        Object.entries(byCategory).sort(([a], [b]) => a.localeCompare(b))
+      ),
       byType: {
         component: byName,
         block: Object.keys(previous.blocks ?? {}).sort()
@@ -272,13 +292,18 @@ async function buildRegistry() {
       '',
       ...byName.map((name) => {
         const component = registry.components[name]!;
-        const relativeSource = relative(packageRoot, join(packageRoot, component.sourceFile));
+        const relativeSource = relative(
+          packageRoot,
+          join(packageRoot, component.sourceFile)
+        );
         return `## ${name}\n\n${component.description}\n\n- Category: ${component.category}\n- Import: \`import { ${name} } from "${component.importPath}";\`\n- Source: \`${relativeSource}\`\n`;
       })
     ].join('\n')
   );
 
-  console.log(`Generated ${byName.length} components in ai/component-registry.json`);
+  console.log(
+    `Generated ${byName.length} components in ai/component-registry.json`
+  );
 }
 
 await buildRegistry();

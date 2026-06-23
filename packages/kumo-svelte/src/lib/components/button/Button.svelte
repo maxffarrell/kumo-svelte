@@ -45,12 +45,13 @@
     },
     variant: {
       primary: {
-        classes: 'bg-kumo-brand !text-white hover:bg-kumo-brand-hover disabled:bg-kumo-brand/50',
+        classes:
+          'relative overflow-hidden bg-(--kumo-button-emphasis-bg) !text-white ring ring-(--kumo-button-emphasis-ring) disabled:opacity-50',
         description: 'High-emphasis button for primary actions'
       },
       secondary: {
         classes:
-          'bg-kumo-base !text-kumo-default ring not-disabled:hover:bg-kumo-tint disabled:bg-kumo-base/50 disabled:!text-kumo-default/70 ring-kumo-hairline data-[state=open]:bg-kumo-base',
+          'bg-kumo-base !text-kumo-default ring not-disabled:hover:bg-kumo-tint disabled:bg-kumo-base/50 disabled:!text-kumo-default/70 ring-kumo-line data-[state=open]:bg-kumo-base',
         description: 'Default button style for most actions'
       },
       ghost: {
@@ -58,16 +59,18 @@
         description: 'Minimal button with no background'
       },
       destructive: {
-        classes: 'bg-kumo-danger !text-white hover:bg-kumo-danger/70',
+        classes:
+          'relative overflow-hidden bg-(--kumo-button-emphasis-bg) !text-white ring ring-(--kumo-button-emphasis-ring) disabled:opacity-50',
         description: 'Danger button for destructive actions like delete'
       },
       'secondary-destructive': {
         classes:
-          'bg-kumo-base !text-kumo-danger ring not-disabled:hover:bg-kumo-base disabled:bg-kumo-base/50 disabled:!text-kumo-danger/70 ring-kumo-hairline data-[state=open]:bg-kumo-base',
+          'bg-kumo-base !text-kumo-danger ring not-disabled:hover:!text-kumo-danger not-disabled:hover:ring-kumo-danger/30 disabled:bg-kumo-base/50 disabled:!text-kumo-danger/70 ring-kumo-line data-[state=open]:bg-kumo-base',
         description: 'Secondary button with destructive text for less prominent dangerous actions'
       },
       outline: {
-        classes: 'bg-transparent text-kumo-default ring ring-kumo-hairline',
+        classes:
+          'bg-transparent text-kumo-default ring ring-kumo-line transition-colors not-disabled:hover:text-kumo-strong not-disabled:hover:ring-kumo-focus/25',
         description: 'Bordered button with transparent background'
       }
     }
@@ -100,10 +103,10 @@
       'focus:outline-none focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
       'cursor-pointer',
       'disabled:cursor-not-allowed disabled:text-kumo-subtle',
-      KUMO_BUTTON_VARIANTS.variant[variant].classes,
       KUMO_BUTTON_VARIANTS.size[size].classes,
       KUMO_BUTTON_VARIANTS.shape[shape].classes,
-      isCompactShape && KUMO_BUTTON_VARIANTS.compactSize[size].classes
+      isCompactShape && KUMO_BUTTON_VARIANTS.compactSize[size].classes,
+      KUMO_BUTTON_VARIANTS.variant[variant].classes
     );
   }
 
@@ -120,7 +123,7 @@
     variant?: Variant;
     loading?: boolean;
     title?: string;
-    componentName?: 'Button' | 'LinkButton';
+    componentName?: 'Button' | 'LinkButton' | 'Toolbar.Button';
     [key: string]: unknown;
   }
 
@@ -152,6 +155,19 @@
 
   const loaderSize = $derived(size === 'lg' ? 16 : 14);
   const externalProps = $derived(external ? { target: '_blank', rel: 'noopener noreferrer' } : {});
+  const emphasisToken = $derived(
+    variant === 'primary'
+      ? 'var(--color-kumo-brand)'
+      : variant === 'destructive'
+        ? 'var(--color-kumo-danger)'
+        : undefined
+  );
+  const emphasisRing = $derived(emphasisToken ? `color-mix(in oklch, ${emphasisToken}, black 10%)` : undefined);
+  const emphasisBg = $derived(emphasisToken ? `color-mix(in oklch, ${emphasisToken}, white 30%)` : undefined);
+  const emphasisGradientStart = $derived(
+    emphasisToken ? `color-mix(in oklch, ${emphasisToken}, white 15%)` : undefined
+  );
+  const emphasisGradientEnd = $derived(emphasisToken);
 </script>
 
 {#snippet buttonElement()}
@@ -164,16 +180,37 @@
     aria-busy={loading || undefined}
     data-kumo-component={componentName}
     data-kumo-part={href ? 'link-button' : 'button'}
+    style:--kumo-button-emphasis-ring={emphasisRing}
+    style:--kumo-button-emphasis-bg={emphasisBg}
+    style:--kumo-button-emphasis-gradient-start={emphasisGradientStart}
+    style:--kumo-button-emphasis-gradient-end={emphasisGradientEnd}
     {...externalProps}
     {...rest}
   >
-    {#if loading}
-      <Loader size={loaderSize} />
-    {:else if IconComponent}
-      <IconComponent />
-    {/if}
-    {#if children}
-      <span class="contents">{@render children()}</span>
+    {#if emphasisToken}
+      <span
+        aria-hidden="true"
+        class="absolute inset-0 translate-y-px rounded-[inherit] bg-linear-to-b from-(--kumo-button-emphasis-gradient-start) to-(--kumo-button-emphasis-gradient-end) group-hover:from-(--kumo-button-emphasis-bg)"
+      ></span>
+      <span class="relative flex items-center gap-1.5">
+        {#if loading}
+          <Loader size={loaderSize} />
+        {:else if IconComponent}
+          <IconComponent />
+        {/if}
+        {#if children}
+          <span class="contents">{@render children()}</span>
+        {/if}
+      </span>
+    {:else}
+      {#if loading}
+        <Loader size={loaderSize} />
+      {:else if IconComponent}
+        <IconComponent />
+      {/if}
+      {#if children}
+        <span class="contents">{@render children()}</span>
+      {/if}
     {/if}
   </svelte:element>
 {/snippet}

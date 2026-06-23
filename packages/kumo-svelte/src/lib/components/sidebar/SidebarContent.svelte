@@ -8,7 +8,7 @@
 <div
   data-sidebar="content"
   class={cn(
-    'relative min-w-0 flex-1 overflow-y-auto overflow-x-hidden px-[11px] py-3 transition-[padding] duration-(--sidebar-animation-duration) group-not-data-[state=collapsed]/sidebar:px-3.5 group-data-[state=collapsed]/sidebar:overflow-x-hidden!',
+    'relative min-w-0 flex-1 overflow-y-auto overflow-x-hidden! px-[11px] py-3 transition-[padding] duration-(--sidebar-animation-duration) group-not-data-[state=collapsed]/sidebar:px-3.5',
     'group-data-[mobile=true]/sidebar:px-3.5',
     className
   )}

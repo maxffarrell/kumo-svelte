@@ -1,25 +1,25 @@
-<script lang="ts">
+<script lang="ts" generics="Value = string">
   import { RadioGroup as RadioGroupPrimitive } from 'bits-ui';
   import { setContext } from 'svelte';
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import type { RadioAppearance, RadioControlPosition } from './Radio.svelte';
 
-  interface Props {
+  export interface Props<Value = string> {
     children?: Snippet;
     legend?: string;
     orientation?: 'vertical' | 'horizontal';
     appearance?: RadioAppearance;
     error?: string;
     description?: string | Snippet;
-    value?: string;
-    defaultValue?: string;
+    value?: Value;
+    defaultValue?: Value;
     disabled?: boolean;
     required?: boolean;
     controlPosition?: RadioControlPosition;
     name?: string;
     class?: string;
-    onValueChange?: (value: string) => void;
+    onValueChange?: (value: Value, eventDetails?: unknown) => void;
   }
 
   let {
@@ -30,7 +30,7 @@
     error,
     description,
     defaultValue,
-    value = $bindable(defaultValue ?? ''),
+    value = $bindable(defaultValue),
     disabled = false,
     required,
     controlPosition,

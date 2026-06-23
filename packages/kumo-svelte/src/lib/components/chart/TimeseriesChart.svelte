@@ -28,12 +28,14 @@
     tooltipBoundary?: 'clipping-ancestors' | Element | Element[];
     tooltipFollowCursor?: 'both' | 'x';
     incomplete?: { before?: number; after?: number };
+    enableLegendSelection?: boolean;
     height?: number;
     onTimeRangeChange?: (from: number, to: number) => void;
     isDarkMode?: boolean;
     gradient?: boolean;
     loading?: boolean;
     ariaDescription?: string;
+    chartRef?: EChartsType | null;
     animation?: boolean;
     animationDuration?: number;
     optionUpdateBehavior?: Record<string, unknown>;
@@ -56,22 +58,24 @@
     tooltipBoundary,
     tooltipFollowCursor = 'both',
     incomplete,
+    enableLegendSelection = false,
     height = 350,
     onTimeRangeChange,
     isDarkMode,
     gradient = false,
     loading = false,
     ariaDescription,
+    chartRef = $bindable(null),
     animation = true,
     animationDuration = 600,
     optionUpdateBehavior
   }: Props = $props();
 
-  let chartRef: EChartsType | null = $state(null);
   let detectedDarkMode = $state(false);
   let containerRef: HTMLDivElement;
   let tooltipAnchor: HTMLSpanElement | null = $state(null);
   let tooltipState: { ts: number; rows: { name: string; value: number; color: string }[]; hiddenCount: number } | null = $state(null);
+  let legendSelected: Record<string, boolean> | null = $state(null);
   let mousePos = $state({ x: 0, y: 0 });
   const effectiveDarkMode = $derived(isDarkMode ?? detectedDarkMode);
 
@@ -207,6 +211,7 @@
       animationEasing: 'cubicOut',
       animationEasingUpdate: 'cubicOut',
       toolbox: { show: false },
+      ...(enableLegendSelection ? { legend: { show: false } } : {}),
       xAxis: {
         name: xAxisName,
         nameLocation: 'middle',
@@ -242,6 +247,7 @@
 
         for (const series of data) {
           if (seenNames.has(series.name)) continue;
+          if (legendSelected && legendSelected[series.name] === false) continue;
           seenNames.add(series.name);
           const value = findNearest(series.data, ts);
           if (value != null) allRows.push({ name: series.name, value, color: series.color });
@@ -270,6 +276,15 @@
       globalout: () => {
         tooltipState = null;
       },
+      legendselectchanged: (params: { selected?: Record<string, boolean> }) => {
+        legendSelected = params.selected ?? null;
+      },
+      legendselected: (params: { selected?: Record<string, boolean> }) => {
+        legendSelected = params.selected ?? null;
+      },
+      legendunselected: (params: { selected?: Record<string, boolean> }) => {
+        legendSelected = params.selected ?? null;
+      },
       ...(onTimeRangeChange
         ? {
             brushend: (params: any) => {
@@ -282,6 +297,12 @@
         : {})
     }
   );
+
+  $effect(() => {
+    enableLegendSelection;
+    effectiveDarkMode;
+    legendSelected = null;
+  });
 
   $effect(() => {
     if (chartRef && onTimeRangeChange && !loading) {

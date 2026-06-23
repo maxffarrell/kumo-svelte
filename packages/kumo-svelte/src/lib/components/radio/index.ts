@@ -14,4 +14,10 @@ export const Radio = Object.assign(RadioRoot, {
 };
 
 export { RadioGroup, RadioItem, RadioLegend };
-export type { RadioAppearance, RadioControlPosition, RadioVariant } from './Radio.svelte';
+export type {
+  RadioAppearance,
+  RadioControlPosition,
+  RadioVariant
+} from './Radio.svelte';
+export type { Props as RadioGroupProps } from './RadioGroup.svelte';
+export type { Props as RadioItemProps } from './RadioItem.svelte';

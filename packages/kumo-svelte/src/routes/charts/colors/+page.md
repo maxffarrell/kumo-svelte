@@ -2,6 +2,7 @@
 title: "Chart Colors"
 description: "Semantic and categorical color tokens for Cloudflare dashboard charts."
 sourceFile: "components/chart/Color.ts"
+contentLayout: "wide"
 ---
 
 <script>

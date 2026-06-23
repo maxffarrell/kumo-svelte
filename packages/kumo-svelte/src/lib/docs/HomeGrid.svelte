@@ -133,32 +133,6 @@
                     class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
                 >
                     <a
-                        id="toolbar"
-                        href="/components/toolbar"
-                        class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default"
-                        >Toolbar</a
-                    >
-                    <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
-                    >
-                        <Toolbar class="w-[260px]">
-                            <Toolbar.Input
-                                aria-label="Search DNS records"
-                                placeholder="Search..."
-                            />
-                            <Toolbar.Button
-                                icon={MagnifyingGlass}
-                                aria-label="Search"
-                            />
-                            <Toolbar.Button icon={Plus} aria-label="Add" />
-                        </Toolbar>
-                    </div>
-                </li>
-
-                <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
-                >
-                    <a
                         id="input"
                         href="/components/input"
                         class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default"
@@ -191,6 +165,32 @@
                             placeholder="Select version"
                             {options}
                         />
+                    </div>
+                </li>
+
+                <li
+                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                >
+                    <a
+                        id="toolbar"
+                        href="/components/toolbar"
+                        class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default"
+                        >Toolbar</a
+                    >
+                    <div
+                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                    >
+                        <Toolbar class="w-[260px]">
+                            <Toolbar.Input
+                                aria-label="Search DNS records"
+                                placeholder="Search..."
+                            />
+                            <Toolbar.Button
+                                icon={MagnifyingGlass}
+                                aria-label="Search"
+                            />
+                            <Toolbar.Button icon={Plus} aria-label="Add" />
+                        </Toolbar>
                     </div>
                 </li>
 

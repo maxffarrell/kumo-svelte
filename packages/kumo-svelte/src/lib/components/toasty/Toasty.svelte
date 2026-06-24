@@ -13,6 +13,10 @@
   } from './manager.svelte';
 
   export const KUMO_TOAST_VARIANTS = {
+    close: {
+      classes: 'absolute top-2 right-2 size-5 rounded text-kumo-subtle hover:bg-current/15',
+      description: 'Button-based close control with variant-aware hover tint'
+    },
     variant: {
       default: {
         classes: 'border-kumo-fill bg-kumo-base',

@@ -20,6 +20,13 @@
     info: 'bg-kumo-info/5'
   };
 
+  const closeClasses: Partial<Record<KumoToastVariant, string>> = {
+    success: 'text-kumo-success',
+    error: 'text-kumo-danger',
+    warning: 'text-kumo-warning',
+    info: 'text-kumo-info'
+  };
+
   function iconForVariant(variant: KumoToastVariant = 'default') {
     if (variant === 'success') return CheckCircle;
     if (variant === 'error') return WarningOctagon;
@@ -65,14 +72,16 @@
       </div>
     </div>
   {/if}
-  <button
+  <Button
     data-kumo-component="Toast"
     data-kumo-part="close"
-    class="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded border-none bg-transparent text-current/50 hover:bg-kumo-contrast/10 hover:text-current"
+    class={cn('absolute top-2 right-2 size-5 rounded text-kumo-subtle hover:bg-current/15', toast.variant && closeClasses[toast.variant])}
     aria-label="Close"
-    type="button"
+    variant="ghost"
+    size="sm"
+    shape="square"
     onclick={onClose}
   >
     <X class="h-3 w-3" />
-  </button>
+  </Button>
 </div>

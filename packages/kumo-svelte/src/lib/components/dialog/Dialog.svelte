@@ -6,20 +6,20 @@
   export const KUMO_DIALOG_VARIANTS = {
     size: {
       base: {
-        classes: 'sm:min-w-96',
-        description: 'Default dialog width'
+        classes: 'sm:w-96',
+        description: 'Default dialog width (384px)'
       },
       sm: {
-        classes: 'min-w-72',
-        description: 'Small dialog for simple confirmations'
+        classes: 'sm:w-72',
+        description: 'Small dialog for simple confirmations (288px)'
       },
       lg: {
-        classes: 'min-w-[32rem]',
-        description: 'Large dialog for complex content'
+        classes: 'sm:w-[32rem]',
+        description: 'Large dialog for complex content (512px)'
       },
       xl: {
-        classes: 'min-w-[48rem]',
-        description: 'Extra large dialog for detailed views'
+        classes: 'sm:w-[48rem]',
+        description: 'Extra large dialog for detailed views (768px)'
       }
     },
     role: {
@@ -136,7 +136,7 @@
 
   let contentClasses = $derived(
     cn(
-      'shadow-m ring ring-kumo-line fixed top-1/2 left-1/2 w-full sm:w-auto max-w-[calc(100vw-2rem)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-kumo-base text-kumo-default duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0',
+      'shadow-m ring ring-kumo-line fixed top-1/2 left-1/2 w-full max-w-[calc(100vw-2rem)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-kumo-base text-kumo-default duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0',
       KUMO_DIALOG_VARIANTS.size[size].classes,
       className
     )

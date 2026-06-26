@@ -25,7 +25,7 @@ const rows: PropRow[] = [
     "type": "'sm' | 'base' | 'lg' | 'xl'",
     "required": false,
     "default": "\"base\"",
-    "description": "Dialog width preset."
+    "description": "Fixed dialog width preset: sm (288px), base (384px), lg (512px), or xl (768px)."
   },
   {
     "prop": "style",

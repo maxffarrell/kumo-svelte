@@ -69,10 +69,8 @@ import { Dialog } from 'kumo-svelte/components/dialog';
 
 ## Dialog vs Alert Dialog
 
-  
 The Dialog component supports two ARIA roles to properly convey semantic
-    meaning to assistive technologies:
-
+meaning to assistive technologies:
 
   <div class="overflow-hidden rounded-lg border border-kumo-hairline">
     <table class="w-full text-sm">
@@ -116,12 +114,19 @@ The Dialog component supports two ARIA roles to properly convey semantic
 
 <ComponentExample demo="DialogBasicDemo" />
 
+### Sizes
+
+The `size` prop controls the fixed width of the dialog on desktop. Content that
+overflows the dialog width will scroll horizontally within the dialog rather
+than stretching it.
+
+<ComponentExample demo="DialogSizesDemo" />
+
 ### Alert Dialog (`role="alertdialog"`)
 
-
 For destructive or confirmation dialogs, use `role="alertdialog"` on
-  `Dialog`. This provides proper accessibility semantics by rendering the
-  dialog with `role="alertdialog"` instead of `role="dialog"`.
+`Dialog`. This provides proper accessibility semantics by rendering the
+dialog with `role="alertdialog"` instead of `role="dialog"`.
 
 <div class="mb-4 rounded-lg border border-kumo-info/30 bg-kumo-info/10 p-4 text-sm text-kumo-info">
   <p class="font-medium mb-2 text-sm">
@@ -139,10 +144,9 @@ For destructive or confirmation dialogs, use `role="alertdialog"` on
 
 ### Confirmation Dialog (with `disablePointerDismissal`)
 
-
 For confirmation dialogs that should not be dismissed by clicking outside, use
-  `disablePointerDismissal` on `Dialog`. This can be combined with
-  `role="alertdialog"` for proper accessibility.
+`disablePointerDismissal` on `Dialog`. This can be combined with
+`role="alertdialog"` for proper accessibility.
 
 <ComponentExample demo="DialogConfirmationDemo" />
 
@@ -158,13 +162,11 @@ Dialog max width can be customized with utility classes like `max-w-lg`.
 
 ### With Select
 
-
 Dialog containing a Select dropdown.
 
 <ComponentExample demo="DialogWithSelectDemo" />
 
 ### With Combobox
-
 
 Dialog containing a Combobox for searchable selection.
 
@@ -185,13 +187,11 @@ Dialog containing a Dropdown menu.
 
 ### Dialog
 
-
 The main dialog container that renders the modal overlay and popup.
 
 <PropsTable component="Dialog" />
 
 ### Dialog.Root
-
 
 Controls the open state of the dialog. Doesn't render its own HTML element.
 
@@ -231,20 +231,17 @@ Controls the open state of the dialog. Doesn't render its own HTML element.
 
 ### Dialog.Trigger
 
-
 A button that opens the dialog when clicked.
 
 <PropsTable component="Dialog.Trigger" />
 
 ### Dialog.Title
 
-
 A heading that labels the dialog for accessibility.
 
 <PropsTable component="Dialog.Title" />
 
 ### Dialog.Description
-
 
 A paragraph providing additional context about the dialog.
 

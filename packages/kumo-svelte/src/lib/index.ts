@@ -6,6 +6,7 @@ export { Breadcrumbs } from './components/breadcrumbs';
 export type { BreadcrumbsItem } from './components/breadcrumbs';
 export { Button, LinkButton, RefreshButton } from './components/button';
 export {
+  BubbleMap,
   Chart,
   ChartLegend,
   ChartPalette,
@@ -13,9 +14,14 @@ export {
   TimeseriesChart
 } from './components/chart';
 export type {
+  BubbleMapProps,
   ChartEvents,
   ChartSemanticColorName,
   KumoChartOption,
+  MapAccessor,
+  MapColors,
+  MapGeoJson,
+  MapStyle,
   SafeTooltipOption
 } from './components/chart';
 export {

@@ -36,4 +36,22 @@ describe('Button', () => {
     expect((button as HTMLButtonElement).disabled).toBe(true);
     expect(button.getAttribute('aria-busy')).toBe('true');
   });
+
+  it('keeps emphasized variant rings color-matched when pressed or focused', () => {
+    for (const variant of ['primary', 'destructive'] as const) {
+      render(Button, {
+        variant,
+        'aria-label': variant
+      });
+
+      const className = screen.getByRole('button', { name: variant }).className;
+
+      expect(className).toContain('ring-(--kumo-button-emphasis-ring)');
+      expect(className).toContain('focus:ring-(--kumo-button-emphasis-ring)');
+      expect(className).toContain(
+        'focus-visible:ring-(--kumo-button-emphasis-ring)'
+      );
+      expect(className).toContain('active:ring-(--kumo-button-emphasis-ring)');
+    }
+  });
 });

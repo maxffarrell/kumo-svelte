@@ -65,6 +65,7 @@ export const chartItems: NavItem[] = [
   { label: 'Colors', href: '/charts/colors' },
   { label: 'Timeseries', href: '/charts/timeseries' },
   { label: 'Sankey', href: '/charts/sankey' },
+  { label: 'Maps', href: '/charts/maps' },
   { label: 'Custom Chart', href: '/charts/custom' }
 ];
 

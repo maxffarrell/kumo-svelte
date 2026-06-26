@@ -26,7 +26,6 @@ headings:
   import ComponentSection from '$lib/docs/ComponentSection.svelte';
 </script>
 
-
 <ComponentSection>
 
 <p class="mb-4">
@@ -43,27 +42,37 @@ examples below show the minimum required imports for our use cases.
 </p>
 
 ```ts
-import * as echarts from "echarts/core";
-import { BarChart, LineChart, PieChart } from "echarts/charts";
+import * as echarts from 'echarts/core';
+import {
+  BarChart,
+  LineChart,
+  MapChart,
+  PieChart,
+  ScatterChart
+} from 'echarts/charts';
 import {
   AriaComponent,
   AxisPointerComponent,
   BrushComponent,
+  GeoComponent,
   GridComponent,
-  TooltipComponent,
-} from "echarts/components";
-import { CanvasRenderer } from "echarts/renderers";
+  TooltipComponent
+} from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
 
 echarts.use([
   BarChart,
   LineChart,
   PieChart,
+  MapChart,
+  ScatterChart,
   AxisPointerComponent,
   BrushComponent,
+  GeoComponent,
   GridComponent,
   TooltipComponent,
   CanvasRenderer,
-  AriaComponent,
+  AriaComponent
 ]);
 ```
 
@@ -82,11 +91,19 @@ echarts.use([
   />
 
   <ChartCard
+    title="Bubble Map"
+    description="Plot proportional bubbles over a GeoJSON map."
+    href="/charts/maps"
+    demo="BubbleMapDemo"
+  />
+
+  <ChartCard
     title="Custom Chart"
     description="Examples like pie charts."
     href="/charts/custom"
     demo="PieChartPreviewDemo"
   />
+
 </div>
 
 </ComponentSection>

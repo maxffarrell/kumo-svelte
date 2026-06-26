@@ -2,6 +2,7 @@
   import type { EChartsOption } from 'echarts';
   import Chart, { type ChartEvents } from './Chart.svelte';
   import { ChartPalette } from './Color';
+  import { defaultValueFormat, escapeHtml } from './tooltip-utils';
 
   export interface SankeyNodeData {
     id?: string;
@@ -57,7 +58,7 @@
     links,
     height = 400,
     showNodeValues,
-    formatValue = (value: number) => value.toLocaleString(),
+    formatValue = defaultValueFormat,
     tooltipFormatter,
     nodeWidth = 8,
     nodePadding = 10,
@@ -73,8 +74,6 @@
     onLinkClick
   }: Props = $props();
 
-  const escapeHtml = (str: string): string =>
-    str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   const escapeRichText = (str: string): string => str.replace(/[{}|]/g, (char) => `\\${char}`);
   const sanitizeColor = (color: string): string => (/^#(?:[0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(color) ? color : '#666');
 

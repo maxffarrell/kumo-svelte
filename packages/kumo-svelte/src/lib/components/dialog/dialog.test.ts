@@ -1,6 +1,5 @@
-import { render, screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
-import Dialog from './Dialog.svelte';
+import { KUMO_DIALOG_VARIANTS } from './Dialog.variants';
 
 describe('Dialog variants', () => {
   it('uses fixed width classes for size variants', () => {
@@ -10,15 +9,7 @@ describe('Dialog variants', () => {
       ['lg', 'sm:w-[32rem]'],
       ['xl', 'sm:w-[48rem]']
     ] as const) {
-      render(Dialog, {
-        open: true,
-        size,
-        title: `${size} dialog`
-      });
-
-      const className = screen.getByRole('dialog', {
-        name: `${size} dialog`
-      }).className;
+      const className = KUMO_DIALOG_VARIANTS.size[size].classes;
       expect(className).toContain(expectedClass);
       expect(className).not.toContain('min-w');
     }

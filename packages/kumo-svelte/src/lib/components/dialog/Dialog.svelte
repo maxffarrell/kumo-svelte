@@ -1,43 +1,12 @@
+<script module lang="ts">
+  export { KUMO_DIALOG_DEFAULT_VARIANTS, KUMO_DIALOG_VARIANTS } from './Dialog.variants';
+</script>
+
 <script lang="ts">
   import { AlertDialog, Dialog as DialogPrimitive } from 'bits-ui';
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
-
-  export const KUMO_DIALOG_VARIANTS = {
-    size: {
-      base: {
-        classes: 'sm:w-96',
-        description: 'Default dialog width (384px)'
-      },
-      sm: {
-        classes: 'sm:w-72',
-        description: 'Small dialog for simple confirmations (288px)'
-      },
-      lg: {
-        classes: 'sm:w-[32rem]',
-        description: 'Large dialog for complex content (512px)'
-      },
-      xl: {
-        classes: 'sm:w-[48rem]',
-        description: 'Extra large dialog for detailed views (768px)'
-      }
-    },
-    role: {
-      dialog: {
-        classes: '',
-        description: 'Standard dialog for general-purpose modals'
-      },
-      alertdialog: {
-        classes: '',
-        description: 'Alert dialog for confirmation flows requiring explicit user acknowledgment'
-      }
-    }
-  } as const;
-
-  export const KUMO_DIALOG_DEFAULT_VARIANTS = {
-    size: 'base',
-    role: 'dialog'
-  } as const;
+  import { KUMO_DIALOG_DEFAULT_VARIANTS, KUMO_DIALOG_VARIANTS } from './Dialog.variants';
 
   export const KUMO_DIALOG_STYLING = {
     dimensions: {

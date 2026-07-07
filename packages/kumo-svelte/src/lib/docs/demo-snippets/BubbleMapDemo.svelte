@@ -1,50 +1,37 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import * as echarts from 'echarts';
-  import { BubbleMap, ChartPalette, type MapGeoJson } from 'kumo-svelte';
+  import { BubbleMap, type MapGeoJson } from 'kumo-svelte';
+  import { colos, fmtRequests, loadWorldGeoJson } from './map-demo-data';
 
-  const world: MapGeoJson = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        id: 'world',
-        properties: { name: 'World' },
-        geometry: {
-          type: 'Polygon',
-          coordinates: [
-            [
-              [-170, -55],
-              [170, -55],
-              [170, 75],
-              [-170, 75],
-              [-170, -55]
-            ]
-          ]
-        }
-      }
-    ]
-  };
+  let geoJson = $state<MapGeoJson | null>(null);
+  let error = $state<string | null>(null);
 
-  const data = [
-    { city: 'San Francisco', lat: 37.77, lon: -122.42, requests: 128000 },
-    { city: 'London', lat: 51.5, lon: -0.12, requests: 96000 },
-    { city: 'Singapore', lat: 1.35, lon: 103.82, requests: 72000 },
-    { city: 'Sydney', lat: -33.86, lon: 151.21, requests: 48000 }
-  ];
+  onMount(() => {
+    loadWorldGeoJson()
+      .then((data) => {
+        geoJson = data;
+      })
+      .catch((cause: unknown) => {
+        error = cause instanceof Error ? cause.message : 'Failed to load GeoJSON';
+      });
+  });
 </script>
 
-<div class="w-full min-w-[280px] max-w-2xl">
+{#if geoJson}
   <BubbleMap
     {echarts}
-    geoJson={world}
-    mapName="demo-world"
-    {data}
+    {geoJson}
+    data={colos}
     lng="lon"
     lat="lat"
     name="city"
     value="requests"
-    bubbleColor={ChartPalette.categorical(0)}
-    valueFormat={(value) => `${value.toLocaleString()} requests`}
-    height={320}
+    valueFormat={fmtRequests}
+    minRadius={8}
   />
-</div>
+{:else if error}
+  <p class="text-sm text-kumo-danger">{error}</p>
+{:else}
+  <p class="text-sm text-kumo-subtle">Loading map...</p>
+{/if}

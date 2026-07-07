@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import type { EChartsType } from 'echarts/core';
   import { geoMercator } from 'd3-geo';
   import Chart, { type ChartEvents, type KumoChartOption } from './Chart.svelte';
@@ -201,7 +202,32 @@
     chartRef = $bindable(null)
   }: BubbleMapProps = $props();
 
+  let detectedDarkMode = $state(false);
+  const effectiveDarkMode = $derived(isDarkMode ?? detectedDarkMode);
   const mapName = $derived(getMapName(geoJson, mapNameProp));
+
+  onMount(() => {
+    const updateDetectedDarkMode = () => {
+      detectedDarkMode =
+        document.documentElement.classList.contains('dark') ||
+        document.body.classList.contains('dark') ||
+        document.documentElement.dataset.mode === 'dark' ||
+        document.body.dataset.mode === 'dark' ||
+        window.matchMedia?.('(prefers-color-scheme: dark)').matches === true;
+    };
+    const themeObserver = new MutationObserver(updateDetectedDarkMode);
+    updateDetectedDarkMode();
+    [document.documentElement, document.body].forEach((node) => {
+      themeObserver.observe(node, { attributes: true, attributeFilter: ['data-mode', 'class'] });
+    });
+    const mediaQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
+    mediaQuery?.addEventListener('change', updateDetectedDarkMode);
+
+    return () => {
+      themeObserver.disconnect();
+      mediaQuery?.removeEventListener('change', updateDetectedDarkMode);
+    };
+  });
 
   $effect.pre(() => {
     // ECharts requires GeoJSON maps to be registered before setOption uses them.
@@ -214,7 +240,7 @@
   );
 
   const options = $derived.by(() => {
-    const palette = ChartPalette.mapColors(isDarkMode);
+    const palette = ChartPalette.mapColors(effectiveDarkMode);
     const values = data.map((row) => resolve(row, value));
     const vmin = values.length ? Math.min(...values) : 0;
     const vmax = values.length ? Math.max(...values) : 1;
@@ -325,6 +351,6 @@
   {height}
   aspectRatio={resolvedAspectRatio}
   class={className}
-  {isDarkMode}
+  isDarkMode={effectiveDarkMode}
   onEvents={events}
 />

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import type { EChartsType } from 'echarts/core';
   import { geoMercator } from 'd3-geo';
   import Chart, { type ChartEvents, type KumoChartOption } from './Chart.svelte';
@@ -128,18 +129,43 @@
     chartRef = $bindable(null)
   }: ChoroplethMapProps = $props();
 
+  let detectedDarkMode = $state(false);
+  const effectiveDarkMode = $derived(isDarkMode ?? detectedDarkMode);
   const mapName = $derived(getMapName(geoJson, mapNameProp));
   const resolvedProjection = $derived(resolveProjection(projection));
   const resolvedAspectRatio = $derived(
     height === undefined ? (aspectRatio ?? projectedAspect(resolvedProjection, DEFAULT_BOUNDING_COORDS)) : undefined
   );
 
+  onMount(() => {
+    const updateDetectedDarkMode = () => {
+      detectedDarkMode =
+        document.documentElement.classList.contains('dark') ||
+        document.body.classList.contains('dark') ||
+        document.documentElement.dataset.mode === 'dark' ||
+        document.body.dataset.mode === 'dark' ||
+        window.matchMedia?.('(prefers-color-scheme: dark)').matches === true;
+    };
+    const themeObserver = new MutationObserver(updateDetectedDarkMode);
+    updateDetectedDarkMode();
+    [document.documentElement, document.body].forEach((node) => {
+      themeObserver.observe(node, { attributes: true, attributeFilter: ['data-mode', 'class'] });
+    });
+    const mediaQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
+    mediaQuery?.addEventListener('change', updateDetectedDarkMode);
+
+    return () => {
+      themeObserver.disconnect();
+      mediaQuery?.removeEventListener('change', updateDetectedDarkMode);
+    };
+  });
+
   $effect.pre(() => {
     echarts.registerMap(mapName, geoJson);
   });
 
   const options = $derived.by(() => {
-    const palette = ChartPalette.mapColors(isDarkMode);
+    const palette = ChartPalette.mapColors(effectiveDarkMode);
     const colors = colorRange ?? palette.scale;
     const noData = noDataColor ?? palette.area;
     const regions: ChoroplethRegion<Record<string, unknown>>[] = data.map((row) => ({
@@ -171,7 +197,7 @@
         left: 0,
         bottom: 8,
         textStyle: {
-          color: ChartPalette.text('primary', isDarkMode),
+          color: ChartPalette.text('primary', effectiveDarkMode),
           fontSize: 11
         }
       },
@@ -277,6 +303,6 @@
   {height}
   aspectRatio={resolvedAspectRatio}
   class={className}
-  {isDarkMode}
+  isDarkMode={effectiveDarkMode}
   onEvents={events}
 />

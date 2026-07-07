@@ -92,15 +92,11 @@ export function createRoundedPath(
   const bottomCurveCommands = [
     `L ${x1} ${firstVerticalEnd}`,
     `Q ${x1} ${horizontalY} ${horizontalStart} ${horizontalY}`,
-    single
-      ? `L ${horizontalEnd} ${horizontalY} Q ${x2} ${horizontalY} ${x2} ${secondVerticalStart}`
-      : `L ${x2} ${horizontalY}`,
+    `L ${x2} ${horizontalY}`,
   ];
 
   const topCurveCommands = [
-    single
-      ? `L ${x1} ${firstVerticalEnd} Q ${x1} ${horizontalY} ${horizontalStart} ${horizontalY}`
-      : `L ${x1} ${horizontalY}`,
+    `L ${x1} ${horizontalY}`,
     `L ${horizontalEnd} ${horizontalY}`,
     `Q ${x2} ${horizontalY} ${x2} ${secondVerticalStart}`,
   ];

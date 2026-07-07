@@ -139,12 +139,25 @@
 
   onMount(() => {
     const updateDetectedDarkMode = () => {
-      detectedDarkMode =
-        document.documentElement.classList.contains('dark') ||
-        document.body.classList.contains('dark') ||
-        document.documentElement.dataset.mode === 'dark' ||
-        document.body.dataset.mode === 'dark' ||
-        window.matchMedia?.('(prefers-color-scheme: dark)').matches === true;
+      const root = document.documentElement;
+      const mode = root.dataset.mode;
+      if (mode === 'dark') {
+        detectedDarkMode = true;
+        return;
+      }
+      if (mode === 'light') {
+        detectedDarkMode = false;
+        return;
+      }
+      if (root.classList.contains('dark')) {
+        detectedDarkMode = true;
+        return;
+      }
+      if (root.classList.contains('light')) {
+        detectedDarkMode = false;
+        return;
+      }
+      detectedDarkMode = window.matchMedia?.('(prefers-color-scheme: dark)').matches === true;
     };
     const themeObserver = new MutationObserver(updateDetectedDarkMode);
     updateDetectedDarkMode();

@@ -4,29 +4,10 @@
   import Chart, { type ChartEvents, type KumoChartOption } from './Chart.svelte';
   import { ChartPalette } from './Color';
   import { defaultValueFormat, escapeHtml } from './tooltip-utils';
-
-  export interface MapGeoJson {
-    type: 'FeatureCollection';
-    features: Array<{
-      type: 'Feature';
-      id?: string | number;
-      properties?: Record<string, unknown> | null;
-      geometry: unknown;
-    }>;
-  }
-
-  /** Accessor for a value on a data row: a key of `T`, or a function of the row. */
-  export type MapAccessor<T, V> = keyof T | ((row: T) => V);
+  import type { MapAccessor, MapGeoJson, MapProjection, MapStyle } from './BubbleMap.svelte';
 
   function resolve<T, V>(row: T, accessor: MapAccessor<T, V>): V {
     return typeof accessor === 'function' ? accessor(row) : (row[accessor] as V);
-  }
-
-  /** Per-datum style value: a constant, or a function of the row. */
-  export type MapStyle<T, V> = V | ((row: T) => V);
-
-  function resolveStyle<T, V>(row: T, style: MapStyle<T, V>): V {
-    return typeof style === 'function' ? (style as (row: T) => V)(row) : (style as V);
   }
 
   const MAX_ZOOM_FACTOR = 8;
@@ -37,11 +18,6 @@
   ];
   const geoJsonMapNames = new WeakMap<MapGeoJson, string>();
   const mercatorProjection = geoMercator();
-
-  export interface MapProjection {
-    project: (point: number[]) => number[];
-    unproject: (point: number[]) => number[];
-  }
 
   const DEFAULT_PROJECTION: MapProjection = {
     project: (point) => {
@@ -81,80 +57,35 @@
 
   function getMapName(geoJson: MapGeoJson, mapName?: string) {
     if (mapName) return sanitizeMapName(mapName);
-
     const existing = geoJsonMapNames.get(geoJson);
     if (existing) return existing;
-
     const generated = `kumo-map-${hashString(JSON.stringify(geoJson))}`;
     geoJsonMapNames.set(geoJson, generated);
     return generated;
   }
 
-  function buildGeo({
-    mapName,
-    areaColor,
-    center,
-    zoom,
-    roam,
-    projection
-  }: {
-    mapName: string;
-    areaColor: string;
-    center?: [number, number];
-    zoom: number;
-    roam: boolean;
-    projection?: MapProjection;
-  }) {
-    return {
-      map: mapName,
-      nameProperty: 'name',
-      roam,
-      ...(roam
-        ? {
-            scaleLimit: {
-              min: Math.min(1, zoom),
-              max: zoom * MAX_ZOOM_FACTOR
-            }
-          }
-        : {}),
-      center,
-      zoom,
-      boundingCoords: DEFAULT_BOUNDING_COORDS,
-      ...(projection ? { projection } : { aspectScale: 1 }),
-      silent: true,
-      itemStyle: {
-        areaColor,
-        borderColor: areaColor,
-        borderWidth: 0.5
-      },
-      emphasis: { disabled: true }
-    };
-  }
-
-  export interface BubbleMapProps<T = Record<string, unknown>> {
+  export interface ChoroplethMapProps<T = Record<string, unknown>> {
     echarts: any;
     geoJson: MapGeoJson;
     mapName?: string;
     data: T[];
-    lng: MapAccessor<T, number>;
-    lat: MapAccessor<T, number>;
+    name: MapAccessor<T, string>;
     value: MapAccessor<T, number>;
-    name?: MapAccessor<T, string>;
-    minRadius?: number;
-    maxRadius?: number;
-    bubbleSize?: (value: number) => number;
-    bubbleColor?: MapStyle<T, string>;
-    bubbleBorderColor?: MapStyle<T, string>;
-    bubbleBorderWidth?: MapStyle<T, number>;
+    nameProperty?: string;
+    colorRange?: string[];
+    min?: number;
+    max?: number;
+    noDataColor?: string;
+    showLegend?: boolean;
+    showTooltip?: boolean;
+    valueFormat?: (value: number) => string;
+    tooltipFormatter?: (row: T) => string;
+    onRegionHover?: (row: T | undefined) => void;
+    onRegionClick?: (row: T) => void;
     center?: [number, number];
     zoom?: number;
     roam?: boolean;
     projection?: MapProjection | null;
-    showTooltip?: boolean;
-    valueFormat?: (value: number) => string;
-    tooltipFormatter?: (row: T) => string;
-    onBubbleHover?: (row: T | undefined) => void;
-    onBubbleClick?: (row: T) => void;
     aspectRatio?: number | string;
     height?: number;
     class?: string;
@@ -162,11 +93,9 @@
     chartRef?: EChartsType | null;
   }
 
-  interface BubblePoint<T> {
-    name?: string;
-    value: [number, number, number];
-    symbolSize: number;
-    itemStyle: { color: string; borderColor: string; borderWidth: number };
+  interface ChoroplethRegion<T> {
+    name: string;
+    value: number;
     datum: T;
   }
 
@@ -175,85 +104,77 @@
     geoJson,
     mapName: mapNameProp,
     data,
-    lng,
-    lat,
-    value,
     name,
-    minRadius = 6,
-    maxRadius = 26,
-    bubbleSize,
-    bubbleColor,
-    bubbleBorderColor = 'transparent',
-    bubbleBorderWidth = 0,
+    value,
+    nameProperty = 'name',
+    colorRange,
+    min,
+    max,
+    noDataColor,
+    showLegend = false,
+    showTooltip = true,
+    valueFormat = defaultValueFormat,
+    tooltipFormatter,
+    onRegionHover,
+    onRegionClick,
     center,
     zoom = 1.25,
     roam = false,
     projection,
-    showTooltip = true,
-    valueFormat = defaultValueFormat,
-    tooltipFormatter,
-    onBubbleHover,
-    onBubbleClick,
     aspectRatio,
     height,
     class: className,
     isDarkMode,
     chartRef = $bindable(null)
-  }: BubbleMapProps = $props();
+  }: ChoroplethMapProps = $props();
 
   const mapName = $derived(getMapName(geoJson, mapNameProp));
-
-  $effect.pre(() => {
-    // ECharts requires GeoJSON maps to be registered before setOption uses them.
-    echarts.registerMap(mapName, geoJson);
-  });
-
   const resolvedProjection = $derived(resolveProjection(projection));
   const resolvedAspectRatio = $derived(
     height === undefined ? (aspectRatio ?? projectedAspect(resolvedProjection, DEFAULT_BOUNDING_COORDS)) : undefined
   );
 
+  $effect.pre(() => {
+    echarts.registerMap(mapName, geoJson);
+  });
+
   const options = $derived.by(() => {
     const palette = ChartPalette.mapColors(isDarkMode);
-    const values = data.map((row) => resolve(row, value));
+    const colors = colorRange ?? palette.scale;
+    const noData = noDataColor ?? palette.area;
+    const regions: ChoroplethRegion<Record<string, unknown>>[] = data.map((row) => ({
+      name: resolve(row, name),
+      value: resolve(row, value),
+      datum: row
+    }));
+    const values = regions.map((region) => region.value);
     const vmin = values.length ? Math.min(...values) : 0;
     const vmax = values.length ? Math.max(...values) : 1;
-
-    const radiusFor = (datumValue: number) => {
-      if (bubbleSize) return bubbleSize(datumValue);
-      if (vmax <= 0) return minRadius;
-      const ratio = Math.sqrt(Math.max(0, datumValue) / vmax);
-      return minRadius + ratio * (maxRadius - minRadius);
-    };
-
-    const points: BubblePoint<Record<string, unknown>>[] = data.map((row) => {
-      const datumValue = resolve(row, value);
-      return {
-        name: name ? resolve(row, name) : undefined,
-        value: [resolve(row, lng), resolve(row, lat), datumValue],
-        symbolSize: radiusFor(datumValue),
-        itemStyle: {
-          color: bubbleColor ? resolveStyle(row, bubbleColor) : palette.bubble,
-          borderColor: resolveStyle(row, bubbleBorderColor),
-          borderWidth: resolveStyle(row, bubbleBorderWidth)
-        },
-        datum: row
-      };
-    });
+    const resolvedMin = min ?? vmin;
+    const resolvedMax = max ?? (vmax > vmin ? vmax : vmin + 1);
 
     return {
       backgroundColor: 'transparent',
       animation: true,
       animationDuration: 500,
       animationDurationUpdate: 0,
-      geo: buildGeo({
-        mapName,
-        areaColor: palette.area,
-        center,
-        zoom,
-        roam,
-        projection: resolvedProjection
-      }),
+      visualMap: {
+        type: 'continuous',
+        show: showLegend,
+        min: resolvedMin,
+        max: resolvedMax,
+        calculable: false,
+        hoverLink: false,
+        inRange: { color: colors },
+        orient: 'horizontal',
+        text: ['High', 'Low'],
+        left: 0,
+        bottom: 8,
+        textStyle: {
+          color: ChartPalette.text('primary', isDarkMode),
+          fontSize: 11
+        }
+      },
       tooltip: showTooltip
         ? {
             trigger: 'item',
@@ -268,11 +189,12 @@
             },
             extraCssText: 'border-radius: 0.5rem;',
             dangerousHtmlFormatter: (params: unknown) => {
-              const param = params as { name?: string; value?: number[]; data?: { datum?: Record<string, unknown> } };
+              const param = params as { name?: string; value?: number; data?: { datum?: Record<string, unknown> } };
               const row = param.data?.datum;
-              if (tooltipFormatter && row !== undefined) return tooltipFormatter(row);
-
-              const tooltipValue = param.value?.[2];
+              if (row === undefined) return '';
+              if (tooltipFormatter) return tooltipFormatter(row);
+              const tooltipValue =
+                typeof param.value === 'number' && !Number.isNaN(param.value) ? param.value : undefined;
               const nameStr = param.name ? `<strong>${escapeHtml(param.name)}</strong>` : '';
               const valueStr =
                 tooltipValue !== undefined
@@ -284,33 +206,63 @@
         : undefined,
       series: [
         {
-          type: 'scatter',
-          coordinateSystem: 'geo',
-          data: points,
-          itemStyle: { opacity: 0.8 },
-          emphasis: { scale: 1.2, itemStyle: { opacity: 1 } },
-          z: 3
+          id: 'regions',
+          type: 'map',
+          map: mapName,
+          nameProperty,
+          roam,
+          ...(roam
+            ? {
+                scaleLimit: {
+                  min: Math.min(1, zoom),
+                  max: zoom * MAX_ZOOM_FACTOR
+                }
+              }
+            : {}),
+          center,
+          zoom,
+          boundingCoords: DEFAULT_BOUNDING_COORDS,
+          ...(resolvedProjection ? { projection: resolvedProjection } : { aspectScale: 1 }),
+          data: regions,
+          itemStyle: {
+            areaColor: noData,
+            borderColor: 'transparent',
+            borderWidth: 0
+          },
+          label: { show: false },
+          emphasis: {
+            label: { show: false },
+            itemStyle: {
+              areaColor: 'inherit'
+            }
+          },
+          blur: {
+            label: { show: false },
+            itemStyle: { opacity: 0.45 }
+          },
+          select: { disabled: true },
+          z: 1
         }
       ]
     } satisfies KumoChartOption;
   });
 
   const events = $derived<Partial<ChartEvents>>({
-    ...(onBubbleHover
+    ...(onRegionHover
       ? {
           mouseover: (params: any) => {
             const datum = params.data?.datum;
-            if (datum !== undefined) onBubbleHover?.(datum);
+            if (datum !== undefined) onRegionHover?.(datum);
           },
-          mouseout: () => onBubbleHover?.(undefined),
-          globalout: () => onBubbleHover?.(undefined)
+          mouseout: () => onRegionHover?.(undefined),
+          globalout: () => onRegionHover?.(undefined)
         }
       : {}),
-    ...(onBubbleClick
+    ...(onRegionClick
       ? {
           click: (params: any) => {
             const datum = params.data?.datum;
-            if (datum !== undefined) onBubbleClick?.(datum);
+            if (datum !== undefined) onRegionClick?.(datum);
           }
         }
       : {})

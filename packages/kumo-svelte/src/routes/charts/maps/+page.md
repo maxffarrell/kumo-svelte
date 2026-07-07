@@ -1,7 +1,7 @@
 ---
-title: 'Bubble Map'
-description: 'A proportional bubble map component for plotting values over GeoJSON maps using ECharts.'
-sourceFile: 'components/chart'
+title: "Maps"
+description: "GeoJSON map components for plotting regional values and proportional bubbles with ECharts."
+sourceFile: "components/chart"
 ---
 
 <script>
@@ -14,20 +14,22 @@ sourceFile: 'components/chart'
 
 <ComponentExample demo="BubbleMapDemo" />
 
+<ComponentExample demo="ChoroplethMapDemo" />
+
 </ComponentSection>
 
 <ComponentSection>
 
 ## Installation
 
-BubbleMap requires <code class="text-kumo-default">echarts</code> as a peer dependency.
+Map charts require <code class="text-kumo-default">echarts</code> as a peer dependency.
 
 ```bash
 npm install echarts
 ```
 
 ```svelte
-import { BubbleMap } from "kumo-svelte";
+import { BubbleMap, ChoroplethMap } from "kumo-svelte";
 ```
 
 </ComponentSection>
@@ -36,7 +38,7 @@ import { BubbleMap } from "kumo-svelte";
 
 ## Usage
 
-Use <code class="text-kumo-default">geoJson</code> to register the map base and accessors to read longitude, latitude, label, and value from each row.
+Use <code class="text-kumo-default">geoJson</code> to register the map base and accessors to read coordinates, labels, region names, and values from each row.
 
 <ComponentExample demo="BubbleMapDemo" />
 
@@ -47,5 +49,7 @@ Use <code class="text-kumo-default">geoJson</code> to register the map base and 
 ## API Reference
 
 <PropsTable component="BubbleMap" />
+
+<PropsTable component="ChoroplethMap" />
 
 </ComponentSection>

@@ -1,168 +1,181 @@
-import type { PropRow } from '../prop-types';
+import type { PropRow } from "../prop-types";
 
 const rows: PropRow[] = [
   {
-    prop: 'echarts',
-    type: 'any',
+    prop: "echarts",
+    type: "any",
     required: true,
-    description: 'The ECharts core instance imported by the consumer.'
+    description: "The ECharts core instance imported by the consumer.",
   },
   {
-    prop: 'geoJson',
-    type: 'MapGeoJson',
+    prop: "geoJson",
+    type: "MapGeoJson",
     required: true,
-    description: 'GeoJSON FeatureCollection for the map base.'
+    description: "GeoJSON FeatureCollection for the map base.",
   },
   {
-    prop: 'mapName',
-    type: 'string',
+    prop: "mapName",
+    type: "string",
     required: false,
     description:
-      'Stable ECharts map registry name. Invalid characters are replaced with dashes.'
+      "Stable ECharts map registry name. Invalid characters are replaced with dashes.",
   },
   {
-    prop: 'data',
-    type: 'T[]',
+    prop: "data",
+    type: "T[]",
     required: true,
-    description: 'Rows to plot as bubbles.'
+    description: "Rows to plot as bubbles.",
   },
   {
-    prop: 'lng',
-    type: 'MapAccessor<T, number>',
+    prop: "lng",
+    type: "MapAccessor<T, number>",
     required: true,
-    description: 'Longitude accessor: a row key or function.'
+    description: "Longitude accessor: a row key or function.",
   },
   {
-    prop: 'lat',
-    type: 'MapAccessor<T, number>',
+    prop: "lat",
+    type: "MapAccessor<T, number>",
     required: true,
-    description: 'Latitude accessor: a row key or function.'
+    description: "Latitude accessor: a row key or function.",
   },
   {
-    prop: 'value',
-    type: 'MapAccessor<T, number>',
+    prop: "value",
+    type: "MapAccessor<T, number>",
     required: true,
-    description: 'Numeric value accessor used to size bubbles.'
+    description: "Numeric value accessor used to size bubbles.",
   },
   {
-    prop: 'name',
-    type: 'MapAccessor<T, string>',
+    prop: "name",
+    type: "MapAccessor<T, string>",
     required: false,
-    description: 'Optional label accessor used by the default tooltip.'
+    description: "Optional label accessor used by the default tooltip.",
   },
   {
-    prop: 'minRadius',
-    type: 'number',
+    prop: "minRadius",
+    type: "number",
     required: false,
-    default: '6',
-    description: 'Smallest bubble radius in pixels.'
+    default: "6",
+    description: "Smallest bubble radius in pixels.",
   },
   {
-    prop: 'maxRadius',
-    type: 'number',
+    prop: "maxRadius",
+    type: "number",
     required: false,
-    default: '26',
-    description: 'Largest bubble radius in pixels.'
+    default: "26",
+    description: "Largest bubble radius in pixels.",
   },
   {
-    prop: 'bubbleSize',
-    type: '(value: number) => number',
+    prop: "bubbleSize",
+    type: "(value: number) => number",
     required: false,
     description:
-      'Explicit bubble radius function. Overrides minRadius/maxRadius scaling.'
+      "Explicit bubble radius function. Overrides minRadius/maxRadius scaling.",
   },
   {
-    prop: 'bubbleColor',
-    type: 'MapStyle<T, string>',
+    prop: "bubbleColor",
+    type: "MapStyle<T, string>",
     required: false,
-    description: 'Bubble fill color as a constant or row function.'
+    description: "Bubble fill color as a constant or row function.",
   },
   {
-    prop: 'bubbleBorderColor',
-    type: 'MapStyle<T, string>',
+    prop: "bubbleBorderColor",
+    type: "MapStyle<T, string>",
     required: false,
     default: '"transparent"',
-    description: 'Bubble border color as a constant or row function.'
+    description: "Bubble border color as a constant or row function.",
   },
   {
-    prop: 'bubbleBorderWidth',
-    type: 'MapStyle<T, number>',
+    prop: "bubbleBorderWidth",
+    type: "MapStyle<T, number>",
     required: false,
-    default: '0',
-    description: 'Bubble border width as a constant or row function.'
+    default: "0",
+    description: "Bubble border width as a constant or row function.",
   },
   {
-    prop: 'center',
-    type: '[number, number]',
+    prop: "center",
+    type: "[number, number]",
     required: false,
-    description: 'Map center as [longitude, latitude]. Defaults to auto-fit.'
+    description: "Map center as [longitude, latitude]. Defaults to auto-fit.",
   },
   {
-    prop: 'zoom',
-    type: 'number',
+    prop: "zoom",
+    type: "number",
     required: false,
-    default: '1.25',
-    description: 'Zoom level as a multiple of the auto-fit scale.'
+    default: "1.25",
+    description: "Zoom level as a multiple of the auto-fit scale.",
   },
   {
-    prop: 'roam',
-    type: 'boolean',
+    prop: "roam",
+    type: "boolean",
     required: false,
-    default: 'true',
-    description: 'Enables drag-to-pan and scroll-to-zoom.'
+    default: "false",
+    description: "Enables drag-to-pan and scroll-to-zoom.",
   },
   {
-    prop: 'showTooltip',
-    type: 'boolean',
-    required: false,
-    default: 'true',
-    description: 'Whether to show the default map tooltip.'
-  },
-  {
-    prop: 'valueFormat',
-    type: '(value: number) => string',
-    required: false,
-    description: 'Formats values in the default tooltip.'
-  },
-  {
-    prop: 'tooltipFormatter',
-    type: '(row: T) => string',
+    prop: "projection",
+    type: "MapProjection | null",
     required: false,
     description:
-      'Custom HTML tooltip formatter. Escape user-provided strings before returning.'
+      "Geographic projection. Defaults to latitude-clamped Mercator; use null for raw coordinates.",
   },
   {
-    prop: 'onBubbleHover',
-    type: '(row: T | undefined) => void',
-    required: false,
-    description: 'Callback fired as the pointer enters or leaves a bubble.'
-  },
-  {
-    prop: 'onBubbleClick',
-    type: '(row: T) => void',
-    required: false,
-    description: 'Callback fired when a bubble is clicked.'
-  },
-  {
-    prop: 'height',
-    type: 'number',
-    required: false,
-    default: '400',
-    description: 'Chart height in pixels.'
-  },
-  {
-    prop: 'class',
-    type: 'string',
-    required: false,
-    description: 'Additional classes merged onto the chart element.'
-  },
-  {
-    prop: 'isDarkMode',
-    type: 'boolean',
+    prop: "aspectRatio",
+    type: "number | string",
     required: false,
     description:
-      'When true, switches map and bubble palette choices for dark mode.'
-  }
+      "Container aspect ratio. Defaults to the projected map window.",
+  },
+  {
+    prop: "showTooltip",
+    type: "boolean",
+    required: false,
+    default: "true",
+    description: "Whether to show the default map tooltip.",
+  },
+  {
+    prop: "valueFormat",
+    type: "(value: number) => string",
+    required: false,
+    description: "Formats values in the default tooltip.",
+  },
+  {
+    prop: "tooltipFormatter",
+    type: "(row: T) => string",
+    required: false,
+    description:
+      "Custom HTML tooltip formatter. Escape user-provided strings before returning.",
+  },
+  {
+    prop: "onBubbleHover",
+    type: "(row: T | undefined) => void",
+    required: false,
+    description: "Callback fired as the pointer enters or leaves a bubble.",
+  },
+  {
+    prop: "onBubbleClick",
+    type: "(row: T) => void",
+    required: false,
+    description: "Callback fired when a bubble is clicked.",
+  },
+  {
+    prop: "height",
+    type: "number",
+    required: false,
+    description: "Fixed chart height in pixels. Overrides aspectRatio.",
+  },
+  {
+    prop: "class",
+    type: "string",
+    required: false,
+    description: "Additional classes merged onto the chart element.",
+  },
+  {
+    prop: "isDarkMode",
+    type: "boolean",
+    required: false,
+    description:
+      "When true, switches map and bubble palette choices for dark mode.",
+  },
 ];
 
 export default rows;

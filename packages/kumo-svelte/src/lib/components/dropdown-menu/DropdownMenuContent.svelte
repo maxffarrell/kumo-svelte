@@ -20,6 +20,7 @@
   <DropdownMenuPrimitive.Content
     class={cn(
       'z-50 overflow-hidden bg-kumo-control text-kumo-default',
+      'max-h-[var(--bits-floating-available-height)] overflow-y-auto',
       'rounded-lg shadow-lg ring ring-kumo-line',
       'min-w-36 p-1.5',
       'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',

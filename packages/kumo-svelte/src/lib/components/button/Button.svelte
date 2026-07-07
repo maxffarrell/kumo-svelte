@@ -190,7 +190,7 @@
     {#if emphasisToken}
       <span
         aria-hidden="true"
-        class="absolute inset-0 translate-y-px rounded-[inherit] bg-linear-to-b from-(--kumo-button-emphasis-gradient-start) to-(--kumo-button-emphasis-gradient-end) group-hover:from-(--kumo-button-emphasis-bg)"
+        class="absolute inset-0 rounded-[inherit] bg-linear-to-b from-(--kumo-button-emphasis-gradient-start) to-(--kumo-button-emphasis-gradient-end) shadow-[inset_0_1px_0_0_var(--kumo-button-emphasis-bg)] group-hover:from-(--kumo-button-emphasis-bg)"
       ></span>
       <span class="relative flex items-center gap-1.5">
         {#if loading}

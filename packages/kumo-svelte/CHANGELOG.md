@@ -1,5 +1,11 @@
 # kumo-svelte
 
+## 0.7.0
+
+### Minor Changes
+
+- Port upstream Kumo updates after June 25, 2026, including ChoroplethMap, map projection sizing, Flow layout utilities, vertical Flow parity, dropdown viewport height limits, faster class merging, and the Firefox button rendering fix.
+
 ## 0.3.0
 
 ### Minor Changes

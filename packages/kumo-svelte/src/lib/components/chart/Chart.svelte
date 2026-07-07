@@ -21,6 +21,7 @@
     optionUpdateBehavior?: SetOptionOpts;
     class?: string;
     isDarkMode?: boolean;
+    aspectRatio?: number | string;
     height?: number;
     onEvents?: Partial<ChartEvents>;
     chartRef?: EChartsType | null;
@@ -32,6 +33,7 @@
     optionUpdateBehavior,
     class: className,
     isDarkMode,
+    aspectRatio,
     height = 350,
     onEvents = {},
     chartRef = $bindable(null)
@@ -202,4 +204,11 @@
 </script>
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-<div bind:this={el} class={cn('w-full', className)} style:height={`${height}px`} tabindex={options.aria?.enabled ? 0 : undefined} role={options.aria?.enabled ? 'img' : undefined}></div>
+<div
+  bind:this={el}
+  class={cn('w-full', className)}
+  style:height={aspectRatio === undefined ? `${height}px` : undefined}
+  style:aspect-ratio={aspectRatio === undefined ? undefined : String(aspectRatio)}
+  tabindex={options.aria?.enabled ? 0 : undefined}
+  role={options.aria?.enabled ? 'img' : undefined}
+></div>

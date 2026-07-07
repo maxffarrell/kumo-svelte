@@ -284,6 +284,7 @@
         : undefined,
       series: [
         {
+          id: 'bubbles',
           type: 'scatter',
           coordinateSystem: 'geo',
           data: points,

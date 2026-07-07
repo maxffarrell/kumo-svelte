@@ -52,11 +52,15 @@ const sequentialDark = {
 
 /** Colours for GeoJSON-based map charts. */
 export interface MapColors {
-  /** Fill for land regions. */
+  /** Fill for land / no-data regions. */
   area: string;
   /** Default bubble fill (the chart palette blue). */
   bubble: string;
-  /** Sequential choropleth scale. */
+  /**
+   * Sequential ramp (low -> high) for shading choropleth regions. Tuned so the
+   * lowest band stays clearly distinct from the neutral no-data fill in both
+   * modes.
+   */
   scale: string[];
 }
 
@@ -64,6 +68,11 @@ export interface MapColors {
 const mapAreaByMode = {
   light: "#E5E7EB",
   dark: "#2B2C31",
+} as const;
+
+const mapScaleByMode = {
+  light: ["#C8DEFB", "#8FBDF6", "#4290F0", "#1E60BE", "#0A3A7A"],
+  dark: ["#26456C", "#2C68BE", "#4290F0", "#79AEF4", "#BBD6FA"],
 } as const;
 
 export const CHART_LIGHT_COLORS = [
@@ -124,7 +133,7 @@ export namespace ChartPalette {
     return {
       area: mapAreaByMode[mode],
       bubble: categorical(0, isDarkMode),
-      scale: sequential("blues", isDarkMode),
+      scale: [...mapScaleByMode[mode]],
     };
   }
 }

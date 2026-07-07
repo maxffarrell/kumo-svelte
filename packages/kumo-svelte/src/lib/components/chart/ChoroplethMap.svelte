@@ -231,11 +231,12 @@
           },
           label: { show: false },
           emphasis: {
+            focus: 'self',
             label: { show: false },
             itemStyle: {
               areaColor: 'inherit'
             }
-          },
+          } as any,
           blur: {
             label: { show: false },
             itemStyle: { opacity: 0.45 }

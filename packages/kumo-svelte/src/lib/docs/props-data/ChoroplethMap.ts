@@ -14,6 +14,13 @@ const rows: PropRow[] = [
     description: "GeoJSON FeatureCollection whose regions are shaded by value.",
   },
   {
+    prop: "mapName",
+    type: "string",
+    required: false,
+    description:
+      "Stable ECharts map registry name. Invalid characters are replaced with dashes.",
+  },
+  {
     prop: "data",
     type: "T[]",
     required: true,
@@ -70,6 +77,46 @@ const rows: PropRow[] = [
     description: "Whether to show the ECharts visualMap legend.",
   },
   {
+    prop: "showTooltip",
+    type: "boolean",
+    required: false,
+    default: "true",
+    description: "Whether to show the default map tooltip.",
+  },
+  {
+    prop: "valueFormat",
+    type: "(value: number) => string",
+    required: false,
+    description: "Formats values in the default tooltip.",
+  },
+  {
+    prop: "tooltipFormatter",
+    type: "(row: T) => string",
+    required: false,
+    description:
+      "Custom HTML tooltip formatter. Escape user-provided strings before returning.",
+  },
+  {
+    prop: "center",
+    type: "[number, number]",
+    required: false,
+    description: "Map center as [longitude, latitude]. Defaults to auto-fit.",
+  },
+  {
+    prop: "zoom",
+    type: "number",
+    required: false,
+    default: "1.25",
+    description: "Zoom level as a multiple of the auto-fit scale.",
+  },
+  {
+    prop: "roam",
+    type: "boolean",
+    required: false,
+    default: "false",
+    description: "Enables drag-to-pan and scroll-to-zoom.",
+  },
+  {
     prop: "projection",
     type: "MapProjection | null",
     required: false,
@@ -88,6 +135,25 @@ const rows: PropRow[] = [
     type: "number",
     required: false,
     description: "Fixed chart height in pixels. Overrides aspectRatio.",
+  },
+  {
+    prop: "class",
+    type: "string",
+    required: false,
+    description: "Additional classes merged onto the chart element.",
+  },
+  {
+    prop: "isDarkMode",
+    type: "boolean",
+    required: false,
+    description:
+      "When true, switches map and region palette choices for dark mode.",
+  },
+  {
+    prop: "chartRef",
+    type: "EChartsType | null",
+    required: false,
+    description: "Bindable chart instance reference.",
   },
   {
     prop: "onRegionHover",

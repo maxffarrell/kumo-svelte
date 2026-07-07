@@ -148,7 +148,11 @@
     {#if demo === 'full'}
       <Sidebar.Group>
         <Sidebar.Menu>
-          <Sidebar.MenuButton icon={MagnifyingGlass} tooltip="Search" class="ring ring-kumo-line group-data-[state=collapsed]/sidebar:ring-transparent">
+          <Sidebar.MenuButton
+            icon={MagnifyingGlass}
+            tooltip="Search"
+            class="ring ring-kumo-line group-data-[state=collapsed]/sidebar:ring-transparent mb-3 group-data-[state=collapsed]/sidebar:mb-0 transition-[margin] duration-(--sidebar-animation-duration)"
+          >
             Quick search...
           </Sidebar.MenuButton>
         </Sidebar.Menu>

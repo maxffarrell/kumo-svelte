@@ -2,7 +2,7 @@
   "name": "kumo-svelte-workspace",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.10.0",
+  "packageManager": "pnpm@11",
   "scripts": {
     "build": "pnpm --filter kumo-svelte build",
     "build:all": "pnpm -r build",

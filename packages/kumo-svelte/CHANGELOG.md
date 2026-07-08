@@ -1,5 +1,28 @@
 # kumo-svelte
 
+## 0.7.0
+
+### Minor Changes
+
+- 3e1233d: Port upstream Kumo map, vertical Flow, Dropdown, Button, and class-merging updates after June 25, 2026.
+- 0fda577: feat(chart): add `BubbleMap` chart component
+
+  New `BubbleMap` component renders proportional bubbles over a registered
+  geographic map using ECharts' scatter series. Includes value-based radius
+  scaling, a `mapColors` palette addition to `ChartPalette`, and supporting
+  types. Also extracts `escapeHtml` / `defaultValueFormat` tooltip helpers into a
+  shared `tooltip-utils` module reused by `SankeyChart`.
+
+### Patch Changes
+
+- 0fda577: Keep primary and destructive button active/focus rings matched to their variant color.
+- 149ce8d: Fix toolbar input-group active highlights and align the homepage toolbar demo actions.
+- d057d73: Use the Button component for Toast close controls and match the hover tint to the toast variant.
+- 0fda577: Fix Dialog `size` prop to set a fixed width instead of only a minimum width. Previously, dialog content could stretch the dialog beyond its intended size.
+- 7887f9d: Align Kumo 2.6 prop documentation metadata for chart, radio, and toolbar APIs.
+- da2d933: Remove the duplicate InputGroup outline from toolbar input group focus states.
+- 6a7e7e0: Stabilize dialog variant exports so fixed-width dialog sizing can be tested without mounting dialog overlays.
+
 ## 0.3.0
 
 ### Minor Changes

@@ -3,7 +3,7 @@
   "version": "0.7.0",
   "description": "Svelte port of Cloudflare's Kumo UI library using bits-ui primitives.",
   "type": "module",
-  "packageManager": "pnpm@11",
+  "packageManager": "pnpm@11.10.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",

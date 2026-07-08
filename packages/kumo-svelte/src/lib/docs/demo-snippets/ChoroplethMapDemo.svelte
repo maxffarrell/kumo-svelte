@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import * as echarts from 'echarts';
-  import { BubbleMap, type MapGeoJson } from 'kumo-svelte';
-  import { colos, fmtRequests, loadWorldGeoJson } from './map-demo-data';
+  import { ChoroplethMap, type MapGeoJson } from 'kumo-svelte';
+  import { countries, fmtRequests, loadWorldGeoJson } from './map-demo-data';
 
   let geoJson = $state<MapGeoJson | null>(null);
   let error = $state<string | null>(null);
@@ -19,16 +19,13 @@
 </script>
 
 {#if geoJson}
-  <BubbleMap
+  <ChoroplethMap
     {echarts}
     {geoJson}
-    data={colos}
-    lng="lon"
-    lat="lat"
-    name="city"
+    data={countries}
+    name="country"
     value="requests"
     valueFormat={fmtRequests}
-    minRadius={8}
   />
 {:else if error}
   <p class="text-sm text-kumo-danger">{error}</p>

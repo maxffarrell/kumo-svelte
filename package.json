@@ -2,7 +2,10 @@
   "name": "kumo-svelte-workspace",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.3.0",
+  "packageManager": "pnpm@11.10.0",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "build": "pnpm --filter kumo-svelte build",
     "build:all": "pnpm -r build",
@@ -30,15 +33,15 @@
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
     "@octokit/rest": "^22.0.1",
-    "@types/node": "^25.9.3",
+    "@types/node": "^26.1.0",
     "@types/pngjs": "^6.0.5",
     "lefthook": "^2.1.9",
-    "oxlint": "1.70.0",
+    "oxlint": "1.72.0",
     "pixelmatch": "^7.2.0",
     "pngjs": "^7.0.0",
-    "prettier": "^3.8.4",
+    "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "tsx": "^4.22.4",
+    "tsx": "^4.23.0",
     "typescript": "^6.0.3"
   }
 }

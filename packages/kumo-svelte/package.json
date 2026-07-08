@@ -1,9 +1,9 @@
 {
   "name": "kumo-svelte",
-  "version": "0.3.0",
+  "version": "0.7.0",
   "description": "Svelte port of Cloudflare's Kumo UI library using bits-ui primitives.",
   "type": "module",
-  "packageManager": "pnpm@11.3.0",
+  "packageManager": "pnpm@11.10.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -81,12 +81,12 @@
   "dependencies": {
     "@internationalized/date": "^3.12.2",
     "bits-ui": "^2.18.1",
-    "clsx": "^2.1.1",
+    "cnfast": "^0.0.8",
+    "d3-geo": "^3.1.1",
     "esm-env": "^1.2.2",
     "phosphor-svelte": "^3.1.0",
     "shiki": "^4.2.0",
-    "svelte-sonner": "^1.1.1",
-    "tailwind-merge": "^3.6.0"
+    "svelte-sonner": "^1.1.1"
   },
   "devDependencies": {
     "@sveltejs/adapter-cloudflare": "^7.2.9",
@@ -97,6 +97,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/svelte": "^5.3.1",
     "@testing-library/user-event": "^14.6.1",
+    "@types/d3-geo": "^3.1.0",
     "@types/node": "^25.9.3",
     "happy-dom": "^20.10.5",
     "jsdom": "^29.1.1",

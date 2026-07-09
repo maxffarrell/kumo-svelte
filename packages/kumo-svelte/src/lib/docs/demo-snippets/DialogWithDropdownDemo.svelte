@@ -1,12 +1,42 @@
 <script lang="ts">
-  import { Dialog } from '$lib';
+  import { X } from 'phosphor-svelte';
+  import { Button, Dialog, DropdownMenu } from 'kumo-svelte';
+
+  let open = $state(false);
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">
-  <Dialog title="Project Actions" description="Make changes and save when you are done.">
-    {#snippet trigger()}<span class="inline-flex h-9 cursor-pointer items-center rounded-lg bg-kumo-base px-3 text-base font-medium text-kumo-default shadow-xs ring ring-kumo-hairline">Click me</span>{/snippet}
-    <div class="grid gap-3">
-      <p class="text-sm text-kumo-subtle">Dialog content goes here.</p>
+  <Dialog
+    bind:open
+    title="Resource Actions"
+    description="Choose an action for the selected resource."
+    class="p-8"
+  >
+    {#snippet trigger(props)}
+      <Button {...props}>Open Form</Button>
+    {/snippet}
+    <Button
+      variant="secondary"
+      shape="square"
+      aria-label="Close"
+      class="absolute top-8 right-8"
+      onclick={() => (open = false)}
+    >
+      <X />
+    </Button>
+    <DropdownMenu>
+      <DropdownMenu.Trigger>
+        <Button>Actions</Button>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content>
+        <DropdownMenu.Item>Edit</DropdownMenu.Item>
+        <DropdownMenu.Item>Duplicate</DropdownMenu.Item>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Item variant="danger">Delete</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu>
+    <div class="mt-8 flex justify-end">
+      <Button variant="secondary" onclick={() => (open = false)}>Close</Button>
     </div>
   </Dialog>
 </div>

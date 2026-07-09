@@ -65,6 +65,9 @@
           </tbody>
         </table>
       </div>
+      <div class="mt-6 flex justify-end gap-2">
+        <Button variant="secondary" onclick={() => (openBySize[size] = false)}>Close</Button>
+      </div>
     </Dialog>
   {/each}
 </div>

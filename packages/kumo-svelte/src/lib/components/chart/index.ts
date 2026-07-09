@@ -11,6 +11,7 @@ export type {
   SafeTooltipOption,
   ChartEvents,
 } from "./Chart.svelte";
+export type { TimeseriesMarker } from "./timeseries-markers";
 export type {
   BubbleMapProps,
   MapProjection,

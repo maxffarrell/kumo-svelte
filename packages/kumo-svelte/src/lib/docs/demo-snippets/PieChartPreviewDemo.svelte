@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as echarts from 'echarts';
-  import { Chart } from 'kumo-svelte';
-  import type { KumoChartOption } from 'kumo-svelte';
+  import { Chart } from 'kumo-svelte/components/chart';
+  import { type KumoChartOption } from 'kumo-svelte/components/chart';
 
   const options: KumoChartOption = {
     toolbox: {

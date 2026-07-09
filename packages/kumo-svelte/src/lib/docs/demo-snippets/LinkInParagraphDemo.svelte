@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link } from 'kumo-svelte';
+  import { Link } from 'kumo-svelte/components/link';
 </script>
 
 <p class="mx-auto max-w-md text-base leading-relaxed text-kumo-default">

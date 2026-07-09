@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Autocomplete } from 'kumo-svelte';
+  import { Autocomplete } from 'kumo-svelte/components/autocomplete';
 
   const countries = [
   { label: 'United States', value: 'us' },

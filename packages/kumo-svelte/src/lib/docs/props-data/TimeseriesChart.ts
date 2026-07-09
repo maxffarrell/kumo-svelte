@@ -21,6 +21,12 @@ const rows: PropRow[] = [
     description: 'Array of time series data to display on the chart.'
   },
   {
+    prop: 'markers',
+    type: 'TimeseriesMarker[]',
+    required: false,
+    description: 'Vertical reference markers rendered on the time axis.'
+  },
+  {
     prop: 'xAxisName',
     type: 'string',
     required: false,

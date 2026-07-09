@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CaretDown } from 'phosphor-svelte';
+  import CaretDown from 'phosphor-svelte/lib/CaretDown';
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import CollapsibleTrigger from './CollapsibleTrigger.svelte';

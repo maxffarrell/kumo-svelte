@@ -22,7 +22,7 @@
 <script lang="ts">
   import { DropdownMenu as DropdownMenuPrimitive } from 'bits-ui';
   import type { Component, Snippet } from 'svelte';
-  import { Check } from 'phosphor-svelte';
+  import Check from 'phosphor-svelte/lib/Check';
   import { cn } from '$lib/utils/cn';
 
   interface Props {

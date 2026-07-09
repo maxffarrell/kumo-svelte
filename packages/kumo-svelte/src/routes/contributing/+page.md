@@ -1,7 +1,6 @@
 ---
 title: "Contributing"
 description: "Learn how to contribute to Kumo, from setup and workflows to PR and release guidelines. Everything you need for setup, development, quality checks, and PR process is documented here."
-contentLayout: "wide"
 ---
 
 <script>

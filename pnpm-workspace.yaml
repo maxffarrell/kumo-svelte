@@ -5,6 +5,7 @@ minimumReleaseAge: 4320
 
 overrides:
   '@sveltejs/kit>cookie': 0.7.2
+  echarts@<6.1.0: ^6.1.0
   esbuild: 0.28.1
   read-yaml-file: 2.1.0
   undici: 7.28.0
@@ -15,3 +16,6 @@ allowBuilds:
   lefthook: true
   sharp: true
   workerd: true
+
+minimumReleaseAgeExclude:
+  - echarts@6.1.0

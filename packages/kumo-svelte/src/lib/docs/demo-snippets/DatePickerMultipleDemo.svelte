@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DatePicker } from 'kumo-svelte';
+  import { DatePicker } from 'kumo-svelte/components/date-picker';
 
   let dates = $state<Date[] | undefined>();
 </script>

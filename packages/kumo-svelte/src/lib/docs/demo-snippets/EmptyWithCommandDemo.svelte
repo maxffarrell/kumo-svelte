@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { FolderOpen } from 'phosphor-svelte';
-  import { Empty } from 'kumo-svelte';
+  import FolderOpen from 'phosphor-svelte/lib/FolderOpen';
+  import { Empty } from 'kumo-svelte/components/empty';
 </script>
 
 <Empty

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Surface } from 'kumo-svelte';
+  import { Surface } from 'kumo-svelte/components/surface';
   import { ResourceListPage } from '../../../blocks/resource-list';
-  import { Database } from 'phosphor-svelte';
+  import Database from 'phosphor-svelte/lib/Database';
 </script>
 
 <ResourceListPage

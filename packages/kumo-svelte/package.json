@@ -50,7 +50,7 @@
     }
   },
   "scripts": {
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check": "svelte-kit sync && svelte-check-native --tsconfig ./tsconfig.json",
     "codegen:registry": "tsx scripts/component-registry.ts",
     "build:cli": "tsc -p tsconfig.cli.json",
     "package": "svelte-package",
@@ -103,7 +103,7 @@
     "jsdom": "^29.1.1",
     "mdsx": "^0.0.7",
     "svelte": "^5.56.3",
-    "svelte-check": "^4.6.0",
+    "svelte-check-native": "^0.9.6",
     "tailwindcss": "^4.3.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",

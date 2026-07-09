@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Button, Tooltip, TooltipProvider } from '$lib';
+  import { Button } from '$lib/components/button';
+  import { Tooltip, TooltipProvider } from '$lib/components/tooltip';
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">

@@ -34,7 +34,7 @@
 <script lang="ts">
   import { Switch as SwitchPrimitive } from 'bits-ui';
   import type { Snippet } from 'svelte';
-  import { Info } from 'phosphor-svelte';
+  import Info from 'phosphor-svelte/lib/Info';
   import { cn } from '$lib/utils/cn';
 
   interface Props {

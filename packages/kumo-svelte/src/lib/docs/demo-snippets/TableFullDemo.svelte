@@ -1,6 +1,14 @@
 <script lang="ts">
-  import { Badge, Button, DropdownMenu, LayerCard, Table } from 'kumo-svelte';
-  import { DotsThree, EnvelopeSimple, Eye, PencilSimple, Trash } from 'phosphor-svelte';
+  import { Badge } from 'kumo-svelte/components/badge';
+  import { Button } from 'kumo-svelte/components/button';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
+  import { LayerCard } from 'kumo-svelte/components/layer-card';
+  import { Table } from 'kumo-svelte/components/table';
+  import DotsThree from 'phosphor-svelte/lib/DotsThree';
+  import EnvelopeSimple from 'phosphor-svelte/lib/EnvelopeSimple';
+  import Eye from 'phosphor-svelte/lib/Eye';
+  import PencilSimple from 'phosphor-svelte/lib/PencilSimple';
+  import Trash from 'phosphor-svelte/lib/Trash';
   import { emailRows } from './table-demo-data';
 
   let selectedIds = $state<Set<string>>(new Set(['2']));

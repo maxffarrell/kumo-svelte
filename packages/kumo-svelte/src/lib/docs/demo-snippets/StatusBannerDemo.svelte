@@ -1,6 +1,9 @@
 <script lang="ts">
-  import { Banner } from '$lib';
-  import { CheckCircle, Info, Warning, WarningCircle } from 'phosphor-svelte';
+  import { Banner } from '$lib/components/banner';
+  import CheckCircle from 'phosphor-svelte/lib/CheckCircle';
+  import Info from 'phosphor-svelte/lib/Info';
+  import Warning from 'phosphor-svelte/lib/Warning';
+  import WarningCircle from 'phosphor-svelte/lib/WarningCircle';
 </script>
 
 <div class="w-full space-y-3">

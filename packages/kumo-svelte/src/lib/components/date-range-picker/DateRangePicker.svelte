@@ -2,7 +2,9 @@
   import type { DateValue } from '@internationalized/date';
   import type { DateRange } from 'bits-ui';
   import type { Snippet } from 'svelte';
-  import { Calendar as CalendarIcon, CaretLeft, CaretRight } from 'phosphor-svelte';
+  import CalendarIcon from 'phosphor-svelte/lib/Calendar';
+  import CaretLeft from 'phosphor-svelte/lib/CaretLeft';
+  import CaretRight from 'phosphor-svelte/lib/CaretRight';
   import { DateRangePicker as DateRangePickerPrimitive } from 'bits-ui';
   import { cn } from '$lib/utils/cn';
 

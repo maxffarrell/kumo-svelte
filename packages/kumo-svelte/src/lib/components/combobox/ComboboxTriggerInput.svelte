@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { CaretDown, X } from 'phosphor-svelte';
+  import CaretDown from 'phosphor-svelte/lib/CaretDown';
+  import X from 'phosphor-svelte/lib/X';
   import { cn } from '$lib/utils/cn';
   import { embeddedInputStyles, getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
 

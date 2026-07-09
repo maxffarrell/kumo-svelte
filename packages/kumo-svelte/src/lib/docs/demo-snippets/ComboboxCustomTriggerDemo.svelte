@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Combobox } from 'kumo-svelte';
-  import { MagnifyingGlass } from 'phosphor-svelte';
+  import { Combobox } from 'kumo-svelte/components/combobox';
+  import MagnifyingGlass from 'phosphor-svelte/lib/MagnifyingGlass';
 
   const languages = [
     { value: 'en', label: 'English', emoji: 'GB' },

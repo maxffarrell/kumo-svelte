@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { ArrowRight, ArrowSquareOut as ExternalLink, CaretRight } from 'phosphor-svelte';
+  import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
+  import ExternalLink from 'phosphor-svelte/lib/ArrowSquareOut';
+  import CaretRight from 'phosphor-svelte/lib/CaretRight';
   import CommandPaletteItem from './CommandPaletteItem.svelte';
   import CommandPaletteHighlightedText from './CommandPaletteHighlightedText.svelte';
   import { cn } from '$lib/utils/cn';

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { CaretUpDown, Check } from 'phosphor-svelte';
+  import CaretUpDown from 'phosphor-svelte/lib/CaretUpDown';
+  import Check from 'phosphor-svelte/lib/Check';
   import { Select as SelectPrimitive } from 'bits-ui';
   import Field from '$lib/components/field/Field.svelte';
   import Loader from '$lib/components/loader/Loader.svelte';

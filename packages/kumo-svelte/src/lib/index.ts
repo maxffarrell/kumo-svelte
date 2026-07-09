@@ -26,6 +26,7 @@ export type {
   MapProjection,
   MapStyle,
   SafeTooltipOption,
+  TimeseriesMarker,
 } from "./components/chart";
 export {
   Checkbox,

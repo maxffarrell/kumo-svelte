@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { Check } from 'phosphor-svelte';
+  import Check from 'phosphor-svelte/lib/Check';
   import { getAutocompleteContext, normalizeAutocompleteItem, type AutocompleteItem } from './context';
   import { cn } from '$lib/utils/cn';
 

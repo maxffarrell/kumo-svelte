@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Text } from 'kumo-svelte';
+  import { Text } from 'kumo-svelte/components/text';
 </script>
 
 <div class="w-64 rounded-lg border border-kumo-hairline bg-kumo-base p-4">

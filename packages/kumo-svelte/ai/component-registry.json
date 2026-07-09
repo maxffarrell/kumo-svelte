@@ -2034,8 +2034,7 @@
         },
         "children": {
           "type": "Snippet",
-          "optional": false,
-          "required": true,
+          "optional": true,
           "description": "Dialog content, typically title, description, close, and action buttons."
         },
         "container": {
@@ -2043,6 +2042,33 @@
           "optional": true,
           "default": "document.body",
           "description": "Portal container for custom roots or Shadow DOM."
+        },
+        "description": {
+          "type": "string",
+          "optional": true,
+          "description": "Description rendered under the dialog title."
+        },
+        "disablePointerDismissal": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "When true, prevents the dialog from being dismissed by clicking outside."
+        },
+        "open": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Controlled open state. Supports bind:open."
+        },
+        "role": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "dialog",
+            "alertdialog"
+          ],
+          "default": "dialog",
+          "description": "ARIA role for the dialog."
         },
         "size": {
           "type": "enum",
@@ -2060,6 +2086,16 @@
           "type": "string",
           "optional": true,
           "description": "Inline styles for the dialog content."
+        },
+        "title": {
+          "type": "string",
+          "optional": true,
+          "description": "Title rendered as the accessible dialog heading."
+        },
+        "trigger": {
+          "type": "Snippet<[Record<string, unknown>]>",
+          "optional": true,
+          "description": "Trigger snippet that receives props for opening the dialog."
         }
       },
       "colors": [

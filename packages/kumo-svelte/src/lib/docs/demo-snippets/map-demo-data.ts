@@ -1,7 +1,4 @@
-import type { MapGeoJson } from 'kumo-svelte';
-
-export const WORLD_GEO_JSON_URL =
-  'https://cdn.jsdelivr.net/gh/johan/world.geo.json@master/countries.geo.json';
+import { type MapGeoJson } from 'kumo-svelte/components/chart';
 
 export interface Colo extends Record<string, unknown> {
   iata: string;
@@ -23,6 +20,48 @@ export interface CountryTraffic extends Record<string, unknown> {
   country: string;
   requests: number;
 }
+
+type Position = [number, number];
+
+function boxFeature(name: string, west: number, south: number, east: number, north: number) {
+  const coordinates: Position[] = [
+    [west, south],
+    [east, south],
+    [east, north],
+    [west, north],
+    [west, south]
+  ];
+
+  return {
+    type: 'Feature' as const,
+    properties: { name },
+    geometry: {
+      type: 'Polygon' as const,
+      coordinates: [coordinates]
+    }
+  };
+}
+
+const WORLD_GEO_JSON: MapGeoJson = {
+  type: 'FeatureCollection',
+  features: [
+    boxFeature('United States of America', -125, 25, -66, 49),
+    boxFeature('Canada', -141, 42, -52, 83),
+    boxFeature('Mexico', -118, 14, -86, 33),
+    boxFeature('Argentina', -73, -55, -53, -21),
+    boxFeature('Brazil', -74, -34, -34, 5),
+    boxFeature('United Kingdom', -8, 50, 2, 59),
+    boxFeature('Netherlands', 3, 50, 8, 54),
+    boxFeature('France', -5, 42, 8, 51),
+    boxFeature('Spain', -10, 36, 4, 44),
+    boxFeature('Germany', 5, 47, 15, 55),
+    boxFeature('Nigeria', 3, 4, 14, 14),
+    boxFeature('South Africa', 16, -35, 33, -22),
+    boxFeature('India', 68, 6, 97, 35),
+    boxFeature('Japan', 129, 31, 146, 46),
+    boxFeature('Australia', 113, -44, 154, -10)
+  ]
+};
 
 export const colos: Colo[] = [
   { iata: 'SFO', city: 'San Francisco', country: 'US', lat: 37.77, lon: -122.42, requests: 1600 },
@@ -95,9 +134,5 @@ export const fmtRequests = (value: number) =>
   `${value >= 1000 ? `${(value / 1000).toLocaleString()}k` : value.toString()} requests`;
 
 export async function loadWorldGeoJson(): Promise<MapGeoJson> {
-  const response = await fetch(WORLD_GEO_JSON_URL);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch GeoJSON: ${response.status} ${response.statusText}`);
-  }
-  return (await response.json()) as MapGeoJson;
+  return WORLD_GEO_JSON;
 }

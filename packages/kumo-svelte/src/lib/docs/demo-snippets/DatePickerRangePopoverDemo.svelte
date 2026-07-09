@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { Button, DatePicker, Popover, type DateRange } from 'kumo-svelte';
-  import { CalendarDotsIcon } from 'phosphor-svelte';
+  import { Button } from 'kumo-svelte/components/button';
+  import { DatePicker, type DateRange } from 'kumo-svelte/components/date-picker';
+  import { Popover } from 'kumo-svelte/components/popover';
+  import CalendarDotsIcon from 'phosphor-svelte/lib/CalendarDotsIcon';
 
   let range = $state<DateRange | undefined>();
 

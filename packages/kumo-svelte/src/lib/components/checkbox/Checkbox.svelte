@@ -14,7 +14,8 @@
 
 <script lang="ts">
   import { Checkbox as CheckboxPrimitive } from 'bits-ui';
-  import { Check, Minus } from 'phosphor-svelte';
+  import Check from 'phosphor-svelte/lib/Check';
+  import Minus from 'phosphor-svelte/lib/Minus';
   import { cn } from '$lib/utils/cn';
   import type { Snippet } from 'svelte';
 

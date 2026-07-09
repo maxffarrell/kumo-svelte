@@ -14,30 +14,38 @@
   }
 
   let { children, code: codeProp, demo, lang = 'svelte', vrTitle }: Props = $props();
-  const code = $derived((codeProp ?? (demo ? getSvelteDemoSnippet(demo) : '') ?? '').replace(/^\n+|\n+$/g, ''));
+  const code = $derived(
+    codeProp !== undefined
+      ? codeProp.replace(/^\n+|\n+$/g, '')
+      : demo
+        ? getSvelteDemoSnippet(demo).then((snippet) => snippet.replace(/^\n+|\n+$/g, ''))
+        : ''
+  );
 </script>
 
-<div class="not-prose overflow-hidden rounded-lg">
-  <div
-    class={[
-      'flex min-h-[120px] items-center justify-center border border-kumo-hairline bg-kumo-canvas p-6',
-      code ? 'rounded-t-lg' : 'rounded-lg'
-    ]}
-  >
-    {#if demo}
-      <DemoRenderer {demo} />
-    {:else if children}
-      {@render children()}
-    {:else}
-      <p class="text-sm text-kumo-subtle">{vrTitle ?? demo ?? 'Example'}</p>
+{#await code then exampleCode}
+  <div class="not-prose overflow-hidden rounded-lg">
+    <div
+      class={[
+        'flex min-h-[120px] items-center justify-center border border-kumo-hairline bg-kumo-canvas p-6',
+        exampleCode ? 'rounded-t-lg' : 'rounded-lg'
+      ]}
+    >
+      {#if demo}
+        <DemoRenderer {demo} />
+      {:else if children}
+        {@render children()}
+      {:else}
+        <p class="text-sm text-kumo-subtle">{vrTitle ?? demo ?? 'Example'}</p>
+      {/if}
+    </div>
+    {#if exampleCode}
+      <div class="component-example-code">
+        <CodeBlock code={exampleCode} {lang} />
+      </div>
     {/if}
   </div>
-  {#if code}
-    <div class="component-example-code">
-      <CodeBlock {code} {lang} />
-    </div>
-  {/if}
-</div>
+{/await}
 
 <style>
   .component-example-code :global(pre.shiki) {

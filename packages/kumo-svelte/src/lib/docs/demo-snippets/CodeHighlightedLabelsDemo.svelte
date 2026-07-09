@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CodeHighlighted } from 'kumo-svelte';
+  import { CodeHighlighted } from 'kumo-svelte/components/code';
 </script>
 
 <CodeHighlighted

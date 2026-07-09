@@ -87,7 +87,7 @@
 
 {#snippet controlWithTooltip()}
   {#if tooltip && sidebar}
-    <Tooltip content={showTooltip ? tooltip : undefined} side="right" trigger={control} />
+    <Tooltip content={tooltip} disabled={!showTooltip} side="right" trigger={control} />
   {:else}
     {@render control()}
   {/if}

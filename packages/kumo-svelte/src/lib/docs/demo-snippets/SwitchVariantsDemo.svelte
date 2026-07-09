@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Switch } from 'kumo-svelte';
+  import { Switch } from 'kumo-svelte/components/switch';
 </script>
 
 <div class="grid grid-cols-2 gap-x-8 gap-y-4">

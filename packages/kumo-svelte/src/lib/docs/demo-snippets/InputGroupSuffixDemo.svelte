@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { CheckCircle, XCircle } from 'phosphor-svelte';
-  import { InputGroup } from 'kumo-svelte';
+  import CheckCircle from 'phosphor-svelte/lib/CheckCircle';
+  import XCircle from 'phosphor-svelte/lib/XCircle';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
 </script>
 
 <div class="flex w-full max-w-2xs flex-col gap-4">

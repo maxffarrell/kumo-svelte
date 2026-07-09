@@ -1,6 +1,9 @@
 <script lang="ts">
-  import { Copy, PencilSimple, Trash } from 'phosphor-svelte';
-  import { Button, DropdownMenu } from 'kumo-svelte';
+  import Copy from 'phosphor-svelte/lib/Copy';
+  import PencilSimple from 'phosphor-svelte/lib/PencilSimple';
+  import Trash from 'phosphor-svelte/lib/Trash';
+  import { Button } from 'kumo-svelte/components/button';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
 
   let lastAction = $state<string | null>(null);
 </script>

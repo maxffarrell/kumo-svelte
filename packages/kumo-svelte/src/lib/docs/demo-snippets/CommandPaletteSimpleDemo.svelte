@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Button, CommandPalette } from '$lib';
+  import { Button } from '$lib/components/button';
+  import { CommandPalette } from '$lib/components/command-palette';
 
   const simpleItems = [
     { id: '1', title: 'Copy' },

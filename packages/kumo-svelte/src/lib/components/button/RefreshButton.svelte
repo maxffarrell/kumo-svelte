@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ArrowClockwise } from 'phosphor-svelte';
+  import ArrowClockwise from 'phosphor-svelte/lib/ArrowClockwise';
   import { cn } from '$lib/utils/cn';
   import Button from './Button.svelte';
 

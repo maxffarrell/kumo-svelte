@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { Check } from 'phosphor-svelte';
+  import Check from 'phosphor-svelte/lib/Check';
   import { cn } from '$lib/utils/cn';
 
   interface Props {

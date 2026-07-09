@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LayerCard } from 'kumo-svelte';
+  import { LayerCard } from 'kumo-svelte/components/layer-card';
 </script>
 
 <div class="flex gap-4">

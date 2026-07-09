@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Banner } from '$lib';
-  import { WarningCircle } from 'phosphor-svelte';
+  import { Banner } from '$lib/components/banner';
+  import WarningCircle from 'phosphor-svelte/lib/WarningCircle';
 </script>
 
 <Banner

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { MenuBar } from 'kumo-svelte';
-  import { TextB, TextItalic } from 'phosphor-svelte';
+  import { MenuBar } from 'kumo-svelte/components/menu-bar';
+  import TextB from 'phosphor-svelte/lib/TextB';
+  import TextItalic from 'phosphor-svelte/lib/TextItalic';
 
   let active = $state<string | undefined>("bold");
 </script>

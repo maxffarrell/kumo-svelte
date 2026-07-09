@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Input, Label } from 'kumo-svelte';
+  import { Input } from 'kumo-svelte/components/input';
+  import { Label } from 'kumo-svelte/components/label';
 </script>
 
 <div class="space-y-2">

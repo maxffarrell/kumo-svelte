@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Input, Select } from 'kumo-svelte';
+  import { Input } from 'kumo-svelte/components/input';
+  import { Select } from 'kumo-svelte/components/select';
 
   const options = [
     { label: 'United States', value: 'us' },

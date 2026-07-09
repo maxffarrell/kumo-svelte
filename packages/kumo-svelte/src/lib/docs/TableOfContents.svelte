@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { CaretDown } from 'phosphor-svelte';
+  import CaretDown from 'phosphor-svelte/lib/CaretDown';
   import { cn } from '$lib/utils/cn';
 
   export interface TocHeading {

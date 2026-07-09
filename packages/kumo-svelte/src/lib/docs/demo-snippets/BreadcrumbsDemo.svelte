@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Breadcrumbs } from 'kumo-svelte';
+  import { Breadcrumbs } from 'kumo-svelte/components/breadcrumbs';
 </script>
 
 <Breadcrumbs>

@@ -1,6 +1,9 @@
 <script lang="ts">
-  import { Code, Globe, Package } from 'phosphor-svelte';
-  import { Button, Empty } from 'kumo-svelte';
+  import Code from 'phosphor-svelte/lib/Code';
+  import Globe from 'phosphor-svelte/lib/Globe';
+  import Package from 'phosphor-svelte/lib/Package';
+  import { Button } from 'kumo-svelte/components/button';
+  import { Empty } from 'kumo-svelte/components/empty';
 </script>
 
 <Empty

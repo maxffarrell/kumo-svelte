@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Check, Copy } from 'phosphor-svelte';
-  import { codeToHtml } from 'shiki';
+  import Check from 'phosphor-svelte/lib/Check';
+  import Copy from 'phosphor-svelte/lib/Copy';
+  import { highlightCode } from '$lib/utils/highlight-code';
 
   interface Props {
     code?: string;
@@ -10,27 +11,6 @@
   let { code = '', lang = 'txt' }: Props = $props();
   let copied = $state(false);
 
-  const languageAliases: Record<string, string> = {
-    cjs: 'javascript',
-    cts: 'typescript',
-    gql: 'graphql',
-    js: 'javascript',
-    jsx: 'jsx',
-    md: 'markdown',
-    mjs: 'javascript',
-    mts: 'typescript',
-    py: 'python',
-    sh: 'bash',
-    shell: 'bash',
-    svelte: 'svelte',
-    ts: 'typescript',
-    tsx: 'tsx',
-    txt: 'text',
-    yml: 'yaml',
-    zsh: 'bash',
-    jsonc: 'jsonc',
-  };
-
   const normalizedCode = $derived(
     code
       .replace(/^\n+|\n+$/g, '')
@@ -39,14 +19,7 @@
   );
 
   const highlightedCode = $derived(
-    codeToHtml(normalizedCode, {
-      lang: languageAliases[lang] ?? lang,
-      themes: {
-        light: 'github-light',
-        dark: 'vesper'
-      },
-      defaultColor: false
-    }).then((html) =>
+    highlightCode(normalizedCode, lang).then((html) =>
       html
         .replace(/\s+tabindex="0"/g, '')
         .replace(/(<\/span>)\n(?=<span class="line")/g, '$1')

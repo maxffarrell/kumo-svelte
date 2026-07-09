@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Flow } from 'kumo-svelte';
+  import { Flow } from 'kumo-svelte/components/flow';
 </script>
 
 <Flow align="center">

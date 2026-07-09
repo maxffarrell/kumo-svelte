@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Link, Text } from 'kumo-svelte';
+  import { Link } from 'kumo-svelte/components/link';
+  import { Text } from 'kumo-svelte/components/text';
 </script>
 
 <nav class="flex gap-4 text-sm" aria-label="Product links">

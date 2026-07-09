@@ -9,7 +9,12 @@
     { size: 'xl', label: 'Extra Large', width: '768px' }
   ] as const;
 
-  let openBySize = $state<Record<string, boolean>>({});
+  let openBySize = $state<Record<(typeof sizes)[number]['size'], boolean>>({
+    sm: false,
+    base: false,
+    lg: false,
+    xl: false
+  });
 </script>
 
 <div class="flex flex-wrap gap-2">

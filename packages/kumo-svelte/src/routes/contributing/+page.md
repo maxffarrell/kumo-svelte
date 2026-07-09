@@ -12,19 +12,15 @@ contentLayout: "wide"
   import PropsTable from '$lib/docs/PropsTable.svelte';
 </script>
 
-<section class="not-prose border-b border-kumo-hairline pb-8 md:pb-9">
-  <h2 id="before-you-start" class="mb-6 text-3xl leading-tight font-semibold tracking-normal text-kumo-default md:mb-8 md:text-[40px]">
-    <a href="#before-you-start">Before You Start</a>
-  </h2>
-  <p class="mb-5 text-lg leading-normal text-kumo-default md:mb-6 md:text-2xl">
-    For non-trivial changes, start with alignment before coding:
-  </p>
-  <ul class="m-0 flex list-disc flex-col gap-3 pl-8 text-lg leading-normal text-kumo-default md:gap-4 md:pl-12 md:text-2xl">
-    <li class="pl-2">Comment on an existing issue or open one first.</li>
-    <li class="pl-2">Confirm scope, API direction, and migration impact.</li>
-    <li class="pl-2">For small fixes/docs tweaks, you can go straight to a PR.</li>
-  </ul>
-</section>
+## Before You Start
+
+For non-trivial changes, start with alignment before coding:
+
+- Comment on an existing issue or open one first.
+- Confirm scope, API direction, and migration impact.
+- For small fixes/docs tweaks, you can go straight to a PR.
+
+---
 
 ## 1. Get Set Up Once
 

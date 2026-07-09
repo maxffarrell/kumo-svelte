@@ -130,7 +130,7 @@ dialog with `role="alertdialog"` instead of `role="dialog"`.
 
 <div class="mb-4 rounded-lg border border-kumo-info/30 bg-kumo-info/10 p-4 text-sm text-kumo-info">
   <p class="font-medium mb-2 text-sm">
-    When to use{" "}
+    When to use
     <code class="bg-kumo-info/20 px-1 rounded">role="alertdialog"</code>:
   </p>
   <ul class="list-disc list-inside space-y-1 ml-2 mb-0">

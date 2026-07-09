@@ -33,7 +33,7 @@ pnpm build
 Requirements:
 
 - Node `^24.12.0`
-- pnpm `&gt;=10.21.0`
+- pnpm `>=10.21.0`
 
 Recommended local setup:
 
@@ -98,7 +98,7 @@ Typical internal change flow:
 
 If your demos should appear in registry metadata, keep demo naming exact:
 
-- File: `&#123;Component&#125;Demo.svelte`
+- File: `{Component}Demo.svelte`
 - Demo component names should end with `Demo`
 
 Implementation expectations:

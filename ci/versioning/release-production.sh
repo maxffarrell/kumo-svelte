@@ -33,7 +33,7 @@ echo "New version will be: $NEW_VERSION"
 
 # Build the package before publishing
 echo "Building package..."
-cd "${PACKAGE_PATH}" && pnpm run build && cd ../..
+cd "${PACKAGE_PATH}" && pnpm run build:package && cd ../..
 
 # Commit version changes
 git add .

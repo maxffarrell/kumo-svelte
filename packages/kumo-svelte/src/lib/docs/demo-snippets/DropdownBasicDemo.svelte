@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Plus } from 'phosphor-svelte';
-  import { Button, DropdownMenu } from 'kumo-svelte';
+  import Plus from 'phosphor-svelte/lib/Plus';
+  import { Button } from 'kumo-svelte/components/button';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
 </script>
 
 <DropdownMenu>

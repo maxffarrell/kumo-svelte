@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { CheckCircle } from 'phosphor-svelte';
-  import { InputGroup, Loader } from 'kumo-svelte';
+  import CheckCircle from 'phosphor-svelte/lib/CheckCircle';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
+  import { Loader } from 'kumo-svelte/components/loader';
 
   let status = $state<'idle' | 'loading' | 'success'>('success');
   let value = $state('kumo');

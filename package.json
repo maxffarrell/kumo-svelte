@@ -4,7 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@11.10.0",
   "engines": {
-    "node": "24.x"
+    "node": "26.x"
   },
   "scripts": {
     "build": "pnpm --filter kumo-svelte build",

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { DownloadSimple, UploadSimple } from 'phosphor-svelte';
-  import { Toolbar } from 'kumo-svelte';
+  import DownloadSimple from 'phosphor-svelte/lib/DownloadSimple';
+  import UploadSimple from 'phosphor-svelte/lib/UploadSimple';
+  import { Toolbar } from 'kumo-svelte/components/toolbar';
 </script>
 
 <Toolbar>

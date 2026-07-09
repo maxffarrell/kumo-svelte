@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Database } from 'phosphor-svelte';
-  import { Empty } from 'kumo-svelte';
+  import Database from 'phosphor-svelte/lib/Database';
+  import { Empty } from 'kumo-svelte/components/empty';
 </script>
 
 <div class="flex flex-col gap-8">

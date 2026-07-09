@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Code } from 'kumo-svelte';
+  import { Code } from 'kumo-svelte/components/code';
 </script>
 
 <Code>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Combobox } from 'kumo-svelte';
+  import { Combobox } from 'kumo-svelte/components/combobox';
 
   const servers = [
     { value: 'Asia', items: [{ label: 'Japan', value: 'japan' }, { label: 'Singapore', value: 'singapore' }] },

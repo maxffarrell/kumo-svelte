@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { InputGroup, Toolbar } from 'kumo-svelte';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
+  import { Toolbar } from 'kumo-svelte/components/toolbar';
 </script>
 
 <Toolbar class="w-full max-w-lg">

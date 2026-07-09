@@ -22,7 +22,8 @@
 </script>
 
 <script lang="ts">
-  import { Eye, EyeSlash } from 'phosphor-svelte';
+  import Eye from 'phosphor-svelte/lib/Eye';
+  import EyeSlash from 'phosphor-svelte/lib/EyeSlash';
   import type { Snippet } from 'svelte';
   import { Field, type FieldErrorMatch } from '$lib/components/field';
   import { cn } from '$lib/utils/cn';

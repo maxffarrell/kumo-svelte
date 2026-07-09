@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import * as echarts from 'echarts';
-  import { Chart, ChartPalette } from 'kumo-svelte';
-  import type { KumoChartOption } from 'kumo-svelte';
+  import { Chart, ChartPalette } from 'kumo-svelte/components/chart';
+  import { type KumoChartOption } from 'kumo-svelte/components/chart';
   import {
     getIsDarkMode,
     lineStyleBySeries,

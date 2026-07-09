@@ -2,7 +2,8 @@
   import { onMount } from 'svelte';
   import * as echarts from 'echarts';
   import type { EChartsType } from 'echarts/core';
-  import { ChartLegend, ChartPalette, LayerCard, TimeseriesChart } from 'kumo-svelte';
+  import { ChartLegend, ChartPalette, TimeseriesChart } from 'kumo-svelte/components/chart';
+  import { LayerCard } from 'kumo-svelte/components/layer-card';
   import { buildSeriesData, getIsDarkMode } from './chart-color-demo-data';
 
   let isDarkMode = $state(false);

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Button, Toasty } from 'kumo-svelte';
+  import { Button } from 'kumo-svelte/components/button';
+  import { Toasty } from 'kumo-svelte/components/toasty';
 </script>
 
 <Toasty>

@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { Gear, SignOut, User } from 'phosphor-svelte';
-  import { DropdownMenu } from 'kumo-svelte';
+  import Gear from 'phosphor-svelte/lib/Gear';
+  import SignOut from 'phosphor-svelte/lib/SignOut';
+  import User from 'phosphor-svelte/lib/User';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
 </script>
 
 <DropdownMenu>

@@ -1,6 +1,12 @@
 <script lang="ts">
-  import { Button, CommandPalette } from '$lib';
-  import { ChartLine, Folder, Gear, House, MagnifyingGlass, Users } from 'phosphor-svelte';
+  import { Button } from '$lib/components/button';
+  import { CommandPalette } from '$lib/components/command-palette';
+  import ChartLine from 'phosphor-svelte/lib/ChartLine';
+  import Folder from 'phosphor-svelte/lib/Folder';
+  import Gear from 'phosphor-svelte/lib/Gear';
+  import House from 'phosphor-svelte/lib/House';
+  import MagnifyingGlass from 'phosphor-svelte/lib/MagnifyingGlass';
+  import Users from 'phosphor-svelte/lib/Users';
 
   interface CommandItem {
     id: string;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Collapsible } from '$lib';
+  import { Collapsible } from '$lib/components/collapsible';
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">

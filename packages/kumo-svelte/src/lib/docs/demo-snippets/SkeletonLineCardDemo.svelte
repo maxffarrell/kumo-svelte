@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SkeletonLine } from 'kumo-svelte';
+  import { SkeletonLine } from 'kumo-svelte/components/loader';
 </script>
 
 <div class="w-64 rounded-lg p-4 ring ring-kumo-hairline">

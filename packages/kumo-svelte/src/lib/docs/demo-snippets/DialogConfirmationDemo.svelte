@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Warning } from 'phosphor-svelte';
-  import { Button, Dialog } from 'kumo-svelte';
+  import Warning from 'phosphor-svelte/lib/Warning';
+  import { Button } from 'kumo-svelte/components/button';
+  import { Dialog } from 'kumo-svelte/components/dialog';
 
   let open = $state(false);
 </script>

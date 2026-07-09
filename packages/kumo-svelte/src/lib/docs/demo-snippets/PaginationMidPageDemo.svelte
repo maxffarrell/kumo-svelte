@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Pagination } from '$lib';
+  import { Pagination } from '$lib/components/pagination';
 
   let paginationPage = $state(5);
 

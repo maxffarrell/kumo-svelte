@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button } from 'kumo-svelte';
-  import { ArrowSquareOut as ExternalLink } from 'phosphor-svelte';
+  import { Button } from 'kumo-svelte/components/button';
+  import ExternalLink from 'phosphor-svelte/lib/ArrowSquareOut';
 </script>
 
 <div class="flex flex-wrap items-center gap-3">

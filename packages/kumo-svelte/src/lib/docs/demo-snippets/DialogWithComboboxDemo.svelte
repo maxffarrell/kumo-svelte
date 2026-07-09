@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { X } from 'phosphor-svelte';
-  import { Button, Combobox, Dialog } from 'kumo-svelte';
+  import X from 'phosphor-svelte/lib/X';
+  import { Button } from 'kumo-svelte/components/button';
+  import { Combobox } from 'kumo-svelte/components/combobox';
+  import { Dialog } from 'kumo-svelte/components/dialog';
 
   const regions = [
     { value: 'us-east', label: 'US East' },

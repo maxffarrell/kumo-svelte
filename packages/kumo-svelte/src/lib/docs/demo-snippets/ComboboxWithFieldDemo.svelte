@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Combobox } from 'kumo-svelte';
+  import { Combobox } from 'kumo-svelte/components/combobox';
 
   const databases = [
     { value: 'postgres', label: 'PostgreSQL' },

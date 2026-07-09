@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CodeHighlighted } from 'kumo-svelte';
+  import { CodeHighlighted } from 'kumo-svelte/components/code';
 
   const svelteCode = `<script lang="ts">
   let size = $state({ width: 0, height: 0 });

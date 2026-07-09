@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Badge } from 'kumo-svelte';
+  import { Badge } from 'kumo-svelte/components/badge';
 </script>
 
 <div class="flex flex-wrap items-center gap-2">

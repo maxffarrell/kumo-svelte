@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as echarts from 'echarts';
-  import { SankeyChart, ChartPalette } from 'kumo-svelte';
+  import { SankeyChart, ChartPalette } from 'kumo-svelte/components/chart';
 
   const nodes = [
     { name: 'Users', value: 103600, color: ChartPalette.categorical(0) },

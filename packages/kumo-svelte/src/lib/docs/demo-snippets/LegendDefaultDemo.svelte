@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { ChartLegend, ChartPalette } from 'kumo-svelte';
+  import { ChartLegend, ChartPalette } from 'kumo-svelte/components/chart';
   import { getIsDarkMode } from './chart-color-demo-data';
 
   let isDarkMode = $state(false);

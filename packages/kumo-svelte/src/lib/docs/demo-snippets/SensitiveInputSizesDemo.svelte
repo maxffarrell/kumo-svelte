@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SensitiveInput } from 'kumo-svelte';
+  import { SensitiveInput } from 'kumo-svelte/components/sensitive-input';
 
   const sizes = ['xs', 'sm', 'base', 'lg'] as const;
 </script>

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Banner, Text } from '$lib';
-  import { Info } from 'phosphor-svelte';
+  import { Banner } from '$lib/components/banner';
+  import { Text } from '$lib/components/text';
+  import Info from 'phosphor-svelte/lib/Info';
 </script>
 
 <Banner icon={Info} title="Custom content supported">

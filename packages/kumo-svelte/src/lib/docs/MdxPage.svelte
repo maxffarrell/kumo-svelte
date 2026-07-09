@@ -5,7 +5,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { onMount } from 'svelte';
-  import { GithubLogoIcon } from 'phosphor-svelte';
+  import GithubLogoIcon from 'phosphor-svelte/lib/GithubLogoIcon';
   import BaseUIIcon from './BaseUIIcon.svelte';
   import CopyPageButton from './CopyPageButton.svelte';
   import StickyDocHeader from './StickyDocHeader.svelte';

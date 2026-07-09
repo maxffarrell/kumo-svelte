@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { Breadcrumbs, Button } from 'kumo-svelte';
+  import { Breadcrumbs } from 'kumo-svelte/components/breadcrumbs';
+  import { Button } from 'kumo-svelte/components/button';
   import { PageHeader } from '../../../blocks/page-header';
-  import { Plus } from 'phosphor-svelte';
+  import Plus from 'phosphor-svelte/lib/Plus';
 </script>
 
 {#snippet breadcrumbs()}

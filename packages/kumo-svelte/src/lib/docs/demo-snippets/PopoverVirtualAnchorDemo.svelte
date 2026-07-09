@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { DotsThree } from 'phosphor-svelte';
-  import { Button, Popover } from '$lib';
+  import DotsThree from 'phosphor-svelte/lib/DotsThree';
+  import { Button } from '$lib/components/button';
+  import { Popover } from '$lib/components/popover';
 
   const rows = [
     { id: '1', name: 'api-gateway', status: 'Active' },

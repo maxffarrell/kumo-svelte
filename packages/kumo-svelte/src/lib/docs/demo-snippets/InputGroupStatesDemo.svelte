@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { Eye, EyeSlash, MagnifyingGlass } from 'phosphor-svelte';
-  import { InputGroup } from 'kumo-svelte';
+  import Eye from 'phosphor-svelte/lib/Eye';
+  import EyeSlash from 'phosphor-svelte/lib/EyeSlash';
+  import MagnifyingGlass from 'phosphor-svelte/lib/MagnifyingGlass';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
 
   let show = $state(false);
 </script>

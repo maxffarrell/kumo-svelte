@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Radio } from '$lib';
+  import { Radio } from '$lib/components/radio';
 
   let value = $state('personal');
 </script>

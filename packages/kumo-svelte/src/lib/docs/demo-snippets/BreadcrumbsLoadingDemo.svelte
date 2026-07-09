@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Breadcrumbs } from 'kumo-svelte';
-  import { House } from 'phosphor-svelte';
+  import { Breadcrumbs } from 'kumo-svelte/components/breadcrumbs';
+  import House from 'phosphor-svelte/lib/House';
 </script>
 
 <Breadcrumbs>

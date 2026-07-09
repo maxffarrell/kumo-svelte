@@ -34,9 +34,10 @@
 </script>
 
 <script lang="ts">
-  import { Check, Copy } from 'phosphor-svelte';
-  import { codeToHtml } from 'shiki';
+  import Check from 'phosphor-svelte/lib/Check';
+  import Copy from 'phosphor-svelte/lib/Copy';
   import { cn } from '$lib/utils/cn';
+  import { highlightCode } from '$lib/utils/highlight-code';
 
   interface Props {
     code: string;
@@ -65,22 +66,6 @@
     ...rest
   }: Props = $props();
 
-  const languageAliases: Record<string, string> = {
-    cjs: 'javascript',
-    cts: 'typescript',
-    gql: 'graphql',
-    js: 'javascript',
-    md: 'markdown',
-    mjs: 'javascript',
-    mts: 'typescript',
-    py: 'python',
-    sh: 'bash',
-    shell: 'bash',
-    ts: 'typescript',
-    yml: 'yaml',
-    zsh: 'bash'
-  };
-
   let copied = $state(false);
   const normalizedCode = $derived(
     code
@@ -100,11 +85,7 @@
   }
 
   const highlightedCode = $derived(
-    codeToHtml(normalizedCode, {
-      lang: languageAliases[lang] ?? lang,
-      themes: KUMO_CODE_HIGHLIGHTED_STYLING.themes,
-      defaultColor: false
-    }).then((html) =>
+    highlightCode(normalizedCode, lang).then((html) =>
       decorateHighlightedLines(html)
         .replace(/\s+tabindex="0"/g, '')
         .replace(/(<\/span>)\n(?=<span class="line")/g, '$1')

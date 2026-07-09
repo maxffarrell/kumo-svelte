@@ -25,7 +25,10 @@
   import { Dialog } from '$lib/components/dialog';
   import { Input } from '$lib/components/input';
   import { cn } from '$lib/utils/cn';
-  import { Check, Copy, WarningCircle, X } from 'phosphor-svelte';
+  import Check from 'phosphor-svelte/lib/Check';
+  import Copy from 'phosphor-svelte/lib/Copy';
+  import WarningCircle from 'phosphor-svelte/lib/WarningCircle';
+  import X from 'phosphor-svelte/lib/X';
 
   interface Props {
     resourceType: string;

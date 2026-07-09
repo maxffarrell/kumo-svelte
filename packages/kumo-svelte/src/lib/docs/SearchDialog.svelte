@@ -1,13 +1,11 @@
 <script lang="ts">
-  import {
-    BookOpenIcon,
-    CubeIcon,
-    MagnifyingGlassIcon,
-    SquaresFourIcon,
-    StackIcon
-  } from 'phosphor-svelte';
+  import BookOpenIcon from 'phosphor-svelte/lib/BookOpenIcon';
+  import CubeIcon from 'phosphor-svelte/lib/CubeIcon';
+  import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
+  import SquaresFourIcon from 'phosphor-svelte/lib/SquaresFourIcon';
+  import StackIcon from 'phosphor-svelte/lib/StackIcon';
   import { fade, scale } from 'svelte/transition';
-  import { Badge } from '$lib';
+  import { Badge } from '$lib/components/badge';
   import { cn } from '$lib/utils/cn';
   import { componentItems, blockItems, type NavItem } from './nav';
 

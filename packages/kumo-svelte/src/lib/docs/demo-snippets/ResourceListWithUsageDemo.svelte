@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Code, Surface } from 'kumo-svelte';
+  import { Code } from 'kumo-svelte/components/code';
+  import { Surface } from 'kumo-svelte/components/surface';
   import { ResourceListPage } from '../../../blocks/resource-list';
 </script>
 

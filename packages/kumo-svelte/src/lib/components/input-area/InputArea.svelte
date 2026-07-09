@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { Info } from 'phosphor-svelte';
+  import Info from 'phosphor-svelte/lib/Info';
   import { cn } from '$lib/utils/cn';
 
   type Size = 'xs' | 'sm' | 'base' | 'lg';

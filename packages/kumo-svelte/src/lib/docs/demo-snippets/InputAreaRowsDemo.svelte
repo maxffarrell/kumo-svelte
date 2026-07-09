@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { InputArea } from 'kumo-svelte';
+  import { InputArea } from 'kumo-svelte/components/input-area';
 </script>
 
 <div class="flex flex-col gap-4">

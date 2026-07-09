@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { X } from 'phosphor-svelte';
-  import { Button, Dialog } from 'kumo-svelte';
+  import X from 'phosphor-svelte/lib/X';
+  import { Button } from 'kumo-svelte/components/button';
+  import { Dialog } from 'kumo-svelte/components/dialog';
 
   const sizes = [
     { size: 'sm', label: 'Small', width: '288px' },

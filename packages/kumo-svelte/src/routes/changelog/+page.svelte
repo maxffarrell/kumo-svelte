@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { GithubLogoIcon, LinkSimple } from 'phosphor-svelte';
+  import GithubLogoIcon from 'phosphor-svelte/lib/GithubLogoIcon';
+  import LinkSimple from 'phosphor-svelte/lib/LinkSimple';
   import { Badge, type BadgeVariant } from '$lib/components/badge';
   import { Text } from '$lib/components/text';
   import ChangelogEntry from '$lib/docs/ChangelogEntry.svelte';

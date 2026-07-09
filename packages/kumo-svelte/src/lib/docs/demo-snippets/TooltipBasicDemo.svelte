@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Button, Tooltip, TooltipProvider } from '$lib';
-  import { Plus } from 'phosphor-svelte';
+  import { Button } from '$lib/components/button';
+  import { Tooltip, TooltipProvider } from '$lib/components/tooltip';
+  import Plus from 'phosphor-svelte/lib/Plus';
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">

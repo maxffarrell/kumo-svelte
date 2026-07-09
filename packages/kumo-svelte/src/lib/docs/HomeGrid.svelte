@@ -1,70 +1,69 @@
 <script lang="ts">
+    import Warning from "phosphor-svelte/lib/Warning";
+    import TextB from "phosphor-svelte/lib/TextB";
+    import CheckCircle from "phosphor-svelte/lib/CheckCircle";
+    import TextItalic from "phosphor-svelte/lib/TextItalic";
+    import TranslateIcon from "phosphor-svelte/lib/TranslateIcon";
+    import WarningOctagon from "phosphor-svelte/lib/WarningOctagon";
+    import Plus from "phosphor-svelte/lib/Plus";
+    import MagnifyingGlass from "phosphor-svelte/lib/MagnifyingGlass";
+    import { Autocomplete } from "$lib/components/autocomplete";
+    import { Badge } from "$lib/components/badge";
+    import { Banner } from "$lib/components/banner";
+    import { Button } from "$lib/components/button";
+    import { Checkbox } from "$lib/components/checkbox";
+    import { ClipboardText } from "$lib/components/clipboard-text";
+    import { CodeHighlighted } from "$lib/components/code-highlighted";
+    import { Collapsible } from "$lib/components/collapsible";
+    import { Combobox } from "$lib/components/combobox";
+    import { CommandPalette } from "$lib/components/command-palette";
+    import { DatePicker } from "$lib/components/date-picker";
+    import { Dialog } from "$lib/components/dialog";
+    import { DropdownMenu } from "$lib/components/dropdown-menu";
+    import { Empty } from "$lib/components/empty";
+    import { Flow } from "$lib/components/flow";
+    import { Grid, GridItem } from "$lib/components/grid";
+    import { Input } from "$lib/components/input";
+    import { InputArea } from "$lib/components/input-area";
     import {
-        Warning,
-        TextB,
-        CheckCircle,
-        TextItalic,
-        TranslateIcon,
-        WarningOctagon,
-        Plus,
-        MagnifyingGlass,
-    } from "phosphor-svelte";
-    import {
-        Badge,
-        Banner,
-        Button,
-        Checkbox,
-        ClipboardText,
-        CodeHighlighted,
-        Collapsible,
-        Combobox,
-        Autocomplete,
-        CommandPalette,
-        DatePicker,
-        Dialog,
-        DropdownMenu,
-        Empty,
-        Flow,
-        Grid,
-        GridItem,
-        Input,
-        InputArea,
         InputGroup,
         InputGroupAddon,
         InputGroupInput,
         InputGroupSuffix,
-        Label,
-        LayerCard,
-        Link,
-        Loader,
-        MenuBar,
-        Meter,
-        Pagination,
-        PaginationControls,
+    } from "$lib/components/input-group";
+    import { Label } from "$lib/components/label";
+    import { LayerCard } from "$lib/components/layer-card";
+    import { Link } from "$lib/components/link";
+    import { Loader } from "$lib/components/loader";
+    import { MenuBar } from "$lib/components/menu-bar";
+    import { Meter } from "$lib/components/meter";
+    import { Pagination, PaginationControls } from "$lib/components/pagination";
+    import {
         PopoverContent,
         PopoverDescription,
         PopoverRoot,
         PopoverTitle,
         PopoverTrigger,
-        Radio,
-        Select,
-        SensitiveInput,
-        SkeletonLine,
-        Switch,
+    } from "$lib/components/popover";
+    import { Radio } from "$lib/components/radio";
+    import { Select } from "$lib/components/select";
+    import { SensitiveInput } from "$lib/components/sensitive-input";
+    import { SkeletonLine } from "$lib/components/loader";
+    import { Switch } from "$lib/components/switch";
+    import {
         Table,
         TableBody,
         TableCell,
         TableHead,
         TableHeader,
         TableRow,
-        TableOfContents,
-        Tabs,
-        Text,
-        Toasty,
-        Toolbar,
-        createKumoToastManager,
-        Tooltip,
-    } from "$lib";
+    } from "$lib/components/table";
+    import { TableOfContents } from "$lib/components/table-of-contents";
+    import { Tabs } from "$lib/components/tabs";
+    import { Text } from "$lib/components/text";
+    import { Toasty, createKumoToastManager } from "$lib/components/toasty";
+    import { Toolbar } from "$lib/components/toolbar";
+    import { Tooltip } from "$lib/components/tooltip";
 
     const options = [
         { label: "All deployed versions", value: "all" },

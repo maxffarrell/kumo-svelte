@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { X } from 'phosphor-svelte';
-  import { Button, Dialog, DropdownMenu } from 'kumo-svelte';
+  import X from 'phosphor-svelte/lib/X';
+  import { Button } from 'kumo-svelte/components/button';
+  import { Dialog } from 'kumo-svelte/components/dialog';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
 
   let open = $state(false);
 </script>

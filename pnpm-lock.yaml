@@ -124,9 +124,9 @@ importers:
       svelte:
         specifier: ^5.56.3
         version: 5.56.3
-      svelte-check:
-        specifier: ^4.6.0
-        version: 4.6.0(picomatch@4.0.4)(svelte@5.56.3)(typescript@6.0.3)
+      svelte-check-native:
+        specifier: ^0.9.6
+        version: 0.9.6(@typescript/native-preview@7.0.0-dev.20260705.1)
       tailwindcss:
         specifier: ^4.3.1
         version: 4.3.1
@@ -1072,10 +1072,6 @@ packages:
       typescript:
         optional: true
 
-  '@sveltejs/load-config@0.1.1':
-    resolution: {integrity: sha512-BXXm+VOH/9X4N7Dd1iZ2MqA1h7M+9i2noI8QYuLDY8QcN2WHYn7D/VK/+IJNfcAmRw7ACNJ538UT9GXIhnBTiA==}
-    engines: {node: '>= 18.0.0'}
-
   '@sveltejs/package@2.5.8':
     resolution: {integrity: sha512-zeBbsXYvHiBu56v4gJaGQoEHzg96w0E1j3dOMX8vo56s6vI5eQ57ZEZhudjwjnegnVitRRu5MrmhO0eNvaonIw==}
     engines: {node: ^16.14 || >=18}
@@ -1280,6 +1276,53 @@ packages:
   '@types/ws@8.18.1':
     resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260705.1':
+    resolution: {integrity: sha512-OemjoGm+5nLCaUyL0zwWcSDhyQYQnO6/DcOidm2EzOqK7dYXgaCerDFUAz6iOGjOFtTAQFU50CV+ZbtUxodk9A==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260705.1':
+    resolution: {integrity: sha512-jYEsBtcVOin3ARa2xAkwM21KOlmr9s3FGxcY28gESigXPJOGooRaxZlJ45tFM3TczCMEGmML88XCXuQaH2z1kw==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260705.1':
+    resolution: {integrity: sha512-kmWaZkuqb5RGTHt4AFIdPJ53/wO8vuZbmjSizNFNpvx1owYgQ8QZNu51zKfLQZbMs2FR7NAzVuQT14mhBaQW5Q==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260705.1':
+    resolution: {integrity: sha512-abTOyfyx5SW5szf1YeZf5K9vUWEE7nbbqUUthl8OgRrFrJzlZnDIRf/FV0h6QGqQIN7XTf8lgKjdFe4piNFLww==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260705.1':
+    resolution: {integrity: sha512-oNA9I3MFLqdFVbwolnsFObjrQ1AsBXc4WXPcNyKcoaauAmFTwjxOBPKtiaqFKj4j4Abum7KvjVj0fgBaO5gRPA==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260705.1':
+    resolution: {integrity: sha512-K6hTgnqAEBbrIGH6feXM//FHbk0ilSAQDpLct+3IHfd+tg2sKop5lK2rTZkl/ptHM7Vlh0CF77m0RL73an+oAw==}
+    engines: {node: '>=16.20.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260705.1':
+    resolution: {integrity: sha512-gAwPJgfQWtJnZlMrJ8NCA+vdI42N+XLev+jqZnpcMqt+Jd2zMtoNpppHB0I6URMVys+R2WpMiOOSlHcnvOMyTQ==}
+    engines: {node: '>=16.20.0'}
+    cpu: [x64]
+    os: [win32]
+
+  '@typescript/native-preview@7.0.0-dev.20260705.1':
+    resolution: {integrity: sha512-mXc3tDkRCe8UinMcl5yqUfLAP5Vk5MFuZNNaNsrwRehu1d+lnL+Zu+K7g6kSMOV8NOY9bn9tGFN4/cqhlK4VwA==}
+    engines: {node: '>=16.20.0'}
+    hasBin: true
+
   '@ungap/structured-clone@1.3.1':
     resolution: {integrity: sha512-mUFwbeTqrVgDQxFveS+df2yfap6iuP20NAKAsBt5jDEoOTDew+zwLAOilHCeQJOVSvmgCX4ogqIrA0mnyr08yQ==}
 
@@ -1404,10 +1447,6 @@ packages:
 
   chardet@2.2.0:
     resolution: {integrity: sha512-rddelWYNPRrXq6PtNEN2S3f6t9ILzvqaN5pVgi4kqt9jHQaXIial9PznB5iSPVlQSLNaaH22ItWz3EJtQ10+OA==}
-
-  chokidar@4.0.3:
-    resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
-    engines: {node: '>= 14.16.0'}
 
   chokidar@5.0.0:
     resolution: {integrity: sha512-TQMmc3w+5AxjpL8iIiwebF73dRDF4fBIieAqGn9RGCWaEVwQ6Fb2cGe31Yns0RRIzii5goJ1Y7xbMwo1TxMplw==}
@@ -2182,10 +2221,6 @@ packages:
     resolution: {integrity: sha512-UkRNRIwnhG+y7hpqnycCL/xbTk7+ia9VuVTC0S+zVbwd65DI9eUpRMfsWIGrCWxTU/mi+JW8cHQCrv+zfCbEPQ==}
     engines: {node: '>=10.13'}
 
-  readdirp@4.1.2:
-    resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
-    engines: {node: '>= 14.18.0'}
-
   readdirp@5.0.0:
     resolution: {integrity: sha512-9u/XQ1pvrQtYyMpZe7DXKv2p5CNvyVwzUB6uhLAnQwHMSgKMBR62lc7AHljaeteeHXn11XTAaLLUVZYVZyuRBQ==}
     engines: {node: '>= 20.19.0'}
@@ -2346,13 +2381,42 @@ packages:
     resolution: {integrity: sha512-SS+jx45GF1QjgEXQx4NJZV9ImqmO2NPz5FNsIHrsDjh2YsHnawpan7SNQ1o8NuhrbHZy9AZhIoCUiCeaW/C80g==}
     engines: {node: '>=18'}
 
-  svelte-check@4.6.0:
-    resolution: {integrity: sha512-KhVnDFDSid57mmZtHz8gfW8AAGylOZ0vPnOIzVmAL+urzwK8sBYXRss953gD8T0OdgAQ11mdWhE6uadmtOz8TQ==}
-    engines: {node: '>= 18.0.0'}
+  svelte-check-native-darwin-arm64@0.9.6:
+    resolution: {integrity: sha512-3LhxeFqR56nmmGKwatUAtQWtVkKZgN8TF10I68ee9tau4+Mc9cXASoXQ4gyVNPW/O35Pogflr0XKn9xoVXpjvA==}
+    engines: {node: '>=18'}
+    cpu: [arm64]
+    os: [darwin]
+
+  svelte-check-native-darwin-x64@0.9.6:
+    resolution: {integrity: sha512-sgydGLz5bGLYK5VIYCbbueKte/Y4eAPKnznl1jRIsJDigGZnK3rAvI64pWz0hiGeHZbUs99S36J8+Fu2+NmQFA==}
+    engines: {node: '>=18'}
+    cpu: [x64]
+    os: [darwin]
+
+  svelte-check-native-linux-arm64@0.9.6:
+    resolution: {integrity: sha512-jZeExEnTs2S8iAXQxgznujYMuS1m1wLcIX+4Ex7uLeAMkJeCFptRmBiLM/O6bd+AZQXr97Xar97DxbHqtfSsKg==}
+    engines: {node: '>=18'}
+    cpu: [arm64]
+    os: [linux]
+
+  svelte-check-native-linux-x64@0.9.6:
+    resolution: {integrity: sha512-KnNHBYj3EIqX4SiFGg6G6C32fWLKG8PxnqdHW/i0u+grPr+qHa0MzffPTebzF6jn/NcqL+iPRAq1HpQFBBCTww==}
+    engines: {node: '>=18'}
+    cpu: [x64]
+    os: [linux]
+
+  svelte-check-native-win32-x64@0.9.6:
+    resolution: {integrity: sha512-4xVZt1J771o3znI0+rntXdqHAvLnHNV7qGeyMjhtSY9eXXftlap4uYut5Gj0ys5/fk9/i0A/0ndd61J9ua+hKw==}
+    engines: {node: '>=18'}
+    cpu: [x64]
+    os: [win32]
+
+  svelte-check-native@0.9.6:
+    resolution: {integrity: sha512-vmMxZj2J4DEh935oq7D8Ie2uUvU0SS7vK7d2SkGc9M+3RPLMYyGNZro9FD3pChQeQRwje+qhq4TC5iGjFF9cxw==}
+    engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
-      svelte: ^4.0.0 || ^5.0.0-next.0
-      typescript: '>=5.0.0'
+      '@typescript/native-preview': '>=7.0.0-dev.0'
 
   svelte-sonner@1.1.1:
     resolution: {integrity: sha512-5cd3p7wa4cq0NsqslMwdlPb7x1JglEZ/GKrLePWNr5bCxR1nagAVrY01FRFrXfUGs41miLt3C327+8XJo5BzZw==}
@@ -3457,8 +3521,6 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  '@sveltejs/load-config@0.1.1': {}
-
   '@sveltejs/package@2.5.8(svelte@5.56.3)(typescript@6.0.3)':
     dependencies:
       chokidar: 5.0.0
@@ -3650,6 +3712,37 @@ snapshots:
     dependencies:
       '@types/node': 25.9.3
 
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20260705.1':
+    optional: true
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20260705.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20260705.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20260705.1':
+    optional: true
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20260705.1':
+    optional: true
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20260705.1':
+    optional: true
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20260705.1':
+    optional: true
+
+  '@typescript/native-preview@7.0.0-dev.20260705.1':
+    optionalDependencies:
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20260705.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20260705.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20260705.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20260705.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20260705.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260705.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20260705.1
+
   '@ungap/structured-clone@1.3.1': {}
 
   '@vitest/expect@4.1.9':
@@ -3763,10 +3856,6 @@ snapshots:
   character-entities@2.0.2: {}
 
   chardet@2.2.0: {}
-
-  chokidar@4.0.3:
-    dependencies:
-      readdirp: 4.1.2
 
   chokidar@5.0.0:
     dependencies:
@@ -4559,8 +4648,6 @@ snapshots:
       js-yaml: 4.3.0
       strip-bom: 4.0.0
 
-  readdirp@4.1.2: {}
-
   readdirp@5.0.0: {}
 
   redent@3.0.0:
@@ -4760,18 +4847,30 @@ snapshots:
 
   supports-color@10.2.2: {}
 
-  svelte-check@4.6.0(picomatch@4.0.4)(svelte@5.56.3)(typescript@6.0.3):
+  svelte-check-native-darwin-arm64@0.9.6:
+    optional: true
+
+  svelte-check-native-darwin-x64@0.9.6:
+    optional: true
+
+  svelte-check-native-linux-arm64@0.9.6:
+    optional: true
+
+  svelte-check-native-linux-x64@0.9.6:
+    optional: true
+
+  svelte-check-native-win32-x64@0.9.6:
+    optional: true
+
+  svelte-check-native@0.9.6(@typescript/native-preview@7.0.0-dev.20260705.1):
     dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
-      '@sveltejs/load-config': 0.1.1
-      chokidar: 4.0.3
-      fdir: 6.5.0(picomatch@4.0.4)
-      picocolors: 1.1.1
-      sade: 1.8.1
-      svelte: 5.56.3
-      typescript: 6.0.3
-    transitivePeerDependencies:
-      - picomatch
+      '@typescript/native-preview': 7.0.0-dev.20260705.1
+    optionalDependencies:
+      svelte-check-native-darwin-arm64: 0.9.6
+      svelte-check-native-darwin-x64: 0.9.6
+      svelte-check-native-linux-arm64: 0.9.6
+      svelte-check-native-linux-x64: 0.9.6
+      svelte-check-native-win32-x64: 0.9.6
 
   svelte-sonner@1.1.1(svelte@5.56.3):
     dependencies:

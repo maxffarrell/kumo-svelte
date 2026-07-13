@@ -13,8 +13,14 @@
     type TimeseriesMarker,
     type TimeseriesMarkerCluster
   } from './timeseries-markers';
+  import {
+    buildTimeseriesThresholdAnnotations,
+    getThresholdValueExtent,
+    type TimeseriesThreshold
+  } from './timeseries-thresholds';
 
   export type { TimeseriesMarker } from './timeseries-markers';
+  export type { TimeseriesThreshold } from './timeseries-thresholds';
 
   export interface TimeseriesData {
     name: string;
@@ -27,6 +33,7 @@
     type?: 'line' | 'bar';
     data: TimeseriesData[];
     markers?: TimeseriesMarker[];
+    thresholds?: TimeseriesThreshold[];
     xAxisName?: string;
     xAxisTickCount?: number;
     xAxisTickFormat?: (value: number) => string;
@@ -58,6 +65,7 @@
     type = 'line',
     data,
     markers,
+    thresholds,
     xAxisName,
     xAxisTickCount,
     xAxisTickFormat,
@@ -220,6 +228,8 @@
       color: markerColor,
       labelBackgroundColor: markerLabelBackgroundColor
     });
+    const thresholdAnnotations = buildTimeseriesThresholdAnnotations(thresholds);
+    const thresholdExtent = getThresholdValueExtent(thresholds);
 
     for (const s of data) {
       const incompleteBeforePoints = incompleteBefore && type === 'line' ? s.data.filter((point) => point[0] <= incompleteBefore) : [];
@@ -269,6 +279,16 @@
       } as SeriesOption);
     }
 
+    if (thresholdAnnotations) {
+      series.push({
+        data: [],
+        name: 'Thresholds',
+        type: type === 'bar' ? 'bar' : 'line',
+        animation: false,
+        markLine: thresholdAnnotations.markLine
+      } as SeriesOption);
+    }
+
     return {
       aria: { enabled: true, ...(ariaDescription && { label: { description: ariaDescription } }) },
       brush: {
@@ -309,7 +329,11 @@
         axisTick: { show: true },
         axisLabel: { margin: 15, ...(yAxisTickFormat && { formatter: (value: number) => yAxisTickFormat(value) }) },
         splitLine: { show: true, lineStyle: { type: 'dashed', width: 1 } },
-        splitNumber: yAxisTickCount
+        splitNumber: yAxisTickCount,
+        ...(thresholdExtent && {
+          min: (value: { min: number }) => Math.min(value.min, thresholdExtent.min),
+          max: (value: { max: number }) => Math.max(value.max, thresholdExtent.max)
+        })
       },
       grid: { left: yAxisName ? 30 : 24, right: 24, top: 24, bottom: xAxisName ? 30 : 24 },
       series

@@ -2,8 +2,8 @@
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import { getSidebarMenuSubItemContext } from './context';
-  interface Props { children?: Snippet; class?: string; active?: boolean; href?: string; [key: string]: unknown; }
-  let { children, class: className, active = false, href, ...rest }: Props = $props();
+  interface Props { children?: Snippet; class?: string; active?: boolean; href?: string; target?: string; [key: string]: unknown; }
+  let { children, class: className, active = false, href, target, ...rest }: Props = $props();
   const menuSubItem = getSidebarMenuSubItemContext();
   const classes = $derived(
     cn(
@@ -18,7 +18,7 @@
 
 {#snippet control()}
   {#if href}
-    <a class={cn(classes, 'no-underline!')} {href} data-active={active || undefined} data-sidebar="menu-sub-button" data-kumo-component="Sidebar" data-kumo-part="menu-sub-button-link" {...rest}>
+    <a class={cn(classes, 'no-underline!')} {href} {target} data-active={active || undefined} data-sidebar="menu-sub-button" data-kumo-component="Sidebar" data-kumo-part="menu-sub-button-link" {...rest}>
       <span class="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">{@render children?.()}</span>
     </a>
   {:else}

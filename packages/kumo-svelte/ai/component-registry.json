@@ -5841,6 +5841,11 @@
           "required": true,
           "description": "Array of time series data to display on the chart."
         },
+        "markers": {
+          "type": "TimeseriesMarker[]",
+          "optional": true,
+          "description": "Vertical reference markers rendered on the time axis."
+        },
         "xAxisName": {
           "type": "string",
           "optional": true,

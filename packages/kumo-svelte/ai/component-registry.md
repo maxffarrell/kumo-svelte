@@ -34,6 +34,14 @@ A navigation component that shows the current page's location within a navigatio
 - Import: `import { Breadcrumbs } from "kumo-svelte/components/breadcrumbs";`
 - Source: `components/breadcrumbs`
 
+## BubbleMap
+
+Map chart components for visualizing geographic data with GeoJSON.
+
+- Category: Data Visualization
+- Import: `import { BubbleMap } from "kumo-svelte/components/chart";`
+- Source: `components/chart`
+
 ## Button
 
 Displays a button or a component that looks like a button.
@@ -42,6 +50,22 @@ Displays a button or a component that looks like a button.
 - Import: `import { Button } from "kumo-svelte/components/button";`
 - Source: `components/button`
 
+## Chart
+
+Charts built on ECharts.
+
+- Category: Data Visualization
+- Import: `import { Chart } from "kumo-svelte/components/chart";`
+- Source: `components/chart`
+
+## ChartLegend
+
+Charts built on ECharts.
+
+- Category: Data Visualization
+- Import: `import { ChartLegend } from "kumo-svelte/components/chart";`
+- Source: `components/chart`
+
 ## Checkbox
 
 A control that allows the user to toggle between checked and not checked. Features built-in label support with automatic horizontal layout.
@@ -49,6 +73,14 @@ A control that allows the user to toggle between checked and not checked. Featur
 - Category: Input
 - Import: `import { Checkbox } from "kumo-svelte/components/checkbox";`
 - Source: `components/checkbox`
+
+## ChoroplethMap
+
+Map chart components for visualizing geographic data with GeoJSON.
+
+- Category: Data Visualization
+- Import: `import { ChoroplethMap } from "kumo-svelte/components/chart";`
+- Source: `components/chart`
 
 ## ClipboardText
 
@@ -242,6 +274,14 @@ A control that allows the user to select one option from a set. Always used with
 - Import: `import { Radio } from "kumo-svelte/components/radio";`
 - Source: `components/radio`
 
+## SankeyChart
+
+A Sankey diagram component for visualizing flow data between nodes using ECharts.
+
+- Category: Data Visualization
+- Import: `import { SankeyChart } from "kumo-svelte/components/chart";`
+- Source: `components/chart`
+
 ## Select
 
 Displays a list of options for the user to pick from—triggered by a button.
@@ -313,6 +353,14 @@ A typography component for various heading and copy styles.
 - Category: Other
 - Import: `import { Text } from "kumo-svelte/components/text";`
 - Source: `components/text`
+
+## TimeseriesChart
+
+A specialized chart for displaying time-based data.
+
+- Category: Data Visualization
+- Import: `import { TimeseriesChart } from "kumo-svelte/components/chart";`
+- Source: `components/chart`
 
 ## Toast
 

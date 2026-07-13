@@ -4,6 +4,17 @@
   import type { SeriesOption } from 'echarts';
   import type { EChartsType } from 'echarts/core';
   import Chart, { type ChartEvents, type KumoChartOption } from './Chart.svelte';
+  import { ChartPalette } from './Color';
+  import {
+    buildTimeseriesMarkerAnnotations,
+    clusterTimeseriesMarkers,
+    getApproximateMarkerClusterInterval,
+    getTimeseriesMarkerFromEvent,
+    type TimeseriesMarker,
+    type TimeseriesMarkerCluster
+  } from './timeseries-markers';
+
+  export type { TimeseriesMarker } from './timeseries-markers';
 
   export interface TimeseriesData {
     name: string;
@@ -15,6 +26,7 @@
     echarts: any;
     type?: 'line' | 'bar';
     data: TimeseriesData[];
+    markers?: TimeseriesMarker[];
     xAxisName?: string;
     xAxisTickCount?: number;
     xAxisTickFormat?: (value: number) => string;
@@ -45,6 +57,7 @@
     echarts,
     type = 'line',
     data,
+    markers,
     xAxisName,
     xAxisTickCount,
     xAxisTickFormat,
@@ -74,9 +87,21 @@
   let detectedDarkMode = $state(false);
   let containerRef: HTMLDivElement;
   let tooltipAnchor: HTMLSpanElement | null = $state(null);
-  let tooltipState: { ts: number; rows: { name: string; value: number; color: string }[]; hiddenCount: number } | null = $state(null);
+  interface TooltipRow {
+    name: string;
+    value: number;
+    color: string;
+  }
+
+  type TooltipState =
+    | { type: 'series'; ts: number; rows: TooltipRow[]; hiddenCount: number }
+    | { type: 'marker'; ts: number; color: string; markers: TimeseriesMarker[]; rows: TooltipRow[]; hiddenCount: number };
+
+  let tooltipState: TooltipState | null = $state(null);
   let legendSelected: Record<string, boolean> | null = $state(null);
   let mousePos = $state({ x: 0, y: 0 });
+  let markerHover = $state(false);
+  let activeMarkerKey: string | null = $state(null);
   const effectiveDarkMode = $derived(isDarkMode ?? detectedDarkMode);
 
   onMount(() => {
@@ -145,12 +170,56 @@
     if (Number.isInteger(value)) return String(value);
     return defaultNumberFormat.format(value);
   };
+  const getTimestamps = (seriesData: TimeseriesData[], referenceMarkers: TimeseriesMarker[] | undefined): number[] => [
+    ...seriesData.flatMap((series) => series.data.map(([timestamp]) => timestamp)),
+    ...(referenceMarkers?.map((marker) => marker.timestamp) ?? [])
+  ];
+  const getAllTooltipRowsAtTimestamp = (
+    seriesData: TimeseriesData[],
+    ts: number,
+    selected: Record<string, boolean> | null
+  ): TooltipRow[] => {
+    const seenNames = new Set<string>();
+    const rows: TooltipRow[] = [];
+
+    for (const series of seriesData) {
+      if (seenNames.has(series.name)) continue;
+      if (selected && selected[series.name] === false) continue;
+      seenNames.add(series.name);
+      const value = findNearest(series.data, ts);
+      if (value != null) rows.push({ name: series.name, value, color: series.color });
+    }
+
+    return rows.sort((a, b) => b.value - a.value);
+  };
+  const limitTooltipRows = (rows: TooltipRow[], max: number): { rows: TooltipRow[]; hiddenCount: number } => ({
+    rows: rows.slice(0, max),
+    hiddenCount: Math.max(0, rows.length - max)
+  });
+  const getTooltipRowsAtTimestamp = (
+    seriesData: TimeseriesData[],
+    ts: number,
+    selected: Record<string, boolean> | null,
+    max: number
+  ): { rows: TooltipRow[]; hiddenCount: number } => {
+    return limitTooltipRows(getAllTooltipRowsAtTimestamp(seriesData, ts, selected), max);
+  };
+  const markerColor = $derived(ChartPalette.text('primary', effectiveDarkMode));
+  const markerLabelBackgroundColor = $derived(effectiveDarkMode ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)');
 
   let options = $derived.by(() => {
     const incompleteBefore = incomplete?.before;
     const incompleteAfter = incomplete?.after;
     const series: SeriesOption[] = [];
     const seriesType = type === 'bar' ? ({ type: 'bar', stack: 'total' } as const) : ({ type: 'line', showSymbol: false } as const);
+    const markerClusters = clusterTimeseriesMarkers(
+      markers,
+      getApproximateMarkerClusterInterval(getTimestamps(data, markers), xAxisTickCount ?? 5)
+    );
+    const markerAnnotations = buildTimeseriesMarkerAnnotations(markerClusters, {
+      color: markerColor,
+      labelBackgroundColor: markerLabelBackgroundColor
+    });
 
     for (const s of data) {
       const incompleteBeforePoints = incompleteBefore && type === 'line' ? s.data.filter((point) => point[0] <= incompleteBefore) : [];
@@ -188,6 +257,16 @@
       };
       if (incompleteBeforePoints.length > 0) series.push({ ...incompleteConfig, data: incompleteBeforePoints });
       if (incompleteAfterPoints.length > 0) series.push({ ...incompleteConfig, data: incompleteAfterPoints });
+    }
+
+    if (markerAnnotations) {
+      series.push({
+        data: [],
+        name: 'Markers',
+        type: type === 'bar' ? 'bar' : 'line',
+        animation: false,
+        markLine: markerAnnotations.markLine
+      } as SeriesOption);
     }
 
     return {
@@ -240,21 +319,12 @@
   let events = $derived<Partial<ChartEvents>>(
     {
       updateaxispointer: (params: any) => {
+        if (markerHover) return;
         const ts: number | undefined = params?.axesInfo?.[0]?.value;
         if (ts == null) return;
-        const seenNames = new Set<string>();
-        const allRows: { name: string; value: number; color: string }[] = [];
 
-        for (const series of data) {
-          if (seenNames.has(series.name)) continue;
-          if (legendSelected && legendSelected[series.name] === false) continue;
-          seenNames.add(series.name);
-          const value = findNearest(series.data, ts);
-          if (value != null) allRows.push({ name: series.name, value, color: series.color });
-        }
-
-        allRows.sort((a, b) => b.value - a.value);
-        let rows: { name: string; value: number; color: string }[];
+        const allRows = getAllTooltipRowsAtTimestamp(data, ts, legendSelected);
+        let rows: TooltipRow[];
         let hiddenCount = 0;
         if (tooltipMode === 'single') {
           const cursorValue = chartRef ? (chartRef.convertFromPixel('grid', [0, mousePos.y]) as [number, number] | undefined)?.[1] : null;
@@ -268,12 +338,42 @@
             rows = allRows.slice(0, 1);
           }
         } else {
-          rows = allRows.slice(0, tooltipMaxItems);
-          hiddenCount = Math.max(0, allRows.length - tooltipMaxItems);
+          ({ rows, hiddenCount } = limitTooltipRows(allRows, tooltipMaxItems));
         }
-        tooltipState = { ts, rows, hiddenCount };
+        tooltipState = { type: 'series', ts, rows, hiddenCount };
+      },
+      mouseover: (params: any) => {
+        const marker: TimeseriesMarkerCluster | undefined = getTimeseriesMarkerFromEvent(params);
+        if (!marker) return;
+
+        const markerKey = `${marker.timestamp}-${marker.label ?? ''}`;
+        if (activeMarkerKey === markerKey) return;
+
+        activeMarkerKey = markerKey;
+        markerHover = true;
+        chartRef?.dispatchAction({ type: 'hideTip' });
+        chartRef?.dispatchAction({ type: 'updateAxisPointer', currTrigger: 'leave' });
+
+        const { rows, hiddenCount } = getTooltipRowsAtTimestamp(data, marker.timestamp, legendSelected, tooltipMaxItems);
+
+        tooltipState = {
+          type: 'marker',
+          ts: marker.timestamp,
+          color: marker.color ?? markerColor,
+          markers: marker.markers,
+          rows,
+          hiddenCount
+        };
+      },
+      mouseout: (params: any) => {
+        if (!getTimeseriesMarkerFromEvent(params)) return;
+        activeMarkerKey = null;
+        markerHover = false;
+        tooltipState = null;
       },
       globalout: () => {
+        activeMarkerKey = null;
+        markerHover = false;
         tooltipState = null;
       },
       legendselectchanged: (params: { selected?: Record<string, boolean> }) => {
@@ -380,22 +480,62 @@
           strategy="fixed"
           updatePositionStrategy="always"
           data-mode={effectiveDarkMode ? 'dark' : 'light'}
-          aria-label={`Values at ${formatAriaTimestamp(tooltipState.ts)}`}
+          aria-label={`${tooltipState.type === 'marker' ? 'Reference marker' : 'Values'} at ${formatAriaTimestamp(tooltipState.ts)}`}
         >
-          <div class="mb-1 text-xs font-semibold text-kumo-default">{formatTimestamp(tooltipState.ts)}</div>
-          {#each tooltipState.rows as row (row.name)}
-            <div class="flex items-center justify-between gap-4 py-0.5">
-              <div class="flex min-w-0 items-center gap-2">
-                <span class="size-3 shrink-0 rounded-full" style:background-color={row.color}></span>
-                <span class="truncate text-xs font-medium text-kumo-default" title={row.name}>{row.name}</span>
-              </div>
-              <span class="shrink-0 text-xs font-semibold text-kumo-default">
-                {formatFn ? formatFn(row.value) : formatDefaultValue(row.value)}
-              </span>
+          {#if tooltipState.type === 'marker'}
+            {#if tooltipState.markers.length === 1}
+              <div class="mb-1 text-xs font-semibold text-kumo-default">{formatTimestamp(tooltipState.markers[0].timestamp)}</div>
+            {/if}
+            <div class="space-y-1">
+              {#each tooltipState.markers as marker, index (`${marker.timestamp}-${marker.label}-${index}`)}
+                <div>
+                  <div class="flex items-center gap-2 text-xs text-kumo-default">
+                    <span class="size-3 shrink-0 rounded-full" style:background-color={marker.color ?? tooltipState.color}></span>
+                    <span class="font-medium">{marker.label ?? 'Reference marker'}</span>
+                    {#if tooltipState.markers.length > 1}
+                      <span class="text-kumo-subtle">{formatTimestamp(marker.timestamp)}</span>
+                    {/if}
+                  </div>
+                  {#if marker.description}
+                    <div class="ml-5 mt-0.5 text-xs text-kumo-default">{marker.description}</div>
+                  {/if}
+                </div>
+              {/each}
             </div>
-          {/each}
-          {#if tooltipState.hiddenCount > 0}
-            <div class="mt-1 text-xs text-kumo-subtle">+{tooltipState.hiddenCount} more</div>
+            {#if tooltipState.rows.length > 0}
+              <div class="mt-2 border-t border-kumo-line pt-2">
+                {#each tooltipState.rows as row (row.name)}
+                  <div class="flex items-center justify-between gap-4 py-0.5">
+                    <div class="flex min-w-0 items-center gap-2">
+                      <span class="size-3 shrink-0 rounded-full" style:background-color={row.color}></span>
+                      <span class="truncate text-xs font-medium text-kumo-default" title={row.name}>{row.name}</span>
+                    </div>
+                    <span class="shrink-0 text-xs font-semibold text-kumo-default">
+                      {formatFn ? formatFn(row.value) : formatDefaultValue(row.value)}
+                    </span>
+                  </div>
+                {/each}
+                {#if tooltipState.hiddenCount > 0}
+                  <div class="mt-1 text-xs text-kumo-subtle">+{tooltipState.hiddenCount} more</div>
+                {/if}
+              </div>
+            {/if}
+          {:else}
+            <div class="mb-1 text-xs font-semibold text-kumo-default">{formatTimestamp(tooltipState.ts)}</div>
+            {#each tooltipState.rows as row (row.name)}
+              <div class="flex items-center justify-between gap-4 py-0.5">
+                <div class="flex min-w-0 items-center gap-2">
+                  <span class="size-3 shrink-0 rounded-full" style:background-color={row.color}></span>
+                  <span class="truncate text-xs font-medium text-kumo-default" title={row.name}>{row.name}</span>
+                </div>
+                <span class="shrink-0 text-xs font-semibold text-kumo-default">
+                  {formatFn ? formatFn(row.value) : formatDefaultValue(row.value)}
+                </span>
+              </div>
+            {/each}
+            {#if tooltipState.hiddenCount > 0}
+              <div class="mt-1 text-xs text-kumo-subtle">+{tooltipState.hiddenCount} more</div>
+            {/if}
           {/if}
         </TooltipPrimitive.Content>
       </TooltipPrimitive.Portal>

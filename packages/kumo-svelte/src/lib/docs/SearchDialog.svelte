@@ -116,6 +116,44 @@
     }
   ];
 
+  const CHART_PAGES: SearchItem[] = [
+    {
+      name: 'Charts',
+      description: 'Charts built on ECharts.',
+      url: '/charts',
+      category: 'Charts',
+      type: 'page'
+    },
+    {
+      name: 'Timeseries Chart',
+      description: 'A specialized chart for displaying time-based data.',
+      url: '/charts/timeseries',
+      category: 'Charts',
+      type: 'page'
+    },
+    {
+      name: 'Sankey Chart',
+      description: 'A Sankey diagram component for visualizing flow data between nodes using ECharts.',
+      url: '/charts/sankey',
+      category: 'Charts',
+      type: 'page'
+    },
+    {
+      name: 'Maps',
+      description: 'Map chart components for visualizing geographic data with GeoJSON.',
+      url: '/charts/maps',
+      category: 'Charts',
+      type: 'page'
+    },
+    {
+      name: 'Custom Chart',
+      description: 'Build custom charts with the base Chart component.',
+      url: '/charts/custom',
+      category: 'Charts',
+      type: 'page'
+    }
+  ];
+
   const COMPONENT_DESCRIPTIONS: Record<string, string> = {
     autocomplete: 'A text input with filtered suggestions.',
     badge: 'Displays a small label for status, categorization, or metadata.',
@@ -182,6 +220,7 @@
 
   const allItems = $derived([
     ...STATIC_PAGES,
+    ...CHART_PAGES,
     ...componentItems
       .filter((item) => !['/components/code-highlighted', '/components/flow'].includes(item.href))
       .map((item) => fromNav(item, 'component', 'Components')),

@@ -98,7 +98,20 @@ const categoryByName: Record<string, string> = {
   Tooltip: 'Overlay',
   CloudflareLogo: 'Other',
   Table: 'Other',
-  Text: 'Other'
+  Text: 'Other',
+  Chart: 'Data Visualization',
+  ChartLegend: 'Data Visualization',
+  TimeseriesChart: 'Data Visualization',
+  SankeyChart: 'Data Visualization',
+  BubbleMap: 'Data Visualization',
+  ChoroplethMap: 'Data Visualization'
+};
+
+const chartComponentsByRoute: Record<string, string[]> = {
+  '+page.md': ['Chart', 'ChartLegend'],
+  'timeseries/+page.md': ['TimeseriesChart'],
+  'sankey/+page.md': ['SankeyChart'],
+  'maps/+page.md': ['BubbleMap', 'ChoroplethMap']
 };
 
 const displayNameByRoute: Record<string, string> = {
@@ -242,6 +255,25 @@ async function buildRegistry() {
       colors: componentColors(sourceFile),
       subComponents: await loadSubComponents(name)
     };
+  }
+
+  const chartRoutesDir = join(packageRoot, 'src/routes/charts');
+  for (const [route, names] of Object.entries(chartComponentsByRoute)) {
+    const page = join(chartRoutesDir, route);
+    if (!existsSync(page)) continue;
+    const frontmatter = parseFrontmatter(readFileSync(page, 'utf8'));
+    for (const name of names) {
+      components[name] = {
+        name,
+        type: 'component',
+        category: categoryByName[name] ?? 'Data Visualization',
+        description: frontmatter.description ?? `${name} component`,
+        importPath: `kumo-svelte/components/chart`,
+        sourceFile: 'components/chart',
+        props: propRowsToRegistry(await loadPropRows(name)),
+        colors: componentColors('components/chart')
+      };
+    }
   }
 
   const byCategory: Record<string, string[]> = {};

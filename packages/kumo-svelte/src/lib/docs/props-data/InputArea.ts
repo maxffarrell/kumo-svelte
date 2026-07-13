@@ -46,6 +46,26 @@ const rows: PropRow[] = [
     "description": "Validation error message or matcher."
   },
   {
+    "prop": "autoResize",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Automatically resize the textarea based on its content."
+  },
+  {
+    "prop": "minRows",
+    "type": "number",
+    "required": false,
+    "default": "1",
+    "description": "Minimum number of rows when auto-resizing."
+  },
+  {
+    "prop": "maxRows",
+    "type": "number",
+    "required": false,
+    "description": "Maximum number of rows before the textarea scrolls."
+  },
+  {
     "prop": "onValueChange",
     "type": "(value: string) => void",
     "required": false,

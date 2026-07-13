@@ -517,6 +517,170 @@
         }
       }
     },
+    "BubbleMap": {
+      "name": "BubbleMap",
+      "type": "component",
+      "category": "Data Visualization",
+      "description": "Map chart components for visualizing geographic data with GeoJSON.",
+      "importPath": "kumo-svelte/components/chart",
+      "sourceFile": "components/chart",
+      "props": {
+        "echarts": {
+          "type": "any",
+          "optional": false,
+          "required": true,
+          "description": "The ECharts core instance imported by the consumer."
+        },
+        "geoJson": {
+          "type": "MapGeoJson",
+          "optional": false,
+          "required": true,
+          "description": "GeoJSON FeatureCollection for the map base."
+        },
+        "mapName": {
+          "type": "string",
+          "optional": true,
+          "description": "Stable ECharts map registry name. Invalid characters are replaced with dashes."
+        },
+        "data": {
+          "type": "T[]",
+          "optional": false,
+          "required": true,
+          "description": "Rows to plot as bubbles."
+        },
+        "lng": {
+          "type": "MapAccessor<T, number>",
+          "optional": false,
+          "required": true,
+          "description": "Longitude accessor: a row key or function."
+        },
+        "lat": {
+          "type": "MapAccessor<T, number>",
+          "optional": false,
+          "required": true,
+          "description": "Latitude accessor: a row key or function."
+        },
+        "value": {
+          "type": "MapAccessor<T, number>",
+          "optional": false,
+          "required": true,
+          "description": "Numeric value accessor used to size bubbles."
+        },
+        "name": {
+          "type": "MapAccessor<T, string>",
+          "optional": true,
+          "description": "Optional label accessor used by the default tooltip."
+        },
+        "minRadius": {
+          "type": "number",
+          "optional": true,
+          "default": "6",
+          "description": "Smallest bubble radius in pixels."
+        },
+        "maxRadius": {
+          "type": "number",
+          "optional": true,
+          "default": "26",
+          "description": "Largest bubble radius in pixels."
+        },
+        "bubbleSize": {
+          "type": "(value: number) => number",
+          "optional": true,
+          "description": "Explicit bubble radius function. Overrides minRadius/maxRadius scaling."
+        },
+        "bubbleColor": {
+          "type": "MapStyle<T, string>",
+          "optional": true,
+          "description": "Bubble fill color as a constant or row function."
+        },
+        "bubbleBorderColor": {
+          "type": "MapStyle<T, string>",
+          "optional": true,
+          "default": "transparent",
+          "description": "Bubble border color as a constant or row function."
+        },
+        "bubbleBorderWidth": {
+          "type": "MapStyle<T, number>",
+          "optional": true,
+          "default": "0",
+          "description": "Bubble border width as a constant or row function."
+        },
+        "center": {
+          "type": "[number, number]",
+          "optional": true,
+          "description": "Map center as [longitude, latitude]. Defaults to auto-fit."
+        },
+        "zoom": {
+          "type": "number",
+          "optional": true,
+          "default": "1.25",
+          "description": "Zoom level as a multiple of the auto-fit scale."
+        },
+        "roam": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Enables drag-to-pan and scroll-to-zoom."
+        },
+        "projection": {
+          "type": "MapProjection | null",
+          "optional": true,
+          "description": "Geographic projection. Defaults to latitude-clamped Mercator; use null for raw coordinates."
+        },
+        "aspectRatio": {
+          "type": "number | string",
+          "optional": true,
+          "description": "Container aspect ratio. Defaults to the projected map window."
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Whether to show the default map tooltip."
+        },
+        "valueFormat": {
+          "type": "(value: number) => string",
+          "optional": true,
+          "description": "Formats values in the default tooltip."
+        },
+        "tooltipFormatter": {
+          "type": "(row: T) => string",
+          "optional": true,
+          "description": "Custom HTML tooltip formatter. Escape user-provided strings before returning."
+        },
+        "onBubbleHover": {
+          "type": "(row: T | undefined) => void",
+          "optional": true,
+          "description": "Callback fired as the pointer enters or leaves a bubble."
+        },
+        "onBubbleClick": {
+          "type": "(row: T) => void",
+          "optional": true,
+          "description": "Callback fired when a bubble is clicked."
+        },
+        "height": {
+          "type": "number",
+          "optional": true,
+          "description": "Fixed chart height in pixels. Overrides aspectRatio."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the chart element."
+        },
+        "isDarkMode": {
+          "type": "boolean",
+          "optional": true,
+          "description": "When true, switches map and bubble palette choices for dark mode."
+        }
+      },
+      "colors": [
+        "bg-kumo-base",
+        "border-kumo-line",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
+    },
     "Button": {
       "name": "Button",
       "type": "component",
@@ -693,6 +857,142 @@
           }
         }
       }
+    },
+    "Chart": {
+      "name": "Chart",
+      "type": "component",
+      "category": "Data Visualization",
+      "description": "Charts built on ECharts.",
+      "importPath": "kumo-svelte/components/chart",
+      "sourceFile": "components/chart",
+      "props": {
+        "echarts": {
+          "type": "any",
+          "optional": false,
+          "required": true,
+          "description": "The ECharts core instance imported by the consumer."
+        },
+        "options": {
+          "type": "KumoChartOption",
+          "optional": false,
+          "required": true,
+          "description": "ECharts option object passed through to chart.setOption()."
+        },
+        "optionUpdateBehavior": {
+          "type": "SetOptionOpts",
+          "optional": true,
+          "description": "Additional options passed as the second argument to chart.setOption()."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
+        "isDarkMode": {
+          "type": "boolean",
+          "optional": true,
+          "description": "When true, initializes ECharts with its dark theme."
+        },
+        "height": {
+          "type": "number",
+          "optional": true,
+          "default": "350",
+          "description": "Chart height in pixels."
+        },
+        "onEvents": {
+          "type": "Partial<ChartEvents>",
+          "optional": true,
+          "default": "{}",
+          "description": "Subset of ECharts events to listen for."
+        },
+        "chartRef": {
+          "type": "EChartsType | null",
+          "optional": true,
+          "default": "null",
+          "description": "Bindable Svelte reference to the raw ECharts instance."
+        }
+      },
+      "colors": [
+        "bg-kumo-base",
+        "border-kumo-line",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
+    },
+    "ChartLegend": {
+      "name": "ChartLegend",
+      "type": "component",
+      "category": "Data Visualization",
+      "description": "Charts built on ECharts.",
+      "importPath": "kumo-svelte/components/chart",
+      "sourceFile": "components/chart",
+      "props": {
+        "variant": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "large",
+            "small"
+          ],
+          "default": "small",
+          "description": "Svelte variant matching the upstream SmallItem or LargeItem legend layouts."
+        },
+        "name": {
+          "type": "string",
+          "optional": false,
+          "required": true,
+          "description": "Series name shown as a label."
+        },
+        "color": {
+          "type": "string",
+          "optional": false,
+          "required": true,
+          "description": "Hex color string for the series indicator dot."
+        },
+        "value": {
+          "type": "string",
+          "optional": false,
+          "required": true,
+          "description": "Formatted value string to display."
+        },
+        "unit": {
+          "type": "string",
+          "optional": true,
+          "description": "Optional unit label shown after the value."
+        },
+        "inactive": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Renders the item at reduced opacity to indicate a deselected state."
+        },
+        "onpointerenter": {
+          "type": "(event: PointerEvent) => void",
+          "optional": true,
+          "description": "Fired when a pointer enters the legend item, useful for highlighting the corresponding chart series."
+        },
+        "onpointerleave": {
+          "type": "(event: PointerEvent) => void",
+          "optional": true,
+          "description": "Fired when a pointer leaves the legend item, useful for resetting chart series emphasis."
+        },
+        "onclick": {
+          "type": "(event: MouseEvent) => void",
+          "optional": true,
+          "description": "Fired when the legend item is clicked, useful for toggling series visibility."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Optional class for customizing legend item presentation."
+        }
+      },
+      "colors": [
+        "bg-kumo-base",
+        "border-kumo-line",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
     },
     "Checkbox": {
       "name": "Checkbox",
@@ -953,6 +1253,162 @@
           }
         }
       }
+    },
+    "ChoroplethMap": {
+      "name": "ChoroplethMap",
+      "type": "component",
+      "category": "Data Visualization",
+      "description": "Map chart components for visualizing geographic data with GeoJSON.",
+      "importPath": "kumo-svelte/components/chart",
+      "sourceFile": "components/chart",
+      "props": {
+        "echarts": {
+          "type": "any",
+          "optional": false,
+          "required": true,
+          "description": "The ECharts core instance imported by the consumer."
+        },
+        "geoJson": {
+          "type": "MapGeoJson",
+          "optional": false,
+          "required": true,
+          "description": "GeoJSON FeatureCollection whose regions are shaded by value."
+        },
+        "mapName": {
+          "type": "string",
+          "optional": true,
+          "description": "Stable ECharts map registry name. Invalid characters are replaced with dashes."
+        },
+        "data": {
+          "type": "T[]",
+          "optional": false,
+          "required": true,
+          "description": "Rows joined to GeoJSON features."
+        },
+        "name": {
+          "type": "MapAccessor<T, string>",
+          "optional": false,
+          "required": true,
+          "description": "Region key accessor used to join rows to GeoJSON features."
+        },
+        "value": {
+          "type": "MapAccessor<T, number>",
+          "optional": false,
+          "required": true,
+          "description": "Numeric value accessor used for the region fill scale."
+        },
+        "nameProperty": {
+          "type": "string",
+          "optional": true,
+          "default": "name",
+          "description": "GeoJSON feature property used for the data join."
+        },
+        "colorRange": {
+          "type": "string[]",
+          "optional": true,
+          "description": "Sequential color ramp from low to high values."
+        },
+        "min": {
+          "type": "number",
+          "optional": true,
+          "description": "Lower bound for the continuous scale."
+        },
+        "max": {
+          "type": "number",
+          "optional": true,
+          "description": "Upper bound for the continuous scale."
+        },
+        "noDataColor": {
+          "type": "string",
+          "optional": true,
+          "description": "Fill color for GeoJSON regions without a matching data row."
+        },
+        "showLegend": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Whether to show the ECharts visualMap legend."
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Whether to show the default map tooltip."
+        },
+        "valueFormat": {
+          "type": "(value: number) => string",
+          "optional": true,
+          "description": "Formats values in the default tooltip."
+        },
+        "tooltipFormatter": {
+          "type": "(row: T) => string",
+          "optional": true,
+          "description": "Custom HTML tooltip formatter. Escape user-provided strings before returning."
+        },
+        "center": {
+          "type": "[number, number]",
+          "optional": true,
+          "description": "Map center as [longitude, latitude]. Defaults to auto-fit."
+        },
+        "zoom": {
+          "type": "number",
+          "optional": true,
+          "default": "1.25",
+          "description": "Zoom level as a multiple of the auto-fit scale."
+        },
+        "roam": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Enables drag-to-pan and scroll-to-zoom."
+        },
+        "projection": {
+          "type": "MapProjection | null",
+          "optional": true,
+          "description": "Geographic projection. Defaults to latitude-clamped Mercator; use null for raw coordinates."
+        },
+        "aspectRatio": {
+          "type": "number | string",
+          "optional": true,
+          "description": "Container aspect ratio. Defaults to the projected map window."
+        },
+        "height": {
+          "type": "number",
+          "optional": true,
+          "description": "Fixed chart height in pixels. Overrides aspectRatio."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the chart element."
+        },
+        "isDarkMode": {
+          "type": "boolean",
+          "optional": true,
+          "description": "When true, switches map and region palette choices for dark mode."
+        },
+        "chartRef": {
+          "type": "EChartsType | null",
+          "optional": true,
+          "description": "Bindable chart instance reference."
+        },
+        "onRegionHover": {
+          "type": "(row: T | undefined) => void",
+          "optional": true,
+          "description": "Callback fired as the pointer enters or leaves a region with data."
+        },
+        "onRegionClick": {
+          "type": "(row: T) => void",
+          "optional": true,
+          "description": "Callback fired when a region with data is clicked."
+        }
+      },
+      "colors": [
+        "bg-kumo-base",
+        "border-kumo-line",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
     },
     "ClipboardText": {
       "name": "ClipboardText",
@@ -2934,6 +3390,23 @@
           "optional": true,
           "description": "Validation error message or matcher."
         },
+        "autoResize": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Automatically resize the textarea based on its content."
+        },
+        "minRows": {
+          "type": "number",
+          "optional": true,
+          "default": "1",
+          "description": "Minimum number of rows when auto-resizing."
+        },
+        "maxRows": {
+          "type": "number",
+          "optional": true,
+          "description": "Maximum number of rows before the textarea scrolls."
+        },
         "onValueChange": {
           "type": "(value: string) => void",
           "optional": true,
@@ -3789,6 +4262,130 @@
           }
         }
       }
+    },
+    "SankeyChart": {
+      "name": "SankeyChart",
+      "type": "component",
+      "category": "Data Visualization",
+      "description": "A Sankey diagram component for visualizing flow data between nodes using ECharts.",
+      "importPath": "kumo-svelte/components/chart",
+      "sourceFile": "components/chart",
+      "props": {
+        "echarts": {
+          "type": "any",
+          "optional": false,
+          "required": true,
+          "description": "The ECharts core instance imported by the consumer."
+        },
+        "nodes": {
+          "type": "SankeyNodeData[]",
+          "optional": false,
+          "required": true,
+          "description": "Array of nodes in the Sankey diagram."
+        },
+        "links": {
+          "type": "SankeyLinkData[]",
+          "optional": false,
+          "required": true,
+          "description": "Array of links connecting nodes by index."
+        },
+        "height": {
+          "type": "number",
+          "optional": true,
+          "default": "400",
+          "description": "Chart height in pixels."
+        },
+        "showNodeValues": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Show node values above labels. Defaults to true when any node has a value."
+        },
+        "formatValue": {
+          "type": "(value: number) => string",
+          "optional": true,
+          "description": "Format function for node and link values."
+        },
+        "tooltipFormatter": {
+          "type": "(params: SankeyTooltipParams) => string",
+          "optional": true,
+          "description": "Custom tooltip formatter. Return an HTML string or empty string."
+        },
+        "nodeWidth": {
+          "type": "number",
+          "optional": true,
+          "default": "8",
+          "description": "Width of each Sankey node in pixels."
+        },
+        "nodePadding": {
+          "type": "number",
+          "optional": true,
+          "default": "10",
+          "description": "Vertical gap between Sankey nodes."
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Whether to show Sankey tooltips."
+        },
+        "defaultNodeColor": {
+          "type": "string",
+          "optional": true,
+          "description": "Fallback color used for nodes without their own color."
+        },
+        "left": {
+          "type": "number | string",
+          "optional": true,
+          "description": "Left padding of the Sankey layout within the chart container."
+        },
+        "right": {
+          "type": "number | string",
+          "optional": true,
+          "description": "Right padding of the Sankey layout within the chart container."
+        },
+        "linkColor": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "gradient",
+            "gray"
+          ],
+          "default": "gradient",
+          "description": "Link fill style: gradient blends source to target colors, gray uses flat gray."
+        },
+        "linkOpacity": {
+          "type": "number",
+          "optional": true,
+          "default": "0.5",
+          "description": "Opacity used for gradient links."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes merged onto the root element."
+        },
+        "isDarkMode": {
+          "type": "boolean",
+          "optional": true,
+          "description": "When true, switches chart labels and palette choices for dark mode."
+        },
+        "onNodeClick": {
+          "type": "(node: SankeyNodeData) => void",
+          "optional": true,
+          "description": "Callback fired when a Sankey node is clicked."
+        },
+        "onLinkClick": {
+          "type": "(link: SankeyLinkData) => void",
+          "optional": true,
+          "description": "Callback fired when a Sankey link is clicked."
+        }
+      },
+      "colors": [
+        "bg-kumo-base",
+        "border-kumo-line",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
     },
     "Select": {
       "name": "Select",
@@ -5214,6 +5811,172 @@
         "text-kumo-subtle"
       ]
     },
+    "TimeseriesChart": {
+      "name": "TimeseriesChart",
+      "type": "component",
+      "category": "Data Visualization",
+      "description": "A specialized chart for displaying time-based data.",
+      "importPath": "kumo-svelte/components/chart",
+      "sourceFile": "components/chart",
+      "props": {
+        "echarts": {
+          "type": "any",
+          "optional": false,
+          "required": true,
+          "description": "The ECharts core instance imported by the consumer."
+        },
+        "type": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "line",
+            "bar"
+          ],
+          "default": "line",
+          "description": "Visual style of each series."
+        },
+        "data": {
+          "type": "TimeseriesData[]",
+          "optional": false,
+          "required": true,
+          "description": "Array of time series data to display on the chart."
+        },
+        "markers": {
+          "type": "TimeseriesMarker[]",
+          "optional": true,
+          "description": "Vertical reference markers rendered on the time axis."
+        },
+        "xAxisName": {
+          "type": "string",
+          "optional": true,
+          "description": "Label for the x-axis."
+        },
+        "xAxisTickCount": {
+          "type": "number",
+          "optional": true,
+          "description": "Number of ticks to display on the x-axis."
+        },
+        "xAxisTickFormat": {
+          "type": "(value: number) => string",
+          "optional": true,
+          "description": "Custom formatter for x-axis tick labels."
+        },
+        "yAxisTickFormat": {
+          "type": "(value: number) => string",
+          "optional": true,
+          "description": "Custom formatter for y-axis tick labels."
+        },
+        "yAxisTickLabelFormat": {
+          "type": "(value: number) => string",
+          "optional": true,
+          "description": "Deprecated: use tooltipValueFormat instead. Formats tooltip values, not y-axis tick labels."
+        },
+        "yAxisName": {
+          "type": "string",
+          "optional": true,
+          "description": "Label for the y-axis."
+        },
+        "yAxisTickCount": {
+          "type": "number",
+          "optional": true,
+          "description": "Number of ticks to display on the y-axis."
+        },
+        "tooltipValueFormat": {
+          "type": "(value: number) => string",
+          "optional": true,
+          "description": "Custom formatter for tooltip values. Takes precedence over yAxisTickLabelFormat."
+        },
+        "tooltipMode": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "all",
+            "single"
+          ],
+          "default": "all",
+          "description": "Controls whether the native tooltip lists all series at the active timestamp or only the nearest series."
+        },
+        "tooltipMaxItems": {
+          "type": "number",
+          "optional": true,
+          "default": "10",
+          "description": "Maximum number of series rows shown when tooltipMode is 'all'."
+        },
+        "tooltipBoundary": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "clipping-ancestors"
+          ],
+          "description": "Constrains the tooltip to stay within clipping ancestors by default, or within a specific Element or Element[] when provided."
+        },
+        "tooltipFollowCursor": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "both",
+            "x"
+          ],
+          "default": "both",
+          "description": "Controls which axis the tooltip follows: both axes near the pointer, or the x-axis only with a fixed vertical position to avoid jitter."
+        },
+        "incomplete": {
+          "type": "{ before?: number; after?: number }",
+          "optional": true,
+          "description": "Indicates incomplete data periods with optional before/after timestamps in milliseconds."
+        },
+        "enableLegendSelection": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Adds a hidden ECharts legend so custom controls can drive series visibility through legendSelect, legendUnSelect, and legendToggleSelect actions. Toggled-off series are excluded from the tooltip and consumers must register ECharts LegendComponent."
+        },
+        "height": {
+          "type": "number",
+          "optional": true,
+          "default": "350",
+          "description": "Chart height in pixels."
+        },
+        "onTimeRangeChange": {
+          "type": "(from: number, to: number) => void",
+          "optional": true,
+          "description": "Callback fired when the user selects a time range via brush selection."
+        },
+        "isDarkMode": {
+          "type": "boolean",
+          "optional": true,
+          "description": "When true, switches the chart to ECharts' dark theme."
+        },
+        "gradient": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Renders a vertical gradient fill beneath line series. Has no effect for bars."
+        },
+        "loading": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Hides the chart and displays an animated sine-wave skeleton."
+        },
+        "ariaDescription": {
+          "type": "string",
+          "optional": true,
+          "description": "Accessible description passed to ECharts aria.label.description and announced when the chart receives focus."
+        },
+        "optionUpdateBehavior": {
+          "type": "SetOptionOpts",
+          "optional": true,
+          "description": "Additional options passed as the second argument to chart.setOption(). Defaults to { notMerge: false, lazyUpdate: true }."
+        }
+      },
+      "colors": [
+        "bg-kumo-base",
+        "border-kumo-line",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
+    },
     "Toast": {
       "name": "Toast",
       "type": "component",
@@ -5473,8 +6236,12 @@
       "Badge",
       "Banner",
       "Breadcrumbs",
+      "BubbleMap",
       "Button",
+      "Chart",
+      "ChartLegend",
       "Checkbox",
+      "ChoroplethMap",
       "ClipboardText",
       "CloudflareLogo",
       "Code",
@@ -5499,6 +6266,7 @@
       "Pagination",
       "Popover",
       "Radio",
+      "SankeyChart",
       "Select",
       "SensitiveInput",
       "Sidebar",
@@ -5508,6 +6276,7 @@
       "TableOfContents",
       "Tabs",
       "Text",
+      "TimeseriesChart",
       "Toast",
       "Toolbar",
       "Tooltip"
@@ -5517,6 +6286,14 @@
         "Button",
         "Link",
         "Toolbar"
+      ],
+      "Data Visualization": [
+        "BubbleMap",
+        "Chart",
+        "ChartLegend",
+        "ChoroplethMap",
+        "SankeyChart",
+        "TimeseriesChart"
       ],
       "Display": [
         "Badge",
@@ -5578,8 +6355,12 @@
         "Badge",
         "Banner",
         "Breadcrumbs",
+        "BubbleMap",
         "Button",
+        "Chart",
+        "ChartLegend",
         "Checkbox",
+        "ChoroplethMap",
         "ClipboardText",
         "CloudflareLogo",
         "Code",
@@ -5604,6 +6385,7 @@
         "Pagination",
         "Popover",
         "Radio",
+        "SankeyChart",
         "Select",
         "SensitiveInput",
         "Sidebar",
@@ -5613,6 +6395,7 @@
         "TableOfContents",
         "Tabs",
         "Text",
+        "TimeseriesChart",
         "Toast",
         "Toolbar",
         "Tooltip"

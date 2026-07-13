@@ -12,6 +12,7 @@ export type {
   ChartEvents,
 } from "./Chart.svelte";
 export type { TimeseriesMarker } from "./timeseries-markers";
+export type { TimeseriesThreshold } from "./timeseries-thresholds";
 export type {
   BubbleMapProps,
   MapProjection,

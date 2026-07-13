@@ -24,6 +24,10 @@
     labelTooltip?: string | Snippet;
     description?: string;
     error?: FieldError;
+    autoResize?: boolean;
+    minRows?: number;
+    maxRows?: number;
+    rows?: number;
     value?: string;
     onValueChange?: (value: string) => void;
     oninput?: (event: Event) => void;
@@ -41,6 +45,10 @@
     labelTooltip,
     description,
     error,
+    autoResize = false,
+    minRows = 1,
+    maxRows,
+    rows,
     value = $bindable(''),
     onValueChange,
     oninput,
@@ -55,6 +63,7 @@
   const errorId = $derived(error ? `${textareaId}-error` : undefined);
 
   let validity = $state<ValidityState | undefined>();
+  let textarea = $state<HTMLTextAreaElement>();
 
   const hasField = $derived(Boolean(label || error || description));
   const normalizedVariant = $derived(variant ?? (error || invalid ? 'error' : 'default'));
@@ -64,6 +73,43 @@
     if (error.match === true) return error.message;
     if (validity?.[error.match]) return error.message;
     return undefined;
+  });
+
+  $effect(() => {
+    if (!autoResize || !textarea) return;
+    const element = textarea;
+
+    const resize = () => {
+      const style = getComputedStyle(element);
+      const parsePx = (value: string) => Number.parseFloat(value) || 0;
+      const padding = parsePx(style.paddingTop) + parsePx(style.paddingBottom);
+      const borders = parsePx(style.borderTopWidth) + parsePx(style.borderBottomWidth);
+      const borderBox = style.boxSizing === 'border-box';
+      const lineHeight = style.lineHeight === 'normal' || !style.lineHeight
+        ? parsePx(style.fontSize) * 1.2
+        : style.lineHeight.endsWith('px') ? parsePx(style.lineHeight) : parsePx(style.lineHeight) * parsePx(style.fontSize);
+
+      element.style.height = 'auto';
+      let height = borderBox ? element.scrollHeight + borders : element.scrollHeight - padding;
+      height = Math.max(height, lineHeight * minRows + (borderBox ? padding + borders : 0));
+      if (maxRows && maxRows > 0) {
+        const maxHeight = lineHeight * maxRows + (borderBox ? padding + borders : 0);
+        element.style.overflowY = height > maxHeight ? 'auto' : 'hidden';
+        height = Math.min(height, maxHeight);
+      } else {
+        element.style.overflowY = 'hidden';
+      }
+      element.style.height = `${height}px`;
+    };
+
+    resize();
+    const observer = typeof ResizeObserver === 'undefined' ? undefined : new ResizeObserver(resize);
+    observer?.observe(element);
+    return () => {
+      observer?.disconnect();
+      element.style.height = '';
+      element.style.overflowY = '';
+    };
   });
 
   function handleInput(event: Event) {
@@ -76,11 +122,13 @@
 
 {#snippet control()}
   <textarea
+    bind:this={textarea}
     bind:value
     id={textareaId}
     class={cn(
       'h-auto w-full border-0 bg-kumo-control py-2 text-kumo-default ring ring-kumo-line outline-none focus:outline-none',
       'placeholder:text-kumo-muted disabled:text-kumo-disabled',
+      autoResize && 'resize-none scroll-pb-2',
       sizes[size],
       normalizedVariant === 'error'
         ? '!ring-kumo-danger focus:ring-kumo-danger/50 focus:ring-[1.5px]'
@@ -90,6 +138,7 @@
     aria-invalid={Boolean(showError || invalid) || undefined}
     aria-describedby={[descriptionId, errorId].filter(Boolean).join(' ') || undefined}
     {required}
+    rows={autoResize ? minRows : rows}
     oninput={handleInput}
     {...rest}
   ></textarea>

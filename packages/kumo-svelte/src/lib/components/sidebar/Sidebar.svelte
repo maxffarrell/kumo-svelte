@@ -44,12 +44,6 @@
     if (event.key === 'Escape') closeMobile(true);
   }
 
-  function handleMobileFocusout(event: FocusEvent) {
-    if (mobileNode && !mobileNode.contains(event.relatedTarget as Node | null)) {
-      closeMobile(false);
-    }
-  }
-
   $effect(() => {
     if (!sidebar.isMobile || !sidebar.openMobile) return;
 
@@ -116,7 +110,6 @@
       className
     )}
     onkeydown={handleMobileKeydown}
-    onfocusout={handleMobileFocusout}
     {...rest}
   >
     {@render sidebarContent()}

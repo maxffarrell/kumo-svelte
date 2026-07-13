@@ -1,5 +1,22 @@
 # kumo-svelte
 
+## 0.8.0
+
+### Minor Changes
+
+- efd6423: Restore the upstream Flow layout rewrite with dedicated layout utilities and regression coverage.
+- ac37ec9: Add auto-resizing support to `InputArea`.
+- 10bd6ed: Add reference markers to `TimeseriesChart`.
+- ac37ec9: Add horizontal threshold lines to `TimeseriesChart`.
+
+### Patch Changes
+
+- ac37ec9: Include chart components exported from the shared chart barrel in the generated component registry.
+- e2118cb: Split the docs deployment build from the npm package build to reduce Cloudflare build time.
+- ac37ec9: Add `target` support to `Sidebar.MenuSubButton` links.
+- ac37ec9: Keep the mobile Sidebar open when focus moves to portaled interactive content.
+- 10bd6ed: Disable sidebar menu button tooltips while the sidebar is expanded.
+
 ## 0.7.0
 
 ### Minor Changes

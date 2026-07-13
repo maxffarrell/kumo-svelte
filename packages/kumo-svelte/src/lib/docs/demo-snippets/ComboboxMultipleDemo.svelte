@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Button, Combobox, Text } from 'kumo-svelte';
+  import { Button } from 'kumo-svelte/components/button';
+  import { Combobox } from 'kumo-svelte/components/combobox';
+  import { Text } from 'kumo-svelte/components/text';
 
   const bots = [
     { value: 'googlebot', label: 'Googlebot', author: 'Google' },

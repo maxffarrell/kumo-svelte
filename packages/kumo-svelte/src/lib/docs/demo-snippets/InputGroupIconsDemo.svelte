@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { LinkIcon } from 'phosphor-svelte';
-  import { InputGroup } from 'kumo-svelte';
+  import LinkIcon from 'phosphor-svelte/lib/LinkIcon';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
 </script>
 
 <InputGroup class="w-full max-w-3xs">

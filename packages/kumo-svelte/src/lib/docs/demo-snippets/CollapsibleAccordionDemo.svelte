@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Collapsible, Text } from '$lib';
+  import { Collapsible } from '$lib/components/collapsible';
+  import { Text } from '$lib/components/text';
 
   let activeIndex = $state<number | null>(0);
 

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Banner, Button } from '$lib';
-  import { Warning } from 'phosphor-svelte';
+  import { Banner } from '$lib/components/banner';
+  import { Button } from '$lib/components/button';
+  import Warning from 'phosphor-svelte/lib/Warning';
 </script>
 
 <Banner

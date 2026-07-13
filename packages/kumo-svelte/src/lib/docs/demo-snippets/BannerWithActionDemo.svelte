@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { Banner, Button } from '$lib';
-  import { Info, X } from 'phosphor-svelte';
+  import { Banner } from '$lib/components/banner';
+  import { Button } from '$lib/components/button';
+  import Info from 'phosphor-svelte/lib/Info';
+  import X from 'phosphor-svelte/lib/X';
 </script>
 
 <div class="w-full space-y-3">

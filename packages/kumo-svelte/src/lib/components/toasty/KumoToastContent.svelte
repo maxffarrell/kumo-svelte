@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { CheckCircle, Info, Warning, WarningOctagon, X } from 'phosphor-svelte';
+  import CheckCircle from 'phosphor-svelte/lib/CheckCircle';
+  import Info from 'phosphor-svelte/lib/Info';
+  import Warning from 'phosphor-svelte/lib/Warning';
+  import WarningOctagon from 'phosphor-svelte/lib/WarningOctagon';
+  import X from 'phosphor-svelte/lib/X';
   import { Button } from '$lib/components/button';
   import { cn } from '$lib/utils/cn';
   import type { KumoToastObject, KumoToastVariant } from './manager.svelte';

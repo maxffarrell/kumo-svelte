@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Empty } from 'kumo-svelte';
+  import { Empty } from 'kumo-svelte/components/empty';
 </script>
 
 <Empty

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { LayerCard, Table } from 'kumo-svelte';
+  import { LayerCard } from 'kumo-svelte/components/layer-card';
+  import { Table } from 'kumo-svelte/components/table';
   import { colorSystemRows } from './chart-color-demo-data';
 </script>
 

@@ -1,6 +1,9 @@
 <script lang="ts">
-  import { FunnelSimple, Gear, MagnifyingGlass } from 'phosphor-svelte';
-  import { InputGroup, Toolbar } from 'kumo-svelte';
+  import FunnelSimple from 'phosphor-svelte/lib/FunnelSimple';
+  import Gear from 'phosphor-svelte/lib/Gear';
+  import MagnifyingGlass from 'phosphor-svelte/lib/MagnifyingGlass';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
+  import { Toolbar } from 'kumo-svelte/components/toolbar';
 </script>
 
 <Toolbar class="w-full max-w-md">

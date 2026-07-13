@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { RadioGroup, RadioItem } from '$lib';
+  import { RadioGroup, RadioItem } from '$lib/components/radio';
 
   const ThemeType = {
     dark: 'dark',

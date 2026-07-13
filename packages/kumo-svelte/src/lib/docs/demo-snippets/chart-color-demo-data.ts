@@ -1,4 +1,4 @@
-import { ChartPalette, type ChartSemanticColorName } from 'kumo-svelte';
+import { ChartPalette, type ChartSemanticColorName } from 'kumo-svelte/components/chart';
 
 export type ThemeMode = 'dark' | 'light';
 

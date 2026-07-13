@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Button, DropdownMenu } from 'kumo-svelte';
+  import { Button } from 'kumo-svelte/components/button';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
 
   let showSidebar = $state(true);
   let showLineNumbers = $state(false);

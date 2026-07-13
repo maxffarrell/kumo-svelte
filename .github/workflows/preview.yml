@@ -24,7 +24,7 @@ jobs:
       - uses: ./.github/actions/install-dependencies
 
       - name: Build kumo-svelte
-        run: pnpm build
+        run: pnpm build:package
 
       - name: Publish package preview
         continue-on-error: true

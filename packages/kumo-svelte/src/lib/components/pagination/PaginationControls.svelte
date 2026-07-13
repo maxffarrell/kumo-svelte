@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { CaretDoubleLeft, CaretDoubleRight, CaretLeft, CaretRight } from 'phosphor-svelte';
+  import CaretDoubleLeft from 'phosphor-svelte/lib/CaretDoubleLeft';
+  import CaretDoubleRight from 'phosphor-svelte/lib/CaretDoubleRight';
+  import CaretLeft from 'phosphor-svelte/lib/CaretLeft';
+  import CaretRight from 'phosphor-svelte/lib/CaretRight';
   import { InputGroup, InputGroupButton, InputGroupInput } from '$lib/components/input-group';
   import { Select } from '$lib/components/select';
   import { cn } from '$lib/utils/cn';

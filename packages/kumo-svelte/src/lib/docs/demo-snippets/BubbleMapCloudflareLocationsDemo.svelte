@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import * as echarts from 'echarts';
-  import { BubbleMap, type MapGeoJson } from 'kumo-svelte';
+  import { BubbleMap, type MapGeoJson } from 'kumo-svelte/components/chart';
   import { cloudflareLocations, loadWorldGeoJson } from './map-demo-data';
 
   let geoJson = $state<MapGeoJson | null>(null);

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Toolbar } from 'kumo-svelte';
+  import { Toolbar } from 'kumo-svelte/components/toolbar';
 
   const sizes = ['xs', 'sm', 'base', 'lg'] as const;
 </script>

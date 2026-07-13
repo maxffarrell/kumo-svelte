@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Check, Copy } from 'phosphor-svelte';
+  import Check from 'phosphor-svelte/lib/Check';
+  import Copy from 'phosphor-svelte/lib/Copy';
   import { Button } from '$lib/components/button';
 
   interface Props {

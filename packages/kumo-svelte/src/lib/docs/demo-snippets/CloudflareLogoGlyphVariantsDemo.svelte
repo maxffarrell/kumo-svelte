@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CloudflareLogo } from 'kumo-svelte';
+  import { CloudflareLogo } from 'kumo-svelte/components/cloudflare-logo';
 </script>
 
 <div class="flex flex-wrap items-center gap-8">

@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { CreditCard, Moon, SignOut, User } from 'phosphor-svelte';
-  import { Button, DropdownMenu } from 'kumo-svelte';
+  import CreditCard from 'phosphor-svelte/lib/CreditCard';
+  import Moon from 'phosphor-svelte/lib/Moon';
+  import SignOut from 'phosphor-svelte/lib/SignOut';
+  import User from 'phosphor-svelte/lib/User';
+  import { Button } from 'kumo-svelte/components/button';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
 
   const languages = [
     { code: 'de', label: 'Deutsch' },

@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { CloudflareLogo, DropdownMenu } from '$lib';
-  import { ArrowSquareOut, Cloud, Code, DownloadSimple } from 'phosphor-svelte';
+  import { CloudflareLogo } from '$lib/components/cloudflare-logo';
+  import { DropdownMenu } from '$lib/components/dropdown-menu';
+  import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
+  import Cloud from 'phosphor-svelte/lib/Cloud';
+  import Code from 'phosphor-svelte/lib/Code';
+  import DownloadSimple from 'phosphor-svelte/lib/DownloadSimple';
   import { generateCloudflareLogoSvg } from '$lib/components/cloudflare-logo';
 
   let copied = $state<string | null>(null);

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button } from 'kumo-svelte';
-  import { Plus } from 'phosphor-svelte';
+  import { Button } from 'kumo-svelte/components/button';
+  import Plus from 'phosphor-svelte/lib/Plus';
 </script>
 
 <Button>

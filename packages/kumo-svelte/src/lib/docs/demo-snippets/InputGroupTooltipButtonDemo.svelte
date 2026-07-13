@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { MagnifyingGlass, Question } from 'phosphor-svelte';
-  import { InputGroup } from 'kumo-svelte';
+  import MagnifyingGlass from 'phosphor-svelte/lib/MagnifyingGlass';
+  import Question from 'phosphor-svelte/lib/Question';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
 </script>
 
 <InputGroup class="w-full max-w-2xs">

@@ -6,9 +6,28 @@ baseUIComponent: "dialog"
 ---
 
 <script>
+  import CodeBlock from '$lib/docs/CodeBlock.svelte';
   import ComponentExample from '$lib/docs/ComponentExample.svelte';
   import ComponentSection from '$lib/docs/ComponentSection.svelte';
   import PropsTable from '$lib/docs/PropsTable.svelte';
+
+  const barrelCode = `import { Dialog } from 'kumo-svelte';`;
+  const granularCode = `import { Dialog } from 'kumo-svelte/components/dialog';`;
+  const usageCode = `<script lang="ts">
+  import { Dialog, Button } from "kumo-svelte";
+
+  let open = $state(false);
+<\/script>
+
+<Dialog bind:open title="Dialog Title" description="Dialog content goes here.">
+  {#snippet trigger(props)}
+    <Button {...props}>Open</Button>
+  {/snippet}
+
+  <div class="flex justify-end gap-2">
+    <Button variant="secondary" onclick={() => (open = false)}>Cancel</Button>
+  </div>
+</Dialog>`;
 </script>
 
 <!-- Hero Demo -->
@@ -25,15 +44,11 @@ baseUIComponent: "dialog"
 
 ### Barrel
 
-```typescript
-import { Dialog } from 'kumo-svelte';
-```
+<CodeBlock code={barrelCode} lang="ts" />
 
 ### Granular
 
-```typescript
-import { Dialog } from 'kumo-svelte/components/dialog';
-```
+<CodeBlock code={granularCode} lang="ts" />
 
 </ComponentSection>
 
@@ -43,23 +58,7 @@ import { Dialog } from 'kumo-svelte/components/dialog';
 
 ## Usage
 
-```svelte
-<script lang="ts">
-  import { Dialog, Button } from "kumo-svelte";
-
-  let open = $state(false);
-</script>
-
-<Dialog bind:open title="Dialog Title" description="Dialog content goes here.">
-  {#snippet trigger(props)}
-    <Button {...props}>Open</Button>
-  {/snippet}
-
-  <div class="flex justify-end gap-2">
-    <Button variant="secondary" onclick={() => (open = false)}>Cancel</Button>
-  </div>
-</Dialog>
-```
+<CodeBlock code={usageCode} lang="svelte" />
 
 </ComponentSection>
 
@@ -72,7 +71,7 @@ import { Dialog } from 'kumo-svelte/components/dialog';
 The Dialog component supports two ARIA roles to properly convey semantic
 meaning to assistive technologies:
 
-  <div class="overflow-hidden rounded-lg border border-kumo-hairline">
+  <div class="not-prose overflow-hidden rounded-lg border border-kumo-hairline">
     <table class="w-full text-sm">
       <thead class="bg-kumo-elevated">
         <tr>
@@ -84,7 +83,7 @@ meaning to assistive technologies:
       <tbody class="divide-y divide-kumo-hairline">
         <tr>
           <td class="px-4 py-3">
-            `role="dialog"`
+            <code>role="dialog"</code>
             <span class="ml-2 text-kumo-subtle">(default)</span>
           </td>
           <td class="px-4 py-3">
@@ -93,7 +92,7 @@ meaning to assistive technologies:
           <td class="px-4 py-3">Dismissible by default</td>
         </tr>
         <tr>
-          <td class="px-4 py-3">`role="alertdialog"`</td>
+          <td class="px-4 py-3"><code>role="alertdialog"</code></td>
           <td class="px-4 py-3">
             Destructive actions, confirmations, critical warnings
           </td>
@@ -156,7 +155,8 @@ For confirmation dialogs that should not be dismissed by clicking outside, use
 
 ### Custom Max Width
 
-Dialog max width can be customized with utility classes like `max-w-lg`.
+Consumer max-width utilities such as `max-w-lg` should cap the dialog on
+desktop, even when the dialog contains wide intrinsic content.
 
 <ComponentExample demo="DialogMaxWidthDemo" />
 
@@ -189,13 +189,7 @@ Dialog containing a Dropdown menu.
 
 The main dialog container that renders the modal overlay and popup.
 
-<PropsTable component="Dialog" />
-
-### Dialog.Root
-
-Controls the open state of the dialog. Doesn't render its own HTML element.
-
-<div class="mb-4 overflow-hidden rounded-lg border border-kumo-hairline">
+<div class="not-prose mb-4 overflow-hidden rounded-lg border border-kumo-hairline">
   <table class="w-full text-sm">
     <thead class="bg-kumo-elevated">
       <tr>
@@ -211,7 +205,7 @@ Controls the open state of the dialog. Doesn't render its own HTML element.
         <td class="px-4 py-2 font-mono text-xs">"dialog" | "alertdialog"</td>
         <td class="px-4 py-2 font-mono text-xs">"dialog"</td>
         <td class="px-4 py-2 text-kumo-subtle">
-          The ARIA role for the dialog. Use `"alertdialog"` for destructive or
+          The ARIA role for the dialog. Use <code>"alertdialog"</code> for destructive or
           confirmation flows.
         </td>
       </tr>
@@ -227,29 +221,5 @@ Controls the open state of the dialog. Doesn't render its own HTML element.
     </tbody>
   </table>
 </div>
-<PropsTable component="Dialog.Root" />
-
-### Dialog.Trigger
-
-A button that opens the dialog when clicked.
-
-<PropsTable component="Dialog.Trigger" />
-
-### Dialog.Title
-
-A heading that labels the dialog for accessibility.
-
-<PropsTable component="Dialog.Title" />
-
-### Dialog.Description
-
-A paragraph providing additional context about the dialog.
-
-<PropsTable component="Dialog.Description" />
-
-### Dialog.Close
-
-A button that closes the dialog when clicked.
-
-  <PropsTable component="Dialog.Close" />
+<PropsTable component="Dialog" />
 </ComponentSection>

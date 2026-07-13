@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { InputGroup, Loader } from 'kumo-svelte';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
+  import { Loader } from 'kumo-svelte/components/loader';
 </script>
 
 <InputGroup class="w-full max-w-3xs">

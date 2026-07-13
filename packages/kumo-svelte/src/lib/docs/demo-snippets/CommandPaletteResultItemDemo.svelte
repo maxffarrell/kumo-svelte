@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Button, CommandPalette } from '$lib';
-  import { File } from 'phosphor-svelte';
+  import { Button } from '$lib/components/button';
+  import { CommandPalette } from '$lib/components/command-palette';
+  import File from 'phosphor-svelte/lib/File';
 
   const searchResults = [
     { id: '1', title: 'Button', breadcrumbs: ['Components'] },

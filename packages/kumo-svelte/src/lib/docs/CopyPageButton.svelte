@@ -1,12 +1,10 @@
 <script lang="ts">
-  import {
-    CaretDownIcon,
-    CheckIcon,
-    CopySimpleIcon,
-    FileMdIcon,
-    LinkSimpleIcon,
-    OpenAiLogo
-  } from 'phosphor-svelte';
+  import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
+  import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
+  import CopySimpleIcon from 'phosphor-svelte/lib/CopySimpleIcon';
+  import FileMdIcon from 'phosphor-svelte/lib/FileMdIcon';
+  import LinkSimpleIcon from 'phosphor-svelte/lib/LinkSimpleIcon';
+  import OpenAiLogo from 'phosphor-svelte/lib/OpenAiLogo';
   import { Button } from '$lib/components/button';
   import { DropdownMenu } from '$lib/components/dropdown-menu';
   import ClaudeIcon from './ClaudeIcon.svelte';

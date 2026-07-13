@@ -39,7 +39,7 @@ jobs:
         with:
           fetch-depth: 1
       - uses: ./.github/actions/install-dependencies
-      - run: pnpm build
+      - run: pnpm build:package && pnpm build
       - uses: actions/upload-artifact@v7
         with:
           name: kumo-svelte-dist

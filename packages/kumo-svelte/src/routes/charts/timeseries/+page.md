@@ -27,6 +27,17 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
+## Reference Markers
+
+Pass <code>markers</code> to render vertical reference lines for deployments,
+configuration changes, or other events on the time axis.
+
+<ComponentExample demo="ReferenceMarkersChartDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
 ## Custom X-Axis Label Format
 
 Use the <code>xAxisTickLabelFormat</code> prop to control how x-axis tick

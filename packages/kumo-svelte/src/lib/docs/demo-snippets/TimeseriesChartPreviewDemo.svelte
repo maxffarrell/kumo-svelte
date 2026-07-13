@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import * as echarts from 'echarts';
-  import { TimeseriesChart, ChartPalette } from 'kumo-svelte';
+  import { TimeseriesChart, ChartPalette } from 'kumo-svelte/components/chart';
   import { buildSeriesData, getIsDarkMode } from './chart-color-demo-data';
 
   let isDarkMode = $state(false);

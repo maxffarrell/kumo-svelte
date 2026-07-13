@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import * as echarts from 'echarts';
-  import { ChoroplethMap, type MapGeoJson } from 'kumo-svelte';
+  import { ChoroplethMap, type MapGeoJson } from 'kumo-svelte/components/chart';
   import { countries, fmtRequests, loadWorldGeoJson } from './map-demo-data';
 
   let geoJson = $state<MapGeoJson | null>(null);

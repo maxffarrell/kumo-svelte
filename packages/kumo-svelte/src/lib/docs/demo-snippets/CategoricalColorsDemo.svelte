@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { ChartPalette, LayerCard, Table } from 'kumo-svelte';
+  import { ChartPalette } from 'kumo-svelte/components/chart';
+  import { LayerCard } from 'kumo-svelte/components/layer-card';
+  import { Table } from 'kumo-svelte/components/table';
   import { categoricalColorIndices, getIsDarkMode } from './chart-color-demo-data';
 
   let isDarkMode = $state(false);

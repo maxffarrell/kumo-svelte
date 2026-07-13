@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { Button, Link, Toasty } from 'kumo-svelte';
-  import { CheckCircle } from 'phosphor-svelte';
+  import { Button } from 'kumo-svelte/components/button';
+  import { Link } from 'kumo-svelte/components/link';
+  import { Toasty } from 'kumo-svelte/components/toasty';
+  import CheckCircle from 'phosphor-svelte/lib/CheckCircle';
 </script>
 
 <Toasty>

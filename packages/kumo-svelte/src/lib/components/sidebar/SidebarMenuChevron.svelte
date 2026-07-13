@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CaretRight } from 'phosphor-svelte';
+  import CaretRight from 'phosphor-svelte/lib/CaretRight';
   import { cn } from '$lib/utils/cn';
   interface Props { class?: string; open?: boolean; [key: string]: unknown; }
   let { class: className, open = false, ...rest }: Props = $props();

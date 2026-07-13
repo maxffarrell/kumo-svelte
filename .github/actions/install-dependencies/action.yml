@@ -15,7 +15,7 @@ runs:
     - name: Install Node.js
       uses: actions/setup-node@v6
       with:
-        node-version: 24
+        node-version: 26
         cache: "pnpm"
         registry-url: "https://registry.npmjs.org"
 

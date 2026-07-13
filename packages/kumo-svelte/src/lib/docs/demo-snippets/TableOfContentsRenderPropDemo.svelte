@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TableOfContents } from 'kumo-svelte';
+  import { TableOfContents } from 'kumo-svelte/components/table-of-contents';
 
   let clicked = $state<string | null>(null);
 </script>

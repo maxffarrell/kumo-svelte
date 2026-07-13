@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Input } from '$lib';
-  import { MagnifyingGlass as Search } from 'phosphor-svelte';
+  import { Input } from '$lib/components/input';
+  import Search from 'phosphor-svelte/lib/MagnifyingGlass';
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">

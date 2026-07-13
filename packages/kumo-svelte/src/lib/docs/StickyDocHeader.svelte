@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { GithubLogoIcon } from "phosphor-svelte";
+    import GithubLogoIcon from "phosphor-svelte/lib/GithubLogoIcon";
     import { onMount } from "svelte";
     import { cn } from "$lib/utils/cn";
     import ThemeToggle from "./ThemeToggle.svelte";

@@ -1,7 +1,10 @@
 <script lang="ts">
-  import { Breadcrumbs, Button } from 'kumo-svelte';
+  import { Breadcrumbs } from 'kumo-svelte/components/breadcrumbs';
+  import { Button } from 'kumo-svelte/components/button';
   import { PageHeader } from '../../../blocks/page-header';
-  import { Code, Globe, House } from 'phosphor-svelte';
+  import Code from 'phosphor-svelte/lib/Code';
+  import Globe from 'phosphor-svelte/lib/Globe';
+  import House from 'phosphor-svelte/lib/House';
 
   let activeTab = $state('overview');
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { InputGroup } from 'kumo-svelte';
+  import { InputGroup } from 'kumo-svelte/components/input-group';
 </script>
 
 <div class="flex flex-col gap-4">

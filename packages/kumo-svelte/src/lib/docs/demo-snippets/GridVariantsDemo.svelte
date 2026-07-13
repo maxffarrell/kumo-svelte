@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Grid, Surface, Text } from 'kumo-svelte';
+  import { Grid } from 'kumo-svelte/components/grid';
+  import { Surface } from 'kumo-svelte/components/surface';
+  import { Text } from 'kumo-svelte/components/text';
 </script>
 
 <div class="flex flex-col gap-8">

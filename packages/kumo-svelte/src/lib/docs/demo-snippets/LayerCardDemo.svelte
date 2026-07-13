@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { ArrowRight } from 'phosphor-svelte';
-  import { Button, LayerCard } from 'kumo-svelte';
+  import ArrowRight from 'phosphor-svelte/lib/ArrowRight';
+  import { Button } from 'kumo-svelte/components/button';
+  import { LayerCard } from 'kumo-svelte/components/layer-card';
 </script>
 
 <LayerCard>

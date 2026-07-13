@@ -1,8 +1,10 @@
 <script lang="ts">
     import { page } from "$app/state";
-    import { CaretDownIcon, MagnifyingGlassIcon, XIcon } from "phosphor-svelte";
+    import CaretDownIcon from "phosphor-svelte/lib/CaretDownIcon";
+    import MagnifyingGlassIcon from "phosphor-svelte/lib/MagnifyingGlassIcon";
+    import XIcon from "phosphor-svelte/lib/XIcon";
     import { onMount } from "svelte";
-    import { Button } from "$lib";
+    import { Button } from "$lib/components/button";
     import { cn } from "$lib/utils/cn";
     import KumoMenuIcon from "./KumoMenuIcon.svelte";
     import SearchDialog from "./SearchDialog.svelte";

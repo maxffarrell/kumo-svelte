@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { MagnifyingGlass } from 'phosphor-svelte';
-  import { Toolbar } from 'kumo-svelte';
+  import MagnifyingGlass from 'phosphor-svelte/lib/MagnifyingGlass';
+  import { Toolbar } from 'kumo-svelte/components/toolbar';
 </script>
 
 <Toolbar class="w-full max-w-lg">

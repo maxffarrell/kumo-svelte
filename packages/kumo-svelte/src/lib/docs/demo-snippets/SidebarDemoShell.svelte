@@ -1,26 +1,25 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { DropdownMenu, Sidebar } from 'kumo-svelte';
-  import {
-    ArrowLeft,
-    ArrowsLeftRight,
-    Bell,
-    CaretUpDown,
-    ChartBar,
-    Check,
-    Code,
-    Cube,
-    Database,
-    Flask,
-    Gear,
-    Globe,
-    House,
-    Lock,
-    MagnifyingGlass,
-    ShieldCheck,
-    Stack,
-    User
-  } from 'phosphor-svelte';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
+  import { Sidebar } from 'kumo-svelte/components/sidebar';
+  import ArrowLeft from 'phosphor-svelte/lib/ArrowLeft';
+  import ArrowsLeftRight from 'phosphor-svelte/lib/ArrowsLeftRight';
+  import Bell from 'phosphor-svelte/lib/Bell';
+  import CaretUpDown from 'phosphor-svelte/lib/CaretUpDown';
+  import ChartBar from 'phosphor-svelte/lib/ChartBar';
+  import Check from 'phosphor-svelte/lib/Check';
+  import Code from 'phosphor-svelte/lib/Code';
+  import Cube from 'phosphor-svelte/lib/Cube';
+  import Database from 'phosphor-svelte/lib/Database';
+  import Flask from 'phosphor-svelte/lib/Flask';
+  import Gear from 'phosphor-svelte/lib/Gear';
+  import Globe from 'phosphor-svelte/lib/Globe';
+  import House from 'phosphor-svelte/lib/House';
+  import Lock from 'phosphor-svelte/lib/Lock';
+  import MagnifyingGlass from 'phosphor-svelte/lib/MagnifyingGlass';
+  import ShieldCheck from 'phosphor-svelte/lib/ShieldCheck';
+  import Stack from 'phosphor-svelte/lib/Stack';
+  import User from 'phosphor-svelte/lib/User';
 
   type Demo = 'basic' | 'collapsible' | 'toggle' | 'full' | 'resizable' | 'right' | 'peeking' | 'auto-scroll' | 'sliding' | 'mobile';
 

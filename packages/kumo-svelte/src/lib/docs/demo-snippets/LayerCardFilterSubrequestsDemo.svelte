@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { Badge, Input, LayerCard, Tabs } from 'kumo-svelte';
+  import { Badge } from 'kumo-svelte/components/badge';
+  import { Input } from 'kumo-svelte/components/input';
+  import { LayerCard } from 'kumo-svelte/components/layer-card';
+  import { Tabs } from 'kumo-svelte/components/tabs';
 
   const ORIGINS = [
     { origin: 'challenges.cloudflare.com', s2xx: 1, s4xx: 0, duration: '95.4ms' },

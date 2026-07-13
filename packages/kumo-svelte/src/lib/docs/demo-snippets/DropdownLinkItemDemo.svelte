@@ -1,6 +1,9 @@
 <script lang="ts">
-  import { ArrowSquareOut, BookOpen, Gear } from 'phosphor-svelte';
-  import { Button, DropdownMenu } from 'kumo-svelte';
+  import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
+  import BookOpen from 'phosphor-svelte/lib/BookOpen';
+  import Gear from 'phosphor-svelte/lib/Gear';
+  import { Button } from 'kumo-svelte/components/button';
+  import { DropdownMenu } from 'kumo-svelte/components/dropdown-menu';
 </script>
 
 <DropdownMenu>

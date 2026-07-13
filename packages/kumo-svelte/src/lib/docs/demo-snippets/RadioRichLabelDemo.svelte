@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Badge, Radio } from '$lib';
+  import { Badge } from '$lib/components/badge';
+  import { Radio } from '$lib/components/radio';
 
   let value = $state('pro');
 </script>

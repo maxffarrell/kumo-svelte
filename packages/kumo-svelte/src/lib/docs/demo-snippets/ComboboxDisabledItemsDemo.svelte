@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Combobox, Text } from 'kumo-svelte';
+  import { Combobox } from 'kumo-svelte/components/combobox';
+  import { Text } from 'kumo-svelte/components/text';
 
   const items = [
     { value: 'postgres', label: 'PostgreSQL' },

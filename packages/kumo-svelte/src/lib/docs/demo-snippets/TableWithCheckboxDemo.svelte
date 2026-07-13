@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { LayerCard, Table } from 'kumo-svelte';
+  import { LayerCard } from 'kumo-svelte/components/layer-card';
+  import { Table } from 'kumo-svelte/components/table';
   import { emailRows } from './table-demo-data';
 
   const rows = emailRows.slice(0, 3);

@@ -4,11 +4,12 @@
   "type": "module",
   "packageManager": "pnpm@11.10.0",
   "engines": {
-    "node": "24.x"
+    "node": "26.x"
   },
   "scripts": {
     "build": "pnpm --filter kumo-svelte build",
-    "build:all": "pnpm -r build",
+    "build:package": "pnpm --filter kumo-svelte build:package",
+    "build:all": "pnpm -r build:package",
     "changeset": "tsx ci/scripts/ensure-changeset-config.ts && changeset",
     "check": "pnpm --filter kumo-svelte check",
     "deploy": "pnpm --filter kumo-svelte deploy",
@@ -21,7 +22,7 @@
     "lockfile-check": "pnpm install --no-frozen-lockfile && git diff --exit-code pnpm-lock.yaml",
     "preview": "pnpm --filter kumo-svelte preview",
     "publish:beta": "bash ci/versioning/publish-beta.sh",
-    "release": "pnpm build:all && changeset publish",
+    "release": "pnpm build:package && changeset publish",
     "release:beta": "changeset publish --no-git-tag --tag beta",
     "test": "pnpm --filter kumo-svelte test && pnpm test:tools",
     "typecheck": "pnpm --filter kumo-svelte typecheck",

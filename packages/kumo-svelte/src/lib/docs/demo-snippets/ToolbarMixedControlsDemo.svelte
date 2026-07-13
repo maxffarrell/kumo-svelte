@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { FunnelSimple, Gear } from 'phosphor-svelte';
-  import { Toolbar } from 'kumo-svelte';
+  import FunnelSimple from 'phosphor-svelte/lib/FunnelSimple';
+  import Gear from 'phosphor-svelte/lib/Gear';
+  import { Toolbar } from 'kumo-svelte/components/toolbar';
 </script>
 
 <Toolbar class="w-full max-w-md">

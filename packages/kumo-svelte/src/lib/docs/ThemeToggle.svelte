@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { MoonIcon, SunIcon } from 'phosphor-svelte';
+  import MoonIcon from 'phosphor-svelte/lib/MoonIcon';
+  import SunIcon from 'phosphor-svelte/lib/SunIcon';
   import { onMount } from 'svelte';
-  import { Button } from '$lib';
+  import { Button } from '$lib/components/button';
 
   let theme = $state<'light' | 'dark'>('light');
   let mounted = $state(false);

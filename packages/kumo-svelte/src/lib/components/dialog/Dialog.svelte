@@ -12,7 +12,7 @@
     dimensions: {
       sm: {
         width: 350,
-        titleSize: 20,
+        titleSize: 24,
         descSize: 16,
         padding: 16,
         gap: 8,
@@ -20,7 +20,7 @@
       },
       base: {
         width: 384,
-        titleSize: 20,
+        titleSize: 24,
         descSize: 16,
         padding: 24,
         gap: 16,
@@ -28,7 +28,7 @@
       },
       lg: {
         width: 512,
-        titleSize: 20,
+        titleSize: 24,
         descSize: 16,
         padding: 24,
         gap: 16,
@@ -36,7 +36,7 @@
       },
       xl: {
         width: 768,
-        titleSize: 20,
+        titleSize: 24,
         descSize: 16,
         padding: 24,
         gap: 16,
@@ -132,8 +132,8 @@
     <AlertDialog.Portal to={container}>
       <AlertDialog.Overlay class={backdropClasses} />
       <AlertDialog.Content class={contentClasses} style={contentStyle}>
-        {#if title}<AlertDialog.Title class="text-lg font-semibold">{title}</AlertDialog.Title>{/if}
-        {#if description}<AlertDialog.Description class="mt-1 text-sm text-kumo-subtle">{description}</AlertDialog.Description>{/if}
+        {#if title}<AlertDialog.Title class="pr-14 text-2xl font-semibold">{title}</AlertDialog.Title>{/if}
+        {#if description}<AlertDialog.Description class="mt-1 text-kumo-subtle">{description}</AlertDialog.Description>{/if}
         <div class={title || description ? 'mt-4' : undefined}>{@render children?.()}</div>
       </AlertDialog.Content>
     </AlertDialog.Portal>
@@ -146,8 +146,8 @@
     <DialogPrimitive.Portal to={container}>
       <DialogPrimitive.Overlay class={backdropClasses} />
       <DialogPrimitive.Content class={contentClasses} style={contentStyle} onInteractOutside={handleInteractOutside}>
-        {#if title}<DialogPrimitive.Title class="text-lg font-semibold">{title}</DialogPrimitive.Title>{/if}
-        {#if description}<DialogPrimitive.Description class="mt-1 text-sm text-kumo-subtle">{description}</DialogPrimitive.Description>{/if}
+        {#if title}<DialogPrimitive.Title class="pr-14 text-2xl font-semibold">{title}</DialogPrimitive.Title>{/if}
+        {#if description}<DialogPrimitive.Description class="mt-1 text-kumo-subtle">{description}</DialogPrimitive.Description>{/if}
         <div class={title || description ? 'mt-4' : undefined}>{@render children?.()}</div>
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>

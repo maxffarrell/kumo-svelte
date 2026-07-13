@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Tabs } from 'kumo-svelte';
+  import { Tabs } from 'kumo-svelte/components/tabs';
 
   const items = [
     { value: 'tab1', label: 'Tab 1' },

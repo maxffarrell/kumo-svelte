@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link } from 'kumo-svelte';
+  import { Link } from 'kumo-svelte/components/link';
 </script>
 
 <div class="grid gap-x-6 gap-y-4 text-base md:grid-cols-3">

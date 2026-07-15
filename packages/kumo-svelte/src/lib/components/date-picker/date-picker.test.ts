@@ -1,7 +1,10 @@
 import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
+import { expectNoA11yViolations } from '../../../../tests/a11y';
 import DatePicker from './DatePicker.svelte';
+
+const fixedMonth = new Date(2024, 0, 1);
 
 describe('DatePicker', () => {
   it('supports hidden and object disabled matchers', () => {
@@ -48,5 +51,69 @@ describe('DatePicker', () => {
     expect((screen.getByRole('combobox', { name: 'Choose the year' }) as HTMLSelectElement).value).toBe('2026');
     expect((screen.getByRole('button', { name: 'Previous month' }) as HTMLButtonElement).disabled).toBe(true);
     expect((screen.getByRole('button', { name: 'Next month' }) as HTMLButtonElement).disabled).toBe(false);
+  });
+
+  describe('variant fidelity', () => {
+    it('applies Kumo root classes', () => {
+      const { container } = render(DatePicker, { month: fixedMonth });
+      const root = container.querySelector('.rdp-root');
+      expect(root?.className).toContain('select-none');
+      expect(root?.className).toContain('rounded-xl');
+      expect(root?.className).toContain('bg-kumo-base');
+    });
+  });
+
+  describe('interaction', () => {
+    it('selects a day and sets aria-pressed', async () => {
+      const onChange = vi.fn();
+
+      render(DatePicker, {
+        mode: 'single',
+        month: fixedMonth,
+        onChange
+      });
+
+      const day = screen.getByRole('button', { name: 'Monday, January 15, 2024' });
+      expect(day.getAttribute('aria-pressed')).toBe('false');
+
+      await userEvent.click(day);
+
+      expect(onChange).toHaveBeenCalledWith(new Date(2024, 0, 15));
+      expect(day.getAttribute('aria-pressed')).toBe('true');
+    });
+
+    it('marks an initial selected date with aria-pressed', () => {
+      render(DatePicker, {
+        mode: 'single',
+        month: fixedMonth,
+        selected: new Date(2024, 0, 15)
+      });
+
+      const day = screen.getByRole('button', { name: 'Monday, January 15, 2024' });
+      expect(day.getAttribute('aria-pressed')).toBe('true');
+    });
+
+    it('navigates months via previous and next buttons', async () => {
+      render(DatePicker, { month: fixedMonth });
+
+      expect(screen.getByText('January 2024')).toBeTruthy();
+
+      await userEvent.click(screen.getByRole('button', { name: 'Next month' }));
+      expect(screen.getByText('February 2024')).toBeTruthy();
+
+      await userEvent.click(screen.getByRole('button', { name: 'Previous month' }));
+      expect(screen.getByText('January 2024')).toBeTruthy();
+    });
+  });
+
+  describe('accessibility', () => {
+    it('has no axe violations with a fixed month', async () => {
+      const { container } = render(DatePicker, {
+        mode: 'single',
+        month: fixedMonth,
+        selected: new Date(2024, 0, 15)
+      });
+      await expectNoA11yViolations(container);
+    });
   });
 });

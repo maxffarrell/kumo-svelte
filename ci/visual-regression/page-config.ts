@@ -27,6 +27,11 @@ export const COMPONENT_ACTIONS: Record<string, ComponentAction> = {
   dropdown: { type: "click", selector: "main button", waitAfter: 300 },
   popover: { type: "click", selector: "main button", waitAfter: 300 },
   tooltip: { type: "hover", selector: "main button", waitAfter: 500 },
+  button: {
+    type: "hover",
+    selector: '[data-vr-section="title"] button',
+    waitAfter: 500,
+  },
   select: { type: "click", selector: "main button", waitAfter: 300 },
   combobox: { type: "click", selector: "main input", waitAfter: 300 },
   toast: { type: "click", selector: "main button", waitAfter: 500 },

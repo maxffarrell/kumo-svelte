@@ -1,6 +1,9 @@
 // @vitest-environment happy-dom
 import { fireEvent, render, screen } from '@testing-library/svelte';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { House } from 'phosphor-svelte';
+import { expectNoA11yViolations } from '../../../../tests/a11y';
 import {
   Sidebar,
   SidebarCollapsibleContent,
@@ -118,5 +121,50 @@ describe('Sidebar toggle', () => {
     await fireEvent.click(screen.getByRole('button', { name: 'Collapse sidebar' }));
 
     expect(onOpenChange).toHaveBeenCalledWith(false);
+  });
+});
+
+describe('menu button fidelity', () => {
+  it('applies active background classes', () => {
+    render(SidebarMenuButton, { active: true, tooltip: 'Home' });
+    const button = screen.getByRole('button', { name: 'Home' });
+    expect(button.className).toContain('bg-(--sidebar-active-bg)');
+    expect(button.getAttribute('data-active')).toBe('true');
+  });
+
+  it('applies hover affordance when inactive', () => {
+    render(SidebarMenuButton, { tooltip: 'Domains' });
+    const button = screen.getByRole('button', { name: 'Domains' });
+    expect(button.className).toContain('hover:bg-(--sidebar-active-bg)');
+  });
+
+  it('renders icon menu buttons with Kumo data attributes', () => {
+    render(SidebarMenuButton, { icon: House, tooltip: 'Dashboard' });
+    const button = screen.getByRole('button', { name: 'Dashboard' });
+    expect(button.getAttribute('data-kumo-component')).toBe('Sidebar');
+    expect(button.getAttribute('data-kumo-part')).toBe('menu-button');
+    expect(button.getAttribute('data-size')).toBe('base');
+  });
+});
+
+describe('accessibility', () => {
+  it('has no axe violations for expanded sidebar', async () => {
+    const { container } = render(SidebarTestHost, { props: { defaultOpen: true } });
+    await expectNoA11yViolations(container);
+  });
+
+  it('has no axe violations for collapsed sidebar', async () => {
+    const { container } = render(SidebarTestHost, { props: { defaultOpen: false } });
+    await expectNoA11yViolations(container);
+  });
+});
+
+describe('interaction', () => {
+  it('activates trigger via keyboard', async () => {
+    const { container } = render(SidebarTestHost, { props: { defaultOpen: true } });
+    const trigger = screen.getByRole('button', { name: 'Collapse sidebar' });
+    trigger.focus();
+    await userEvent.keyboard('{Enter}');
+    expect(container.querySelector('[data-sidebar-wrapper]')?.getAttribute('data-state')).toBe('collapsed');
   });
 });

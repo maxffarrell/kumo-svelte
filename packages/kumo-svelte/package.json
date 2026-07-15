@@ -92,6 +92,7 @@
     "svelte-sonner": "^1.1.1"
   },
   "devDependencies": {
+    "@fontsource-variable/inter": "^5.2.5",
     "@sveltejs/adapter-cloudflare": "^7.2.9",
     "@sveltejs/kit": "^2.65.2",
     "@sveltejs/package": "^2.5.8",
@@ -100,6 +101,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/svelte": "^5.3.1",
     "@testing-library/user-event": "^14.6.1",
+    "axe-core": "^4.10.2",
     "@types/d3-geo": "^3.1.0",
     "@types/node": "^25.9.3",
     "happy-dom": "^20.10.5",

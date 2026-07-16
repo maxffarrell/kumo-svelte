@@ -22,6 +22,8 @@
 
 <button
   type="button"
+  role="option"
+  aria-selected={context.isSelected(item)}
   disabled={item.disabled}
   data-kumo-component="Autocomplete"
   data-kumo-part="item"

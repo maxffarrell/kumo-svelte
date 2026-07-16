@@ -62,7 +62,7 @@
         (isCard
           ? 'focus-visible:outline-offset-3'
           : 'focus:ring-kumo-focus focus:ring-2 focus-visible:ring-2 focus-visible:ring-kumo-brand focus-visible:outline-offset-3'),
-      'data-[state=checked]:bg-kumo-contrast'
+      'data-[checked]:bg-kumo-contrast data-[state=checked]:bg-kumo-contrast'
     )}
   >
     {#snippet children({ checked }: { checked: boolean })}
@@ -80,7 +80,7 @@
     data-kumo-component="Radio"
     data-kumo-part="item-label"
     class={cn(
-      'm-0 group relative flex items-start gap-3 rounded-lg border border-kumo-hairline bg-kumo-base p-3 transition-colors has-[[data-state=checked]]:border-kumo-interact has-[[data-state=checked]]:bg-kumo-tint',
+      'm-0 group relative flex items-start gap-3 rounded-lg border border-kumo-hairline bg-kumo-base p-3 transition-colors has-[[data-checked]]:border-kumo-interact has-[[data-checked]]:bg-kumo-tint has-[[data-state=checked]]:border-kumo-interact has-[[data-state=checked]]:bg-kumo-tint',
       controlAtStart && 'flex-row-reverse',
       variant === 'error' &&
         'border-kumo-danger has-[[data-state=checked]]:border-kumo-danger has-[[data-state=checked]]:bg-kumo-base',

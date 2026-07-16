@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
   import Info from 'phosphor-svelte/lib/Info';
   import { cn } from '$lib/utils/cn';
+  import { inputVariants, type KumoInputSize, type KumoInputVariant } from './input-variants';
 
   type Size = 'xs' | 'sm' | 'base' | 'lg';
   type Variant = 'default' | 'error';
@@ -81,8 +82,8 @@
     bind:value
     id={inputId}
     class={cn(
-      'block w-full border-0 bg-kumo-control text-kumo-default ring ring-kumo-line outline-none focus:outline-none',
-      'placeholder:text-kumo-muted disabled:text-kumo-disabled',
+      'block w-full',
+      inputVariants({ size: size as KumoInputSize, variant: normalizedVariant as KumoInputVariant, focusIndicator: true }),
       sizes[size],
       normalizedVariant === 'error'
         ? '!ring-kumo-danger focus:ring-kumo-danger/50 focus:ring-[1.5px]'

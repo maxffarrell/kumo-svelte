@@ -1,8 +1,4 @@
-<script lang="ts">
-  import type { Snippet } from 'svelte';
-  import Info from 'phosphor-svelte/lib/Info';
-  import { Button } from '$lib/components/button';
-  import { Tooltip } from '$lib/components/tooltip';
+<script lang="ts" module>
   import { cn } from '$lib/utils/cn';
 
   export const KUMO_LABEL_VARIANTS = {} as const;
@@ -17,6 +13,13 @@
   export function labelContentVariants() {
     return cn('inline-flex items-center gap-1');
   }
+</script>
+
+<script lang="ts">
+  import type { Snippet } from 'svelte';
+  import Info from 'phosphor-svelte/lib/Info';
+  import { Button } from '$lib/components/button';
+  import { Tooltip } from '$lib/components/tooltip';
 
   interface Props extends KumoLabelVariantsProps {
     children?: Snippet;

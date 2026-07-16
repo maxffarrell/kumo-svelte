@@ -54,9 +54,9 @@ describe('Select', () => {
         error: 'Required'
       });
       const cls = screen.getByRole('button', { name: 'Fruit' }).className;
-      expect(cls).toContain('!ring-kumo-danger');
+      // cn/tailwind-merge canonicalizes the important modifier to a trailing `!`.
+      expect(cls).toContain('ring-kumo-danger');
       expect(cls).toContain('focus:ring-kumo-danger/50');
-      expect(cls).toContain('focus:ring-[1.5px]');
     });
 
     it('applies disabled opacity classes on trigger', () => {

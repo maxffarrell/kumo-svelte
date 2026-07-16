@@ -60,6 +60,7 @@
   }: Props = $props();
 
   let query = $state('');
+  let highlightedIndex = $state(-1);
   let rootElement: HTMLDivElement | null = $state(null);
   const { contains } = createKumoFilter();
 
@@ -132,6 +133,43 @@
     query = '';
     open = false;
     onOpenChange?.(false);
+    highlightedIndex = -1;
+  }
+
+  const selectableItems = $derived(filteredItems.filter((item) => !item.disabled));
+
+  function isHighlighted(item: NormalizedComboboxItem) {
+    const index = selectableItems.findIndex((candidate) => valuesEqual(candidate.value, item.value));
+    return index >= 0 && index === highlightedIndex;
+  }
+
+  function handleListKeydown(event: KeyboardEvent) {
+    if (disabled) return;
+
+    if (!open && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+      event.preventDefault();
+      open = true;
+      onOpenChange?.(true);
+      highlightedIndex = event.key === 'ArrowUp' ? Math.max(selectableItems.length - 1, 0) : 0;
+      return;
+    }
+
+    if (!open || selectableItems.length === 0) return;
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      highlightedIndex = highlightedIndex < selectableItems.length - 1 ? highlightedIndex + 1 : 0;
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      highlightedIndex = highlightedIndex > 0 ? highlightedIndex - 1 : selectableItems.length - 1;
+    } else if (event.key === 'Enter' && highlightedIndex >= 0) {
+      event.preventDefault();
+      const item = selectableItems[highlightedIndex];
+      if (item) select(item);
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      close();
+    }
   }
 
   function remove(itemValue: unknown) {
@@ -206,9 +244,11 @@
       return Boolean(errorMessage);
     },
     isSelected,
+    isHighlighted,
     select,
     remove,
-    labelFor
+    labelFor,
+    handleListKeydown
   });
 </script>
 
@@ -217,6 +257,7 @@
     bind:this={rootElement}
     onfocusout={handleFocusOut}
     class={cn('relative inline-block max-w-full', className)}
+    onkeydown={handleListKeydown}
     {...rest}
   >
     {@render children?.()}

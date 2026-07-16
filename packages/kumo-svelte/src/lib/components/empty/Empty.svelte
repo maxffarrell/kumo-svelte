@@ -103,7 +103,7 @@
       )}
     >
       <span class="text-xs text-kumo-inactive select-none">$</span>
-      <span class="no-scrollbar min-w-0 overflow-x-auto overflow-y-hidden text-base whitespace-nowrap text-kumo-brand">
+      <span class="no-scrollbar overflow-scroll text-base whitespace-nowrap text-kumo-brand">
         {commandLine}
       </span>
       <Button

@@ -2,6 +2,7 @@
   import CaretDown from 'phosphor-svelte/lib/CaretDown';
   import X from 'phosphor-svelte/lib/X';
   import { cn } from '$lib/utils/cn';
+  import { KUMO_COMBOBOX_CLEAR_CLASSES } from './combobox-variants';
   import { embeddedInputStyles, getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
 
   export interface Props {
@@ -57,6 +58,8 @@
   )}
 >
   <input
+    role="combobox"
+    aria-expanded={context.open}
     class={cn(
       inputStyles[resolvedSize],
       'w-full border-0 bg-kumo-control text-kumo-default shadow-xs ring ring-kumo-line outline-none',
@@ -81,13 +84,10 @@
   <button
     type="button"
     aria-label={clearLabel}
+    data-disabled={context.disabled || !hasValue || undefined}
     data-kumo-component="Combobox"
     data-kumo-part="clear"
-    class={cn(
-      'absolute top-1/2 flex -translate-y-1/2 cursor-pointer bg-transparent p-0 text-kumo-default',
-      'disabled:pointer-events-none disabled:opacity-0',
-      clearRight[resolvedSize]
-    )}
+    class={cn(KUMO_COMBOBOX_CLEAR_CLASSES, 'text-kumo-default', clearRight[resolvedSize])}
     disabled={context.disabled || !hasValue}
     onclick={() => (context.value = context.multiple ? [] : null)}
   >

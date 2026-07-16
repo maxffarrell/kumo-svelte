@@ -1,6 +1,5 @@
-<script lang="ts">
+<script lang="ts" module>
   import type { Snippet } from 'svelte';
-  import Label from '$lib/components/label/Label.svelte';
   import { cn } from '$lib/utils/cn';
 
   export type FieldErrorMatch =
@@ -17,12 +16,10 @@
     | 'valid'
     | 'valueMissing';
 
-  type FieldLabel = string | Snippet;
   type FieldText = string | Snippet;
-  type FieldError = string | { message: FieldText; match: FieldErrorMatch };
 
   export function normalizeFieldError(
-    error: FieldError | undefined
+    error: string | { message: FieldText; match: FieldErrorMatch } | undefined
   ): { message: FieldText; match: FieldErrorMatch } | undefined {
     if (!error) return undefined;
     if (typeof error === 'string') return { message: error, match: true };
@@ -48,6 +45,13 @@
       ]
     );
   }
+</script>
+
+<script lang="ts">
+  import Label from '$lib/components/label/Label.svelte';
+
+  type FieldLabel = string | Snippet;
+  type FieldError = string | { message: FieldText; match: FieldErrorMatch };
 
   interface Props extends KumoFieldVariantsProps {
     children?: Snippet;

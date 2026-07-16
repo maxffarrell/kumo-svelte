@@ -1,3 +1,50 @@
+<script module lang="ts">
+  import { cn } from '$lib/utils/cn';
+
+  export const DATE_RANGE_CELL_BACKGROUNDS = {
+    outOfRange: 'bg-transparent',
+    enabled: 'bg-transparent',
+    selectedStart: '!bg-kumo-contrast rounded-tl-[5px] rounded-bl-[5px]',
+    selectedEnd: '!bg-kumo-contrast rounded-tr-[5px] rounded-br-[5px]',
+    selected: 'bg-kumo-interact',
+    selectedOutOfRange: 'bg-kumo-fill'
+  } as const;
+
+  export const KUMO_DATE_RANGE_PICKER_VARIANTS = {
+    size: {
+      sm: { classes: 'p-3 gap-2' },
+      base: { classes: 'p-4 gap-2.5' },
+      lg: { classes: 'p-5 gap-3' }
+    },
+    variant: {
+      default: { classes: 'bg-kumo-overlay' },
+      subtle: { classes: 'bg-kumo-base' }
+    }
+  } as const;
+
+  export const KUMO_DATE_RANGE_PICKER_DEFAULT_VARIANTS = { size: 'base', variant: 'default' } as const;
+  export type KumoDateRangePickerSize = keyof typeof KUMO_DATE_RANGE_PICKER_VARIANTS.size;
+  export type KumoDateRangePickerVariant = keyof typeof KUMO_DATE_RANGE_PICKER_VARIANTS.variant;
+
+  export function dateRangePickerVariants({
+    size = KUMO_DATE_RANGE_PICKER_DEFAULT_VARIANTS.size,
+    variant = KUMO_DATE_RANGE_PICKER_DEFAULT_VARIANTS.variant
+  }: { size?: KumoDateRangePickerSize; variant?: KumoDateRangePickerVariant } = {}) {
+    return cn(
+      'flex w-fit flex-col rounded-xl select-none',
+      KUMO_DATE_RANGE_PICKER_VARIANTS.variant[variant].classes,
+      KUMO_DATE_RANGE_PICKER_VARIANTS.size[size].classes
+    );
+  }
+
+  export function dateRangePickerDayCellClasses(_size: KumoDateRangePickerSize = 'base') {
+    return cn(
+      'data-[selection-start]:!bg-kumo-contrast data-[selection-start]:rounded-tl-[5px]',
+      'data-[selection-end]:!bg-kumo-contrast data-[selection-end]:rounded-tr-[5px]'
+    );
+  }
+</script>
+
 <script lang="ts">
   import type { DateValue } from '@internationalized/date';
   import type { DateRange } from 'bits-ui';
@@ -6,7 +53,6 @@
   import CaretLeft from 'phosphor-svelte/lib/CaretLeft';
   import CaretRight from 'phosphor-svelte/lib/CaretRight';
   import { DateRangePicker as DateRangePickerPrimitive } from 'bits-ui';
-  import { cn } from '$lib/utils/cn';
 
   interface Props {
     value?: DateRange;
@@ -90,6 +136,8 @@
   {numberOfMonths}
   {fixedWeeks}
   {calendarLabel}
+  data-kumo-component="DateRangePicker"
+  data-kumo-part="date-range-picker"
   {...rest}
 >
   <div class={rootClass}>

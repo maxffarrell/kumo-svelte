@@ -36,6 +36,14 @@ describe('InputArea', () => {
       expect(cls).toContain('focus:ring-kumo-focus/50');
     });
 
+    it('supports auto-resizing with a minimum row contract', () => {
+      render(InputArea, { autoResize: true, minRows: 3, maxRows: 6, 'aria-label': 'Message' });
+      const textarea = screen.getByRole('textbox', { name: 'Message' });
+      expect(textarea).toHaveAttribute('rows', '3');
+      expect(textarea.className).toContain('resize-none');
+      expect(textarea.className).toContain('scroll-pb-2');
+    });
+
     it('applies error ring classes when error is set', () => {
       render(InputArea, { 'aria-label': 'Message', error: 'Required' });
       const cls = screen.getByRole('textbox', { name: 'Message' }).className;

@@ -52,16 +52,16 @@
     'flex h-full min-w-0 grow items-center rounded-none border-0 bg-transparent font-sans',
     tokens.inputOuter,
     'text-ellipsis text-kumo-default outline-none',
-    'placeholder:text-kumo-muted disabled:text-kumo-disabled',
+    'kumo-input-placeholder disabled:text-kumo-disabled',
     isIndividual
       ? [
-          'relative ring-0 border border-kumo-line',
+          'relative ring-0 focus:ring-0 border border-kumo-line',
           'first:rounded-l-[inherit] last:rounded-r-[inherit]',
           'not-first:-ml-px',
           'hover:z-1 hover:border-kumo-line',
           'focus:z-2 focus:border-kumo-focus/50'
         ]
-      : 'relative z-[1] ring-0! shadow-none focus:ring-0! focus:outline-none',
+      : 'relative z-1 ring-0! shadow-none focus:ring-0! focus:outline-none',
     className
   )}
   oninput={handleInput}

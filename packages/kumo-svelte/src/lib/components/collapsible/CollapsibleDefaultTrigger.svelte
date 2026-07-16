@@ -15,6 +15,8 @@
 </script>
 
 <CollapsibleTrigger
+  data-kumo-component="Collapsible"
+  data-kumo-part="default-trigger"
   class={cn(
     'group m-0 flex cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-sm text-kumo-link shadow-none select-none',
     className
@@ -23,5 +25,5 @@
   {...rest}
 >
   {@render children?.()}
-  <CaretDown class="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
+  <CaretDown class="h-4 w-4 transition-transform [[data-panel-open]_&]:rotate-180" />
 </CollapsibleTrigger>

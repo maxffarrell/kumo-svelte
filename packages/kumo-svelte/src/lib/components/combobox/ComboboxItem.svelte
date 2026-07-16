@@ -23,6 +23,8 @@
 
 <button
   type="button"
+  role="option"
+  aria-selected={selected}
   disabled={item.disabled}
   data-kumo-component="Combobox"
   data-kumo-part="item"

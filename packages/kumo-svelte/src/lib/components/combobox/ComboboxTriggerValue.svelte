@@ -1,6 +1,7 @@
 <script lang="ts">
   import CaretDown from 'phosphor-svelte/lib/CaretDown';
   import { cn } from '$lib/utils/cn';
+  import { KUMO_COMBOBOX_TRIGGER_VALUE_CLASSES } from './combobox-variants';
   import { getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
 
   export interface Props {
@@ -32,9 +33,14 @@
 
 <button
   type="button"
+  role="combobox"
+  aria-expanded={context.open}
+  data-disabled={context.disabled || undefined}
+  data-placeholder={!displayValue || undefined}
   class={cn(
     inputStyles[resolvedSize],
     'relative flex w-full items-center border-0 bg-kumo-control text-left font-normal text-kumo-default shadow-xs ring ring-kumo-line outline-none',
+    KUMO_COMBOBOX_TRIGGER_VALUE_CLASSES,
     'focus:ring-kumo-focus/50 focus:ring-[1.5px] disabled:cursor-not-allowed disabled:opacity-50',
     !displayValue && 'text-kumo-placeholder',
     iconPadding[resolvedSize],

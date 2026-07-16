@@ -10,7 +10,7 @@ export const KUMO_COMBOBOX_ITEM_CLASSES = cn(
 /** Clear button classes copied verbatim from upstream Kumo TriggerInput. */
 export const KUMO_COMBOBOX_CLEAR_CLASSES = cn(
   'absolute top-1/2 flex -translate-y-1/2 cursor-pointer bg-transparent p-0',
-  'data-[disabled]:pointer-events-none data-[disabled]:opacity-0'
+  'data-[disabled]:pointer-events-none data-[disabled]:opacity-0 disabled:pointer-events-none disabled:opacity-0'
 );
 
 /** TriggerValue trigger classes copied verbatim from upstream Kumo. */

@@ -287,10 +287,10 @@
             isOverflowing ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',
             isSm ? 'text-xs' : 'text-base',
             isSegmented &&
-              'my-0.5 text-kumo-subtle hover:text-kumo-default data-[state=active]:text-kumo-default focus-visible:ring-inset',
+              'my-0.5 text-kumo-subtle hover:text-kumo-default aria-selected:text-kumo-default data-[state=active]:text-kumo-default focus-visible:ring-inset',
             isSegmented && (isSm ? 'px-2 rounded-sm' : 'px-2.5 rounded-md'),
             isUnderline &&
-              'text-kumo-subtle hover:bg-kumo-tint hover:text-kumo-default data-[state=active]:hover:bg-kumo-tint data-[state=active]:font-medium data-[state=active]:text-kumo-default',
+              'text-kumo-subtle hover:bg-kumo-tint hover:text-kumo-default aria-selected:hover:bg-kumo-tint aria-selected:font-medium aria-selected:text-kumo-default data-[state=active]:hover:bg-kumo-tint data-[state=active]:font-medium data-[state=active]:text-kumo-default',
             isUnderline && (isSm ? 'px-1.5 py-2.5' : 'px-2 py-3'),
             tab.className,
             tab.class,
@@ -308,14 +308,15 @@
         aria-hidden="true"
         data-rendered={indicatorRendered}
         class={cn(
-          'absolute z-1 left-0 transition-all duration-200 data-[rendered=false]:scale-90 data-[rendered=false]:opacity-0',
-          isSegmented && cn('bg-kumo-base shadow-sm ring ring-kumo-line', isSm ? 'rounded' : 'rounded-md'),
+          'absolute z-1 left-0 w-(--active-tab-width) translate-x-(--active-tab-left) transition-all duration-200 data-[rendered=false]:scale-90 data-[rendered=false]:opacity-0',
+          isSegmented && cn('top-(--active-tab-top) h-(--active-tab-height) bg-kumo-base shadow-sm ring ring-kumo-line', isSm ? 'rounded' : 'rounded-md'),
           isUnderline && 'bottom-0 h-0.5 bg-kumo-brand',
           indicatorClassName
         )}
-        style:width={`${activeWidth}px`}
-        style:height={isUnderline ? undefined : `${activeHeight}px`}
-        style:transform={`translate(${activeLeft}px, ${isUnderline ? 0 : activeTop}px)`}
+        style:--active-tab-width={`${activeWidth}px`}
+        style:--active-tab-left={`${activeLeft}px`}
+        style:--active-tab-top={`${activeTop}px`}
+        style:--active-tab-height={`${activeHeight}px`}
       ></div>
     </TabsPrimitive.List>
 

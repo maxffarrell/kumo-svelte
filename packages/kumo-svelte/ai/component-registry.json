@@ -1,5 +1,5 @@
 {
-  "version": "0.7.0",
+  "version": "0.8.0",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -776,6 +776,7 @@
         "ring-kumo-brand",
         "ring-kumo-danger",
         "ring-kumo-focus",
+        "ring-kumo-hairline",
         "ring-kumo-line",
         "text-kumo-danger",
         "text-kumo-default",
@@ -2095,11 +2096,9 @@
         "bg-kumo-elevated",
         "bg-kumo-overlay",
         "bg-kumo-warning",
-        "border-kumo-line",
         "ring-kumo-brand",
         "ring-kumo-hairline",
         "text-kumo-default",
-        "text-kumo-placeholder",
         "text-kumo-subtle"
       ],
       "subComponents": {
@@ -3968,6 +3967,7 @@
         "fill-kumo-base",
         "fill-kumo-tip-shadow",
         "fill-kumo-tip-stroke",
+        "ring-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -4512,10 +4512,14 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-elevated",
+        "bg-kumo-hairline",
         "bg-kumo-tint",
+        "border-kumo-line",
         "ring-kumo-brand",
         "ring-kumo-danger",
         "ring-kumo-focus",
+        "ring-kumo-hairline",
         "ring-kumo-line",
         "text-kumo-default",
         "text-kumo-placeholder",

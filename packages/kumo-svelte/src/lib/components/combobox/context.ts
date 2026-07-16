@@ -31,9 +31,11 @@ export type ComboboxContext = {
   get size(): ComboboxSize;
   get invalid(): boolean;
   isSelected(item: NormalizedComboboxItem): boolean;
+  isHighlighted(item: NormalizedComboboxItem): boolean;
   select(item: NormalizedComboboxItem): void;
   remove(item: unknown): void;
   labelFor(value: unknown): string;
+  handleListKeydown(event: KeyboardEvent): void;
 };
 
 export type ComboboxGroupContext = {

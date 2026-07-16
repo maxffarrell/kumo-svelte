@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import SidebarMenuButton from './SidebarMenuButton.svelte';
+import SidebarMenuSubButton from './SidebarMenuSubButton.svelte';
 
 describe('SidebarMenuButton', () => {
   it('wraps itself in a menu item when rendered standalone', () => {
@@ -28,5 +29,14 @@ describe('SidebarMenuButton', () => {
     expect(link.getAttribute('data-active')).toBe('true');
     expect(link.getAttribute('data-size')).toBe('sm');
     expect(link.getAttribute('data-kumo-part')).toBe('menu-button-link');
+  });
+
+  it('forwards target to submenu links', () => {
+    render(SidebarMenuSubButton, { props: { href: '/settings', target: '_blank' } });
+
+    const link = screen.getByRole('link');
+    expect(link).toHaveAttribute('href', '/settings');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link.getAttribute('data-kumo-part')).toBe('menu-sub-button-link');
   });
 });

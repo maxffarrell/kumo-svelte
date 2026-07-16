@@ -1,42 +1,35 @@
+<script module lang="ts">
+  import { cn } from '$lib/utils/cn';
+
+  export const KUMO_CLIPBOARD_TEXT_VARIANTS = {
+    size: {
+      sm: { classes: 'text-xs', buttonSize: 'sm' as const, description: 'Small clipboard text' },
+      base: { classes: 'text-sm', buttonSize: 'base' as const, description: 'Default clipboard text' },
+      lg: { classes: 'text-sm', buttonSize: 'lg' as const, description: 'Large clipboard text' }
+    }
+  } as const;
+
+  export const KUMO_CLIPBOARD_TEXT_DEFAULT_VARIANTS = { size: 'lg' } as const;
+  export type KumoClipboardTextSize = keyof typeof KUMO_CLIPBOARD_TEXT_VARIANTS.size;
+
+  export function clipboardTextVariants({
+    size = KUMO_CLIPBOARD_TEXT_DEFAULT_VARIANTS.size
+  }: { size?: KumoClipboardTextSize } = {}) {
+    return cn(
+      'flex items-center overflow-hidden bg-kumo-base px-0 font-mono',
+      KUMO_CLIPBOARD_TEXT_VARIANTS.size[size].classes
+    );
+  }
+</script>
+
 <script lang="ts">
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
   import { Button } from '$lib/components/button';
   import { Tooltip } from '$lib/components/tooltip';
-  import { cn } from '$lib/utils/cn';
 
-  export const KUMO_CLIPBOARD_TEXT_VARIANTS = {
-    size: {
-      sm: {
-        classes: 'text-xs',
-        buttonSize: 'sm',
-        description: 'Small clipboard text for compact UIs'
-      },
-      base: {
-        classes: 'text-sm',
-        buttonSize: 'base',
-        description: 'Default clipboard text size'
-      },
-      lg: {
-        classes: 'text-sm',
-        buttonSize: 'lg',
-        description: 'Large clipboard text for prominent display'
-      }
-    }
-  } as const;
-
-  export const KUMO_CLIPBOARD_TEXT_DEFAULT_VARIANTS = {
-    size: 'lg'
-  } as const;
-
-  type ClipboardTextSize = keyof typeof KUMO_CLIPBOARD_TEXT_VARIANTS.size;
+  type ClipboardTextSize = KumoClipboardTextSize;
   type TooltipSide = 'top' | 'bottom' | 'left' | 'right';
-
-  const inputSizes = {
-    sm: 'h-6.5 gap-1 rounded-md px-2',
-    base: 'h-9 gap-1.5 rounded-lg px-3',
-    lg: 'h-10 gap-2 rounded-lg px-4'
-  } as const;
 
   const clipboardTextAnimations = {
     initial: 'pointer-events-none absolute inset-0 flex translate-y-full items-center justify-center opacity-0',
@@ -83,15 +76,6 @@
   const tooltipSide = $derived(tooltip?.side ?? 'top');
   const copyAction = $derived(labels.copyAction ?? 'Copy to clipboard');
   const displayText = $derived(text ?? value ?? '');
-
-  export function clipboardTextVariants({ size = KUMO_CLIPBOARD_TEXT_DEFAULT_VARIANTS.size }: { size?: ClipboardTextSize } = {}) {
-    const resolvedSize = KUMO_CLIPBOARD_TEXT_VARIANTS.size[size] ?? KUMO_CLIPBOARD_TEXT_VARIANTS.size.lg;
-
-    return cn(
-      'flex items-center overflow-hidden bg-kumo-base px-0 font-mono',
-      resolvedSize.classes
-    );
-  }
 
   async function writeClipboard(value: string) {
     if (
@@ -177,10 +161,14 @@
 <div
   class={cn(
     'border-0 text-kumo-default ring ring-kumo-line outline-none focus:outline-none',
-    inputSizes[size],
+    'kumo-input-placeholder',
+    KUMO_CLIPBOARD_TEXT_VARIANTS.size[size].buttonSize === 'sm' && 'h-6.5 gap-1 rounded-md px-2 text-xs',
+    KUMO_CLIPBOARD_TEXT_VARIANTS.size[size].buttonSize === 'base' && 'h-9 gap-1.5 rounded-lg px-3 text-base',
+    KUMO_CLIPBOARD_TEXT_VARIANTS.size[size].buttonSize === 'lg' && 'h-10 gap-2 rounded-lg px-4 text-base',
     clipboardTextVariants({ size }),
     className
   )}
+  data-kumo-component="ClipboardText"
   {...rest}
 >
   <span class="grow truncate ps-4 pe-2">{displayText}</span>

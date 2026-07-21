@@ -30,6 +30,7 @@ export type AutocompleteContext = {
   resetInputInteraction(): void;
   isSelected(item: NormalizedAutocompleteItem): boolean;
   select(item: NormalizedAutocompleteItem): void;
+  serializeValue(value: unknown): string;
 };
 
 export type AutocompleteGroupContext = {

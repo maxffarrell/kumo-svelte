@@ -12,6 +12,7 @@
     type NormalizedAutocompleteItem
   } from './context';
   import { createKumoFilter } from '../filter';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   type FieldError = string | { message?: string; match?: boolean };
 
@@ -22,6 +23,7 @@
     value?: AutocompleteValue;
     defaultValue?: AutocompleteValue;
     open?: boolean;
+    disabled?: boolean;
     size?: AutocompleteSize;
     label?: string | Snippet;
     labelTooltip?: string | Snippet;
@@ -41,6 +43,7 @@
     defaultValue,
     value = $bindable(defaultValue ?? ''),
     open = $bindable(false),
+    disabled = false,
     size = 'base',
     label,
     labelTooltip,
@@ -71,6 +74,62 @@
       if (filter) return filter(item.raw, query);
       return contains(item.label, term) || contains(String(item.value), term);
     });
+  });
+
+  const serializedOptions = $derived(
+    normalizedItems.map((item, index) => ({
+      ...item,
+      serializedValue: `kumo-autocomplete:${index}`
+    }))
+  );
+
+  function serializeSelectedValue(selectionValue: unknown) {
+    const option = serializedOptions.find((entry) => valuesEqual(entry.value, selectionValue as AutocompleteValue));
+    if (option) return option.serializedValue;
+    return typeof selectionValue === 'string' || typeof selectionValue === 'number' ? String(selectionValue) : undefined;
+  }
+
+  function deserializePrimitiveValue(primitiveValue: string) {
+    const option = serializedOptions.find((entry) => entry.serializedValue === primitiveValue);
+    return option ? option.value : primitiveValue;
+  }
+
+  const primitiveValue = $derived.by(() => {
+    if (Array.isArray(value)) {
+      return value.map(serializeSelectedValue).filter((v): v is string => v !== undefined);
+    }
+    const val = serializeSelectedValue(value);
+    return val !== undefined ? val : '';
+  });
+
+  function handleSingleValueChange(nextValue: string | undefined) {
+    if (nextValue === undefined) return;
+    const deserialized = deserializePrimitiveValue(nextValue);
+    value = deserialized;
+    const option = serializedOptions.find((entry) => entry.serializedValue === nextValue);
+    if (option) {
+      query = option.label;
+    }
+    open = false;
+    onValueChange?.(deserialized);
+    onOpenChange?.(false);
+  }
+
+  function handleMultipleValueChange(nextValue: string[]) {
+    const deserialized = nextValue.map(deserializePrimitiveValue).map(String);
+    value = deserialized;
+    onValueChange?.(deserialized);
+  }
+
+  $effect(() => {
+    if (!open) {
+      if (Array.isArray(value)) {
+        query = value.join(', ');
+      } else {
+        const option = serializedOptions.find((entry) => entry.value === value);
+        query = option ? option.label : String(value ?? '');
+      }
+    }
   });
 
   function valuesEqual(itemValue: string | number, selectedValue: AutocompleteValue) {
@@ -151,13 +210,39 @@
       onOpenChange?.(false);
     },
     isSelected,
-    select
+    select,
+    serializeValue(itemValue: unknown): string {
+      const option = serializedOptions.find((entry) => entry.value === itemValue);
+      return option?.serializedValue ?? String(itemValue ?? '');
+    }
   });
 </script>
 
 {#snippet control()}
   <div bind:this={rootElement} class={cn('relative w-full', className)} {...rest}>
-    {@render children?.()}
+    {#if Array.isArray(value)}
+      <ComboboxPrimitive.Root
+        type="multiple"
+        value={Array.isArray(primitiveValue) ? primitiveValue : []}
+        onValueChange={handleMultipleValueChange}
+        bind:open={open}
+        disabled={disabled}
+        inputValue={query}
+      >
+        {@render children?.()}
+      </ComboboxPrimitive.Root>
+    {:else}
+      <ComboboxPrimitive.Root
+        type="single"
+        value={Array.isArray(primitiveValue) ? (primitiveValue[0] ?? '') : primitiveValue}
+        onValueChange={handleSingleValueChange}
+        bind:open={open}
+        disabled={disabled}
+        inputValue={query}
+      >
+        {@render children?.()}
+      </ComboboxPrimitive.Root>
+    {/if}
   </div>
 {/snippet}
 

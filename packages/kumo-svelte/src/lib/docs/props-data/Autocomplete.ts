@@ -79,6 +79,26 @@ const rows: PropRow[] = [
     "type": "(open: boolean) => void",
     "required": false,
     "description": "Called when open state changes."
+  },
+  {
+    "prop": "disabled",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Prevents interaction with the field."
+  },
+  {
+    "prop": "size",
+    "type": "'xs' | 'sm' | 'base' | 'lg'",
+    "required": false,
+    "default": "\"base\"",
+    "description": "Size preset."
+  },
+  {
+    "prop": "filter",
+    "type": "((item: AutocompleteItem, query: string) => boolean) | null",
+    "required": false,
+    "description": "Custom filter function. Set to null to disable filtering."
   }
 ];
 

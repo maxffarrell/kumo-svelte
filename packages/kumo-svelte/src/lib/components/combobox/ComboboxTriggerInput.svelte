@@ -3,6 +3,7 @@
   import X from 'phosphor-svelte/lib/X';
   import { cn } from '$lib/utils/cn';
   import { embeddedInputStyles, getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {
     class?: string;
@@ -24,7 +25,6 @@
 
   const context = getComboboxContext('Combobox.TriggerInput');
   const resolvedSize = $derived(size ?? context.size);
-  const displayValue = $derived(context.open || context.multiple ? context.query : context.labelFor(context.value));
   const hasValue = $derived(context.multiple ? Array.isArray(context.value) && context.value.length > 0 : Boolean(context.value));
 
   const iconPadding: Record<ComboboxSize, string> = {
@@ -56,7 +56,7 @@
     className
   )}
 >
-  <input
+  <ComboboxPrimitive.Input
     class={cn(
       inputStyles[resolvedSize],
       'w-full border-0 bg-kumo-control text-kumo-default shadow-xs ring ring-kumo-line outline-none',
@@ -66,15 +66,8 @@
         : 'focus:ring-kumo-focus/50 focus:ring-[1.5px]',
       iconPadding[resolvedSize]
     )}
-    value={displayValue}
     {placeholder}
-    disabled={context.disabled}
     aria-invalid={context.invalid || undefined}
-    oninput={(event) => {
-      context.query = (event.currentTarget as HTMLInputElement).value;
-      context.open = true;
-    }}
-    onfocus={() => (context.open = true)}
     {...rest}
   />
 
@@ -89,13 +82,15 @@
       clearRight[resolvedSize]
     )}
     disabled={context.disabled || !hasValue}
-    onclick={() => (context.value = context.multiple ? [] : null)}
+    onclick={() => {
+      context.value = context.multiple ? [] : null;
+      context.query = '';
+    }}
   >
     <X size={iconSizes[resolvedSize]} />
   </button>
 
-  <button
-    type="button"
+  <ComboboxPrimitive.Trigger
     aria-label={showOptionsLabel}
     data-kumo-component="Combobox"
     data-kumo-part="trigger"
@@ -104,8 +99,7 @@
       caretRight[resolvedSize]
     )}
     disabled={context.disabled}
-    onclick={() => (context.open = !context.open)}
   >
     <CaretDown size={iconSizes[resolvedSize]} class="fill-current" />
-  </button>
+  </ComboboxPrimitive.Trigger>
 </div>

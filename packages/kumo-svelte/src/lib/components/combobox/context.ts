@@ -34,6 +34,7 @@ export type ComboboxContext = {
   select(item: NormalizedComboboxItem): void;
   remove(item: unknown): void;
   labelFor(value: unknown): string;
+  serializeValue(value: unknown): string;
 };
 
 export type ComboboxGroupContext = {

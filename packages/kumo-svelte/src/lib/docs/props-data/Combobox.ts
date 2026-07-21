@@ -80,6 +80,31 @@ const rows: PropRow[] = [
     "type": "(open: boolean) => void",
     "required": false,
     "description": "Called when open state changes."
+  },
+  {
+    "prop": "disabled",
+    "type": "boolean",
+    "required": false,
+    "default": "false",
+    "description": "Prevents interaction with the field."
+  },
+  {
+    "prop": "defaultValue",
+    "type": "unknown",
+    "required": false,
+    "description": "Initial value."
+  },
+  {
+    "prop": "filter",
+    "type": "((item: ComboboxItem, query: string) => boolean) | null",
+    "required": false,
+    "description": "Custom filter function. Set to null to disable filtering."
+  },
+  {
+    "prop": "isItemEqualToValue",
+    "type": "(item: unknown, value: unknown) => boolean",
+    "required": false,
+    "description": "Custom value equality matcher function."
   }
 ];
 

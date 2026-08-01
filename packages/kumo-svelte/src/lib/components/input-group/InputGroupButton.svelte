@@ -63,6 +63,7 @@
   title={tooltip}
   class={cn(
     'pointer-events-auto',
+    'shadow-xs',
     isIndividual && [
       'relative h-full! rounded-none ring-0 border border-kumo-line',
       'first:rounded-l-[inherit] last:rounded-r-[inherit]',

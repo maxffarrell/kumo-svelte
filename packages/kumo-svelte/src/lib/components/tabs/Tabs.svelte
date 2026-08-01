@@ -69,6 +69,7 @@
     listClass?: string;
     triggerClass?: string;
     contentClass?: string;
+    labels?: { scrollStart?: string; scrollEnd?: string };
     [key: string]: unknown;
   }
 
@@ -88,11 +89,14 @@
     listClass,
     triggerClass,
     contentClass,
+    labels = {},
     ...rest
   }: Props = $props();
 
   let listEl: HTMLDivElement | null = $state(null);
   let isOverflowing = $state(false);
+  let canScrollStart = $state(false);
+  let canScrollEnd = $state(false);
   let activeLeft = $state(0);
   let activeTop = $state(0);
   let activeWidth = $state(0);
@@ -112,11 +116,17 @@
   }
 
   function updateOverflow() {
-    if (!listEl || !isSegmented) {
+    if (!listEl) {
       isOverflowing = false;
+      canScrollStart = false;
+      canScrollEnd = false;
       return;
     }
-    isOverflowing = listEl.scrollWidth > listEl.clientWidth;
+    const maxScrollLeft = Math.max(0, listEl.scrollWidth - listEl.clientWidth);
+    const scrollLeft = Math.min(Math.max(0, listEl.scrollLeft), maxScrollLeft);
+    isOverflowing = maxScrollLeft > 1;
+    canScrollStart = scrollLeft > 1;
+    canScrollEnd = maxScrollLeft - scrollLeft > 1;
   }
 
   function updateIndicator() {
@@ -210,6 +220,18 @@
     });
   }
 
+  function scrollTabs(direction: 'start' | 'end') {
+    if (!listEl) return;
+    const tabs = Array.from(listEl.querySelectorAll<HTMLElement>('[data-kumo-part="tab"]'));
+    let distance = 0;
+    for (const tab of tabs) {
+      if (distance + tab.offsetWidth > listEl.clientWidth) break;
+      distance += tab.offsetWidth;
+    }
+    const amount = distance || listEl.clientWidth;
+    listEl.scrollBy({ left: direction === 'start' ? -amount : amount, behavior: 'smooth' });
+  }
+
   $effect(() => {
     if (normalizedItems.length === 0) return;
     value ??= selectedValue ?? normalizedItems[0]?.value;
@@ -263,6 +285,7 @@
       onpointerupcapture={endDrag}
       onpointercancelcapture={endDrag}
       onclickcapture={handleClickCapture}
+      onscroll={updateOverflow}
       class={cn(
         'relative flex min-w-0 shrink items-stretch',
         isSegmented &&
@@ -318,6 +341,33 @@
         style:transform={`translate(${activeLeft}px, ${isUnderline ? 0 : activeTop}px)`}
       ></div>
     </TabsPrimitive.List>
+
+    {#each [
+      { side: 'start', visible: canScrollStart, label: labels.scrollStart ?? 'Scroll tabs left' },
+      { side: 'end', visible: canScrollEnd, label: labels.scrollEnd ?? 'Scroll tabs right' }
+    ] as control}
+      <button
+        type="button"
+        aria-label={control.label}
+        aria-hidden={!control.visible}
+        tabindex={control.visible ? 0 : -1}
+        onclick={() => scrollTabs(control.side as 'start' | 'end')}
+        class={cn(
+          'absolute inset-y-0 z-3 flex items-center border-0 p-0 transition-opacity duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-kumo-brand',
+          control.side === 'start' ? 'left-0 justify-start bg-linear-to-r' : 'right-0 justify-end bg-linear-to-l',
+          control.visible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+          isSegmented ? 'from-kumo-recessed via-kumo-recessed/95 to-transparent' : 'from-kumo-base via-kumo-base/95 to-transparent',
+          isSegmented && (isSm ? 'w-8 rounded-md' : 'w-10 rounded-lg'),
+          !isSegmented && 'w-8'
+        )}
+      >
+        <span class={cn('flex items-center justify-center rounded-full bg-kumo-elevated text-kumo-subtle shadow-sm ring ring-kumo-line transition-colors hover:bg-kumo-base hover:text-kumo-default', isSm ? 'size-5' : 'size-6', control.side === 'start' ? 'ml-1' : 'mr-1')}>
+          <svg viewBox="0 0 16 16" fill="none" class="size-3.5" aria-hidden="true">
+            <path d={control.side === 'start' ? 'M9.25 4.25L5.75 8L9.25 11.75' : 'M6.75 4.25L10.25 8L6.75 11.75'} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+        </span>
+      </button>
+    {/each}
 
     {#each normalizedItems as tab (tab.value)}
       {#if tab.content}

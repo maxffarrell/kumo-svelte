@@ -112,6 +112,12 @@
   let activeMarkerKey: string | null = $state(null);
   const effectiveDarkMode = $derived(isDarkMode ?? detectedDarkMode);
 
+  function closeTooltip() {
+    activeMarkerKey = null;
+    markerHover = false;
+    tooltipState = null;
+  }
+
   onMount(() => {
     const updateDetectedDarkMode = () => {
       detectedDarkMode =
@@ -213,6 +219,8 @@
     return limitTooltipRows(getAllTooltipRowsAtTimestamp(seriesData, ts, selected), max);
   };
   const markerColor = $derived(ChartPalette.text('primary', effectiveDarkMode));
+  const axisTextColor = $derived(ChartPalette.text('primary', effectiveDarkMode));
+  const gridLineColor = $derived(colorWithOpacity(axisTextColor, 0.2));
   const markerLabelBackgroundColor = $derived(effectiveDarkMode ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)');
 
   let options = $derived.by(() => {
@@ -315,20 +323,25 @@
         name: xAxisName,
         nameLocation: 'middle',
         nameGap: 30,
+        nameTextStyle: { color: axisTextColor },
         type: 'time',
         splitLine: { show: false },
         axisLine: { show: false },
         splitNumber: xAxisTickCount ?? 5,
-        ...(xAxisTickFormat && { axisLabel: { formatter: (value: number) => xAxisTickFormat(value) } })
+        axisLabel: {
+          color: axisTextColor,
+          ...(xAxisTickFormat && { formatter: (value: number) => xAxisTickFormat(value) })
+        }
       },
       yAxis: {
         name: yAxisName,
         nameLocation: 'middle',
         nameGap: 40,
+        nameTextStyle: { color: axisTextColor },
         type: 'value',
         axisTick: { show: true },
-        axisLabel: { margin: 15, ...(yAxisTickFormat && { formatter: (value: number) => yAxisTickFormat(value) }) },
-        splitLine: { show: true, lineStyle: { type: 'dashed', width: 1 } },
+        axisLabel: { margin: 15, color: axisTextColor, ...(yAxisTickFormat && { formatter: (value: number) => yAxisTickFormat(value) }) },
+        splitLine: { show: true, lineStyle: { type: 'dashed', width: 1, color: gridLineColor } },
         splitNumber: yAxisTickCount,
         ...(thresholdExtent && {
           min: (value: { min: number }) => Math.min(value.min, thresholdExtent.min),
@@ -391,14 +404,10 @@
       },
       mouseout: (params: any) => {
         if (!getTimeseriesMarkerFromEvent(params)) return;
-        activeMarkerKey = null;
-        markerHover = false;
-        tooltipState = null;
+        closeTooltip();
       },
       globalout: () => {
-        activeMarkerKey = null;
-        markerHover = false;
-        tooltipState = null;
+        closeTooltip();
       },
       legendselectchanged: (params: { selected?: Record<string, boolean> }) => {
         legendSelected = params.selected ?? null;
@@ -430,6 +439,7 @@
 
   $effect(() => {
     if (chartRef && onTimeRangeChange && !loading) {
+      options;
       chartRef.dispatchAction({
         type: 'takeGlobalCursor',
         key: 'brush',
@@ -443,6 +453,21 @@
         });
       };
     }
+  });
+
+  $effect(() => {
+    if (!tooltipState || typeof window === 'undefined') return;
+
+    const closeWhenOutsideChart = (event: MouseEvent) => {
+      const rect = containerRef?.getBoundingClientRect();
+      if (!rect) return;
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) {
+        closeTooltip();
+      }
+    };
+
+    window.addEventListener('mousemove', closeWhenOutsideChart);
+    return () => window.removeEventListener('mousemove', closeWhenOutsideChart);
   });
 
   function updateMousePosition(event: MouseEvent) {
@@ -462,7 +487,7 @@
   });
 </script>
 
-<div bind:this={containerRef} class="relative w-full" style:height={`${height}px`} role="presentation" onmousemove={updateMousePosition}>
+<div bind:this={containerRef} class="relative w-full" style:height={`${height}px`} role="presentation" aria-busy={loading || undefined} onmousemove={updateMousePosition}>
   {#if loading}
     {@const mid = height / 2}
     {@const amp = Math.min(height * 0.12, 28)}
@@ -472,7 +497,7 @@
       const y = mid + Math.sin((i / 120) * 2 * Math.PI * 3) * amp;
       return `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`;
     }).join(' ')}
-    <div aria-hidden="true" class="absolute inset-0 overflow-hidden" style:height={`${height}px`}>
+    <div role="status" aria-label="Loading chart" class="absolute inset-0 overflow-hidden" style:height={`${height}px`}>
       <svg width="100%" height={height} viewBox={`0 0 ${period} ${height}`} preserveAspectRatio="none" class="w-full animate-pulse">
         <path
           d={wavePath}

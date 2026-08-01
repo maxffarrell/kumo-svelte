@@ -1,7 +1,7 @@
 export { Autocomplete } from "./components/autocomplete";
 export { Badge, KUMO_BADGE_BASE_STYLES } from "./components/badge";
 export type { BadgeVariant } from "./components/badge";
-export { Banner } from "./components/banner";
+export { Banner, BannerAction } from "./components/banner";
 export { Breadcrumbs } from "./components/breadcrumbs";
 export type { BreadcrumbsItem } from "./components/breadcrumbs";
 export { Button, LinkButton, RefreshButton } from "./components/button";
@@ -190,7 +190,14 @@ export type {
   KumoTableRowVariant,
   KumoTableStickyColumn,
 } from "./components/table";
-export { TableOfContents } from "./components/table-of-contents";
+export {
+  TableOfContents,
+  useTableOfContentsActiveId,
+} from "./components/table-of-contents";
+export type {
+  UseTableOfContentsActiveIdOptions,
+  UseTableOfContentsActiveIdResult,
+} from "./components/table-of-contents";
 export { Tabs } from "./components/tabs";
 export type { TabsItem } from "./components/tabs";
 export { Text } from "./components/text";

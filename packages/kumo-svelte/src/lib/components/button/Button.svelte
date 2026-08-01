@@ -2,7 +2,7 @@
   import type { Component, Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import { Loader } from '$lib/components/loader';
-  import { Tooltip } from '$lib/components/tooltip';
+  import { Tooltip, TooltipProvider } from '$lib/components/tooltip';
 
   export const KUMO_BUTTON_VARIANTS = {
     shape: {
@@ -141,6 +141,8 @@
     loading = false,
     title,
     componentName = 'Button',
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledby,
     ...rest
   }: Props = $props();
 
@@ -168,24 +170,33 @@
     emphasisToken ? `color-mix(in oklch, ${emphasisToken}, white 15%)` : undefined
   );
   const emphasisGradientEnd = $derived(emphasisToken);
+  const titleLabel = $derived(title && title.trim() ? title : undefined);
+  const resolvedAriaLabel = $derived(
+    ariaLabel ?? (!children && !ariaLabelledby ? titleLabel : undefined)
+  );
+  const rendersAsButton = $derived(!href || disabled || loading);
+  const renderedExternalProps = $derived(rendersAsButton ? {} : externalProps);
 </script>
 
-{#snippet buttonElement()}
+{#snippet buttonElement(triggerProps: Record<string, unknown> = {})}
   <svelte:element
-    this={href ? 'a' : 'button'}
+    this={rendersAsButton ? 'button' : 'a'}
     class={classes}
-    href={href}
-    type={href ? undefined : type}
-    disabled={href ? undefined : disabled || loading}
+    href={rendersAsButton ? undefined : href}
+    type={rendersAsButton ? type : undefined}
+    disabled={rendersAsButton ? disabled || loading : undefined}
     aria-busy={loading || undefined}
     data-kumo-component={componentName}
-    data-kumo-part={href ? 'link-button' : 'button'}
+    data-kumo-part={rendersAsButton ? 'button' : 'link-button'}
+    aria-label={resolvedAriaLabel}
+    aria-labelledby={ariaLabelledby}
     style:--kumo-button-emphasis-ring={emphasisRing}
     style:--kumo-button-emphasis-bg={emphasisBg}
     style:--kumo-button-emphasis-gradient-start={emphasisGradientStart}
     style:--kumo-button-emphasis-gradient-end={emphasisGradientEnd}
-    {...externalProps}
     {...rest}
+    {...renderedExternalProps}
+    {...triggerProps}
   >
     {#if emphasisToken}
       <span
@@ -216,7 +227,18 @@
 {/snippet}
 
 {#if title}
-  <Tooltip trigger={buttonElement}>{title}</Tooltip>
+  <TooltipProvider>
+    {#if rendersAsButton && (href || disabled || loading)}
+      {#snippet disabledTrigger(triggerProps: Record<string, unknown>)}
+        <span {...triggerProps} class="inline-flex">
+          {@render buttonElement({})}
+        </span>
+      {/snippet}
+      <Tooltip trigger={disabledTrigger}>{title}</Tooltip>
+    {:else}
+      <Tooltip trigger={buttonElement}>{title}</Tooltip>
+    {/if}
+  </TooltipProvider>
 {:else}
-  {@render buttonElement()}
+  {@render buttonElement({})}
 {/if}

@@ -90,7 +90,6 @@
     class={cn(
       'relative w-full cursor-text text-kumo-default',
       sizes[size],
-      'shadow-xs',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       focusMode === 'container'
         ? [

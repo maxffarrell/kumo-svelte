@@ -92,6 +92,27 @@
       KUMO_BANNER_VARIANTS.variant[KUMO_BANNER_DEFAULT_VARIANTS.variant]
   );
   const classes = $derived(cn(bannerVariants({ variant, size }), className));
+  let actionElement = $state<HTMLSpanElement>();
+  let actionIsInlineLink = $state(false);
+  let observedAction = $state<Snippet>();
+
+  $effect(() => {
+    if (action !== observedAction) {
+      observedAction = action;
+      actionIsInlineLink = false;
+    }
+  });
+
+  $effect(() => {
+    if (size !== 'sm') {
+      actionIsInlineLink = false;
+      return;
+    }
+    if (!actionElement) return;
+
+    actionIsInlineLink = Boolean(actionElement.querySelector('[data-kumo-component="Link"]'));
+  });
+
   setBannerActionContext({
     get variant() {
       return variant;
@@ -112,10 +133,28 @@
     <div class={cn('flex min-w-0 flex-1 items-center justify-between', size === 'sm' ? 'gap-2' : 'gap-3', !title && 'pt-px')}>
       {#if size === 'sm'}
         <div class="flex min-w-0 flex-wrap items-baseline gap-x-1.5">
-          {#if title}<span class="font-medium leading-snug">{title}</span>{/if}
+          {#if title}
+            <span class="font-medium leading-snug">
+              {title}
+              {#if action && actionIsInlineLink && !description}
+                <span class="banner-compact-action ml-1.5 contents">{@render action()}</span>
+              {/if}
+            </span>
+          {/if}
           {#if description}
             <span class="text-sm leading-snug">
               {#if typeof description === 'function'}{@render description()}{:else}{description}{/if}
+              {#if action && actionIsInlineLink}
+                <span class="banner-compact-action ml-1.5 contents">{@render action()}</span>
+              {/if}
+            </span>
+          {/if}
+          {#if action && !actionIsInlineLink}
+            <span
+              bind:this={actionElement}
+              class="banner-compact-action ml-auto flex shrink-0 items-center gap-2"
+            >
+              {@render action()}
             </span>
           {/if}
         </div>
@@ -129,7 +168,7 @@
           {/if}
         </div>
       {/if}
-      {#if action}<div class="flex shrink-0 items-center gap-2">{@render action()}</div>{/if}
+      {#if action && size !== 'sm'}<div class="flex shrink-0 items-center gap-2">{@render action()}</div>{/if}
     </div>
   {:else}
     {#if IconComponent}
@@ -144,3 +183,9 @@
     {/if}
   {/if}
 </div>
+
+<style>
+  :global(.banner-compact-action > [data-kumo-component='Link']) {
+    margin-left: 0.375rem;
+  }
+</style>

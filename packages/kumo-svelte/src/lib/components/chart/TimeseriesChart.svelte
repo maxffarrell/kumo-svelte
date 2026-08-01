@@ -112,6 +112,65 @@
   let activeMarkerKey: string | null = $state(null);
   const effectiveDarkMode = $derived(isDarkMode ?? detectedDarkMode);
 
+  const CHART_LOADER_WIDTH = 400;
+  const CHART_LOADER_SAMPLES = 80;
+  const CHART_LOADER_BARS = 24;
+
+  function chartLoaderWave(theta: number) {
+    return (
+      0.45 * Math.sin(3 * theta) +
+      0.3 * Math.sin(5 * theta + 0.9) +
+      0.25 * Math.sin(7 * theta + 2.1)
+    );
+  }
+
+  function chartLoaderLinePath(chartHeight: number) {
+    const mid = chartHeight / 2;
+    const amplitude = Math.min(chartHeight * 0.18, 40);
+    return Array.from({ length: CHART_LOADER_SAMPLES + 1 }, (_, index) => {
+      const x = (index / CHART_LOADER_SAMPLES) * CHART_LOADER_WIDTH;
+      const theta = (x / CHART_LOADER_WIDTH) * 2 * Math.PI;
+      const y = mid - chartLoaderWave(theta) * amplitude;
+      return `${index === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`;
+    }).join(' ');
+  }
+
+  function chartLoaderBars(chartHeight: number) {
+    const slot = CHART_LOADER_WIDTH / CHART_LOADER_BARS;
+    const barWidth = slot * 0.65;
+    const minHeight = chartHeight * 0.15;
+    const maxHeight = chartHeight * 0.85;
+
+    return Array.from({ length: CHART_LOADER_BARS }, (_, index) => {
+      const theta = ((index + 0.5) / CHART_LOADER_BARS) * 2 * Math.PI;
+      const normalized = (chartLoaderWave(theta) + 1) / 2;
+      const barHeight = minHeight + normalized * (maxHeight - minHeight);
+      return {
+        x: index * slot + (slot - barWidth) / 2,
+        y: chartHeight - barHeight,
+        width: barWidth,
+        height: barHeight
+      };
+    });
+  }
+
+  let chartLoaderId = $state('kumo-chart-loader');
+  onMount(() => {
+    chartLoaderId = `kumo-chart-loader-${
+      typeof crypto !== 'undefined' && 'randomUUID' in crypto
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`
+    }`;
+  });
+
+  const chartLoaderLine = $derived(chartLoaderLinePath(height));
+  const chartLoaderArea = $derived(`${chartLoaderLine} L${CHART_LOADER_WIDTH},${height} L0,${height} Z`);
+  const chartLoaderBarsData = $derived(chartLoaderBars(height));
+  const chartLoaderColor = $derived(ChartPalette.semantic('Skeleton', effectiveDarkMode));
+  const chartLoaderFillId = $derived(`${chartLoaderId}-fill`);
+  const chartLoaderShineId = $derived(`${chartLoaderId}-shine`);
+  const chartLoaderClipId = $derived(`${chartLoaderId}-clip`);
+
   function closeTooltip() {
     activeMarkerKey = null;
     markerHover = false;
@@ -489,24 +548,41 @@
 
 <div bind:this={containerRef} class="relative w-full" style:height={`${height}px`} role="presentation" aria-busy={loading || undefined} onmousemove={updateMousePosition}>
   {#if loading}
-    {@const mid = height / 2}
-    {@const amp = Math.min(height * 0.12, 28)}
-    {@const period = 400}
-    {@const wavePath = Array.from({ length: 121 }, (_, i) => {
-      const x = -period + (i / 120) * period * 3;
-      const y = mid + Math.sin((i / 120) * 2 * Math.PI * 3) * amp;
-      return `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`;
-    }).join(' ')}
     <div role="status" aria-label="Loading chart" class="absolute inset-0 overflow-hidden" style:height={`${height}px`}>
-      <svg width="100%" height={height} viewBox={`0 0 ${period} ${height}`} preserveAspectRatio="none" class="w-full animate-pulse">
-        <path
-          d={wavePath}
-          fill="none"
-          stroke={effectiveDarkMode ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.2)'}
-          stroke-width="2"
-          style:animation="kumo-chart-wave 2.4s linear infinite"
-          style:transform-origin="0 0"
-        ></path>
+      <svg width="100%" height={height} viewBox={`0 0 ${CHART_LOADER_WIDTH} ${height}`} preserveAspectRatio="none" class="block w-full">
+        <defs>
+          <linearGradient id={chartLoaderFillId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color={chartLoaderColor} stop-opacity={effectiveDarkMode ? 0.07 : 0.1}></stop>
+            <stop offset="100%" stop-color={chartLoaderColor} stop-opacity="0"></stop>
+          </linearGradient>
+          <linearGradient id={chartLoaderShineId} x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color={chartLoaderColor} stop-opacity="0"></stop>
+            <stop offset="50%" stop-color={chartLoaderColor} stop-opacity={effectiveDarkMode ? 0.16 : 0.24}></stop>
+            <stop offset="100%" stop-color={chartLoaderColor} stop-opacity="0"></stop>
+          </linearGradient>
+          <clipPath id={chartLoaderClipId}>
+            {#if type === 'bar'}
+              {#each chartLoaderBarsData as bar}
+                <rect x={bar.x} y={bar.y} width={bar.width} height={bar.height}></rect>
+              {/each}
+            {:else}
+              <path d={chartLoaderArea}></path>
+            {/if}
+          </clipPath>
+        </defs>
+
+        {#if type === 'bar'}
+          {#each chartLoaderBarsData as bar}
+            <rect x={bar.x} y={bar.y} width={bar.width} height={bar.height} fill={chartLoaderColor} fill-opacity={effectiveDarkMode ? 0.12 : 0.16}></rect>
+          {/each}
+        {:else}
+          <path d={chartLoaderArea} fill={`url(#${chartLoaderFillId})`}></path>
+          <path d={chartLoaderLine} fill="none" stroke={chartLoaderColor} stroke-opacity={effectiveDarkMode ? 0.36 : 0.6} stroke-width="1" vector-effect="non-scaling-stroke"></path>
+        {/if}
+
+        <g clip-path={`url(#${chartLoaderClipId})`}>
+          <rect class="kumo-chart-shimmer" x="0" y="0" width={CHART_LOADER_WIDTH} height={height} fill={`url(#${chartLoaderShineId})`}></rect>
+        </g>
       </svg>
     </div>
   {:else}
@@ -518,7 +594,7 @@
     <TooltipPrimitive.Root open={true} delayDuration={0} disableHoverableContent>
       <TooltipPrimitive.Portal>
         <TooltipPrimitive.Content
-          class="pointer-events-none z-50 min-w-[150px] max-w-[280px] rounded-lg bg-kumo-base p-2 text-kumo-default shadow-lg shadow-kumo-tip-shadow outline outline-1 outline-kumo-fill"
+          class="pointer-events-none z-50 min-w-[150px] max-w-[280px] rounded-lg bg-kumo-base p-2 text-kumo-default shadow-lg shadow-kumo-tip-shadow outline-1 outline-kumo-fill"
           customAnchor={tooltipAnchor}
           side="right"
           align="start"

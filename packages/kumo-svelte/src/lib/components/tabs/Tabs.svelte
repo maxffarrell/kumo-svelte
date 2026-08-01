@@ -38,6 +38,11 @@
   export type TabsVariant = (typeof KUMO_TABS_VARIANTS.variant)[number];
   export type TabsSize = (typeof KUMO_TABS_VARIANTS.size)[number];
 
+  export interface TabsLabels {
+    scrollStart?: string;
+    scrollEnd?: string;
+  }
+
   export type TabsItem = {
     value: string;
     label: string | Snippet;
@@ -69,7 +74,7 @@
     listClass?: string;
     triggerClass?: string;
     contentClass?: string;
-    labels?: { scrollStart?: string; scrollEnd?: string };
+    labels?: TabsLabels;
     [key: string]: unknown;
   }
 

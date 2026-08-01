@@ -27,10 +27,10 @@
   const banner = getBannerActionContext();
   const buttonVariant = $derived(variant === 'secondary' ? 'outline' : variant);
   const accents = {
-    default: { token: 'var(--color-kumo-info)', secondary: 'ring-kumo-info/50 fill-kumo-info hover:!ring-kumo-info/50 hover:bg-kumo-info/10', ghost: 'fill-kumo-info hover:bg-kumo-info/10' },
-    alert: { token: 'var(--color-kumo-warning)', secondary: 'ring-kumo-warning/50 fill-kumo-warning hover:!ring-kumo-warning/50 hover:bg-kumo-warning/10', ghost: 'fill-kumo-warning hover:bg-kumo-warning/10' },
-    error: { token: 'var(--color-kumo-danger)', secondary: 'ring-kumo-danger/50 fill-kumo-danger hover:!ring-kumo-danger/10 hover:bg-kumo-danger/10', ghost: 'fill-kumo-danger hover:bg-kumo-danger/10' },
-    secondary: { token: 'var(--color-neutral-700, oklch(37.1% 0 0))', secondary: 'ring-kumo-focus/20 fill-kumo-subtle hover:bg-kumo-contrast/10', ghost: 'fill-kumo-subtle hover:bg-kumo-contrast/10' }
+    default: { token: 'var(--color-kumo-info)', secondary: 'text-inherit ring-kumo-info/50 fill-kumo-info hover:!text-inherit hover:!ring-kumo-info/50 hover:bg-kumo-info/10', ghost: 'text-inherit fill-kumo-info hover:bg-kumo-info/10' },
+    alert: { token: 'var(--color-kumo-warning)', secondary: 'text-inherit ring-kumo-warning/50 fill-kumo-warning hover:!text-inherit hover:!ring-kumo-warning/50 hover:bg-kumo-warning/10', ghost: 'text-inherit fill-kumo-warning hover:bg-kumo-warning/10' },
+    error: { token: 'var(--color-kumo-danger)', secondary: 'text-inherit ring-kumo-danger/50 fill-kumo-danger hover:!text-inherit hover:!ring-kumo-danger/50 hover:bg-kumo-danger/10', ghost: 'text-inherit fill-kumo-danger hover:bg-kumo-danger/10' },
+    secondary: { token: 'var(--color-neutral-700, oklch(37.1% 0 0))', secondary: 'text-inherit ring-kumo-focus/20 fill-kumo-subtle hover:!text-inherit hover:!ring-kumo-focus/20 hover:bg-kumo-contrast/10', ghost: 'text-inherit fill-kumo-subtle hover:bg-kumo-contrast/10' }
   } as const;
   const accent = accents[banner.variant];
   const actionClass = $derived(cn(variant !== 'primary' && [

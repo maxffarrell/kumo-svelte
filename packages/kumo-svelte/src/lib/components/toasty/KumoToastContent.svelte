@@ -18,10 +18,10 @@
   const { toast, behind = false, expanded = false, onClose }: Props = $props();
 
   const backgroundClasses: Partial<Record<KumoToastVariant, string>> = {
-    success: 'bg-kumo-success/5',
-    error: 'bg-kumo-danger/5',
-    warning: 'bg-kumo-warning/5',
-    info: 'bg-kumo-info/5'
+    success: 'bg-kumo-success-tint/20',
+    error: 'bg-kumo-danger-tint/50',
+    warning: 'bg-kumo-warning-tint/50',
+    info: 'bg-kumo-info-tint/50'
   };
 
   const closeClasses: Partial<Record<KumoToastVariant, string>> = {

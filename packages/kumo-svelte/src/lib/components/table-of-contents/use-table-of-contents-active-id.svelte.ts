@@ -1,9 +1,13 @@
-import { onDestroy, onMount } from "svelte";
+import { onDestroy } from 'svelte';
 
 export interface UseTableOfContentsActiveIdOptions {
+  /** Section anchor ids in document order. */
   ids: string[];
+  /** Fixed-header offset for the scrollspy activation line. @default 0 */
   offset?: number;
+  /** Scroll container to observe. Defaults to the viewport. */
   root?: Element | null;
+  /** Select location.hash targets on load and hashchange. @default true */
   trackHash?: boolean;
 }
 
@@ -19,38 +23,47 @@ export function useTableOfContentsActiveId({
   ids,
   offset = 0,
   root = null,
-  trackHash = true,
+  trackHash = true
 }: UseTableOfContentsActiveIdOptions): UseTableOfContentsActiveIdResult {
   let activeId = $state<string | null>(null);
   let pinned = false;
   let settleTimer: number | undefined;
   let cleanupPin: (() => void) | undefined;
+  const idsKey = $derived(ids.join('\0'));
 
   const selectSection = (id: string) => {
+    if (typeof window === 'undefined') return;
+
     cleanupPin?.();
     pinned = true;
     activeId = id;
     const target: EventTarget = root ?? window;
     const arm = () => {
-      if (settleTimer) window.clearTimeout(settleTimer);
+      if (settleTimer !== undefined) window.clearTimeout(settleTimer);
       settleTimer = window.setTimeout(() => {
         cleanupPin?.();
         pinned = false;
       }, SCROLL_SETTLE_MS);
     };
-    target.addEventListener("scroll", arm, { passive: true });
+
+    target.addEventListener('scroll', arm, { passive: true });
     cleanupPin = () => {
-      if (settleTimer) window.clearTimeout(settleTimer);
-      target.removeEventListener("scroll", arm);
+      if (settleTimer !== undefined) window.clearTimeout(settleTimer);
+      target.removeEventListener('scroll', arm);
       cleanupPin = undefined;
+      settleTimer = undefined;
     };
     arm();
   };
 
-  onMount(() => {
-    const elements = ids
+  // Rebuild the observer when ids change so dynamically rendered headings are
+  // tracked without requiring consumers to recreate the hook.
+  $effect(() => {
+    const sectionIds = idsKey.split('\0').filter(Boolean);
+    const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter((element): element is HTMLElement => Boolean(element));
+
     if (elements.length === 0) return;
 
     const intersecting = new Set<Element>();
@@ -60,26 +73,29 @@ export function useTableOfContentsActiveId({
           if (entry.isIntersecting) intersecting.add(entry.target);
           else intersecting.delete(entry.target);
         }
+
         const first = elements.find((element) => intersecting.has(element));
         if (first && !pinned) activeId = first.id;
       },
-      { root, rootMargin: `-${offset}px 0px 0px 0px` },
+      { root, rootMargin: `-${offset}px 0px 0px 0px` }
     );
-    elements.forEach((element) => observer.observe(element));
 
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  });
+
+  $effect(() => {
+    if (!trackHash || typeof window === 'undefined') return;
+
+    const knownIds = new Set(idsKey.split('\0').filter(Boolean));
     const syncHash = () => {
       const id = decodeURIComponent(window.location.hash.slice(1));
-      if (id && ids.includes(id)) selectSection(id);
+      if (id && knownIds.has(id)) selectSection(id);
     };
-    if (trackHash) {
-      syncHash();
-      window.addEventListener("hashchange", syncHash);
-    }
 
-    return () => {
-      observer.disconnect();
-      if (trackHash) window.removeEventListener("hashchange", syncHash);
-    };
+    syncHash();
+    window.addEventListener('hashchange', syncHash);
+    return () => window.removeEventListener('hashchange', syncHash);
   });
 
   onDestroy(() => cleanupPin?.());
@@ -88,6 +104,6 @@ export function useTableOfContentsActiveId({
     get activeId() {
       return activeId;
     },
-    selectSection,
+    selectSection
   };
 }

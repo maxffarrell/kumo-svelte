@@ -199,7 +199,7 @@ export type {
   UseTableOfContentsActiveIdResult,
 } from "./components/table-of-contents";
 export { Tabs } from "./components/tabs";
-export type { TabsItem } from "./components/tabs";
+export type { TabsItem, TabsLabels } from "./components/tabs";
 export { Text } from "./components/text";
 export {
   KUMO_TOOLBAR_DEFAULT_VARIANTS,

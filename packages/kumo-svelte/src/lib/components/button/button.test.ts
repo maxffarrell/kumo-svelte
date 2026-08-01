@@ -44,6 +44,13 @@ describe("Button", () => {
     expect(button.getAttribute("aria-label")).toBe("Remove");
   });
 
+  it("uses a numeric title as the accessible name for an icon-only button", () => {
+    render(Button, { shape: "square", title: 42 });
+
+    const button = screen.getByRole("button", { name: "42" });
+    expect(button.getAttribute("aria-label")).toBe("42");
+  });
+
   it("wraps disabled buttons in an enabled tooltip trigger", () => {
     render(Button, {
       disabled: true,

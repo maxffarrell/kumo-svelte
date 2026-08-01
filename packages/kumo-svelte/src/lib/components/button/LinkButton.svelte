@@ -13,7 +13,7 @@
     size?: 'xs' | 'sm' | 'base' | 'lg';
     variant?: 'primary' | 'secondary' | 'ghost' | 'destructive' | 'secondary-destructive' | 'outline';
     disabled?: boolean;
-    title?: string;
+    title?: string | number;
     'aria-label'?: string;
     'aria-labelledby'?: string;
     [key: string]: unknown;

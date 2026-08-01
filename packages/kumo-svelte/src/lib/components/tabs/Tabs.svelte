@@ -260,9 +260,15 @@
       resizeObserver.observe(listEl);
     }
 
+    const mutationObserver = listEl ? new MutationObserver(() => void syncMeasurements()) : undefined;
+    mutationObserver?.observe(listEl!, { childList: true, characterData: true, subtree: true });
+
     void syncMeasurements();
 
-    return () => resizeObserver.disconnect();
+    return () => {
+      resizeObserver.disconnect();
+      mutationObserver?.disconnect();
+    };
   });
 </script>
 
@@ -285,6 +291,8 @@
     <TabsPrimitive.List
       bind:ref={listEl}
       data-overflowing={isOverflowing ? '' : undefined}
+      data-overflow-start={canScrollStart ? '' : undefined}
+      data-overflow-end={canScrollEnd ? '' : undefined}
       onpointerdowncapture={handlePointerDownCapture}
       onpointermovecapture={handlePointerMoveCapture}
       onpointerupcapture={endDrag}
@@ -292,9 +300,9 @@
       onclickcapture={handleClickCapture}
       onscroll={updateOverflow}
       class={cn(
-        'relative flex min-w-0 shrink items-stretch',
+        'kumo-tabs-list relative flex min-w-0 shrink items-stretch overflow-x-auto overflow-y-hidden scroll-px-(--scroll-fade-width) [--scroll-fade-width:3rem]',
         isSegmented &&
-          'kumo-tabs-list overflow-x-auto rounded-lg bg-kumo-recessed px-0.5 [--scroll-fade-width:3rem] scroll-px-(--scroll-fade-width)',
+          'rounded-lg bg-kumo-recessed px-0.5',
         isSegmented && (isSm ? 'h-6.5 rounded-md' : 'h-9'),
         isOverflowing && 'cursor-grab active:cursor-grabbing',
         isUnderline && 'gap-4 border-b border-kumo-hairline pb-2',

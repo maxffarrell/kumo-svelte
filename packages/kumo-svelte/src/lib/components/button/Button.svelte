@@ -122,7 +122,7 @@
     size?: Size;
     variant?: Variant;
     loading?: boolean;
-    title?: string;
+    title?: string | number;
     componentName?: 'Button' | 'LinkButton' | 'Toolbar.Button';
     [key: string]: unknown;
   }
@@ -170,7 +170,11 @@
     emphasisToken ? `color-mix(in oklch, ${emphasisToken}, white 15%)` : undefined
   );
   const emphasisGradientEnd = $derived(emphasisToken);
-  const titleLabel = $derived(title && title.trim() ? title : undefined);
+  const titleLabel = $derived(
+    typeof title === 'string'
+      ? title.trim() ? title : undefined
+      : title !== undefined ? String(title) : undefined
+  );
   const resolvedAriaLabel = $derived(
     ariaLabel ?? (!children && !ariaLabelledby ? titleLabel : undefined)
   );

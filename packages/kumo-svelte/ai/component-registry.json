@@ -1,5 +1,5 @@
 {
-  "version": "0.7.0",
+  "version": "0.8.0",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -413,13 +413,25 @@
         }
       },
       "colors": [
-        "bg-kumo-banner-info",
-        "bg-kumo-banner-warning",
         "bg-kumo-contrast",
+        "bg-kumo-danger",
         "bg-kumo-danger-tint",
+        "bg-kumo-info",
+        "bg-kumo-info-tint",
+        "bg-kumo-warning",
+        "bg-kumo-warning-tint",
+        "fill-kumo-danger",
+        "fill-kumo-info",
+        "fill-kumo-interact",
+        "fill-kumo-subtle",
+        "fill-kumo-warning",
+        "ring-kumo-danger",
+        "ring-kumo-focus",
+        "ring-kumo-info",
+        "ring-kumo-warning",
         "text-kumo-danger",
+        "text-kumo-default",
         "text-kumo-info",
-        "text-kumo-subtle",
         "text-kumo-warning"
       ]
     },
@@ -676,6 +688,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -914,6 +927,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -989,6 +1003,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -1405,6 +1420,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -4382,6 +4398,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -5723,6 +5740,7 @@
       "colors": [
         "bg-kumo-base",
         "bg-kumo-brand",
+        "bg-kumo-elevated",
         "bg-kumo-recessed",
         "bg-kumo-tint",
         "border-kumo-hairline",
@@ -5972,6 +5990,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"

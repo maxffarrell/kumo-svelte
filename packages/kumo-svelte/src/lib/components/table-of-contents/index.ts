@@ -1,14 +1,14 @@
-import TableOfContentsRoot from './TableOfContents.svelte';
-import TableOfContentsTitle from './TableOfContentsTitle.svelte';
-import TableOfContentsList from './TableOfContentsList.svelte';
-import TableOfContentsItem from './TableOfContentsItem.svelte';
-import TableOfContentsGroup from './TableOfContentsGroup.svelte';
+import TableOfContentsRoot from "./TableOfContents.svelte";
+import TableOfContentsTitle from "./TableOfContentsTitle.svelte";
+import TableOfContentsList from "./TableOfContentsList.svelte";
+import TableOfContentsItem from "./TableOfContentsItem.svelte";
+import TableOfContentsGroup from "./TableOfContentsGroup.svelte";
 
 export const TableOfContents = Object.assign(TableOfContentsRoot, {
   Title: TableOfContentsTitle,
   List: TableOfContentsList,
   Item: TableOfContentsItem,
-  Group: TableOfContentsGroup
+  Group: TableOfContentsGroup,
 }) as typeof TableOfContentsRoot & {
   Title: typeof TableOfContentsTitle;
   List: typeof TableOfContentsList;
@@ -16,4 +16,15 @@ export const TableOfContents = Object.assign(TableOfContentsRoot, {
   Group: typeof TableOfContentsGroup;
 };
 
-export { TableOfContentsRoot, TableOfContentsTitle, TableOfContentsList, TableOfContentsItem, TableOfContentsGroup };
+export {
+  TableOfContentsRoot,
+  TableOfContentsTitle,
+  TableOfContentsList,
+  TableOfContentsItem,
+  TableOfContentsGroup,
+};
+export { useTableOfContentsActiveId } from "./use-table-of-contents-active-id.svelte";
+export type {
+  UseTableOfContentsActiveIdOptions,
+  UseTableOfContentsActiveIdResult,
+} from "./use-table-of-contents-active-id.svelte";

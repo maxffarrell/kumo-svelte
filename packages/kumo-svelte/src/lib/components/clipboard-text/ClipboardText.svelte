@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
   import { Button } from '$lib/components/button';
@@ -75,7 +76,12 @@
   }: Props = $props();
 
   let copied = $state(false);
+  let copyFeedbackKey = $state(0);
   let resetTimer: ReturnType<typeof setTimeout> | undefined;
+
+  onDestroy(() => {
+    if (resetTimer) clearTimeout(resetTimer);
+  });
 
   const sizeConfig = $derived(KUMO_CLIPBOARD_TEXT_VARIANTS.size[size] ?? KUMO_CLIPBOARD_TEXT_VARIANTS.size.lg);
   const tooltipText = $derived(tooltip?.text ?? 'Copy');
@@ -131,6 +137,7 @@
     try {
       await writeClipboard(textToCopy ?? displayText);
       copied = true;
+      copyFeedbackKey += 1;
       onCopy?.();
 
       if (resetTimer) clearTimeout(resetTimer);
@@ -188,18 +195,20 @@
     <div class="relative">
       <Tooltip side={tooltipSide} content={tooltipText} disabled={copied} trigger={copyButton} />
       {#if copied}
-        <div
-          class={cn(
-            'pointer-events-none absolute z-50 flex origin-(--bits-floating-transform-origin) flex-col rounded-md bg-kumo-base px-3 py-1.5 font-sans text-xs text-kumo-default',
-            'shadow-lg shadow-kumo-tip-shadow outline outline-kumo-fill',
-            tooltipSide === 'top' && 'bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2',
-            tooltipSide === 'bottom' && 'top-[calc(100%+8px)] left-1/2 -translate-x-1/2',
-            tooltipSide === 'left' && 'top-1/2 right-[calc(100%+8px)] -translate-y-1/2',
-            tooltipSide === 'right' && 'top-1/2 left-[calc(100%+8px)] -translate-y-1/2'
-          )}
-        >
-          {copiedText}
-        </div>
+        {#key copyFeedbackKey}
+          <div
+            class={cn(
+              'animate-clipboard-toast-bump pointer-events-none absolute z-50 flex origin-(--bits-floating-transform-origin) flex-col rounded-md bg-kumo-base px-3 py-1.5 font-sans text-xs text-kumo-default',
+              'shadow-lg shadow-kumo-tip-shadow outline outline-kumo-fill',
+              tooltipSide === 'top' && 'bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2',
+              tooltipSide === 'bottom' && 'top-[calc(100%+8px)] left-1/2 -translate-x-1/2',
+              tooltipSide === 'left' && 'top-1/2 right-[calc(100%+8px)] -translate-y-1/2',
+              tooltipSide === 'right' && 'top-1/2 left-[calc(100%+8px)] -translate-y-1/2'
+            )}
+          >
+            {copiedText}
+          </div>
+        {/key}
       {/if}
     </div>
   {:else}

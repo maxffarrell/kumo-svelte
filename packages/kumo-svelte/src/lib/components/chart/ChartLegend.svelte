@@ -1,13 +1,15 @@
 <script lang="ts">
+  import { SkeletonLine } from '$lib/components/loader';
   import { cn } from '$lib/utils/cn';
 
   interface Props {
     variant?: 'large' | 'small';
-    name: string;
-    color: string;
-    value: string;
+    name?: string;
+    color?: string;
+    value?: string;
     unit?: string;
     inactive?: boolean;
+    loading?: boolean;
     onpointerenter?: (event: PointerEvent) => void;
     onpointerleave?: (event: PointerEvent) => void;
     onclick?: (event: MouseEvent) => void;
@@ -22,6 +24,7 @@
     value,
     unit,
     inactive = false,
+    loading = false,
     onpointerenter,
     onpointerleave,
     onclick,
@@ -38,7 +41,20 @@
   }
 </script>
 
-{#if variant === 'large'}
+{#if loading}
+  {#if variant === 'large'}
+    <div aria-hidden="true" class={cn('inline-flex min-w-42 flex-col gap-2 py-2', className)}>
+      <div class="flex items-center gap-2"><span class="inline-block size-2 rounded-full bg-kumo-fill"></span><SkeletonLine class="h-3 w-[8ch]" /></div>
+      <SkeletonLine class="h-5 w-[5ch]" />
+    </div>
+  {:else}
+    <div aria-hidden="true" class={cn('inline-flex h-4 items-center gap-2', className)}>
+      <span class="inline-block size-2 rounded-full bg-kumo-fill"></span>
+      <SkeletonLine class="h-3 w-[5ch]" />
+      <SkeletonLine class="h-3 w-[3ch]" />
+    </div>
+  {/if}
+{:else if variant === 'large'}
   <div
     role="button"
     tabindex={onclick ? 0 : -1}

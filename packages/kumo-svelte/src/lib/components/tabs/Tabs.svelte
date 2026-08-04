@@ -361,12 +361,15 @@
     ] as control}
       <button
         type="button"
+        data-kumo-component="Tabs"
+        data-kumo-part="overflow-control"
+        data-side={control.side}
         aria-label={control.label}
         aria-hidden={!control.visible}
         tabindex={control.visible ? 0 : -1}
         onclick={() => scrollTabs(control.side as 'start' | 'end')}
         class={cn(
-          'absolute inset-y-0 z-3 flex items-center border-0 p-0 transition-opacity duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-kumo-brand',
+          'absolute inset-y-0 z-3 flex items-center border-0 bg-transparent p-0 transition-opacity duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-kumo-brand',
           control.side === 'start' ? 'left-0 justify-start bg-linear-to-r' : 'right-0 justify-end bg-linear-to-l',
           control.visible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
           isSegmented ? 'from-kumo-recessed via-kumo-recessed/95 to-transparent' : 'from-kumo-base via-kumo-base/95 to-transparent',

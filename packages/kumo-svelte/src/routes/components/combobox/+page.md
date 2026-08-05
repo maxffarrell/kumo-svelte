@@ -17,13 +17,7 @@ baseUIComponent: "combobox"
   <ComponentExample demo="ComboboxDemo" />
 </ComponentSection>
 
-<ComponentSection>
-
-## Contribution
-
-The Bits UI primitive integration, keyboard-navigation tests, and prop documentation for this component were contributed by [Teddy (@uhteddy)](https://github.com/uhteddy).
-
-</ComponentSection>
+The Bits UI primitive integration, keyboard-navigation tests, and prop documentation for Combobox were contributed by [Teddy (@uhteddy)](https://github.com/uhteddy).
 
 <!-- Installation -->
 

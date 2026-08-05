@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import { getComboboxContext, inputStyles, type ComboboxInputSide, type ComboboxSize } from './context';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {
     children?: Snippet<[any]>;
@@ -43,16 +44,9 @@
   {...rest}
 >
   {#if inputSide === 'top'}
-    <input
+    <ComboboxPrimitive.Input
       class="w-full border-0 bg-inherit px-2 py-1 outline-none placeholder:text-kumo-muted"
       {placeholder}
-      value={context.query}
-      disabled={context.disabled}
-      oninput={(event) => {
-        context.query = (event.currentTarget as HTMLInputElement).value;
-        context.open = true;
-      }}
-      onfocus={() => (context.open = true)}
     />
   {/if}
   <div class="flex flex-1 flex-wrap items-center gap-1.5">
@@ -60,16 +54,9 @@
       {@render children?.(selected)}
     {/each}
     {#if inputSide === 'right'}
-      <input
+      <ComboboxPrimitive.Input
         class="min-w-[100px] flex-1 border-0 bg-inherit px-2 py-1 outline-none placeholder:text-kumo-muted"
         {placeholder}
-        value={context.query}
-        disabled={context.disabled}
-        oninput={(event) => {
-          context.query = (event.currentTarget as HTMLInputElement).value;
-          context.open = true;
-        }}
-        onfocus={() => (context.open = true)}
       />
     {/if}
   </div>

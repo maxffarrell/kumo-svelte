@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
   import { getComboboxContext } from './context';
   import { cn } from '$lib/utils/cn';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {
     children?: Snippet;
@@ -13,14 +14,12 @@
   const context = getComboboxContext('Combobox.Trigger');
 </script>
 
-<button
-  type="button"
+<ComboboxPrimitive.Trigger
   class={cn('inline-flex items-center gap-2', className)}
   disabled={context.disabled}
   data-kumo-component="Combobox"
   data-kumo-part="trigger"
-  onclick={() => (context.open = !context.open)}
   {...rest}
 >
   {@render children?.()}
-</button>
+</ComboboxPrimitive.Trigger>

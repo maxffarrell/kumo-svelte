@@ -17,6 +17,8 @@ sourceFile: "components/autocomplete"
   <ComponentExample demo="AutocompleteDemo" />
 </ComponentSection>
 
+The Bits UI primitive integration, keyboard-navigation tests, and prop documentation for Autocomplete were contributed by [Teddy (@uhteddy)](https://github.com/uhteddy).
+
 <!-- Installation -->
 
 <ComponentSection>
@@ -26,13 +28,13 @@ sourceFile: "components/autocomplete"
 ### Barrel
 
 ```typescript
-import { Autocomplete } from 'kumo-svelte';
+import { Autocomplete } from "kumo-svelte";
 ```
 
 ### Granular
 
 ```typescript
-import { Autocomplete } from 'kumo-svelte/components/autocomplete';
+import { Autocomplete } from "kumo-svelte/components/autocomplete";
 ```
 
 </ComponentSection>
@@ -43,10 +45,9 @@ import { Autocomplete } from 'kumo-svelte/components/autocomplete';
 
 ## When to use
 
-
 Use `Autocomplete` when the input value can be free-form text and suggestions
-  are optional hints. Use `Combobox` instead when the selected value must come
-  from the predefined list.
+are optional hints. Use `Combobox` instead when the selected value must come
+from the predefined list.
 
 </ComponentSection>
 
@@ -55,7 +56,6 @@ Use `Autocomplete` when the input value can be free-form text and suggestions
 <ComponentSection>
 
 ## Controlled
-
 
 Pass `value` and `onValueChange` for controlled usage.
 
@@ -68,7 +68,6 @@ Pass `value` and `onValueChange` for controlled usage.
 
 ## With Field
 
-
 Add `label`, `description`, and `required` to enable the built-in Field wrapper.
 
 <ComponentExample demo="AutocompleteWithFieldDemo" />
@@ -79,7 +78,6 @@ Add `label`, `description`, and `required` to enable the built-in Field wrapper.
 <ComponentSection>
 
 ## Error State
-
 
 Display validation errors with the `error` prop.
 
@@ -92,7 +90,6 @@ Display validation errors with the `error` prop.
 
 ## Grouped
 
-
 Group items into categories using `Autocomplete.Group` and `Autocomplete.GroupLabel`.
 
 <ComponentExample demo="AutocompleteGroupedDemo" />
@@ -104,9 +101,8 @@ Group items into categories using `Autocomplete.Group` and `Autocomplete.GroupLa
 
 ## Sizes
 
-
 The `size` prop on `Autocomplete.InputGroup` supports four variants matching the
-  Input component: `xs`, `sm`, `base` (default), and `lg`.
+Input component: `xs`, `sm`, `base` (default), and `lg`.
 
 <ComponentExample demo="AutocompleteSizesDemo" />
 </ComponentSection>
@@ -161,13 +157,11 @@ pass `filter={null}`:
 
 ### Autocomplete
 
-
 Root component. Wraps all sub-components and manages state.
 
 <PropsTable component="Autocomplete" />
 
 ### Autocomplete.InputGroup
-
 
 Autocomplete text input with Input component styling.
 
@@ -175,13 +169,11 @@ Autocomplete text input with Input component styling.
 
 ### Autocomplete.Content
 
-
 Dropdown popup container.
 
 <PropsTable component="Autocomplete.Content" />
 
 ### Autocomplete.List
-
 
 Scrollable list container with render prop.
 
@@ -189,13 +181,11 @@ Scrollable list container with render prop.
 
 ### Autocomplete.Item
 
-
 Individual suggestion item in the list.
 
 <PropsTable component="Autocomplete.Item" />
 
 ### Autocomplete.Group
-
 
 Groups items under a heading.
 
@@ -203,20 +193,17 @@ Groups items under a heading.
 
 ### Autocomplete.GroupLabel
 
-
 Heading label for a group.
 
 <PropsTable component="Autocomplete.GroupLabel" />
 
 ### Autocomplete.Collection
 
-
 Item container within a group.
 
 <PropsTable component="Autocomplete.Collection" />
 
 ### Autocomplete.Separator
-
 
 Horizontal divider between items.
 

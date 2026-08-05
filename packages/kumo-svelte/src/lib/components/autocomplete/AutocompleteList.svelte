@@ -2,6 +2,7 @@
   import type { ItemSnippet } from './context';
   import { getAutocompleteContext } from './context';
   import { cn } from '$lib/utils/cn';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {
     children?: ItemSnippet;
@@ -13,11 +14,11 @@
   const context = getAutocompleteContext('Autocomplete.List');
 </script>
 
-<div
+<ComboboxPrimitive.Viewport
   class={cn('min-h-0 flex-1 overflow-y-auto overscroll-contain scroll-pb-2 scroll-pt-2', className)}
   {...rest}
 >
   {#each context.filteredItems as item (item.value)}
     {@render children?.(item.raw)}
   {/each}
-</div>
+</ComboboxPrimitive.Viewport>

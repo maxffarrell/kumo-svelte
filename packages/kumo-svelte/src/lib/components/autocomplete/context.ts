@@ -1,7 +1,7 @@
-import type { Snippet } from 'svelte';
-import { getContext, setContext } from 'svelte';
+import type { Snippet } from "svelte";
+import { getContext, setContext } from "svelte";
 
-export type AutocompleteSize = 'xs' | 'sm' | 'base' | 'lg';
+export type AutocompleteSize = "xs" | "sm" | "base" | "lg";
 export type AutocompleteValue = string | number | string[];
 
 export type AutocompleteItem = unknown;
@@ -30,22 +30,26 @@ export type AutocompleteContext = {
   resetInputInteraction(): void;
   isSelected(item: NormalizedAutocompleteItem): boolean;
   select(item: NormalizedAutocompleteItem): void;
+  serializeValue(value: unknown): string;
 };
 
 export type AutocompleteGroupContext = {
   get items(): NormalizedAutocompleteItem[];
 };
 
-const AUTOCOMPLETE_CONTEXT = Symbol('kumo-autocomplete');
-const AUTOCOMPLETE_GROUP_CONTEXT = Symbol('kumo-autocomplete-group');
+const AUTOCOMPLETE_CONTEXT = Symbol("kumo-autocomplete");
+const AUTOCOMPLETE_GROUP_CONTEXT = Symbol("kumo-autocomplete-group");
 
 export function setAutocompleteContext(context: AutocompleteContext) {
   setContext(AUTOCOMPLETE_CONTEXT, context);
 }
 
 export function getAutocompleteContext(component: string) {
-  const context = getContext<AutocompleteContext | undefined>(AUTOCOMPLETE_CONTEXT);
-  if (!context) throw new Error(`${component} must be used inside <Autocomplete>.`);
+  const context = getContext<AutocompleteContext | undefined>(
+    AUTOCOMPLETE_CONTEXT,
+  );
+  if (!context)
+    throw new Error(`${component} must be used inside <Autocomplete>.`);
   return context;
 }
 
@@ -54,15 +58,19 @@ export function setAutocompleteGroupContext(context: AutocompleteGroupContext) {
 }
 
 export function getAutocompleteGroupContext() {
-  return getContext<AutocompleteGroupContext | undefined>(AUTOCOMPLETE_GROUP_CONTEXT);
+  return getContext<AutocompleteGroupContext | undefined>(
+    AUTOCOMPLETE_GROUP_CONTEXT,
+  );
 }
 
-export function normalizeAutocompleteItem(item: AutocompleteItem): NormalizedAutocompleteItem {
-  if (typeof item === 'string' || typeof item === 'number') {
+export function normalizeAutocompleteItem(
+  item: AutocompleteItem,
+): NormalizedAutocompleteItem {
+  if (typeof item === "string" || typeof item === "number") {
     return { label: String(item), value: item, raw: item };
   }
 
-  if (item && typeof item === 'object' && 'label' in item && 'value' in item) {
+  if (item && typeof item === "object" && "label" in item && "value" in item) {
     const option = item as {
       label: unknown;
       value: unknown;
@@ -72,17 +80,19 @@ export function normalizeAutocompleteItem(item: AutocompleteItem): NormalizedAut
 
     return {
       label: String(option.label),
-      value: typeof option.value === 'number' ? option.value : String(option.value),
-      disabled: typeof option.disabled === 'boolean' ? option.disabled : undefined,
-      group: typeof option.group === 'string' ? option.group : undefined,
-      raw: item
+      value:
+        typeof option.value === "number" ? option.value : String(option.value),
+      disabled:
+        typeof option.disabled === "boolean" ? option.disabled : undefined,
+      group: typeof option.group === "string" ? option.group : undefined,
+      raw: item,
     };
   }
 
   return {
     label: String(item),
     value: String(item),
-    raw: item
+    raw: item,
   };
 }
 

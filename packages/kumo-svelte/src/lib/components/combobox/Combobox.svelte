@@ -10,6 +10,7 @@
     type NormalizedComboboxItem
   } from './context';
   import { createKumoFilter } from '../filter';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   type FieldError = string | { message?: string; match?: boolean };
 
@@ -77,6 +78,54 @@
       if (filter) return filter(item.raw, query);
       return contains(item.label, term) || contains(String(item.value), term);
     });
+  });
+
+  const serializedOptions = $derived(
+    normalizedItems.map((item, index) => ({
+      ...item,
+      serializedValue: `kumo-combobox:${index}`
+    }))
+  );
+
+  function serializeSelectedValue(selectionValue: unknown) {
+    const option = serializedOptions.find((entry) => valuesEqual(entry.value, selectionValue));
+    if (option) return option.serializedValue;
+    return typeof selectionValue === 'string' ? selectionValue : undefined;
+  }
+
+  function deserializePrimitiveValue(primitiveValue: string) {
+    const option = serializedOptions.find((entry) => entry.serializedValue === primitiveValue);
+    return option ? option.value : primitiveValue;
+  }
+
+  const primitiveValue = $derived.by(() => {
+    if (multiple) {
+      const arr = Array.isArray(value) ? value : [];
+      return arr.map(serializeSelectedValue).filter((v): v is string => v !== undefined);
+    }
+    const val = serializeSelectedValue(value);
+    return val !== undefined ? val : '';
+  });
+
+  const rootInputValue = $derived(open || multiple ? query : labelFor(value));
+
+  function handleSingleValueChange(nextValue: string | undefined) {
+    const next = nextValue ? deserializePrimitiveValue(nextValue) : null;
+    emit(next);
+    query = '';
+    open = false;
+    onOpenChange?.(false);
+  }
+
+  function handleMultipleValueChange(nextValue: string[]) {
+    emit(nextValue.map(deserializePrimitiveValue));
+    query = '';
+  }
+
+  $effect(() => {
+    if (!open) {
+      query = '';
+    }
   });
 
   function valuesEqual(itemValue: unknown, selectedValue: unknown) {
@@ -208,7 +257,11 @@
     isSelected,
     select,
     remove,
-    labelFor
+    labelFor,
+    serializeValue(itemValue: unknown): string {
+      const option = serializedOptions.find((entry) => valuesEqual(entry.value, itemValue));
+      return option?.serializedValue ?? String(itemValue ?? '');
+    }
   });
 </script>
 
@@ -219,7 +272,29 @@
     class={cn('relative inline-block max-w-full', className)}
     {...rest}
   >
-    {@render children?.()}
+    {#if multiple}
+      <ComboboxPrimitive.Root
+        type="multiple"
+        value={Array.isArray(primitiveValue) ? primitiveValue : []}
+        onValueChange={handleMultipleValueChange}
+        bind:open={open}
+        disabled={disabled}
+        inputValue={rootInputValue}
+      >
+        {@render children?.()}
+      </ComboboxPrimitive.Root>
+    {:else}
+      <ComboboxPrimitive.Root
+        type="single"
+        value={Array.isArray(primitiveValue) ? (primitiveValue[0] ?? '') : primitiveValue}
+        onValueChange={handleSingleValueChange}
+        bind:open={open}
+        disabled={disabled}
+        inputValue={rootInputValue}
+      >
+        {@render children?.()}
+      </ComboboxPrimitive.Root>
+    {/if}
   </div>
 {/snippet}
 

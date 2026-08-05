@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0",
+  "version": "0.9.0",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -75,6 +75,29 @@
           "type": "(open: boolean) => void",
           "optional": true,
           "description": "Called when open state changes."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Prevents interaction with the field."
+        },
+        "size": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "xs",
+            "sm",
+            "base",
+            "lg"
+          ],
+          "default": "base",
+          "description": "Size preset."
+        },
+        "filter": {
+          "type": "((item: AutocompleteItem, query: string) => boolean) | null",
+          "optional": true,
+          "description": "Custom filter function. Set to null to disable filtering."
         }
       },
       "colors": [
@@ -1938,6 +1961,27 @@
           "type": "(open: boolean) => void",
           "optional": true,
           "description": "Called when open state changes."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Prevents interaction with the field."
+        },
+        "defaultValue": {
+          "type": "unknown",
+          "optional": true,
+          "description": "Initial value."
+        },
+        "filter": {
+          "type": "((item: ComboboxItem, query: string) => boolean) | null",
+          "optional": true,
+          "description": "Custom filter function. Set to null to disable filtering."
+        },
+        "isItemEqualToValue": {
+          "type": "(item: unknown, value: unknown) => boolean",
+          "optional": true,
+          "description": "Custom value equality matcher function."
         }
       },
       "colors": [

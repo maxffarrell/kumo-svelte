@@ -1,5 +1,11 @@
 # kumo-svelte
 
+## 0.9.1
+
+### Patch Changes
+
+- e52f165: Port the applicable `@cloudflare/kumo@2.9.1` fixes: dark-mode favicon support, the updated collapsible default panel structure and styling, and transparent Tabs overflow scrims.
+
 ## 0.9.0
 
 ### Minor Changes

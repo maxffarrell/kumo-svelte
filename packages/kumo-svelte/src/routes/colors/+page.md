@@ -4,7 +4,6 @@ description: "Kumo uses semantic color tokens that automatically adapt to light 
 ---
 
 <script>
-  import { Badge } from 'kumo-svelte';
   import Callout from '$lib/docs/Callout.svelte';
   import ComponentExample from '$lib/docs/ComponentExample.svelte';
   import ComponentSection from '$lib/docs/ComponentSection.svelte';
@@ -322,11 +321,11 @@ Use the solid token on icons, status dots, borders and rings. Banners and badges
     </thead>
     <tbody>
       <tr>
-        <td><code>kumo-hairline</code><span class="not-prose ml-2 inline-flex align-middle"><Badge variant="blue">New</Badge></span></td>
+        <td><code>kumo-hairline</code></td>
         <td>A border/ring color to distinguish between flat surfaces where no shadow is present (i.e. <code>LayerCard</code>).</td>
       </tr>
       <tr>
-        <td><code>kumo-hairline</code></td>
+        <td><code>kumo-line</code></td>
         <td>A thicker border/ring color that defines the edge of an elevated surface alongside a shadow.</td>
       </tr>
     </tbody>

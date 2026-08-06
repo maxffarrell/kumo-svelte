@@ -106,6 +106,7 @@
   let activeTop = $state(0);
   let activeWidth = $state(0);
   let activeHeight = $state(0);
+  let indicatorMeasured = $state(false);
   let indicatorRendered = $state(false);
   let dragState: { pointerId: number; startX: number; scrollLeft: number; dragging: boolean } | null = null;
   let shouldSuppressClick = false;
@@ -139,6 +140,7 @@
 
     const activeTab = listEl.querySelector<HTMLElement>('[data-state="active"], [aria-selected="true"]');
     if (!activeTab) {
+      indicatorMeasured = false;
       indicatorRendered = false;
       return;
     }
@@ -149,7 +151,20 @@
     activeTop = tabRect.top - listRect.top;
     activeWidth = tabRect.width;
     activeHeight = tabRect.height;
-    indicatorRendered = true;
+
+    if (!indicatorMeasured) {
+      // First measurement: unhide the indicator at its real size while it is
+      // still in the pre-render state (scale-90 / opacity-0 via
+      // data-rendered=false), then flip data-rendered on a later frame so it
+      // pops in at the correct size and position instead of transitioning its
+      // size up from 0x0.
+      indicatorMeasured = true;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          indicatorRendered = true;
+        });
+      });
+    }
   }
 
   async function syncMeasurements() {
@@ -342,6 +357,7 @@
       {/each}
       <div
         aria-hidden="true"
+        hidden={!indicatorMeasured}
         data-rendered={indicatorRendered}
         class={cn(
           'absolute z-1 left-0 transition-all duration-200 data-[rendered=false]:scale-90 data-[rendered=false]:opacity-0',

@@ -377,7 +377,7 @@
           !isSegmented && 'w-8'
         )}
       >
-        <span class={cn('flex items-center justify-center rounded-full bg-kumo-elevated text-kumo-subtle shadow-sm ring ring-kumo-line transition-colors hover:bg-kumo-base hover:text-kumo-default', isSm ? 'size-5' : 'size-6', control.side === 'start' ? 'ml-1' : 'mr-1')}>
+        <span class={cn('flex items-center justify-center text-kumo-subtle transition-colors hover:text-kumo-default', isSm ? 'size-5' : 'size-6', control.side === 'start' ? 'ml-1' : 'mr-1')}>
           <svg viewBox="0 0 16 16" fill="none" class="size-3.5" aria-hidden="true">
             <path d={control.side === 'start' ? 'M9.25 4.25L5.75 8L9.25 11.75' : 'M6.75 4.25L10.25 8L6.75 11.75'} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
           </svg>

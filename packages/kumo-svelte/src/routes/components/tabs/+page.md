@@ -99,6 +99,12 @@ Tabs automatically scroll horizontally when there are many items.
 
 <ComponentExample demo="TabsManyDemo" />
 
+### Horizontal Overflow
+
+When segmented tabs overflow their container, scroll buttons appear at the
+clipped edge. Use them, horizontal scrolling, or mouse drag to reveal off-screen
+tabs.
+
 </ComponentSection>
 
 <!-- API Reference -->

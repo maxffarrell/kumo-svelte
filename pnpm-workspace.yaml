@@ -19,5 +19,5 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - echarts@6.1.0
-  # Renovate security update: @sveltejs/kit@2.69.1
-  - "@sveltejs/kit@2.69.1"
+  # Renovate security update: @sveltejs/kit@2.69.1 || 2.70.2
+  - "@sveltejs/kit@2.69.1 || 2.70.2"

@@ -160,4 +160,23 @@ describe("Sidebar toggle", () => {
 
     expect(onOpenChange).toHaveBeenCalledWith(false);
   });
+
+  it("keeps peeking when a view change blurs the active item under the pointer", async () => {
+    const { container } = render(SidebarTestHost, {
+      props: { defaultOpen: false, peekable: true },
+    });
+    const wrapper = container.querySelector<HTMLElement>("[data-sidebar-wrapper]")!;
+    const peekZone = container.querySelector<HTMLElement>(
+      '[data-sidebar="content-container"]',
+    )!;
+
+    await fireEvent.mouseEnter(peekZone);
+    expect(wrapper.dataset.state).toBe("peeking");
+
+    await fireEvent.blur(peekZone, { relatedTarget: null });
+    expect(wrapper.dataset.state).toBe("peeking");
+
+    await fireEvent.mouseLeave(peekZone);
+    expect(wrapper.dataset.state).toBe("collapsed");
+  });
 });

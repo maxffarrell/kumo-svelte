@@ -2049,6 +2049,66 @@
               "optional": true,
               "default": "4",
               "description": "Offset between the popup and the trigger."
+            },
+            "customAnchor": {
+              "type": "string | HTMLElement | Measurable | null",
+              "optional": true,
+              "description": "Custom element or virtual anchor used to position the popup."
+            },
+            "strategy": {
+              "type": "enum",
+              "optional": true,
+              "values": [
+                "absolute",
+                "fixed"
+              ],
+              "description": "CSS positioning strategy used by the floating content."
+            },
+            "avoidCollisions": {
+              "type": "boolean",
+              "optional": true,
+              "default": "true",
+              "description": "Adjust placement to avoid crossing collision boundaries."
+            },
+            "collisionBoundary": {
+              "type": "Boundary | Boundary[]",
+              "optional": true,
+              "description": "Boundary elements used for collision detection."
+            },
+            "collisionPadding": {
+              "type": "number | Partial<Record<Side, number>>",
+              "optional": true,
+              "default": "8",
+              "description": "Padding kept between the popup and collision boundaries."
+            },
+            "sticky": {
+              "type": "enum",
+              "optional": true,
+              "values": [
+                "partial",
+                "always"
+              ],
+              "description": "How the popup remains attached when its anchor approaches a boundary."
+            },
+            "hideWhenDetached": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Hide the popup when its anchor is fully clipped."
+            },
+            "updatePositionStrategy": {
+              "type": "enum",
+              "optional": true,
+              "values": [
+                "optimized",
+                "always"
+              ],
+              "default": "'optimized'",
+              "description": "How frequently floating position updates are calculated."
+            },
+            "container": {
+              "type": "HTMLElement | string",
+              "optional": true,
+              "description": "Portal target for the popup content."
             }
           }
         },

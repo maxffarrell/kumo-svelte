@@ -15,4 +15,11 @@
   const size = $derived(toolbar?.size ?? 'base');
 </script>
 
-<Input bind:value {onValueChange} class={toolbarControlClassName(className)} {size} {...rest} />
+<Input
+  bind:value
+  {onValueChange}
+  class={toolbarControlClassName(className)}
+  {size}
+  data-kumo-toolbar-control=""
+  {...rest}
+/>

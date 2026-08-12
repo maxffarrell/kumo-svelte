@@ -279,6 +279,7 @@
         onValueChange={handleMultipleValueChange}
         bind:open={open}
         disabled={disabled}
+        {required}
         inputValue={rootInputValue}
       >
         {@render children?.()}
@@ -290,6 +291,7 @@
         onValueChange={handleSingleValueChange}
         bind:open={open}
         disabled={disabled}
+        {required}
         inputValue={rootInputValue}
       >
         {@render children?.()}

@@ -41,6 +41,7 @@
     name?: string;
     required?: boolean;
     children?: Snippet;
+    trigger?: Snippet<[{ props: Record<string, unknown>; value: string }]>;
     renderValue?: (value: Value) => unknown;
     onValueChange?: (value: Value) => void;
     container?: HTMLElement | string;
@@ -68,6 +69,7 @@
     name,
     required = false,
     children,
+    trigger,
     renderValue,
     onValueChange,
     container,
@@ -178,8 +180,13 @@
   }
 </script>
 
+{#snippet customTriggerChild({ props }: { props: Record<string, unknown> })}
+  {@render trigger?.({ props, value: selectedLabels || placeholder })}
+{/snippet}
+
 {#snippet selectContent()}
   <SelectPrimitive.Trigger
+      child={trigger ? customTriggerChild : undefined}
       class={cn(
         'inline-flex w-full items-center justify-between gap-2 bg-kumo-base text-left font-normal text-kumo-default shadow-xs outline-none ring ring-kumo-line transition focus:opacity-100 focus:ring-2 focus:ring-kumo-focus/50 focus-visible:ring-inset disabled:cursor-not-allowed disabled:opacity-50 *:in-focus:opacity-100',
         sizes[size],

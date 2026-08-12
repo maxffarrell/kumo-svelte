@@ -17,7 +17,6 @@
     import { CodeHighlighted } from "$lib/components/code-highlighted";
     import { Collapsible } from "$lib/components/collapsible";
     import { Combobox } from "$lib/components/combobox";
-    import { CommandPalette } from "$lib/components/command-palette";
     import { DatePicker } from "$lib/components/date-picker";
     import { Dialog } from "$lib/components/dialog";
     import { DropdownMenu } from "$lib/components/dropdown-menu";
@@ -65,6 +64,7 @@
     import { Toasty, createKumoToastManager } from "$lib/components/toasty";
     import { Toolbar } from "$lib/components/toolbar";
     import { Tooltip } from "$lib/components/tooltip";
+    import CommandPaletteBasicDemo from "$lib/docs/demo-snippets/CommandPaletteBasicDemo.svelte";
 
     const options = [
         { label: "All deployed versions", value: "all" },
@@ -80,12 +80,6 @@
         { id: "enhancement", value: "enhancement" },
         { id: "help-wanted", value: "help wanted" },
         { id: "good-first-issue", value: "good first issue" },
-    ];
-
-    const commands = [
-        { label: "Open dashboard" },
-        { label: "Create worker" },
-        { label: "Deploy project" },
     ];
 
     const tabs = [
@@ -836,9 +830,7 @@
                     <div
                         class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
                     >
-                        <Button icon={MagnifyingGlass}
-                            >Open Command Palette</Button
-                        >
+                        <CommandPaletteBasicDemo />
                     </div>
                 </li>
 

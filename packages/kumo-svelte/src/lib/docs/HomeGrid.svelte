@@ -7,6 +7,7 @@
     import WarningOctagon from "phosphor-svelte/lib/WarningOctagon";
     import Plus from "phosphor-svelte/lib/Plus";
     import MagnifyingGlass from "phosphor-svelte/lib/MagnifyingGlass";
+    import X from "phosphor-svelte/lib/X";
     import { Autocomplete } from "$lib/components/autocomplete";
     import { Badge } from "$lib/components/badge";
     import { Banner } from "$lib/components/banner";
@@ -100,6 +101,7 @@
     let activeMenuOption = $state<number | undefined>(0);
     let collapsibleOpen = $state(false);
     let comboboxIssue = $state<string | null>(null);
+    let dialogOpen = $state(false);
     const toastManager = createKumoToastManager();
 </script>
 
@@ -308,13 +310,36 @@
                         class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         {#snippet dialogTrigger(props: Record<string, unknown>)}
-                            <Button {...props}>Click me!</Button>
+                            <Button {...props}>Delete</Button>
                         {/snippet}
                         <Dialog
+                            bind:open={dialogOpen}
                             trigger={dialogTrigger}
-                            title="Hello!"
-                            description="I'm a dialog."
-                        />
+                            title="Delete Resource?"
+                            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                            class="p-8"
+                        >
+                            <Button
+                                variant="secondary"
+                                shape="square"
+                                icon={X}
+                                aria-label="Close"
+                                class="absolute top-8 right-8"
+                                onclick={() => (dialogOpen = false)}
+                            />
+                            <div class="mt-8 flex justify-end gap-2">
+                                <Button
+                                    variant="secondary"
+                                    onclick={() => (dialogOpen = false)}
+                                    >Cancel</Button
+                                >
+                                <Button
+                                    variant="destructive"
+                                    onclick={() => (dialogOpen = false)}
+                                    >Delete</Button
+                                >
+                            </div>
+                        </Dialog>
                     </div>
                 </li>
 

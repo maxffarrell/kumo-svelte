@@ -8,7 +8,7 @@ overrides:
   echarts@<6.1.0: ^6.1.0
   esbuild: 0.28.1
   read-yaml-file: 2.1.0
-  undici: 7.28.0
+  undici: 7.29.0
   ws: 8.21.0
 
 allowBuilds:
@@ -21,3 +21,5 @@ minimumReleaseAgeExclude:
   - echarts@6.1.0
   # Renovate security update: @sveltejs/kit@2.69.1 || 2.70.2
   - "@sveltejs/kit@2.69.1 || 2.70.2"
+  # Renovate security update: undici@7.29.0
+  - undici@7.29.0

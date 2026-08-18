@@ -6,7 +6,7 @@ const KUMO_RANDOM_CONTEXT = "kumo:random-sequence";
 export interface KumoRandomSequence {
   next(): number;
   int(min: number, max: number): number;
-  float(min: number, max: number): string;
+  float(min: number, max: number): number;
 }
 
 function createSequence(seed: number): KumoRandomSequence {
@@ -23,7 +23,7 @@ function createSequence(seed: number): KumoRandomSequence {
       return Math.floor(sequence.next() * (max - min + 1) + min);
     },
     float(min, max) {
-      return (sequence.next() * (max - min) + min).toFixed(2);
+      return sequence.next() * (max - min) + min;
     },
   };
 
@@ -46,6 +46,6 @@ export function useKumoRandom(): KumoRandomSequence {
   return {
     next: () => Math.random(),
     int: (min, max) => Math.floor(Math.random() * (max - min + 1) + min),
-    float: (min, max) => (Math.random() * (max - min) + min).toFixed(2),
+    float: (min, max) => Math.random() * (max - min) + min,
   };
 }

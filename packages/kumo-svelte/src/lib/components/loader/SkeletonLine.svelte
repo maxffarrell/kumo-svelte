@@ -27,8 +27,8 @@
 
   const random = useKumoRandom();
   let width = $derived(random.int(minWidth, maxWidth));
-  let duration = $derived(random.float(minDuration, maxDuration));
-  let delay = $derived(random.float(minDelay, maxDelay));
+  let duration = $derived(random.float(minDuration, maxDuration).toFixed(2));
+  let delay = $derived(random.float(minDelay, maxDelay).toFixed(2));
   let height = $derived(typeof blockHeight === 'number' ? `${blockHeight}px` : blockHeight);
 </script>
 

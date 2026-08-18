@@ -591,6 +591,20 @@
   }
 }
 
+/* ===========================================================================
+   LayerCard component styles
+   ========================================================================== */
+
+@layer components {
+  :where(.kumo-layer-card) {
+    @apply overflow-hidden rounded-lg bg-kumo-base shadow-xs ring ring-kumo-line;
+  }
+
+  :where(.kumo-layer-card:has(> [data-kumo-layer-section])) {
+    @apply flex w-full flex-col bg-kumo-elevated text-base shadow-none ring-kumo-hairline;
+  }
+}
+
 /* ==========================================================================
    Kumo Docs Global Styles
    ========================================================================== */

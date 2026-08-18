@@ -36,6 +36,34 @@ import { SkeletonLine } from 'kumo-svelte/components/loader';
 
 </ComponentSection>
 
+<!-- SSR -->
+
+<ComponentSection>
+
+## SSR and Hydration
+
+  <p class="mb-4">
+    Skeleton widths and animation timings are stable between server rendering
+    and hydration. In an SSR application, call <code>provideKumoRandom</code>
+    once from the root layout to use one request-scoped random sequence for
+    all Kumo components:
+  </p>
+
+```svelte
+<script lang="ts">
+  import { provideKumoRandom } from 'kumo-svelte';
+
+  provideKumoRandom();
+</script>
+```
+
+  <p>
+    This is optional for client-only applications. Without the provider,
+    randomized values retain their normal unseeded behavior.
+  </p>
+
+</ComponentSection>
+
 <!-- Custom Widths -->
 
 <ComponentSection>

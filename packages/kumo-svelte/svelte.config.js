@@ -7,6 +7,11 @@ import { mdsxConfig } from './mdsx.config.js';
 const config = {
   extensions: ['.svelte', '.md'],
   preprocess: [mdsx(mdsxConfig), vitePreprocess()],
+  compilerOptions: {
+    experimental: {
+      async: true
+    }
+  },
   kit: {
     alias: {
       'kumo-svelte': './src/lib/index.ts',

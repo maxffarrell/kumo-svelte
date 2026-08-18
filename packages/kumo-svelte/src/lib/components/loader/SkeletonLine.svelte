@@ -1,7 +1,5 @@
 <script lang="ts">
-  const getRandomWidth = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
-
-  const getRandomFloat = (min: number, max: number) => (Math.random() * (max - min) + min).toFixed(2);
+  import { randomFloat, randomInt, useKumoRandom } from '$lib/utils/random';
 
   interface Props {
     minWidth?: number;
@@ -27,9 +25,10 @@
     ...rest
   }: Props = $props();
 
-  let width = $derived(getRandomWidth(minWidth, maxWidth));
-  let duration = $derived(getRandomFloat(minDuration, maxDuration));
-  let delay = $derived(getRandomFloat(minDelay, maxDelay));
+  const random = useKumoRandom();
+  let width = $derived(randomInt(random, minWidth, maxWidth));
+  let duration = $derived(randomFloat(random, minDuration, maxDuration));
+  let delay = $derived(randomFloat(random, minDelay, maxDelay));
   let height = $derived(typeof blockHeight === 'number' ? `${blockHeight}px` : blockHeight);
 </script>
 

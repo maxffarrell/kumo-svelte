@@ -2,6 +2,9 @@
   import '../lib/styles.css';
   import SidebarNav from '$lib/docs/SidebarNav.svelte';
   import { TooltipProvider } from '$lib/components/tooltip';
+  import { provideKumoRandom } from '$lib/utils/random';
+
+  provideKumoRandom();
 </script>
 
 <svelte:head>

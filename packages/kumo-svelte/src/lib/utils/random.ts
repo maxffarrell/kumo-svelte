@@ -9,7 +9,7 @@ export interface KumoRandomSequence {
   float(min: number, max: number): number;
 }
 
-function createSequence(seed: number): KumoRandomSequence {
+export function createKumoRandomSequence(seed: number): KumoRandomSequence {
   let state = seed >>> 0 || 1;
 
   const sequence: KumoRandomSequence = {
@@ -33,15 +33,17 @@ function createSequence(seed: number): KumoRandomSequence {
 export function provideKumoRandom(): void {
   if (getContext<KumoRandomSequence | undefined>(KUMO_RANDOM_CONTEXT)) return;
 
-  const seed = hydratable("kumo:random-seed", () => Math.random());
-  setContext(KUMO_RANDOM_CONTEXT, createSequence(seed));
+  const seed = hydratable("kumo:random-seed", () =>
+    Math.floor(Math.random() * 0x100000000),
+  );
+  setContext(KUMO_RANDOM_CONTEXT, createKumoRandomSequence(seed));
 }
 
 export function useKumoRandom(): KumoRandomSequence {
   const sequence = getContext<KumoRandomSequence | undefined>(
     KUMO_RANDOM_CONTEXT,
   );
-  if (sequence) return createSequence(sequence.next() * 0xffffffff);
+  if (sequence) return createKumoRandomSequence(sequence.next() * 0xffffffff);
 
   return {
     next: () => Math.random(),

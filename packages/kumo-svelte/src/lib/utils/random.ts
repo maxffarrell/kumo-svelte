@@ -43,7 +43,10 @@ export function useKumoRandom(): KumoRandomSequence {
   const sequence = getContext<KumoRandomSequence | undefined>(
     KUMO_RANDOM_CONTEXT,
   );
-  if (sequence) return createKumoRandomSequence(sequence.next() * 0xffffffff);
+  if (sequence)
+    return createKumoRandomSequence(
+      Math.floor(sequence.next() * 0x100000000),
+    );
 
   return {
     next: () => Math.random(),

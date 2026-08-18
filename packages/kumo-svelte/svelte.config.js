@@ -1,12 +1,13 @@
 import adapter from '@sveltejs/adapter-cloudflare';
+import MagicString from 'magic-string';
 import { mdsx } from 'mdsx';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsxConfig } from './mdsx.config.js';
 
-/** @returns {import('svelte/compiler').PreprocessorGroup} */
 /**
  * Resolve demos at page compilation so SSR can render them immediately.
  * Imports are injected into each page instead of eagerly loading every demo globally.
+ * @returns {import('svelte/compiler').PreprocessorGroup}
  */
 function componentExamples() {
   return {
@@ -15,32 +16,32 @@ function componentExamples() {
     markup: ({ content, filename }) => {
       if (!filename?.endsWith('.md') || !content.includes('<ComponentExample')) return;
 
+      const ms = new MagicString(content);
       const demos = new Set();
-      const transformed = content.replace(
-        /(<ComponentExample\b[^>]*?)\s+demo=(['"])([^'"]+)\2/g,
-        /** @param {string} match @param {string} openingTag @param {string} quote @param {string} demo */
-        (match, openingTag, quote, demo) => {
-          demos.add(demo);
-          return `${openingTag} component={${demo}} demo=${quote}${demo}${quote}`;
-        }
-      );
+      const results = content.matchAll(/<ComponentExample\b[^>]*?\s+demo=(['"])([^'"]+)\1/g);
+
+      for (const result of results) {
+        const [, , demo] = result;
+        if (demo === undefined || result.index === undefined) continue;
+
+        demos.add(demo);
+        ms.appendRight(result.index + '<ComponentExample'.length, ` component={${demo}}`);
+      }
 
       if (demos.size === 0) return;
 
-      const importMatch = transformed.match(/^import .*ComponentExample.*$/m);
+      const importMatch = content.match(/^import .*ComponentExample.*$/m);
       if (!importMatch || importMatch.index === undefined) return;
 
       const imports = [...demos]
-        .map((demo) => `import ${demo} from '$lib/docs/demo-snippets/${demo}.svelte';`)
-        .join('\n');
+        .map(
+          (demo) =>
+            `import ${demo} from '$lib/docs/demo-snippets/${demo}.svelte';`
+        )
+        .join("\n");
 
-      return {
-        code:
-          transformed.slice(0, importMatch.index) +
-          imports +
-          '\n' +
-          transformed.slice(importMatch.index)
-      };
+      ms.appendLeft(importMatch.index, `${imports}\n`);
+      return { code: ms.toString(), map: ms.generateMap() };
     }
   };
 }

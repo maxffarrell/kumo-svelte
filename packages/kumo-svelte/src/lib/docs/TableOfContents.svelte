@@ -62,7 +62,7 @@
         .map((heading) => document.getElementById(heading.slug))
         .filter((element): element is HTMLElement => element !== null);
 
-      if (elements.length === 0) return false;
+      if (elements.length === 0) return;
 
       observer?.disconnect();
       observer = new IntersectionObserver(
@@ -94,7 +94,6 @@
       );
 
       for (const element of elements) observer.observe(element);
-      return true;
     };
 
     initialize();

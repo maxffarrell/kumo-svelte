@@ -162,7 +162,12 @@ export type {
   SensitiveInputSize,
   SensitiveInputVariant,
 } from "./components/sensitive-input";
-export { Sidebar } from "./components/sidebar";
+export { Sidebar, useSidebar } from "./components/sidebar";
+export type {
+  SidebarContextValue,
+  SidebarScrollAlign,
+  SidebarScrollToItemOptions,
+} from "./components/sidebar";
 export { Surface } from "./components/surface";
 export {
   Switch,

@@ -42,7 +42,7 @@
   const Icon = $derived(iconForVariant(toast.variant));
 </script>
 
-<div class={cn('absolute inset-0 rounded-[11px] bg-kumo-base/90', toast.variant && backgroundClasses[toast.variant])}></div>
+<div class={cn('absolute inset-0 rounded-xl bg-kumo-base/90', toast.variant && backgroundClasses[toast.variant])}></div>
 <div
   class="isolate flex flex-col gap-1 transition-opacity [transition-duration:250ms] data-[behind]:pointer-events-none data-[behind]:opacity-0 data-[expanded]:pointer-events-auto data-[expanded]:opacity-100"
   data-behind={behind ? '' : undefined}

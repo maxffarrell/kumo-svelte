@@ -175,7 +175,7 @@
                     <div
                         class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
                     >
-                        <Toolbar class="w-[260px]">
+                        <Toolbar>
                             <Toolbar.Input
                                 aria-label="Search DNS records"
                                 placeholder="Search..."

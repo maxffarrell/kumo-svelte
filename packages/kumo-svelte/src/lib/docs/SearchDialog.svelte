@@ -178,7 +178,6 @@
     'layer-card': 'A card with a layered visual effect for navigation or highlights.',
     link: 'Text link styling.',
     loader: 'A loading spinner to indicate loading state.',
-    'menu-bar': 'A horizontal menu bar with icon buttons for toolbars.',
     meter: 'A visual indicator showing a value within a known range.',
     pagination: 'Navigation controls for paginated content.',
     popover: 'An accessible popup anchored to a trigger element.',

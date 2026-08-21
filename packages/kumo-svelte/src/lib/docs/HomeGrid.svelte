@@ -1,8 +1,6 @@
 <script lang="ts">
     import Warning from "phosphor-svelte/lib/Warning";
-    import TextB from "phosphor-svelte/lib/TextB";
     import CheckCircle from "phosphor-svelte/lib/CheckCircle";
-    import TextItalic from "phosphor-svelte/lib/TextItalic";
     import TranslateIcon from "phosphor-svelte/lib/TranslateIcon";
     import WarningOctagon from "phosphor-svelte/lib/WarningOctagon";
     import Plus from "phosphor-svelte/lib/Plus";
@@ -35,7 +33,6 @@
     import { LayerCard } from "$lib/components/layer-card";
     import { Link } from "$lib/components/link";
     import { Loader } from "$lib/components/loader";
-    import { MenuBar } from "$lib/components/menu-bar";
     import { Meter } from "$lib/components/meter";
     import { Pagination, PaginationControls } from "$lib/components/pagination";
     import {
@@ -92,7 +89,6 @@
     let checked = $state(true);
     let page = $state(1);
     let activeTab = $state("home");
-    let activeMenuOption = $state<number | undefined>(0);
     let collapsibleOpen = $state(false);
     let comboboxIssue = $state<string | null>(null);
     let dialogOpen = $state(false);
@@ -722,44 +718,6 @@
                             value={75}
                             label="My meter"
                             customValue="100 / 5,000"
-                        />
-                    </div>
-                </li>
-
-                <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
-                >
-                    <a
-                        id="menu-bar"
-                        href="/components/menu-bar"
-                        class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default"
-                        >MenuBar</a
-                    >
-                    <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
-                    >
-                        <MenuBar
-                            isActive={activeMenuOption}
-                            options={[
-                                {
-                                    icon: TextB,
-                                    tooltip: "Bold",
-                                    onClick: () =>
-                                        (activeMenuOption =
-                                            activeMenuOption === 0
-                                                ? undefined
-                                                : 0),
-                                },
-                                {
-                                    icon: TextItalic,
-                                    tooltip: "Italic",
-                                    onClick: () =>
-                                        (activeMenuOption =
-                                            activeMenuOption === 1
-                                                ? undefined
-                                                : 1),
-                                },
-                            ]}
                         />
                     </div>
                 </li>

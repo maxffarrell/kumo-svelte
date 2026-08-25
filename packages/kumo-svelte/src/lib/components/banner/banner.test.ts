@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import Banner, { bannerVariants } from "./Banner.svelte";
 import { Banner as BannerCompound } from "./index";
 import BannerLinkActionTest from "../../test-fixtures/BannerLinkActionTest.svelte";
+import BannerActionTest from "../../test-fixtures/BannerActionTest.svelte";
 
 describe("Banner", () => {
   it("matches the 2.9 compact size contract", () => {
@@ -43,6 +44,24 @@ describe("Banner", () => {
     const description = screen.getByText("A DNS record already exists.");
     const action = screen.getByTestId("action");
     expect(action.parentElement?.parentElement).toBe(description);
-    expect(action.parentElement?.className).toContain("banner-compact-action");
+    expect(action.parentElement?.className).toContain("ml-1.5");
+  });
+
+  it("renders a compact CTA as a trailing sibling at the xs size", () => {
+    render(BannerActionTest);
+
+    const description = screen.getByText("A new version is ready.");
+    const action = screen.getByTestId("action");
+    expect(action.parentElement?.parentElement).toBe(
+      description.parentElement?.parentElement,
+    );
+    expect(action.className).toContain("h-5");
+  });
+
+  it("uses the compact icon line-height slot", () => {
+    const { container } = render(BannerActionTest);
+
+    const icon = container.querySelector("svg");
+    expect(icon?.parentElement?.className).toContain("h-[1.25em]");
   });
 });

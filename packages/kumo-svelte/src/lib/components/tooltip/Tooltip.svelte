@@ -57,7 +57,7 @@
     onOpenChange,
     side = KUMO_TOOLTIP_DEFAULT_VARIANTS.side,
     align,
-    sideOffset = 1,
+    sideOffset = 0,
     delay = 600,
     closeDelay,
     disabled,

@@ -7,6 +7,7 @@
   import { fade, scale } from 'svelte/transition';
   import { Badge } from '$lib/components/badge';
   import { cn } from '$lib/utils/cn';
+  import { CANONICAL_DOCS } from './canonicalDocs';
   import { componentItems, blockItems, type NavItem } from './nav';
 
   interface SearchItem {
@@ -59,7 +60,7 @@
     {
       name: 'Colors',
       description: "Explore Kumo's semantic color tokens and theming system.",
-      url: '/colors',
+      url: CANONICAL_DOCS.colors,
       category: 'Guides',
       type: 'page'
     },
@@ -87,7 +88,14 @@
     {
       name: 'Figma',
       description: 'Using Kumo components in Figma with the Kumo Figma plugin.',
-      url: '/figma',
+      url: CANONICAL_DOCS.figma,
+      category: 'Guides',
+      type: 'page'
+    },
+    {
+      name: 'Design skill',
+      description: 'Cloudflare product design guidance for building and reviewing Kumo interfaces.',
+      url: CANONICAL_DOCS.skill,
       category: 'Guides',
       type: 'page'
     },

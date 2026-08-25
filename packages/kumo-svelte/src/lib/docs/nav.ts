@@ -1,3 +1,5 @@
+import { CANONICAL_DOCS } from './canonicalDocs';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -7,10 +9,11 @@ export const staticPages: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Installation', href: '/installation' },
   { label: 'Contributing', href: '/contributing' },
-  { label: 'Colors', href: '/colors' },
+  { label: 'Colors', href: CANONICAL_DOCS.colors },
   { label: 'Accessibility', href: '/accessibility' },
-  { label: 'Figma Resources', href: '/figma' },
+  { label: 'Figma Resources', href: CANONICAL_DOCS.figma },
   { label: 'CLI', href: '/cli' },
+  { label: 'Design skill', href: CANONICAL_DOCS.skill },
   { label: 'Registry', href: '/registry' },
   { label: 'Changelog', href: '/changelog' }
 ];

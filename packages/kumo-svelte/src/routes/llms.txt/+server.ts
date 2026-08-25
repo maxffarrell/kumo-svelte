@@ -80,13 +80,19 @@ const coreDocs: LlmLink[] = [
   },
   {
     title: "Colors",
-    path: "/colors.md",
+    path: "https://kumo-ui.com/colors",
     description: "Semantic color tokens and theme behavior.",
   },
   {
     title: "Figma Resources",
-    path: "/figma.md",
+    path: "https://kumo-ui.com/figma",
     description: "Design resources and Figma integration notes.",
+  },
+  {
+    title: "Design skill",
+    path: "https://kumo-ui.com/skill",
+    description:
+      "Cloudflare product design guidance for building and reviewing Kumo interfaces.",
   },
   {
     title: "Streaming",
@@ -230,10 +236,12 @@ function formatSection(title: string, links: LlmLink[]) {
   return [
     `## ${title}`,
     "",
-    ...links.map(
-      (link) =>
-        `- [${link.title}](${SITE_URL}${link.path}): ${link.description}`,
-    ),
+    ...links.map((link) => {
+      const url = link.path.startsWith("https://")
+        ? link.path
+        : `${SITE_URL}${link.path}`;
+      return `- [${link.title}](${url}): ${link.description}`;
+    }),
   ].join("\n");
 }
 

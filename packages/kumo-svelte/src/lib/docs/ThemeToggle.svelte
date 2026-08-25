@@ -54,21 +54,28 @@
   }
 </script>
 
+{#snippet themeTrigger({ props }: { props: Record<string, unknown> })}
+  <Button
+    {...props}
+    variant="ghost"
+    shape="square"
+    aria-label={mounted ? `Select theme, current theme is ${theme}` : 'Select theme'}
+  >
+    {#if !mounted || theme === 'system'}
+      <DesktopIcon size={20} />
+    {:else if theme === 'dark'}
+      <MoonIcon size={20} />
+    {:else}
+      <SunIcon size={20} />
+    {/if}
+  </Button>
+{/snippet}
+
 <DropdownMenu>
-  <DropdownMenu.Trigger>
-    <Button variant="ghost" shape="square" aria-label={mounted ? `Select theme, current theme is ${theme}` : 'Select theme'}>
-      {#if !mounted || theme === 'system'}
-        <DesktopIcon size={20} />
-      {:else if theme === 'dark'}
-        <MoonIcon size={20} />
-      {:else}
-        <SunIcon size={20} />
-      {/if}
-    </Button>
-  </DropdownMenu.Trigger>
+  <DropdownMenu.Trigger child={themeTrigger} />
   <DropdownMenu.Content align="end">
-    <DropdownMenu.Label>Theme</DropdownMenu.Label>
-    <DropdownMenu.RadioGroup bind:value={theme} onValueChange={selectTheme}>
+    <DropdownMenu.RadioGroup value={theme} onValueChange={selectTheme}>
+      <DropdownMenu.Label>Theme</DropdownMenu.Label>
       {#each themeOptions as option}
         <DropdownMenu.RadioItem value={option.value} icon={option.icon}>
           {option.label}

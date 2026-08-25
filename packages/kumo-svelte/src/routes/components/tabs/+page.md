@@ -99,6 +99,20 @@ Tabs automatically scroll horizontally when there are many items.
 
 <ComponentExample demo="TabsManyDemo" />
 
+### Horizontal Overflow
+
+When segmented tabs overflow their container, scroll buttons appear at the
+clipped edge. Use them, horizontal scrolling, or mouse drag to reveal off-screen
+tabs.
+
+### Dynamic Tab Count
+
+This example toggles between an overflowing tab set and a production-like
+seven-tab set. When the extra tabs disappear, the end overflow control hides
+once the remaining tabs fit.
+
+<ComponentExample demo="TabsDynamicCountDemo" />
+
 </ComponentSection>
 
 <!-- API Reference -->

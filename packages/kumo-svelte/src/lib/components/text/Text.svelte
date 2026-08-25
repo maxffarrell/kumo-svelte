@@ -4,17 +4,24 @@
   /** Text variant and size definitions mapping names to their Tailwind classes. */
   export const KUMO_TEXT_VARIANTS = {
     variant: {
+      heading: {
+        classes: 'text-lg font-semibold',
+        description: 'Heading text (16px by default, 20px at large size)'
+      },
+      /** @deprecated Use `heading` and set `size` and `as` explicitly. */
       heading1: {
         classes: 'text-3xl font-semibold',
-        description: 'Large heading for page titles'
+        description: 'Deprecated large heading for page titles; use heading instead'
       },
+      /** @deprecated Use `heading` and set `size` and `as` explicitly. */
       heading2: {
         classes: 'text-2xl font-semibold',
-        description: 'Medium heading for section titles'
+        description: 'Deprecated medium heading for section titles; use heading instead'
       },
+      /** @deprecated Use `heading` and set `size` and `as` explicitly. */
       heading3: {
         classes: 'text-lg font-semibold',
-        description: 'Small heading for subsections'
+        description: 'Deprecated small heading for subsections; use heading instead'
       },
       body: {
         classes: 'text-kumo-default',
@@ -101,6 +108,30 @@
 
   export type KumoTextVariant = keyof typeof KUMO_TEXT_VARIANTS.variant;
   export type KumoTextSize = keyof typeof KUMO_TEXT_VARIANTS.size;
+  type CopyVariant = 'body' | 'secondary' | 'success' | 'error';
+  type MonospaceVariant = 'mono' | 'mono-secondary';
+  type DeprecatedHeadingVariant = 'heading1' | 'heading2' | 'heading3';
+
+  const DEPRECATED_HEADING_VARIANTS: readonly DeprecatedHeadingVariant[] = [
+    'heading1',
+    'heading2',
+    'heading3'
+  ];
+
+  export function isDeprecatedHeadingVariant(
+    variant: KumoTextVariant
+  ): variant is DeprecatedHeadingVariant {
+    return (DEPRECATED_HEADING_VARIANTS as readonly KumoTextVariant[]).includes(variant);
+  }
+
+  export function resolveTextSizeClasses(variant: KumoTextVariant, size: KumoTextSize) {
+    if (variant === 'heading') return size === 'lg' ? 'text-xl' : '';
+    if (isDeprecatedHeadingVariant(variant)) return '';
+    if (variant === 'mono' || variant === 'mono-secondary') {
+      return size === 'lg' ? KUMO_TEXT_VARIANTS.size.base.classes : KUMO_TEXT_VARIANTS.size.sm.classes;
+    }
+    return KUMO_TEXT_VARIANTS.size[size]?.classes ?? KUMO_TEXT_VARIANTS.size.base.classes;
+  }
 
   export interface KumoTextVariantsProps {
     variant?: KumoTextVariant;
@@ -137,36 +168,31 @@
     return cn(
       KUMO_TEXT_VARIANTS.variant[variant]?.classes ??
         KUMO_TEXT_VARIANTS.variant[KUMO_TEXT_DEFAULT_VARIANTS.variant].classes,
-      KUMO_TEXT_VARIANTS.size[size]?.classes ??
-        KUMO_TEXT_VARIANTS.size[KUMO_TEXT_DEFAULT_VARIANTS.size].classes
+      resolveTextSizeClasses(variant, size)
     );
   }
-</script>
 
-<script lang="ts">
-  import type { Snippet } from 'svelte';
-
-  interface Props {
-    /** Text style variant. Determines color, font, and weight. */
-    variant?: KumoTextVariant;
-    /** Backward-compatible color alias from the original Kumo examples. */
-    color?: 'default' | 'subtle' | 'success' | 'error';
-    /** Text size. Only applies to body/secondary/success/error variants. */
-    size?: KumoTextSize;
-    /** Whether to use bold font weight. Only applies to body variants. */
-    bold?: boolean;
-    /** Whether to truncate overflowing text with an ellipsis. */
+  interface CommonTextProps {
     truncate?: boolean;
-    /** The HTML element to render. */
-    as?: TextElement;
-    /** Text content. */
-    children?: Snippet;
+    children?: import('svelte').Snippet;
     DANGEROUS_className?: string;
     DANGEROUS_style?: string;
     class?: string;
     style?: string;
     [key: string]: unknown;
   }
+
+  export type TextProps = CommonTextProps &
+    (
+      | { variant?: CopyVariant; color?: 'default' | 'subtle' | 'success' | 'error'; size?: KumoTextSize; bold?: boolean; as?: TextElement }
+      | { variant: 'heading'; color?: never; size?: 'lg'; bold?: never; as?: TextElement }
+      | { variant: DeprecatedHeadingVariant; color?: never; size?: never; bold?: never; as: TextElement }
+      | { variant: MonospaceVariant; color?: never; size?: 'lg'; bold?: never; as?: TextElement }
+    );
+</script>
+
+<script lang="ts">
+  import { DEV } from 'esm-env';
 
   let {
     variant = KUMO_TEXT_DEFAULT_VARIANTS.variant,
@@ -181,7 +207,7 @@
     class: className,
     style,
     ...rest
-  }: Props = $props();
+  }: TextProps = $props();
 
   const copyVariants = ['body', 'secondary', 'success', 'error'];
   const monoVariants = ['mono', 'mono-secondary'];
@@ -190,21 +216,21 @@
   let isCopy = $derived(copyVariants.includes(resolvedVariant));
   let isMono = $derived(monoVariants.includes(resolvedVariant));
   let Component = $derived(as ?? (isMono || resolvedVariant.startsWith('heading') ? 'span' : 'p'));
+
+  $effect(() => {
+    if (DEV && isDeprecatedHeadingVariant(resolvedVariant)) {
+      console.warn(
+        `[Kumo Text]: variant="${resolvedVariant}" is deprecated. Use variant="heading" and set size and as explicitly.`
+      );
+    }
+  });
   let computedClass = $derived(
     cn(
       'text-kumo-default',
       KUMO_TEXT_VARIANTS.variant[resolvedVariant]?.classes ??
         KUMO_TEXT_VARIANTS.variant[KUMO_TEXT_DEFAULT_VARIANTS.variant].classes,
-      isCopy
-        ? (KUMO_TEXT_VARIANTS.size[size]?.classes ??
-            KUMO_TEXT_VARIANTS.size[KUMO_TEXT_DEFAULT_VARIANTS.size].classes)
-        : '',
+      resolveTextSizeClasses(resolvedVariant, size),
       isCopy && bold ? 'font-medium' : '',
-      isMono
-        ? size === 'lg'
-          ? KUMO_TEXT_VARIANTS.size.base.classes
-          : KUMO_TEXT_VARIANTS.size.sm.classes
-        : '',
       truncate && 'truncate min-w-0',
       DANGEROUS_className,
       className

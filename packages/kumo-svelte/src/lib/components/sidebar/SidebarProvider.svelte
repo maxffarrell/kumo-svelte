@@ -6,6 +6,7 @@
     setSidebarContext,
     type SidebarCollapsible,
     type SidebarSide,
+    type SidebarScrollToItemOptions,
     type SidebarState,
     type SidebarVariant
   } from './context';
@@ -55,6 +56,7 @@
   let isMobile: boolean = $state(false);
   let openMobile: boolean = $state(false);
   let isResizing: boolean = $state(false);
+  const items = new Map<string, HTMLElement>();
 
   const visibleOpen = $derived(isMobile ? openMobile : open);
   const sidebarState: SidebarState = $derived(isPeeking ? 'peeking' : visibleOpen ? 'expanded' : 'collapsed');
@@ -104,6 +106,42 @@
 
   function stopPeek() {
     isPeeking = false;
+  }
+
+  function registerItem(id: string, node: HTMLElement | null) {
+    if (node) items.set(id, node);
+    else items.delete(id);
+  }
+
+  function scrollToItem(id: string, options: SidebarScrollToItemOptions = {}) {
+    const { align = 'auto', behavior = 'auto' } = options;
+    const target = items.get(id);
+    if (!target) return;
+    const viewport = target.closest<HTMLElement>('[data-sidebar="viewport"]');
+    if (!viewport) return;
+
+    const targetRect = target.getBoundingClientRect();
+    const viewportRect = viewport.getBoundingClientRect();
+    const itemScrollOffset = targetRect.top - viewportRect.top + viewport.scrollTop;
+
+    let desired: number;
+    if (align === 'center') {
+      desired = itemScrollOffset - (viewport.clientHeight - target.offsetHeight) / 2;
+    } else if (align === 'end') {
+      desired = itemScrollOffset - (viewport.clientHeight - target.offsetHeight);
+    } else if (align === 'auto') {
+      const itemBottom = itemScrollOffset + target.offsetHeight;
+      const viewBottom = viewport.scrollTop + viewport.clientHeight;
+      if (itemScrollOffset < viewport.scrollTop) desired = itemScrollOffset;
+      else if (itemBottom > viewBottom) desired = itemBottom - viewport.clientHeight;
+      else return;
+    } else {
+      desired = itemScrollOffset;
+    }
+
+    const clamped = Math.max(0, Math.min(desired, viewport.scrollHeight - viewport.clientHeight));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    viewport.scrollTo({ top: clamped, behavior: reducedMotion ? 'auto' : behavior });
   }
 
   $effect(() => {
@@ -172,7 +210,9 @@
     },
     startPeek,
     stopPeek,
-    toggleSidebar
+    toggleSidebar,
+    registerItem,
+    scrollToItem
   });
 </script>
 

@@ -1,5 +1,6 @@
 <script lang="ts">
   import CaretDown from 'phosphor-svelte/lib/CaretDown';
+  import type { Snippet } from 'svelte';
   import X from 'phosphor-svelte/lib/X';
   import { cn } from '$lib/utils/cn';
   import { embeddedInputStyles, getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
@@ -11,6 +12,7 @@
     size?: ComboboxSize;
     clearLabel?: string;
     showOptionsLabel?: string;
+    child?: Snippet<[{ props: Record<string, unknown> }]>;
     [key: string]: unknown;
   }
 
@@ -20,6 +22,7 @@
     size,
     clearLabel = 'Clear selection',
     showOptionsLabel = 'Show options',
+    child,
     ...rest
   }: Props = $props();
 
@@ -51,12 +54,13 @@
 
 <div
   class={cn(
-    'relative inline-block w-full max-w-xs',
+    'relative inline-block w-full',
     'has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50',
     className
   )}
 >
   <ComboboxPrimitive.Input
+    {child}
     class={cn(
       inputStyles[resolvedSize],
       'w-full border-0 bg-kumo-control text-kumo-default shadow-xs ring ring-kumo-line outline-none',

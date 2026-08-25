@@ -8,8 +8,10 @@
   export const KUMO_MENUBAR_VARIANTS = {} as const;
   export const KUMO_MENUBAR_DEFAULT_VARIANTS = {} as const;
 
+  /** @deprecated Use segmented Tabs instead. */
   export interface KumoMenuBarVariantsProps {}
 
+  /** @deprecated Use segmented Tabs instead. */
   export function menuBarVariants(_props: KumoMenuBarVariantsProps = {}) {
     return cn(
       'flex rounded-lg border border-kumo-recessed bg-kumo-recessed pl-px shadow-xs transition-colors'

@@ -30,6 +30,7 @@ import {
   SidebarTrigger,
 } from "./index";
 import SidebarTestHost from "./SidebarTestHost.svelte";
+import SidebarScrollTestHost from "./SidebarScrollTestHost.svelte";
 
 beforeEach(() => {
   Object.defineProperty(window, "matchMedia", {
@@ -81,6 +82,37 @@ describe("Sidebar exports", () => {
     expect(Sidebar).not.toHaveProperty("Input");
     expect(Sidebar).not.toHaveProperty("MenuAction");
     expect(Sidebar).not.toHaveProperty("GroupContent");
+  });
+});
+
+describe("Sidebar imperative scrolling", () => {
+  it("registers item ids and scrolls only the owning viewport", async () => {
+    const { container } = render(SidebarScrollTestHost);
+    const viewport = container.querySelector<HTMLElement>(
+      '[data-sidebar="viewport"]',
+    )!;
+    const item = container.querySelector<HTMLElement>(
+      '[data-sidebar-item-id="billing"]',
+    )!;
+    const scrollTo = vi.fn();
+
+    Object.defineProperties(viewport, {
+      clientHeight: { value: 100 },
+      scrollHeight: { value: 500 },
+      scrollTop: { value: 50, writable: true },
+      scrollTo: { value: scrollTo },
+    });
+    Object.defineProperty(item, "offsetHeight", { value: 20 });
+    vi.spyOn(viewport, "getBoundingClientRect").mockReturnValue({
+      top: 0,
+    } as DOMRect);
+    vi.spyOn(item, "getBoundingClientRect").mockReturnValue({
+      top: 200,
+    } as DOMRect);
+
+    await fireEvent.click(screen.getByRole("button", { name: "Find billing" }));
+
+    expect(scrollTo).toHaveBeenCalledWith({ top: 210, behavior: "smooth" });
   });
 });
 
@@ -159,5 +191,24 @@ describe("Sidebar toggle", () => {
     );
 
     expect(onOpenChange).toHaveBeenCalledWith(false);
+  });
+
+  it("keeps peeking when a view change blurs the active item under the pointer", async () => {
+    const { container } = render(SidebarTestHost, {
+      props: { defaultOpen: false, peekable: true },
+    });
+    const wrapper = container.querySelector<HTMLElement>("[data-sidebar-wrapper]")!;
+    const peekZone = container.querySelector<HTMLElement>(
+      '[data-sidebar="content-container"]',
+    )!;
+
+    await fireEvent.mouseEnter(peekZone);
+    expect(wrapper.dataset.state).toBe("peeking");
+
+    await fireEvent.blur(peekZone, { relatedTarget: null });
+    expect(wrapper.dataset.state).toBe("peeking");
+
+    await fireEvent.mouseLeave(peekZone);
+    expect(wrapper.dataset.state).toBe("collapsed");
   });
 });

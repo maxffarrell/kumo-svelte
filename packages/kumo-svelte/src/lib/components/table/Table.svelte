@@ -14,11 +14,12 @@
     },
     variant: {
       default: {
-        classes: '',
+        classes:
+          'even:bg-kumo-tint [--kumo-table-row-bg:var(--color-kumo-base)] even:[--kumo-table-row-bg:var(--color-kumo-tint)]',
         description: 'Default row variant'
       },
       selected: {
-        classes: 'bg-kumo-tint',
+        classes: 'bg-kumo-tint [--kumo-table-row-bg:var(--color-kumo-tint)]',
         description: 'Selected row variant'
       }
     },
@@ -52,10 +53,10 @@
     if (element === 'cell') {
       const fade =
         side === 'right'
-          ? 'before:bg-gradient-to-r before:from-transparent before:to-kumo-base'
-          : 'before:bg-gradient-to-l before:from-transparent before:to-kumo-base';
+          ? 'before:bg-gradient-to-r before:from-transparent before:to-(--kumo-table-row-bg)'
+          : 'before:bg-gradient-to-l before:from-transparent before:to-(--kumo-table-row-bg)';
 
-      return cn(base, z, 'bg-kumo-base', fadeBase, fadePosition, fade);
+      return cn(base, z, 'bg-(--kumo-table-row-bg)', fadeBase, fadePosition, fade);
     }
 
     const bg = 'bg-kumo-base group-data-[compact]/header:bg-kumo-elevated';
@@ -85,7 +86,6 @@
   class={cn(
     'isolate w-full',
     KUMO_TABLE_VARIANTS.layout[layout].classes,
-    '[&_td]:border-b [&_td]:border-kumo-fill [&_tr:last-child_td]:border-b-0',
     '[&_td]:p-3',
     '[&_th]:border-b [&_th]:border-kumo-fill [&_th]:p-3 [&_th]:font-semibold [&_th]:text-base',
     '[&_th]:bg-kumo-base',

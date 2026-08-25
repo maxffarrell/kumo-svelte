@@ -119,6 +119,7 @@ export {
 export type { KumoLinkVariant } from "./components/link";
 export { Loader, SkeletonLine } from "./components/loader";
 export { KumoLogo, SvelteLogo } from "./components/logo";
+/** @deprecated Use `Tabs` with `variant="segmented"` instead. */
 export { MenuBar } from "./components/menu-bar";
 export {
   Meter,
@@ -161,7 +162,12 @@ export type {
   SensitiveInputSize,
   SensitiveInputVariant,
 } from "./components/sensitive-input";
-export { Sidebar } from "./components/sidebar";
+export { Sidebar, useSidebar } from "./components/sidebar";
+export type {
+  SidebarContextValue,
+  SidebarScrollAlign,
+  SidebarScrollToItemOptions,
+} from "./components/sidebar";
 export { Surface } from "./components/surface";
 export {
   Switch,

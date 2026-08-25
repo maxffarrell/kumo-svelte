@@ -3,16 +3,16 @@ import type { PropRow } from '../prop-types';
 const rows: PropRow[] = [
   {
     "prop": "variant",
-    "type": "'heading1' | 'heading2' | 'heading3' | 'body' | 'secondary' | 'mono' | 'mono-secondary' | 'success' | 'error'",
+    "type": "'heading' | 'heading1' | 'heading2' | 'heading3' | 'body' | 'secondary' | 'mono' | 'mono-secondary' | 'success' | 'error'",
     "required": false,
-    "description": "Visual variant.",
+    "description": "Visual variant. Numbered heading variants are deprecated; use heading with size and as.",
     "default": "\"body\""
   },
   {
     "prop": "size",
     "type": "'xs' | 'sm' | 'base' | 'lg'",
     "required": false,
-    "description": "Size preset.",
+    "description": "Size preset. Heading accepts lg for a 20px heading; its default is 16px.",
     "default": "\"base\""
   },
   {

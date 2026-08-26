@@ -120,6 +120,9 @@ importers:
       jsdom:
         specifier: ^29.1.1
         version: 29.1.1
+      magic-string:
+        specifier: ^0.30.21
+        version: 0.30.21
       mdsx:
         specifier: ^0.0.7
         version: 0.0.7(svelte@5.56.3)

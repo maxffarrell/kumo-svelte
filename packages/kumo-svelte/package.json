@@ -104,6 +104,7 @@
     "@types/node": "^25.9.3",
     "happy-dom": "^20.10.5",
     "jsdom": "^29.1.1",
+    "magic-string": "^0.30.21",
     "mdsx": "^0.0.7",
     "svelte": "^5.56.3",
     "svelte-check-native": "^0.9.6",

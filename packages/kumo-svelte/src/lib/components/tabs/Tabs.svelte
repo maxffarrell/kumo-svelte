@@ -371,35 +371,36 @@
       ></div>
     </TabsPrimitive.List>
 
-    {#each [
-      { side: 'start', visible: canScrollStart, label: labels.scrollStart ?? 'Scroll tabs left' },
-      { side: 'end', visible: canScrollEnd, label: labels.scrollEnd ?? 'Scroll tabs right' }
-    ] as control}
-      <button
-        type="button"
-        data-kumo-component="Tabs"
-        data-kumo-part="overflow-control"
-        data-side={control.side}
-        aria-label={control.label}
-        aria-hidden={!control.visible}
-        tabindex={control.visible ? 0 : -1}
-        onclick={() => scrollTabs(control.side as 'start' | 'end')}
-        class={cn(
-          'absolute inset-y-0 z-3 flex items-center border-0 bg-transparent p-0 transition-opacity duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-kumo-brand',
-          control.side === 'start' ? 'left-0 justify-start bg-linear-to-r' : 'right-0 justify-end bg-linear-to-l',
-          control.visible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
-          isSegmented ? 'from-kumo-recessed via-kumo-recessed/95 to-transparent' : 'from-kumo-base via-kumo-base/95 to-transparent',
-          isSegmented && (isSm ? 'w-8 rounded-md' : 'w-10 rounded-lg'),
-          !isSegmented && 'w-8'
-        )}
-      >
-        <span class={cn('flex items-center justify-center rounded-full bg-kumo-elevated text-kumo-subtle shadow-sm ring ring-kumo-line transition-colors hover:bg-kumo-base hover:text-kumo-default', isSm ? 'size-5' : 'size-6', control.side === 'start' ? 'ml-1' : 'mr-1')}>
-          <svg viewBox="0 0 16 16" fill="none" class="size-3.5" aria-hidden="true">
-            <path d={control.side === 'start' ? 'M9.25 4.25L5.75 8L9.25 11.75' : 'M6.75 4.25L10.25 8L6.75 11.75'} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-          </svg>
-        </span>
-      </button>
-    {/each}
+    {#if isSegmented}
+      {#each [
+        { side: 'start', visible: canScrollStart, label: labels.scrollStart ?? 'Scroll tabs left' },
+        { side: 'end', visible: canScrollEnd, label: labels.scrollEnd ?? 'Scroll tabs right' }
+      ] as control}
+        <button
+          type="button"
+          data-kumo-component="Tabs"
+          data-kumo-part="overflow-control"
+          data-side={control.side}
+          aria-label={control.label}
+          aria-hidden={!control.visible}
+          tabindex={control.visible ? 0 : -1}
+          onclick={() => scrollTabs(control.side as 'start' | 'end')}
+          class={cn(
+            'absolute inset-y-0 z-3 flex items-center border-0 bg-transparent p-0 transition-opacity duration-150 focus:outline-none focus-visible:[&>span]:ring-2 focus-visible:[&>span]:ring-kumo-brand',
+            control.side === 'start' ? 'left-0 justify-start bg-linear-to-r' : 'right-0 justify-end bg-linear-to-l',
+            control.visible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+            'from-kumo-recessed via-kumo-recessed/95 to-transparent',
+            isSm ? 'w-8 rounded-md' : 'w-10 rounded-lg'
+          )}
+        >
+          <span class={cn('flex items-center justify-center text-kumo-subtle transition-colors hover:text-kumo-default', isSm ? 'size-5 rounded-sm' : 'size-6 rounded-md', control.side === 'start' ? 'ml-1' : 'mr-1')}>
+            <svg viewBox="0 0 16 16" fill="none" class="size-3.5" aria-hidden="true">
+              <path d={control.side === 'start' ? 'M9.25 4.25L5.75 8L9.25 11.75' : 'M6.75 4.25L10.25 8L6.75 11.75'} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+          </span>
+        </button>
+      {/each}
+    {/if}
 
     {#each normalizedItems as tab (tab.value)}
       {#if tab.content}

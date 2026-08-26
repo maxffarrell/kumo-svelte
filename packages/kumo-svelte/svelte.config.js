@@ -18,6 +18,7 @@ function componentExamples() {
 
       const ms = new MagicString(content);
       const demos = new Set();
+      const sourceDemos = new Set();
       const results = content.matchAll(/<ComponentExample\b[^>]*?\s+demo=(['"])([^'"]+)\1/g);
 
       for (const result of results) {
@@ -25,7 +26,13 @@ function componentExamples() {
         if (demo === undefined || result.index === undefined) continue;
 
         demos.add(demo);
-        ms.appendRight(result.index + '<ComponentExample'.length, ` component={${demo}}`);
+        const tagEnd = content.indexOf('>', result.index);
+        const hasCode = tagEnd !== -1 && /\scode\s*=/.test(content.slice(result.index, tagEnd));
+        if (!hasCode) sourceDemos.add(demo);
+        ms.appendRight(
+          result.index + '<ComponentExample'.length,
+          ` component={${demo}}${hasCode ? '' : ` code={${demo}Source}`}`
+        );
       }
 
       if (demos.size === 0) return;
@@ -34,11 +41,14 @@ function componentExamples() {
       if (!importMatch || importMatch.index === undefined) return;
 
       const imports = [...demos]
-        .map(
-          (demo) =>
-            `import ${demo} from '$lib/docs/demo-snippets/${demo}.svelte';`
-        )
-        .join("\n");
+        .flatMap((demo) => {
+          const imports = [`import ${demo} from '$lib/docs/demo-snippets/${demo}.svelte';`];
+          if (sourceDemos.has(demo)) {
+            imports.push(`import ${demo}Source from '$lib/docs/demo-snippets/${demo}.svelte?raw';`);
+          }
+          return imports;
+        })
+        .join('\n');
 
       ms.appendLeft(importMatch.index, `${imports}\n`);
       return { code: ms.toString(), map: ms.generateMap() };
@@ -50,6 +60,11 @@ function componentExamples() {
 const config = {
   extensions: ['.svelte', '.md'],
   preprocess: [mdsx(mdsxConfig), componentExamples(), vitePreprocess()],
+  compilerOptions: {
+    experimental: {
+      async: true
+    }
+  },
   kit: {
     alias: {
       'kumo-svelte': './src/lib/index.ts',

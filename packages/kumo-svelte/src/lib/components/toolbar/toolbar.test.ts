@@ -78,4 +78,32 @@ describe('Toolbar', () => {
     await fireEvent.keyDown(input, { key: 'ArrowRight' });
     expect(document.activeElement).toBe(visit);
   });
+
+  it('composes Select and Combobox triggers as toolbar controls', async () => {
+    render(ToolbarTestHost);
+
+    const select = screen.getByRole('button', { name: 'Sort records' });
+    expect(select.className).toContain('rounded-none');
+    expect(screen.getByRole('combobox', { name: 'Filter status' }).className).toContain('rounded-none');
+
+    await fireEvent.pointerDown(select, { button: 0 });
+    expect(await screen.findByRole('option', { name: 'Created date' })).toBeTruthy();
+  });
+
+  it('moves from a composed combobox input only when its caret reaches the edge', async () => {
+    render(ToolbarTestHost);
+
+    const input = screen.getByRole('combobox', { name: 'Filter status' }) as HTMLInputElement;
+    const next = screen.getByRole('button', { name: 'After combobox' });
+    await fireEvent.input(input, { target: { value: 'Ac' } });
+
+    input.focus();
+    input.setSelectionRange(1, 1);
+    await fireEvent.keyDown(input, { key: 'ArrowRight' });
+    expect(document.activeElement).toBe(input);
+
+    input.setSelectionRange(input.value.length, input.value.length);
+    await fireEvent.keyDown(input, { key: 'ArrowRight' });
+    expect(document.activeElement).toBe(next);
+  });
 });

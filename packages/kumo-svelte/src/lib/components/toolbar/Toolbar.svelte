@@ -19,6 +19,7 @@
   export interface Props {
     children?: Snippet;
     class?: string;
+    /** @deprecated Omit this prop to use the default base size. */
     size?: ToolbarSize;
     [key: string]: unknown;
   }
@@ -38,13 +39,26 @@
 
   function handleKeydown(event: KeyboardEvent) {
     if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+    if (event.defaultPrevented) return;
+
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (target.getAttribute('aria-expanded') === 'true') return;
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+      const selectionStart = target.selectionStart ?? 0;
+      const selectionEnd = target.selectionEnd ?? selectionStart;
+      if (selectionStart !== selectionEnd) return;
+      if (event.key === 'ArrowLeft' && selectionStart > 0) return;
+      if (event.key === 'ArrowRight' && selectionEnd < target.value.length) return;
+    }
+
     const root = event.currentTarget as HTMLElement;
     const controls = Array.from(
       root.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        '[data-kumo-toolbar-control]:not([disabled]), [data-kumo-toolbar-input-group] input:not([disabled])'
       )
     ).filter((element) => !element.hasAttribute('aria-hidden'));
-    const index = controls.indexOf(event.target as HTMLElement);
+    const index = controls.indexOf(target);
     if (index === -1) return;
 
     event.preventDefault();

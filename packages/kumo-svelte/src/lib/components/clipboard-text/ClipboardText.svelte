@@ -199,7 +199,7 @@
           <div
             class={cn(
               'animate-clipboard-toast-bump pointer-events-none absolute z-50 flex origin-(--bits-floating-transform-origin) flex-col rounded-md bg-kumo-base px-3 py-1.5 font-sans text-xs text-kumo-default',
-              'shadow-lg shadow-kumo-tip-shadow outline outline-kumo-fill',
+              'shadow-lg outline outline-kumo-line',
               tooltipSide === 'top' && 'bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2',
               tooltipSide === 'bottom' && 'top-[calc(100%+8px)] left-1/2 -translate-x-1/2',
               tooltipSide === 'left' && 'top-1/2 right-[calc(100%+8px)] -translate-y-1/2',

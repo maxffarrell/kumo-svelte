@@ -20,7 +20,8 @@
     autoScrollOnOpen = false,
     ...rest
   }: Props = $props();
-  const contentId = `kumo-sidebar-collapsible-${Math.random().toString(36).slice(2)}`;
+  const componentId = $props.id();
+  const contentId = `kumo-sidebar-collapsible-${componentId}`;
   const context = {
     get open() {
       return open;

@@ -36,6 +36,11 @@ import { SkeletonLine } from 'kumo-svelte/components/loader';
 
 </ComponentSection>
 
+<p class="mb-4 text-sm text-kumo-muted">
+  For SSR hydration stability, see the
+  <a class="underline" href="/installation#ssr-random-values">SSR random values utility</a>.
+</p>
+
 <!-- Custom Widths -->
 
 <ComponentSection>

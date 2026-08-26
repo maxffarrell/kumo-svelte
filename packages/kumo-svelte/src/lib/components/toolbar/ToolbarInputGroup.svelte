@@ -15,6 +15,12 @@
   const size = $derived(toolbar?.size ?? 'base');
 </script>
 
-<InputGroup {...rest} class={toolbarControlClassName(className)} {size} wrapLabel={false}>
+<InputGroup
+  {...rest}
+  class={toolbarControlClassName(className)}
+  {size}
+  wrapLabel={false}
+  data-kumo-toolbar-input-group=""
+>
   {@render children?.()}
 </InputGroup>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
+  import { cn } from '$lib/utils/cn';
   import Button from './Button.svelte';
 
   interface Props {
@@ -68,7 +69,7 @@
   aria-label={ariaLabel}
   aria-labelledby={ariaLabelledby}
   componentName="LinkButton"
-  class={className}
+  class={cn('select-text', className)}
   {...(disabled ? disabledRest : rest)}
 >
   {@render children?.()}

@@ -267,6 +267,8 @@ import { Sidebar } from "kumo-svelte/components/sidebar";
 
 <ComponentExample demo="SidebarAutoScrollDemo" code={autoScrollCode} vrSection="auto-scroll" vrTitle="Auto Scroll" />
 
+Tag a navigation item with `itemId`, then call `useSidebar().scrollToItem(id, options)` from a descendant component to scroll it into view without moving the document. `align` accepts `"start"`, `"center"`, `"end"`, or `"auto"`; reduced-motion preferences are always respected.
+
 ### Sliding Views
 
 <p class="mb-3 text-sm text-kumo-strong">
@@ -318,7 +320,7 @@ Scrollable middle section (`flex-1 overflow-y-auto`). Use `Header` / `Footer` to
 
 ### Sidebar.MenuButton
 
-Primary interactive element. Supports icons, active state, links, and auto-tooltip when collapsed.
+Primary interactive element. Supports icons, active state, links, auto-tooltip when collapsed, and `itemId` registration for imperative scrolling.
 
 <PropsTable component="Sidebar.MenuButton" />
 

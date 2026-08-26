@@ -130,6 +130,20 @@ const displayNameByRoute: Record<string, string> = {
   'table-of-contents': 'TableOfContents'
 };
 
+const componentsWithoutDocs: Array<{
+  name: string;
+  description: string;
+  importPath: string;
+  sourceFile: string;
+}> = [
+  {
+    name: 'MenuBar',
+    description: 'Deprecated horizontal menu bar. Use segmented Tabs for new work.',
+    importPath: 'kumo-svelte/components/menu-bar',
+    sourceFile: 'components/menu-bar'
+  }
+];
+
 function titleCaseRoute(route: string) {
   return route
     .split('-')
@@ -254,6 +268,20 @@ async function buildRegistry() {
       props,
       colors: componentColors(sourceFile),
       subComponents: await loadSubComponents(name)
+    };
+  }
+
+  for (const component of componentsWithoutDocs) {
+    components[component.name] = {
+      name: component.name,
+      type: 'component',
+      category: categoryByName[component.name] ?? 'Other',
+      description: component.description,
+      importPath: component.importPath,
+      sourceFile: component.sourceFile,
+      props: propRowsToRegistry(await loadPropRows(component.name)),
+      colors: componentColors(component.sourceFile),
+      subComponents: await loadSubComponents(component.name)
     };
   }
 

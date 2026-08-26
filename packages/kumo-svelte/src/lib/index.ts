@@ -118,6 +118,7 @@ export {
 } from "./components/link";
 export type { KumoLinkVariant } from "./components/link";
 export { Loader, SkeletonLine } from "./components/loader";
+export { provideKumoRandom, useKumoRandom } from "./utils/random";
 export { KumoLogo, SvelteLogo } from "./components/logo";
 /** @deprecated Use `Tabs` with `variant="segmented"` instead. */
 export { MenuBar } from "./components/menu-bar";

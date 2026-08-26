@@ -127,3 +127,33 @@ After installation, blocks live in your project and can be customized directly.
   const classes = cn('base-class', true && 'conditional-class');
 </script>
 ```
+
+### SSR Random Values
+
+When using SSR, call `provideKumoRandom` once from the root layout to keep
+randomized Kumo values stable during hydration. This uses one request-scoped
+random sequence for Kumo components that need random values. This integration
+requires Svelte 5.56.3 or newer.
+
+Enable Svelte's experimental async compiler option in `svelte.config.js`:
+
+```js
+export default {
+  compilerOptions: {
+    experimental: {
+      async: true
+    }
+  }
+};
+```
+
+```svelte
+<script lang="ts">
+  import { provideKumoRandom } from 'kumo-svelte';
+
+  provideKumoRandom();
+</script>
+```
+
+This is optional for client-only applications. Without the provider,
+randomized values retain their normal unseeded behavior.

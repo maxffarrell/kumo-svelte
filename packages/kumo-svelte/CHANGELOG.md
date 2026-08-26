@@ -1,5 +1,43 @@
 # kumo-svelte
 
+## 0.10.0
+
+### Minor Changes
+
+- a710b36: Add the `Text` `heading` variant with a 16px semibold default and a 20px `size="lg"` option. Deprecate the numbered `heading1`, `heading2`, and `heading3` variants.
+- a710b36: Compose Select and Combobox triggers with Toolbar controls while preserving popup behavior and caret-aware keyboard navigation.
+- a710b36: Add icon support to filled Badge variants, add linked-badge hover styles, and use the base surface background for outline badges.
+
+### Patch Changes
+
+- a710b36: Allow users to select and copy LinkButton text while preserving Button text selection behavior.
+- a710b36: Add the Design skill docs link and redirect Design skill, Figma Resources, and Colors to their canonical Kumo UI pages.
+- a710b36: `Collapsible.DefaultTrigger` now uses `text-kumo-default` with `font-medium` instead of the blue `text-kumo-link` color.
+- a710b36: Deprecate `MenuBar` in favor of segmented `Tabs`. Runtime behavior is unchanged for existing consumers, while the MenuBar documentation and demos are removed.
+- a878bbf: Render documentation examples and table-of-contents navigation during SSR instead of waiting for client initialization.
+- ad1c7c4: Expand component interaction, accessibility, fidelity, and visual-regression test coverage, and fix the implementation gaps those tests exposed.
+- a710b36: Fix Toast background clipping its ring outline by matching the inner background radius to the root radius.
+- a710b36: Expose all Bits UI floating-position and portal props on Combobox.Content.
+- a710b36: Preserve collapsed-sidebar peeking when sliding views move focus while the pointer remains over the peek zone.
+- a710b36: Port the Kumo 2.9.2 Tabs fixes: flatten overflow carets, limit overflow controls to segmented Tabs, and focus the caret target.
+- 87d8852: Prevent layered LayerCard roots from briefly rendering with surface styling on first paint. Match upstream behavior by only treating direct LayerCard section children as layered content.
+- a710b36: Match Kumo's Tooltip spacing, CodeHighlighted controls and line numbers, and Banner compact alignment.
+- a710b36: Normalize shadows and outlines on Popover, Tooltip, ClipboardText, and chart overlays, and rename the arrow edge and stroke color tokens to match their purpose.
+- 01a9193: Update runtime and development dependencies to their latest compatible releases.
+- a710b36: Add `scrollToItem(id, options?)` to `useSidebar()` for imperatively scrolling a tagged nav item into the sidebar viewport. Tag items with the new `itemId` prop on `Sidebar.MenuButton` or `Sidebar.MenuItem`.
+- 8cf5467: Port the upstream SkeletonLine fix: move the `.skeleton-line` styles into `@layer base` so Tailwind utility classes (e.g. `h-6`) can override the default `0.5rem` height.
+- 080b72b: Use Svelte-generated IDs and stabilize randomized component values during SSR hydration with an optional request-scoped random sequence.
+- a710b36: Update Table rows to use borderless, alternating background styling.
+- 66d3b88: Fix Tabs indicator (segmented pill and underline) growing from 0x0 on initial mount. The indicator stays hidden until the active tab is measured, then pops in at the correct size and position via the existing scale/opacity transition instead of animating its size up from zero.
+- a0b5666: Fix the Tabs indicator (segmented pill and underline) in two interacting ways:
+
+  1. **Measurement**: the indicator was measured with `getBoundingClientRect()`, which reflects ancestor CSS transforms (e.g. a Dialog's open `scale(0.9)` animation). Since `ResizeObserver` does not fire when only a transform changes, the indicator could stay stuck at 90% of the tab's size. It is now measured from layout-space values (`offsetLeft`/`offsetTop`/`offsetWidth`/`offsetHeight`), which ignore ancestor transforms.
+
+  2. **Pop-in origin**: the indicator was positioned with `transform: translate(...)` and animated with the CSS `scale` property. Those share a transform-origin and compound such that the scale pivot drifts to `origin + translate / (1 - scale)`, making the pill slide sideways while it grows for any tab other than the first. It is now positioned with layout `left`/`top`, so the pop-in `scale` grows from the pill's own center regardless of which tab is active.
+
+- a710b36: Fix the docs theme dropdown trigger and ensure dropdown radio indicators only display for the selected item.
+- cb3324b: Improve Combobox and Autocomplete parity with Bits UI primitives, including keyboard navigation, disabled state, multi-value handling, and updated prop documentation. Contributed by Teddy (@uhteddy).
+
 ## 0.9.1
 
 ### Patch Changes

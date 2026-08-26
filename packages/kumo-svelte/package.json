@@ -1,6 +1,6 @@
 {
   "name": "kumo-svelte",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "description": "Svelte port of Cloudflare's Kumo UI library using bits-ui primitives.",
   "type": "module",
   "packageManager": "pnpm@11.10.0",

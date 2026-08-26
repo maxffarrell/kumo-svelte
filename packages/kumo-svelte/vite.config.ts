@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { readFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
-import { kumoRegistryPlugin } from './src/lib/docs/vite-plugin-kumo-registry';
+import { kumoRegistryPlugin } from './src/lib/docs/vite-plugin-kumo-registry.ts';
 
 const packageJson = JSON.parse(readFileSync(new URL('package.json', import.meta.url), 'utf-8')) as {
   version?: string;

@@ -145,14 +145,14 @@
       return;
     }
 
-    const listRect = listEl.getBoundingClientRect();
-    const tabRect = activeTab.getBoundingClientRect();
-    activeLeft = tabRect.left - listRect.left + listEl.scrollLeft;
-    activeTop = tabRect.top - listRect.top;
-    activeWidth = tabRect.width;
-    activeHeight = tabRect.height;
+    // Use layout-space offset* (not getBoundingClientRect) so ancestor
+    // transforms (e.g. Dialog scale) can't skew the measurement.
+    activeLeft = activeTab.offsetLeft;
+    activeTop = activeTab.offsetTop;
+    activeWidth = activeTab.offsetWidth;
+    activeHeight = activeTab.offsetHeight;
 
-    if (!indicatorMeasured) {
+    if (!indicatorMeasured && activeWidth > 0) {
       // First measurement: unhide the indicator at its real size while it is
       // still in the pre-render state (scale-90 / opacity-0 via
       // data-rendered=false), then flip data-rendered on a later frame so it
@@ -360,14 +360,15 @@
         hidden={!indicatorMeasured}
         data-rendered={indicatorRendered}
         class={cn(
-          'absolute z-1 left-0 transition-all duration-200 data-[rendered=false]:scale-90 data-[rendered=false]:opacity-0',
+          'absolute z-1 transition-all duration-200 data-[rendered=false]:scale-90 data-[rendered=false]:opacity-0',
           isSegmented && cn('bg-kumo-base shadow-sm ring ring-kumo-line', isSm ? 'rounded' : 'rounded-md'),
           isUnderline && 'bottom-0 h-0.5 bg-kumo-brand',
           indicatorClassName
         )}
+        style:left={`${activeLeft}px`}
+        style:top={isUnderline ? undefined : `${activeTop}px`}
         style:width={`${activeWidth}px`}
         style:height={isUnderline ? undefined : `${activeHeight}px`}
-        style:transform={`translate(${activeLeft}px, ${isUnderline ? 0 : activeTop}px)`}
       ></div>
     </TabsPrimitive.List>
 

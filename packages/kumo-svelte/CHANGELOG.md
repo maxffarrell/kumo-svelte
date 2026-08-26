@@ -1,6 +1,6 @@
 # kumo-svelte
 
-## 0.10.0
+## 0.12.0
 
 ### Minor Changes
 

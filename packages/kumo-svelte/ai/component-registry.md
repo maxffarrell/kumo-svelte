@@ -1,6 +1,6 @@
 # Kumo Svelte Component Registry
 
-Version: 0.9.1
+Version: 0.12.0
 
 ## Autocomplete
 

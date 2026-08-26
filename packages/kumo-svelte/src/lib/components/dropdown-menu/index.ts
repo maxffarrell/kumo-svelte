@@ -13,6 +13,7 @@ import DropdownMenuSubContent from './DropdownMenuSubContent.svelte';
 import DropdownMenuSubTrigger from './DropdownMenuSubTrigger.svelte';
 
 export {
+  dropdownVariants,
   KUMO_DROPDOWN_DEFAULT_VARIANTS,
   KUMO_DROPDOWN_VARIANTS,
   type KumoDropdownVariant

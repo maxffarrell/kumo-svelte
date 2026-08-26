@@ -2,6 +2,10 @@
 
 Cloudflare's component library for building modern web applications, ported to Svelte.
 
+> This is an independent community package and is not affiliated with, sponsored by, or endorsed by Cloudflare.
+
+The expanded fidelity test coverage was contributed by [axel-rock](https://github.com/axel-rock/kumo-svelte).
+
 Kumo Svelte provides accessible, design-system-compliant UI components built on [Bits UI](https://bits-ui.com/). It handles keyboard navigation, focus management, and ARIA attributes so you can build accessible applications without thinking through every detail.
 
 <img width="2560" height="1456" alt="Kumo UI preview" src="https://github.com/user-attachments/assets/032f5a0e-b686-4440-b1ca-6182379479aa" />

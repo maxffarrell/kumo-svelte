@@ -114,7 +114,16 @@
     {#if label}
       <label for={inputId} class="absolute inset-0 z-0 !mb-0 cursor-text" aria-hidden="true"></label>
     {/if}
-    {@render children?.()}
+    {#if focusMode === 'hybrid'}
+      <div
+        data-slot="input-group-container-zone"
+        class="flex min-w-0 flex-1 items-center gap-0 border border-kumo-line focus-within:border-kumo-focus/50 focus-within:z-2"
+      >
+        {@render children?.()}
+      </div>
+    {:else}
+      {@render children?.()}
+    {/if}
   </div>
 {/snippet}
 

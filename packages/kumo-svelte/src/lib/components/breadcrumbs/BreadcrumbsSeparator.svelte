@@ -1,4 +1,9 @@
-<span class="flex shrink-0 items-center text-kumo-inactive" aria-hidden="true">
+<script lang="ts">
+  import { cn } from '$lib/utils/cn';
+  let { class: className, ...rest }: { class?: string; [key: string]: unknown } = $props();
+</script>
+
+<span class={cn('flex shrink-0 items-center text-kumo-inactive', className)} aria-hidden="true" {...rest}>
   <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
     <path
       stroke="currentColor"

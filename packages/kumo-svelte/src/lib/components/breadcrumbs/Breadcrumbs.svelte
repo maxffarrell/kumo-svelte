@@ -41,6 +41,14 @@
     );
   }
 
+  const MOBILE_BREADCRUMB_CLASSES = {
+    ellipsis: 'kumo-breadcrumb-mobile-ellipsis',
+    separatorLeading: 'kumo-breadcrumb-mobile-separator-leading',
+    separatorTrailing: 'kumo-breadcrumb-mobile-separator-trailing',
+    parent: 'kumo-breadcrumb-mobile-parent',
+    current: 'kumo-breadcrumb-mobile-current'
+  } as const;
+
   function getMobileItems(items: BreadcrumbsItem[]) {
     if (items.length <= 2) return items;
     return items.slice(-2);
@@ -78,17 +86,17 @@
   {:else if items.length > 0}
     <div class="contents sm:hidden">
       {#if items.length > 2}
-        <span class="flex shrink-0 items-center text-kumo-subtle" aria-hidden="true">...</span>
-        <BreadcrumbsSeparator />
+        <span class={cn('flex shrink-0 items-center text-kumo-subtle', MOBILE_BREADCRUMB_CLASSES.ellipsis)} aria-hidden="true">...</span>
+        <BreadcrumbsSeparator class={MOBILE_BREADCRUMB_CLASSES.separatorLeading} />
       {/if}
       {#each mobileItems as item, index}
         {#if index > 0}
-          <BreadcrumbsSeparator />
+          <BreadcrumbsSeparator class={MOBILE_BREADCRUMB_CLASSES.separatorTrailing} />
         {/if}
         {#if item.href && index < mobileItems.length - 1}
-          <BreadcrumbsLink href={item.href} icon={item.icon}>{item.label}</BreadcrumbsLink>
+          <BreadcrumbsLink class={MOBILE_BREADCRUMB_CLASSES.parent} href={item.href} icon={item.icon}>{item.label}</BreadcrumbsLink>
         {:else}
-          <BreadcrumbsCurrent icon={item.icon}>{item.label}</BreadcrumbsCurrent>
+          <BreadcrumbsCurrent class={MOBILE_BREADCRUMB_CLASSES.current} icon={item.icon}>{item.label}</BreadcrumbsCurrent>
         {/if}
       {/each}
     </div>

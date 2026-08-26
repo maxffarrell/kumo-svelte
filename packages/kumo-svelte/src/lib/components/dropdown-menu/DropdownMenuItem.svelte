@@ -1,4 +1,6 @@
 <script module lang="ts">
+  import { cn } from '$lib/utils/cn';
+
   export const KUMO_DROPDOWN_VARIANTS = {
     variant: {
       default: {
@@ -6,7 +8,7 @@
         description: 'Default dropdown item appearance'
       },
       danger: {
-        classes: 'text-kumo-danger data-[highlighted]:bg-kumo-danger/5 data-[highlighted]:text-kumo-danger',
+        classes: 'text-kumo-danger data-highlighted:bg-kumo-danger/5 data-highlighted:text-kumo-danger',
         description: 'Destructive action item'
       }
     }
@@ -17,13 +19,18 @@
   } as const;
 
   export type KumoDropdownVariant = keyof typeof KUMO_DROPDOWN_VARIANTS.variant;
+
+  export function dropdownVariants({
+    variant = KUMO_DROPDOWN_DEFAULT_VARIANTS.variant
+  }: { variant?: KumoDropdownVariant } = {}) {
+    return cn(KUMO_DROPDOWN_VARIANTS.variant[variant].classes);
+  }
 </script>
 
 <script lang="ts">
   import { DropdownMenu as DropdownMenuPrimitive } from 'bits-ui';
   import type { Component, Snippet } from 'svelte';
   import Check from 'phosphor-svelte/lib/Check';
-  import { cn } from '$lib/utils/cn';
 
   interface Props {
     children?: Snippet;
@@ -55,7 +62,7 @@
 
   const itemClasses = $derived(
     cn(
-      'relative flex cursor-default items-center rounded-md px-2 py-1.5 text-base outline-hidden select-none focus:text-kumo-default focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-kumo-overlay',
+      'relative flex cursor-default items-center rounded-md px-2 py-1.5 text-base outline-hidden select-none focus:text-kumo-default focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-kumo-overlay',
       inset && 'pl-8',
       KUMO_DROPDOWN_VARIANTS.variant[variant].classes,
       className

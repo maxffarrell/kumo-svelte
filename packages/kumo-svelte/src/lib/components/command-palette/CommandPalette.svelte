@@ -134,7 +134,7 @@
         {placeholder}
         {...inputProps}
         class={cn(
-          'h-11 w-full border-b border-kumo-line bg-transparent px-3 text-base text-kumo-default outline-none placeholder:text-kumo-placeholder',
+          'h-11 w-full border-none bg-transparent px-3 text-base text-kumo-default kumo-input-placeholder outline-none',
           inputClass
         )}
       />

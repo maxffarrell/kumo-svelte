@@ -18,5 +18,12 @@
     "types": ["svelte"]
   },
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.svelte", "mdsx.config.js", "svelte.config.js", "vite.config.ts"],
-  "exclude": ["node_modules", "dist", "build", "src/command-line"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "src/command-line",
+    "src/**/*.test.ts",
+    "tests"
+  ]
 }

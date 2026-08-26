@@ -10,3 +10,13 @@ build/
 output/
 .pnpm-store/
 packages/kumo-svelte/src/blocks/**/*.d.ts
+
+# Test-generated artifacts
+tools/fidelity/last-report.json
+ci/visual-regression/screenshots/
+ci/visual-regression/diffs/
+ci/visual-regression/actual/
+ci/visual-regression/parity/
+ci/visual-regression/test-results/
+playwright-report/
+test-results/

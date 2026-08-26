@@ -1,10 +1,15 @@
 <script lang="ts">
+  import { page } from '$app/state';
   import '../lib/styles.css';
   import SidebarNav from '$lib/docs/SidebarNav.svelte';
   import { TooltipProvider } from '$lib/components/tooltip';
   import { provideKumoRandom } from '$lib/utils/random';
+  import type { Snippet } from 'svelte';
 
   provideKumoRandom();
+
+  let { children }: { children: Snippet } = $props();
+  const isVisualRegressionRoute = $derived(page.url.pathname.startsWith('/vrt'));
 </script>
 
 <svelte:head>
@@ -71,14 +76,18 @@
   </script>
 </svelte:head>
 
-<TooltipProvider>
-  <div class="isolate min-h-screen bg-kumo-canvas text-kumo-default">
-    <SidebarNav />
-    <div id="main-content" class="main-content mt-12 md:mt-0 md:ml-12 transition-[margin] duration-300">
-      <slot />
+{#if isVisualRegressionRoute}
+  {@render children()}
+{:else}
+  <TooltipProvider>
+    <div class="isolate min-h-screen bg-kumo-canvas text-kumo-default">
+      <SidebarNav />
+      <div id="main-content" class="main-content mt-12 md:mt-0 md:ml-12 transition-[margin] duration-300">
+        {@render children()}
+      </div>
     </div>
-  </div>
-</TooltipProvider>
+  </TooltipProvider>
+{/if}
 
 <style>
   @media (min-width: 768px) {

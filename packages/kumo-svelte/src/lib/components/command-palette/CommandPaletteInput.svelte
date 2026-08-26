@@ -33,7 +33,7 @@
     <CommandPrimitive.Input
       bind:value
       {placeholder}
-    class={cn('h-7 min-w-0 flex-1 bg-transparent text-base text-kumo-default outline-none placeholder:text-kumo-placeholder', className)}
+    class={cn('h-7 min-w-0 flex-1 border-none bg-transparent text-base kumo-input-placeholder outline-none', className)}
       {...rest}
     />
     {@render trailing?.()}

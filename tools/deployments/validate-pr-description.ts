@@ -65,11 +65,18 @@ export function validateDescription(
 
   // Validate changeset
   const changedFiles = JSON.parse(changedFilesJson) as string[];
+  const hasKumoSvelteChanges = changedFiles.some((f) =>
+    f.startsWith("packages/kumo-svelte/"),
+  );
   const changesetIncluded = changedFiles.some((f) =>
     f.startsWith(".changeset/"),
   );
 
-  if (!changesetIncluded && !parsedLabels.includes("no-changeset-required")) {
+  if (
+    hasKumoSvelteChanges &&
+    !changesetIncluded &&
+    !parsedLabels.includes("no-changeset-required")
+  ) {
     errors.push(
       "Your PR doesn't include a changeset. Either include one or add the 'no-changeset-required' label to bypass this check.",
     );

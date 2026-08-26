@@ -1,5 +1,6 @@
 <script lang="ts">
   import CaretDown from 'phosphor-svelte/lib/CaretDown';
+  import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import { getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
   import { Combobox as ComboboxPrimitive } from 'bits-ui';
@@ -8,10 +9,11 @@
     class?: string;
     placeholder?: string;
     size?: ComboboxSize;
+    child?: Snippet<[{ props: Record<string, unknown>; value: string }]>;
     [key: string]: unknown;
   }
 
-  let { class: className, placeholder, size, ...rest }: Props = $props();
+  let { class: className, placeholder, size, child, ...rest }: Props = $props();
   const context = getComboboxContext('Combobox.TriggerValue');
   const resolvedSize = $derived(size ?? context.size);
   const displayValue = $derived(context.labelFor(context.value));
@@ -31,7 +33,12 @@
   };
 </script>
 
+{#snippet customTriggerChild({ props }: { props: Record<string, unknown> })}
+  {@render child?.({ props, value: displayValue || placeholder || '' })}
+{/snippet}
+
 <ComboboxPrimitive.Trigger
+  child={child ? customTriggerChild : undefined}
   class={cn(
     inputStyles[resolvedSize],
     'relative flex w-full items-center border-0 bg-kumo-control text-left font-normal text-kumo-default shadow-xs ring ring-kumo-line outline-none',

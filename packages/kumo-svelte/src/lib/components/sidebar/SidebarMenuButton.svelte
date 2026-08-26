@@ -13,10 +13,11 @@
     href?: string;
     target?: string;
     tooltip?: string;
+    itemId?: string;
     [key: string]: unknown;
   }
 
-  let { children, class: className, icon: Icon, active = false, size = 'base', href, target, tooltip, ...rest }: Props = $props();
+  let { children, class: className, icon: Icon, active = false, size = 'base', href, target, tooltip, itemId, ...rest }: Props = $props();
   const menuItem = getSidebarMenuItemContext();
   let sidebar = $state<ReturnType<typeof getSidebarContext> | undefined>();
 
@@ -40,16 +41,27 @@
     )
   );
   const showTooltip = $derived(Boolean(tooltip && sidebar?.state === 'collapsed' && !sidebar.peekable));
+  let controlNode: HTMLAnchorElement | HTMLButtonElement = $state()!;
+  let autoWrapNode: HTMLLIElement = $state()!;
+
+  $effect(() => {
+    const node = menuItem?.insideMenuItem ? controlNode : autoWrapNode;
+    if (!sidebar || !itemId || !node) return;
+    sidebar.registerItem(itemId, node);
+    return () => sidebar.registerItem(itemId, null);
+  });
 </script>
 
 {#snippet control()}
   {#if href}
     <a
+      bind:this={controlNode}
       class={cn(classes, 'no-underline!')}
       {href}
       {target}
       data-active={active || undefined}
       data-sidebar="menu-button"
+      data-sidebar-item-id={menuItem?.insideMenuItem ? itemId : undefined}
       data-kumo-component="Sidebar"
       data-kumo-part="menu-button-link"
       data-size={size}
@@ -65,10 +77,12 @@
     </a>
   {:else}
     <button
+      bind:this={controlNode}
       type="button"
       class={classes}
       data-active={active || undefined}
       data-sidebar="menu-button"
+      data-sidebar-item-id={menuItem?.insideMenuItem ? itemId : undefined}
       data-kumo-component="Sidebar"
       data-kumo-part="menu-button"
       data-size={size}
@@ -96,7 +110,7 @@
 {#if menuItem?.insideMenuItem}
   {@render controlWithTooltip()}
 {:else}
-  <li data-sidebar="menu-item" class="relative group-data-[state=collapsed]/sidebar:overflow-hidden">
+  <li bind:this={autoWrapNode} data-sidebar="menu-item" data-sidebar-item-id={itemId} class="relative group-data-[state=collapsed]/sidebar:overflow-hidden">
     {@render controlWithTooltip()}
   </li>
 {/if}

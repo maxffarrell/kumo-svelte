@@ -82,7 +82,7 @@
                     >
                       <LinkSimple class="size-4 text-kumo-subtle" />
                     </span>
-                    <Text as="span" variant="heading2">{version.version}</Text>
+                    <Text as="span" variant="heading" size="lg">{version.version}</Text>
                   </a>
                   <Badge variant={badgeConfig[version.bump].variant}>{badgeConfig[version.bump].label}</Badge>
                   <a

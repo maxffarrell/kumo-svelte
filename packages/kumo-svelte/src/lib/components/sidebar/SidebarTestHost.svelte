@@ -11,13 +11,14 @@
     defaultOpen?: boolean;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
+    peekable?: boolean;
   }
 
-  let { defaultOpen = true, open = $bindable(), onOpenChange }: Props = $props();
+  let { defaultOpen = true, open = $bindable(), onOpenChange, peekable = false }: Props = $props();
 </script>
 
 {#if open === undefined}
-  <SidebarProvider {defaultOpen} {onOpenChange}>
+  <SidebarProvider {defaultOpen} {onOpenChange} {peekable}>
     <Sidebar>
       <SidebarContent>
         <div data-testid="state-reader"></div>
@@ -29,7 +30,7 @@
     <div data-testid="main">Main</div>
   </SidebarProvider>
 {:else}
-  <SidebarProvider {defaultOpen} bind:open {onOpenChange}>
+  <SidebarProvider {defaultOpen} bind:open {onOpenChange} {peekable}>
     <Sidebar>
       <SidebarContent>
         <div data-testid="state-reader"></div>

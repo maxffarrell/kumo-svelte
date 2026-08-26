@@ -114,6 +114,10 @@ export type {
   SidebarCollapsible as SidebarCollapsibleMode,
   SidebarContextValue,
   SidebarSide,
+  SidebarScrollAlign,
+  SidebarScrollToItemOptions,
   SidebarState,
   SidebarVariant,
 } from "./context";
+
+export { useSidebar } from "./context";

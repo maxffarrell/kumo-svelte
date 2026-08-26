@@ -62,6 +62,18 @@ Use `appearance="dot"` with `success`, `warning`, `error`, or `neutral` variants
 
 <ComponentExample demo="BadgeDotDemo" />
 
+### With an icon
+
+Filled badges can render an icon before their label.
+
+<ComponentExample demo="BadgeIconDemo" />
+
+### As a link
+
+Wrap a badge in `Link` to make it interactive. Linked badges automatically show a hover ring.
+
+<ComponentExample demo="BadgeLinkDemo" />
+
 ### In a sentence
 
 <ComponentExample demo="BadgeInSentenceDemo" />

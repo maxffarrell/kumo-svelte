@@ -17,6 +17,7 @@
   let mobileNode: HTMLElement | null = $state(null);
   let mobileTrigger: HTMLElement | null = null;
   let shouldRestoreFocus = false;
+  let isPointerInPeekZone = false;
   const isAlwaysExpanded = $derived(sidebar.collapsible === 'none');
   const isVisible = $derived(sidebar.open || sidebar.isPeeking || isAlwaysExpanded);
   const railWidth = $derived(isAlwaysExpanded || sidebar.open ? 'var(--sidebar-width)' : sidebar.collapsible === 'icon' ? 'var(--sidebar-width-icon)' : '0px');
@@ -43,6 +44,27 @@
 
   function handleMobileKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape') closeMobile(true);
+  }
+
+  function handlePeekBlur(event: FocusEvent) {
+    const currentTarget = event.currentTarget;
+    if (!(currentTarget instanceof HTMLElement)) return;
+    if (
+      !currentTarget.contains(event.relatedTarget as Node | null) &&
+      !isPointerInPeekZone
+    ) {
+      sidebar.stopPeek();
+    }
+  }
+
+  function handlePeekMouseEnter() {
+    isPointerInPeekZone = true;
+    sidebar.startPeek();
+  }
+
+  function handlePeekMouseLeave() {
+    isPointerInPeekZone = false;
+    sidebar.stopPeek();
   }
 
   $effect(() => {
@@ -136,10 +158,10 @@
       role="presentation"
       style:width={contentWidth}
       class={contentClasses}
-      onmouseenter={sidebar.startPeek}
-      onmouseleave={sidebar.stopPeek}
+      onmouseenter={handlePeekMouseEnter}
+      onmouseleave={handlePeekMouseLeave}
       onfocus={sidebar.startPeek}
-      onblur={sidebar.stopPeek}
+      onblur={handlePeekBlur}
     >
       {@render sidebarContent()}
     </div>

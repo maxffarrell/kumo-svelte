@@ -22,6 +22,12 @@ const rows: PropRow[] = [
     "description": "Additional classes merged onto the root element."
   },
   {
+    "prop": "icon",
+    "type": "Component",
+    "required": false,
+    "description": "Icon rendered before the content on filled badges."
+  },
+  {
     "prop": "children",
     "type": "Snippet",
     "required": true,

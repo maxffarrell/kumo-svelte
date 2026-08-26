@@ -285,14 +285,11 @@
     oklch(0% 0 0 / 0.3)
   );
 
-  --color-kumo-tip-shadow: light-dark(
-    var(--color-gray-200, oklch(92.8% 0.006 264.531)),
-    transparent
-  );
+  --color-kumo-arrow-edge: light-dark(oklch(14.5% 0 0 / 0.1), transparent);
 
-  --color-kumo-tip-stroke: light-dark(
+  --color-kumo-arrow-stroke: light-dark(
     transparent,
-    var(--color-neutral-800, oklch(26.9% 0 0))
+    var(--color-kumo-neutral-750, oklch(32% 0 0))
   );
 
   --color-kumo-info-tint: light-dark(
@@ -464,8 +461,8 @@
     --color-kumo-focus: var(--color-kumo-neutral-950, oklch(15% 0 0));
     --color-kumo-shadow-edge: oklch(0% 0 0 / 0.12);
     --color-kumo-shadow-drop: oklch(0% 0 0 / 0.08);
-    --color-kumo-tip-shadow: var(--color-gray-200, oklch(92.8% 0.006 264.531));
-    --color-kumo-tip-stroke: transparent;
+    --color-kumo-arrow-edge: oklch(14.5% 0 0 / 0.1);
+    --color-kumo-arrow-stroke: transparent;
     --color-kumo-info-tint: oklch(93.2% 0.032 255.6 / 0.45);
     --color-kumo-info: var(--color-blue-500, oklch(68.5% 0.169 237.323));
     --color-kumo-warning-tint: oklch(93.1% 0.107 94.6 / 0.2);
@@ -554,8 +551,8 @@
     --color-kumo-focus: var(--color-kumo-neutral-150, oklch(93.5% 0 0));
     --color-kumo-shadow-edge: oklch(100% 0 0 / 0.1);
     --color-kumo-shadow-drop: oklch(0% 0 0 / 0.3);
-    --color-kumo-tip-shadow: transparent;
-    --color-kumo-tip-stroke: var(--color-neutral-800, oklch(26.9% 0 0));
+    --color-kumo-arrow-edge: transparent;
+    --color-kumo-arrow-stroke: var(--color-kumo-neutral-750, oklch(32% 0 0));
     --color-kumo-info-tint: oklch(38% 0.145 265.5 / 0.22);
     --color-kumo-info: var(--color-blue-500, oklch(68.5% 0.169 237.323));
     --color-kumo-warning-tint: oklch(35.3% 0.079 65 / 0.37);
@@ -588,6 +585,20 @@
     --color-kumo-badge-blue: var(--color-blue-700, oklch(48.8% 0.243 264.376));
     --color-kumo-badge-neutral: var(--color-neutral-600, oklch(43.9% 0 0));
     --color-kumo-badge-inverted: var(--color-white, #fff);
+  }
+}
+
+/* ===========================================================================
+   LayerCard component styles
+   ========================================================================== */
+
+@layer components {
+  :where(.kumo-layer-card) {
+    @apply overflow-hidden rounded-lg bg-kumo-base shadow-xs ring ring-kumo-line;
+  }
+
+  :where(.kumo-layer-card:has(> [data-kumo-layer-section])) {
+    @apply flex w-full flex-col bg-kumo-elevated text-base shadow-none ring-kumo-hairline;
   }
 }
 
@@ -1015,76 +1026,44 @@ pre.shiki {
 }
 
 .kumo-shiki pre {
-  margin: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
   background-color: transparent !important;
-  padding: 1rem !important;
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace !important;
-  font-size: 0.875rem !important;
-  line-height: 1.625 !important;
 }
 
 .kumo-shiki code {
   display: block;
-  min-width: 100%;
   width: fit-content;
-  background-color: transparent !important;
-  border: 0 !important;
-  margin: 0 !important;
-  padding: 0 1rem 0 0 !important;
-}
-
-.kumo-shiki .line {
-  min-height: 1.625em;
+  min-width: 100%;
   padding-right: 1rem;
 }
 
-.kumo-shiki .line-highlighted {
-  margin-right: -1rem;
-  margin-left: -1rem;
-  padding-right: 2rem;
-  padding-left: 1rem;
-  background-color: var(
-    --kumo-code-highlight-bg,
-    color-mix(in srgb, var(--color-kumo-brand) 12%, transparent)
-  ) !important;
+.kumo-shiki {
+  --kumo-code-highlight-bg: rgba(0, 0, 0, 0.05);
 }
 
-.kumo-shiki-line-numbers .kumo-shiki pre {
-  counter-reset: kumo-code-line;
-  padding-left: 0 !important;
+[data-mode="dark"] .kumo-shiki {
+  --kumo-code-highlight-bg: rgba(255, 255, 255, 0.08);
 }
 
-.kumo-shiki-line-numbers .kumo-shiki code {
-  padding-right: 0 !important;
+.kumo-shiki .line.line-highlighted {
+  display: inline-block;
+  width: calc(100% + 2rem);
+  margin: 0 -1rem;
+  padding: 0 1rem;
+  background-color: var(--kumo-code-highlight-bg);
 }
 
-.kumo-shiki-line-numbers .kumo-shiki .line {
-  counter-increment: kumo-code-line;
-  display: grid;
-  grid-template-columns: 3.5rem 1fr;
-  min-width: max-content;
-}
-
-.kumo-shiki-line-numbers .kumo-shiki .line::before {
-  content: counter(kumo-code-line);
-  padding-right: 1rem;
-  color: var(--text-color-kumo-placeholder);
-  text-align: right;
-  user-select: none;
-}
-
-.kumo-shiki-line-numbers .kumo-shiki .line-highlighted {
-  margin-left: 0;
-  padding-left: 0;
+.kumo-line-numbers {
+  padding-left: 0.75rem;
+  line-height: 1.625;
 }
 
 [data-mode="dark"] .kumo-shiki span:not(.line-highlighted) {
   color: var(--shiki-dark) !important;
   background-color: transparent !important;
+}
+
+[data-mode="dark"] .kumo-shiki .line-highlighted {
+  color: var(--shiki-dark) !important;
 }
 
 /* Light mode (default) */

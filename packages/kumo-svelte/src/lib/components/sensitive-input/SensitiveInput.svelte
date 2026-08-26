@@ -84,7 +84,8 @@
     ...inputProps
   }: Props = $props();
 
-  const generatedId = `kumo-sensitive-input-${Math.random().toString(36).slice(2)}`;
+  const componentId = $props.id();
+  const generatedId = `kumo-sensitive-input-${componentId}`;
   const inputId = $derived(id ?? generatedId);
   const maskedInstructionId = $derived(`${inputId}-masked-instruction`);
   const liveRegionId = $derived(`${inputId}-live`);

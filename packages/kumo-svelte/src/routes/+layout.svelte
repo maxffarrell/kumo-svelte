@@ -2,6 +2,9 @@
   import '../lib/styles.css';
   import SidebarNav from '$lib/docs/SidebarNav.svelte';
   import { TooltipProvider } from '$lib/components/tooltip';
+  import { provideKumoRandom } from '$lib/utils/random';
+
+  provideKumoRandom();
 </script>
 
 <svelte:head>
@@ -17,11 +20,52 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=optional" />
   <script>
     (function () {
-      const stored = localStorage.getItem('theme');
-      if (stored) {
-        document.documentElement.setAttribute('data-mode', stored);
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.setAttribute('data-mode', 'dark');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function resolveTheme(theme) {
+        return theme === 'system' ? (systemTheme.matches ? 'dark' : 'light') : theme;
+      }
+
+      function setTheme(theme) {
+        const resolvedTheme = resolveTheme(theme);
+        localStorage.setItem('theme', theme);
+        document.documentElement.setAttribute('data-mode', resolvedTheme);
+        window.dispatchEvent(
+          new CustomEvent('kumo:theme-change', { detail: { theme, resolvedTheme } })
+        );
+      }
+
+      function applyStoredTheme() {
+        const stored = localStorage.getItem('theme');
+        const theme = ['light', 'dark', 'system'].includes(stored) ? stored : 'system';
+        document.documentElement.setAttribute('data-mode', resolveTheme(theme));
+      }
+
+      applyStoredTheme();
+
+      if (!window.__kumoThemeInit) {
+        window.__kumoThemeInit = true;
+        systemTheme.addEventListener('change', () => {
+          const stored = localStorage.getItem('theme');
+          if (!stored || stored === 'system') setTheme('system');
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.defaultPrevented || event.repeat) return;
+          if (event.metaKey || event.ctrlKey || event.altKey) return;
+          if (event.key?.toLowerCase() !== 'd') return;
+
+          const target = event.target;
+          if (
+            target instanceof HTMLElement &&
+            (target.isContentEditable || target.closest('input, textarea, select, [contenteditable]'))
+          ) return;
+
+          event.preventDefault();
+          const current = localStorage.getItem('theme');
+          const nextTheme = current === 'light' ? 'dark' : current === 'dark' ? 'system' : 'light';
+          setTheme(nextTheme);
+        });
       }
     })();
   </script>

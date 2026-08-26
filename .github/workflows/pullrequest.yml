@@ -29,6 +29,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/install-dependencies
+      - name: Test changeset validation
+        run: pnpm tsx --test ci/utils/git-operations.test.ts
       - run: pnpm tsx ci/scripts/validate-kumo-svelte-changeset.ts
 
   build:

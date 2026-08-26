@@ -594,7 +594,7 @@
     <TooltipPrimitive.Root open={true} delayDuration={0} disableHoverableContent>
       <TooltipPrimitive.Portal>
         <TooltipPrimitive.Content
-          class="pointer-events-none z-50 min-w-[150px] max-w-[280px] rounded-lg bg-kumo-base p-2 text-kumo-default shadow-lg shadow-kumo-tip-shadow outline-1 outline-kumo-fill"
+          class="pointer-events-none z-50 min-w-[150px] max-w-[280px] rounded-lg bg-kumo-base p-2 text-kumo-default shadow-md outline-1 outline-kumo-line"
           customAnchor={tooltipAnchor}
           side="right"
           align="start"

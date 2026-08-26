@@ -77,6 +77,18 @@ describe("Button", () => {
     expect(button.getAttribute("href")).toBeNull();
   });
 
+  it("allows LinkButton text selection", async () => {
+    const { default: LinkButton } = await import("./LinkButton.svelte");
+    render(LinkButton, {
+      href: "/settings",
+      "aria-label": "Settings",
+    });
+
+    expect(screen.getByRole("link", { name: "Settings" }).className).toContain(
+      "select-text",
+    );
+  });
+
   it("keeps emphasized variant rings color-matched when pressed or focused", () => {
     for (const variant of ["primary", "destructive"] as const) {
       render(Button, {

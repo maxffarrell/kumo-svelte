@@ -16,7 +16,15 @@
 
 <Combobox bind:value {items} {onValueChange}>
   <ComboboxTriggerInput placeholder="Select fruit" />
-  <ComboboxContent>
+  <ComboboxContent
+    side="bottom"
+    strategy="fixed"
+    avoidCollisions={false}
+    collisionPadding={10}
+    sticky="always"
+    hideWhenDetached={false}
+    updatePositionStrategy="optimized"
+  >
     <ComboboxList>
       {#snippet children(item)}
         <ComboboxItem value={item}>{item}</ComboboxItem>

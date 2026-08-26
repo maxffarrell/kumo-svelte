@@ -52,29 +52,25 @@ import { Text } from 'kumo-svelte/components/text';
 
 ### Semantic HTML
 
-The `variant` prop controls visual styling only - it does not determine the HTML element rendered. Heading variants **require** the `as` prop to avoid silently excluding real section headings from the document outline. Body and monospace variants have sensible defaults (`<p>` and `<span>` respectively) and accept `as` optionally.
+The `variant` prop controls visual styling only; use `as` to choose semantic HTML. The `heading` variant defaults to a `<span>` so decorative heading text does not silently enter the document outline. Body and monospace variants default to `<p>` and `<span>` respectively.
 
 ```svelte
-<!-- Heading variants REQUIRE `as` — TypeScript will flag usages missing it -->
-<Text variant="heading1">Page Title</Text> <!-- Doesn't compile -->
-
 <!-- Real section headings (contribute to the document outline) -->
-<Text variant="heading1" as="h1">Page Title</Text>
-<Text variant="heading2" as="h2">Section Title</Text>
+<Text variant="heading" size="lg" as="h1">Page Title</Text>
+<Text variant="heading" as="h2">Section Title</Text>
 
 <!-- Decorative heading-styled text that is NOT a section heading -->
-<Text variant="heading1" as="span">Big bold card label</Text>
+<Text variant="heading">Card label</Text>
 
 <!-- Visually one size, semantically another -->
-<Text variant="heading1" as="h3">Visually large, but semantically h3</Text>
+<Text variant="heading" size="lg" as="h3">Large presentation, semantic h3</Text>
 ```
 
-
-The `as` prop accepts: `"h1"` through `"h6"`, `"p"`, and `"span"`. Body variants default to `"p"`, monospace variants default to `"span"`, and heading variants have no default - you must choose explicitly.
+The `as` prop accepts headings (`"h1"` through `"h6"`) and common inline or block text elements. The legacy `heading1`, `heading2`, and `heading3` variants remain available for compatibility but are deprecated and still require `as`.
 
 ### Restrictions
 
-The `bold` and `size` props are intentionally restricted to the `base`, `secondary`, `success`, and `error` text variants.
+The `bold` and full `size` range are restricted to body, secondary, success, and error text variants. The new `heading` variant accepts only `size="lg"`; omit it for the default 16px heading.
 
 ```svelte
 <Text size="sm" bold>Body</Text>
@@ -93,7 +89,7 @@ Monospace variants (`mono` and `mono-secondary`) can only set `size` to `lg` and
 ```
 
 
-Headings (i.e. `heading1`, `heading2` and `heading3` variants) cannot use these props at all:
+Deprecated numbered headings cannot use `bold` or `size`:
 
 ```svelte
 <Text variant="heading1" bold>

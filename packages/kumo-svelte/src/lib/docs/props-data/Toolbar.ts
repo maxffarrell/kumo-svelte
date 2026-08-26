@@ -9,7 +9,7 @@ export default [
     prop: 'size',
     type: '"xs" | "sm" | "base" | "lg"',
     default: '"base"',
-    description: 'Locks every toolbar item to this size.'
+    description: 'Deprecated. Sets every toolbar item to this size; omit it for the base size.'
   },
   {
     prop: 'class',

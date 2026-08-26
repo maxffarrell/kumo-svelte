@@ -1,6 +1,7 @@
 import { getContext, setContext } from 'svelte';
 import { cn } from '$lib/utils/cn';
 
+/** @deprecated Toolbar size customization is deprecated. Omit `size` to use the default base size. */
 export const KUMO_TOOLBAR_VARIANTS = {
   size: {
     xs: {
@@ -22,10 +23,12 @@ export const KUMO_TOOLBAR_VARIANTS = {
   }
 } as const;
 
+/** @deprecated Toolbar size customization is deprecated. Omit `size` to use the default base size. */
 export const KUMO_TOOLBAR_DEFAULT_VARIANTS = {
   size: 'base'
 } as const;
 
+/** @deprecated Toolbar size customization is deprecated. Omit `size` to use the default base size. */
 export type ToolbarSize = keyof typeof KUMO_TOOLBAR_VARIANTS.size;
 
 export interface ToolbarContextValue {
@@ -44,11 +47,11 @@ export function getToolbarContext() {
 
 export function toolbarControlClassName(className?: string) {
   return cn(
+    className,
     'relative min-w-0 border-0 bg-transparent shadow-none ring-0 focus:z-2 focus-within:z-2 focus-visible:z-2',
     'rounded-none first:rounded-l-lg last:rounded-r-lg only:rounded-lg',
     'not-first:border-l not-first:border-kumo-line',
     'focus:ring-2 focus:ring-kumo-brand focus-visible:ring-2 focus-visible:ring-kumo-brand',
-    'focus-within:ring-2 focus-within:ring-kumo-brand',
-    className
+    'focus-within:ring-2 focus-within:ring-kumo-brand'
   );
 }

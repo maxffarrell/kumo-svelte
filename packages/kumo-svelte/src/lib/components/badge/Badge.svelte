@@ -1,5 +1,6 @@
 <script lang="ts" module>
-  export const KUMO_BADGE_BASE_STYLES = 'inline-flex w-fit flex-none shrink-0 items-center justify-self-start rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap';
+  export const KUMO_BADGE_BASE_STYLES =
+    'inline-flex w-fit flex-none shrink-0 items-center justify-self-start gap-1 rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap [a:hover_&]:ring [a:hover_&]:ring-current';
   export const KUMO_BADGE_VARIANTS = {
     primary: 'bg-kumo-badge-inverted text-kumo-badge-inverted',
     secondary: 'bg-kumo-fill text-kumo-badge-neutral-subtle',
@@ -9,7 +10,7 @@
     destructive: 'bg-kumo-badge-red text-white',
     info: 'bg-kumo-info-tint text-kumo-info',
     beta: 'border border-dashed border-kumo-brand bg-transparent text-kumo-link',
-    outline: 'border border-kumo-fill bg-transparent text-kumo-default',
+    outline: 'border border-kumo-fill bg-kumo-base text-kumo-default',
     red: 'bg-kumo-badge-red text-white',
     green: 'bg-kumo-badge-green text-white',
     neutral: 'bg-kumo-badge-neutral text-white',
@@ -37,7 +38,7 @@
 </script>
 
 <script lang="ts">
-  import type { Snippet } from 'svelte';
+  import type { Component, Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
 
   interface Props {
@@ -45,6 +46,8 @@
     class?: string;
     variant?: BadgeVariant;
     appearance?: BadgeAppearance;
+    /** Icon component rendered before the content. Filled badges only. */
+    icon?: Component;
     [key: string]: unknown;
   }
 
@@ -53,6 +56,7 @@
     class: className,
     variant = 'primary',
     appearance = 'filled',
+    icon: Icon,
     ...rest
   }: Props = $props();
 
@@ -64,12 +68,18 @@
     KUMO_BADGE_BASE_STYLES,
     appearance === 'dot' ? undefined : KUMO_BADGE_VARIANTS[variant],
     KUMO_BADGE_APPEARANCES[appearance],
+    Icon && appearance === 'filled' && 'pl-1.5',
     className
   )}
   {...rest}
 >
   {#if dotColor}
     <span aria-hidden="true" class={cn('size-1.75 shrink-0 rounded-full', dotColor)}></span>
+  {/if}
+  {#if Icon && appearance === 'filled'}
+    <span class="flex h-lh w-3 shrink-0 items-center justify-center [&>svg]:size-3">
+      <Icon />
+    </span>
   {/if}
   {@render children?.()}
 </span>

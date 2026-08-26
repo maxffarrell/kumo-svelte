@@ -5,6 +5,7 @@ import { validateDescription } from "./validate-pr-description.ts";
 const NO_LABELS = "[]";
 const NO_FILES = "[]";
 const WITH_CHANGESET = '[".changeset/some-change.md"]';
+const WITH_KUMO_SVELTE_CHANGE = '["packages/kumo-svelte/src/index.ts"]';
 
 describe("validateDescription", () => {
   describe("Tests section", () => {
@@ -114,13 +115,32 @@ describe("validateDescription", () => {
       assert.deepStrictEqual(errors, []);
     });
 
-    it("fails when changeset is missing", () => {
+    it("fails when a kumo-svelte source change is missing a changeset", () => {
       const body = `
 - Tests
 - [x] Tests included/updated
       `;
-      const errors = validateDescription("Test PR", body, NO_LABELS, NO_FILES);
+      const errors = validateDescription(
+        "Test PR",
+        body,
+        NO_LABELS,
+        WITH_KUMO_SVELTE_CHANGE,
+      );
       assert.ok(errors.some((e) => e.includes("changeset")));
+    });
+
+    it("passes without a changeset when kumo-svelte is unchanged", () => {
+      const body = `
+- Tests
+- [x] Tests included/updated
+      `;
+      const errors = validateDescription(
+        "Test PR",
+        body,
+        NO_LABELS,
+        '["ci/utils/git-operations.ts"]',
+      );
+      assert.deepStrictEqual(errors, []);
     });
 
     it("passes when no-changeset-required label is applied", () => {

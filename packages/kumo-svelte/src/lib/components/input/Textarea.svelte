@@ -50,7 +50,8 @@
     ...rest
   }: Props = $props();
 
-  const generatedId = `kumo-textarea-${Math.random().toString(36).slice(2)}`;
+  const componentId = $props.id();
+  const generatedId = `kumo-textarea-${componentId}`;
   const textareaId = $derived(id ?? generatedId);
   const descriptionId = $derived(description ? `${textareaId}-description` : undefined);
   const errorId = $derived(error ? `${textareaId}-error` : undefined);

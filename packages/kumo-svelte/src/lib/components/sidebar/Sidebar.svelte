@@ -8,14 +8,16 @@
     children?: Snippet;
     class?: string;
     contentClass?: string;
+    fullScreenOnMobile?: boolean;
     [key: string]: unknown;
   }
 
-  let { children, class: className, contentClass, ...rest }: Props = $props();
+  let { children, class: className, contentClass, fullScreenOnMobile = false, ...rest }: Props = $props();
   const sidebar = getSidebarContext('Sidebar');
   let mobileNode: HTMLElement | null = $state(null);
   let mobileTrigger: HTMLElement | null = null;
   let shouldRestoreFocus = false;
+  let isPointerInPeekZone = false;
   const isAlwaysExpanded = $derived(sidebar.collapsible === 'none');
   const isVisible = $derived(sidebar.open || sidebar.isPeeking || isAlwaysExpanded);
   const railWidth = $derived(isAlwaysExpanded || sidebar.open ? 'var(--sidebar-width)' : sidebar.collapsible === 'icon' ? 'var(--sidebar-width-icon)' : '0px');
@@ -42,6 +44,27 @@
 
   function handleMobileKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape') closeMobile(true);
+  }
+
+  function handlePeekBlur(event: FocusEvent) {
+    const currentTarget = event.currentTarget;
+    if (!(currentTarget instanceof HTMLElement)) return;
+    if (
+      !currentTarget.contains(event.relatedTarget as Node | null) &&
+      !isPointerInPeekZone
+    ) {
+      sidebar.stopPeek();
+    }
+  }
+
+  function handlePeekMouseEnter() {
+    isPointerInPeekZone = true;
+    sidebar.startPeek();
+  }
+
+  function handlePeekMouseLeave() {
+    isPointerInPeekZone = false;
+    sidebar.stopPeek();
   }
 
   $effect(() => {
@@ -80,7 +103,7 @@
     class={cn(
       sidebar.contained ? 'absolute inset-0 z-40 bg-kumo-recessed' : 'fixed inset-0 z-40 bg-kumo-recessed',
       'transition-opacity duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none',
-      sidebar.openMobile ? 'opacity-80' : 'pointer-events-none opacity-0'
+      sidebar.openMobile && !fullScreenOnMobile ? 'opacity-80' : 'pointer-events-none opacity-0'
     )}
     onclick={() => closeMobile(true)}
     aria-hidden="true"
@@ -99,10 +122,11 @@
     data-mobile="true"
     data-sidebar="sidebar"
     class={cn(
-      sidebar.contained
-        ? 'group/sidebar absolute inset-y-0 z-50 flex w-(--sidebar-width) flex-col overflow-hidden'
-        : 'group/sidebar fixed inset-y-0 z-50 flex w-(--sidebar-width) flex-col overflow-hidden',
-      'border-r border-kumo-line bg-(--sidebar-bg) text-kumo-default transition-transform duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none',
+      'group/sidebar inset-y-0 z-50 flex flex-col overflow-hidden',
+      sidebar.contained ? 'absolute' : 'fixed',
+      fullScreenOnMobile ? 'w-full' : 'w-(--sidebar-width)',
+      'bg-(--sidebar-bg) text-kumo-default transition-transform duration-(--sidebar-animation-duration) ease-(--sidebar-easing) motion-reduce:transition-none',
+      !fullScreenOnMobile && 'border-r border-kumo-line',
       sidebar.side === 'left' && 'left-0',
       sidebar.side === 'right' && 'right-0',
       sidebar.side === 'left' && (sidebar.openMobile ? 'translate-x-0' : '-translate-x-full'),
@@ -134,10 +158,10 @@
       role="presentation"
       style:width={contentWidth}
       class={contentClasses}
-      onmouseenter={sidebar.startPeek}
-      onmouseleave={sidebar.stopPeek}
+      onmouseenter={handlePeekMouseEnter}
+      onmouseleave={handlePeekMouseLeave}
       onfocus={sidebar.startPeek}
-      onblur={sidebar.stopPeek}
+      onblur={handlePeekBlur}
     >
       {@render sidebarContent()}
     </div>

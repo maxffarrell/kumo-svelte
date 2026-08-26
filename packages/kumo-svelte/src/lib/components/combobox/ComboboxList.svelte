@@ -2,6 +2,7 @@
   import type { ItemSnippet } from './context';
   import { getComboboxContext } from './context';
   import { cn } from '$lib/utils/cn';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {
     children?: ItemSnippet;
@@ -13,7 +14,7 @@
   const context = getComboboxContext('Combobox.List');
 </script>
 
-<div
+<ComboboxPrimitive.Viewport
   class={cn('min-h-0 flex-1 overflow-y-auto overscroll-contain scroll-pb-2 scroll-pt-2', className)}
   role="listbox"
   {...rest}
@@ -23,4 +24,4 @@
       {@render children(item.raw)}
     {/each}
   {/if}
-</div>
+</ComboboxPrimitive.Viewport>

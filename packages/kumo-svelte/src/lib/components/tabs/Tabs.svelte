@@ -38,6 +38,11 @@
   export type TabsVariant = (typeof KUMO_TABS_VARIANTS.variant)[number];
   export type TabsSize = (typeof KUMO_TABS_VARIANTS.size)[number];
 
+  export interface TabsLabels {
+    scrollStart?: string;
+    scrollEnd?: string;
+  }
+
   export type TabsItem = {
     value: string;
     label: string | Snippet;
@@ -69,6 +74,7 @@
     listClass?: string;
     triggerClass?: string;
     contentClass?: string;
+    labels?: TabsLabels;
     [key: string]: unknown;
   }
 
@@ -88,15 +94,19 @@
     listClass,
     triggerClass,
     contentClass,
+    labels = {},
     ...rest
   }: Props = $props();
 
   let listEl: HTMLDivElement | null = $state(null);
   let isOverflowing = $state(false);
+  let canScrollStart = $state(false);
+  let canScrollEnd = $state(false);
   let activeLeft = $state(0);
   let activeTop = $state(0);
   let activeWidth = $state(0);
   let activeHeight = $state(0);
+  let indicatorMeasured = $state(false);
   let indicatorRendered = $state(false);
   let dragState: { pointerId: number; startX: number; scrollLeft: number; dragging: boolean } | null = null;
   let shouldSuppressClick = false;
@@ -112,11 +122,17 @@
   }
 
   function updateOverflow() {
-    if (!listEl || !isSegmented) {
+    if (!listEl) {
       isOverflowing = false;
+      canScrollStart = false;
+      canScrollEnd = false;
       return;
     }
-    isOverflowing = listEl.scrollWidth > listEl.clientWidth;
+    const maxScrollLeft = Math.max(0, listEl.scrollWidth - listEl.clientWidth);
+    const scrollLeft = Math.min(Math.max(0, listEl.scrollLeft), maxScrollLeft);
+    isOverflowing = maxScrollLeft > 1;
+    canScrollStart = scrollLeft > 1;
+    canScrollEnd = maxScrollLeft - scrollLeft > 1;
   }
 
   function updateIndicator() {
@@ -124,17 +140,31 @@
 
     const activeTab = listEl.querySelector<HTMLElement>('[data-state="active"], [aria-selected="true"]');
     if (!activeTab) {
+      indicatorMeasured = false;
       indicatorRendered = false;
       return;
     }
 
-    const listRect = listEl.getBoundingClientRect();
-    const tabRect = activeTab.getBoundingClientRect();
-    activeLeft = tabRect.left - listRect.left + listEl.scrollLeft;
-    activeTop = tabRect.top - listRect.top;
-    activeWidth = tabRect.width;
-    activeHeight = tabRect.height;
-    indicatorRendered = true;
+    // Use layout-space offset* (not getBoundingClientRect) so ancestor
+    // transforms (e.g. Dialog scale) can't skew the measurement.
+    activeLeft = activeTab.offsetLeft;
+    activeTop = activeTab.offsetTop;
+    activeWidth = activeTab.offsetWidth;
+    activeHeight = activeTab.offsetHeight;
+
+    if (!indicatorMeasured && activeWidth > 0) {
+      // First measurement: unhide the indicator at its real size while it is
+      // still in the pre-render state (scale-90 / opacity-0 via
+      // data-rendered=false), then flip data-rendered on a later frame so it
+      // pops in at the correct size and position instead of transitioning its
+      // size up from 0x0.
+      indicatorMeasured = true;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          indicatorRendered = true;
+        });
+      });
+    }
   }
 
   async function syncMeasurements() {
@@ -210,6 +240,18 @@
     });
   }
 
+  function scrollTabs(direction: 'start' | 'end') {
+    if (!listEl) return;
+    const tabs = Array.from(listEl.querySelectorAll<HTMLElement>('[data-kumo-part="tab"]'));
+    let distance = 0;
+    for (const tab of tabs) {
+      if (distance + tab.offsetWidth > listEl.clientWidth) break;
+      distance += tab.offsetWidth;
+    }
+    const amount = distance || listEl.clientWidth;
+    listEl.scrollBy({ left: direction === 'start' ? -amount : amount, behavior: 'smooth' });
+  }
+
   $effect(() => {
     if (normalizedItems.length === 0) return;
     value ??= selectedValue ?? normalizedItems[0]?.value;
@@ -233,9 +275,15 @@
       resizeObserver.observe(listEl);
     }
 
+    const mutationObserver = listEl ? new MutationObserver(() => void syncMeasurements()) : undefined;
+    mutationObserver?.observe(listEl!, { childList: true, characterData: true, subtree: true });
+
     void syncMeasurements();
 
-    return () => resizeObserver.disconnect();
+    return () => {
+      resizeObserver.disconnect();
+      mutationObserver?.disconnect();
+    };
   });
 </script>
 
@@ -258,15 +306,18 @@
     <TabsPrimitive.List
       bind:ref={listEl}
       data-overflowing={isOverflowing ? '' : undefined}
+      data-overflow-start={canScrollStart ? '' : undefined}
+      data-overflow-end={canScrollEnd ? '' : undefined}
       onpointerdowncapture={handlePointerDownCapture}
       onpointermovecapture={handlePointerMoveCapture}
       onpointerupcapture={endDrag}
       onpointercancelcapture={endDrag}
       onclickcapture={handleClickCapture}
+      onscroll={updateOverflow}
       class={cn(
-        'relative flex min-w-0 shrink items-stretch',
+        'kumo-tabs-list relative flex min-w-0 shrink items-stretch overflow-x-auto overflow-y-hidden scroll-px-(--scroll-fade-width) [--scroll-fade-width:3rem]',
         isSegmented &&
-          'kumo-tabs-list overflow-x-auto rounded-lg bg-kumo-recessed px-0.5 [--scroll-fade-width:3rem] scroll-px-(--scroll-fade-width)',
+          'rounded-lg bg-kumo-recessed px-0.5',
         isSegmented && (isSm ? 'h-6.5 rounded-md' : 'h-9'),
         isOverflowing && 'cursor-grab active:cursor-grabbing',
         isUnderline && 'gap-4 border-b border-kumo-hairline pb-2',
@@ -287,10 +338,10 @@
             isOverflowing ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',
             isSm ? 'text-xs' : 'text-base',
             isSegmented &&
-              'my-0.5 text-kumo-subtle hover:text-kumo-default aria-selected:text-kumo-default data-[state=active]:text-kumo-default focus-visible:ring-inset',
+              'my-0.5 text-kumo-subtle hover:text-kumo-default data-[state=active]:text-kumo-default focus-visible:ring-inset',
             isSegmented && (isSm ? 'px-2 rounded-sm' : 'px-2.5 rounded-md'),
             isUnderline &&
-              'text-kumo-subtle hover:bg-kumo-tint hover:text-kumo-default aria-selected:hover:bg-kumo-tint aria-selected:font-medium aria-selected:text-kumo-default data-[state=active]:hover:bg-kumo-tint data-[state=active]:font-medium data-[state=active]:text-kumo-default',
+              'text-kumo-subtle hover:bg-kumo-tint hover:text-kumo-default data-[state=active]:hover:bg-kumo-tint data-[state=active]:font-medium data-[state=active]:text-kumo-default',
             isUnderline && (isSm ? 'px-1.5 py-2.5' : 'px-2 py-3'),
             tab.className,
             tab.class,
@@ -306,19 +357,51 @@
       {/each}
       <div
         aria-hidden="true"
+        hidden={!indicatorMeasured}
         data-rendered={indicatorRendered}
         class={cn(
-          'absolute z-1 left-0 w-(--active-tab-width) translate-x-(--active-tab-left) transition-all duration-200 data-[rendered=false]:scale-90 data-[rendered=false]:opacity-0',
-          isSegmented && cn('top-(--active-tab-top) h-(--active-tab-height) bg-kumo-base shadow-sm ring ring-kumo-line', isSm ? 'rounded' : 'rounded-md'),
+          'absolute z-1 transition-all duration-200 data-[rendered=false]:scale-90 data-[rendered=false]:opacity-0',
+          isSegmented && cn('bg-kumo-base shadow-sm ring ring-kumo-line', isSm ? 'rounded' : 'rounded-md'),
           isUnderline && 'bottom-0 h-0.5 bg-kumo-brand',
           indicatorClassName
         )}
-        style:--active-tab-width={`${activeWidth}px`}
-        style:--active-tab-left={`${activeLeft}px`}
-        style:--active-tab-top={`${activeTop}px`}
-        style:--active-tab-height={`${activeHeight}px`}
+        style:left={`${activeLeft}px`}
+        style:top={isUnderline ? undefined : `${activeTop}px`}
+        style:width={`${activeWidth}px`}
+        style:height={isUnderline ? undefined : `${activeHeight}px`}
       ></div>
     </TabsPrimitive.List>
+
+    {#if isSegmented}
+      {#each [
+        { side: 'start', visible: canScrollStart, label: labels.scrollStart ?? 'Scroll tabs left' },
+        { side: 'end', visible: canScrollEnd, label: labels.scrollEnd ?? 'Scroll tabs right' }
+      ] as control}
+        <button
+          type="button"
+          data-kumo-component="Tabs"
+          data-kumo-part="overflow-control"
+          data-side={control.side}
+          aria-label={control.label}
+          aria-hidden={!control.visible}
+          tabindex={control.visible ? 0 : -1}
+          onclick={() => scrollTabs(control.side as 'start' | 'end')}
+          class={cn(
+            'absolute inset-y-0 z-3 flex items-center border-0 bg-transparent p-0 transition-opacity duration-150 focus:outline-none focus-visible:[&>span]:ring-2 focus-visible:[&>span]:ring-kumo-brand',
+            control.side === 'start' ? 'left-0 justify-start bg-linear-to-r' : 'right-0 justify-end bg-linear-to-l',
+            control.visible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+            'from-kumo-recessed via-kumo-recessed/95 to-transparent',
+            isSm ? 'w-8 rounded-md' : 'w-10 rounded-lg'
+          )}
+        >
+          <span class={cn('flex items-center justify-center text-kumo-subtle transition-colors hover:text-kumo-default', isSm ? 'size-5 rounded-sm' : 'size-6 rounded-md', control.side === 'start' ? 'ml-1' : 'mr-1')}>
+            <svg viewBox="0 0 16 16" fill="none" class="size-3.5" aria-hidden="true">
+              <path d={control.side === 'start' ? 'M9.25 4.25L5.75 8L9.25 11.75' : 'M6.75 4.25L10.25 8L6.75 11.75'} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+          </span>
+        </button>
+      {/each}
+    {/if}
 
     {#each normalizedItems as tab (tab.value)}
       {#if tab.content}

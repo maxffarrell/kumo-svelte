@@ -4,4 +4,4 @@ export {
   KUMO_TABS_STYLING,
   KUMO_TABS_VARIANTS
 } from './Tabs.svelte';
-export type { TabsItem, TabsSize, TabsVariant } from './Tabs.svelte';
+export type { TabsItem, TabsLabels, TabsSize, TabsVariant } from './Tabs.svelte';

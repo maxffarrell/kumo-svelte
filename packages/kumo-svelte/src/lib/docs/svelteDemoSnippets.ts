@@ -3,21 +3,20 @@ const demoSources = import.meta.glob('./demo-snippets/**/*.svelte', {
   import: 'default'
 }) as Record<string, () => Promise<string>>;
 
+export function normalizeSvelteDemoSnippet(demo: string, source: string) {
+  let snippet = source.replace(/^\n+|\n+$/g, '');
+  if (demo.startsWith('Table')) {
+    snippet = snippet
+      .replace(/\n\s*import \{ emailRows \} from '\.\/table-demo-data';/, '')
+      .replaceAll('emailRows', 'emailData');
+  }
+  return snippet;
+}
+
 const snippets = new Map(
   Object.entries(demoSources).map(([path, loadSource]) => {
     const demo = path.split('/').pop()?.replace(/\.svelte$/, '') ?? '';
-    return [
-      demo,
-      async () => {
-        let snippet = (await loadSource()).replace(/^\n+|\n+$/g, '');
-        if (demo.startsWith('Table')) {
-          snippet = snippet
-            .replace(/\n\s*import \{ emailRows \} from '\.\/table-demo-data';/, '')
-            .replaceAll('emailRows', 'emailData');
-        }
-        return snippet;
-      }
-    ] as const;
+    return [demo, async () => normalizeSvelteDemoSnippet(demo, await loadSource())] as const;
   })
 );
 

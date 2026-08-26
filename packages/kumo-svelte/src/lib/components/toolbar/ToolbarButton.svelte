@@ -40,6 +40,7 @@
   {type}
   variant="ghost"
   componentName="Toolbar.Button"
+  data-kumo-toolbar-control=""
   {...rest}
 >
   {@render children?.()}

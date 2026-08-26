@@ -1,6 +1,6 @@
 # Kumo Svelte Component Registry
 
-Version: 0.8.0
+Version: 0.9.1
 
 ## Autocomplete
 
@@ -236,11 +236,11 @@ A loading spinner to indicate loading state.
 
 ## MenuBar
 
-A horizontal menu bar with icon buttons, commonly used for text editors or toolbars.
+Deprecated horizontal menu bar. Use segmented Tabs for new work.
 
 - Category: Navigation
-- Import: `import { MenuBar } from "kumo-svelte/components/menubar";`
-- Source: `components/menubar`
+- Import: `import { MenuBar } from "kumo-svelte/components/menu-bar";`
+- Source: `components/menu-bar`
 
 ## Meter
 

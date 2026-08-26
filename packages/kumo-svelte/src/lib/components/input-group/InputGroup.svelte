@@ -48,7 +48,8 @@
     ...rest
   }: Props = $props();
 
-  const generatedId = `kumo-input-group-${Math.random().toString(36).slice(2)}`;
+  const componentId = $props.id();
+  const generatedId = `kumo-input-group-${componentId}`;
   const inputId = $derived(id ?? generatedId);
   const descriptionId = $derived(description ? `${inputId}-description` : undefined);
   const errorId = $derived(error ? `${inputId}-error` : undefined);
@@ -90,7 +91,6 @@
     class={cn(
       'relative w-full cursor-text text-kumo-default',
       sizes[size],
-      'shadow-xs',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       focusMode === 'container'
         ? [

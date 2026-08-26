@@ -86,6 +86,10 @@ Port components file-by-file from [cloudflare/kumo](https://github.com/cloudflar
 - **Original Live Docs**: [kumo-ui.com](https://kumo-ui.com)
 - **Original Source**: [cloudflare/kumo](https://github.com/cloudflare/kumo)
 
+## Contributors
+
+- [Teddy (@uhteddy)](https://github.com/uhteddy) contributed the Bits UI primitive integration, keyboard-navigation tests, and prop documentation for the Combobox and Autocomplete components.
+
 ## License
 
 MIT

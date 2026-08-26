@@ -20,7 +20,7 @@
   data-kumo-component="DropdownMenu"
   data-kumo-part="radio-item"
   class={cn(
-    'relative flex cursor-default items-center rounded-md px-2 py-1.5 text-base outline-hidden select-none',
+    'group/radio-item relative flex cursor-default items-center rounded-md px-2 py-1.5 text-base outline-hidden select-none',
     'data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-kumo-tint',
     inset && 'pl-8',
     className

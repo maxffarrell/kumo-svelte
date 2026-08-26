@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
+  import type { Component, Snippet } from 'svelte';
   import DemoRenderer from './DemoRenderer.svelte';
   import CodeBlock from './CodeBlock.svelte';
-  import { getSvelteDemoSnippet } from './svelteDemoSnippets';
+  import { getSvelteDemoSnippet, normalizeSvelteDemoSnippet } from './svelteDemoSnippets';
 
   interface Props {
     children?: Snippet;
+    component?: Component;
     code?: string;
     demo?: string;
     lang?: string;
@@ -13,12 +14,12 @@
     vrTitle?: string;
   }
 
-  let { children, code: codeProp, demo, lang = 'svelte', vrTitle }: Props = $props();
+  let { children, code: codeProp, component, demo, lang = 'svelte', vrTitle }: Props = $props();
   const code = $derived(
     codeProp !== undefined
-      ? codeProp.replace(/^\n+|\n+$/g, '')
+      ? normalizeSvelteDemoSnippet(demo ?? '', codeProp)
       : demo
-        ? getSvelteDemoSnippet(demo).then((snippet) => snippet.replace(/^\n+|\n+$/g, ''))
+        ? getSvelteDemoSnippet(demo)
         : ''
   );
 </script>
@@ -31,7 +32,10 @@
         exampleCode ? 'rounded-t-lg' : 'rounded-lg'
       ]}
     >
-      {#if demo}
+      {#if component}
+        {@const DemoComponent = component}
+        <DemoComponent />
+      {:else if demo}
         <DemoRenderer {demo} />
       {:else if children}
         {@render children()}

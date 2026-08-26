@@ -12,7 +12,7 @@
   let { children, class: className, ...rest }: Props = $props();
 </script>
 
-<span class={cn('ml-auto', className)} {...rest}>
+<span class={cn('ml-auto group-data-[state=unchecked]/radio-item:hidden', className)} {...rest}>
   {#if children}
     {@render children()}
   {:else}

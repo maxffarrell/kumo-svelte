@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getAutocompleteContext, type AutocompleteSize } from './context';
   import { cn } from '$lib/utils/cn';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {
     class?: string;
@@ -28,17 +29,16 @@
   }
 </script>
 
-<input
+<ComboboxPrimitive.Input
   class={cn(
     'w-full border-0 bg-kumo-control text-kumo-default shadow-xs ring ring-kumo-line outline-none focus:outline-none',
     'placeholder:text-kumo-placeholder disabled:text-kumo-disabled',
     context.invalid
-      ? '!ring-kumo-danger focus:ring-kumo-danger/50 focus:ring-[1.5px]'
+      ? 'ring-kumo-danger! focus:ring-kumo-danger/50 focus:ring-[1.5px]'
       : 'focus:ring-kumo-focus/50 focus:ring-[1.5px]',
     sizes[size ?? context.size],
     className
   )}
-  value={context.query}
   {placeholder}
   aria-invalid={context.invalid || undefined}
   onbeforeinput={(event) => {

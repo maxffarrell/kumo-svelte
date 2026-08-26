@@ -1,12 +1,11 @@
 <script lang="ts">
     import Warning from "phosphor-svelte/lib/Warning";
-    import TextB from "phosphor-svelte/lib/TextB";
     import CheckCircle from "phosphor-svelte/lib/CheckCircle";
-    import TextItalic from "phosphor-svelte/lib/TextItalic";
     import TranslateIcon from "phosphor-svelte/lib/TranslateIcon";
     import WarningOctagon from "phosphor-svelte/lib/WarningOctagon";
     import Plus from "phosphor-svelte/lib/Plus";
     import MagnifyingGlass from "phosphor-svelte/lib/MagnifyingGlass";
+    import X from "phosphor-svelte/lib/X";
     import { Autocomplete } from "$lib/components/autocomplete";
     import { Badge } from "$lib/components/badge";
     import { Banner } from "$lib/components/banner";
@@ -16,7 +15,6 @@
     import { CodeHighlighted } from "$lib/components/code-highlighted";
     import { Collapsible } from "$lib/components/collapsible";
     import { Combobox } from "$lib/components/combobox";
-    import { CommandPalette } from "$lib/components/command-palette";
     import { DatePicker } from "$lib/components/date-picker";
     import { Dialog } from "$lib/components/dialog";
     import { DropdownMenu } from "$lib/components/dropdown-menu";
@@ -35,7 +33,6 @@
     import { LayerCard } from "$lib/components/layer-card";
     import { Link } from "$lib/components/link";
     import { Loader } from "$lib/components/loader";
-    import { MenuBar } from "$lib/components/menu-bar";
     import { Meter } from "$lib/components/meter";
     import { Pagination, PaginationControls } from "$lib/components/pagination";
     import {
@@ -64,6 +61,7 @@
     import { Toasty, createKumoToastManager } from "$lib/components/toasty";
     import { Toolbar } from "$lib/components/toolbar";
     import { Tooltip } from "$lib/components/tooltip";
+    import CommandPaletteBasicDemo from "$lib/docs/demo-snippets/CommandPaletteBasicDemo.svelte";
 
     const options = [
         { label: "All deployed versions", value: "all" },
@@ -81,12 +79,6 @@
         { id: "good-first-issue", value: "good first issue" },
     ];
 
-    const commands = [
-        { label: "Open dashboard" },
-        { label: "Create worker" },
-        { label: "Deploy project" },
-    ];
-
     const tabs = [
         { value: "home", label: "Home" },
         { value: "about", label: "About" },
@@ -97,9 +89,9 @@
     let checked = $state(true);
     let page = $state(1);
     let activeTab = $state("home");
-    let activeMenuOption = $state<number | undefined>(0);
     let collapsibleOpen = $state(false);
     let comboboxIssue = $state<string | null>(null);
+    let dialogOpen = $state(false);
     const toastManager = createKumoToastManager();
 </script>
 
@@ -179,7 +171,7 @@
                     <div
                         class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
                     >
-                        <Toolbar class="w-[260px]">
+                        <Toolbar>
                             <Toolbar.Input
                                 aria-label="Search DNS records"
                                 placeholder="Search..."
@@ -308,13 +300,36 @@
                         class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         {#snippet dialogTrigger(props: Record<string, unknown>)}
-                            <Button {...props}>Click me!</Button>
+                            <Button {...props}>Delete</Button>
                         {/snippet}
                         <Dialog
+                            bind:open={dialogOpen}
                             trigger={dialogTrigger}
-                            title="Hello!"
-                            description="I'm a dialog."
-                        />
+                            title="Delete Resource?"
+                            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                            class="p-8"
+                        >
+                            <Button
+                                variant="secondary"
+                                shape="square"
+                                icon={X}
+                                aria-label="Close"
+                                class="absolute top-8 right-8"
+                                onclick={() => (dialogOpen = false)}
+                            />
+                            <div class="mt-8 flex justify-end gap-2">
+                                <Button
+                                    variant="secondary"
+                                    onclick={() => (dialogOpen = false)}
+                                    >Cancel</Button
+                                >
+                                <Button
+                                    variant="destructive"
+                                    onclick={() => (dialogOpen = false)}
+                                    >Delete</Button
+                                >
+                            </div>
+                        </Dialog>
                     </div>
                 </li>
 
@@ -342,7 +357,7 @@
                                     id="home-tooltip-add"
                                     role="tooltip"
                                     data-side="top"
-                                    class="kumo-tooltip-popup absolute bottom-[calc(100%+10px)] left-1/2 z-10 flex -translate-x-1/2 flex-col rounded-md bg-kumo-base px-2.5 py-1.5 text-sm whitespace-nowrap text-kumo-default shadow-lg shadow-kumo-tip-shadow outline outline-kumo-fill"
+                                    class="kumo-tooltip-popup absolute bottom-[calc(100%+10px)] left-1/2 z-10 flex -translate-x-1/2 flex-col rounded-md bg-kumo-base px-2.5 py-1.5 text-sm whitespace-nowrap text-kumo-default shadow-md outline outline-kumo-line"
                                 >
                                     Add
                                     <span
@@ -362,11 +377,11 @@
                                             />
                                             <path
                                                 d="M8.99542 1.85876C9.75604 1.17425 10.9106 1.17422 11.6713 1.85878L16.5281 6.22989C17.0789 6.72568 17.7938 7.00001 18.5349 7.00001L15.89 7L11.0023 2.60207C10.622 2.2598 10.0447 2.2598 9.66436 2.60207L4.77734 7L2.13171 7.00001C2.87284 7.00001 3.58774 6.72568 4.13861 6.22989L8.99542 1.85876Z"
-                                                class="fill-kumo-tip-shadow"
+                                                class="fill-kumo-arrow-edge"
                                             />
                                             <path
                                                 d="M10.3333 3.34539L5.47654 7.71648C4.55842 8.54279 3.36693 9 2.13172 9H0V8H2.13172C3.11989 8 4.07308 7.63423 4.80758 6.97318L9.66437 2.60207C10.0447 2.25979 10.622 2.2598 11.0023 2.60207L15.8591 6.97318C16.5936 7.63423 17.5468 8 18.5349 8H20V9H18.5349C17.2997 9 16.1082 8.54278 15.1901 7.71648L10.3333 3.34539Z"
-                                                class="fill-kumo-tip-stroke"
+                                                class="fill-kumo-arrow-stroke"
                                             />
                                         </svg>
                                     </span>
@@ -711,44 +726,6 @@
                     class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
                 >
                     <a
-                        id="menu-bar"
-                        href="/components/menu-bar"
-                        class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default"
-                        >MenuBar</a
-                    >
-                    <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
-                    >
-                        <MenuBar
-                            isActive={activeMenuOption}
-                            options={[
-                                {
-                                    icon: TextB,
-                                    tooltip: "Bold",
-                                    onClick: () =>
-                                        (activeMenuOption =
-                                            activeMenuOption === 0
-                                                ? undefined
-                                                : 0),
-                                },
-                                {
-                                    icon: TextItalic,
-                                    tooltip: "Italic",
-                                    onClick: () =>
-                                        (activeMenuOption =
-                                            activeMenuOption === 1
-                                                ? undefined
-                                                : 1),
-                                },
-                            ]}
-                        />
-                    </div>
-                </li>
-
-                <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
-                >
-                    <a
                         id="date-picker"
                         href="/components/date-picker"
                         class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default"
@@ -811,9 +788,7 @@
                     <div
                         class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
                     >
-                        <Button icon={MagnifyingGlass}
-                            >Open Command Palette</Button
-                        >
+                        <CommandPaletteBasicDemo />
                     </div>
                 </li>
 

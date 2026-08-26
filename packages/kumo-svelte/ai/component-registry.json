@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0",
+  "version": "0.9.1",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -75,6 +75,29 @@
           "type": "(open: boolean) => void",
           "optional": true,
           "description": "Called when open state changes."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Prevents interaction with the field."
+        },
+        "size": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "xs",
+            "sm",
+            "base",
+            "lg"
+          ],
+          "default": "base",
+          "description": "Size preset."
+        },
+        "filter": {
+          "type": "((item: AutocompleteItem, query: string) => boolean) | null",
+          "optional": true,
+          "description": "Custom filter function. Set to null to disable filtering."
         }
       },
       "colors": [
@@ -320,6 +343,11 @@
           "optional": true,
           "description": "Additional classes merged onto the root element."
         },
+        "icon": {
+          "type": "Component",
+          "optional": true,
+          "description": "Icon rendered before the content on filled badges."
+        },
         "children": {
           "type": "Snippet",
           "optional": false,
@@ -337,6 +365,7 @@
         "bg-kumo-badge-red",
         "bg-kumo-badge-teal",
         "bg-kumo-badge-teal-subtle",
+        "bg-kumo-base",
         "bg-kumo-danger-tint",
         "bg-kumo-fill",
         "bg-kumo-info-tint",
@@ -413,13 +442,25 @@
         }
       },
       "colors": [
-        "bg-kumo-banner-info",
-        "bg-kumo-banner-warning",
         "bg-kumo-contrast",
+        "bg-kumo-danger",
         "bg-kumo-danger-tint",
+        "bg-kumo-info",
+        "bg-kumo-info-tint",
+        "bg-kumo-warning",
+        "bg-kumo-warning-tint",
+        "fill-kumo-danger",
+        "fill-kumo-info",
+        "fill-kumo-interact",
+        "fill-kumo-subtle",
+        "fill-kumo-warning",
+        "ring-kumo-danger",
+        "ring-kumo-focus",
+        "ring-kumo-info",
+        "ring-kumo-warning",
         "text-kumo-danger",
+        "text-kumo-default",
         "text-kumo-info",
-        "text-kumo-subtle",
         "text-kumo-warning"
       ]
     },
@@ -676,6 +717,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -776,7 +818,6 @@
         "ring-kumo-brand",
         "ring-kumo-danger",
         "ring-kumo-focus",
-        "ring-kumo-hairline",
         "ring-kumo-line",
         "text-kumo-danger",
         "text-kumo-default",
@@ -915,6 +956,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -990,6 +1032,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -1406,6 +1449,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -1676,7 +1720,7 @@
       },
       "colors": [
         "border-kumo-fill",
-        "text-kumo-link"
+        "text-kumo-default"
       ],
       "subComponents": {
         "DefaultPanel": {
@@ -1923,6 +1967,27 @@
           "type": "(open: boolean) => void",
           "optional": true,
           "description": "Called when open state changes."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Prevents interaction with the field."
+        },
+        "defaultValue": {
+          "type": "unknown",
+          "optional": true,
+          "description": "Initial value."
+        },
+        "filter": {
+          "type": "((item: ComboboxItem, query: string) => boolean) | null",
+          "optional": true,
+          "description": "Custom filter function. Set to null to disable filtering."
+        },
+        "isItemEqualToValue": {
+          "type": "(item: unknown, value: unknown) => boolean",
+          "optional": true,
+          "description": "Custom value equality matcher function."
         }
       },
       "colors": [
@@ -1990,6 +2055,66 @@
               "optional": true,
               "default": "4",
               "description": "Offset between the popup and the trigger."
+            },
+            "customAnchor": {
+              "type": "string | HTMLElement | Measurable | null",
+              "optional": true,
+              "description": "Custom element or virtual anchor used to position the popup."
+            },
+            "strategy": {
+              "type": "enum",
+              "optional": true,
+              "values": [
+                "absolute",
+                "fixed"
+              ],
+              "description": "CSS positioning strategy used by the floating content."
+            },
+            "avoidCollisions": {
+              "type": "boolean",
+              "optional": true,
+              "default": "true",
+              "description": "Adjust placement to avoid crossing collision boundaries."
+            },
+            "collisionBoundary": {
+              "type": "Boundary | Boundary[]",
+              "optional": true,
+              "description": "Boundary elements used for collision detection."
+            },
+            "collisionPadding": {
+              "type": "number | Partial<Record<Side, number>>",
+              "optional": true,
+              "default": "8",
+              "description": "Padding kept between the popup and collision boundaries."
+            },
+            "sticky": {
+              "type": "enum",
+              "optional": true,
+              "values": [
+                "partial",
+                "always"
+              ],
+              "description": "How the popup remains attached when its anchor approaches a boundary."
+            },
+            "hideWhenDetached": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Hide the popup when its anchor is fully clipped."
+            },
+            "updatePositionStrategy": {
+              "type": "enum",
+              "optional": true,
+              "values": [
+                "optimized",
+                "always"
+              ],
+              "default": "'optimized'",
+              "description": "How frequently floating position updates are calculated."
+            },
+            "container": {
+              "type": "HTMLElement | string",
+              "optional": true,
+              "description": "Portal target for the popup content."
             }
           }
         },
@@ -3594,8 +3719,6 @@
         "bg-kumo-base",
         "bg-kumo-elevated",
         "ring-kumo-fill",
-        "ring-kumo-hairline",
-        "ring-kumo-line",
         "text-kumo-subtle"
       ]
     },
@@ -3680,9 +3803,9 @@
       "name": "MenuBar",
       "type": "component",
       "category": "Navigation",
-      "description": "A horizontal menu bar with icon buttons, commonly used for text editors or toolbars.",
-      "importPath": "kumo-svelte/components/menubar",
-      "sourceFile": "components/menubar",
+      "description": "Deprecated horizontal menu bar. Use segmented Tabs for new work.",
+      "importPath": "kumo-svelte/components/menu-bar",
+      "sourceFile": "components/menu-bar",
       "props": {
         "class": {
           "type": "string",
@@ -3708,7 +3831,14 @@
           "description": "When true, each option's id is used for active matching instead of its array index."
         }
       },
-      "colors": []
+      "colors": [
+        "bg-kumo-base",
+        "bg-kumo-recessed",
+        "border-kumo-recessed",
+        "ring-kumo-brand",
+        "ring-kumo-focus",
+        "ring-kumo-line"
+      ]
     },
     "Meter": {
       "name": "Meter",
@@ -3964,9 +4094,9 @@
       },
       "colors": [
         "bg-kumo-base",
+        "fill-kumo-arrow-edge",
+        "fill-kumo-arrow-stroke",
         "fill-kumo-base",
-        "fill-kumo-tip-shadow",
-        "fill-kumo-tip-stroke",
         "ring-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -4382,6 +4512,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -4803,10 +4934,35 @@
               "optional": true,
               "description": "Tooltip label shown when the sidebar is collapsed."
             },
+            "itemId": {
+              "type": "string",
+              "optional": true,
+              "description": "Anchor id used by useSidebar().scrollToItem()."
+            },
             "children": {
               "type": "Snippet",
               "optional": true,
               "description": "Menu button label and inline content."
+            },
+            "class": {
+              "type": "string",
+              "optional": true,
+              "description": "Additional classes."
+            }
+          }
+        },
+        "MenuItem": {
+          "description": "Sidebar.MenuItem",
+          "props": {
+            "itemId": {
+              "type": "string",
+              "optional": true,
+              "description": "Anchor id used by useSidebar().scrollToItem()."
+            },
+            "children": {
+              "type": "Snippet",
+              "optional": true,
+              "description": "Menu item content."
             },
             "class": {
               "type": "string",
@@ -5750,6 +5906,7 @@
           "type": "enum",
           "optional": true,
           "values": [
+            "heading",
             "heading1",
             "heading2",
             "heading3",
@@ -5761,7 +5918,7 @@
             "error"
           ],
           "default": "body",
-          "description": "Visual variant."
+          "description": "Visual variant. Numbered heading variants are deprecated; use heading with size and as."
         },
         "size": {
           "type": "enum",
@@ -5773,7 +5930,7 @@
             "lg"
           ],
           "default": "base",
-          "description": "Size preset."
+          "description": "Size preset. Heading accepts lg for a 20px heading; its default is 16px."
         },
         "bold": {
           "type": "boolean",
@@ -5976,6 +6133,7 @@
       },
       "colors": [
         "bg-kumo-base",
+        "bg-kumo-fill",
         "border-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
@@ -6015,7 +6173,7 @@
             "lg"
           ],
           "default": "base",
-          "description": "Locks every toolbar item to this size."
+          "description": "Deprecated. Sets every toolbar item to this size; omit it for the base size."
         },
         "class": {
           "type": "string",
@@ -6184,9 +6342,9 @@
       },
       "colors": [
         "bg-kumo-base",
+        "fill-kumo-arrow-edge",
+        "fill-kumo-arrow-stroke",
         "fill-kumo-base",
-        "fill-kumo-tip-shadow",
-        "fill-kumo-tip-stroke",
         "text-kumo-default"
       ]
     }

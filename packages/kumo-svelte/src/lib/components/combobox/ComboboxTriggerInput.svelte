@@ -1,9 +1,10 @@
 <script lang="ts">
   import CaretDown from 'phosphor-svelte/lib/CaretDown';
+  import type { Snippet } from 'svelte';
   import X from 'phosphor-svelte/lib/X';
   import { cn } from '$lib/utils/cn';
-  import { KUMO_COMBOBOX_CLEAR_CLASSES } from './combobox-variants';
   import { embeddedInputStyles, getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {
     class?: string;
@@ -11,6 +12,7 @@
     size?: ComboboxSize;
     clearLabel?: string;
     showOptionsLabel?: string;
+    child?: Snippet<[{ props: Record<string, unknown> }]>;
     [key: string]: unknown;
   }
 
@@ -20,12 +22,12 @@
     size,
     clearLabel = 'Clear selection',
     showOptionsLabel = 'Show options',
+    child,
     ...rest
   }: Props = $props();
 
   const context = getComboboxContext('Combobox.TriggerInput');
   const resolvedSize = $derived(size ?? context.size);
-  const displayValue = $derived(context.open || context.multiple ? context.query : context.labelFor(context.value));
   const hasValue = $derived(context.multiple ? Array.isArray(context.value) && context.value.length > 0 : Boolean(context.value));
 
   const iconPadding: Record<ComboboxSize, string> = {
@@ -52,14 +54,13 @@
 
 <div
   class={cn(
-    'relative inline-block w-full max-w-xs',
+    'relative inline-block w-full',
     'has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50',
     className
   )}
 >
-  <input
-    role="combobox"
-    aria-expanded={context.open}
+  <ComboboxPrimitive.Input
+    {child}
     class={cn(
       inputStyles[resolvedSize],
       'w-full border-0 bg-kumo-control text-kumo-default shadow-xs ring ring-kumo-line outline-none',
@@ -69,33 +70,31 @@
         : 'focus:ring-kumo-focus/50 focus:ring-[1.5px]',
       iconPadding[resolvedSize]
     )}
-    value={displayValue}
     {placeholder}
-    disabled={context.disabled}
     aria-invalid={context.invalid || undefined}
-    oninput={(event) => {
-      context.query = (event.currentTarget as HTMLInputElement).value;
-      context.open = true;
-    }}
-    onfocus={() => (context.open = true)}
     {...rest}
   />
 
   <button
     type="button"
     aria-label={clearLabel}
-    data-disabled={context.disabled || !hasValue || undefined}
     data-kumo-component="Combobox"
     data-kumo-part="clear"
-    class={cn(KUMO_COMBOBOX_CLEAR_CLASSES, 'text-kumo-default', clearRight[resolvedSize])}
+    class={cn(
+      'absolute top-1/2 flex -translate-y-1/2 cursor-pointer bg-transparent p-0 text-kumo-default',
+      'disabled:pointer-events-none disabled:opacity-0',
+      clearRight[resolvedSize]
+    )}
     disabled={context.disabled || !hasValue}
-    onclick={() => (context.value = context.multiple ? [] : null)}
+    onclick={() => {
+      context.value = context.multiple ? [] : null;
+      context.query = '';
+    }}
   >
     <X size={iconSizes[resolvedSize]} />
   </button>
 
-  <button
-    type="button"
+  <ComboboxPrimitive.Trigger
     aria-label={showOptionsLabel}
     data-kumo-component="Combobox"
     data-kumo-part="trigger"
@@ -104,8 +103,7 @@
       caretRight[resolvedSize]
     )}
     disabled={context.disabled}
-    onclick={() => (context.open = !context.open)}
   >
     <CaretDown size={iconSizes[resolvedSize]} class="fill-current" />
-  </button>
+  </ComboboxPrimitive.Trigger>
 </div>

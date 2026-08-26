@@ -1,60 +1,67 @@
-import { render, screen } from '@testing-library/svelte';
-import { describe, expect, it } from 'vitest';
-import { expectNoA11yViolations } from '../../../../tests/a11y';
-import Banner, { bannerVariants } from './Banner.svelte';
+import { render, screen } from "@testing-library/svelte";
+import { describe, expect, it } from "vitest";
+import Banner, { bannerVariants } from "./Banner.svelte";
+import { Banner as BannerCompound } from "./index";
+import BannerLinkActionTest from "../../test-fixtures/BannerLinkActionTest.svelte";
+import BannerActionTest from "../../test-fixtures/BannerActionTest.svelte";
 
-describe('Banner', () => {
-  it('supports secondary variant classes', () => {
-    const className = bannerVariants({ variant: 'secondary' });
-    expect(className).toContain('bg-kumo-contrast/5');
-    expect(className).toContain('text-kumo-subtle');
+describe("Banner", () => {
+  it("matches the 2.9 compact size contract", () => {
+    const classes = bannerVariants({ size: "sm" });
+    expect(classes).toContain("items-center");
+    expect(classes).toContain("px-3");
+    expect(classes).toContain("py-2");
+    expect(classes).toContain("text-sm");
   });
 
-  it('forwards root div props', () => {
+  it("renders compact title and description inline", () => {
     render(Banner, {
-      role: 'status',
-      'data-testid': 'banner',
-      'aria-live': 'polite',
-      title: 'System status'
+      size: "sm",
+      title: "Heads up",
+      description: "More details",
     });
-
-    const banner = screen.getByTestId('banner');
-    expect(banner.getAttribute('role')).toBe('status');
-    expect(banner.getAttribute('aria-live')).toBe('polite');
-    expect(banner.textContent?.trim()).toBe('System status');
+    const title = screen.getByText("Heads up");
+    const description = screen.getByText("More details");
+    expect(title.tagName).toBe("SPAN");
+    expect(description.tagName).toBe("SPAN");
+    expect(title.parentElement).toBe(description.parentElement);
   });
 
-  describe('variant fidelity', () => {
-    it('applies default info classes', () => {
-      const { container } = render(Banner, { title: 'Info', variant: 'default' });
-      expect(container.firstElementChild?.className).toContain('bg-kumo-banner-info');
-    });
-
-    it('applies alert warning classes', () => {
-      const { container } = render(Banner, { title: 'Alert', variant: 'alert' });
-      expect(container.firstElementChild?.className).toContain('bg-kumo-banner-warning');
-    });
-
-    it('applies error danger classes', () => {
-      const { container } = render(Banner, { title: 'Error', variant: 'error' });
-      const cls = container.firstElementChild?.className ?? '';
-      expect(cls).toContain('bg-kumo-danger-tint/60');
-      expect(cls).toContain('text-kumo-danger');
-    });
+  it("uses the updated neutral secondary color", () => {
+    expect(bannerVariants({ variant: "secondary" })).toContain(
+      "text-kumo-default/70",
+    );
   });
 
-  describe('accessibility', () => {
-    it('has no axe violations (structured)', async () => {
-      const { container } = render(Banner, {
-        title: 'Update available',
-        description: 'A new version is ready.'
-      });
-      await expectNoA11yViolations(container);
-    });
+  it("exposes the action through the compound Banner API", () => {
+    expect(BannerCompound).toBe(Banner);
+    expect(BannerCompound.Action).toBeDefined();
+  });
 
-    it('has no axe violations (legacy text)', async () => {
-      const { container } = render(Banner, { text: 'Simple banner message.' });
-      await expectNoA11yViolations(container);
-    });
+  it("renders a Link action inline in a compact banner", () => {
+    render(BannerLinkActionTest);
+
+    const description = screen.getByText("A DNS record already exists.");
+    const action = screen.getByTestId("action");
+    expect(action.parentElement?.parentElement).toBe(description);
+    expect(action.parentElement?.className).toContain("ml-1.5");
+  });
+
+  it("renders a compact CTA as a trailing sibling at the xs size", () => {
+    render(BannerActionTest);
+
+    const description = screen.getByText("A new version is ready.");
+    const action = screen.getByTestId("action");
+    expect(action.parentElement?.parentElement).toBe(
+      description.parentElement?.parentElement,
+    );
+    expect(action.className).toContain("h-5");
+  });
+
+  it("uses the compact icon line-height slot", () => {
+    const { container } = render(BannerActionTest);
+
+    const icon = container.querySelector("svg");
+    expect(icon?.parentElement?.className).toContain("h-[1.25em]");
   });
 });

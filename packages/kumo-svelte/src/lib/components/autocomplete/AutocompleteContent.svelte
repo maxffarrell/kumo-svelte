@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
   import { getAutocompleteContext } from './context';
   import { cn } from '$lib/utils/cn';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   type AutocompleteContentAlign = 'start' | 'center' | 'end';
   type AutocompleteContentSide = 'top' | 'right' | 'bottom' | 'left';
@@ -30,49 +31,28 @@
   }: Props = $props();
   const context = getAutocompleteContext('Autocomplete.Content');
 
-  const horizontalAlignClasses: Record<AutocompleteContentAlign, string> = {
-    start: 'left-[var(--autocomplete-align-offset)]',
-    center: 'left-1/2 -translate-x-1/2',
-    end: 'right-[var(--autocomplete-align-offset)]'
-  };
-
-  const verticalAlignClasses: Record<AutocompleteContentAlign, string> = {
-    start: 'top-[var(--autocomplete-align-offset)]',
-    center: 'top-1/2 -translate-y-1/2',
-    end: 'bottom-[var(--autocomplete-align-offset)]'
-  };
-
-  const sideClasses: Record<AutocompleteContentSide, string> = {
-    top: 'bottom-full mb-[var(--autocomplete-side-offset)]',
-    right: 'left-full ml-[var(--autocomplete-side-offset)]',
-    bottom: 'top-full mt-[var(--autocomplete-side-offset)]',
-    left: 'right-full mr-[var(--autocomplete-side-offset)]'
-  };
-
-  function toCssUnit(value: Offset) {
-    return typeof value === 'number' ? `${value}px` : value;
+  function toNumberOffset(val: Offset): number {
+    if (typeof val === 'number') return val;
+    const parsed = parseFloat(val);
+    return isNaN(parsed) ? 0 : parsed;
   }
-
-  const positionStyle = $derived(
-    `--autocomplete-align-offset: ${toCssUnit(alignOffset)}; --autocomplete-side-offset: ${toCssUnit(sideOffset)};${style ? ` ${style}` : ''}`
-  );
-  const positionClass = $derived.by(() =>
-    side === 'top' || side === 'bottom'
-      ? cn(sideClasses[side], horizontalAlignClasses[align])
-      : cn(sideClasses[side], verticalAlignClasses[align])
-  );
 </script>
 
 {#if context.open && context.hasTypedSinceFocus && context.filteredItems.length}
-  <div
-    class={cn(
-      'absolute z-50 flex max-h-[min(24rem,calc(100vh-8rem))] min-w-full flex-col overflow-hidden rounded-lg bg-kumo-control py-1.5 text-kumo-default shadow-lg ring ring-kumo-line',
-      positionClass,
-      className
-    )}
-    style={positionStyle}
-    {...rest}
-  >
-    {@render children?.()}
-  </div>
+  <ComboboxPrimitive.Portal>
+    <ComboboxPrimitive.Content
+      class={cn(
+        'z-50 flex max-h-[min(24rem,calc(100vh-8rem))] min-w-[calc(var(--bits-select-anchor-width)+3px)] flex-col overflow-hidden rounded-lg bg-kumo-control py-1.5 text-kumo-default shadow-lg ring ring-kumo-line outline-none',
+        className
+      )}
+      side={side}
+      sideOffset={toNumberOffset(sideOffset)}
+      align={align}
+      alignOffset={toNumberOffset(alignOffset)}
+      style={style}
+      {...rest}
+    >
+      {@render children?.()}
+    </ComboboxPrimitive.Content>
+  </ComboboxPrimitive.Portal>
 {/if}

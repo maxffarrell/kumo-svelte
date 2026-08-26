@@ -1,13 +1,13 @@
-import Root from './Autocomplete.svelte';
-import InputGroup from './AutocompleteInputGroup.svelte';
-import Content from './AutocompleteContent.svelte';
-import List from './AutocompleteList.svelte';
-import Item from './AutocompleteItem.svelte';
-import Group from './AutocompleteGroup.svelte';
-import GroupLabel from './AutocompleteGroupLabel.svelte';
-import Collection from './AutocompleteCollection.svelte';
-import Separator from './AutocompleteSeparator.svelte';
-import { createKumoFilter } from '../filter';
+import Root from "./Autocomplete.svelte";
+import InputGroup from "./AutocompleteInputGroup.svelte";
+import Content from "./AutocompleteContent.svelte";
+import List from "./AutocompleteList.svelte";
+import Item from "./AutocompleteItem.svelte";
+import Group from "./AutocompleteGroup.svelte";
+import GroupLabel from "./AutocompleteGroupLabel.svelte";
+import Collection from "./AutocompleteCollection.svelte";
+import Separator from "./AutocompleteSeparator.svelte";
+import { createKumoFilter } from "../filter";
 
 export const Autocomplete = Object.assign(Root, {
   InputGroup,
@@ -18,7 +18,7 @@ export const Autocomplete = Object.assign(Root, {
   GroupLabel,
   Collection,
   Separator,
-  useFilter: createKumoFilter
+  useFilter: createKumoFilter,
 });
 
 export {
@@ -30,7 +30,10 @@ export {
   Group as AutocompleteGroup,
   GroupLabel as AutocompleteGroupLabel,
   Collection as AutocompleteCollection,
-  Separator as AutocompleteSeparator
+  Separator as AutocompleteSeparator,
 };
 
-export type { AutocompleteItem as AutocompleteOption, AutocompleteSize } from './context';
+export type {
+  AutocompleteItem as AutocompleteOption,
+  AutocompleteSize,
+} from "./context";

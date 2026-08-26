@@ -84,7 +84,8 @@
     ...inputProps
   }: Props = $props();
 
-  const generatedId = `kumo-sensitive-input-${Math.random().toString(36).slice(2)}`;
+  const componentId = $props.id();
+  const generatedId = `kumo-sensitive-input-${componentId}`;
   const inputId = $derived(id ?? generatedId);
   const maskedInstructionId = $derived(`${inputId}-masked-instruction`);
   const liveRegionId = $derived(`${inputId}-live`);
@@ -107,7 +108,7 @@
   const containerClassName = $derived(
     cn(
       'group/container relative flex w-full items-center border-0 bg-kumo-control text-kumo-default ring outline-none',
-      'focus-within:outline focus-within:outline-2',
+      'focus-within:outline-2',
       KUMO_SENSITIVE_INPUT_VARIANTS.size[size],
       KUMO_SENSITIVE_INPUT_VARIANTS.variant[variant],
       error && '!ring-kumo-danger focus-within:outline-kumo-danger',

@@ -4,6 +4,12 @@ export type SidebarState = "expanded" | "collapsed" | "peeking";
 export type SidebarSide = "left" | "right";
 export type SidebarVariant = "sidebar" | "floating" | "inset";
 export type SidebarCollapsible = "icon" | "offcanvas" | "none";
+export type SidebarScrollAlign = "start" | "center" | "end" | "auto";
+
+export interface SidebarScrollToItemOptions {
+  align?: SidebarScrollAlign;
+  behavior?: ScrollBehavior;
+}
 
 export interface SidebarContextValue {
   get state(): SidebarState;
@@ -30,6 +36,8 @@ export interface SidebarContextValue {
   startPeek(): void;
   stopPeek(): void;
   toggleSidebar(): void;
+  registerItem(id: string, node: HTMLElement | null): void;
+  scrollToItem(id: string, options?: SidebarScrollToItemOptions): void;
 }
 
 export interface SidebarMenuItemContextValue {
@@ -53,6 +61,11 @@ export function getSidebarContext(component: string) {
   if (!context)
     throw new Error(`${component} must be used inside <Sidebar.Provider>.`);
   return context;
+}
+
+/** Access the nearest Sidebar provider from a descendant component. */
+export function useSidebar() {
+  return getSidebarContext("useSidebar");
 }
 
 export function setSidebarMenuItemContext(

@@ -1,27 +1,29 @@
-import Root from './Sidebar.svelte';
-import Provider from './SidebarProvider.svelte';
-import Header from './SidebarHeader.svelte';
-import Content from './SidebarContent.svelte';
-import Footer from './SidebarFooter.svelte';
-import Group from './SidebarGroup.svelte';
-import GroupLabel from './SidebarGroupLabel.svelte';
-import Menu from './SidebarMenu.svelte';
-import MenuItem from './SidebarMenuItem.svelte';
-import MenuButton from './SidebarMenuButton.svelte';
-import MenuBadge from './SidebarMenuBadge.svelte';
-import MenuSub from './SidebarMenuSub.svelte';
-import MenuSubItem from './SidebarMenuSubItem.svelte';
-import MenuSubButton from './SidebarMenuSubButton.svelte';
-import Separator from './SidebarSeparator.svelte';
-import Trigger from './SidebarTrigger.svelte';
-import Rail from './SidebarRail.svelte';
-import ResizeHandle from './SidebarResizeHandle.svelte';
-import MenuChevron from './SidebarMenuChevron.svelte';
-import Collapsible from './SidebarCollapsible.svelte';
-import CollapsibleTrigger from './SidebarCollapsibleTrigger.svelte';
-import CollapsibleContent from './SidebarCollapsibleContent.svelte';
-import SlidingViews from './SidebarSlidingViews.svelte';
-import SlidingView from './SidebarSlidingView.svelte';
+import Root from "./Sidebar.svelte";
+import Provider from "./SidebarProvider.svelte";
+import Header from "./SidebarHeader.svelte";
+import Content from "./SidebarContent.svelte";
+import Footer from "./SidebarFooter.svelte";
+import Loading from "./SidebarLoading.svelte";
+import Close from "./SidebarClose.svelte";
+import Group from "./SidebarGroup.svelte";
+import GroupLabel from "./SidebarGroupLabel.svelte";
+import Menu from "./SidebarMenu.svelte";
+import MenuItem from "./SidebarMenuItem.svelte";
+import MenuButton from "./SidebarMenuButton.svelte";
+import MenuBadge from "./SidebarMenuBadge.svelte";
+import MenuSub from "./SidebarMenuSub.svelte";
+import MenuSubItem from "./SidebarMenuSubItem.svelte";
+import MenuSubButton from "./SidebarMenuSubButton.svelte";
+import Separator from "./SidebarSeparator.svelte";
+import Trigger from "./SidebarTrigger.svelte";
+import Rail from "./SidebarRail.svelte";
+import ResizeHandle from "./SidebarResizeHandle.svelte";
+import MenuChevron from "./SidebarMenuChevron.svelte";
+import Collapsible from "./SidebarCollapsible.svelte";
+import CollapsibleTrigger from "./SidebarCollapsibleTrigger.svelte";
+import CollapsibleContent from "./SidebarCollapsibleContent.svelte";
+import SlidingViews from "./SidebarSlidingViews.svelte";
+import SlidingView from "./SidebarSlidingView.svelte";
 
 export const Sidebar: typeof Root & {
   Provider: typeof Provider;
@@ -29,6 +31,8 @@ export const Sidebar: typeof Root & {
   Header: typeof Header;
   Content: typeof Content;
   Footer: typeof Footer;
+  Loading: typeof Loading;
+  Close: typeof Close;
   Group: typeof Group;
   GroupLabel: typeof GroupLabel;
   Menu: typeof Menu;
@@ -54,6 +58,8 @@ export const Sidebar: typeof Root & {
   Header,
   Content,
   Footer,
+  Loading,
+  Close,
   Group,
   GroupLabel,
   Menu,
@@ -72,7 +78,7 @@ export const Sidebar: typeof Root & {
   CollapsibleTrigger,
   CollapsibleContent,
   SlidingViews,
-  SlidingView
+  SlidingView,
 });
 
 export {
@@ -81,6 +87,8 @@ export {
   Header as SidebarHeader,
   Content as SidebarContent,
   Footer as SidebarFooter,
+  Loading as SidebarLoading,
+  Close as SidebarClose,
   Group as SidebarGroup,
   GroupLabel as SidebarGroupLabel,
   Menu as SidebarMenu,
@@ -99,13 +107,17 @@ export {
   CollapsibleTrigger as SidebarCollapsibleTrigger,
   CollapsibleContent as SidebarCollapsibleContent,
   SlidingViews as SidebarSlidingViews,
-  SlidingView as SidebarSlidingView
+  SlidingView as SidebarSlidingView,
 };
 
 export type {
   SidebarCollapsible as SidebarCollapsibleMode,
   SidebarContextValue,
   SidebarSide,
+  SidebarScrollAlign,
+  SidebarScrollToItemOptions,
   SidebarState,
-  SidebarVariant
-} from './context';
+  SidebarVariant,
+} from "./context";
+
+export { useSidebar } from "./context";

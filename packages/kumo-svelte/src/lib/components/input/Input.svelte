@@ -52,7 +52,8 @@
     ...rest
   }: Props = $props();
 
-  const generatedId = `kumo-input-${Math.random().toString(36).slice(2)}`;
+  const componentId = $props.id();
+  const generatedId = `kumo-input-${componentId}`;
   const inputId = $derived(id ?? generatedId);
   const descriptionId = $derived(description ? `${inputId}-description` : undefined);
   const errorId = $derived(error ? `${inputId}-error` : undefined);

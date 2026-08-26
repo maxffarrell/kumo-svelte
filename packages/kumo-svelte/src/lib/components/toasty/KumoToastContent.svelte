@@ -19,9 +19,9 @@
 
   const backgroundClasses: Partial<Record<KumoToastVariant, string>> = {
     success: 'bg-kumo-success-tint/20',
-    error: 'bg-kumo-danger-tint/30',
-    warning: 'bg-kumo-warning-tint/20',
-    info: 'bg-kumo-info-tint/30'
+    error: 'bg-kumo-danger-tint/50',
+    warning: 'bg-kumo-warning-tint/50',
+    info: 'bg-kumo-info-tint/50'
   };
 
   const closeClasses: Partial<Record<KumoToastVariant, string>> = {
@@ -42,7 +42,7 @@
   const Icon = $derived(iconForVariant(toast.variant));
 </script>
 
-<div class={cn('absolute inset-0 rounded-[11px] bg-kumo-base/90', toast.variant && backgroundClasses[toast.variant])}></div>
+<div class={cn('absolute inset-0 rounded-xl bg-kumo-base/90', toast.variant && backgroundClasses[toast.variant])}></div>
 <div
   class="isolate flex flex-col gap-1 transition-opacity [transition-duration:250ms] data-[behind]:pointer-events-none data-[behind]:opacity-0 data-[expanded]:pointer-events-auto data-[expanded]:opacity-100"
   data-behind={behind ? '' : undefined}
@@ -62,7 +62,7 @@
           </div>
         {/if}
         {#if toast.description}
-          <div class="text-[0.925rem] leading-5 text-kumo-default/70">{toast.description}</div>
+          <div class="text-[0.925rem] leading-5 text-kumo-subtle">{toast.description}</div>
         {/if}
         {#if toast.actions}
           <div class="mt-2 flex min-w-0 flex-nowrap gap-2 overflow-x-auto p-px">

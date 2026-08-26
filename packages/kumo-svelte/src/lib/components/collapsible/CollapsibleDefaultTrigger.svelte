@@ -18,7 +18,7 @@
   data-kumo-component="Collapsible"
   data-kumo-part="default-trigger"
   class={cn(
-    'group m-0 flex cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-sm text-kumo-link shadow-none select-none',
+    'group m-0 flex cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-base font-medium text-kumo-default shadow-none select-none',
     className
   )}
   {disabled}

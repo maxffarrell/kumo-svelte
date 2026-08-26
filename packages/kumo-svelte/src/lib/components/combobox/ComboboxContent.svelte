@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
   import { getComboboxContext } from './context';
   import { cn } from '$lib/utils/cn';
+  import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   type ComboboxContentAlign = 'start' | 'center' | 'end';
   type ComboboxContentSide = 'top' | 'right' | 'bottom' | 'left';
@@ -14,6 +15,15 @@
     alignOffset?: Offset;
     side?: ComboboxContentSide;
     sideOffset?: Offset;
+    customAnchor?: ComboboxPrimitive.ContentProps['customAnchor'];
+    strategy?: ComboboxPrimitive.ContentProps['strategy'];
+    avoidCollisions?: ComboboxPrimitive.ContentProps['avoidCollisions'];
+    collisionBoundary?: ComboboxPrimitive.ContentProps['collisionBoundary'];
+    collisionPadding?: ComboboxPrimitive.ContentProps['collisionPadding'];
+    sticky?: ComboboxPrimitive.ContentProps['sticky'];
+    hideWhenDetached?: ComboboxPrimitive.ContentProps['hideWhenDetached'];
+    updatePositionStrategy?: ComboboxPrimitive.ContentProps['updatePositionStrategy'];
+    container?: HTMLElement | string;
     style?: string;
     [key: string]: unknown;
   }
@@ -25,54 +35,34 @@
     alignOffset = 0,
     side = 'bottom',
     sideOffset = 4,
+    container,
     style,
     ...rest
   }: Props = $props();
   const context = getComboboxContext('Combobox.Content');
 
-  const horizontalAlignClasses: Record<ComboboxContentAlign, string> = {
-    start: 'left-[var(--combobox-align-offset)]',
-    center: 'left-1/2 -translate-x-1/2',
-    end: 'right-[var(--combobox-align-offset)]'
-  };
-
-  const verticalAlignClasses: Record<ComboboxContentAlign, string> = {
-    start: 'top-[var(--combobox-align-offset)]',
-    center: 'top-1/2 -translate-y-1/2',
-    end: 'bottom-[var(--combobox-align-offset)]'
-  };
-
-  const sideClasses: Record<ComboboxContentSide, string> = {
-    top: 'bottom-full mb-[var(--combobox-side-offset)]',
-    right: 'left-full ml-[var(--combobox-side-offset)]',
-    bottom: 'top-full mt-[var(--combobox-side-offset)]',
-    left: 'right-full mr-[var(--combobox-side-offset)]'
-  };
-
-  function toCssUnit(value: Offset) {
-    return typeof value === 'number' ? `${value}px` : value;
+  function toNumberOffset(val: Offset): number {
+    if (typeof val === 'number') return val;
+    const parsed = parseFloat(val);
+    return isNaN(parsed) ? 0 : parsed;
   }
-
-  const positionStyle = $derived(
-    `--combobox-align-offset: ${toCssUnit(alignOffset)}; --combobox-side-offset: ${toCssUnit(sideOffset)};${style ? ` ${style}` : ''}`
-  );
-  const positionClass = $derived.by(() =>
-    side === 'top' || side === 'bottom'
-      ? cn(sideClasses[side], horizontalAlignClasses[align])
-      : cn(sideClasses[side], verticalAlignClasses[align])
-  );
 </script>
 
 {#if context.open}
-  <div
-    class={cn(
-      'absolute z-50 flex max-h-[min(24rem,calc(100vh-8rem))] min-w-full flex-col overflow-hidden rounded-lg bg-kumo-base py-1.5 text-base text-kumo-default shadow-lg ring ring-kumo-line',
-      positionClass,
-      className
-    )}
-    style={positionStyle}
-    {...rest}
-  >
-    {@render children?.()}
-  </div>
+  <ComboboxPrimitive.Portal to={container}>
+    <ComboboxPrimitive.Content
+      class={cn(
+        'z-50 flex max-h-[min(24rem,calc(100vh-8rem))] min-w-[calc(var(--bits-select-anchor-width)+3px)] flex-col overflow-hidden rounded-lg bg-kumo-base py-1.5 text-base text-kumo-default shadow-lg ring ring-kumo-line outline-none',
+        className
+      )}
+      side={side}
+      sideOffset={toNumberOffset(sideOffset)}
+      align={align}
+      alignOffset={toNumberOffset(alignOffset)}
+      style={style}
+      {...rest}
+    >
+      {@render children?.()}
+    </ComboboxPrimitive.Content>
+  </ComboboxPrimitive.Portal>
 {/if}

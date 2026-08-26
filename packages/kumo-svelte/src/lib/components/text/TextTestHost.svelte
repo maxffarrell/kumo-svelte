@@ -1,5 +1,10 @@
 <script lang="ts">
-  import Text, { type KumoTextSize, type KumoTextVariant, type TextElement } from './Text.svelte';
+  import Text, {
+    type KumoTextSize,
+    type KumoTextVariant,
+    type TextElement,
+    type TextProps
+  } from './Text.svelte';
 
   interface Props {
     label?: string;
@@ -20,6 +25,8 @@
     as,
     color
   }: Props = $props();
+
+  const textProps = $derived({ variant, size, bold, truncate, as, color } as TextProps);
 </script>
 
-<Text {variant} {size} {bold} {truncate} {as} {color}>{label}</Text>
+<Text {...textProps}>{label}</Text>

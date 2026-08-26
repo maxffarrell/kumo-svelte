@@ -1,20 +1,20 @@
-import Root from './Combobox.svelte';
-import Content from './ComboboxContent.svelte';
-import TriggerInput from './ComboboxTriggerInput.svelte';
-import TriggerValue from './ComboboxTriggerValue.svelte';
-import TriggerMultipleWithInput from './ComboboxTriggerMultipleWithInput.svelte';
-import Item from './ComboboxItem.svelte';
-import Chip from './ComboboxChip.svelte';
-import Input from './ComboboxInput.svelte';
-import Empty from './ComboboxEmpty.svelte';
-import GroupLabel from './ComboboxGroupLabel.svelte';
-import Group from './ComboboxGroup.svelte';
-import List from './ComboboxList.svelte';
-import Collection from './ComboboxCollection.svelte';
-import Trigger from './ComboboxTrigger.svelte';
-import Value from './ComboboxValue.svelte';
-import Icon from './ComboboxIcon.svelte';
-import { createKumoFilter } from '../filter';
+import Root from "./Combobox.svelte";
+import Content from "./ComboboxContent.svelte";
+import TriggerInput from "./ComboboxTriggerInput.svelte";
+import TriggerValue from "./ComboboxTriggerValue.svelte";
+import TriggerMultipleWithInput from "./ComboboxTriggerMultipleWithInput.svelte";
+import Item from "./ComboboxItem.svelte";
+import Chip from "./ComboboxChip.svelte";
+import Input from "./ComboboxInput.svelte";
+import Empty from "./ComboboxEmpty.svelte";
+import GroupLabel from "./ComboboxGroupLabel.svelte";
+import Group from "./ComboboxGroup.svelte";
+import List from "./ComboboxList.svelte";
+import Collection from "./ComboboxCollection.svelte";
+import Trigger from "./ComboboxTrigger.svelte";
+import Value from "./ComboboxValue.svelte";
+import Icon from "./ComboboxIcon.svelte";
+import { createKumoFilter } from "../filter";
 
 export const Combobox = Object.assign(Root, {
   Content,
@@ -32,7 +32,7 @@ export const Combobox = Object.assign(Root, {
   Trigger,
   Value,
   Icon,
-  useFilter: createKumoFilter
+  useFilter: createKumoFilter,
 });
 
 export {
@@ -51,7 +51,11 @@ export {
   Collection as ComboboxCollection,
   Trigger as ComboboxTrigger,
   Value as ComboboxValue,
-  Icon as ComboboxIcon
+  Icon as ComboboxIcon,
 };
 
-export type { ComboboxInputSide, ComboboxItem as ComboboxOption, ComboboxSize } from './context';
+export type {
+  ComboboxInputSide,
+  ComboboxItem as ComboboxOption,
+  ComboboxSize,
+} from "./context";

@@ -20,8 +20,8 @@
   }
 
   let { headings: headingsProp = [], layout = 'sidebar' }: Props = $props();
-  let headings = $state<TocHeading[]>([]);
   let activeId = $state('');
+  const headings = $derived(headingsProp.filter((heading) => heading.depth <= 3));
   let suppressObserver = false;
   let suppressTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -30,55 +30,6 @@
   const ITEM_DEFAULT =
     'text-kumo-subtle hover:border-kumo-line hover:text-kumo-default hover:font-medium';
   const ITEM_ACTIVE = 'border-kumo-brand font-medium text-kumo-default';
-
-  function slugify(text: string) {
-    return text
-      .toLowerCase()
-      .trim()
-      .replace(/[`'"’]/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-  }
-
-  function headingText(element: Element) {
-    const anchor = element.querySelector(':scope > a[href^="#"]');
-    const source = anchor?.cloneNode(true) as Element | undefined;
-    source?.querySelector('.heading-anchor-icon')?.remove();
-    return (source ?? element).textContent?.trim() ?? '';
-  }
-
-  function scrapeHeadings(): TocHeading[] {
-    const content = document.querySelector('.kumo-prose');
-    if (!content) return [];
-
-    const usedSlugs: string[] = [];
-
-    return Array.from(content.querySelectorAll('h2, h3'))
-      .filter((element) => !element.closest('.not-prose'))
-      .map((element) => {
-        const text = headingText(element);
-        if (!text) return null;
-
-        let slug = element.id || slugify(text) || 'section';
-        const baseSlug = slug;
-        let index = 2;
-
-        while (usedSlugs.includes(slug)) {
-          slug = `${baseSlug}-${index}`;
-          index += 1;
-        }
-
-        usedSlugs.push(slug);
-        if (!element.id) element.id = slug;
-
-        return {
-          depth: Number(element.tagName[1]),
-          slug,
-          text
-        };
-      })
-      .filter((heading): heading is TocHeading => heading !== null);
-  }
 
   function groupHeadings(items: TocHeading[]): HeadingGroup[] {
     const groups: HeadingGroup[] = [];
@@ -104,18 +55,14 @@
 
   onMount(() => {
     let observer: IntersectionObserver | undefined;
-    let retryTimer: ReturnType<typeof setTimeout> | undefined;
-
     const initialize = () => {
-      headings = headingsProp.filter((heading) => heading.depth <= 3);
-      if (headings.length === 0) headings = scrapeHeadings();
       activeId = headings[0]?.slug ?? '';
 
       const elements = headings
         .map((heading) => document.getElementById(heading.slug))
         .filter((element): element is HTMLElement => element !== null);
 
-      if (elements.length === 0) return false;
+      if (elements.length === 0) return;
 
       observer?.disconnect();
       observer = new IntersectionObserver(
@@ -147,16 +94,12 @@
       );
 
       for (const element of elements) observer.observe(element);
-      return true;
     };
 
-    if (!initialize()) {
-      retryTimer = setTimeout(initialize);
-    }
+    initialize();
 
     return () => {
       clearTimeout(suppressTimer);
-      clearTimeout(retryTimer);
       observer?.disconnect();
     };
   });

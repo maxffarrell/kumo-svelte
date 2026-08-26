@@ -132,7 +132,8 @@ After installation, blocks live in your project and can be customized directly.
 
 When using SSR, call `provideKumoRandom` once from the root layout to keep
 randomized Kumo values stable during hydration. This uses one request-scoped
-random sequence for Kumo components that need random values.
+random sequence for Kumo components that need random values. This integration
+requires Svelte 5.56.3 or newer.
 
 Enable Svelte's experimental async compiler option in `svelte.config.js`:
 

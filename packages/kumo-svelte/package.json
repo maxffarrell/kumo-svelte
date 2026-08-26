@@ -71,7 +71,7 @@
   "peerDependencies": {
     "@sveltejs/kit": "^2.60.1",
     "echarts": "^6.0.0",
-    "svelte": "^5.55.7"
+    "svelte": "^5.56.3"
   },
   "peerDependenciesMeta": {
     "@sveltejs/kit": {

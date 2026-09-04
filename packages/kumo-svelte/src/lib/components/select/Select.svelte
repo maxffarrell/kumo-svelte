@@ -19,6 +19,7 @@
 
   type ItemDescriptor = string | { label: string; disabled?: boolean };
   type Items = Record<string, ItemDescriptor> | Option[];
+  type ContentProps = SelectPrimitive.ContentProps;
 
   interface Props {
     class?: string;
@@ -45,6 +46,19 @@
     renderValue?: (value: Value) => unknown;
     onValueChange?: (value: Value) => void;
     container?: HTMLElement | string;
+    /** Preferred popup side. Collision handling may flip it when space is limited. */
+    side?: ContentProps['side'];
+    sideOffset?: ContentProps['sideOffset'];
+    align?: ContentProps['align'];
+    alignOffset?: ContentProps['alignOffset'];
+    customAnchor?: ContentProps['customAnchor'];
+    strategy?: ContentProps['strategy'];
+    avoidCollisions?: ContentProps['avoidCollisions'];
+    collisionBoundary?: ContentProps['collisionBoundary'];
+    collisionPadding?: ContentProps['collisionPadding'];
+    sticky?: ContentProps['sticky'];
+    hideWhenDetached?: ContentProps['hideWhenDetached'];
+    updatePositionStrategy?: ContentProps['updatePositionStrategy'];
     [key: string]: unknown;
   }
 
@@ -73,6 +87,18 @@
     renderValue,
     onValueChange,
     container,
+    side = 'bottom',
+    sideOffset = 4,
+    align = 'start',
+    alignOffset = 0,
+    customAnchor,
+    strategy,
+    avoidCollisions,
+    collisionBoundary,
+    collisionPadding,
+    sticky,
+    hideWhenDetached,
+    updatePositionStrategy,
     ...rest
   }: Props = $props();
 
@@ -224,11 +250,22 @@
     <SelectPrimitive.Portal to={container}>
       <SelectPrimitive.Content
         class={cn(
-          'z-50 flex max-h-[var(--bits-select-content-available-height)] min-w-[calc(var(--bits-select-anchor-width)+3px)] flex-col overflow-hidden rounded-lg bg-kumo-base py-1.5 text-base text-kumo-default shadow-lg ring ring-kumo-line outline-none',
+          'z-50 flex max-h-[var(--bits-select-content-available-height)] max-w-[var(--bits-select-content-available-width)] min-w-[var(--bits-select-anchor-width)] flex-col overflow-hidden rounded-lg bg-kumo-base py-1.5 text-base text-kumo-default shadow-lg ring ring-kumo-line outline-none',
           contentClass
         )}
         preventScroll
-        sideOffset={4}
+        {side}
+        {sideOffset}
+        {align}
+        {alignOffset}
+        {customAnchor}
+        {strategy}
+        {avoidCollisions}
+        {collisionBoundary}
+        {collisionPadding}
+        {sticky}
+        {hideWhenDetached}
+        {updatePositionStrategy}
       >
         <SelectPrimitive.Viewport class={cn('min-h-0 flex-1 overflow-y-auto overscroll-none scroll-pb-2 scroll-pt-2', viewportClass)}>
           {#if children}

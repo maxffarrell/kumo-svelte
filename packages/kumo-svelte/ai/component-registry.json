@@ -3934,6 +3934,11 @@
           "optional": true,
           "description": "Total number of items across all pages."
         },
+        "hasNextPage": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Whether another page exists when the total count is unknown."
+        },
         "class": {
           "type": "string",
           "optional": true,
@@ -4639,6 +4644,71 @@
           "type": "HTMLElement | string",
           "optional": true,
           "description": "Container element for the portal."
+        },
+        "side": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "top",
+            "right",
+            "bottom",
+            "left"
+          ],
+          "default": "bottom",
+          "description": "Preferred popup side; collision handling may flip it."
+        },
+        "sideOffset": {
+          "type": "number",
+          "optional": true,
+          "default": "4",
+          "description": "Distance between the trigger and popup."
+        },
+        "align": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "start",
+          "description": "Popup alignment along the trigger edge."
+        },
+        "alignOffset": {
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "Additional offset along the alignment axis."
+        },
+        "customAnchor": {
+          "type": "HTMLElement | string",
+          "optional": true,
+          "description": "Custom floating-position anchor."
+        },
+        "strategy": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "absolute",
+            "fixed"
+          ],
+          "description": "CSS positioning strategy for the popup."
+        },
+        "avoidCollisions": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Whether the popup should adjust to avoid viewport collisions."
+        },
+        "collisionPadding": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "top",
+            "right",
+            "bottom",
+            "left"
+          ],
+          "description": "Padding between the popup and its collision boundary."
         }
       },
       "colors": [
@@ -6256,6 +6326,46 @@
               "type": "string",
               "optional": true,
               "description": "Additional classes merged onto the toolbar input group."
+            }
+          }
+        },
+        "Link": {
+          "description": "Toolbar.Link",
+          "props": {
+            "children": {
+              "type": "Snippet",
+              "optional": true,
+              "description": "Optional visible link label."
+            },
+            "href": {
+              "type": "string",
+              "optional": true,
+              "description": "Navigation destination."
+            },
+            "icon": {
+              "type": "Component",
+              "optional": true,
+              "description": "Optional icon component rendered before the label."
+            },
+            "shape": {
+              "type": "enum",
+              "optional": true,
+              "values": [
+                "base",
+                "square",
+                "circle"
+              ],
+              "description": "Link shape. Icon-only toolbar links default to square."
+            },
+            "external": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Opens the link in a new tab with safe rel attributes."
+            },
+            "disabled": {
+              "type": "boolean",
+              "optional": true,
+              "description": "Disables navigation and exposes disabled semantics."
             }
           }
         }

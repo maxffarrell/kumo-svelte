@@ -22,6 +22,12 @@
 </Toolbar>
 
 <Toolbar>
+  <Toolbar.Button>Before link</Toolbar.Button>
+  <Toolbar.Link href="#docs" external>Documentation</Toolbar.Link>
+  <Toolbar.Button>After link</Toolbar.Button>
+</Toolbar>
+
+<Toolbar>
   <Toolbar.InputGroup aria-label="Search DNS records">
     <InputGroup.Input placeholder="Search DNS records" />
   </Toolbar.InputGroup>

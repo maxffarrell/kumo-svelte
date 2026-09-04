@@ -37,7 +37,7 @@ import { Toolbar } from "kumo-svelte/components/toolbar";
 ## Usage
 
 Use `Toolbar` when multiple controls should read as one compact toolbar or
-filter card. Use `Toolbar.Button`, `Toolbar.Input`, and `Toolbar.InputGroup` to
+filter card. Use `Toolbar.Button`, `Toolbar.Link`, `Toolbar.Input`, and `Toolbar.InputGroup` to
 opt supported controls into toolbar sizing, button styling, borders, and radii.
 Compose Select and Combobox triggers with those controls through Svelte child
 snippets.
@@ -68,6 +68,7 @@ snippets.
 - Every `Toolbar.*` control uses the `base` size by default.
 - The Toolbar `size` prop remains available for compatibility but is deprecated; omit it for the base size.
 - `Toolbar.Button` always renders with quiet toolbar button styling.
+- `Toolbar.Link` renders a `LinkButton` with quiet toolbar styling and participates in arrow-key navigation.
 - `Toolbar.InputGroup` passes props directly to `InputGroup` with the toolbar `size`.
 - Render `Toolbar.Button` from Select's `trigger` snippet to compose a select trigger.
 - Render `Toolbar.Input` from `Combobox.TriggerInput`'s `child` snippet for an editable combobox.
@@ -124,6 +125,13 @@ consistent.
 
 <ComponentExample demo="ToolbarActionsDemo" />
 
+### Links
+
+Use `Toolbar.Link` for navigation actions. It accepts LinkButton props except
+for `size` and `variant`, which are controlled by the Toolbar.
+
+<ComponentExample demo="ToolbarLinksDemo" />
+
 ### Accessible Labels
 
 Use `aria-label` or `aria-labelledby` for compact toolbar controls that do not
@@ -145,6 +153,10 @@ already at the relevant text boundary.
 ### Toolbar.Button
 
 <PropsTable component="Toolbar.Button" />
+
+### Toolbar.Link
+
+<PropsTable component="Toolbar.Link" />
 
 ### Toolbar.Input
 

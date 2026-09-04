@@ -213,12 +213,14 @@ export {
   KUMO_TOOLBAR_VARIANTS,
   Toolbar,
   ToolbarButton,
+  ToolbarLink,
   ToolbarInput,
   ToolbarInputGroup,
   ToolbarRoot,
 } from "./components/toolbar";
 export type {
   ToolbarButtonProps,
+  ToolbarLinkProps,
   ToolbarInputGroupProps,
   ToolbarInputProps,
   ToolbarProps,

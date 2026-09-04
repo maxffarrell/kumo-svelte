@@ -8,7 +8,7 @@
   ];
 </script>
 
-<div class="flex flex-col gap-6">
+<div class="flex flex-col items-start gap-6">
   <div>
     <p class="mb-2 text-sm text-kumo-subtle">Segmented sm</p>
     <Tabs variant="segmented" size="sm" {items} value="tab1" />

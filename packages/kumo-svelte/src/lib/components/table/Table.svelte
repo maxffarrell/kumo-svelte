@@ -15,7 +15,7 @@
     variant: {
       default: {
         classes:
-          'even:bg-kumo-tint [--kumo-table-row-bg:var(--color-kumo-base)] even:[--kumo-table-row-bg:var(--color-kumo-tint)]',
+          'even:bg-kumo-elevated [--kumo-table-row-bg:var(--color-kumo-base)] even:[--kumo-table-row-bg:var(--color-kumo-elevated)]',
         description: 'Default row variant'
       },
       selected: {

@@ -38,17 +38,21 @@ jobs:
       # consider a publish-only script.
       - name: Create Version PR or Publish to npm
         id: changesets
-        uses: changesets/action@v1
+        # v2 is required for @changesets/cli v3. The v1 action relies on the
+        # Changesets v2 publish output and can publish successfully without
+        # detecting the package, pushing its tag, or creating its release.
+        uses: changesets/action@v2
         with:
-          version: pnpm run version
-          publish: pnpm run release
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version-script: pnpm run version
+          publish-script: pnpm run release
+          create-github-releases: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
 
       # Publish pkg-pr-new preview for Version Packages PR
       # (GITHUB_TOKEN PRs don't trigger workflows, so we do it here)
       - name: Publish package preview
-        if: ${{ steps.changesets.outputs.pullRequestNumber }}
+        if: ${{ steps.changesets.outputs.pr-number }}
         continue-on-error: true
         run: pnpm dlx pkg-pr-new publish --pnpm --compact --no-template ./packages/kumo-svelte

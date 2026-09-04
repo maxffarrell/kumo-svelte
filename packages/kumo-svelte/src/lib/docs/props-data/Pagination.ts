@@ -27,6 +27,12 @@ const rows: PropRow[] = [
     "description": "Total number of items across all pages."
   },
   {
+    "prop": "hasNextPage",
+    "type": "boolean",
+    "required": false,
+    "description": "Whether another page exists when the total count is unknown."
+  },
+  {
     "prop": "class",
     "type": "string",
     "required": false,

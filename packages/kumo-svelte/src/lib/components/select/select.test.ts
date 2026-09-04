@@ -1,169 +1,199 @@
-import { render, screen } from '@testing-library/svelte';
-import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
-import { expectNoA11yViolations } from '../../../../tests/a11y';
-import Select from './Select.svelte';
+import { render, screen } from "@testing-library/svelte";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
+import { expectNoA11yViolations } from "../../../../tests/a11y";
+import Select from "./Select.svelte";
 
 const fruits = [
-  { label: 'Apple', value: 'apple' },
-  { label: 'Banana', value: 'banana' },
-  { label: 'Cherry', value: 'cherry' }
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Cherry", value: "cherry" },
 ];
 
-describe('Select', () => {
-  it('renders trigger with Kumo data attributes', () => {
+describe("Select", () => {
+  it("renders trigger with Kumo data attributes", () => {
     render(Select, {
-      'aria-label': 'Favorite fruit',
-      options: fruits
+      "aria-label": "Favorite fruit",
+      options: fruits,
     });
 
-    const trigger = screen.getByRole('button', { name: 'Favorite fruit' });
-    expect(trigger.getAttribute('data-kumo-component')).toBe('Select');
-    expect(trigger.getAttribute('data-kumo-part')).toBe('trigger');
-    expect(trigger.getAttribute('aria-expanded')).toBe('false');
+    const trigger = screen.getByRole("button", { name: "Favorite fruit" });
+    expect(trigger.getAttribute("data-kumo-component")).toBe("Select");
+    expect(trigger.getAttribute("data-kumo-part")).toBe("trigger");
+    expect(trigger.getAttribute("aria-expanded")).toBe("false");
   });
 
-  it('displays labels for non-string option values', () => {
+  it("displays labels for non-string option values", () => {
     render(Select, {
-      'aria-label': 'Rows per page',
+      "aria-label": "Rows per page",
       value: 50,
       options: [
-        { label: '25 rows', value: 25 },
-        { label: '50 rows', value: 50 },
-        { label: '100 rows', value: 100 }
-      ]
+        { label: "25 rows", value: 25 },
+        { label: "50 rows", value: 50 },
+        { label: "100 rows", value: 100 },
+      ],
     });
 
-    expect(screen.getByRole('button', { name: 'Rows per page' }).textContent).toContain('50 rows');
+    expect(
+      screen.getByRole("button", { name: "Rows per page" }).textContent,
+    ).toContain("50 rows");
   });
 
-  describe('variant fidelity', () => {
-    it('applies selectVariants with button secondary base classes', () => {
-      render(Select, { 'aria-label': 'Fruit', options: fruits });
-      const cls = screen.getByRole('button', { name: 'Fruit' }).className;
-      expect(cls).toContain('justify-between');
-      expect(cls).toContain('font-normal');
-      expect(cls).toContain('ring-kumo-line');
-      expect(cls).not.toContain('ring-kumo-hairline');
+  describe("variant fidelity", () => {
+    it("uses the Input control surface when closed, open, or disabled", () => {
+      render(Select, { "aria-label": "Fruit", options: fruits, disabled: true });
+      const cls = screen.getByRole("button", { name: "Fruit" }).className;
+      expect(cls).toContain("bg-kumo-control");
+      expect(cls).toContain("data-[state=open]:bg-kumo-control");
+      expect(cls).toContain("disabled:bg-kumo-control/50");
+      expect(cls).not.toContain("data-[state=open]:bg-kumo-base");
     });
 
-    it('applies error ring classes on trigger', () => {
+    it("accepts popup positioning props without forwarding them to the trigger", () => {
       render(Select, {
-        'aria-label': 'Fruit',
+        "aria-label": "Fruit",
         options: fruits,
-        error: 'Required'
+        side: "top",
+        sideOffset: 12,
+        align: "end",
+        alignOffset: 2,
+        strategy: "fixed",
       });
-      const cls = screen.getByRole('button', { name: 'Fruit' }).className;
+      const trigger = screen.getByRole("button", { name: "Fruit" });
+      expect(trigger).not.toHaveAttribute("side");
+      expect(trigger).not.toHaveAttribute("align");
+    });
+
+    it("applies selectVariants with button secondary base classes", () => {
+      render(Select, { "aria-label": "Fruit", options: fruits });
+      const cls = screen.getByRole("button", { name: "Fruit" }).className;
+      expect(cls).toContain("justify-between");
+      expect(cls).toContain("font-normal");
+      expect(cls).toContain("ring-kumo-line");
+      expect(cls).not.toContain("ring-kumo-hairline");
+    });
+
+    it("applies error ring classes on trigger", () => {
+      render(Select, {
+        "aria-label": "Fruit",
+        options: fruits,
+        error: "Required",
+      });
+      const cls = screen.getByRole("button", { name: "Fruit" }).className;
       // cn/tailwind-merge canonicalizes the important modifier to a trailing `!`.
-      expect(cls).toContain('ring-kumo-danger');
-      expect(cls).toContain('focus:ring-kumo-danger/50');
+      expect(cls).toContain("ring-kumo-danger");
+      expect(cls).toContain("focus:ring-kumo-danger/50");
     });
 
-    it('applies disabled opacity classes on trigger', () => {
+    it("applies disabled opacity classes on trigger", () => {
       render(Select, {
-        'aria-label': 'Fruit',
+        "aria-label": "Fruit",
         options: fruits,
-        disabled: true
+        disabled: true,
       });
-      const cls = screen.getByRole('button', { name: 'Fruit' }).className;
-      expect(cls).toContain('cursor-not-allowed');
-      expect(cls).toContain('opacity-50');
+      const cls = screen.getByRole("button", { name: "Fruit" }).className;
+      expect(cls).toContain("cursor-not-allowed");
+      expect(cls).toContain("opacity-50");
     });
 
-    it('applies size classes via selectVariants', () => {
-      render(Select, { 'aria-label': 'Fruit', options: fruits, size: 'lg' });
-      expect(screen.getByRole('button', { name: 'Fruit' }).className).toContain('h-10');
+    it("applies size classes via selectVariants", () => {
+      render(Select, { "aria-label": "Fruit", options: fruits, size: "lg" });
+      expect(screen.getByRole("button", { name: "Fruit" }).className).toContain(
+        "h-10",
+      );
     });
   });
 
-  describe('interaction', () => {
-    it('opens on trigger click and updates aria-expanded', async () => {
+  describe("interaction", () => {
+    it("opens on trigger click and updates aria-expanded", async () => {
       const user = userEvent.setup();
-      render(Select, { 'aria-label': 'Favorite fruit', options: fruits });
+      render(Select, { "aria-label": "Favorite fruit", options: fruits });
 
-      const trigger = screen.getByRole('button', { name: 'Favorite fruit' });
-      expect(trigger.getAttribute('aria-expanded')).toBe('false');
+      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
+      expect(trigger.getAttribute("aria-expanded")).toBe("false");
 
       await user.click(trigger);
 
-      expect(trigger.getAttribute('aria-expanded')).toBe('true');
+      expect(trigger.getAttribute("aria-expanded")).toBe("true");
       // Open listbox content is covered by VRT (happy-dom does not mount portaled content).
     });
 
-    it('selects an option via keyboard and updates displayed value', async () => {
+    it("selects an option via keyboard and updates displayed value", async () => {
       const user = userEvent.setup();
-      let current = 'apple';
+      let current = "apple";
       const onValueChange = vi.fn((next: unknown) => {
         current = next as string;
       });
 
       const { rerender } = render(Select, {
-        'aria-label': 'Favorite fruit',
+        "aria-label": "Favorite fruit",
         options: fruits,
         value: current,
-        onValueChange
+        onValueChange,
       });
 
-      const trigger = screen.getByRole('button', { name: 'Favorite fruit' });
+      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
       trigger.focus();
-      await user.keyboard('{ArrowDown}{ArrowDown}{Enter}');
+      await user.keyboard("{ArrowDown}{ArrowDown}{Enter}");
 
-      expect(onValueChange).toHaveBeenCalledWith('banana');
+      expect(onValueChange).toHaveBeenCalledWith("banana");
       await rerender({
-        value: 'banana',
+        value: "banana",
         onValueChange,
         options: fruits,
-        'aria-label': 'Favorite fruit'
+        "aria-label": "Favorite fruit",
       });
-      expect(screen.getByRole('button', { name: 'Favorite fruit' }).textContent).toContain('Banana');
+      expect(
+        screen.getByRole("button", { name: "Favorite fruit" }).textContent,
+      ).toContain("Banana");
     });
 
-    it('supports keyboard navigation with ArrowDown and Enter', async () => {
+    it("supports keyboard navigation with ArrowDown and Enter", async () => {
       const user = userEvent.setup();
       const onValueChange = vi.fn();
       render(Select, {
-        'aria-label': 'Favorite fruit',
+        "aria-label": "Favorite fruit",
         options: fruits,
-        onValueChange
+        onValueChange,
       });
 
-      const trigger = screen.getByRole('button', { name: 'Favorite fruit' });
+      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
       trigger.focus();
-      await user.keyboard('{ArrowDown}{ArrowDown}{Enter}');
+      await user.keyboard("{ArrowDown}{ArrowDown}{Enter}");
 
       expect(onValueChange).toHaveBeenCalled();
     });
 
-    it('stays closed when disabled', () => {
+    it("stays closed when disabled", () => {
       render(Select, {
-        'aria-label': 'Favorite fruit',
+        "aria-label": "Favorite fruit",
         options: fruits,
-        disabled: true
+        disabled: true,
       });
 
-      const trigger = screen.getByRole('button', { name: 'Favorite fruit' });
+      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
       expect(trigger).toBeDisabled();
-      expect(trigger.getAttribute('aria-expanded')).toBe('false');
+      expect(trigger.getAttribute("aria-expanded")).toBe("false");
     });
 
-    it('activates via keyboard on trigger', async () => {
+    it("activates via keyboard on trigger", async () => {
       const user = userEvent.setup();
-      render(Select, { 'aria-label': 'Favorite fruit', options: fruits });
+      render(Select, { "aria-label": "Favorite fruit", options: fruits });
 
-      const trigger = screen.getByRole('button', { name: 'Favorite fruit' });
+      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
       trigger.focus();
       expect(document.activeElement).toBe(trigger);
 
-      await user.keyboard('{Enter}');
-      expect(trigger.getAttribute('aria-expanded')).toBe('true');
+      await user.keyboard("{Enter}");
+      expect(trigger.getAttribute("aria-expanded")).toBe("true");
     });
   });
 
-  describe('accessibility', () => {
-    it('has no axe violations when closed', async () => {
+  describe("accessibility", () => {
+    it("has no axe violations when closed", async () => {
       const { container } = render(Select, {
-        'aria-label': 'Favorite fruit',
-        options: fruits
+        "aria-label": "Favorite fruit",
+        options: fruits,
       });
       await expectNoA11yViolations(container);
     });

@@ -24,6 +24,7 @@ export interface PaginationContextValue {
   page: number;
   perPage?: number;
   totalCount?: number;
+  hasNextPage?: boolean;
   maxPage: number;
   pageShowingRange: string;
   setPage: (page: number) => void;

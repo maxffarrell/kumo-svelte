@@ -26,13 +26,13 @@ baseUIComponent: "select"
 ### Barrel
 
 ```typescript
-import { Select } from 'kumo-svelte';
+import { Select } from "kumo-svelte";
 ```
 
 ### Granular
 
 ```typescript
-import { Select } from 'kumo-svelte/components/select';
+import { Select } from "kumo-svelte/components/select";
 ```
 
 </ComponentSection>
@@ -67,9 +67,7 @@ import { Select } from 'kumo-svelte/components/select';
 
 ### Basic
 
-
 A select with a visible label. When you provide the <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">label</code> prop, the select automatically renders inside a Field wrapper with the label displayed above it.
-
 
   <ComponentExample demo="SelectBasicDemo" />
 </ComponentSection>
@@ -80,12 +78,23 @@ A select with a visible label. When you provide the <code class="rounded bg-kumo
 
 ### Sizes
 
-
 Use the <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">size</code> prop
-    to match Input sizing (xs, sm, base, lg).
-
+to match Input sizing (xs, sm, base, lg).
 
   <ComponentExample demo="SelectSizesDemo" />
+</ComponentSection>
+
+<!-- Placement -->
+
+<ComponentSection>
+
+### Placement
+
+The popup prefers `side="bottom"` and flips automatically when that side runs
+out of room. Use `side`, `align`, `sideOffset`, and `alignOffset` to pin it
+explicitly while retaining collision handling.
+
+  <ComponentExample demo="SelectPlacementDemo" />
 </ComponentSection>
 
 <!-- Without Visible Label -->
@@ -94,10 +103,8 @@ Use the <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">size</code> pr
 
 ### Without Visible Label
 
-
 When a visible label isn't needed (e.g., in compact UIs or when context is clear),
-    use `aria-label` for accessibility.
-
+use `aria-label` for accessibility.
 
   <ComponentExample demo="SelectWithoutLabelDemo" />
 </ComponentSection>
@@ -108,9 +115,7 @@ When a visible label isn't needed (e.g., in compact UIs or when context is clear
 
 ### With Description and Error
 
-
 Select integrates with the Field wrapper to show description text and validation errors.
-
 
   <ComponentExample demo="SelectWithFieldDemo" />
 </ComponentSection>
@@ -121,12 +126,10 @@ Select integrates with the Field wrapper to show description text and validation
 
 ### Placeholder
 
-
 Use the <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">placeholder</code> prop
-    to show text when no value is selected. When using <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code> to
-    customize the display of selected values, the placeholder is shown instead of
-    calling <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code> when the value is <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">null</code>.
-
+to show text when no value is selected. When using <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code> to
+customize the display of selected values, the placeholder is shown instead of
+calling <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code> when the value is <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">null</code>.
 
 ```svelte
 <script lang="ts">
@@ -156,10 +159,8 @@ Use the <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">placeholder</c
 
 ### Label with Tooltip
 
-
 Add a tooltip icon next to the label for additional context using <code
       class="rounded bg-kumo-control px-1 py-0.5 text-sm">labelTooltip</code>.
-
 
   <ComponentExample demo="SelectWithTooltipDemo" />
 </ComponentSection>
@@ -170,17 +171,13 @@ Add a tooltip icon next to the label for additional context using <code
 
 ### Custom Rendering
 
-
 Use <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code> to customize how the selected value
-    appears in the trigger button. This is useful when working with complex object
-    data structures instead of simple string values.
-
+appears in the trigger button. This is useful when working with complex object
+data structures instead of simple string values.
 
 <ComponentExample demo="SelectCustomRenderingDemo" />
 
-
 The <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code> function is only called when a value is selected. Use <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">placeholder</code> to define what to show when no value is selected.
-
 
 ```svelte
 <script lang="ts">
@@ -214,11 +211,9 @@ The <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code>
 
 ### Loading
 
-
 A select component with loading state. The loading state is passed to
-    the component via the <code
+the component via the <code
       class="rounded bg-kumo-control px-1 py-0.5 text-sm">loading</code> prop.
-
 
   <ComponentExample demo="SelectLoadingDemo" />
 </ComponentSection>
@@ -229,11 +224,9 @@ A select component with loading state. The loading state is passed to
 
 ### Multiple Selection
 
-
 Enable multiple selection with the <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">multiple</code> prop.
-    The value becomes an array of selected items. Use <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">placeholder</code> for the empty state
-    and <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code> to customize how selections are displayed.
-
+The value becomes an array of selected items. Use <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">placeholder</code> for the empty state
+and <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">renderValue</code> to customize how selections are displayed.
 
 ```svelte
 <script lang="ts">
@@ -269,10 +262,8 @@ Enable multiple selection with the <code class="rounded bg-kumo-control px-1 py-
 
 ### Disabled Options
 
-
 Options can be disabled with the <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">disabled</code> prop.
-    Disabled options are greyed out and cannot be selected.
-
+Disabled options are greyed out and cannot be selected.
 
   <ComponentExample demo="SelectDisabledOptionsDemo" />
 </ComponentSection>
@@ -283,11 +274,9 @@ Options can be disabled with the <code class="rounded bg-kumo-control px-1 py-0.
 
 ### Disabled Items (via items prop)
 
-
 The <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">items</code> object-map prop
-    accepts descriptor objects with <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">disabled</code> alongside
-    plain string values.
-
+accepts descriptor objects with <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">disabled</code> alongside
+plain string values.
 
   <ComponentExample demo="SelectDisabledItemsDemo" />
 </ComponentSection>
@@ -298,12 +287,10 @@ The <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">items</code> objec
 
 ### Grouped Options
 
-
 Use <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">Select.Group</code>,{" "}
-    <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">Select.GroupLabel</code>, and{" "}
-    <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">Select.Separator</code> to
-    organize options under labeled headers with visual dividers.
-
+<code class="rounded bg-kumo-control px-1 py-0.5 text-sm">Select.GroupLabel</code>, and{" "}
+<code class="rounded bg-kumo-control px-1 py-0.5 text-sm">Select.Separator</code> to
+organize options under labeled headers with visual dividers.
 
   <ComponentExample demo="SelectGroupedDemo" />
 </ComponentSection>
@@ -314,10 +301,8 @@ Use <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">Select.Group</code
 
 ### Groups with Disabled Options
 
-
 Combine groups, separators, and disabled options with info tooltips to
-    clearly separate available and unavailable choices.
-
+clearly separate available and unavailable choices.
 
   <ComponentExample demo="SelectGroupedWithDisabledDemo" />
 </ComponentSection>
@@ -328,10 +313,8 @@ Combine groups, separators, and disabled options with info tooltips to
 
 ### Long List (Scrolling Test)
 
-
 A select component with many options to test popup scrolling behavior.
-    The popup should scroll smoothly without bounce/overscroll issues.
-
+The popup should scroll smoothly without bounce/overscroll issues.
 
   <ComponentExample demo="SelectLongListDemo" />
 </ComponentSection>
@@ -352,26 +335,21 @@ A select component with many options to test popup scrolling behavior.
 
 ### Select.Group
 
-
 Groups related options together with an accessible{" "}
-  <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">role="group"</code>.
-  Use with{" "}
-  <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">
-    Select.GroupLabel
-  </code>{" "}
-  to provide a visible heading.
-
+<code class="rounded bg-kumo-control px-1 py-0.5 text-sm">role="group"</code>.
+Use with{" "}
+<code class="rounded bg-kumo-control px-1 py-0.5 text-sm">
+Select.GroupLabel
+</code>{" "}
+to provide a visible heading.
 
 ### Select.GroupLabel
 
-
 A visible heading for a{" "}
-  <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">Select.Group</code>.
-  Automatically associated with its parent group for accessibility.
-
+<code class="rounded bg-kumo-control px-1 py-0.5 text-sm">Select.Group</code>.
+Automatically associated with its parent group for accessibility.
 
 ### Select.Separator
-
 
 A visual divider line between option groups. Renders with <code class="rounded bg-kumo-control px-1 py-0.5 text-sm">role="separator"</code>.
 

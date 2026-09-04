@@ -4,6 +4,7 @@
   import ComboboxContent from './ComboboxContent.svelte';
   import ComboboxList from './ComboboxList.svelte';
   import ComboboxItem from './ComboboxItem.svelte';
+  import ComboboxInput from './ComboboxInput.svelte';
 
   interface Props {
     value?: unknown;
@@ -25,6 +26,7 @@
     hideWhenDetached={false}
     updatePositionStrategy="optimized"
   >
+    <ComboboxInput placeholder="Search fruit" />
     <ComboboxList>
       {#snippet children(item)}
         <ComboboxItem value={item}>{item}</ComboboxItem>

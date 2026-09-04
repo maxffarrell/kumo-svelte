@@ -36,6 +36,18 @@ describe("Table", () => {
     );
   });
 
+  it("elevates even rows without changing selected row styling", () => {
+    expect(KUMO_TABLE_VARIANTS.variant.default.classes).toContain(
+      "even:bg-kumo-elevated",
+    );
+    expect(KUMO_TABLE_VARIANTS.variant.default.classes).toContain(
+      "even:[--kumo-table-row-bg:var(--color-kumo-elevated)]",
+    );
+    expect(KUMO_TABLE_VARIANTS.variant.selected.classes).not.toContain(
+      "even:bg-kumo-elevated",
+    );
+  });
+
   it("applies sticky column classes on head and cell", () => {
     render(TableTestHost, { variant: "sticky" });
     const head = screen.getByTestId("sticky-head");

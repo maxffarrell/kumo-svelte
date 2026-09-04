@@ -55,6 +55,29 @@ describe('Pagination', () => {
     expect(onPageChange).toHaveBeenCalledWith(3);
   });
 
+  it('supports sequential pagination when the total is unknown', async () => {
+    const user = userEvent.setup();
+    const setPage = vi.fn();
+
+    render(Pagination, {
+      page: 3,
+      hasNextPage: true,
+      setPage,
+      text: ({ page }) => `Page ${page}`
+    });
+
+    expect(screen.queryByRole('button', { name: 'First page' })).toBeNull();
+    expect(screen.queryByRole('textbox', { name: 'Page number' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Last page' })).toBeNull();
+    await user.click(screen.getByRole('button', { name: 'Next page' }));
+    expect(setPage).toHaveBeenCalledWith(4);
+  });
+
+  it('disables next when an unknown-total list has no following page', () => {
+    render(Pagination, { page: 3, hasNextPage: false });
+    expect(screen.getByRole('button', { name: 'Next page' })).toBeDisabled();
+  });
+
   it('updates the page from the dropdown selector', async () => {
     const user = userEvent.setup();
     const setPage = vi.fn();

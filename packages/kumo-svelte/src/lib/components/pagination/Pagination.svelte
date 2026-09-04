@@ -50,6 +50,8 @@
     setPage?: (page: number) => void;
     perPage?: number;
     totalCount?: number;
+    /** Whether another page exists when no total count or page count is available. */
+    hasNextPage?: boolean;
     pages?: number;
     controls?: Controls;
     text?: (props: InfoTextProps) => unknown;
@@ -64,6 +66,7 @@
     setPage: setPageProp,
     perPage,
     totalCount,
+    hasNextPage,
     pages,
     controls = KUMO_PAGINATION_DEFAULT_VARIANTS.controls,
     text,
@@ -100,6 +103,9 @@
     },
     get totalCount() {
       return effectiveTotalCount;
+    },
+    get hasNextPage() {
+      return hasNextPage;
     },
     get maxPage() {
       return maxPage;

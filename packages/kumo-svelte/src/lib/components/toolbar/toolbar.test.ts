@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import {
   Toolbar,
   ToolbarButton,
+  ToolbarLink,
   ToolbarInput,
   ToolbarInputGroup,
   ToolbarRoot
@@ -15,12 +16,28 @@ describe('Toolbar exports', () => {
     expect(Toolbar).toBeDefined();
     expect(Toolbar.Root).toBe(ToolbarRoot);
     expect(Toolbar.Button).toBe(ToolbarButton);
+    expect(Toolbar.Link).toBe(ToolbarLink);
     expect(Toolbar.Input).toBe(ToolbarInput);
     expect(Toolbar.InputGroup).toBe(ToolbarInputGroup);
   });
 });
 
 describe('Toolbar', () => {
+  it('renders links and includes them in arrow-key focus movement', async () => {
+    render(ToolbarTestHost);
+    const before = screen.getByRole('button', { name: 'Before link' });
+    const link = screen.getByRole('link', { name: 'Documentation' });
+    const after = screen.getByRole('button', { name: 'After link' });
+
+    expect(link.getAttribute('data-kumo-component')).toBe('Toolbar.Link');
+    expect(link).toHaveAttribute('target', '_blank');
+    before.focus();
+    await fireEvent.keyDown(before, { key: 'ArrowRight' });
+    expect(document.activeElement).toBe(link);
+    await fireEvent.keyDown(link, { key: 'ArrowRight' });
+    expect(document.activeElement).toBe(after);
+  });
+
   it('applies toolbar size and item styles through Toolbar.Input', () => {
     render(ToolbarTestHost);
 

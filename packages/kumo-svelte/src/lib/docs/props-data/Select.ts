@@ -128,6 +128,58 @@ const rows: PropRow[] = [
     "type": "HTMLElement | string",
     "required": false,
     "description": "Container element for the portal."
+  },
+  {
+    "prop": "side",
+    "type": "'top' | 'right' | 'bottom' | 'left'",
+    "required": false,
+    "default": "\"bottom\"",
+    "description": "Preferred popup side; collision handling may flip it."
+  },
+  {
+    "prop": "sideOffset",
+    "type": "number",
+    "required": false,
+    "default": "4",
+    "description": "Distance between the trigger and popup."
+  },
+  {
+    "prop": "align",
+    "type": "'start' | 'center' | 'end'",
+    "required": false,
+    "default": "\"start\"",
+    "description": "Popup alignment along the trigger edge."
+  },
+  {
+    "prop": "alignOffset",
+    "type": "number",
+    "required": false,
+    "default": "0",
+    "description": "Additional offset along the alignment axis."
+  },
+  {
+    "prop": "customAnchor",
+    "type": "HTMLElement | string",
+    "required": false,
+    "description": "Custom floating-position anchor."
+  },
+  {
+    "prop": "strategy",
+    "type": "'absolute' | 'fixed'",
+    "required": false,
+    "description": "CSS positioning strategy for the popup."
+  },
+  {
+    "prop": "avoidCollisions",
+    "type": "boolean",
+    "required": false,
+    "description": "Whether the popup should adjust to avoid viewport collisions."
+  },
+  {
+    "prop": "collisionPadding",
+    "type": "number | Partial<Record<'top' | 'right' | 'bottom' | 'left', number>>",
+    "required": false,
+    "description": "Padding between the popup and its collision boundary."
   }
 ];
 

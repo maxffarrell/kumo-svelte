@@ -214,7 +214,7 @@
   <SelectPrimitive.Trigger
       child={trigger ? customTriggerChild : undefined}
       class={cn(
-        'inline-flex w-full items-center justify-between gap-2 bg-kumo-base text-left font-normal text-kumo-default shadow-xs outline-none ring ring-kumo-line transition focus:opacity-100 focus:ring-2 focus:ring-kumo-focus/50 focus-visible:ring-inset disabled:cursor-not-allowed disabled:opacity-50 *:in-focus:opacity-100',
+        'inline-flex w-full items-center justify-between gap-2 bg-kumo-control text-left font-normal text-kumo-default shadow-xs outline-none ring ring-kumo-line transition focus:opacity-100 focus:ring-2 focus:ring-kumo-focus/50 focus-visible:ring-inset disabled:cursor-not-allowed disabled:bg-kumo-control/50 disabled:opacity-50 data-[state=open]:bg-kumo-control *:in-focus:opacity-100',
         sizes[size],
         !value || (Array.isArray(value) && value.length === 0) ? 'text-kumo-placeholder' : undefined,
         errorMessage ? 'ring-kumo-danger! focus:ring-kumo-danger/50!' : undefined,

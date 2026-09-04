@@ -40,6 +40,15 @@ describe("Select", () => {
   });
 
   describe("variant fidelity", () => {
+    it("uses the Input control surface when closed, open, or disabled", () => {
+      render(Select, { "aria-label": "Fruit", options: fruits, disabled: true });
+      const cls = screen.getByRole("button", { name: "Fruit" }).className;
+      expect(cls).toContain("bg-kumo-control");
+      expect(cls).toContain("data-[state=open]:bg-kumo-control");
+      expect(cls).toContain("disabled:bg-kumo-control/50");
+      expect(cls).not.toContain("data-[state=open]:bg-kumo-base");
+    });
+
     it("accepts popup positioning props without forwarding them to the trigger", () => {
       render(Select, {
         "aria-label": "Fruit",

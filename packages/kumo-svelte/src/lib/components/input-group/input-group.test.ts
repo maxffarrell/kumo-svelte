@@ -3,8 +3,13 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import { expectNoA11yViolations } from '../../../../tests/a11y';
 import InputGroupTestHost from './InputGroupTestHost.svelte';
+import { INPUT_GROUP_SIZE } from './context';
 
 describe('InputGroup', () => {
+  it('uses compact end spacing for a button in a large group', () => {
+    expect(INPUT_GROUP_SIZE.lg.addonButtonOuterEnd).toBe('pr-0.5');
+  });
+
   it('renders input inside group', () => {
     render(InputGroupTestHost);
     expect(screen.getByRole('textbox', { name: 'Search' })).toBeTruthy();

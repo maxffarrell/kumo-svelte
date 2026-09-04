@@ -20,6 +20,12 @@
 
   let { controls = 'full', pageSelector = 'input', class: className, ...rest }: Props = $props();
   const context = getPaginationContext();
+  const hasKnownTotal = $derived(context.totalCount !== undefined);
+  const isUnknownTotal = $derived(!hasKnownTotal && context.hasNextPage !== undefined);
+  const showFullControls = $derived(controls === 'full' && !isUnknownTotal);
+  const isNextDisabled = $derived(
+    hasKnownTotal ? context.page === context.maxPage : context.hasNextPage !== true
+  );
   const pageOptions = $derived(
     Array.from({ length: context.maxPage }, (_, index) => {
       const page = index + 1;
@@ -28,7 +34,9 @@
   );
 
   function commitPage(nextPage: number) {
-    const clamped = clamp(nextPage, 1, context.maxPage);
+    const clamped = hasKnownTotal
+      ? clamp(nextPage, 1, context.maxPage)
+      : Math.max(nextPage, 1);
     context.setPage(clamped);
     context.setEditingPage(clamped);
   }
@@ -42,7 +50,7 @@
 <div data-slot="pagination-controls" class={cn('grow flex flex-col items-end', className)} {...rest}>
   <nav aria-label={context.labels.navigation}>
     <InputGroup focusMode="individual">
-      {#if controls === 'full'}
+      {#if showFullControls}
         <InputGroupButton
           variant="secondary"
           aria-label={context.labels.firstPage}
@@ -60,7 +68,7 @@
       >
         <CaretLeft class="size-4" />
       </InputGroupButton>
-      {#if controls === 'full'}
+      {#if showFullControls}
         {#if pageSelector === 'dropdown'}
           <Select
             aria-label={context.labels.pageNumber}
@@ -95,12 +103,12 @@
       <InputGroupButton
         variant="secondary"
         aria-label={context.labels.nextPage}
-        disabled={context.page === context.maxPage}
+        disabled={isNextDisabled}
         onclick={() => commitPage(context.page + 1)}
       >
         <CaretRight class="size-4" />
       </InputGroupButton>
-      {#if controls === 'full'}
+      {#if showFullControls}
         <InputGroupButton
           variant="secondary"
           aria-label={context.labels.lastPage}

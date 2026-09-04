@@ -75,6 +75,23 @@ Use `controls="simple"` for a minimal pagination with only previous and next
 
 <ComponentExample demo="PaginationSimpleDemo" />
 
+### Unknown Totals
+
+Use `hasNextPage` when the data source does not return a total count. This is
+common for cursor-based APIs, where calculating the total can be expensive or
+unavailable. Pagination then shows only the sequential Previous and Next
+controls, and disables Next when `hasNextPage` is false.
+
+```svelte
+<Pagination
+  bind:page
+  hasNextPage={data.hasMore}
+  text={({ page }) => `Page ${page}`}
+/>
+```
+
+<ComponentExample demo="PaginationUnknownTotalDemo" />
+
 ### Mid-Page State
 
 

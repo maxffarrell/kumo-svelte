@@ -95,7 +95,7 @@
   <span
     {...props}
     class={cn(
-      'inline-flex h-auto min-h-0 items-center border-none bg-transparent p-0 leading-[0] shadow-none',
+      'inline-flex h-auto min-h-0 items-center border-none bg-transparent p-0 shadow-none',
       'm-0 cursor-default'
     )}
   >

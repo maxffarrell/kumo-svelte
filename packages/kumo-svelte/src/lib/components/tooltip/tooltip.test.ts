@@ -5,6 +5,13 @@ import { expectNoA11yViolations } from '../../../../tests/a11y';
 import TooltipTestHost from './TooltipTestHost.svelte';
 
 describe('Tooltip', () => {
+  it('does not override the line height of nested text', () => {
+    render(TooltipTestHost);
+    const trigger = screen.getByText('Trigger label').closest('[data-tooltip-trigger]');
+    expect(trigger).not.toBeNull();
+    expect(trigger?.className).not.toMatch(/\bleading-/);
+  });
+
   it('renders the trigger when closed', () => {
     render(TooltipTestHost);
 

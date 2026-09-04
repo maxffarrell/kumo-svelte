@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { expectNoA11yViolations } from "../../../../tests/a11y";
 import DialogTestHost from "./DialogTestHost.svelte";
-import { KUMO_DIALOG_VARIANTS } from "./Dialog.variants";
+import { dialogVariants, KUMO_DIALOG_VARIANTS } from "./Dialog.variants";
 
 describe("Dialog", () => {
   it("renders the trigger with Kumo data attributes", () => {
@@ -71,6 +71,14 @@ describe("Dialog", () => {
 });
 
 describe("Dialog variants", () => {
+  it("positions dialogs closer to the top of the viewport", () => {
+    const classes = dialogVariants().split(" ");
+    expect(classes).toContain("top-8");
+    expect(classes).toContain("sm:top-16");
+    expect(classes).not.toContain("top-1/2");
+    expect(classes).not.toContain("-translate-y-1/2");
+  });
+
   it("uses fixed width classes for size variants", () => {
     for (const [size, expectedClass] of [
       ["sm", "sm:w-72"],

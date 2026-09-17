@@ -3171,10 +3171,9 @@
         "bg-kumo-control",
         "bg-kumo-overlay",
         "border-kumo-fill",
-        "border-kumo-interact",
+        "ring-kumo-line",
         "text-kumo-brand",
         "text-kumo-default",
-        "text-kumo-inactive",
         "text-kumo-subtle",
         "text-kumo-success"
       ]
@@ -3517,6 +3516,74 @@
           }
         }
       }
+    },
+    "InlineCopyText": {
+      "name": "InlineCopyText",
+      "type": "component",
+      "category": "Action",
+      "description": "A compact, borderless copy control for short inline values.",
+      "importPath": "kumo-svelte/components/inline-copy-text",
+      "sourceFile": "components/inline-copy-text",
+      "props": {
+        "children": {
+          "type": "Snippet",
+          "optional": false,
+          "required": true,
+          "description": "Inline content to display."
+        },
+        "value": {
+          "type": "string",
+          "optional": true,
+          "description": "Value copied to the clipboard. Defaults to rendered text content."
+        },
+        "variant": {
+          "type": "InlineCopyTextVariant",
+          "optional": true,
+          "default": "mono-secondary",
+          "description": "Text style; heading variants are excluded."
+        },
+        "size": {
+          "type": "KumoTextSize",
+          "optional": true,
+          "description": "Text size."
+        },
+        "bold": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Uses medium-weight copy text."
+        },
+        "truncate": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Truncates overflowing text."
+        },
+        "as": {
+          "type": "TextElement",
+          "optional": true,
+          "default": "span",
+          "description": "Element used for displayed text."
+        },
+        "onCopy": {
+          "type": "() => void",
+          "optional": true,
+          "description": "Called after a successful clipboard write."
+        },
+        "labels": {
+          "type": "InlineCopyTextLabels",
+          "optional": true,
+          "description": "Localized copy and copied accessible labels."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional button classes."
+        }
+      },
+      "colors": [
+        "ring-kumo-brand",
+        "text-kumo-default"
+      ]
     },
     "Input": {
       "name": "Input",
@@ -6721,6 +6788,7 @@
       "Flow",
       "GlobeMap",
       "Grid",
+      "InlineCopyText",
       "Input",
       "InputArea",
       "InputGroup",
@@ -6753,6 +6821,7 @@
     "byCategory": {
       "Action": [
         "Button",
+        "InlineCopyText",
         "Link",
         "Toolbar"
       ],
@@ -6848,6 +6917,7 @@
         "Flow",
         "GlobeMap",
         "Grid",
+        "InlineCopyText",
         "Input",
         "InputArea",
         "InputGroup",

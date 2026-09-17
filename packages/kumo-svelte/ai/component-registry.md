@@ -194,6 +194,14 @@ A responsive grid layout component for organizing content into columns.
 - Import: `import { Grid } from "kumo-svelte/components/grid";`
 - Source: `components/grid`
 
+## InlineCopyText
+
+A compact, borderless copy control for short inline values.
+
+- Category: Action
+- Import: `import { InlineCopyText } from "kumo-svelte/components/inline-copy-text";`
+- Source: `components/inline-copy-text`
+
 ## Input
 
 A text input field for user input with built-in label, description, and error support.

@@ -104,6 +104,17 @@ export {
 export type { FlowAlign, FlowOrientation } from "./components/flow";
 export { Grid, GridItem } from "./components/grid";
 export { Input, Textarea } from "./components/input";
+export {
+  InlineCopyText,
+  KUMO_INLINE_COPY_TEXT_DEFAULT_VARIANTS,
+  KUMO_INLINE_COPY_TEXT_STYLING,
+  KUMO_INLINE_COPY_TEXT_VARIANTS,
+} from "./components/inline-copy-text";
+export type {
+  InlineCopyTextLabels,
+  InlineCopyTextProps,
+  InlineCopyTextVariant,
+} from "./components/inline-copy-text";
 export { InputArea } from "./components/input-area";
 export {
   InputGroup,

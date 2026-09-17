@@ -85,7 +85,7 @@
   {name}
   onValueChange={handleValueChange}
 >
-  <fieldset class={cn('flex flex-col gap-4', className)} {disabled}>
+  <fieldset class={cn('flex flex-col gap-4 p-0', className)} {disabled}>
     {#if legend}
       <legend class="text-base font-medium text-kumo-default">
         {legend}

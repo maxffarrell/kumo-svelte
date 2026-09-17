@@ -3,8 +3,14 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { expectNoA11yViolations } from '../../../../tests/a11y';
 import Checkbox from './Checkbox.svelte';
+import CheckboxGroup from './CheckboxGroup.svelte';
 
 describe('Checkbox', () => {
+  it('resets native fieldset padding', () => {
+    const { container } = render(CheckboxGroup, { legend: 'Preferences' });
+    expect(container.querySelector('fieldset')?.className).toContain('p-0');
+  });
+
   it('renders with Kumo data attributes', () => {
     render(Checkbox, { 'aria-label': 'Accept terms' });
 

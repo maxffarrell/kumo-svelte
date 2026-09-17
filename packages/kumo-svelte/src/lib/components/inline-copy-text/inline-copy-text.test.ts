@@ -12,9 +12,15 @@ describe('InlineCopyText', () => {
   beforeEach(() => { writeText = mockClipboard(); });
 
   it('renders an accessible compact copy button', () => {
-    render(InlineCopyText, { value: 'namespace-id', children: content('namespace-id') });
+    render(InlineCopyText, { children: content('namespace-id') });
     expect(screen.getByRole('button', { name: 'Copy to clipboard' })).toBeTruthy();
     expect(screen.getByText('namespace-id')).toBeTruthy();
+  });
+
+  it('copies rendered text when value is omitted', async () => {
+    render(InlineCopyText, { children: content('namespace-id') });
+    await userEvent.click(screen.getByRole('button', { name: 'Copy to clipboard' }));
+    expect(writeText).toHaveBeenCalledWith('namespace-id');
   });
 
   it('copies a value and announces localized success', async () => {

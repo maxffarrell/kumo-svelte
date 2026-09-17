@@ -33,7 +33,7 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
   import Check from 'phosphor-svelte/lib/Check';
-  import CopySimple from 'phosphor-svelte/lib/CopySimple';
+  import Copy from 'phosphor-svelte/lib/Copy';
   import { Text } from '$lib/components/text';
 
   let { children, value, variant = 'mono-secondary', size, bold, truncate = true, as = 'span', onCopy, labels = {}, class: className, onclick, ...rest }: InlineCopyTextProps = $props();
@@ -77,7 +77,7 @@
   {#if copied}
     <Check aria-hidden="true" class="size-3.5 shrink-0" />
   {:else}
-    <CopySimple aria-hidden="true" class={cn('size-3.5 shrink-0 opacity-0 transition-opacity motion-reduce:transition-none', 'group-hover/inline-copy:opacity-100 group-focus-visible/inline-copy:opacity-100', 'group-focus-within:opacity-100 group-hover:opacity-100')} />
+    <Copy aria-hidden="true" class={cn('size-3.5 shrink-0 opacity-0 transition-opacity motion-reduce:transition-none', 'group-hover/inline-copy:opacity-100 group-focus-visible/inline-copy:opacity-100', 'group-focus-within:opacity-100 group-hover:opacity-100')} />
   {/if}
   <span class="sr-only" aria-live="polite">{copied ? copiedLabel : ''}</span>
 </button>

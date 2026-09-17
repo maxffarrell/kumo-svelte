@@ -41,6 +41,7 @@
     yAxisTickLabelFormat?: (value: number) => string;
     yAxisName?: string;
     yAxisTickCount?: number;
+    yAxisMinInterval?: number;
     tooltipValueFormat?: (value: number) => string;
     tooltipFooter?: string;
     tooltipMode?: 'all' | 'single';
@@ -74,6 +75,7 @@
     yAxisTickLabelFormat,
     yAxisName,
     yAxisTickCount,
+    yAxisMinInterval,
     tooltipValueFormat,
     tooltipFooter,
     tooltipMode = 'all',
@@ -404,6 +406,7 @@
         axisLabel: { margin: 15, color: axisTextColor, ...(yAxisTickFormat && { formatter: (value: number) => yAxisTickFormat(value) }) },
         splitLine: { show: true, lineStyle: { type: 'dashed', width: 1, color: gridLineColor } },
         splitNumber: yAxisTickCount,
+        ...(yAxisMinInterval !== undefined && { minInterval: yAxisMinInterval }),
         ...(thresholdExtent && {
           min: (value: { min: number }) => Math.min(value.min, thresholdExtent.min),
           max: (value: { max: number }) => Math.max(value.max, thresholdExtent.max)

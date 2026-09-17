@@ -6148,6 +6148,11 @@
           "optional": true,
           "description": "Number of ticks to display on the y-axis."
         },
+        "yAxisMinInterval": {
+          "type": "number",
+          "optional": true,
+          "description": "Minimum interval between y-axis ticks. Use 1 for discrete count data."
+        },
         "tooltipValueFormat": {
           "type": "(value: number) => string",
           "optional": true,

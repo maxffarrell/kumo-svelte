@@ -27,6 +27,16 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
+## Discrete Count Data
+
+Set `yAxisMinInterval={1}` for discrete values such as request counts. This prevents fractional y-axis ticks while leaving the default axis behavior unchanged for rates and other continuous values.
+
+<ComponentExample demo="IntegerYAxisChartDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
 ## Reference Markers
 
 Pass <code>markers</code> to render vertical reference lines for deployments,

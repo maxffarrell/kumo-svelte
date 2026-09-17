@@ -36,7 +36,7 @@ A navigation component that shows the current page's location within a navigatio
 
 ## BubbleMap
 
-Map chart components for visualizing geographic data with GeoJSON.
+Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.
 
 - Category: Data Visualization
 - Import: `import { BubbleMap } from "kumo-svelte/components/chart";`
@@ -84,7 +84,7 @@ A control that allows the user to toggle between checked and not checked. Featur
 
 ## ChoroplethMap
 
-Map chart components for visualizing geographic data with GeoJSON.
+Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.
 
 - Category: Data Visualization
 - Import: `import { ChoroplethMap } from "kumo-svelte/components/chart";`
@@ -177,6 +177,14 @@ A group of components for building directed flow diagrams with nodes and connect
 - Category: Display
 - Import: `import { Flow } from "kumo-svelte/components/flow";`
 - Source: `components/flow`
+
+## GlobeMap
+
+Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.
+
+- Category: Data Visualization
+- Import: `import { GlobeMap } from "kumo-svelte/components/chart";`
+- Source: `components/chart`
 
 ## Grid
 

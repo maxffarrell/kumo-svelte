@@ -562,7 +562,7 @@
       "name": "BubbleMap",
       "type": "component",
       "category": "Data Visualization",
-      "description": "Map chart components for visualizing geographic data with GeoJSON.",
+      "description": "Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.",
       "importPath": "kumo-svelte/components/chart",
       "sourceFile": "components/chart",
       "props": {
@@ -719,6 +719,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -968,6 +970,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -1044,6 +1048,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -1312,7 +1318,7 @@
       "name": "ChoroplethMap",
       "type": "component",
       "category": "Data Visualization",
-      "description": "Map chart components for visualizing geographic data with GeoJSON.",
+      "description": "Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.",
       "importPath": "kumo-svelte/components/chart",
       "sourceFile": "components/chart",
       "props": {
@@ -1461,6 +1467,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -3317,6 +3325,126 @@
         }
       }
     },
+    "GlobeMap": {
+      "name": "GlobeMap",
+      "type": "component",
+      "category": "Data Visualization",
+      "description": "Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.",
+      "importPath": "kumo-svelte/components/chart",
+      "sourceFile": "components/chart",
+      "props": {
+        "landColor": {
+          "type": "string",
+          "optional": true,
+          "description": "Stroke color for the hatched land."
+        },
+        "landHatchSpacing": {
+          "type": "number",
+          "optional": true,
+          "default": "10",
+          "description": "Spacing between land hatch lines in view-box pixels."
+        },
+        "oceanColor": {
+          "type": "string",
+          "optional": true,
+          "default": "var(--color-kumo-base)",
+          "description": "Fill behind the land and graticule."
+        },
+        "markers": {
+          "type": "GlobeMapMarker[]",
+          "optional": true,
+          "default": "[]",
+          "description": "Geographic points drawn above the land."
+        },
+        "markerColor": {
+          "type": "string",
+          "optional": true,
+          "description": "Default marker fill."
+        },
+        "markerRadius": {
+          "type": "number",
+          "optional": true,
+          "default": "7",
+          "description": "Default marker radius in view-box pixels."
+        },
+        "onMarkerClick": {
+          "type": "(marker: GlobeMapMarker) => void",
+          "optional": true,
+          "description": "Called when a visible marker is clicked."
+        },
+        "defaultRotation": {
+          "type": "[number, number, number]",
+          "optional": true,
+          "default": "[-10, -20, 0]",
+          "description": "Initial longitude, latitude, and roll rotation."
+        },
+        "draggable": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Allows pointer and keyboard rotation."
+        },
+        "autoRotate": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Continuously rotates the globe horizontally."
+        },
+        "autoRotateSpeed": {
+          "type": "number",
+          "optional": true,
+          "default": "4",
+          "description": "Horizontal auto-rotation speed in degrees per second."
+        },
+        "showGraticule": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Draws latitude and longitude guides."
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Shows the Kumo-styled marker tooltip."
+        },
+        "onUserRotationChange": {
+          "type": "(rotation: [number, number, number]) => void",
+          "optional": true,
+          "description": "Called after pointer or keyboard rotation."
+        },
+        "aria-label": {
+          "type": "string",
+          "optional": true,
+          "default": "Interactive globe map",
+          "description": "Accessible label for the visualization."
+        },
+        "height": {
+          "type": "number",
+          "optional": true,
+          "description": "Fixed height in pixels; otherwise uses a square aspect ratio."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes for the container."
+        },
+        "isDarkMode": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Overrides automatic theme detection."
+        }
+      },
+      "colors": [
+        "bg-kumo-base",
+        "bg-kumo-fill",
+        "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
+    },
     "Grid": {
       "name": "Grid",
       "type": "component",
@@ -4548,6 +4676,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -6266,6 +6396,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -6587,6 +6719,7 @@
       "DropdownMenu",
       "Empty",
       "Flow",
+      "GlobeMap",
       "Grid",
       "Input",
       "InputArea",
@@ -6628,6 +6761,7 @@
         "Chart",
         "ChartLegend",
         "ChoroplethMap",
+        "GlobeMap",
         "SankeyChart",
         "TimeseriesChart"
       ],
@@ -6712,6 +6846,7 @@
         "DropdownMenu",
         "Empty",
         "Flow",
+        "GlobeMap",
         "Grid",
         "Input",
         "InputArea",

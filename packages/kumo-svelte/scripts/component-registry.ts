@@ -107,6 +107,7 @@ const categoryByName: Record<string, string> = {
   TimeseriesChart: 'Data Visualization',
   SankeyChart: 'Data Visualization',
   BubbleMap: 'Data Visualization',
+  GlobeMap: 'Data Visualization',
   ChoroplethMap: 'Data Visualization'
 };
 
@@ -114,7 +115,7 @@ const chartComponentsByRoute: Record<string, string[]> = {
   '+page.md': ['Chart', 'ChartLegend'],
   'timeseries/+page.md': ['TimeseriesChart'],
   'sankey/+page.md': ['SankeyChart'],
-  'maps/+page.md': ['BubbleMap', 'ChoroplethMap']
+  'maps/+page.md': ['BubbleMap', 'ChoroplethMap', 'GlobeMap']
 };
 
 const displayNameByRoute: Record<string, string> = {

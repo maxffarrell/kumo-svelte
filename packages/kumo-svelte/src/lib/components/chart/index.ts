@@ -4,6 +4,7 @@ export { default as TimeseriesChart } from "./TimeseriesChart.svelte";
 export { default as SankeyChart } from "./SankeyChart.svelte";
 export { default as BubbleMap } from "./BubbleMap.svelte";
 export { default as ChoroplethMap } from "./ChoroplethMap.svelte";
+export { default as GlobeMap } from "./GlobeMap.svelte";
 export { ChartPalette, CHART_DARK_COLORS, CHART_LIGHT_COLORS } from "./Color";
 export type { ChartSemanticColorName, MapColors } from "./Color";
 export type {
@@ -21,3 +22,4 @@ export type {
   MapStyle,
 } from "./BubbleMap.svelte";
 export type { ChoroplethMapProps } from "./ChoroplethMap.svelte";
+export type { GlobeMapProps, GlobeMapMarker } from "./GlobeMap.svelte";

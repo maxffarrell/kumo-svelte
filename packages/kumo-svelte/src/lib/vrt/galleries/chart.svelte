@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as echarts from 'echarts';
-  import { Chart, ChartLegend, TimeseriesChart } from '$lib/components/chart';
+  import { Chart, ChartLegend, GlobeMap, TimeseriesChart } from '$lib/components/chart';
   import Scenario from '$lib/vrt/Scenario.svelte';
 
   /** Fixed epoch — avoids Date.now() so VRT data stays deterministic. */
@@ -38,6 +38,20 @@
 <Scenario id="timeseries-default" label="timeseries">
   <div class="w-[320px]">
     <TimeseriesChart {echarts} data={timeseriesData} height={160} yAxisTickCount={2} animation={false} />
+  </div>
+</Scenario>
+
+<Scenario id="globe-map" label="globe map">
+  <div class="w-[320px]">
+    <GlobeMap
+      markers={[
+        { name: 'SFO', description: 'San Francisco', latitude: 37.77, longitude: -122.42 },
+        { name: 'LHR', description: 'London', latitude: 51.51, longitude: -0.13 }
+      ]}
+      showGraticule
+      draggable={false}
+      aria-label="Availability locations"
+    />
   </div>
 </Scenario>
 

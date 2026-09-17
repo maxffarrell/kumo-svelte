@@ -114,6 +114,40 @@ describe("Sidebar imperative scrolling", () => {
 
     expect(scrollTo).toHaveBeenCalledWith({ top: 210, behavior: "smooth" });
   });
+
+  it("only scrolls an item into view when it is outside the viewport", async () => {
+    const { container } = render(SidebarScrollTestHost);
+    const viewport = container.querySelector<HTMLElement>(
+      '[data-sidebar="viewport"]',
+    )!;
+    const item = container.querySelector<HTMLElement>(
+      '[data-sidebar-item-id="billing"]',
+    )!;
+    const scrollTo = vi.fn();
+
+    Object.defineProperties(viewport, {
+      clientHeight: { value: 100 },
+      offsetHeight: { value: 100 },
+      scrollHeight: { value: 500 },
+      scrollTop: { value: 50, writable: true },
+      scrollTo: { value: scrollTo },
+    });
+    Object.defineProperty(item, "offsetHeight", { value: 20 });
+    vi.spyOn(viewport, "getBoundingClientRect").mockReturnValue({
+      top: 100,
+      bottom: 200,
+      height: 100,
+    } as DOMRect);
+    const itemRect = vi.spyOn(item, "getBoundingClientRect");
+    itemRect.mockReturnValue({ top: 120, bottom: 140 } as DOMRect);
+
+    await fireEvent.click(screen.getByRole("button", { name: "Reveal billing" }));
+    expect(scrollTo).not.toHaveBeenCalled();
+
+    itemRect.mockReturnValue({ top: 250, bottom: 270 } as DOMRect);
+    await fireEvent.click(screen.getByRole("button", { name: "Reveal billing" }));
+    expect(scrollTo).toHaveBeenCalledWith({ top: 200, behavior: "auto" });
+  });
 });
 
 describe("Sidebar loading", () => {

@@ -38,6 +38,7 @@ export interface SidebarContextValue {
   toggleSidebar(): void;
   registerItem(id: string, node: HTMLElement | null): void;
   scrollToItem(id: string, options?: SidebarScrollToItemOptions): void;
+  scrollItemIntoView(id: string, options?: SidebarScrollToItemOptions): void;
 }
 
 export interface SidebarMenuItemContextValue {

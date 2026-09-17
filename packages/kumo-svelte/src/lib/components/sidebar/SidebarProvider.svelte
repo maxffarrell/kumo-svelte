@@ -122,7 +122,12 @@
 
     const targetRect = target.getBoundingClientRect();
     const viewportRect = viewport.getBoundingClientRect();
-    const itemScrollOffset = targetRect.top - viewportRect.top + viewport.scrollTop;
+    const viewportScaleY =
+      viewport.offsetHeight > 0 && viewportRect.height > 0
+        ? viewportRect.height / viewport.offsetHeight
+        : 1;
+    const itemScrollOffset =
+      (targetRect.top - viewportRect.top) / viewportScaleY + viewport.scrollTop;
 
     let desired: number;
     if (align === 'center') {
@@ -142,6 +147,19 @@
     const clamped = Math.max(0, Math.min(desired, viewport.scrollHeight - viewport.clientHeight));
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     viewport.scrollTo({ top: clamped, behavior: reducedMotion ? 'auto' : behavior });
+  }
+
+  function scrollItemIntoView(id: string, options: SidebarScrollToItemOptions = {}) {
+    const target = items.get(id);
+    if (!target) return;
+    const viewport = target.closest<HTMLElement>('[data-sidebar="viewport"]');
+    if (!viewport) return;
+
+    const targetRect = target.getBoundingClientRect();
+    const viewportRect = viewport.getBoundingClientRect();
+    if (targetRect.top >= viewportRect.top && targetRect.bottom <= viewportRect.bottom) return;
+
+    scrollToItem(id, options);
   }
 
   $effect(() => {
@@ -212,7 +230,8 @@
     stopPeek,
     toggleSidebar,
     registerItem,
-    scrollToItem
+    scrollToItem,
+    scrollItemIntoView
   });
 </script>
 

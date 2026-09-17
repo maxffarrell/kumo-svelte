@@ -900,6 +900,16 @@
         }
       }
     },
+    "Button Group": {
+      "name": "Button Group",
+      "type": "component",
+      "category": "Other",
+      "description": "Joins a primary action and a related trigger into a single split button.",
+      "importPath": "kumo-svelte/components/button-group",
+      "sourceFile": "components/button-group",
+      "props": {},
+      "colors": []
+    },
     "Chart": {
       "name": "Chart",
       "type": "component",
@@ -6561,6 +6571,7 @@
       "Breadcrumbs",
       "BubbleMap",
       "Button",
+      "Button Group",
       "Chart",
       "ChartLegend",
       "Checkbox",
@@ -6661,6 +6672,7 @@
         "Tabs"
       ],
       "Other": [
+        "Button Group",
         "CloudflareLogo",
         "Collapsible",
         "Layer Dialog",
@@ -6684,6 +6696,7 @@
         "Breadcrumbs",
         "BubbleMap",
         "Button",
+        "Button Group",
         "Chart",
         "ChartLegend",
         "Checkbox",

@@ -50,6 +50,14 @@ Displays a button or a component that looks like a button.
 - Import: `import { Button } from "kumo-svelte/components/button";`
 - Source: `components/button`
 
+## Button Group
+
+Joins a primary action and a related trigger into a single split button.
+
+- Category: Other
+- Import: `import { Button Group } from "kumo-svelte/components/button-group";`
+- Source: `components/button-group`
+
 ## Chart
 
 Charts built on ECharts.

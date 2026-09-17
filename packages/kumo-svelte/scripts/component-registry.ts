@@ -57,6 +57,7 @@ const outputDir = join(packageRoot, 'ai');
 
 const categoryByName: Record<string, string> = {
   Button: 'Action',
+  ButtonGroup: 'Action',
   Toolbar: 'Action',
   Link: 'Action',
   Badge: 'Display',

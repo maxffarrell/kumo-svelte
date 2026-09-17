@@ -10,9 +10,9 @@ const rows: PropRow[] = [
   },
   {
     prop: "items",
-    type: "unknown[]",
+    type: "ComboboxItem[] | ComboboxItemCollection",
     required: true,
-    description: "Array of items to display in the dropdown.",
+    description: "Items to display, optionally created with Combobox.createItems().",
   },
   {
     prop: "value",

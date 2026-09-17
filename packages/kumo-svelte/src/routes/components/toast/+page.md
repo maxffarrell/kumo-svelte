@@ -212,6 +212,11 @@ const toastManager = useKumoToastManager();
 // Add a toast
 toastManager.add(options);
 
+// Update from the current toast state
+toastManager.update(toastId, (toast) => ({
+  description: `Updated after ${toast.timeout ?? 5000}ms`,
+}));
+
 // Promise-based toast
 toastManager.promise(asyncFn(), {
   loading: options,

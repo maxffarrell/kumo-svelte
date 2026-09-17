@@ -39,6 +39,10 @@ export interface KumoToastObject<Data extends object = Record<string, unknown>>
   transitionStatus?: 'starting' | 'active' | 'ending';
 }
 
+export type KumoToastManagerUpdateOptions<Data extends object = Record<string, unknown>> = Partial<
+  KumoToastOptions<Data> & Pick<KumoToastObject<Data>, 'transitionStatus'>
+>;
+
 export class KumoToastManager {
   toasts = $state<KumoToastObject[]>([]);
   #timeouts = new Map<string, ReturnType<typeof setTimeout>>();
@@ -80,10 +84,27 @@ export class KumoToastManager {
     return id;
   }
 
-  update(id: string, options: Partial<KumoToastOptions & Pick<KumoToastObject, 'transitionStatus'>>) {
-    this.toasts = this.toasts.map((toast) => (toast.id === id ? { ...toast, ...options } : toast));
+  update(
+    id: string,
+    options:
+      | KumoToastManagerUpdateOptions
+      | ((toast: KumoToastObject) => KumoToastManagerUpdateOptions)
+  ) {
+    let resolvedOptions: KumoToastManagerUpdateOptions | undefined;
+    this.toasts = this.toasts.map((toast) => {
+      if (toast.id !== id) return toast;
+      resolvedOptions = typeof options === 'function' ? options(toast) : options;
+      return { ...toast, ...resolvedOptions };
+    });
     const toast = this.toasts.find((item) => item.id === id);
-    if (toast && ('timeout' in options || 'title' in options || 'description' in options || 'content' in options)) {
+    if (
+      toast &&
+      resolvedOptions &&
+      ('timeout' in resolvedOptions ||
+        'title' in resolvedOptions ||
+        'description' in resolvedOptions ||
+        'content' in resolvedOptions)
+    ) {
       this.#scheduleRemoval(toast);
     }
   }

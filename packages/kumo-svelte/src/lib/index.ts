@@ -60,6 +60,7 @@ export {
   CollapsibleTrigger,
 } from "./components/collapsible";
 export { Combobox } from "./components/combobox";
+export type { ComboboxItemCollection } from "./components/combobox";
 export { CommandPalette } from "./components/command-palette";
 export { DatePicker } from "./components/date-picker";
 export type {
@@ -242,7 +243,11 @@ export {
   createKumoToastManager,
   useKumoToastManager,
 } from "./components/toasty";
-export type { KumoToastOptions, KumoToastVariant } from "./components/toasty";
+export type {
+  KumoToastManagerUpdateOptions,
+  KumoToastOptions,
+  KumoToastVariant,
+} from "./components/toasty";
 export { Tooltip, TooltipProvider } from "./components/tooltip";
 export { cn } from "./utils/cn";
 export * as Primitives from "./primitives";

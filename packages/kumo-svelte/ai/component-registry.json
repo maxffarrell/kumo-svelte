@@ -1907,10 +1907,10 @@
           "description": "Size preset."
         },
         "items": {
-          "type": "unknown[]",
+          "type": "ComboboxItem[] | ComboboxItemCollection",
           "optional": false,
           "required": true,
-          "description": "Array of items to display in the dropdown."
+          "description": "Items to display, optionally created with Combobox.createItems()."
         },
         "value": {
           "type": "unknown",

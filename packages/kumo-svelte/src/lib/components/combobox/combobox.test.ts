@@ -2,6 +2,21 @@ import { render, screen } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import ComboboxTest from "./ComboboxTest.svelte";
+import { Combobox } from "./index";
+
+describe("Combobox item collections", () => {
+  it("creates collections from application objects", () => {
+    const fruit = { id: "apple", name: "Apple" };
+    const collection = Combobox.createItems([fruit], {
+      getValue: (item) => item.id,
+      getLabel: (item) => item.name,
+    });
+
+    expect(collection.items[0]).toBe(fruit);
+    expect(collection.getValue(fruit)).toBe("apple");
+    expect(collection.getLabel(fruit)).toBe("Apple");
+  });
+});
 
 describe("Combobox Keyboard Navigation", () => {
   it("aligns popup input with the content edges", async () => {

@@ -15,6 +15,7 @@ import Trigger from "./ComboboxTrigger.svelte";
 import Value from "./ComboboxValue.svelte";
 import Icon from "./ComboboxIcon.svelte";
 import { createKumoFilter } from "../filter";
+import { createComboboxItems } from "./context";
 
 export const Combobox = Object.assign(Root, {
   Content,
@@ -33,6 +34,7 @@ export const Combobox = Object.assign(Root, {
   Value,
   Icon,
   useFilter: createKumoFilter,
+  createItems: createComboboxItems,
 });
 
 export {
@@ -55,7 +57,9 @@ export {
 };
 
 export type {
+  ComboboxItemCollection,
   ComboboxInputSide,
   ComboboxItem as ComboboxOption,
   ComboboxSize,
 } from "./context";
+export { createComboboxItems } from "./context";

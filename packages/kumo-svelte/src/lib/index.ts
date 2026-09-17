@@ -111,6 +111,24 @@ export type {
 export { Label } from "./components/label";
 export { LayerCard } from "./components/layer-card";
 export {
+  LayerDialog,
+  LayerDialogActions,
+  LayerDialogAlert,
+  LayerDialogBody,
+  LayerDialogContent,
+  LayerDialogDescription,
+  LayerDialogPrimary,
+  LayerDialogRoot,
+  LayerDialogTitle,
+  LayerDialogTrigger,
+  KUMO_LAYER_DIALOG_DEFAULT_VARIANTS,
+  KUMO_LAYER_DIALOG_VARIANTS,
+} from "./components/layer-dialog";
+export type {
+  KumoLayerDialogSize,
+  KumoLayerDialogVerticalAlign,
+} from "./components/layer-dialog";
+export {
   KUMO_LINK_DEFAULT_VARIANTS,
   KUMO_LINK_VARIANTS,
   Link,

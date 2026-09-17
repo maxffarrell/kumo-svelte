@@ -3690,6 +3690,25 @@
         "text-kumo-subtle"
       ]
     },
+    "Layer Dialog": {
+      "name": "Layer Dialog",
+      "type": "component",
+      "category": "Other",
+      "description": "A responsive dialog that becomes a bottom sheet on mobile.",
+      "importPath": "kumo-svelte/components/layer-dialog",
+      "sourceFile": "components/layer-dialog",
+      "props": {},
+      "colors": [
+        "bg-kumo-base",
+        "bg-kumo-contrast",
+        "bg-kumo-elevated",
+        "bg-kumo-fill",
+        "bg-kumo-recessed",
+        "ring-kumo-hairline",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
+    },
     "LayerCard": {
       "name": "LayerCard",
       "type": "component",
@@ -6552,6 +6571,7 @@
       "InputArea",
       "InputGroup",
       "Label",
+      "Layer Dialog",
       "LayerCard",
       "Link",
       "Loader",
@@ -6633,6 +6653,7 @@
       "Other": [
         "CloudflareLogo",
         "Collapsible",
+        "Layer Dialog",
         "Switch",
         "Table",
         "Tag Input",
@@ -6673,6 +6694,7 @@
         "InputArea",
         "InputGroup",
         "Label",
+        "Layer Dialog",
         "LayerCard",
         "Link",
         "Loader",

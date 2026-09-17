@@ -85,6 +85,7 @@ const categoryByName: Record<string, string> = {
   TagInput: 'Input',
   Grid: 'Layout',
   LayerCard: 'Layout',
+  LayerDialog: 'Overlay',
   Surface: 'Layout',
   Breadcrumbs: 'Navigation',
   CommandPalette: 'Navigation',

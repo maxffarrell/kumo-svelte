@@ -210,6 +210,14 @@ A label component for form fields with support for required/optional indicators 
 - Import: `import { Label } from "kumo-svelte/components/label";`
 - Source: `components/label`
 
+## Layer Dialog
+
+A responsive dialog that becomes a bottom sheet on mobile.
+
+- Category: Other
+- Import: `import { Layer Dialog } from "kumo-svelte/components/layer-dialog";`
+- Source: `components/layer-dialog`
+
 ## LayerCard
 
 A card component with a layered visual effect, perfect for navigation or feature highlights.

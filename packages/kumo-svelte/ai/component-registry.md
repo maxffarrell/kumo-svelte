@@ -1,6 +1,6 @@
 # Kumo Svelte Component Registry
 
-Version: 0.12.0
+Version: 0.13.0
 
 ## Autocomplete
 
@@ -345,6 +345,14 @@ A set of layered sections of content, known as tab panels, displayed one at a ti
 - Category: Navigation
 - Import: `import { Tabs } from "kumo-svelte/components/tabs";`
 - Source: `components/tabs`
+
+## Tag Input
+
+A creatable multi-value input for values that do not come from a predefined option list.
+
+- Category: Other
+- Import: `import { Tag Input } from "kumo-svelte/components/tag-input";`
+- Source: `components/tag-input`
 
 ## Text
 

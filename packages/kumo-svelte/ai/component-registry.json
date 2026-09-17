@@ -1,5 +1,5 @@
 {
-  "version": "0.12.0",
+  "version": "0.13.0",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -5964,6 +5964,23 @@
         "text-kumo-subtle"
       ]
     },
+    "Tag Input": {
+      "name": "Tag Input",
+      "type": "component",
+      "category": "Other",
+      "description": "A creatable multi-value input for values that do not come from a predefined option list.",
+      "importPath": "kumo-svelte/components/tag-input",
+      "sourceFile": "components/tag-input",
+      "props": {},
+      "colors": [
+        "bg-kumo-overlay",
+        "ring-kumo-hairline",
+        "text-kumo-danger",
+        "text-kumo-default",
+        "text-kumo-muted",
+        "text-kumo-subtle"
+      ]
+    },
     "Text": {
       "name": "Text",
       "type": "component",
@@ -6547,6 +6564,7 @@
       "Table",
       "TableOfContents",
       "Tabs",
+      "Tag Input",
       "Text",
       "TimeseriesChart",
       "Toast",
@@ -6612,6 +6630,7 @@
         "Collapsible",
         "Switch",
         "Table",
+        "Tag Input",
         "Text"
       ],
       "Overlay": [
@@ -6666,6 +6685,7 @@
         "Table",
         "TableOfContents",
         "Tabs",
+        "Tag Input",
         "Text",
         "TimeseriesChart",
         "Toast",

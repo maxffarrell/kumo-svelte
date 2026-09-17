@@ -56,6 +56,7 @@ export const componentItems: NavItem[] = [
   { label: 'Table', href: '/components/table' },
   { label: 'Table of Contents', href: '/components/table-of-contents' },
   { label: 'Tabs', href: '/components/tabs' },
+  { label: 'Tag Input', href: '/components/tag-input' },
   { label: 'Text', href: '/components/text' },
   { label: 'Toolbar', href: '/components/toolbar' },
   { label: 'Toast', href: '/components/toast' },

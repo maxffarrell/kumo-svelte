@@ -207,6 +207,17 @@ export type {
 } from "./components/table-of-contents";
 export { Tabs } from "./components/tabs";
 export type { TabsItem, TabsLabels } from "./components/tabs";
+export {
+  TagInput,
+  KUMO_TAG_INPUT_DEFAULT_VARIANTS,
+  KUMO_TAG_INPUT_STYLING,
+  KUMO_TAG_INPUT_VARIANTS,
+} from "./components/tag-input";
+export type {
+  TagInputError,
+  TagInputFieldText,
+  TagInputLabels,
+} from "./components/tag-input";
 export { Text } from "./components/text";
 export {
   KUMO_TOOLBAR_DEFAULT_VARIANTS,

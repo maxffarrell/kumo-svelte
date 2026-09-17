@@ -82,6 +82,7 @@ const categoryByName: Record<string, string> = {
   Radio: 'Input',
   Select: 'Input',
   SensitiveInput: 'Input',
+  TagInput: 'Input',
   Grid: 'Layout',
   LayerCard: 'Layout',
   Surface: 'Layout',

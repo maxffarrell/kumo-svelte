@@ -77,14 +77,14 @@
 
 {#if context.alert}
   <AlertDialog.Portal to={container}>
-    <AlertDialog.Overlay class={backdrop} />
+    <AlertDialog.Overlay data-layer-dialog-backdrop class={backdrop} />
     <div class={viewport}>
       <AlertDialog.Content class={content} onEscapeKeydown={preventDismiss} {...rest}>{@render innerContent()}</AlertDialog.Content>
     </div>
   </AlertDialog.Portal>
 {:else}
   <Dialog.Portal to={container}>
-    <Dialog.Overlay class={backdrop} />
+    <Dialog.Overlay data-layer-dialog-backdrop class={backdrop} />
     <div class={viewport}>
       <Dialog.Content class={content} onInteractOutside={preventDismiss} onEscapeKeydown={preventDismiss} {...rest}>{@render innerContent()}</Dialog.Content>
     </div>

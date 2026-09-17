@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/svelte';
 import { describe, expect, it } from 'vitest';
 import { LayerDialog, LayerDialogActions, LayerDialogAlert, LayerDialogRoot } from './index';
 import LayerDialogTestHost from './LayerDialogTestHost.svelte';
+import LayerDialogNestedTestHost from './LayerDialogNestedTestHost.svelte';
 
 describe('LayerDialog', () => {
   it('exports the complete compound component API', () => {
@@ -28,5 +29,13 @@ describe('LayerDialog', () => {
     expect(await screen.findByRole('alertdialog')).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Delete' })).toBeTruthy();
+  });
+
+  it('keeps nested dialogs distinct and renders a backdrop for each layer', () => {
+    const initialBackdropCount = document.querySelectorAll('[data-layer-dialog-backdrop]').length;
+    render(LayerDialogNestedTestHost);
+    expect(screen.getByRole('dialog', { hidden: true })).toBeTruthy();
+    expect(screen.getByRole('alertdialog', { hidden: true })).toBeTruthy();
+    expect(document.querySelectorAll('[data-layer-dialog-backdrop]')).toHaveLength(initialBackdropCount + 2);
   });
 });

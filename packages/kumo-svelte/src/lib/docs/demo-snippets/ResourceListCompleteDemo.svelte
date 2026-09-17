@@ -9,6 +9,7 @@
   <Surface class="p-4">
     <h3 class="mb-2 font-semibold">Usage Example</h3>
     <Code
+      class="overflow-x-auto"
       lang="ts"
       code={`// Read from KV
 const value = await KV.get('key');
@@ -37,11 +38,11 @@ await KV.put('key', 'value');`}
 >
   <div class="space-y-4">
     <Surface class="p-6">
-      <h4 class="mb-2 font-semibold">production-kv</h4>
+      <h4 class="mb-2 truncate font-semibold">production-kv</h4>
       <p class="text-sm text-kumo-subtle">Created 2 days ago</p>
     </Surface>
     <Surface class="p-6">
-      <h4 class="mb-2 font-semibold">staging-kv</h4>
+      <h4 class="mb-2 truncate font-semibold">staging-kv</h4>
       <p class="text-sm text-kumo-subtle">Created 1 week ago</p>
     </Surface>
   </div>

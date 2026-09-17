@@ -14,6 +14,15 @@
   export const KUMO_LAYER_DIALOG_DEFAULT_VARIANTS = { size: 'base', verticalAlign: 'center' } as const;
   export type KumoLayerDialogSize = keyof typeof KUMO_LAYER_DIALOG_VARIANTS.size;
   export type KumoLayerDialogVerticalAlign = keyof typeof KUMO_LAYER_DIALOG_VARIANTS.verticalAlign;
+  export interface LayerDialogContentProps {
+    children?: import('svelte').Snippet;
+    class?: string;
+    container?: HTMLElement | string;
+    size?: KumoLayerDialogSize;
+    verticalAlign?: KumoLayerDialogVerticalAlign;
+    closeLabel?: string;
+    [key: string]: unknown;
+  }
 </script>
 
 <script lang="ts">
@@ -24,16 +33,6 @@
   import { cn } from '$lib/utils/cn';
   import { getLayerDialogContext } from './context';
 
-  interface Props {
-    children?: Snippet;
-    class?: string;
-    container?: HTMLElement | string;
-    size?: KumoLayerDialogSize;
-    verticalAlign?: KumoLayerDialogVerticalAlign;
-    closeLabel?: string;
-    [key: string]: unknown;
-  }
-
   let {
     children,
     class: className,
@@ -42,7 +41,7 @@
     verticalAlign = KUMO_LAYER_DIALOG_DEFAULT_VARIANTS.verticalAlign,
     closeLabel = 'Close',
     ...rest
-  }: Props = $props();
+  }: LayerDialogContentProps = $props();
   const context = getLayerDialogContext('LayerDialog.Content');
   const backdrop = 'fixed inset-0 bg-kumo-recessed opacity-80 transition-opacity duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)] data-ending-style:opacity-0 data-starting-style:opacity-0 motion-reduce:transition-none sm:duration-200';
   const viewport = $derived(cn('fixed inset-0 z-50 flex items-end justify-center sm:px-4', KUMO_LAYER_DIALOG_VARIANTS.verticalAlign[verticalAlign].classes));

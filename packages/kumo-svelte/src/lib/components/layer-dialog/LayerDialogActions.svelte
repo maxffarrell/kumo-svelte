@@ -1,10 +1,13 @@
+<script module lang="ts">
+  export interface LayerDialogActionsProps { children?: import('svelte').Snippet; dismissLabel?: string; class?: string; }
+</script>
+
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { AlertDialog, Dialog } from 'bits-ui';
   import { Button } from '$lib/components/button';
   import { getLayerDialogContext } from './context';
-  interface Props { children?: Snippet; dismissLabel?: string; class?: string; }
-  let { children, dismissLabel, class: className }: Props = $props();
+  let { children, dismissLabel, class: className }: LayerDialogActionsProps = $props();
   const context = getLayerDialogContext('LayerDialog.Actions');
   const label = $derived(dismissLabel ?? (context.alert ? 'Cancel' : 'Close'));
 </script>

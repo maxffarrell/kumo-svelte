@@ -1,13 +1,16 @@
+<script module lang="ts">
+  export interface LayerDialogTriggerProps {
+    children?: import('svelte').Snippet;
+    child?: import('svelte').Snippet<[{ props: Record<string, unknown> }]>
+    [key: string]: unknown;
+  }
+</script>
+
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { AlertDialog, Dialog } from 'bits-ui';
   import { getLayerDialogContext } from './context';
-  interface Props {
-    children?: Snippet;
-    child?: Snippet<[{ props: Record<string, unknown> }]>;
-    [key: string]: unknown;
-  }
-  let { children, child, ...rest }: Props = $props();
+  let { children, child, ...rest }: LayerDialogTriggerProps = $props();
   const context = getLayerDialogContext('LayerDialog.Trigger');
 </script>
 

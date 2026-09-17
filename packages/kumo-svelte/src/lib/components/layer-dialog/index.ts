@@ -37,3 +37,12 @@ export {
   KUMO_LAYER_DIALOG_VARIANTS
 } from './LayerDialogContent.svelte';
 export type { KumoLayerDialogSize, KumoLayerDialogVerticalAlign } from './LayerDialogContent.svelte';
+export type { LayerDialogRootProps } from './LayerDialogRoot.svelte';
+export type { LayerDialogAlertProps } from './LayerDialogAlert.svelte';
+export type { LayerDialogTriggerProps } from './LayerDialogTrigger.svelte';
+export type { LayerDialogContentProps } from './LayerDialogContent.svelte';
+export type { LayerDialogTitleProps } from './LayerDialogTitle.svelte';
+export type { LayerDialogDescriptionProps } from './LayerDialogDescription.svelte';
+export type { LayerDialogBodyProps } from './LayerDialogBody.svelte';
+export type { LayerDialogActionsProps } from './LayerDialogActions.svelte';
+export type { LayerDialogPrimaryProps } from './LayerDialogPrimary.svelte';

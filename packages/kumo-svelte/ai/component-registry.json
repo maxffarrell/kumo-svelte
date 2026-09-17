@@ -3909,6 +3909,7 @@
         "bg-kumo-elevated",
         "bg-kumo-fill",
         "bg-kumo-recessed",
+        "border-kumo-hairline",
         "ring-kumo-hairline",
         "text-kumo-default",
         "text-kumo-subtle"

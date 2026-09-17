@@ -1,9 +1,12 @@
+<script module lang="ts">
+  export interface LayerDialogDescriptionProps { children?: import('svelte').Snippet; class?: string; [key: string]: unknown; }
+</script>
+
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { AlertDialog, Dialog } from 'bits-ui';
   import { getLayerDialogContext } from './context';
-  interface Props { children?: Snippet; class?: string; [key: string]: unknown; }
-  let { children, class: className, ...rest }: Props = $props();
+  let { children, class: className, ...rest }: LayerDialogDescriptionProps = $props();
   const context = getLayerDialogContext('LayerDialog.Description');
 </script>
 

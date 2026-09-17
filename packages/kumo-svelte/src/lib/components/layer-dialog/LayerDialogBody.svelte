@@ -1,8 +1,11 @@
+<script module lang="ts">
+  export interface LayerDialogBodyProps { children?: import('svelte').Snippet; class?: string; [key: string]: unknown; }
+</script>
+
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { ScrollArea } from 'bits-ui';
-  interface Props { children?: Snippet; class?: string; [key: string]: unknown; }
-  let { children, class: className, ...rest }: Props = $props();
+  let { children, class: className, ...rest }: LayerDialogBodyProps = $props();
 </script>
 
 <ScrollArea.Root class="relative mt-4 flex min-h-0 flex-1 flex-col" {...rest}>

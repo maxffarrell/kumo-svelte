@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CaretDown from 'phosphor-svelte/lib/CaretDown';
+  import CaretUpDown from 'phosphor-svelte/lib/CaretUpDown';
   import type { Snippet } from 'svelte';
   import X from 'phosphor-svelte/lib/X';
   import { cn } from '$lib/utils/cn';
@@ -104,6 +104,6 @@
     )}
     disabled={context.disabled}
   >
-    <CaretDown size={iconSizes[resolvedSize]} class="fill-current" />
+    <CaretUpDown size={iconSizes[resolvedSize]} class="fill-current" />
   </ComboboxPrimitive.Trigger>
 </div>

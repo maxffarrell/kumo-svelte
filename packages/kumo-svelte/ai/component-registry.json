@@ -6134,6 +6134,11 @@
           "optional": true,
           "description": "Custom formatter for tooltip values. Takes precedence over yAxisTickLabelFormat."
         },
+        "tooltipFooter": {
+          "type": "string",
+          "optional": true,
+          "description": "Brief supporting text rendered below the series rows in every tooltip."
+        },
         "tooltipMode": {
           "type": "enum",
           "optional": true,

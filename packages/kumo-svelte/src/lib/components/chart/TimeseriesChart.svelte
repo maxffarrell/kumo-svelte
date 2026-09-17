@@ -42,6 +42,7 @@
     yAxisName?: string;
     yAxisTickCount?: number;
     tooltipValueFormat?: (value: number) => string;
+    tooltipFooter?: string;
     tooltipMode?: 'all' | 'single';
     tooltipMaxItems?: number;
     tooltipBoundary?: 'clipping-ancestors' | Element | Element[];
@@ -74,6 +75,7 @@
     yAxisName,
     yAxisTickCount,
     tooltipValueFormat,
+    tooltipFooter,
     tooltipMode = 'all',
     tooltipMaxItems = 10,
     tooltipBoundary,
@@ -661,6 +663,9 @@
             {#if tooltipState.hiddenCount > 0}
               <div class="mt-1 text-xs text-kumo-subtle">+{tooltipState.hiddenCount} more</div>
             {/if}
+          {/if}
+          {#if tooltipFooter}
+            <div class="mt-1 text-xs text-kumo-subtle">{tooltipFooter}</div>
           {/if}
         </TooltipPrimitive.Content>
       </TooltipPrimitive.Portal>

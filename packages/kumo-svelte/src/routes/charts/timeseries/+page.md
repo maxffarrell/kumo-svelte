@@ -108,6 +108,16 @@ the rest. Clicking the already-isolated series restores them all.
 
 <ComponentSection>
 
+## Tooltip footer
+
+Use `tooltipFooter` to add brief supporting text below the values in standard series tooltips. It works with every timeseries configuration, including line, bar, gradient, threshold, and custom-axis charts.
+
+<ComponentExample demo="TooltipFooterChartDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
 ## Tooltip Cursor Tracking
 
 Use <code>tooltipFollowCursor</code> to choose whether the tooltip follows both cursor axes or only tracks the x position.

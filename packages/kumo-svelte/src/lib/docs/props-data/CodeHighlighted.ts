@@ -2,6 +2,13 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
+    prop: "variant",
+    type: '"default" | "plain"',
+    required: false,
+    default: '"default"',
+    description: "Code block appearance. Plain removes the frame and content padding.",
+  },
+  {
     "prop": "code",
     "type": "string",
     "required": true,

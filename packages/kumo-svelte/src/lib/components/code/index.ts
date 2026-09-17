@@ -14,5 +14,6 @@ export {
 export { KUMO_CODEBLOCK_STYLING } from './CodeBlock.svelte';
 export {
   KUMO_CODE_HIGHLIGHTED_STYLING,
-  type CodeHighlightedLang
+  type CodeHighlightedLang,
+  type CodeHighlightedVariant
 } from './CodeHighlighted.svelte';

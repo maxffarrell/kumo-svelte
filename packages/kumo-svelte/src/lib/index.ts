@@ -60,6 +60,7 @@ export type {
   GenerateCloudflareLogoSvgOptions,
 } from "./components/cloudflare-logo";
 export { Code, CodeBlock, CodeHighlighted } from "./components/code";
+export type { CodeHighlightedLang, CodeHighlightedVariant } from "./components/code";
 export {
   Collapsible,
   CollapsibleDefaultPanel,

@@ -45,6 +45,10 @@
   <CodeHighlighted code={highlightSnippet} lang="typescript" highlightLines={[2, 3]} />
 </Scenario>
 
+<Scenario id="highlighted-plain" label="highlighted plain">
+  <CodeHighlighted code={highlightSnippet} lang="typescript" variant="plain" highlightLines={[2]} showCopyButton />
+</Scenario>
+
 <Scenario id="line-numbers" label="line numbers">
   <CodeHighlighted code={highlightSnippet} lang="typescript" showLineNumbers />
 </Scenario>

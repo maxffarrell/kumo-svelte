@@ -3,6 +3,24 @@ import { describe, expect, it } from "vitest";
 import CodeHighlighted from "./CodeHighlighted.svelte";
 
 describe("CodeHighlighted", () => {
+  it("renders the plain variant without a frame or padding", async () => {
+    const { container } = render(CodeHighlighted, {
+      code: "const x = 1;\nconst y = 2;",
+      lang: "typescript",
+      variant: "plain",
+      showCopyButton: true,
+      showLineNumbers: true,
+    });
+    await screen.findByRole("button", { name: "Copy" });
+    const root = container.firstElementChild as HTMLElement;
+    expect(root.className).toContain("rounded-none");
+    expect(root.className).toContain("border-0");
+    expect(root.className).toContain("bg-transparent");
+    expect(container.querySelector(".kumo-shiki")?.className).toContain("[&>pre]:!p-0");
+    expect(container.querySelector(".kumo-line-numbers")?.className).toContain("py-0");
+    expect(screen.getByRole("button", { name: "Copy" }).parentElement?.className).toContain("absolute top-0 right-0");
+  });
+
   it("renders the copy action inline for a single line", async () => {
     const { container } = render(CodeHighlighted, {
       code: "const ready = true;",

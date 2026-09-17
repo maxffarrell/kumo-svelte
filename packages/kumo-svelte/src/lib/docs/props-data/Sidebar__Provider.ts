@@ -14,6 +14,11 @@ const rows: PropRow[] = [
     description: "Callback when open state changes.",
   },
   {
+    prop: "onOpenChangeComplete",
+    type: "(open: boolean) => void",
+    description: "Callback after the sidebar finishes its open or close transition.",
+  },
+  {
     prop: "variant",
     type: '"sidebar" | "floating" | "inset"',
     default: '"sidebar"',

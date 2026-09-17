@@ -17,6 +17,7 @@
     defaultOpen?: boolean;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
+    onOpenChangeComplete?: (open: boolean) => void;
     variant?: SidebarVariant;
     side?: SidebarSide;
     collapsible?: SidebarCollapsible;
@@ -37,6 +38,7 @@
     defaultOpen = true,
     open = $bindable(defaultOpen),
     onOpenChange,
+    onOpenChangeComplete,
     variant = 'sidebar',
     side = 'left',
     collapsible = 'icon',
@@ -61,6 +63,50 @@
   const visibleOpen = $derived(isMobile ? openMobile : open);
   const sidebarState: SidebarState = $derived(isPeeking ? 'peeking' : visibleOpen ? 'expanded' : 'collapsed');
   const sidebarWidth = $derived(resizable ? `${width}px` : '16.25rem');
+  let previousVisibleOpen: boolean | undefined;
+  let pendingOpen: boolean | undefined;
+  let completionTimer: ReturnType<typeof setTimeout> | undefined;
+
+  function completeOpenChange() {
+    if (pendingOpen === undefined) return;
+    const completedOpen = pendingOpen;
+    pendingOpen = undefined;
+    clearTimeout(completionTimer);
+    onOpenChangeComplete?.(completedOpen);
+  }
+
+  function handleTransitionEnd(event: TransitionEvent) {
+    const target = event.target as HTMLElement;
+    if (
+      target.closest('[data-sidebar-wrapper]') === event.currentTarget &&
+      target.dataset.sidebar === 'sidebar' &&
+      event.propertyName === (isMobile ? 'transform' : 'width')
+    ) {
+      completeOpenChange();
+    }
+  }
+
+  $effect(() => {
+    const nextOpen = visibleOpen;
+    if (previousVisibleOpen === undefined) {
+      previousVisibleOpen = nextOpen;
+      return;
+    }
+    if (nextOpen === previousVisibleOpen) return;
+    previousVisibleOpen = nextOpen;
+    clearTimeout(completionTimer);
+    if (!onOpenChangeComplete) {
+      pendingOpen = undefined;
+      return;
+    }
+    pendingOpen = nextOpen;
+    if (animationDuration === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      completeOpenChange();
+      return;
+    }
+    completionTimer = setTimeout(completeOpenChange, animationDuration + 50);
+    return () => clearTimeout(completionTimer);
+  });
 
   onMount(() => {
     const media = window.matchMedia(`(max-width: ${mobileBreakpoint - 1}px)`);
@@ -236,6 +282,7 @@
 </script>
 
 <div
+  ontransitionend={handleTransitionEnd}
   data-sidebar-wrapper
   data-state={sidebarState}
   data-side={side}

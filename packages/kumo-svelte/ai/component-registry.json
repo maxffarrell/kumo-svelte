@@ -5105,6 +5105,11 @@
               "optional": true,
               "description": "Callback when open state changes."
             },
+            "onOpenChangeComplete": {
+              "type": "(open: boolean) => void",
+              "optional": true,
+              "description": "Callback after the sidebar finishes its open or close transition."
+            },
             "variant": {
               "type": "enum",
               "optional": true,

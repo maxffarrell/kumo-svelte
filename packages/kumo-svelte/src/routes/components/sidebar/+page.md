@@ -164,6 +164,8 @@ sourceFile: "components/sidebar"
 </Sidebar.Provider>`;
 </script>
 
+`Sidebar.Provider` and `Sidebar.Collapsible` accept `onOpenChangeComplete`, which runs after their open or close transition finishes. Reduced-motion changes complete immediately, and a timer fallback covers transitions interrupted by the browser.
+
 <!-- Demo -->
 
 <ComponentSection>

@@ -227,6 +227,23 @@ describe("Sidebar toggle", () => {
     expect(onOpenChange).toHaveBeenCalledWith(false);
   });
 
+  it("calls onOpenChangeComplete after the width transition", async () => {
+    const onOpenChangeComplete = vi.fn();
+    const { container } = render(SidebarTestHost, {
+      props: { defaultOpen: true, onOpenChangeComplete },
+    });
+
+    await fireEvent.click(screen.getByRole("button", { name: "Collapse sidebar" }));
+    expect(onOpenChangeComplete).not.toHaveBeenCalled();
+
+    const sidebar = container.querySelector<HTMLElement>('[data-sidebar="sidebar"]')!;
+    const event = new Event("transitionend", { bubbles: true });
+    Object.defineProperty(event, "propertyName", { value: "width" });
+    await fireEvent(sidebar, event);
+
+    expect(onOpenChangeComplete).toHaveBeenCalledWith(false);
+  });
+
   it("keeps peeking when a view change blurs the active item under the pointer", async () => {
     const { container } = render(SidebarTestHost, {
       props: { defaultOpen: false, peekable: true },

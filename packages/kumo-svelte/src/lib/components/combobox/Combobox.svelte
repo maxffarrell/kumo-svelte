@@ -4,8 +4,10 @@
   import { cn } from '$lib/utils/cn';
   import {
     normalizeComboboxItem,
+    isComboboxItemCollection,
     setComboboxContext,
     type ComboboxItem,
+    type ComboboxItemCollection,
     type ComboboxSize,
     type NormalizedComboboxItem
   } from './context';
@@ -17,7 +19,7 @@
   export interface Props {
     children?: Snippet;
     class?: string;
-    items?: ComboboxItem[];
+    items?: ComboboxItem[] | ComboboxItemCollection<any>;
     options?: ComboboxItem[];
     value?: unknown;
     defaultValue?: unknown;
@@ -65,7 +67,18 @@
   const { contains } = createKumoFilter();
 
   const sourceItems = $derived(items ?? options);
-  const normalizedItems = $derived(sourceItems.map(normalizeComboboxItem));
+  const normalizedItems = $derived.by<NormalizedComboboxItem[]>(() => {
+    if (isComboboxItemCollection(sourceItems)) {
+      return sourceItems.items.map((item) => ({
+        label: sourceItems.getLabel(item),
+        value: item,
+        disabled: sourceItems.isItemDisabled?.(item),
+        raw: item as ComboboxItem,
+        serializedKey: sourceItems.getValue(item)
+      }));
+    }
+    return sourceItems.map(normalizeComboboxItem);
+  });
   const errorMessage = $derived(
     typeof error === 'string' ? error : error?.match === false ? undefined : error?.message
   );
@@ -83,7 +96,7 @@
   const serializedOptions = $derived(
     normalizedItems.map((item, index) => ({
       ...item,
-      serializedValue: `kumo-combobox:${index}`
+      serializedValue: `kumo-combobox:${item.serializedKey ?? index}`
     }))
   );
 

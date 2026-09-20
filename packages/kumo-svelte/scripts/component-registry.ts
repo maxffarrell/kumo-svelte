@@ -57,10 +57,12 @@ const outputDir = join(packageRoot, 'ai');
 
 const categoryByName: Record<string, string> = {
   Button: 'Action',
+  ButtonGroup: 'Action',
   Toolbar: 'Action',
   Link: 'Action',
   Badge: 'Display',
   ClipboardText: 'Display',
+  InlineCopyText: 'Action',
   Code: 'Display',
   CodeHighlighted: 'Display',
   Flow: 'Display',
@@ -82,8 +84,10 @@ const categoryByName: Record<string, string> = {
   Radio: 'Input',
   Select: 'Input',
   SensitiveInput: 'Input',
+  TagInput: 'Input',
   Grid: 'Layout',
   LayerCard: 'Layout',
+  LayerDialog: 'Overlay',
   Surface: 'Layout',
   Breadcrumbs: 'Navigation',
   CommandPalette: 'Navigation',
@@ -104,6 +108,7 @@ const categoryByName: Record<string, string> = {
   TimeseriesChart: 'Data Visualization',
   SankeyChart: 'Data Visualization',
   BubbleMap: 'Data Visualization',
+  GlobeMap: 'Data Visualization',
   ChoroplethMap: 'Data Visualization'
 };
 
@@ -111,7 +116,7 @@ const chartComponentsByRoute: Record<string, string[]> = {
   '+page.md': ['Chart', 'ChartLegend'],
   'timeseries/+page.md': ['TimeseriesChart'],
   'sankey/+page.md': ['SankeyChart'],
-  'maps/+page.md': ['BubbleMap', 'ChoroplethMap']
+  'maps/+page.md': ['BubbleMap', 'ChoroplethMap', 'GlobeMap']
 };
 
 const displayNameByRoute: Record<string, string> = {
@@ -123,6 +128,7 @@ const displayNameByRoute: Record<string, string> = {
   dropdown: 'DropdownMenu',
   'input-area': 'InputArea',
   'input-group': 'InputGroup',
+  'inline-copy-text': 'InlineCopyText',
   'layer-card': 'LayerCard',
   'menu-bar': 'MenuBar',
   'sensitive-input': 'SensitiveInput',

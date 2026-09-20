@@ -41,7 +41,9 @@
     yAxisTickLabelFormat?: (value: number) => string;
     yAxisName?: string;
     yAxisTickCount?: number;
+    yAxisMinInterval?: number;
     tooltipValueFormat?: (value: number) => string;
+    tooltipFooter?: string;
     tooltipMode?: 'all' | 'single';
     tooltipMaxItems?: number;
     tooltipBoundary?: 'clipping-ancestors' | Element | Element[];
@@ -73,7 +75,9 @@
     yAxisTickLabelFormat,
     yAxisName,
     yAxisTickCount,
+    yAxisMinInterval,
     tooltipValueFormat,
+    tooltipFooter,
     tooltipMode = 'all',
     tooltipMaxItems = 10,
     tooltipBoundary,
@@ -402,6 +406,7 @@
         axisLabel: { margin: 15, color: axisTextColor, ...(yAxisTickFormat && { formatter: (value: number) => yAxisTickFormat(value) }) },
         splitLine: { show: true, lineStyle: { type: 'dashed', width: 1, color: gridLineColor } },
         splitNumber: yAxisTickCount,
+        ...(yAxisMinInterval !== undefined && { minInterval: yAxisMinInterval }),
         ...(thresholdExtent && {
           min: (value: { min: number }) => Math.min(value.min, thresholdExtent.min),
           max: (value: { max: number }) => Math.max(value.max, thresholdExtent.max)
@@ -661,6 +666,9 @@
             {#if tooltipState.hiddenCount > 0}
               <div class="mt-1 text-xs text-kumo-subtle">+{tooltipState.hiddenCount} more</div>
             {/if}
+          {/if}
+          {#if tooltipFooter}
+            <div class="mt-1 text-xs text-kumo-subtle">{tooltipFooter}</div>
           {/if}
         </TooltipPrimitive.Content>
       </TooltipPrimitive.Portal>

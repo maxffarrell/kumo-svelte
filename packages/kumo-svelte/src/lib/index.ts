@@ -6,10 +6,17 @@ export { Breadcrumbs } from "./components/breadcrumbs";
 export type { BreadcrumbsItem } from "./components/breadcrumbs";
 export { Button, LinkButton, RefreshButton } from "./components/button";
 export {
+  ButtonGroup,
+  KUMO_BUTTON_GROUP_DEFAULT_VARIANTS,
+  KUMO_BUTTON_GROUP_STYLING,
+  KUMO_BUTTON_GROUP_VARIANTS,
+} from "./components/button-group";
+export {
   BubbleMap,
   Chart,
   ChartLegend,
   ChoroplethMap,
+  GlobeMap,
   ChartPalette,
   SankeyChart,
   TimeseriesChart,
@@ -18,6 +25,8 @@ export type {
   BubbleMapProps,
   ChartEvents,
   ChoroplethMapProps,
+  GlobeMapMarker,
+  GlobeMapProps,
   ChartSemanticColorName,
   KumoChartOption,
   MapAccessor,
@@ -51,6 +60,7 @@ export type {
   GenerateCloudflareLogoSvgOptions,
 } from "./components/cloudflare-logo";
 export { Code, CodeBlock, CodeHighlighted } from "./components/code";
+export type { CodeHighlightedLang, CodeHighlightedVariant } from "./components/code";
 export {
   Collapsible,
   CollapsibleDefaultPanel,
@@ -60,6 +70,7 @@ export {
   CollapsibleTrigger,
 } from "./components/collapsible";
 export { Combobox } from "./components/combobox";
+export type { ComboboxItemCollection } from "./components/combobox";
 export { CommandPalette } from "./components/command-palette";
 export { DatePicker } from "./components/date-picker";
 export type {
@@ -94,6 +105,17 @@ export {
 export type { FlowAlign, FlowOrientation } from "./components/flow";
 export { Grid, GridItem } from "./components/grid";
 export { Input, Textarea } from "./components/input";
+export {
+  InlineCopyText,
+  KUMO_INLINE_COPY_TEXT_DEFAULT_VARIANTS,
+  KUMO_INLINE_COPY_TEXT_STYLING,
+  KUMO_INLINE_COPY_TEXT_VARIANTS,
+} from "./components/inline-copy-text";
+export type {
+  InlineCopyTextLabels,
+  InlineCopyTextProps,
+  InlineCopyTextVariant,
+} from "./components/inline-copy-text";
 export { InputArea } from "./components/input-area";
 export {
   InputGroup,
@@ -109,6 +131,24 @@ export type {
 } from "./components/input-group";
 export { Label } from "./components/label";
 export { LayerCard } from "./components/layer-card";
+export {
+  LayerDialog,
+  LayerDialogActions,
+  LayerDialogAlert,
+  LayerDialogBody,
+  LayerDialogContent,
+  LayerDialogDescription,
+  LayerDialogPrimary,
+  LayerDialogRoot,
+  LayerDialogTitle,
+  LayerDialogTrigger,
+  KUMO_LAYER_DIALOG_DEFAULT_VARIANTS,
+  KUMO_LAYER_DIALOG_VARIANTS,
+} from "./components/layer-dialog";
+export type {
+  KumoLayerDialogSize,
+  KumoLayerDialogVerticalAlign,
+} from "./components/layer-dialog";
 export {
   KUMO_LINK_DEFAULT_VARIANTS,
   KUMO_LINK_VARIANTS,
@@ -207,6 +247,17 @@ export type {
 } from "./components/table-of-contents";
 export { Tabs } from "./components/tabs";
 export type { TabsItem, TabsLabels } from "./components/tabs";
+export {
+  TagInput,
+  KUMO_TAG_INPUT_DEFAULT_VARIANTS,
+  KUMO_TAG_INPUT_STYLING,
+  KUMO_TAG_INPUT_VARIANTS,
+} from "./components/tag-input";
+export type {
+  TagInputError,
+  TagInputFieldText,
+  TagInputLabels,
+} from "./components/tag-input";
 export { Text } from "./components/text";
 export {
   KUMO_TOOLBAR_DEFAULT_VARIANTS,
@@ -231,7 +282,11 @@ export {
   createKumoToastManager,
   useKumoToastManager,
 } from "./components/toasty";
-export type { KumoToastOptions, KumoToastVariant } from "./components/toasty";
+export type {
+  KumoToastManagerUpdateOptions,
+  KumoToastOptions,
+  KumoToastVariant,
+} from "./components/toasty";
 export { Tooltip, TooltipProvider } from "./components/tooltip";
 export { cn } from "./utils/cn";
 export * as Primitives from "./primitives";

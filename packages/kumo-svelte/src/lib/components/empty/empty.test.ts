@@ -15,6 +15,22 @@ describe('Empty', () => {
 
     expect(screen.getByRole('heading', { name: 'No results found' })).toBeTruthy();
     expect(screen.getByText('Try adjusting your search.')).toBeTruthy();
+    const title = screen.getByRole('heading', { name: 'No results found' });
+    const description = screen.getByText('Try adjusting your search.');
+    expect(title.className).toContain('text-xl');
+    expect(title.className).toContain('font-semibold');
+    expect(description.className).toContain('text-base/[inherit]');
+    expect(description.className).toContain('text-balance');
+    expect(title.parentElement).toBe(description.parentElement);
+    expect(title.parentElement?.className).toContain('gap-2.5');
+  });
+
+  it('renders a secondary base heading without a description', () => {
+    render(Empty, { title: 'Nothing here' });
+    const title = screen.getByRole('heading', { name: 'Nothing here' });
+    expect(title.className).toContain('text-base/[inherit]');
+    expect(title.className).toContain('text-kumo-subtle');
+    expect(title.className).not.toContain('font-semibold');
   });
 
   describe('variant fidelity', () => {
@@ -57,17 +73,22 @@ describe('Empty', () => {
       expect(command.className).not.toContain('overflow-x-auto');
     });
 
-    it('restores command block hover affordances', () => {
+    it('uses inset command styling without brand-colored text', () => {
       render(Empty, {
         title: 'Install',
         commandLine: 'npm install @cloudflare/kumo'
       });
 
-      const block = screen.getByText('npm install @cloudflare/kumo').closest('div');
+      const command = screen.getByText('npm install @cloudflare/kumo');
+      const block = command.parentElement?.parentElement;
       expect(block).toBeTruthy();
-      expect(block!.className).toContain('hover:border-kumo-interact/80');
-      expect(block!.className).toContain('hover:shadow-md');
-      expect(block!.className).toContain('border-kumo-fill/60');
+      expect(block!.className).toContain('bg-kumo-overlay');
+      expect(block!.className).toContain('border-white');
+      expect(block!.className).toContain('ring-kumo-line');
+      expect(block!.className).toContain('shadow-xs');
+      expect(command.className).not.toContain('text-kumo-brand');
+      expect(screen.getByText('$').className).toContain('text-kumo-subtle');
+      expect(screen.getByRole('button', { name: 'Copy command' }).className).toContain('text-kumo-subtle');
     });
   });
 

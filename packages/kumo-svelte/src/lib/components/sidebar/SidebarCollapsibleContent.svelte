@@ -3,13 +3,19 @@
   import { getContext } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import { getSidebarContext } from './context';
-  interface CollapsibleContext { get open(): boolean; get contentId(): string; get autoScrollOnOpen(): boolean; toggle(): void; }
+  interface CollapsibleContext { get open(): boolean; get contentId(): string; get autoScrollOnOpen(): boolean; toggle(): void; completeOpenChange(): void; }
   interface Props { children?: Snippet; class?: string; [key: string]: unknown; }
   let { children, class: className, ...rest }: Props = $props();
   const collapsible = getContext<CollapsibleContext>('kumo-sidebar-collapsible');
   const sidebar = getSidebarContext('Sidebar.CollapsibleContent');
   let contentEl: HTMLDivElement | null = $state(null);
   const isOpen = $derived(Boolean(collapsible?.open && sidebar.state !== 'collapsed'));
+
+  function handleTransitionEnd(event: TransitionEvent) {
+    if (event.target === event.currentTarget && event.propertyName === 'grid-template-rows') {
+      collapsible?.completeOpenChange();
+    }
+  }
 
   $effect(() => {
     if (!isOpen || !collapsible?.autoScrollOnOpen || !contentEl) return;
@@ -28,6 +34,7 @@
 
 <div
   bind:this={contentEl}
+  ontransitionend={handleTransitionEnd}
   id={collapsible?.contentId}
   data-sidebar="collapsible-content"
   data-open={isOpen ? '' : undefined}

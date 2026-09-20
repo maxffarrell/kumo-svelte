@@ -30,6 +30,8 @@
     | 'typescript'
     | 'tsx'
     | 'yaml';
+
+  export type CodeHighlightedVariant = 'default' | 'plain';
 </script>
 
 <script lang="ts">
@@ -39,6 +41,7 @@
 
   interface Props {
     code: string;
+    variant?: CodeHighlightedVariant;
     lang?: CodeHighlightedLang;
     highlightLines?: number[];
     labels?: {
@@ -54,6 +57,7 @@
 
   let {
     code,
+    variant = 'default',
     class: className,
     highlightLines = [],
     lang = 'typescript',
@@ -74,6 +78,14 @@
   const highlightLineSet = $derived(new Set(highlightLines));
   const lineCount = $derived(normalizedCode.split('\n').length);
   const isSingleLine = $derived(lineCount === 1);
+  const fallbackCodeClasses = $derived(cn(
+    'm-0 min-w-0 flex-1 overflow-x-auto font-mono text-sm leading-relaxed text-kumo-subtle',
+    variant === 'plain' ? 'p-0' : 'p-4'
+  ));
+  const highlightedCodeClasses = $derived(cn(
+    'kumo-shiki [&_code]:!m-0 [&_code]:!border-0 [&_code]:!bg-transparent [&_code]:!p-0 [&>pre]:!m-0 [&>pre]:!rounded-none [&>pre]:!border-0 [&>pre]:!bg-transparent [&>pre]:font-mono [&>pre]:text-sm [&>pre]:leading-relaxed',
+    variant === 'plain' ? '[&>pre]:!p-0 [&_.line-highlighted]:!m-0 [&_.line-highlighted]:!w-full [&_.line-highlighted]:!px-0' : '[&>pre]:!p-4'
+  ));
 
   function decorateHighlightedLines(html: string) {
     let lineNumber = 0;
@@ -107,7 +119,7 @@
   {#if showCopyButton}
     <div
       class={cn(
-        isSingleLine ? 'shrink-0 px-2' : 'absolute top-2 right-2',
+        isSingleLine ? 'shrink-0 px-2' : variant === 'plain' ? 'absolute top-0 right-0' : 'absolute top-2 right-2',
         !copied && 'opacity-0 transition-opacity group-hover:opacity-100'
       )}
     >
@@ -126,7 +138,7 @@
 {#snippet lineNumbers()}
   {#if showLineNumbers && !isSingleLine}
     <div
-      class="kumo-line-numbers shrink-0 py-4 pr-4 text-right font-mono text-sm opacity-40 select-none"
+      class={cn('kumo-line-numbers shrink-0 pr-4 text-right font-mono text-sm opacity-40 select-none', variant === 'plain' ? 'py-0' : 'py-4')}
       aria-hidden="true"
     >
       {#each Array(lineCount) as _, index}
@@ -138,7 +150,8 @@
 
 <div
   class={cn(
-    'not-prose group relative m-0 w-full min-w-0 rounded-md border border-kumo-fill bg-kumo-base p-0',
+    'not-prose group relative m-0 w-full min-w-0 p-0',
+    variant === 'plain' ? 'rounded-none border-0 bg-transparent' : 'rounded-md border border-kumo-fill bg-kumo-base',
     showCopyButton && isSingleLine && 'flex items-center',
     className
   )}
@@ -149,24 +162,24 @@
     {#if showLineNumbers && !isSingleLine}
       <div class="flex w-full">
         {@render lineNumbers()}
-        <pre class="m-0 min-w-0 flex-1 overflow-x-auto p-4 font-mono text-sm leading-relaxed text-kumo-subtle"><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
+        <pre class={fallbackCodeClasses}><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
       </div>
     {:else}
-      <pre class="m-0 min-w-0 flex-1 overflow-x-auto p-4 font-mono text-sm leading-relaxed text-kumo-subtle"><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
+      <pre class={fallbackCodeClasses}><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
     {/if}
   {:then html}
     {#if showLineNumbers && !isSingleLine}
       <div class="flex w-full">
         {@render lineNumbers()}
         <div class="min-w-0 flex-1 overflow-x-auto">
-          <div class="kumo-shiki [&_code]:!m-0 [&_code]:!border-0 [&_code]:!bg-transparent [&_code]:!p-0 [&>pre]:!m-0 [&>pre]:!rounded-none [&>pre]:!border-0 [&>pre]:!bg-transparent [&>pre]:!p-4 [&>pre]:font-mono [&>pre]:text-sm [&>pre]:leading-relaxed">
+          <div class={highlightedCodeClasses}>
             {@html html}
           </div>
         </div>
       </div>
     {:else}
       <div class="overflow-x-auto">
-        <div class="kumo-shiki [&_code]:!m-0 [&_code]:!border-0 [&_code]:!bg-transparent [&_code]:!p-0 [&>pre]:!m-0 [&>pre]:!rounded-none [&>pre]:!border-0 [&>pre]:!bg-transparent [&>pre]:!p-4 [&>pre]:font-mono [&>pre]:text-sm [&>pre]:leading-relaxed">
+        <div class={highlightedCodeClasses}>
           {@html html}
         </div>
       </div>

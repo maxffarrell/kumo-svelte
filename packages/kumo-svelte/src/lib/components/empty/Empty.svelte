@@ -44,6 +44,7 @@
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
   import { Button } from '$lib/components/button';
+  import { Text } from '$lib/components/text';
 
   interface Props extends KumoEmptyVariantsProps {
     children?: Snippet;
@@ -87,27 +88,31 @@
     {@render icon()}
   {/if}
 
-  <h2 class="text-2xl font-semibold">{title}</h2>
-
-  {#if description}
-    <p class="max-w-140 text-center text-kumo-subtle">{description}</p>
-  {/if}
+  <div class="flex flex-col items-center gap-2.5">
+    {#if description}
+      <Text variant="heading" size="lg" as="h2">{title}</Text>
+      <Text
+        variant="secondary"
+        size="base"
+        DANGEROUS_className="max-w-140 text-center text-balance leading-normal"
+      >{description}</Text>
+    {:else}
+      <Text variant="secondary" size="base" as="h2">{title}</Text>
+    {/if}
+  </div>
 
   {#if commandLine}
     <div
       class={cn(
-        'group/cmd relative inline-flex h-10 max-w-8/10 transform-gpu items-center gap-2 rounded-lg font-mono shadow-sm',
-        'bg-kumo-overlay pr-2 pl-3',
-        'transition-all duration-300 hover:border-kumo-interact/80 hover:shadow-md',
-        'border border-kumo-fill/60'
+        'relative inline-flex h-10 max-w-8/10 transform-gpu items-center gap-2 rounded-lg border border-white bg-kumo-overlay pr-2 pl-3 font-mono shadow-xs ring ring-kumo-line'
       )}
     >
-      <span class="text-xs text-kumo-inactive select-none">$</span>
-      <span class="no-scrollbar overflow-scroll text-base whitespace-nowrap text-kumo-brand">
-        {commandLine}
+      <span class="inline-flex min-w-0 items-baseline gap-2">
+        <span class="text-kumo-subtle select-none">$</span>
+        <span class="no-scrollbar overflow-scroll text-base whitespace-nowrap">{commandLine}</span>
       </span>
       <Button
-        class="group"
+        class="text-kumo-subtle"
         size="sm"
         variant="ghost"
         shape="square"
@@ -117,7 +122,7 @@
         {#if emptyStateCopied}
           <Check class="size-4 animate-bounce-in text-kumo-success" />
         {:else}
-          <Copy class="size-4 text-kumo-inactive group-hover:text-kumo-brand" />
+          <Copy class="size-4" />
         {/if}
       </Button>
     </div>

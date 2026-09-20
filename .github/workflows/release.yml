@@ -49,6 +49,9 @@ jobs:
           create-github-releases: true
         env:
           NPM_CONFIG_PROVENANCE: true
+          # Changesets shells out to npm for registry lookups. Allow that npm
+          # subprocess even though pnpm is the workspace package manager.
+          NPM_CONFIG_FORCE: true
 
       # Publish pkg-pr-new preview for Version Packages PR
       # (GITHUB_TOKEN PRs don't trigger workflows, so we do it here)

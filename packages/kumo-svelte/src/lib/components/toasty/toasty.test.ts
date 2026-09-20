@@ -3,6 +3,22 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { expectNoA11yViolations } from "../../../../tests/a11y";
 import ToastPreview from "./ToastPreview.svelte";
+import { createKumoToastManager } from "./manager.svelte";
+
+describe("KumoToastManager", () => {
+  it("updates a toast from its current state", () => {
+    const manager = createKumoToastManager();
+    const id = manager.add({ title: "Saving", timeout: 0 });
+
+    manager.update(id, (toast) => ({
+      title: `${toast.title} complete`,
+    }));
+
+    expect(manager.toasts.find((toast) => toast.id === id)?.title).toBe(
+      "Saving complete",
+    );
+  });
+});
 
 describe("ToastPreview", () => {
   it("renders with Kumo data attributes", () => {

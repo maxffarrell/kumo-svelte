@@ -8,7 +8,7 @@
   <Surface class="p-4">
     <h3 class="mb-2 font-semibold">Quick Start</h3>
     <p class="mb-3 text-sm text-kumo-subtle">Generate an API key to authenticate your requests</p>
-    <Code lang="bash" code={'curl -H "Authorization: Bearer YOUR_API_KEY" https://api.example.com'} />
+    <Code class="overflow-x-auto" lang="bash" code={'curl -H "Authorization: Bearer YOUR_API_KEY" https://api.example.com'} />
   </Surface>
 {/snippet}
 

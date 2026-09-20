@@ -27,6 +27,16 @@ A simple line chart displaying multiple data series over time.
 
 <ComponentSection>
 
+## Discrete Count Data
+
+Set `yAxisMinInterval={1}` for discrete values such as request counts. This prevents fractional y-axis ticks while leaving the default axis behavior unchanged for rates and other continuous values.
+
+<ComponentExample demo="IntegerYAxisChartDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
 ## Reference Markers
 
 Pass <code>markers</code> to render vertical reference lines for deployments,
@@ -103,6 +113,16 @@ Clicking a `ChartLegend` item isolates that series, showing only it and hiding
 the rest. Clicking the already-isolated series restores them all.
 
 <ComponentExample demo="LegendOnClickDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
+## Tooltip footer
+
+Use `tooltipFooter` to add brief supporting text below the values in standard series tooltips. It works with every timeseries configuration, including line, bar, gradient, threshold, and custom-axis charts.
+
+<ComponentExample demo="TooltipFooterChartDemo" />
 
 </ComponentSection>
 

@@ -37,11 +37,11 @@
       {/if}
     </div>
 
-    <div class="flex flex-col-reverse gap-6 xl:flex-row xl:gap-8">
-      <div class="min-w-0 grow">{@render children?.()}</div>
+    <div class="flex flex-col-reverse gap-6 xl:grid xl:grid-cols-[1fr_2fr] xl:gap-8">
+      <div class="min-w-0">{@render children?.()}</div>
 
       {#if usage || additionalContent}
-        <div class="top-22 flex h-fit w-full shrink-0 flex-col gap-4 xl:sticky xl:w-[380px]">
+        <div class="top-22 flex h-fit w-full min-w-0 flex-col gap-4 xl:sticky">
           {@render usage?.()}
 
           <div class={cn('hidden xl:block', usage ? 'mt-6' : '')}>

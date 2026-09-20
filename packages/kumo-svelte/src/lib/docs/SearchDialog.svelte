@@ -168,6 +168,7 @@
     button: 'Displays a button or a component that looks like a button.',
     checkbox: 'A control that allows the user to toggle between checked and not checked.',
     'clipboard-text': 'A text component with a copy-to-clipboard button.',
+    'inline-copy-text': 'A compact, borderless copy control for short inline values.',
     'cloudflare-logo': 'Cloudflare brand mark component.',
     'code-highlighted': 'Syntax-highlighted code blocks powered by Shiki.',
     collapsible: 'A vertically stacked set of interactive headings that each reveal content.',

@@ -70,11 +70,23 @@ const rows: PropRow[] = [
     description: 'Number of ticks to display on the y-axis.'
   },
   {
+    prop: 'yAxisMinInterval',
+    type: 'number',
+    required: false,
+    description: 'Minimum interval between y-axis ticks. Use 1 for discrete count data.'
+  },
+  {
     prop: 'tooltipValueFormat',
     type: '(value: number) => string',
     required: false,
     description:
       'Custom formatter for tooltip values. Takes precedence over yAxisTickLabelFormat.'
+  },
+  {
+    prop: 'tooltipFooter',
+    type: 'string',
+    required: false,
+    description: 'Brief supporting text rendered below the series rows in every tooltip.'
   },
   {
     prop: 'tooltipMode',

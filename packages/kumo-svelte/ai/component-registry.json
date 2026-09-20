@@ -1,5 +1,5 @@
 {
-  "version": "0.12.0",
+  "version": "0.13.0",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -562,7 +562,7 @@
       "name": "BubbleMap",
       "type": "component",
       "category": "Data Visualization",
-      "description": "Map chart components for visualizing geographic data with GeoJSON.",
+      "description": "Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.",
       "importPath": "kumo-svelte/components/chart",
       "sourceFile": "components/chart",
       "props": {
@@ -719,6 +719,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -900,6 +902,16 @@
         }
       }
     },
+    "Button Group": {
+      "name": "Button Group",
+      "type": "component",
+      "category": "Other",
+      "description": "Joins a primary action and a related trigger into a single split button.",
+      "importPath": "kumo-svelte/components/button-group",
+      "sourceFile": "components/button-group",
+      "props": {},
+      "colors": []
+    },
     "Chart": {
       "name": "Chart",
       "type": "component",
@@ -958,6 +970,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -1034,6 +1048,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -1302,7 +1318,7 @@
       "name": "ChoroplethMap",
       "type": "component",
       "category": "Data Visualization",
-      "description": "Map chart components for visualizing geographic data with GeoJSON.",
+      "description": "Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.",
       "importPath": "kumo-svelte/components/chart",
       "sourceFile": "components/chart",
       "props": {
@@ -1451,6 +1467,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -1907,10 +1925,10 @@
           "description": "Size preset."
         },
         "items": {
-          "type": "unknown[]",
+          "type": "ComboboxItem[] | ComboboxItemCollection",
           "optional": false,
           "required": true,
-          "description": "Array of items to display in the dropdown."
+          "description": "Items to display, optionally created with Combobox.createItems()."
         },
         "value": {
           "type": "unknown",
@@ -3153,10 +3171,9 @@
         "bg-kumo-control",
         "bg-kumo-overlay",
         "border-kumo-fill",
-        "border-kumo-interact",
+        "ring-kumo-line",
         "text-kumo-brand",
         "text-kumo-default",
-        "text-kumo-inactive",
         "text-kumo-subtle",
         "text-kumo-success"
       ]
@@ -3307,6 +3324,126 @@
         }
       }
     },
+    "GlobeMap": {
+      "name": "GlobeMap",
+      "type": "component",
+      "category": "Data Visualization",
+      "description": "Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.",
+      "importPath": "kumo-svelte/components/chart",
+      "sourceFile": "components/chart",
+      "props": {
+        "landColor": {
+          "type": "string",
+          "optional": true,
+          "description": "Stroke color for the hatched land."
+        },
+        "landHatchSpacing": {
+          "type": "number",
+          "optional": true,
+          "default": "10",
+          "description": "Spacing between land hatch lines in view-box pixels."
+        },
+        "oceanColor": {
+          "type": "string",
+          "optional": true,
+          "default": "var(--color-kumo-base)",
+          "description": "Fill behind the land and graticule."
+        },
+        "markers": {
+          "type": "GlobeMapMarker[]",
+          "optional": true,
+          "default": "[]",
+          "description": "Geographic points drawn above the land."
+        },
+        "markerColor": {
+          "type": "string",
+          "optional": true,
+          "description": "Default marker fill."
+        },
+        "markerRadius": {
+          "type": "number",
+          "optional": true,
+          "default": "7",
+          "description": "Default marker radius in view-box pixels."
+        },
+        "onMarkerClick": {
+          "type": "(marker: GlobeMapMarker) => void",
+          "optional": true,
+          "description": "Called when a visible marker is clicked."
+        },
+        "defaultRotation": {
+          "type": "[number, number, number]",
+          "optional": true,
+          "default": "[-10, -20, 0]",
+          "description": "Initial longitude, latitude, and roll rotation."
+        },
+        "draggable": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Allows pointer and keyboard rotation."
+        },
+        "autoRotate": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Continuously rotates the globe horizontally."
+        },
+        "autoRotateSpeed": {
+          "type": "number",
+          "optional": true,
+          "default": "4",
+          "description": "Horizontal auto-rotation speed in degrees per second."
+        },
+        "showGraticule": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Draws latitude and longitude guides."
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Shows the Kumo-styled marker tooltip."
+        },
+        "onUserRotationChange": {
+          "type": "(rotation: [number, number, number]) => void",
+          "optional": true,
+          "description": "Called after pointer or keyboard rotation."
+        },
+        "aria-label": {
+          "type": "string",
+          "optional": true,
+          "default": "Interactive globe map",
+          "description": "Accessible label for the visualization."
+        },
+        "height": {
+          "type": "number",
+          "optional": true,
+          "description": "Fixed height in pixels; otherwise uses a square aspect ratio."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional classes for the container."
+        },
+        "isDarkMode": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Overrides automatic theme detection."
+        }
+      },
+      "colors": [
+        "bg-kumo-base",
+        "bg-kumo-fill",
+        "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
+    },
     "Grid": {
       "name": "Grid",
       "type": "component",
@@ -3379,6 +3516,74 @@
           }
         }
       }
+    },
+    "InlineCopyText": {
+      "name": "InlineCopyText",
+      "type": "component",
+      "category": "Action",
+      "description": "A compact, borderless copy control for short inline values.",
+      "importPath": "kumo-svelte/components/inline-copy-text",
+      "sourceFile": "components/inline-copy-text",
+      "props": {
+        "children": {
+          "type": "Snippet",
+          "optional": false,
+          "required": true,
+          "description": "Inline content to display."
+        },
+        "value": {
+          "type": "string",
+          "optional": true,
+          "description": "Value copied to the clipboard. Defaults to rendered text content."
+        },
+        "variant": {
+          "type": "InlineCopyTextVariant",
+          "optional": true,
+          "default": "mono-secondary",
+          "description": "Text style; heading variants are excluded."
+        },
+        "size": {
+          "type": "KumoTextSize",
+          "optional": true,
+          "description": "Text size."
+        },
+        "bold": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Uses medium-weight copy text."
+        },
+        "truncate": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Truncates overflowing text."
+        },
+        "as": {
+          "type": "TextElement",
+          "optional": true,
+          "default": "span",
+          "description": "Element used for displayed text."
+        },
+        "onCopy": {
+          "type": "() => void",
+          "optional": true,
+          "description": "Called after a successful clipboard write."
+        },
+        "labels": {
+          "type": "InlineCopyTextLabels",
+          "optional": true,
+          "description": "Localized copy and copied accessible labels."
+        },
+        "class": {
+          "type": "string",
+          "optional": true,
+          "description": "Additional button classes."
+        }
+      },
+      "colors": [
+        "ring-kumo-brand",
+        "text-kumo-default"
+      ]
     },
     "Input": {
       "name": "Input",
@@ -3686,6 +3891,26 @@
         }
       },
       "colors": [
+        "text-kumo-default",
+        "text-kumo-subtle"
+      ]
+    },
+    "Layer Dialog": {
+      "name": "Layer Dialog",
+      "type": "component",
+      "category": "Other",
+      "description": "A responsive dialog that becomes a bottom sheet on mobile.",
+      "importPath": "kumo-svelte/components/layer-dialog",
+      "sourceFile": "components/layer-dialog",
+      "props": {},
+      "colors": [
+        "bg-kumo-base",
+        "bg-kumo-contrast",
+        "bg-kumo-elevated",
+        "bg-kumo-fill",
+        "bg-kumo-recessed",
+        "border-kumo-hairline",
+        "ring-kumo-hairline",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -4519,6 +4744,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -5085,6 +5312,11 @@
               "type": "(open: boolean) => void",
               "optional": true,
               "description": "Callback when open state changes."
+            },
+            "onOpenChangeComplete": {
+              "type": "(open: boolean) => void",
+              "optional": true,
+              "description": "Callback after the sidebar finishes its open or close transition."
             },
             "variant": {
               "type": "enum",
@@ -5964,6 +6196,23 @@
         "text-kumo-subtle"
       ]
     },
+    "Tag Input": {
+      "name": "Tag Input",
+      "type": "component",
+      "category": "Other",
+      "description": "A creatable multi-value input for values that do not come from a predefined option list.",
+      "importPath": "kumo-svelte/components/tag-input",
+      "sourceFile": "components/tag-input",
+      "props": {},
+      "colors": [
+        "bg-kumo-overlay",
+        "ring-kumo-hairline",
+        "text-kumo-danger",
+        "text-kumo-default",
+        "text-kumo-muted",
+        "text-kumo-subtle"
+      ]
+    },
     "Text": {
       "name": "Text",
       "type": "component",
@@ -6112,10 +6361,20 @@
           "optional": true,
           "description": "Number of ticks to display on the y-axis."
         },
+        "yAxisMinInterval": {
+          "type": "number",
+          "optional": true,
+          "description": "Minimum interval between y-axis ticks. Use 1 for discrete count data."
+        },
         "tooltipValueFormat": {
           "type": "(value: number) => string",
           "optional": true,
           "description": "Custom formatter for tooltip values. Takes precedence over yAxisTickLabelFormat."
+        },
+        "tooltipFooter": {
+          "type": "string",
+          "optional": true,
+          "description": "Brief supporting text rendered below the series rows in every tooltip."
         },
         "tooltipMode": {
           "type": "enum",
@@ -6205,6 +6464,8 @@
         "bg-kumo-base",
         "bg-kumo-fill",
         "border-kumo-line",
+        "stroke-kumo-base",
+        "stroke-kumo-line",
         "text-kumo-default",
         "text-kumo-subtle"
       ]
@@ -6510,6 +6771,7 @@
       "Breadcrumbs",
       "BubbleMap",
       "Button",
+      "Button Group",
       "Chart",
       "ChartLegend",
       "Checkbox",
@@ -6525,11 +6787,14 @@
       "DropdownMenu",
       "Empty",
       "Flow",
+      "GlobeMap",
       "Grid",
+      "InlineCopyText",
       "Input",
       "InputArea",
       "InputGroup",
       "Label",
+      "Layer Dialog",
       "LayerCard",
       "Link",
       "Loader",
@@ -6547,6 +6812,7 @@
       "Table",
       "TableOfContents",
       "Tabs",
+      "Tag Input",
       "Text",
       "TimeseriesChart",
       "Toast",
@@ -6556,6 +6822,7 @@
     "byCategory": {
       "Action": [
         "Button",
+        "InlineCopyText",
         "Link",
         "Toolbar"
       ],
@@ -6564,6 +6831,7 @@
         "Chart",
         "ChartLegend",
         "ChoroplethMap",
+        "GlobeMap",
         "SankeyChart",
         "TimeseriesChart"
       ],
@@ -6608,10 +6876,13 @@
         "Tabs"
       ],
       "Other": [
+        "Button Group",
         "CloudflareLogo",
         "Collapsible",
+        "Layer Dialog",
         "Switch",
         "Table",
+        "Tag Input",
         "Text"
       ],
       "Overlay": [
@@ -6629,6 +6900,7 @@
         "Breadcrumbs",
         "BubbleMap",
         "Button",
+        "Button Group",
         "Chart",
         "ChartLegend",
         "Checkbox",
@@ -6644,11 +6916,14 @@
         "DropdownMenu",
         "Empty",
         "Flow",
+        "GlobeMap",
         "Grid",
+        "InlineCopyText",
         "Input",
         "InputArea",
         "InputGroup",
         "Label",
+        "Layer Dialog",
         "LayerCard",
         "Link",
         "Loader",
@@ -6666,6 +6941,7 @@
         "Table",
         "TableOfContents",
         "Tabs",
+        "Tag Input",
         "Text",
         "TimeseriesChart",
         "Toast",

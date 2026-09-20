@@ -1,6 +1,6 @@
 ---
 title: "Maps"
-description: "Map chart components for visualizing geographic data with GeoJSON."
+description: "Map components for visualizing geographic data with GeoJSON or an interactive SVG globe."
 sourceFile: "components/chart"
 ---
 
@@ -109,6 +109,17 @@ const countries = [
     "<strong>" + row.city + "</strong><br />" + row.requests.toLocaleString()
   }
 />`;
+
+  const globeMapCode = `<GlobeMap
+  markers={locations}
+  landHatchSpacing={8}
+  oceanColor="transparent"
+  showGraticule
+  markerColor="var(--color-kumo-brand)"
+  markerRadius={8}
+  autoRotate
+  aria-label="Cloudflare availability locations"
+/>`;
 </script>
 
 <ComponentSection>
@@ -121,7 +132,7 @@ const countries = [
 
 ## Installation
 
-<code class="text-kumo-default">BubbleMap</code> and <code class="text-kumo-default">ChoroplethMap</code> require <code class="text-kumo-default">echarts</code> as a peer dependency. Consumers provide the GeoJSON feature collection; map components do not fetch map data or use map tiles.
+<code class="text-kumo-default">BubbleMap</code> and <code class="text-kumo-default">ChoroplethMap</code> require <code class="text-kumo-default">echarts</code> as a peer dependency. Consumers provide the GeoJSON feature collection; map components do not fetch map data or use map tiles. <code class="text-kumo-default">GlobeMap</code> is SVG-only and does not require ECharts or WebGL.
 
 ```bash
 npm install echarts
@@ -130,13 +141,13 @@ npm install echarts
 ### Barrel
 
 ```svelte
-import { BubbleMap, ChoroplethMap } from "kumo-svelte";
+import { BubbleMap, ChoroplethMap, GlobeMap } from "kumo-svelte";
 ```
 
 ### Granular
 
 ```svelte
-import { BubbleMap, ChoroplethMap } from "kumo-svelte/components/chart";
+import { BubbleMap, ChoroplethMap, GlobeMap } from "kumo-svelte/components/chart";
 ```
 
 </ComponentSection>
@@ -171,6 +182,12 @@ Provide <code class="text-kumo-default">tooltipFormatter</code> when the default
 
 <CodeBlock code={tooltipCode} lang="svelte" />
 
+### Globe Map
+
+Render a boundary-free orthographic globe with hatched land and geographic markers. Drag or use the arrow keys to rotate it; automatic rotation respects reduced-motion preferences and pauses during interaction.
+
+<ComponentExample demo="GlobeMapDemo" code={globeMapCode} />
+
 </ComponentSection>
 
 <ComponentSection>
@@ -184,5 +201,9 @@ Provide <code class="text-kumo-default">tooltipFormatter</code> when the default
 ### ChoroplethMap
 
 <PropsTable component="ChoroplethMap" />
+
+### GlobeMap
+
+<PropsTable component="GlobeMap" />
 
 </ComponentSection>

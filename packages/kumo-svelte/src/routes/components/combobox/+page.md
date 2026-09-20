@@ -108,11 +108,38 @@ The placeholder is displayed until a value is selected.
 
 <ComponentSection>
 
+### Object Item Collections
+
+Derive stable values and labels from application objects with `Combobox.createItems()`.
+
+<ComponentExample demo="ComboboxCreateItemsDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
 ### Custom Trigger
 
 Use <code>Combobox.Trigger</code> with a <code>render</code> prop to replace the default input-like trigger with your own element. Pair with <code>Combobox.Value</code> to display the selected value. Useful for account switchers, sidebar navigation, or anywhere the default chrome doesn't fit.
 
 <ComponentExample demo="ComboboxCustomTriggerDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
+## Object Item Collections
+
+Use `Combobox.createItems()` when items are application objects rather than primitive values. It derives stable selection values and labels while keeping the source object available to the list renderer.
+
+```svelte
+const fruits = Combobox.createItems(
+  [{ id: 'apple', label: 'Apple' }],
+  { getValue: (fruit) => fruit.id, getLabel: (fruit) => fruit.label }
+);
+```
+
+Create static collections at module scope. For data that changes at runtime, recreate the collection when the source data changes.
 
 </ComponentSection>
 

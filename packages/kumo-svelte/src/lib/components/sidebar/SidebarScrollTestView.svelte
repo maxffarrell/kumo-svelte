@@ -14,3 +14,6 @@
 <button type="button" onclick={() => sidebar.scrollToItem('billing', { align: 'center', behavior: 'smooth' })}>
   Find billing
 </button>
+<button type="button" onclick={() => sidebar.scrollItemIntoView('billing', { align: 'start' })}>
+  Reveal billing
+</button>

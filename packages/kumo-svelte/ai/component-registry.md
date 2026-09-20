@@ -1,6 +1,6 @@
 # Kumo Svelte Component Registry
 
-Version: 0.12.0
+Version: 0.13.0
 
 ## Autocomplete
 
@@ -36,7 +36,7 @@ A navigation component that shows the current page's location within a navigatio
 
 ## BubbleMap
 
-Map chart components for visualizing geographic data with GeoJSON.
+Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.
 
 - Category: Data Visualization
 - Import: `import { BubbleMap } from "kumo-svelte/components/chart";`
@@ -49,6 +49,14 @@ Displays a button or a component that looks like a button.
 - Category: Action
 - Import: `import { Button } from "kumo-svelte/components/button";`
 - Source: `components/button`
+
+## Button Group
+
+Joins a primary action and a related trigger into a single split button.
+
+- Category: Other
+- Import: `import { Button Group } from "kumo-svelte/components/button-group";`
+- Source: `components/button-group`
 
 ## Chart
 
@@ -76,7 +84,7 @@ A control that allows the user to toggle between checked and not checked. Featur
 
 ## ChoroplethMap
 
-Map chart components for visualizing geographic data with GeoJSON.
+Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.
 
 - Category: Data Visualization
 - Import: `import { ChoroplethMap } from "kumo-svelte/components/chart";`
@@ -170,6 +178,14 @@ A group of components for building directed flow diagrams with nodes and connect
 - Import: `import { Flow } from "kumo-svelte/components/flow";`
 - Source: `components/flow`
 
+## GlobeMap
+
+Map components for visualizing geographic data with GeoJSON or an interactive SVG globe.
+
+- Category: Data Visualization
+- Import: `import { GlobeMap } from "kumo-svelte/components/chart";`
+- Source: `components/chart`
+
 ## Grid
 
 A responsive grid layout component for organizing content into columns.
@@ -177,6 +193,14 @@ A responsive grid layout component for organizing content into columns.
 - Category: Layout
 - Import: `import { Grid } from "kumo-svelte/components/grid";`
 - Source: `components/grid`
+
+## InlineCopyText
+
+A compact, borderless copy control for short inline values.
+
+- Category: Action
+- Import: `import { InlineCopyText } from "kumo-svelte/components/inline-copy-text";`
+- Source: `components/inline-copy-text`
 
 ## Input
 
@@ -209,6 +233,14 @@ A label component for form fields with support for required/optional indicators 
 - Category: Input
 - Import: `import { Label } from "kumo-svelte/components/label";`
 - Source: `components/label`
+
+## Layer Dialog
+
+A responsive dialog that becomes a bottom sheet on mobile.
+
+- Category: Other
+- Import: `import { Layer Dialog } from "kumo-svelte/components/layer-dialog";`
+- Source: `components/layer-dialog`
 
 ## LayerCard
 
@@ -345,6 +377,14 @@ A set of layered sections of content, known as tab panels, displayed one at a ti
 - Category: Navigation
 - Import: `import { Tabs } from "kumo-svelte/components/tabs";`
 - Source: `components/tabs`
+
+## Tag Input
+
+A creatable multi-value input for values that do not come from a predefined option list.
+
+- Category: Other
+- Import: `import { Tag Input } from "kumo-svelte/components/tag-input";`
+- Source: `components/tag-input`
 
 ## Text
 

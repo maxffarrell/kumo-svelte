@@ -82,6 +82,33 @@ If your application uses Tailwind CSS, add Kumo Svelte's source files and import
 
 Adjust the `@source` path if your CSS file lives in a different directory.
 
+## Isolate Your App Root
+
+Kumo's floating components (`Select`, `Combobox`, `Dropdown`, `Popover`, `Tooltip`, `Dialog`, and others) render their popups in a portal at the end of `document.body`. Because Kumo does not apply a `z-index` to these popups, a positive `z-index` in your layout can paint above an open popup.
+
+Add `isolation: isolate` to your application root, as [Bits UI recommends](https://bits-ui.com/docs/child-snippet#dealing-with-z-index):
+
+```css
+/* The element that wraps your entire app, e.g. #root or #app */
+.root {
+  isolation: isolate;
+}
+```
+
+Or with Tailwind:
+
+```svelte
+<div id="app" class="isolate">
+  <!-- Your app -->
+</div>
+```
+
+Apply isolation to the element wrapping your app content, not to `<body>`. This creates a separate stacking context for app content so portaled popups remain above positive `z-index` values inside the layout.
+
+<Callout type="info">
+  If a Kumo popup appears below your UI, isolate the app root instead of raising the popup's `z-index` or targeting Bits UI's internal data attributes.
+</Callout>
+
 ## Usage Example
 
 #### CSS File

@@ -17,7 +17,28 @@ export type NormalizedComboboxItem = {
   value: unknown;
   disabled?: boolean;
   raw: ComboboxItem;
+  serializedKey?: string;
 };
+
+export interface ComboboxItemCollection<T> {
+  items: T[];
+  getValue: (item: T) => string;
+  getLabel: (item: T) => string;
+  isItemDisabled?: (item: T) => boolean;
+}
+
+export function createComboboxItems<T>(
+  items: T[],
+  options: Omit<ComboboxItemCollection<T>, "items">,
+): ComboboxItemCollection<T> {
+  return { items, ...options };
+}
+
+export function isComboboxItemCollection(
+  items: ComboboxItem[] | ComboboxItemCollection<any>,
+): items is ComboboxItemCollection<any> {
+  return !Array.isArray(items);
+}
 
 export type ComboboxContext = {
   get items(): NormalizedComboboxItem[];

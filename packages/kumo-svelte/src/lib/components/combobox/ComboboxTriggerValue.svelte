@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CaretDown from 'phosphor-svelte/lib/CaretDown';
+  import CaretUpDown from 'phosphor-svelte/lib/CaretUpDown';
   import type { Snippet } from 'svelte';
   import { cn } from '$lib/utils/cn';
   import { getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
@@ -54,6 +54,6 @@
 >
   <span class="min-w-0 flex-1 truncate">{displayValue || placeholder}</span>
   <span class={cn('absolute top-1/2 flex -translate-y-1/2 items-center text-kumo-subtle', iconRight[resolvedSize])}>
-    <CaretDown size={iconSizes[resolvedSize]} class="fill-current" />
+    <CaretUpDown size={iconSizes[resolvedSize]} class="fill-current" />
   </span>
 </ComboboxPrimitive.Trigger>

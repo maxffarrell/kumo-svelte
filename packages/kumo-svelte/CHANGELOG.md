@@ -1,5 +1,28 @@
 # kumo-svelte
 
+## 0.14.0
+
+### Minor Changes
+
+- ea08f23: Expose Combobox item collections and functional Toast update APIs.
+- ea08f23: Add ButtonGroup for joining tightly coupled controls into a split button.
+- ea08f23: Add sidebar open-change completion callbacks.
+- ea08f23: Add a `plain` CodeHighlighted variant without a frame or content padding.
+- ea08f23: Add the TagInput component for creating and removing free-form values.
+- ea08f23: Add `InlineCopyText`, a compact borderless copy control for short values in dense interfaces and table cells.
+- ea08f23: Add an optional yAxisMinInterval prop to TimeseriesChart for discrete data.
+- ea08f23: Add supporting footer text to TimeseriesChart tooltips.
+- ea08f23: Add a responsive LayerDialog component with alert semantics and automatic dismissal controls.
+- ea08f23: Add `GlobeMap`, an SVG orthographic globe with boundary-free hatched land, horizon-faded geographic markers, optional geographic guides, pointer and keyboard rotation, automatic rotation, Kumo-themed tooltips, and no WebGL or ECharts requirement.
+
+### Patch Changes
+
+- ea08f23: Reset native fieldset padding in radio and checkbox groups.
+- ea08f23: Refine Empty state typography and balance description text when it wraps.
+- ea08f23: Keep nested LayerDialog instances distinct, render a backdrop for every layer, and refine mobile action spacing.
+- ea08f23: Document app-root CSS isolation for reliable stacking of portaled components.
+- ea08f23: Prevent ResourceListPage content from overflowing its responsive columns.
+
 ## 0.13.0
 
 ### Minor Changes

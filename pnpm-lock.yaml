@@ -18,43 +18,43 @@ importers:
   .:
     devDependencies:
       '@changesets/cli':
-        specifier: ^3.0.1
+        specifier: 3.0.1
         version: 3.0.1
       '@octokit/rest':
-        specifier: ^22.0.1
+        specifier: 22.0.1
         version: 22.0.1
       '@playwright/test':
-        specifier: ^1.62.1
+        specifier: 1.62.1
         version: 1.62.1
       '@types/node':
-        specifier: ^26.2.0
+        specifier: 26.2.0
         version: 26.2.0
       '@types/pngjs':
-        specifier: ^6.0.5
+        specifier: 6.0.5
         version: 6.0.5
       lefthook:
-        specifier: ^2.1.10
+        specifier: 2.1.10
         version: 2.1.10
       oxlint:
         specifier: 1.79.0
         version: 1.79.0
       pixelmatch:
-        specifier: ^7.2.0
+        specifier: 7.2.0
         version: 7.2.0
       pngjs:
-        specifier: ^7.0.0
+        specifier: 7.0.0
         version: 7.0.0
       prettier:
-        specifier: ^3.9.6
+        specifier: 3.9.6
         version: 3.9.6
       prettier-plugin-tailwindcss:
-        specifier: ^0.8.1
+        specifier: 0.8.1
         version: 0.8.1(prettier@3.9.6)
       tsx:
-        specifier: ^4.23.12
+        specifier: 4.23.12
         version: 4.23.12
       typescript:
-        specifier: ^6.0.3
+        specifier: 6.0.3
         version: 6.0.3
 
   packages/kumo-svelte:
@@ -88,76 +88,76 @@ importers:
         version: 1.2.1(svelte@5.56.10)
     devDependencies:
       '@fontsource-variable/inter':
-        specifier: ^5.3.0
+        specifier: 5.3.0
         version: 5.3.0
       '@sveltejs/adapter-cloudflare':
-        specifier: ^7.2.9
+        specifier: 7.2.9
         version: 7.2.9(@sveltejs/kit@2.70.3(@sveltejs/vite-plugin-svelte@7.3.0(svelte@5.56.10)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))(svelte@5.56.10)(typescript@6.0.3)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))(wrangler@4.125.0)
       '@sveltejs/kit':
-        specifier: ^2.70.3
+        specifier: 2.70.3
         version: 2.70.3(@sveltejs/vite-plugin-svelte@7.3.0(svelte@5.56.10)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))(svelte@5.56.10)(typescript@6.0.3)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sveltejs/package':
-        specifier: ^2.5.8
+        specifier: 2.5.8
         version: 2.5.8(svelte@5.56.10)(typescript@6.0.3)
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^7.3.0
+        specifier: 7.3.0
         version: 7.3.0(svelte@5.56.10)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))
       '@tailwindcss/vite':
-        specifier: ^4.3.3
+        specifier: 4.3.3
         version: 4.3.3(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))
       '@testing-library/jest-dom':
-        specifier: ^7.0.1
+        specifier: 7.0.1
         version: 7.0.1(@testing-library/dom@10.4.1)(vitest@4.1.11(@types/node@26.2.0)(happy-dom@20.11.6)(jsdom@30.0.1)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))
       '@testing-library/svelte':
-        specifier: ^5.4.2
+        specifier: 5.4.2
         version: 5.4.2(svelte@5.56.10)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))(vitest@4.1.11(@types/node@26.2.0)(happy-dom@20.11.6)(jsdom@30.0.1)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)))
       '@testing-library/user-event':
-        specifier: ^14.6.6
+        specifier: 14.6.6
         version: 14.6.6(@testing-library/dom@10.4.1)
       '@types/d3-geo':
-        specifier: ^3.1.1
+        specifier: 3.1.1
         version: 3.1.1
       '@types/node':
-        specifier: ^26.2.0
+        specifier: 26.2.0
         version: 26.2.0
       axe-core:
-        specifier: ^4.13.0
+        specifier: 4.13.0
         version: 4.13.0
       happy-dom:
-        specifier: ^20.11.6
+        specifier: 20.11.6
         version: 20.11.6
       jsdom:
-        specifier: ^30.0.1
+        specifier: 30.0.1
         version: 30.0.1
       magic-string:
-        specifier: ^1.2.2
+        specifier: 1.2.2
         version: 1.2.2
       mdsx:
-        specifier: ^0.0.7
+        specifier: 0.0.7
         version: 0.0.7(svelte@5.56.10)
       svelte:
-        specifier: ^5.56.10
+        specifier: 5.56.10
         version: 5.56.10
       svelte-check-native:
-        specifier: ^0.9.6
+        specifier: 0.9.6
         version: 0.9.6(@typescript/native-preview@7.0.0-dev.20260705.1)
       tailwindcss:
-        specifier: ^4.3.3
+        specifier: 4.3.3
         version: 4.3.3
       tsx:
-        specifier: ^4.23.12
+        specifier: 4.23.12
         version: 4.23.12
       typescript:
-        specifier: ^6.0.3
+        specifier: 6.0.3
         version: 6.0.3
       vite:
-        specifier: ^8.2.2
+        specifier: 8.2.2
         version: 8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)
       vitest:
-        specifier: ^4.1.11
+        specifier: 4.1.11
         version: 4.1.11(@types/node@26.2.0)(happy-dom@20.11.6)(jsdom@30.0.1)(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))
       wrangler:
-        specifier: ^4.125.0
+        specifier: 4.125.0
         version: 4.125.0
 
 packages:

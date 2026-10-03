@@ -1,7 +1,7 @@
 <script lang="ts">
     import GithubLogoIcon from "phosphor-svelte/lib/GithubLogoIcon";
     import { onMount } from "svelte";
-    import { cn } from "$lib/utils/cn";
+    import { cn } from "#lib/utils/cn.js";
     import ThemeToggle from "./ThemeToggle.svelte";
     import BaseUIIcon from "./BaseUIIcon.svelte";
 

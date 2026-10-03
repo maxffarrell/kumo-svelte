@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Flow } from '$lib/components/flow';
+  import { Flow } from '#lib/components/flow/index.js';
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">

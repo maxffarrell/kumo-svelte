@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { getContext } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   interface SlidingContext { get activeKey(): string; get direction(): 'left' | 'right'; }
   interface Props { children?: Snippet; class?: string; value: string; [key: string]: unknown; }
   let { children, class: className, value, ...rest }: Props = $props();

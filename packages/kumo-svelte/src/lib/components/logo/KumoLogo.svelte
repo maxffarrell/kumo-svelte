@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   interface Props { class?: string; title?: string; wordmark?: boolean; [key: string]: unknown; }
   let { class: className, title = 'Kumo Svelte', wordmark = true, ...rest }: Props = $props();
 </script>

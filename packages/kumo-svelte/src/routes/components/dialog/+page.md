@@ -6,10 +6,10 @@ baseUIComponent: "dialog"
 ---
 
 <script>
-  import CodeBlock from '$lib/docs/CodeBlock.svelte';
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
-  import PropsTable from '$lib/docs/PropsTable.svelte';
+  import CodeBlock from '#lib/docs/CodeBlock.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
+  import PropsTable from '#lib/docs/PropsTable.svelte';
 
   const barrelCode = `import { Dialog } from 'kumo-svelte';`;
   const granularCode = `import { Dialog } from 'kumo-svelte/components/dialog';`;

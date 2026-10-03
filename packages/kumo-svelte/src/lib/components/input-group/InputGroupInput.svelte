@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { getInputGroupContext, INPUT_GROUP_SIZE } from './context';
 
   interface Props {

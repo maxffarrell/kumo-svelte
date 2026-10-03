@@ -1,4 +1,4 @@
-import { cn } from '$lib/utils/cn';
+import { cn } from '#lib/utils/cn.js';
 
 /** Autocomplete item classes copied verbatim from upstream Kumo. */
 export const KUMO_AUTOCOMPLETE_ITEM_CLASSES = cn(

@@ -5,7 +5,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { AlertDialog, Dialog } from 'bits-ui';
-  import { Button } from '$lib/components/button';
+  import { Button } from '#lib/components/button/index.js';
   import { getLayerDialogContext } from './context';
   let { children, dismissLabel, class: className }: LayerDialogActionsProps = $props();
   const context = getLayerDialogContext('LayerDialog.Actions');

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Breadcrumbs } from '$lib/components/breadcrumbs';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Breadcrumbs } from '#lib/components/breadcrumbs/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
   import { House, BookOpen } from 'phosphor-svelte';
 
   const twoLevel = [

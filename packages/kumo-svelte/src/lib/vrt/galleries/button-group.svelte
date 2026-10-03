@@ -1,8 +1,8 @@
 <script lang="ts">
   import CaretDown from 'phosphor-svelte/lib/CaretDown';
-  import { Button } from '$lib/components/button';
-  import { ButtonGroup } from '$lib/components/button-group';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Button } from '#lib/components/button/index.js';
+  import { ButtonGroup } from '#lib/components/button-group/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 <Scenario id="primary" label="primary">
   <ButtonGroup aria-label="Deploy"><Button variant="primary">Deploy</Button><Button variant="primary" shape="square" aria-label="More" icon={CaretDown} /></ButtonGroup>

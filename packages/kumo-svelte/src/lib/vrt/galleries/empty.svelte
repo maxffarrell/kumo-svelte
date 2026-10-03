@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Empty } from '$lib/components/empty';
-  import { Button } from '$lib/components/button';
+  import { Empty } from '#lib/components/empty/index.js';
+  import { Button } from '#lib/components/button/index.js';
   import { Package } from 'phosphor-svelte';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 {#snippet packageIcon()}

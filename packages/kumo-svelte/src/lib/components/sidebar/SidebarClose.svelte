@@ -1,7 +1,7 @@
 <script lang="ts">
   import X from 'phosphor-svelte/lib/X';
   import type { Snippet } from 'svelte';
-  import { Button } from '$lib/components/button';
+  import { Button } from '#lib/components/button/index.js';
   import { getSidebarContext } from './context';
 
   interface Props { children?: Snippet; class?: string; [key: string]: unknown; }

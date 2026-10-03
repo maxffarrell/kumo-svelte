@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { ToastPreview } from '$lib/components/toasty';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { ToastPreview } from '#lib/components/toasty/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const variants = ['default', 'success', 'error', 'info', 'warning'] as const;
 </script>

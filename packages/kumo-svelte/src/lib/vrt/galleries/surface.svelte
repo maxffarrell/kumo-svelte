@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Surface } from '$lib/components/surface';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Surface } from '#lib/components/surface/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="primary" label="primary">

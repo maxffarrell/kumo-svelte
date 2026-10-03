@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { getSidebarMenuSubItemContext } from './context';
   interface Props { children?: Snippet; class?: string; active?: boolean; href?: string; target?: string; [key: string]: unknown; }
   let { children, class: className, active = false, href, target, ...rest }: Props = $props();

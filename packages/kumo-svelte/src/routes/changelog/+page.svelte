@@ -2,13 +2,13 @@
   import { onMount } from 'svelte';
   import GithubLogoIcon from 'phosphor-svelte/lib/GithubLogoIcon';
   import LinkSimple from 'phosphor-svelte/lib/LinkSimple';
-  import { Badge, type BadgeVariant } from '$lib/components/badge';
-  import { Text } from '$lib/components/text';
-  import ChangelogEntry from '$lib/docs/ChangelogEntry.svelte';
-  import ChangelogPagination from '$lib/docs/ChangelogPagination.svelte';
-  import CopyPageButton from '$lib/docs/CopyPageButton.svelte';
-  import StickyDocHeader from '$lib/docs/StickyDocHeader.svelte';
-  import type { ChangelogBump, ChangelogVersion } from '$lib/docs/changelog';
+  import { Badge, type BadgeVariant } from '#lib/components/badge/index.js';
+  import { Text } from '#lib/components/text/index.js';
+  import ChangelogEntry from '#lib/docs/ChangelogEntry.svelte';
+  import ChangelogPagination from '#lib/docs/ChangelogPagination.svelte';
+  import CopyPageButton from '#lib/docs/CopyPageButton.svelte';
+  import StickyDocHeader from '#lib/docs/StickyDocHeader.svelte';
+  import type { ChangelogBump, ChangelogVersion } from '#lib/docs/changelog.js';
 
   interface Props {
     data: {

@@ -35,9 +35,9 @@
 </script>
 
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { cn } from '$lib/utils/cn';
-  import { highlightCode } from '$lib/utils/highlight-code';
+  import { Button } from '#lib/components/button/index.js';
+  import { cn } from '#lib/utils/cn.js';
+  import { highlightCode } from '#lib/utils/highlight-code.js';
 
   interface Props {
     code: string;

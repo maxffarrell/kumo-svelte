@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   const CLOUDFLARE_ORANGE = '#F48120';
   const CLOUDFLARE_YELLOW = '#FAAD3F';

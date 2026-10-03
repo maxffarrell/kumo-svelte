@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import Info from 'phosphor-svelte/lib/Info';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { inputVariants, type KumoInputSize, type KumoInputVariant } from './input-variants';
 
   type Size = 'xs' | 'sm' | 'base' | 'lg';

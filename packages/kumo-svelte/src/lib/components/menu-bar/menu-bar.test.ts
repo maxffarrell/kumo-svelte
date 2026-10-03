@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { createRawSnippet, mount, type ComponentProps } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 import { List, SquaresFour } from 'phosphor-svelte';
-import { TooltipProvider } from '$lib/components/tooltip';
+import { TooltipProvider } from '#lib/components/tooltip/index.js';
 import { expectNoA11yViolations } from '../../../../tests/a11y';
 import MenuBar from './MenuBar.svelte';
 

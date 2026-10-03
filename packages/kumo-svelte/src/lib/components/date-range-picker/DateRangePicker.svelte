@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export const DATE_RANGE_CELL_BACKGROUNDS = {
     outOfRange: 'bg-transparent',

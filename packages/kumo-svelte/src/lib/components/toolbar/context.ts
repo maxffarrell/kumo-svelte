@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import { cn } from '$lib/utils/cn';
+import { cn } from '#lib/utils/cn.js';
 
 /** @deprecated Toolbar size customization is deprecated. Omit `size` to use the default base size. */
 export const KUMO_TOOLBAR_VARIANTS = {

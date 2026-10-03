@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
+  import { Button } from '#lib/components/button/index.js';
   import { DropdownMenu } from './index';
 
   let selected = $state(false);

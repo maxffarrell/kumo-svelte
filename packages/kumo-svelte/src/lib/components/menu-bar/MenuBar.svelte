@@ -2,8 +2,8 @@
   import { BROWSER } from 'esm-env';
   import type { Component } from 'svelte';
   import { onDestroy, onMount } from 'svelte';
-  import { Tooltip } from '$lib/components/tooltip';
-  import { cn } from '$lib/utils/cn';
+  import { Tooltip } from '#lib/components/tooltip/index.js';
+  import { cn } from '#lib/utils/cn.js';
 
   export const KUMO_MENUBAR_VARIANTS = {} as const;
   export const KUMO_MENUBAR_DEFAULT_VARIANTS = {} as const;

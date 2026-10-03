@@ -5,7 +5,7 @@
   import CaretRight from 'phosphor-svelte/lib/CaretRight';
   import CommandPaletteItem from './CommandPaletteItem.svelte';
   import CommandPaletteHighlightedText from './CommandPaletteHighlightedText.svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props<T = unknown> {
     value: T;

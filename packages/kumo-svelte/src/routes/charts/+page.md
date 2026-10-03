@@ -21,9 +21,9 @@ headings:
 ---
 
 <script>
-  import ChartCard from '$lib/docs/ChartCard.svelte';
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
+  import ChartCard from '#lib/docs/ChartCard.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
 </script>
 
 <ComponentSection>

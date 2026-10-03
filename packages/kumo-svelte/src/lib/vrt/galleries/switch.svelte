@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Switch } from '$lib/components/switch';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Switch } from '#lib/components/switch/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const sizes = ['sm', 'base', 'lg'] as const;
 </script>

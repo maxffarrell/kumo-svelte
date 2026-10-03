@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
-  import { Tooltip } from '$lib/components/tooltip';
+  import { cn } from '#lib/utils/cn.js';
+  import { Tooltip } from '#lib/components/tooltip/index.js';
   import { getSidebarContext, getSidebarMenuItemContext } from './context';
 
   interface Props {

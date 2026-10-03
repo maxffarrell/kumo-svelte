@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { getSidebarContext } from './context';
   interface Props { class?: string; [key: string]: unknown; }
   let { class: className, ...rest }: Props = $props();

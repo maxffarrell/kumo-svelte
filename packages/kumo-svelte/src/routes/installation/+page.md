@@ -4,7 +4,7 @@ description: "Get started with Kumo Svelte by installing the package and importi
 ---
 
 <script>
-  import Callout from '$lib/docs/Callout.svelte';
+  import Callout from '#lib/docs/Callout.svelte';
 
   const kumoVersion = typeof __KUMO_VERSION__ !== 'undefined' ? __KUMO_VERSION__ : 'latest';
 </script>
@@ -160,18 +160,19 @@ After installation, blocks live in your project and can be customized directly.
 When using SSR, call `provideKumoRandom` once from the root layout to keep
 randomized Kumo values stable during hydration. This uses one request-scoped
 random sequence for Kumo components that need random values. This integration
-requires Svelte 5.56.3 or newer.
+requires Svelte 5.57.1 or newer.
 
-Enable Svelte's experimental async compiler option in `svelte.config.js`:
+Enable Svelte's experimental async compiler option in `vite.config.ts`:
 
-```js
-export default {
-  compilerOptions: {
-    experimental: {
-      async: true
-    }
-  }
-};
+```ts
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [sveltekit({
+    compilerOptions: { experimental: { async: true } }
+  })]
+});
 ```
 
 ```svelte

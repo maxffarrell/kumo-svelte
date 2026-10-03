@@ -3,9 +3,9 @@
   import CaretUpDown from 'phosphor-svelte/lib/CaretUpDown';
   import Check from 'phosphor-svelte/lib/Check';
   import { Select as SelectPrimitive } from 'bits-ui';
-  import Field from '$lib/components/field/Field.svelte';
-  import Loader from '$lib/components/loader/Loader.svelte';
-  import { cn } from '$lib/utils/cn';
+  import Field from '#lib/components/field/Field.svelte';
+  import Loader from '#lib/components/loader/Loader.svelte';
+  import { cn } from '#lib/utils/cn.js';
 
   type Size = 'xs' | 'sm' | 'base' | 'lg';
   type SelectValue = unknown;

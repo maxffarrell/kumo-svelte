@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { EChartsOption, SetOptionOpts, TooltipComponentOption } from 'echarts';
   import type { EChartsType } from 'echarts/core';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { CHART_DARK_COLORS, CHART_LIGHT_COLORS, ChartPalette } from './Color';
 
   export type SafeTooltipOption = Omit<TooltipComponentOption, 'formatter'> & {

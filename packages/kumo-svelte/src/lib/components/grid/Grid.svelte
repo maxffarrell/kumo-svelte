@@ -1,6 +1,6 @@
 <script module lang="ts">
-  import { cn } from '$lib/utils/cn';
-  import { resolveVariant } from '$lib/utils/variants';
+  import { cn } from '#lib/utils/cn.js';
+  import { resolveVariant } from '#lib/utils/variants.js';
 
   export const KUMO_GRID_VARIANTS = {
     variant: {

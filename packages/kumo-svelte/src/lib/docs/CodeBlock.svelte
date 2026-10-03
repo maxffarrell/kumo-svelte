@@ -1,7 +1,7 @@
 <script lang="ts">
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
-  import { highlightCode } from '$lib/utils/highlight-code';
+  import { highlightCode } from '#lib/utils/highlight-code.js';
 
   interface Props {
     code?: string;

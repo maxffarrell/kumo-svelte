@@ -2,7 +2,7 @@
   import { DropdownMenu as DropdownMenuPrimitive } from 'bits-ui';
   import type { Component, Snippet } from 'svelte';
   import CaretRight from 'phosphor-svelte/lib/CaretRight';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props {
     children?: Snippet;

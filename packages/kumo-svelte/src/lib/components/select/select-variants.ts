@@ -1,4 +1,4 @@
-import { cn } from '$lib/utils/cn';
+import { cn } from '#lib/utils/cn.js';
 
 /** Select variant definitions. */
 export const KUMO_SELECT_VARIANTS = {

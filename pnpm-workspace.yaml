@@ -4,7 +4,6 @@ packages:
 minimumReleaseAge: 4320
 
 overrides:
-  '@sveltejs/kit>cookie': 0.7.2
   echarts@<6.1.0: ^6.1.0
   esbuild: 0.28.1
   read-yaml-file: 2.1.0
@@ -28,3 +27,7 @@ minimumReleaseAgeExclude:
   - postcss@8.5.18 || 8.5.23
   - js-yaml@4.3.1
   - nanoid@3.3.16 || 3.3.18
+
+  # Stable SvelteKit 3 migration releases explicitly requested for this upgrade.
+  - "@sveltejs/kit@3.0.0"
+  - "@sveltejs/adapter-cloudflare@8.0.0"

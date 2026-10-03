@@ -18,8 +18,8 @@
     SidebarMenuSubButton,
     SidebarProvider,
     SidebarTrigger
-  } from '$lib/components/sidebar';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  } from '#lib/components/sidebar/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
   import { Code, Globe, House } from 'phosphor-svelte';
 </script>
 

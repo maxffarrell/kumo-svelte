@@ -5,8 +5,8 @@
   import SquaresFourIcon from 'phosphor-svelte/lib/SquaresFourIcon';
   import StackIcon from 'phosphor-svelte/lib/StackIcon';
   import { fade, scale } from 'svelte/transition';
-  import { Badge } from '$lib/components/badge';
-  import { cn } from '$lib/utils/cn';
+  import { Badge } from '#lib/components/badge/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import { CANONICAL_DOCS } from './canonicalDocs';
   import { componentItems, blockItems, type NavItem } from './nav';
 

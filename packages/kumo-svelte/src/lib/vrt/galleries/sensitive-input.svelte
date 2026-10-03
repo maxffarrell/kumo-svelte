@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { SensitiveInput } from '$lib/components/sensitive-input';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { SensitiveInput } from '#lib/components/sensitive-input/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const sizes = ['xs', 'sm', 'base', 'lg'] as const;
   const secret = 'sk_live_abc123xyz789';

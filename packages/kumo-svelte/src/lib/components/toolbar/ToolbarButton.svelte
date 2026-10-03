@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import Button from '$lib/components/button/Button.svelte';
+  import Button from '#lib/components/button/Button.svelte';
   import { getToolbarContext, toolbarControlClassName } from './context';
 
   export interface Props {

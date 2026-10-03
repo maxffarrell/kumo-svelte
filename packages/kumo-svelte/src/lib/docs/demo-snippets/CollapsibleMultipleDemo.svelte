@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Collapsible } from '$lib/components/collapsible';
-  import { Text } from '$lib/components/text';
+  import { Collapsible } from '#lib/components/collapsible/index.js';
+  import { Text } from '#lib/components/text/index.js';
 
   let open1 = $state(false);
   let open2 = $state(false);

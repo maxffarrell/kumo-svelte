@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export const KUMO_PAGE_HEADER_VARIANTS = {
     spacing: {
@@ -35,8 +35,8 @@
 
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { Breadcrumbs, type BreadcrumbsItem } from '$lib/components/breadcrumbs';
-  import { Tabs, type TabsItem } from '$lib/components/tabs';
+  import { Breadcrumbs, type BreadcrumbsItem } from '#lib/components/breadcrumbs/index.js';
+  import { Tabs, type TabsItem } from '#lib/components/tabs/index.js';
 
   interface Props {
     breadcrumbs?: BreadcrumbsItem[];

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Radio } from '$lib/components/radio';
+  import { Radio } from '#lib/components/radio/index.js';
 </script>
 
 <Radio.Group legend="Preferences" controlPosition="end" defaultValue="a">

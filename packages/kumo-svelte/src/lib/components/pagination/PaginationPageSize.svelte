@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { Select } from '$lib/components/select';
-  import { cn } from '$lib/utils/cn';
+  import { Select } from '#lib/components/select/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import { getPaginationContext } from './context';
 
   const DEFAULT_PAGE_SIZE_OPTIONS = [25, 50, 100, 250] as const;

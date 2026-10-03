@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Autocomplete } from '$lib/components/autocomplete';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Autocomplete } from '#lib/components/autocomplete/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const countries = [
     { label: 'United States', value: 'us' },

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { Checkbox } from '$lib/components/checkbox';
-  import { Field } from '$lib/components/field';
-  import { Input } from '$lib/components/input';
-  import { Switch } from '$lib/components/switch';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Checkbox } from '#lib/components/checkbox/index.js';
+  import { Field } from '#lib/components/field/index.js';
+  import { Input } from '#lib/components/input/index.js';
+  import { Switch } from '#lib/components/switch/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="default" label="default">

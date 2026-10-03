@@ -25,9 +25,9 @@
 
 <script lang="ts">
   import X from 'phosphor-svelte/lib/X';
-  import { Button } from '$lib/components/button';
-  import { inputVariants, type KumoInputVariant } from '$lib/components/input/input-variants';
-  import { cn } from '$lib/utils/cn';
+  import { Button } from '#lib/components/button/index.js';
+  import { inputVariants, type KumoInputVariant } from '#lib/components/input/input-variants.js';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props {
     value?: string[];

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { TooltipProvider } from '$lib/components/tooltip';
+  import { Button } from '#lib/components/button/index.js';
+  import { TooltipProvider } from '#lib/components/tooltip/index.js';
   import Tooltip from './Tooltip.svelte';
-  import { Text } from '$lib/components/text';
+  import { Text } from '#lib/components/text/index.js';
 </script>
 
 <TooltipProvider>

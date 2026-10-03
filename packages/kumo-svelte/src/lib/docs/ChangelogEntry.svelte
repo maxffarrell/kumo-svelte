@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Text } from '$lib/components/text';
-  import { cn } from '$lib/utils/cn';
+  import { Text } from '#lib/components/text/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import { markdownToHtml } from './changelog';
 
   interface Props {

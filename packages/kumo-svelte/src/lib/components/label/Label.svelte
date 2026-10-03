@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export const KUMO_LABEL_VARIANTS = {} as const;
   export const KUMO_LABEL_DEFAULT_VARIANTS = {} as const;
@@ -18,8 +18,8 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import Info from 'phosphor-svelte/lib/Info';
-  import { Button } from '$lib/components/button';
-  import { Tooltip } from '$lib/components/tooltip';
+  import { Button } from '#lib/components/button/index.js';
+  import { Tooltip } from '#lib/components/tooltip/index.js';
 
   interface Props extends KumoLabelVariantsProps {
     children?: Snippet;

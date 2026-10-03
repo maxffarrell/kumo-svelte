@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { InlineCopyText } from '$lib/components/inline-copy-text';
+  import { InlineCopyText } from '#lib/components/inline-copy-text/index.js';
 </script>
 
 <InlineCopyText

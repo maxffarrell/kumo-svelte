@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Input from '$lib/components/input/Input.svelte';
+  import Input from '#lib/components/input/Input.svelte';
   import { getToolbarContext, toolbarControlClassName } from './context';
 
   export interface Props {

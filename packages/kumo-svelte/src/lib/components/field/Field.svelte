@@ -1,6 +1,6 @@
 <script lang="ts" module>
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export type FieldErrorMatch =
     | boolean
@@ -48,7 +48,7 @@
 </script>
 
 <script lang="ts">
-  import Label from '$lib/components/label/Label.svelte';
+  import Label from '#lib/components/label/Label.svelte';
 
   type FieldLabel = string | Snippet;
   type FieldError = string | { message: FieldText; match: FieldErrorMatch };

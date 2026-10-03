@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   /** Text variant and size definitions mapping names to their Tailwind classes. */
   export const KUMO_TEXT_VARIANTS = {

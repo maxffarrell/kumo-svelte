@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { DatePicker } from '$lib/components/date-picker';
-  import { Popover } from '$lib/components/popover';
+  import { Button } from '#lib/components/button/index.js';
+  import { DatePicker } from '#lib/components/date-picker/index.js';
+  import { Popover } from '#lib/components/popover/index.js';
   import { CalendarDotsIcon } from 'phosphor-svelte';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   /** Fixed dates for deterministic VRT — do not use `new Date()` for display month/selection. */
   const fixedDate = new Date(2024, 0, 15);

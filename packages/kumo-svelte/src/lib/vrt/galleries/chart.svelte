@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as echarts from 'echarts';
-  import { Chart, ChartLegend, GlobeMap, TimeseriesChart } from '$lib/components/chart';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Chart, ChartLegend, GlobeMap, TimeseriesChart } from '#lib/components/chart/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   /** Fixed epoch — avoids Date.now() so VRT data stays deterministic. */
   const BASE_TS = 1_700_000_000_000;

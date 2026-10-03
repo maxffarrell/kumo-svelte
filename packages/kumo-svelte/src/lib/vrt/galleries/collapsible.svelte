@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Collapsible, Text } from '$lib';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Collapsible, Text } from '#lib';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="collapsed" label="collapsed">

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { SkeletonLine } from '$lib/components/loader';
-  import { cn } from '$lib/utils/cn';
+  import { SkeletonLine } from '#lib/components/loader/index.js';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props {
     variant?: 'large' | 'small';

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { Popover } from '$lib/components/popover';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Button } from '#lib/components/button/index.js';
+  import { Popover } from '#lib/components/popover/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const sides = ['top', 'bottom', 'left', 'right'] as const;
 </script>

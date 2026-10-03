@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { getSidebarContext } from './context';
   interface Props { children?: Snippet; class?: string; onclick?: (event: MouseEvent) => void; [key: string]: unknown; }
   let { children, class: className, onclick, ...rest }: Props = $props();

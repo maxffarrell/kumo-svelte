@@ -3,9 +3,9 @@
   import CaretDoubleRight from 'phosphor-svelte/lib/CaretDoubleRight';
   import CaretLeft from 'phosphor-svelte/lib/CaretLeft';
   import CaretRight from 'phosphor-svelte/lib/CaretRight';
-  import { InputGroup, InputGroupButton, InputGroupInput } from '$lib/components/input-group';
-  import { Select } from '$lib/components/select';
-  import { cn } from '$lib/utils/cn';
+  import { InputGroup, InputGroupButton, InputGroupInput } from '#lib/components/input-group/index.js';
+  import { Select } from '#lib/components/select/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import { clamp, getPaginationContext } from './context';
 
   type Controls = 'full' | 'simple';

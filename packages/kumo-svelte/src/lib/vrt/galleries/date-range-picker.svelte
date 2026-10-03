@@ -1,7 +1,7 @@
 <script lang="ts">
   import { CalendarDate } from '@internationalized/date';
-  import { DateRangePicker } from '$lib/components/date-range-picker';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { DateRangePicker } from '#lib/components/date-range-picker/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   /** Fixed dates for deterministic VRT — do not use `new Date()` or today. */
   const fixedPlaceholder = new CalendarDate(2024, 1, 1);

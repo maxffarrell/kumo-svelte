@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { LinkButton } from '$lib/components/button';
+  import { LinkButton } from '#lib/components/button/index.js';
 
   const notFound = $derived(page.status === 404);
   const title = $derived(notFound ? 'Page not found' : 'Something went wrong');

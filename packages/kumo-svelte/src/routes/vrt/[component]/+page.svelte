@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { loadGallery } from '$lib/vrt/registry';
+  import { loadGallery } from '#lib/vrt/registry.js';
 
   const slug = $derived(page.params.component);
   const gallery = $derived(loadGallery(slug));

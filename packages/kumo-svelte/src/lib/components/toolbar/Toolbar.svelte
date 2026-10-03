@@ -8,7 +8,7 @@
 
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import {
     KUMO_TOOLBAR_DEFAULT_VARIANTS,
     KUMO_TOOLBAR_VARIANTS,

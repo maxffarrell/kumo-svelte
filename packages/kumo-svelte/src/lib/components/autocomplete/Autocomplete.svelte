@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { onMount } from 'svelte';
-  import Field from '$lib/components/field/Field.svelte';
-  import { cn } from '$lib/utils/cn';
+  import Field from '#lib/components/field/Field.svelte';
+  import { cn } from '#lib/utils/cn.js';
   import {
     normalizeAutocompleteItem,
     setAutocompleteContext,

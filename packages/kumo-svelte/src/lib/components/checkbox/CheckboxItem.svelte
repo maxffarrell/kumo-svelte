@@ -9,7 +9,7 @@
     checkboxVariantClasses,
     type CheckboxVariant
   } from './Checkbox.svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface CheckboxGroupContext {
     readonly controlFirst: boolean;

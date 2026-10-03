@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Grid, GridItem } from '$lib/components/grid';
-  import { Surface } from '$lib/components/surface';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Grid, GridItem } from '#lib/components/grid/index.js';
+  import { Surface } from '#lib/components/surface/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const variants = [
     '2up',

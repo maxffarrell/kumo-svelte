@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { gallerySlugs } from '$lib/vrt/registry';
+  import { gallerySlugs } from '#lib/vrt/registry.js';
 </script>
 
 <main style="padding: 2rem; max-width: 48rem; margin: 0 auto;">

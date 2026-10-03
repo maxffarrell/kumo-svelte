@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Flow } from '$lib/components/flow';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Flow } from '#lib/components/flow/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <!-- Fixed dimensions keep captures stable; node ids are explicit for connector paths. -->

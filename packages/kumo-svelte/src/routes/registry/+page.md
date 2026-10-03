@@ -4,12 +4,12 @@ description: "AI-readable component metadata for LLMs and code generation tools.
 ---
 
 <script>
-  import Callout from '$lib/docs/Callout.svelte';
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
-  import ComponentRegistryView from '$lib/docs/ComponentRegistryView.svelte';
-  import CodeBlock from '$lib/docs/CodeBlock.svelte';
-  import PropsTable from '$lib/docs/PropsTable.svelte';
+  import Callout from '#lib/docs/Callout.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
+  import ComponentRegistryView from '#lib/docs/ComponentRegistryView.svelte';
+  import CodeBlock from '#lib/docs/CodeBlock.svelte';
+  import PropsTable from '#lib/docs/PropsTable.svelte';
 </script>
 
 

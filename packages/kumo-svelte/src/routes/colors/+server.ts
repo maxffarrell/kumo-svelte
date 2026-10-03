@@ -1,4 +1,4 @@
-import { canonicalDocRedirect } from '$lib/docs/canonicalDocs';
+import { canonicalDocRedirect } from '#lib/docs/canonicalDocs.js';
 import type { RequestHandler } from './$types';
 
 export const prerender = false;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Popover as PopoverPrimitive } from 'bits-ui';
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import PopoverContent from './PopoverContent.svelte';
   import PopoverDescription from './PopoverDescription.svelte';
   import PopoverTitle from './PopoverTitle.svelte';

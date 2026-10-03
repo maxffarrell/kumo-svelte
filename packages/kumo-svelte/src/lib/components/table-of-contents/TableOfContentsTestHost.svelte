@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TableOfContents } from '$lib/components/table-of-contents';
+  import { TableOfContents } from '#lib/components/table-of-contents/index.js';
 
   interface Props {
     active?: boolean;

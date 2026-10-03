@@ -2,7 +2,7 @@
   import CaretUpDown from 'phosphor-svelte/lib/CaretUpDown';
   import type { Snippet } from 'svelte';
   import X from 'phosphor-svelte/lib/X';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { embeddedInputStyles, getComboboxContext, iconSizes, inputStyles, type ComboboxSize } from './context';
   import { Combobox as ComboboxPrimitive } from 'bits-ui';
 

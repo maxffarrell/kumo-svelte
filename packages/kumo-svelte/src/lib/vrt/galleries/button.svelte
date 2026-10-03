@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Button } from '#lib/components/button/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
   import { Gear } from 'phosphor-svelte';
 
   const variants = [

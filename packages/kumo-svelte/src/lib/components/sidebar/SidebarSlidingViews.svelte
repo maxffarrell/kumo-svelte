@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { setContext } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   interface Props { children?: Snippet; class?: string; activeKey: string; direction?: 'left' | 'right'; [key: string]: unknown; }
   let { children, class: className, activeKey, direction = 'left', ...rest }: Props = $props();
   setContext('kumo-sidebar-sliding-view', {

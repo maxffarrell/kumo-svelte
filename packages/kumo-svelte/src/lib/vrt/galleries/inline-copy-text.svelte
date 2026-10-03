@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { InlineCopyText } from '$lib/components/inline-copy-text';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { InlineCopyText } from '#lib/components/inline-copy-text/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="default" label="default">

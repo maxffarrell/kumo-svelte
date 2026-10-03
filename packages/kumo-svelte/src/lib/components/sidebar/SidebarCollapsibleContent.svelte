@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { getContext } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { getSidebarContext } from './context';
   interface CollapsibleContext { get open(): boolean; get contentId(): string; get autoScrollOnOpen(): boolean; toggle(): void; completeOpenChange(): void; }
   interface Props { children?: Snippet; class?: string; [key: string]: unknown; }

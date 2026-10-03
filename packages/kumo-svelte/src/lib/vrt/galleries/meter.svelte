@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Meter } from '$lib/components/meter';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Meter } from '#lib/components/meter/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const values = [0, 25, 50, 75, 100] as const;
 </script>

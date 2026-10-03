@@ -6,7 +6,7 @@ contentLayout: "wide"
 ---
 
 <script>
-  import DemoRenderer from '$lib/docs/DemoRenderer.svelte';
+  import DemoRenderer from '#lib/docs/DemoRenderer.svelte';
 </script>
 
 

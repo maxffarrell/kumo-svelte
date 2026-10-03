@@ -25,8 +25,8 @@
   import Eye from 'phosphor-svelte/lib/Eye';
   import EyeSlash from 'phosphor-svelte/lib/EyeSlash';
   import type { Snippet } from 'svelte';
-  import { Field, type FieldErrorMatch } from '$lib/components/field';
-  import { cn } from '$lib/utils/cn';
+  import { Field, type FieldErrorMatch } from '#lib/components/field/index.js';
+  import { cn } from '#lib/utils/cn.js';
 
   type Mode = 'masked' | 'revealed' | 'empty';
   type FieldText = string | Snippet;

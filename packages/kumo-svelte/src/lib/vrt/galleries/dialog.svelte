@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { Dialog } from '$lib/components/dialog';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Button } from '#lib/components/button/index.js';
+  import { Dialog } from '#lib/components/dialog/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const sizes = ['sm', 'base', 'lg', 'xl'] as const;
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { Tooltip, TooltipProvider } from '$lib/components/tooltip';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Button } from '#lib/components/button/index.js';
+  import { Tooltip, TooltipProvider } from '#lib/components/tooltip/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
   import { Gear } from 'phosphor-svelte';
 
   const sides = ['top', 'bottom', 'left', 'right'] as const;

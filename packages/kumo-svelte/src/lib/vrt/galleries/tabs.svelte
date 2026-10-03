@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Tabs } from '$lib/components/tabs';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Tabs } from '#lib/components/tabs/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const basicItems = [
     { value: 'overview', label: 'Overview' },

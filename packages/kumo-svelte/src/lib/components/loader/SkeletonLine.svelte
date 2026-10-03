@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useKumoRandom } from '$lib/utils/random';
+  import { useKumoRandom } from '#lib/utils/random.js';
 
   interface Props {
     minWidth?: number;

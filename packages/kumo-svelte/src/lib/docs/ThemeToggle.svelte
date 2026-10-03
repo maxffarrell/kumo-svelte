@@ -3,8 +3,8 @@
   import MoonIcon from 'phosphor-svelte/lib/MoonIcon';
   import SunIcon from 'phosphor-svelte/lib/SunIcon';
   import { onMount, type Component } from 'svelte';
-  import { Button } from '$lib/components/button';
-  import { DropdownMenu } from '$lib/components/dropdown-menu';
+  import { Button } from '#lib/components/button/index.js';
+  import { DropdownMenu } from '#lib/components/dropdown-menu/index.js';
 
   type ThemePreference = 'light' | 'dark' | 'system';
 

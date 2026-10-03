@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Link, LinkExternalIcon } from '$lib/components/link';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Link, LinkExternalIcon } from '#lib/components/link/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const variants = ['inline', 'current', 'plain'] as const;
 </script>

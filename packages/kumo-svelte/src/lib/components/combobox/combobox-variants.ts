@@ -1,4 +1,4 @@
-import { cn } from '$lib/utils/cn';
+import { cn } from '#lib/utils/cn.js';
 
 /** Combobox item classes copied verbatim from upstream Kumo. */
 export const KUMO_COMBOBOX_ITEM_CLASSES = cn(

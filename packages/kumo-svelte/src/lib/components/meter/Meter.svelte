@@ -12,7 +12,7 @@
 </script>
 
 <script lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props extends KumoMeterVariantsProps {
     class?: string;

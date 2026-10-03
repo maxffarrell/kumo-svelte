@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Checkbox } from '$lib/components/checkbox';
-  import { cn } from '$lib/utils/cn';
+  import { Checkbox } from '#lib/components/checkbox/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import TableCell from './TableCell.svelte';
 
   interface Props {

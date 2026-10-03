@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Input } from '$lib/components/input';
+  import { Input } from '#lib/components/input/index.js';
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">

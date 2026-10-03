@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Banner } from '$lib/components/banner';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Banner } from '#lib/components/banner/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
   import { Info, WarningCircle, XCircle } from 'phosphor-svelte';
 
   const variants = ['default', 'alert', 'error', 'secondary'] as const;

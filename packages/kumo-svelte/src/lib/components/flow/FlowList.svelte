@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, tick, type Snippet } from 'svelte';
   import { get } from 'svelte/store';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import Connectors from './Connectors.svelte';
   import {
     createDescendantGroup,

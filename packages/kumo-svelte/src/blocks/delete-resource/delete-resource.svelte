@@ -20,11 +20,11 @@
 </script>
 
 <script lang="ts">
-  import { Banner } from '$lib/components/banner';
-  import { Button } from '$lib/components/button';
-  import { Dialog } from '$lib/components/dialog';
-  import { Input } from '$lib/components/input';
-  import { cn } from '$lib/utils/cn';
+  import { Banner } from '#lib/components/banner/index.js';
+  import { Button } from '#lib/components/button/index.js';
+  import { Dialog } from '#lib/components/dialog/index.js';
+  import { Input } from '#lib/components/input/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
   import WarningCircle from 'phosphor-svelte/lib/WarningCircle';

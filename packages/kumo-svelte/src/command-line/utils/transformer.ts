@@ -29,7 +29,8 @@ function parseImports(content: string): ParsedImport[] {
 }
 
 function shouldTransformToKumo(path: string): boolean {
-  if (path.startsWith('$lib/components/') || path.startsWith('$lib/utils/')) {
+  if (path.startsWith('#lib/components/') || path.startsWith('#lib/utils/') ||
+      path.startsWith('$lib/components/') || path.startsWith('$lib/utils/')) {
     return true;
   }
 

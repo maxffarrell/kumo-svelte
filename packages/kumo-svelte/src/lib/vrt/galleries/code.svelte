@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Code, CodeBlock, CodeHighlighted } from '$lib/components/code';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Code, CodeBlock, CodeHighlighted } from '#lib/components/code/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const inlineTs = 'const x = 1;';
   const blockTs = 'const sum = (a: number, b: number) => a + b;';

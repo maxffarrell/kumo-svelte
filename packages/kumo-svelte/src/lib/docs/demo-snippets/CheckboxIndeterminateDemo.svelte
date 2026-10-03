@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Checkbox } from '$lib/components/checkbox';
+  import { Checkbox } from '#lib/components/checkbox/index.js';
 
   let indeterminate = $state(true);
 </script>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import ArrowClockwise from 'phosphor-svelte/lib/ArrowClockwise';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import Button from './Button.svelte';
 
   interface Props {

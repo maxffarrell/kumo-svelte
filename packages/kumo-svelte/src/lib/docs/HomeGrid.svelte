@@ -6,47 +6,47 @@
     import Plus from "phosphor-svelte/lib/Plus";
     import MagnifyingGlass from "phosphor-svelte/lib/MagnifyingGlass";
     import X from "phosphor-svelte/lib/X";
-    import { Autocomplete } from "$lib/components/autocomplete";
-    import { Badge } from "$lib/components/badge";
-    import { Banner } from "$lib/components/banner";
-    import { Button } from "$lib/components/button";
-    import { Checkbox } from "$lib/components/checkbox";
-    import { ClipboardText } from "$lib/components/clipboard-text";
-    import { CodeHighlighted } from "$lib/components/code-highlighted";
-    import { Collapsible } from "$lib/components/collapsible";
-    import { Combobox } from "$lib/components/combobox";
-    import { DatePicker } from "$lib/components/date-picker";
-    import { Dialog } from "$lib/components/dialog";
-    import { DropdownMenu } from "$lib/components/dropdown-menu";
-    import { Empty } from "$lib/components/empty";
-    import { Flow } from "$lib/components/flow";
-    import { Grid, GridItem } from "$lib/components/grid";
-    import { Input } from "$lib/components/input";
-    import { InputArea } from "$lib/components/input-area";
+    import { Autocomplete } from "#lib/components/autocomplete/index.js";
+    import { Badge } from "#lib/components/badge/index.js";
+    import { Banner } from "#lib/components/banner/index.js";
+    import { Button } from "#lib/components/button/index.js";
+    import { Checkbox } from "#lib/components/checkbox/index.js";
+    import { ClipboardText } from "#lib/components/clipboard-text/index.js";
+    import { CodeHighlighted } from "#lib/components/code-highlighted/index.js";
+    import { Collapsible } from "#lib/components/collapsible/index.js";
+    import { Combobox } from "#lib/components/combobox/index.js";
+    import { DatePicker } from "#lib/components/date-picker/index.js";
+    import { Dialog } from "#lib/components/dialog/index.js";
+    import { DropdownMenu } from "#lib/components/dropdown-menu/index.js";
+    import { Empty } from "#lib/components/empty/index.js";
+    import { Flow } from "#lib/components/flow/index.js";
+    import { Grid, GridItem } from "#lib/components/grid/index.js";
+    import { Input } from "#lib/components/input/index.js";
+    import { InputArea } from "#lib/components/input-area/index.js";
     import {
         InputGroup,
         InputGroupAddon,
         InputGroupInput,
         InputGroupSuffix,
-    } from "$lib/components/input-group";
-    import { Label } from "$lib/components/label";
-    import { LayerCard } from "$lib/components/layer-card";
-    import { Link } from "$lib/components/link";
-    import { Loader } from "$lib/components/loader";
-    import { Meter } from "$lib/components/meter";
-    import { Pagination, PaginationControls } from "$lib/components/pagination";
+    } from "#lib/components/input-group/index.js";
+    import { Label } from "#lib/components/label/index.js";
+    import { LayerCard } from "#lib/components/layer-card/index.js";
+    import { Link } from "#lib/components/link/index.js";
+    import { Loader } from "#lib/components/loader/index.js";
+    import { Meter } from "#lib/components/meter/index.js";
+    import { Pagination, PaginationControls } from "#lib/components/pagination/index.js";
     import {
         PopoverContent,
         PopoverDescription,
         PopoverRoot,
         PopoverTitle,
         PopoverTrigger,
-    } from "$lib/components/popover";
-    import { Radio } from "$lib/components/radio";
-    import { Select } from "$lib/components/select";
-    import { SensitiveInput } from "$lib/components/sensitive-input";
-    import { SkeletonLine } from "$lib/components/loader";
-    import { Switch } from "$lib/components/switch";
+    } from "#lib/components/popover/index.js";
+    import { Radio } from "#lib/components/radio/index.js";
+    import { Select } from "#lib/components/select/index.js";
+    import { SensitiveInput } from "#lib/components/sensitive-input/index.js";
+    import { SkeletonLine } from "#lib/components/loader/index.js";
+    import { Switch } from "#lib/components/switch/index.js";
     import {
         Table,
         TableBody,
@@ -54,14 +54,14 @@
         TableHead,
         TableHeader,
         TableRow,
-    } from "$lib/components/table";
-    import { TableOfContents } from "$lib/components/table-of-contents";
-    import { Tabs } from "$lib/components/tabs";
-    import { Text } from "$lib/components/text";
-    import { Toasty, createKumoToastManager } from "$lib/components/toasty";
-    import { Toolbar } from "$lib/components/toolbar";
-    import { Tooltip } from "$lib/components/tooltip";
-    import CommandPaletteBasicDemo from "$lib/docs/demo-snippets/CommandPaletteBasicDemo.svelte";
+    } from "#lib/components/table/index.js";
+    import { TableOfContents } from "#lib/components/table-of-contents/index.js";
+    import { Tabs } from "#lib/components/tabs/index.js";
+    import { Text } from "#lib/components/text/index.js";
+    import { Toasty, createKumoToastManager } from "#lib/components/toasty/index.js";
+    import { Toolbar } from "#lib/components/toolbar/index.js";
+    import { Tooltip } from "#lib/components/tooltip/index.js";
+    import CommandPaletteBasicDemo from "#lib/docs/demo-snippets/CommandPaletteBasicDemo.svelte";
 
     const options = [
         { label: "All deployed versions", value: "all" },

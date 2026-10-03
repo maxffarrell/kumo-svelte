@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   export const KUMO_BUTTON_GROUP_VARIANTS = {} as const;
   export const KUMO_BUTTON_GROUP_DEFAULT_VARIANTS = {} as const;
   export const KUMO_BUTTON_GROUP_STYLING = {

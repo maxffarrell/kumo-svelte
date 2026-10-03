@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import Check from 'phosphor-svelte/lib/Check';
   import { getComboboxContext, normalizeComboboxItem, type ComboboxItem } from './context';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import LinkButton from '$lib/components/button/LinkButton.svelte';
+  import LinkButton from '#lib/components/button/LinkButton.svelte';
   import { getToolbarContext, toolbarControlClassName } from './context';
 
   export interface Props {

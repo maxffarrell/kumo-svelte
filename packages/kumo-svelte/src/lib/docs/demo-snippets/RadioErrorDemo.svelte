@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Radio } from '$lib/components/radio';
+  import { Radio } from '#lib/components/radio/index.js';
 </script>
 
 <div class="grid grid-cols-2 gap-6">

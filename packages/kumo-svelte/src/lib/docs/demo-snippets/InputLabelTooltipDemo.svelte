@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Input } from '$lib/components/input';
-  import { Label } from '$lib/components/label';
+  import { Input } from '#lib/components/input/index.js';
+  import { Label } from '#lib/components/label/index.js';
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">

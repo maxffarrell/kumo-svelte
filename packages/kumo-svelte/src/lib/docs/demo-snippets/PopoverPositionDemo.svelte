@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { Popover } from '$lib/components/popover';
+  import { Button } from '#lib/components/button/index.js';
+  import { Popover } from '#lib/components/popover/index.js';
 </script>
 
 <div class="flex flex-wrap gap-4">

@@ -4,10 +4,10 @@ description: "Understanding how Kumo delivers different types of building blocks
 ---
 
 <script>
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
-  import CodeBlock from '$lib/docs/CodeBlock.svelte';
-  import PropsTable from '$lib/docs/PropsTable.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
+  import CodeBlock from '#lib/docs/CodeBlock.svelte';
+  import PropsTable from '#lib/docs/PropsTable.svelte';
 </script>
 
 

@@ -45,4 +45,4 @@ export function dialogVariants({
     KUMO_DIALOG_VARIANTS.size[size].classes
   );
 }
-import { cn } from '$lib/utils/cn';
+import { cn } from '#lib/utils/cn.js';

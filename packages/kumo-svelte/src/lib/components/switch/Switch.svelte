@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export type SwitchSize = 'sm' | 'base' | 'lg';
   export type SwitchVariant = 'default' | 'neutral';

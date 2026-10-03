@@ -4,8 +4,8 @@
   import Warning from 'phosphor-svelte/lib/Warning';
   import WarningOctagon from 'phosphor-svelte/lib/WarningOctagon';
   import X from 'phosphor-svelte/lib/X';
-  import { Button } from '$lib/components/button';
-  import { cn } from '$lib/utils/cn';
+  import { Button } from '#lib/components/button/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import type { KumoToastObject, KumoToastVariant } from './manager.svelte';
 
   interface Props {

@@ -5,8 +5,8 @@ sourceFile: "blocks/resource-list"
 ---
 
 <script>
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
 </script>
 
 <!-- Hero Demo -->

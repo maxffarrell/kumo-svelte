@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import Check from 'phosphor-svelte/lib/Check';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props {
     children?: Snippet;

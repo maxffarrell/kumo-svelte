@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { getPaginationContext } from './context';
 
   interface RenderProps {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { LayerCard } from '$lib/components/layer-card';
-  import { cn } from '$lib/utils/cn';
+  import { LayerCard } from '#lib/components/layer-card/index.js';
+  import { cn } from '#lib/utils/cn.js';
 
   type SurfaceColor = 'primary' | 'secondary';
 

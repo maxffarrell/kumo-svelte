@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import {
     setSidebarContext,
     type SidebarCollapsible,

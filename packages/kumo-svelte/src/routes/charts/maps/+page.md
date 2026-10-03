@@ -5,10 +5,10 @@ sourceFile: "components/chart"
 ---
 
 <script>
-  import CodeBlock from '$lib/docs/CodeBlock.svelte';
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
-  import PropsTable from '$lib/docs/PropsTable.svelte';
+  import CodeBlock from '#lib/docs/CodeBlock.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
+  import PropsTable from '#lib/docs/PropsTable.svelte';
 
   const cloudflareLocationsCode = `const cloudflareLocations = [
   { city: "San Francisco", iata: "SFO", lat: 37.77, lon: -122.42 },

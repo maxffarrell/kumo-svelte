@@ -29,8 +29,8 @@
   import type { Snippet } from 'svelte';
   import X from 'phosphor-svelte/lib/X';
   import { AlertDialog, Dialog } from 'bits-ui';
-  import { Button } from '$lib/components/button';
-  import { cn } from '$lib/utils/cn';
+  import { Button } from '#lib/components/button/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import { getLayerDialogContext } from './context';
 
   let {

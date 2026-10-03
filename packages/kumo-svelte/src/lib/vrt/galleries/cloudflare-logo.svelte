@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { CloudflareLogo, PoweredByCloudflare } from '$lib/components/cloudflare-logo';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { CloudflareLogo, PoweredByCloudflare } from '#lib/components/cloudflare-logo/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const variants = ['glyph', 'full'] as const;
   const colors = ['color', 'black', 'white'] as const;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { LayerCard } from '$lib/components/layer-card';
+  import { LayerCard } from '#lib/components/layer-card/index.js';
 
   interface Props {
     layered?: boolean;

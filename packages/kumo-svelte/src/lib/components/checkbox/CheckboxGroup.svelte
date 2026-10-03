@@ -2,7 +2,7 @@
   import { Checkbox as CheckboxPrimitive } from 'bits-ui';
   import { setContext } from 'svelte';
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props {
     children?: Snippet;

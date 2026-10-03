@@ -16,7 +16,7 @@
   import { Checkbox as CheckboxPrimitive } from 'bits-ui';
   import Check from 'phosphor-svelte/lib/Check';
   import Minus from 'phosphor-svelte/lib/Minus';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import type { Snippet } from 'svelte';
 
   interface Props {

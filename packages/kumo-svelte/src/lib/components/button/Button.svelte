@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
-  import { Loader } from '$lib/components/loader';
-  import { Tooltip, TooltipProvider } from '$lib/components/tooltip';
+  import { cn } from '#lib/utils/cn.js';
+  import { Loader } from '#lib/components/loader/index.js';
+  import { Tooltip, TooltipProvider } from '#lib/components/tooltip/index.js';
 
   export const KUMO_BUTTON_VARIANTS = {
     shape: {

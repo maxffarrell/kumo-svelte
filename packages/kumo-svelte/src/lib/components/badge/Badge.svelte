@@ -39,7 +39,7 @@
 
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props {
     children?: Snippet;

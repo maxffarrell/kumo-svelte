@@ -1,9 +1,9 @@
 <script lang="ts">
   import '@fontsource-variable/inter';
-  import '$lib/styles.css';
+  import '#lib/styles.css';
   import { page } from '$app/state';
   import type { Snippet } from 'svelte';
-  import { TooltipProvider } from '$lib/components/tooltip';
+  import { TooltipProvider } from '#lib/components/tooltip/index.js';
 
   let { children }: { children: Snippet } = $props();
 

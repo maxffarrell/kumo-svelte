@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Table } from '$lib/components/table';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Table } from '#lib/components/table/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="default" label="header and rows">

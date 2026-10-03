@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { Tooltip, TooltipProvider } from '$lib/components/tooltip';
+  import { Button } from '#lib/components/button/index.js';
+  import { Tooltip, TooltipProvider } from '#lib/components/tooltip/index.js';
 
   const longContent =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.';

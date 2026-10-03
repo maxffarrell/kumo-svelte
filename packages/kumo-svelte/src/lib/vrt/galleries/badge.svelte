@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Badge } from '$lib/components/badge';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Badge } from '#lib/components/badge/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const filledVariants = [
     'primary',

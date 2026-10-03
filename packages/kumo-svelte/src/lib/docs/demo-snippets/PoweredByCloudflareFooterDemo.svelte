@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { PoweredByCloudflare } from '$lib/components/cloudflare-logo';
+  import { PoweredByCloudflare } from '#lib/components/cloudflare-logo/index.js';
 </script>
 
 <footer class="flex w-full items-center justify-between rounded-lg border border-kumo-hairline bg-kumo-elevated px-6 py-4">

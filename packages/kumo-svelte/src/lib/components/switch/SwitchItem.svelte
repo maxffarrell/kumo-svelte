@@ -9,7 +9,7 @@
     type SwitchSize,
     type SwitchVariant
   } from './Switch.svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface SwitchGroupContext {
     readonly controlFirst: boolean;

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Checkbox } from '$lib/components/checkbox';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Checkbox } from '#lib/components/checkbox/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="unchecked" label="unchecked">

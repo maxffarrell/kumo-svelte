@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Combobox } from '$lib/components/combobox';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Combobox } from '#lib/components/combobox/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const fruits = ['Apple', 'Banana', 'Cherry', 'Dragonfruit', 'Elderberry'];
 

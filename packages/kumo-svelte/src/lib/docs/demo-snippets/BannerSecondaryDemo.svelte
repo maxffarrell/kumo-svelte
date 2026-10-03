@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Banner } from '$lib/components/banner';
+  import { Banner } from '#lib/components/banner/index.js';
   import Info from 'phosphor-svelte/lib/Info';
 </script>
 

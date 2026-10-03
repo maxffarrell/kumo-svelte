@@ -56,7 +56,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import { Tabs as TabsPrimitive } from 'bits-ui';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   interface Props {
     tabs?: TabsItem[];

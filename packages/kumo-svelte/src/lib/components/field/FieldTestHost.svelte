@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Input } from '$lib/components/input';
+  import { Input } from '#lib/components/input/index.js';
   import Field, { type FieldErrorMatch } from './Field.svelte';
 
   interface Props {

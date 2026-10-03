@@ -1,7 +1,7 @@
 <script lang="ts">
   import Bell from 'phosphor-svelte/lib/Bell';
-  import { Button } from '$lib/components/button';
-  import { Popover } from '$lib/components/popover';
+  import { Button } from '#lib/components/button/index.js';
+  import { Popover } from '#lib/components/popover/index.js';
 </script>
 
 <Popover.Root>

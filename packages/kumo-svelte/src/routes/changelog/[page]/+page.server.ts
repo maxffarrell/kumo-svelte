@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { getChangelogPage } from '$lib/docs/changelog.server';
+import { getChangelogPage } from '#lib/docs/changelog.server.js';
 
 export const prerender = false;
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ItemSnippet } from './context';
   import { getAutocompleteContext } from './context';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { Combobox as ComboboxPrimitive } from 'bits-ui';
 
   export interface Props {

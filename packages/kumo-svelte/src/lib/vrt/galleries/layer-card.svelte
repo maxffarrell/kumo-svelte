@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { LayerCard } from '$lib/components/layer-card';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { LayerCard } from '#lib/components/layer-card/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="simple" label="simple surface">

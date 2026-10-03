@@ -1,6 +1,6 @@
 <script module lang="ts">
-  import { cn } from '$lib/utils/cn';
-  import { resolveVariant } from '$lib/utils/variants';
+  import { cn } from '#lib/utils/cn.js';
+  import { resolveVariant } from '#lib/utils/variants.js';
 
   export const KUMO_EMPTY_VARIANTS = {
     size: {
@@ -43,8 +43,8 @@
   import type { Snippet } from 'svelte';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
-  import { Button } from '$lib/components/button';
-  import { Text } from '$lib/components/text';
+  import { Button } from '#lib/components/button/index.js';
+  import { Text } from '#lib/components/text/index.js';
 
   interface Props extends KumoEmptyVariantsProps {
     children?: Snippet;

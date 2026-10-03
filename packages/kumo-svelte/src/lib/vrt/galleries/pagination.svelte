@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Pagination } from '$lib/components/pagination';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Pagination } from '#lib/components/pagination/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   let interactivePage = $state(1);
   let pageSize = $state(25);

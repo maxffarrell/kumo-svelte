@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import KumoToastContent from './KumoToastContent.svelte';
   import { toastRootClass, type KumoToastAction, type KumoToastVariant } from './manager.svelte';
 

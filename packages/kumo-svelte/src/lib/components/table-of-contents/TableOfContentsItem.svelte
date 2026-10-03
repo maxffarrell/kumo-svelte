@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   const ITEM_BASE = 'block w-full truncate border-l-2 border-transparent py-0.5 pl-4 text-left text-sm no-underline';
 

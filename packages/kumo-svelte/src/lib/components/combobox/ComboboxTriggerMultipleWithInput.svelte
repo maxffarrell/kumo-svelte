@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { getComboboxContext, inputStyles, type ComboboxInputSide, type ComboboxSize } from './context';
   import { Combobox as ComboboxPrimitive } from 'bits-ui';
 

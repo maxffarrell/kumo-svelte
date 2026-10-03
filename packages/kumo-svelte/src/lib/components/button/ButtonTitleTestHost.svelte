@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TooltipProvider } from '$lib/components/tooltip';
+  import { TooltipProvider } from '#lib/components/tooltip/index.js';
   import Button from './Button.svelte';
 
   let { onclick }: { onclick?: (event: MouseEvent) => void } = $props();

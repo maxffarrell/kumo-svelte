@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { setFlowContext, type FlowAlign, type FlowOrientation } from './context';
   import FlowList from './FlowList.svelte';
 

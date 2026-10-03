@@ -4,9 +4,9 @@ description: "Joins a primary action and a related trigger into a single split b
 sourceFile: "components/button-group"
 ---
 <script>
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
-  import PropsTable from '$lib/docs/PropsTable.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
+  import PropsTable from '#lib/docs/PropsTable.svelte';
 </script>
 
 <ComponentSection><ComponentExample demo="ButtonGroupDemo" /></ComponentSection>

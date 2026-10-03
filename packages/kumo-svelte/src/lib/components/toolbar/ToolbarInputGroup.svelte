@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { InputGroup } from '$lib/components/input-group';
+  import { InputGroup } from '#lib/components/input-group/index.js';
   import { getToolbarContext, toolbarControlClassName } from './context';
 
   export interface Props {

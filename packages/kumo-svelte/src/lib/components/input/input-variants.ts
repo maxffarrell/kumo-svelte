@@ -1,5 +1,5 @@
-import { cn } from '$lib/utils/cn';
-import { resolveVariant } from '$lib/utils/variants';
+import { cn } from '#lib/utils/cn.js';
+import { resolveVariant } from '#lib/utils/variants.js';
 
 /** Input size and variant definitions mapping names to their Tailwind classes. */
 export const KUMO_INPUT_VARIANTS = {

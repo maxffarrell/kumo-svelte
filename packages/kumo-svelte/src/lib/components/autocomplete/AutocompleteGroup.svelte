@@ -5,7 +5,7 @@
     setAutocompleteGroupContext,
     type AutocompleteItem
   } from './context';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export interface Props {
     children?: Snippet;

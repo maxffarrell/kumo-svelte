@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Select } from '$lib/components/select';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Select } from '#lib/components/select/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const sizes = ['xs', 'sm', 'base', 'lg'] as const;
 

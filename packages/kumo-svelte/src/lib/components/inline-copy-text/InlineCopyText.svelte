@@ -1,6 +1,6 @@
 <script module lang="ts">
-  import { cn } from '$lib/utils/cn';
-  import type { KumoTextSize, KumoTextVariant, TextElement } from '$lib/components/text';
+  import { cn } from '#lib/utils/cn.js';
+  import type { KumoTextSize, KumoTextVariant, TextElement } from '#lib/components/text/index.js';
 
   export const KUMO_INLINE_COPY_TEXT_VARIANTS = {} as const;
   export const KUMO_INLINE_COPY_TEXT_DEFAULT_VARIANTS = {} as const;
@@ -34,7 +34,7 @@
   import { onDestroy } from 'svelte';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
-  import { Text } from '$lib/components/text';
+  import { Text } from '#lib/components/text/index.js';
 
   let { children, value, variant = 'mono-secondary', size, bold, truncate = true, as = 'span', onCopy, labels = {}, class: className, onclick, ...rest }: InlineCopyTextProps = $props();
   let content: HTMLSpanElement;
@@ -50,7 +50,7 @@
     bold,
     truncate,
     DANGEROUS_className: textHoverClasses
-  } as import('$lib/components/text').TextProps);
+  } as import('#lib/components/text/index.js').TextProps);
 
   onDestroy(() => { if (resetTimer) clearTimeout(resetTimer); });
 

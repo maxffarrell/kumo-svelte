@@ -2,7 +2,7 @@
   import { onDestroy } from 'svelte';
   import type { Snippet } from 'svelte';
   import { Portal } from 'bits-ui';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import KumoToastContent from './KumoToastContent.svelte';
   import {
     createKumoToastManager,

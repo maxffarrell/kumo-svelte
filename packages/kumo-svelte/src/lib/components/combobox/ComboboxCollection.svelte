@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ItemSnippet } from './context';
   import { getComboboxGroupContext } from './context';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export interface Props {
     children?: ItemSnippet;

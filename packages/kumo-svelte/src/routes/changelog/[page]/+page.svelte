@@ -1,6 +1,6 @@
 <script lang="ts">
   import ChangelogPage from '../+page.svelte';
-  import type { ChangelogVersion } from '$lib/docs/changelog';
+  import type { ChangelogVersion } from '#lib/docs/changelog.js';
 
   interface Props {
     data: {

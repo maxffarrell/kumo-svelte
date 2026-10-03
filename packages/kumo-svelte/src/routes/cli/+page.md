@@ -4,12 +4,12 @@ description: "Access component documentation and install blocks from your termin
 ---
 
 <script>
-  import Callout from '$lib/docs/Callout.svelte';
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
-  import CLITerminal from '$lib/docs/CLITerminal.svelte';
-  import CodeBlock from '$lib/docs/CodeBlock.svelte';
-  import PropsTable from '$lib/docs/PropsTable.svelte';
+  import Callout from '#lib/docs/Callout.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
+  import CLITerminal from '#lib/docs/CLITerminal.svelte';
+  import CodeBlock from '#lib/docs/CodeBlock.svelte';
+  import PropsTable from '#lib/docs/PropsTable.svelte';
 </script>
 
 

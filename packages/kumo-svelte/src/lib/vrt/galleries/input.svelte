@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Input, Textarea } from '$lib/components/input';
-  import { InputArea } from '$lib/components/input-area';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Input, Textarea } from '#lib/components/input/index.js';
+  import { InputArea } from '#lib/components/input-area/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
   import { EnvelopeSimple } from 'phosphor-svelte';
 
   const sizes = ['xs', 'sm', 'base', 'lg'] as const;

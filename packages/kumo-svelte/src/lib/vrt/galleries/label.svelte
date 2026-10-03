@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Label } from '$lib/components/label';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Label } from '#lib/components/label/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="default" label="default">

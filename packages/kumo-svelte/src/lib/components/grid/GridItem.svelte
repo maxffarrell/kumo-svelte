@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getContext } from 'svelte';
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { gridItemVariants, type KumoGridGap, type KumoGridVariant } from './Grid.svelte';
 
   interface GridContextValue {

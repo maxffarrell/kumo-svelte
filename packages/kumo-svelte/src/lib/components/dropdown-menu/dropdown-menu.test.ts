@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { createRawSnippet, mount, type ComponentProps } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
-import { Button } from '$lib/components/button';
+import { Button } from '#lib/components/button/index.js';
 import { expectNoA11yViolations } from '../../../../tests/a11y';
 import { textSnippet } from '../../../../tests/snippet';
 import DropdownMenu from './DropdownMenu.svelte';

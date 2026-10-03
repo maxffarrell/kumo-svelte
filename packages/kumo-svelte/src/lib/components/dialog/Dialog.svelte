@@ -5,7 +5,7 @@
 <script lang="ts">
   import { AlertDialog, Dialog as DialogPrimitive } from 'bits-ui';
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { dialogVariants, KUMO_DIALOG_DEFAULT_VARIANTS, KUMO_DIALOG_VARIANTS } from './Dialog.variants';
 
   export const KUMO_DIALOG_STYLING = {

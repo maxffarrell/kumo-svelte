@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { DropdownMenu } from '$lib/components/dropdown-menu';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Button } from '#lib/components/button/index.js';
+  import { DropdownMenu } from '#lib/components/dropdown-menu/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   let showBookmarks = $state(true);
 </script>

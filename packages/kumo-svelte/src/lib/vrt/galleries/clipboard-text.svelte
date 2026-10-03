@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { ClipboardText } from '$lib/components/clipboard-text';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { ClipboardText } from '#lib/components/clipboard-text/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const sizes = ['sm', 'base', 'lg'] as const;
 </script>

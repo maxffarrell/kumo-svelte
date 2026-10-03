@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export const KUMO_CLIPBOARD_TEXT_VARIANTS = {
     size: {
@@ -26,8 +26,8 @@
   import { onDestroy } from 'svelte';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
-  import { Button } from '$lib/components/button';
-  import { Tooltip } from '$lib/components/tooltip';
+  import { Button } from '#lib/components/button/index.js';
+  import { Tooltip } from '#lib/components/tooltip/index.js';
 
   type ClipboardTextSize = KumoClipboardTextSize;
   type TooltipSide = 'top' | 'bottom' | 'left' | 'right';

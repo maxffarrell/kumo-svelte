@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export const KUMO_TABLE_VARIANTS = {
     layout: {

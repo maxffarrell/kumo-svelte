@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   interface Item { title: string; href: string; depth?: number; }
   interface Props { class?: string; items?: Item[]; children?: Snippet; 'aria-label'?: string; [key: string]: unknown; }
   let { class: className, items = [], children, 'aria-label': ariaLabel = 'Table of contents', ...rest }: Props = $props();

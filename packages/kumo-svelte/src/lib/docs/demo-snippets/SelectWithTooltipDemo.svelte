@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Select } from '$lib/components/select';
+  import { Select } from '#lib/components/select/index.js';
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">

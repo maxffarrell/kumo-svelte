@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
-import { renderChangelogMarkdown } from '$lib/docs/changelog';
-import { parseChangelog } from '$lib/docs/changelog.server';
+import { renderChangelogMarkdown } from '#lib/docs/changelog.js';
+import { parseChangelog } from '#lib/docs/changelog.server.js';
 
 export const prerender = true;
 

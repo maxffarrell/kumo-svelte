@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { InputGroup } from '$lib/components/input-group';
-  import { Loader } from '$lib/components/loader';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { InputGroup } from '#lib/components/input-group/index.js';
+  import { Loader } from '#lib/components/loader/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
   import { EnvelopeSimple, MagnifyingGlass } from 'phosphor-svelte';
 
   const sizes = ['xs', 'sm', 'base', 'lg'] as const;

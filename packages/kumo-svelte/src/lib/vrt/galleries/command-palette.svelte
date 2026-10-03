@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { CommandPalette } from '$lib/components/command-palette';
+  import { Button } from '#lib/components/button/index.js';
+  import { CommandPalette } from '#lib/components/command-palette/index.js';
   import { Folder, Gear, House } from 'phosphor-svelte';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const groups = [
     {

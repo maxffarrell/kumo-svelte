@@ -5,8 +5,8 @@
   import FileMdIcon from 'phosphor-svelte/lib/FileMdIcon';
   import LinkSimpleIcon from 'phosphor-svelte/lib/LinkSimpleIcon';
   import OpenAiLogo from 'phosphor-svelte/lib/OpenAiLogo';
-  import { Button } from '$lib/components/button';
-  import { DropdownMenu } from '$lib/components/dropdown-menu';
+  import { Button } from '#lib/components/button/index.js';
+  import { DropdownMenu } from '#lib/components/dropdown-menu/index.js';
   import ClaudeIcon from './ClaudeIcon.svelte';
 
   interface Props {

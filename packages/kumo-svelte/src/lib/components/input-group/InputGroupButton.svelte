@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import { Button } from '$lib/components/button';
-  import { cn } from '$lib/utils/cn';
+  import { Button } from '#lib/components/button/index.js';
+  import { cn } from '#lib/utils/cn.js';
   import {
     getInputGroupAddonContext,
     getInputGroupContext,

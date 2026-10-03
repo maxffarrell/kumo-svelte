@@ -4,8 +4,8 @@
     import MagnifyingGlassIcon from "phosphor-svelte/lib/MagnifyingGlassIcon";
     import XIcon from "phosphor-svelte/lib/XIcon";
     import { onMount } from "svelte";
-    import { Button } from "$lib/components/button";
-    import { cn } from "$lib/utils/cn";
+    import { Button } from "#lib/components/button/index.js";
+    import { cn } from "#lib/utils/cn.js";
     import KumoMenuIcon from "./KumoMenuIcon.svelte";
     import SearchDialog from "./SearchDialog.svelte";
     import ThemeToggle from "./ThemeToggle.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Table } from '$lib/components/table';
+  import { Table } from '#lib/components/table/index.js';
 
   interface Props {
     variant?: 'default' | 'compact' | 'selected' | 'sticky' | 'fixed';

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Radio } from '$lib/components/radio';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Radio } from '#lib/components/radio/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="unchecked" label="unchecked">

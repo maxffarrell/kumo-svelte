@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { Button } from '$lib/components/button';
+  import { Button } from '#lib/components/button/index.js';
   let { children, loading = false, variant = 'primary', ...rest }: LayerDialogPrimaryProps = $props();
 </script>
 

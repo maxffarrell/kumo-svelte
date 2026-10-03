@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { TagInput } from '$lib/components/tag-input';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { TagInput } from '#lib/components/tag-input/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="default" label="default">

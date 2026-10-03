@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { CommandPalette } from '$lib/components/command-palette';
+  import { Button } from '#lib/components/button/index.js';
+  import { CommandPalette } from '#lib/components/command-palette/index.js';
   import ChartLine from 'phosphor-svelte/lib/ChartLine';
   import Folder from 'phosphor-svelte/lib/Folder';
   import Gear from 'phosphor-svelte/lib/Gear';

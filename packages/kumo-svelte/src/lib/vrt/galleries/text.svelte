@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Text } from '$lib/components/text';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Text } from '#lib/components/text/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const copyVariants = ['body', 'secondary', 'success', 'error'] as const;
   const sizes = ['xs', 'sm', 'base', 'lg'] as const;

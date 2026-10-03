@@ -2,7 +2,7 @@
   import { RadioGroup as RadioGroupPrimitive } from 'bits-ui';
   import { getContext } from 'svelte';
   import type { Snippet } from 'svelte';
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import type { RadioAppearance, RadioControlPosition, RadioVariant } from './Radio.svelte';
 
   interface RadioGroupContext {

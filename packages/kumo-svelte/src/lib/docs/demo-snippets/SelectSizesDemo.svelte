@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Select } from '$lib/components/select';
+  import { Select } from '#lib/components/select/index.js';
 
   const selectSizes = ['xs', 'sm', 'base', 'lg'] as const;
 </script>

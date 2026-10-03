@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button } from '$lib/components/button';
-  import { LayerDialog } from '$lib/components/layer-dialog';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Button } from '#lib/components/button/index.js';
+  import { LayerDialog } from '#lib/components/layer-dialog/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="open" label="open" interact={[{ type: 'click' }]} capture="page">

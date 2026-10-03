@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Header from '$lib/docs/Header.svelte';
-  import HomeGrid from '$lib/docs/HomeGrid.svelte';
+  import Header from '#lib/docs/Header.svelte';
+  import HomeGrid from '#lib/docs/HomeGrid.svelte';
 </script>
 
 <div class="flex flex-col">

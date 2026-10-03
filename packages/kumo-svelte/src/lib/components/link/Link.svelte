@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
 
   export const KUMO_LINK_VARIANTS = {
     variant: {

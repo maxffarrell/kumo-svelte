@@ -1,7 +1,7 @@
 <script lang="ts">
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
-  import { Button } from '$lib/components/button';
+  import { Button } from '#lib/components/button/index.js';
 
   interface Props {
     text: string;

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Loader } from '$lib/components/loader';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { Loader } from '#lib/components/loader/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 
   const sizes = ['sm', 'base', 'lg'] as const;
 </script>

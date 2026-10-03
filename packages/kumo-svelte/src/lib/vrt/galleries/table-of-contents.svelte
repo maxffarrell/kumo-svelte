@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { TableOfContents } from '$lib/components/table-of-contents';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { TableOfContents } from '#lib/components/table-of-contents/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
 
 <Scenario id="without-title" label="without title">

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Banner } from '$lib/components/banner';
-  import { Text } from '$lib/components/text';
+  import { Banner } from '#lib/components/banner/index.js';
+  import { Text } from '#lib/components/text/index.js';
   import Info from 'phosphor-svelte/lib/Info';
 </script>
 

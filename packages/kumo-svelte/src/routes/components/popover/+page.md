@@ -6,9 +6,9 @@ baseUIComponent: "popover"
 ---
 
 <script>
-  import ComponentExample from '$lib/docs/ComponentExample.svelte';
-  import ComponentSection from '$lib/docs/ComponentSection.svelte';
-  import PropsTable from '$lib/docs/PropsTable.svelte';
+  import ComponentExample from '#lib/docs/ComponentExample.svelte';
+  import ComponentSection from '#lib/docs/ComponentSection.svelte';
+  import PropsTable from '#lib/docs/PropsTable.svelte';
 </script>
 
 <!-- Hero Demo -->

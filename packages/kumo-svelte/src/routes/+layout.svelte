@@ -1,9 +1,9 @@
 <script lang="ts">
   import { page } from '$app/state';
   import '../lib/styles.css';
-  import SidebarNav from '$lib/docs/SidebarNav.svelte';
-  import { TooltipProvider } from '$lib/components/tooltip';
-  import { provideKumoRandom } from '$lib/utils/random';
+  import SidebarNav from '#lib/docs/SidebarNav.svelte';
+  import { TooltipProvider } from '#lib/components/tooltip/index.js';
+  import { provideKumoRandom } from '#lib/utils/random.js';
   import type { Snippet } from 'svelte';
 
   provideKumoRandom();

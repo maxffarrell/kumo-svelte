@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { MenuBar } from '$lib/components/menu-bar';
-  import Scenario from '$lib/vrt/Scenario.svelte';
+  import { MenuBar } from '#lib/components/menu-bar/index.js';
+  import Scenario from '#lib/vrt/Scenario.svelte';
   import { List, SquaresFour } from 'phosphor-svelte';
 
   const options = [

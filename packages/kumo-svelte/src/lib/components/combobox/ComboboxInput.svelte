@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from '$lib/utils/cn';
+  import { cn } from '#lib/utils/cn.js';
   import { getComboboxContext, inputStyles } from './context';
 
   export interface Props {

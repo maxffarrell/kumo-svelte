@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Input } from '$lib/components/input';
-  import { InputGroup } from '$lib/components/input-group';
-  import { Combobox } from '$lib/components/combobox';
-  import { Select } from '$lib/components/select';
+  import { Input } from '#lib/components/input/index.js';
+  import { InputGroup } from '#lib/components/input-group/index.js';
+  import { Combobox } from '#lib/components/combobox/index.js';
+  import { Select } from '#lib/components/select/index.js';
   import { Toolbar } from './index';
 </script>
 

@@ -52,7 +52,6 @@ jobs:
           retention-days: 1
 
   lint:
-    needs: build
     timeout-minutes: 5
     runs-on: ubuntu-24.04-arm
     steps:
@@ -63,7 +62,6 @@ jobs:
       - run: pnpm lint
 
   typecheck:
-    needs: build
     timeout-minutes: 5
     runs-on: ubuntu-24.04-arm
     steps:
@@ -74,7 +72,6 @@ jobs:
       - run: pnpm typecheck
 
   test:
-    needs: build
     timeout-minutes: 5
     runs-on: ubuntu-24.04-arm
     steps:
@@ -82,4 +79,9 @@ jobs:
         with:
           fetch-depth: 1
       - uses: ./.github/actions/install-dependencies
-      - run: pnpm test
+      # The tools tests do not share Vitest's SvelteKit generated state.
+      - parallel:
+          - name: Test package
+            run: pnpm --filter kumo-svelte test
+          - name: Test deployment tools
+            run: pnpm test:tools

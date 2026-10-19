@@ -39,3 +39,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `f46e8bc9` | Update Cloudflare orange/yellow brand asset colors, including SVG generation. |
 | `dc7c513f` | Safely decode table-of-contents fragments and retain raw malformed hashes for matching. |
 | `d97d751d` | Already preserved: Actions.Primary remains the same component as LayerDialog.Action and retains its deprecated prop type alias. |
+| `17d094ec` | Render the MenuSub guide as an aria-hidden list item to preserve valid list structure. |

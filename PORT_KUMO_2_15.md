@@ -8,3 +8,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | --- | --- |
 | `7d917210` | Preserve outer trigger corners when overlays mount non-control siblings. |
 | `a8c946a1` | Mark Badge ownership and match direct Badge link focus rings to the pill shape. |
+| `88850d58` | Add reactive tooltipTimestampFormat for series and marker timestamps; retain browser locale/time zone defaults. |

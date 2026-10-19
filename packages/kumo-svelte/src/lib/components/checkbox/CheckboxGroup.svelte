@@ -14,6 +14,8 @@
     required?: boolean;
     name?: string;
     controlFirst?: boolean;
+    appearance?: "default" | "card";
+    orientation?: "vertical" | "horizontal";
     class?: string;
     onValueChange?: (value: string[]) => void;
   }
@@ -28,19 +30,21 @@
     required,
     name,
     controlFirst = true,
+    appearance = "default",
+    orientation = "vertical",
     class: className,
     onValueChange
   }: Props = $props();
 
-  setContext('kumo-checkbox-group', { get controlFirst() { return controlFirst; } });
+  setContext('kumo-checkbox-group', { get controlFirst() { return controlFirst; }, get appearance() { return appearance; }, get orientation() { return orientation; } });
 </script>
 
 <CheckboxPrimitive.Group bind:value {disabled} {required} {name} {onValueChange}>
-  <fieldset class={cn('flex flex-col gap-4 p-0', className)} {disabled}>
+  <fieldset class={cn('flex flex-col p-0', appearance === 'card' ? 'gap-2' : 'gap-4', className)} {disabled}>
     {#if legend}
       <legend class="text-base font-medium text-kumo-default">{legend}</legend>
     {/if}
-    <div class="flex flex-col gap-2">
+    <div class={cn(appearance === 'card' ? cn('overflow-hidden rounded-lg bg-kumo-base ring ring-kumo-line', orientation === 'horizontal' ? 'grid grid-cols-2' : 'flex flex-col') : cn('flex gap-2', orientation === 'horizontal' ? 'flex-row flex-wrap' : 'flex-col'))}>
       {@render children?.()}
     </div>
     {#if error}

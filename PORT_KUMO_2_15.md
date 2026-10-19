@@ -25,3 +25,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `3d933128` | Add Checkbox.Group card appearance and orientation with joined cells, rich labels, descriptions and selection tint. |
 | `03aa5aee` | Tabs has no upstream motion entrance variants to remove; retain Bits UI tab indicator behavior. |
 | `85afbd08` | Add scalar/range Slider using Bits UI, size variants, value formatting, accessible thumb names, docs, navigation and VRT gallery. |
+| `72b3346a` | Not applicable to the CSS-layout Svelte Flow: nodes remain in flex layout and connectors use measured rectangles; no unpositioned absolute-layout phase. |

@@ -30,6 +30,8 @@
         InputGroupSuffix,
     } from "#lib/components/input-group/index.js";
     import { Label } from "#lib/components/label/index.js";
+    import { CloudflareLogo } from "#lib/components/cloudflare-logo/index.js";
+    import { LayerDialog } from "#lib/components/layer-dialog/index.js";
     import { LayerCard } from "#lib/components/layer-card/index.js";
     import { Link } from "#lib/components/link/index.js";
     import { Loader } from "#lib/components/loader/index.js";
@@ -95,11 +97,11 @@
     const toastManager = createKumoToastManager();
 </script>
 
-<ul
+<ul data-vr-home-grid
                 class="grid auto-rows-min grid-cols-1 gap-px bg-kumo-hairline md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
             >
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="button"
@@ -108,7 +110,7 @@
                         >Button</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="grid gap-3">
                             <Button icon={Plus}>Create Worker</Button>
@@ -121,7 +123,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="input"
@@ -130,7 +132,7 @@
                         >Input</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="grid gap-3">
                             <Input placeholder="Type something..." />
@@ -140,7 +142,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="select"
@@ -149,7 +151,7 @@
                         >Select</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Select
                             class="w-[200px]"
@@ -160,7 +162,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="toolbar"
@@ -169,9 +171,9 @@
                         >Toolbar</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
-                        <Toolbar>
+                        <Toolbar class="max-w-full">
                             <Toolbar.Input
                                 aria-label="Search DNS records"
                                 placeholder="Search..."
@@ -186,7 +188,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="autocomplete"
@@ -195,7 +197,7 @@
                         >Autocomplete</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Autocomplete items={fruits}>
                             <Autocomplete.InputGroup
@@ -215,7 +217,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="combobox"
@@ -224,7 +226,7 @@
                         >Combobox</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Combobox
                             class="w-[200px]"
@@ -248,7 +250,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="switch"
@@ -257,14 +259,14 @@
                         >Switch</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Switch bind:checked={switchToggled} />
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="input"
@@ -273,7 +275,7 @@
                         >Input (with validation)</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="grid w-[220px] gap-1.5">
                             <Label for="home-email">Email</Label>
@@ -288,7 +290,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="dialog"
@@ -297,7 +299,7 @@
                         >Dialog</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         {#snippet dialogTrigger(props: Record<string, unknown>)}
                             <Button {...props}>Delete</Button>
@@ -334,7 +336,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="tooltip"
@@ -343,7 +345,7 @@
                         >Tooltip</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="flex gap-2">
                             <div class="relative inline-flex">
@@ -405,7 +407,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="dropdown"
@@ -414,7 +416,7 @@
                         >Dropdown</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <DropdownMenu>
                             <DropdownMenu.Trigger>
@@ -429,7 +431,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="collapsible"
@@ -438,7 +440,7 @@
                         >Collapsible</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Collapsible
                             bind:open={collapsibleOpen}
@@ -449,7 +451,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="checkbox"
@@ -458,14 +460,14 @@
                         >Checkbox</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Checkbox bind:checked>Max bandwidth</Checkbox>
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="layer-card"
@@ -474,7 +476,7 @@
                         >LayerCard</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <LayerCard class="w-[200px]">
                             <LayerCard.Secondary>Next Steps</LayerCard.Secondary
@@ -485,7 +487,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="loader"
@@ -494,14 +496,14 @@
                         >Loader</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Loader />
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="skeleton-line"
@@ -517,7 +519,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="code-highlighted"
@@ -526,7 +528,7 @@
                         >CodeHighlighted</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <CodeHighlighted
                             lang="typescript"
@@ -538,7 +540,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="banner"
@@ -547,7 +549,7 @@
                         >Banner</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="flex flex-col gap-2">
                             <Banner text="This is a default banner." />
@@ -566,7 +568,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="tabs"
@@ -575,14 +577,14 @@
                         >Tabs</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Tabs items={tabs} bind:value={activeTab} />
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="badge"
@@ -591,7 +593,7 @@
                         >Badge</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="flex flex-col gap-2">
                             <Badge variant="blue">Blue</Badge>
@@ -604,7 +606,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="toast"
@@ -613,7 +615,7 @@
                         >Toast</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Toasty {toastManager}>
                             <Button
@@ -632,7 +634,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="pagination"
@@ -641,7 +643,7 @@
                         >Pagination</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Pagination
                             bind:page
@@ -655,7 +657,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="input-area"
@@ -664,14 +666,14 @@
                         >InputArea</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <InputArea placeholder="Enter your name" />
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="input-group"
@@ -680,7 +682,7 @@
                         >InputGroup</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="w-full max-w-2xs">
                             <InputGroup>
@@ -703,7 +705,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="meter"
@@ -712,7 +714,7 @@
                         >Meter</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Meter
                             value={75}
@@ -723,7 +725,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="date-picker"
@@ -732,14 +734,14 @@
                         >DatePicker</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="-m-4 scale-85"><DatePicker /></div>
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="breadcrumbs"
@@ -748,7 +750,7 @@
                         >Breadcrumbs</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="flex items-center gap-1 text-sm">
                             <span class="text-kumo-subtle">Home</span>
@@ -761,7 +763,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="clipboard-text"
@@ -770,14 +772,14 @@
                         >ClipboardText</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <ClipboardText text="npx kumo-svelte add button" />
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="command-palette"
@@ -786,14 +788,14 @@
                         >CommandPalette</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <CommandPaletteBasicDemo />
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="flow"
@@ -802,7 +804,7 @@
                         >Flow</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Flow canvas={false}>
                             <Flow.Node>Step 1</Flow.Node>
@@ -812,7 +814,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="link"
@@ -821,7 +823,7 @@
                         >Link</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="flex flex-col gap-2 text-sm">
                             <Link href="#">Default link</Link>
@@ -834,7 +836,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="empty"
@@ -843,7 +845,7 @@
                         >Empty</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div
                             class="flex flex-col items-center gap-1 text-center"
@@ -857,7 +859,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="grid"
@@ -866,7 +868,7 @@
                         >Grid</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Grid variant="side-by-side" gap="sm" class="w-[140px]">
                             {#each [1, 2, 3, 4] as item (item)}
@@ -880,7 +882,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="label"
@@ -889,7 +891,7 @@
                         >Label</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="flex flex-col gap-2">
                             <Label>Default Label</Label>
@@ -900,7 +902,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="popover"
@@ -909,7 +911,7 @@
                         >Popover</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         {#snippet popoverTrigger({
                             props,
@@ -931,7 +933,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="radio"
@@ -940,7 +942,7 @@
                         >Radio</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Radio.Group
                             legend="Select option"
@@ -953,7 +955,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="sensitive-input"
@@ -962,14 +964,14 @@
                         >SensitiveInput</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <SensitiveInput value="super-secret-api-key" readonly />
                     </div>
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="table"
@@ -978,7 +980,7 @@
                         >Table</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <Table class="w-[200px] text-sm">
                             <TableHeader>
@@ -1009,7 +1011,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="table-of-contents"
@@ -1018,7 +1020,7 @@
                         >TableOfContents</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <TableOfContents>
                             <TableOfContents.Title
@@ -1040,7 +1042,7 @@
                 </li>
 
                 <li
-                    class="relative flex aspect-square items-center justify-center bg-kumo-canvas"
+                    class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
                 >
                     <a
                         id="text"
@@ -1049,7 +1051,7 @@
                         >Text</a
                     >
                     <div
-                        class="flex w-full items-center justify-center p-8 tracking-normal leading-normal"
+                        class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
                     >
                         <div class="flex flex-col gap-1">
                             <Text size="lg" bold>Large Bold Text</Text>
@@ -1058,4 +1060,6 @@
                         </div>
                     </div>
                 </li>
-            </ul>
+            <li class="relative flex aspect-square w-full min-w-0 items-center justify-center bg-kumo-canvas"><a href="/components/cloudflare-logo" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle">CloudflareLogo</a><CloudflareLogo class="w-48 max-w-full" /></li>
+<li class="relative flex aspect-square w-full min-w-0 items-center justify-center bg-kumo-canvas"><a href="/components/layer-dialog" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle">LayerDialog</a><LayerDialog.Root><LayerDialog.Trigger>{#snippet child({ props })}<Button {...props}>Open dialog</Button>{/snippet}</LayerDialog.Trigger><LayerDialog.Content size="sm"><LayerDialog.Title>Keyboard shortcuts</LayerDialog.Title><LayerDialog.Description>Search components and jump to a page.</LayerDialog.Description><LayerDialog.Body>Open command palette: ⌘ K</LayerDialog.Body></LayerDialog.Content></LayerDialog.Root></li>
+</ul>

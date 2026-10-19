@@ -17,7 +17,7 @@
     class?: string;
     disabled?: boolean;
     variant?: RadioVariant;
-    appearance?: RadioAppearance;
+    appearance?: Exclude<RadioAppearance, "segmented">;
     label: string | Snippet;
     description?: string | Snippet;
     value: Value;
@@ -35,7 +35,7 @@
   }: Props<Value> = $props();
 
   const group = getContext<RadioGroupContext | undefined>('kumo-radio-group');
-  const appearance = $derived(appearanceProp ?? group?.appearance ?? 'default');
+  const appearance = $derived(group?.appearance === 'segmented' ? 'segmented' : appearanceProp ?? group?.appearance ?? 'default');
   const isCard = $derived(appearance === 'card');
   const isJoined = $derived(isCard && group?.appearance === 'card');
   const effectiveControlPosition = $derived(group?.controlPosition ?? (isCard ? 'end' : 'start'));
@@ -77,7 +77,12 @@
   </RadioGroupPrimitive.Item>
 {/snippet}
 
-{#if isCard}
+{#if appearance === 'segmented'}
+ <label data-kumo-component="Radio" data-kumo-part="item-label" class={cn('group relative z-0 my-0 mr-0 -ml-px inline-flex h-8.5 shrink-0 cursor-pointer items-center border-r border-kumo-line/60 bg-transparent first:ml-0 last:border-r-0 px-3 text-sm font-medium whitespace-nowrap text-kumo-default select-none first:rounded-l-lg first:pl-2.75 last:rounded-r-lg last:pr-2.75 has-[[data-state=checked]]:text-kumo-inverse has-data-disabled:cursor-not-allowed has-data-disabled:opacity-50 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-kumo-brand before:absolute before:-inset-y-px before:-right-px before:left-0 before:-z-10 first:before:-left-px first:before:rounded-l-[9px] last:before:rounded-r-[9px] hover:not-has-data-disabled:not-has-[[data-state=checked]]:before:bg-kumo-contrast/7 has-[[data-state=checked]]:before:bg-kumo-contrast', variant === 'error' && 'ring ring-kumo-danger', className)}>
+ <RadioGroupPrimitive.Item value={primitiveValue} {disabled} data-kumo-component="Radio" data-kumo-part="item" class="sr-only" />
+ <span>{#if typeof label === 'string'}{label}{:else}{@render label()}{/if}</span>
+ </label>
+{:else if isCard}
   <label
     data-kumo-component="Radio"
     data-kumo-part="item-label"

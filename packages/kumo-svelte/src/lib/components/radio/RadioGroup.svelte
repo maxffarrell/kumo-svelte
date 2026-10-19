@@ -80,21 +80,22 @@
 
 <RadioGroupPrimitive.Root
   value={primitiveValue}
-  {orientation}
+  orientation={appearance === "segmented" ? "horizontal" : orientation}
   {disabled}
   {required}
   {name}
   onValueChange={handleValueChange}
 >
-  <fieldset class={cn('flex flex-col p-0', appearance === 'card' ? 'gap-2' : 'gap-4', className)} {disabled}>
+  <fieldset class={cn('flex flex-col p-0', appearance === 'card' || appearance === 'segmented' ? 'gap-2' : 'gap-4', className)} {disabled}>
     {#if legend}
       <legend class="text-base font-medium text-kumo-default">
         {legend}
       </legend>
     {/if}
     <div
+      data-kumo-component="Radio" data-kumo-part="items"
       class={cn(
-        orientation === 'vertical'
+        appearance === 'segmented' ? 'inline-flex w-max flex-row flex-nowrap items-center self-start rounded-lg bg-kumo-control shadow-xs ring ring-kumo-line' : orientation === 'vertical'
           ? appearance === 'card' ? 'flex flex-col overflow-hidden rounded-lg ring ring-kumo-line' : 'flex flex-col gap-2'
           : appearance === 'card'
             ? 'grid grid-cols-2 overflow-hidden rounded-lg bg-kumo-base ring ring-kumo-line'

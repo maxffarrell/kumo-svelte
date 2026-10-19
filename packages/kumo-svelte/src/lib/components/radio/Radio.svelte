@@ -13,6 +13,7 @@
       }
     },
     appearance: {
+      segmented: { classes: 'inline-flex flex-nowrap rounded-lg', description: 'Compact grouped-button appearance for short, mutually exclusive options' },
       default: {
         classes: '',
         description: 'Standard inline radio item'

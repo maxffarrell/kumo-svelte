@@ -50,8 +50,8 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 
 - Based on freshly fetched `origin/main` at `6cde7613`; original checkout and its 456 modified files were preserved.
 - All 39 commits in the exact upstream release range are recorded above in chronological order. Upstream React dependency and fork-specific CI changes are explicitly classified.
-- `svelte-check-native --tsconfig ./tsconfig.json`: 766 files, zero errors and warnings.
-- Full Vitest suite: 65 files, 463 tests passed, zero unhandled errors. Vitest exits successfully but prints a Vite server close timeout warning.
+- `svelte-check-native --tsconfig ./tsconfig.json`: 768 files, zero errors and warnings.
+- Full Vitest suite: 66 files, 467 tests passed, zero unhandled errors. Vitest exits successfully but prints a Vite server close timeout warning.
 - Package/declaration emission, packaged CSS, CLI TypeScript compilation, and the Cloudflare docs production build passed.
 - Repository lint, 13 deployment-tool tests, Changeset validation, and `git diff --check` passed.
 - Exact 2.15 class-vocabulary checks: Slider and Radio each have zero missing upstream tokens. Extra tokens adapt Bits UI's focus and layout behavior; this is not a full pixel comparison of every component.
@@ -65,3 +65,17 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 - Slider maps scalar/array values onto Bits UI thumbs, uses hidden inputs for native forms, and maps edge/center alignment to contained/exact thumb positioning. It remains horizontal.
 - Segmented Radio legends use the group's `legend` prop; Svelte cannot reorder an arbitrary child snippet containing a Legend as React does.
 - Flow retains its existing CSS layout and viewport-based anchor measurements, so upstream absolute-layout offset fixes do not apply.
+
+## Production readiness review
+
+Assessment: no known release-blocking findings remain for the documented Svelte API after the fixes below. Release remains subject to the PR's remote checks. The framework adaptations above still apply; a full cross-browser pixel comparison of every component was not performed.
+
+Fixed during review:
+
+- Slider now forwards standalone `aria-label` / `aria-labelledby` to its thumbs. Scalar and range callbacks retain their respective generic value types.
+- Slider hidden inputs support external form ownership, and native form reset restores initial values while honoring cancellation.
+- DropdownMenu.CheckboxItem retains the Bits UI wrapper, ARIA role and keyboard/pointer handlers by using its children snippet.
+- DropdownMenu.Label renders as a visual heading without requiring an implicit Bits UI Group context, preventing ordinary labeled menus from throwing when opened.
+- Published `#lib` imports resolve to emitted runtime/declaration files instead of source Svelte modules. Local source checking and Vite use explicit source aliases. A consumer built from an extracted npm tarball passes both production bundling and independent Svelte typechecking with root and deep imports.
+
+Additional evidence: regressions cover the failures above; the full suite passes 467 tests across 66 files. Package/declarations/CSS/CLI and production docs builds pass. Browser verification confirms a labeled checkbox menu opens and toggles checked state with Enter across close/reopen.

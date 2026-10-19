@@ -118,7 +118,7 @@
     "wrangler": "^4.125.0"
   },
   "imports": {
-    "#lib": "./src/lib/index.js",
-    "#lib/*": "./src/lib/*"
+    "#lib": "./dist/index.js",
+    "#lib/*": "./dist/*"
   }
 }

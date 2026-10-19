@@ -63,7 +63,7 @@
   const dotColor = $derived(appearance === 'dot' ? KUMO_BADGE_DOT_COLORS[variant as keyof typeof KUMO_BADGE_DOT_COLORS] : undefined);
 </script>
 
-<span
+<span data-kumo-component="Badge"
   class={cn(
     KUMO_BADGE_BASE_STYLES,
     appearance === 'dot' ? undefined : KUMO_BADGE_VARIANTS[variant],
@@ -74,10 +74,10 @@
   {...rest}
 >
   {#if dotColor}
-    <span aria-hidden="true" class={cn('size-1.75 shrink-0 rounded-full', dotColor)}></span>
+    <span data-kumo-component="Badge" aria-hidden="true" class={cn('size-1.75 shrink-0 rounded-full', dotColor)}></span>
   {/if}
   {#if Icon && appearance === 'filled'}
-    <span class="flex h-lh w-3 shrink-0 items-center justify-center [&>svg]:size-3">
+    <span data-kumo-component="Badge" class="flex h-lh w-3 shrink-0 items-center justify-center [&>svg]:size-3">
       <Icon />
     </span>
   {/if}

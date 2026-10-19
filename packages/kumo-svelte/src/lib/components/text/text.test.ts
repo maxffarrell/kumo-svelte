@@ -33,13 +33,11 @@ describe("Text", () => {
     expect(container.querySelector("h2")?.className).toContain("text-xl");
   });
 
-  it("warns when a deprecated numbered heading is used", () => {
+  it("renders deprecated numbered headings without a runtime warning", () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     render(Text, { variant: "heading2", as: "h2" });
 
-    expect(warn).toHaveBeenCalledWith(
-      expect.stringContaining('variant="heading2" is deprecated'),
-    );
+    expect(warn).not.toHaveBeenCalled();
     warn.mockRestore();
   });
 });

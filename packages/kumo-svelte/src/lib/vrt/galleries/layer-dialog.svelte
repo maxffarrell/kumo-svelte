@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ReleaseDemo from "#lib/docs/demo-snippets/LayerDialogSplitActionDemo.svelte";
   import { Button } from '#lib/components/button/index.js';
   import { LayerDialog } from '#lib/components/layer-dialog/index.js';
   import Scenario from '#lib/vrt/Scenario.svelte';
@@ -45,3 +46,5 @@
     </LayerDialog.Content>
   </LayerDialog.Alert>
 </Scenario>
+
+<Scenario id="release-215" label="Kumo 2.15" interact={[{ type: 'click' }]} capture="page"><ReleaseDemo /></Scenario>

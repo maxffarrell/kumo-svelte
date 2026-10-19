@@ -26,13 +26,29 @@ baseUIComponent: "popover"
 ### Barrel
 
 ```typescript
-import { Popover, PopoverClose, PopoverContent, PopoverDescription, PopoverRoot, PopoverTitle, PopoverTrigger } from 'kumo-svelte';
+import {
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverDescription,
+  PopoverRoot,
+  PopoverTitle,
+  PopoverTrigger,
+} from "kumo-svelte";
 ```
 
 ### Granular
 
 ```typescript
-import { Popover, PopoverClose, PopoverContent, PopoverDescription, PopoverRoot, PopoverTitle, PopoverTrigger } from 'kumo-svelte/components/popover';
+import {
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverDescription,
+  PopoverRoot,
+  PopoverTitle,
+  PopoverTrigger,
+} from "kumo-svelte/components/popover";
 ```
 
 </ComponentSection>
@@ -69,10 +85,9 @@ import { Popover, PopoverClose, PopoverContent, PopoverDescription, PopoverRoot,
 
 ## Popover vs Tooltip
 
-  
 While popovers can be triggered on hover (using `openOnHover`), they serve a
-    different purpose than tooltips. Understanding when to use each is important
-    for accessibility and user experience.
+different purpose than tooltips. Understanding when to use each is important
+for accessibility and user experience.
 
   <div class="overflow-hidden rounded-lg border border-kumo-hairline">
     <table class="w-full text-sm">
@@ -128,11 +143,11 @@ While popovers can be triggered on hover (using `openOnHover`), they serve a
       </tbody>
     </table>
   </div>
-  
+
 **Use a Tooltip** when you need to label an icon button or
-    provide a brief explanation. **Use a Popover** when users need
-    to interact with the content inside, such as clicking links, filling out
-    forms, or dismissing with a button.
+provide a brief explanation. **Use a Popover** when users need
+to interact with the content inside, such as clicking links, filling out
+forms, or dismissing with a button.
 
 </ComponentSection>
 
@@ -152,35 +167,31 @@ While popovers can be triggered on hover (using `openOnHover`), they serve a
 
 ### Positioning
 
-
 Use the `side` prop to control where the popover appears relative to the
-  trigger.
+trigger.
 
 <ComponentExample demo="PopoverPositionDemo" />
 
 ### Custom Content
 
-
 Popovers can contain any content, including custom layouts with avatars,
-  buttons, and more.
+buttons, and more.
 
 <ComponentExample demo="PopoverCustomContentDemo" />
 
 ### Open on Hover
 
-
-  Use `openOnHover` on the trigger to open the popover when the user hovers over
-  it. You can also specify a `delay` in milliseconds before the popover appears.
+Use `openOnHover` on the trigger to open the popover when the user hovers over
+it. You can also specify a `delay` in milliseconds before the popover appears.
 
 <ComponentExample demo="PopoverOpenOnHoverDemo" />
 
 ### Virtual Anchor
 
-
 Use the `anchor` prop on `Popover.Content` to position the popover against an
-  element other than the trigger, or against a virtual point (e.g., a `DOMRect`
-  from `getBoundingClientRect()`). This is useful when the trigger and the
-  desired anchor are in different component trees.
+element other than the trigger, or against a virtual point (e.g., a `DOMRect`
+from `getBoundingClientRect()`). This is useful when the trigger and the
+desired anchor are in different component trees.
 
 <ComponentExample demo="PopoverVirtualAnchorDemo" />
 
@@ -207,17 +218,15 @@ your own element.
 
 ### Popover.Content
 
-
 The container for popover content. Controls positioning via `side`, `align`,
-  `sideOffset`, and `alignOffset` props. Use the `anchor` prop to position
-  against a custom element or virtual point instead of the trigger. Use
-  `positionMethod="fixed"` when the popover needs to escape stacking contexts,
-  such as when inside sticky headers.
+`sideOffset`, and `alignOffset` props. Use the `anchor` prop to position
+against a custom element or virtual point instead of the trigger. Use
+`positionMethod="fixed"` when the popover needs to escape stacking contexts,
+such as when inside sticky headers.
 
 <PropsTable component="Popover.Content" />
 
 ### Popover.Title
-
 
 A heading that labels the popover for accessibility.
 
@@ -225,13 +234,11 @@ A heading that labels the popover for accessibility.
 
 ### Popover.Description
 
-
 A paragraph providing additional context about the popover content.
 
 <PropsTable component="Popover.Description" />
 
 ### Popover.Close
-
 
 A button that closes the popover when clicked. Use a `render` prop to render
 your own element.
@@ -245,3 +252,5 @@ your own element.
 Prefer `Popover.Root`, `Popover.Trigger`, `Popover.Portal`, `Popover.Positioner`, `Popover.Popup`, and `Popover.Arrow`. Put the popup inside the positioner, and the arrow inside the popup. `Popover.Backdrop` and `Popover.Viewport` provide optional unstyled surfaces. The positioner accepts `side`, `align`, `sideOffset`, and `alignOffset`. `--available-height`, `--available-width`, `--anchor-width`, and `--transform-origin` are available on descendants.
 
 `Popover.Content` remains supported as a deprecated wrapper with opacity-only transitions. Bits UI combines positioning and dialog/focus semantics in Content; the separate Popup is a styled surface. Viewport is a plain container (Base UI animated multi-trigger viewport behavior is not available in Bits UI).
+
+<ComponentExample demo="PopoverComposableDemo" />

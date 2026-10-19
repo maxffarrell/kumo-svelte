@@ -1,2 +1,15 @@
-<script lang="ts">import { Slider } from '#lib/components/slider/index.js';</script>
-<div class="w-full max-w-sm space-y-6"><Slider label="Volume" defaultValue={40} /><Slider label="Price" defaultValue={[25, 75]} getAriaLabel={(index) => index === 0 ? 'Minimum price' : 'Maximum price'} /><Slider label="Match count" size="sm" max={5} defaultValue={2} /><Slider label="Disabled" disabled defaultValue={50} /></div>
+<script lang="ts">
+  import { Slider } from "#lib/components/slider/index.js";
+</script>
+
+<div class="w-full max-w-sm space-y-6">
+  <Slider label="Volume" defaultValue={40} /><Slider
+    label="Price"
+    defaultValue={[25, 75]}
+    getAriaLabel={(index) => (index === 0 ? "Minimum price" : "Maximum price")}
+  /><Slider label="Match count" size="sm" max={5} defaultValue={2} /><Slider
+    label="Disabled"
+    disabled
+    defaultValue={50}
+  />
+</div>

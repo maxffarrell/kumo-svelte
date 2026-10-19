@@ -23,3 +23,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `3fd5b648` | Keep sidebar demo footer triggers aligned with the collapsed rail. |
 | `49317c6c` | Join Radio card groups with shared borders, two-column dividers, and checked-aware hover backgrounds. |
 | `3d933128` | Add Checkbox.Group card appearance and orientation with joined cells, rich labels, descriptions and selection tint. |
+| `03aa5aee` | Tabs has no upstream motion entrance variants to remove; retain Bits UI tab indicator behavior. |

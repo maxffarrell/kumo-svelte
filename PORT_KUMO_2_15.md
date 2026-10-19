@@ -42,3 +42,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `17d094ec` | Render the MenuSub guide as an aria-hidden list item to preserve valid list structure. |
 | `cdb7e0fd` | Lift Button/LinkButton text and balance leading icon padding across sizes, preserving square/circle shapes. |
 | `18467591` | Unify dropdown rows, preserve custom snippet icons, auto-inset iconless siblings, expose Portal/Positioner/Popup, and resolve submenu offsets against collision side with Bits UI. |
+| `7e0ff405` | Already equivalent: Flow reads anchor getBoundingClientRect directly in viewport coordinates, including node margin, instead of rebuilding offsets from positioned node data. |

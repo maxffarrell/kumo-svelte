@@ -28,3 +28,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `72b3346a` | Not applicable to the CSS-layout Svelte Flow: nodes remain in flex layout and connectors use measured rectangles; no unpositioned absolute-layout phase. |
 | `10b7f667` | Fill Slider indicator to contained thumb edges and center grips, with track padding outside the measured Bits control. |
 | `1cb4773c` | Add reactive nested KumoLocaleProvider defaults for Label generated text and LayerDialog dismissal, with explicit optionalLabel/tooltipAriaLabel overrides. |
+| `86af1a15` | Pad the LayerDialog viewport top to keep control rings visible. Svelte body has no top mask fallback to correct. |

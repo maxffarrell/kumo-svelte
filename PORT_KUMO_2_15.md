@@ -79,3 +79,13 @@ Fixed during review:
 - Published `#lib` imports resolve to emitted runtime/declaration files instead of source Svelte modules. Local source checking and Vite use explicit source aliases. A consumer built from an extracted npm tarball passes both production bundling and independent Svelte typechecking with root and deep imports.
 
 Additional evidence: regressions cover the failures above; the full suite passes 467 tests across 66 files. Package/declarations/CSS/CLI and production docs builds pass. Browser verification confirms a labeled checkbox menu opens and toggles checked state with Enter across close/reopen.
+
+### Inherited dependency advisories
+
+GitHub reported four open advisories on main during PR publication. The affected locked versions were traced to build/development tooling (Miniflare, launch-editor, Tailwind/PostCSS and CSS parsing). This branch now overrides their patched versions:
+
+- `sharp` 0.35.5: [GHSA-wq5f-xc86-pv6w](https://github.com/advisories/GHSA-wq5f-xc86-pv6w) and [GHSA-rgj7-g3m4-5g8c](https://github.com/advisories/GHSA-rgj7-g3m4-5g8c).
+- `shell-quote` 1.11.0: [GHSA-pqg4-j6r4-53mv](https://github.com/advisories/GHSA-pqg4-j6r4-53mv).
+- `source-map-js` 1.2.2: [GHSA-68fv-2mgg-jv7q](https://github.com/advisories/GHSA-68fv-2mgg-jv7q).
+
+The vulnerable locked versions are absent from the updated lockfile. Default-branch Dependabot alerts may remain open until these changes reach main. This review is not an exhaustive security audit.

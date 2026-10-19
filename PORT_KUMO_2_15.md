@@ -33,3 +33,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `52827100` | Add group-only segmented Radio appearance with horizontal keyboard navigation, accessible hidden controls and checked/error/disabled styling. |
 | `828866ab` | Remove negative Select separator margins to avoid horizontal overflow. |
 | `543dc8a0` | Use contrast/inverse tokens for Slider value badges and disabled colors. |
+| `2c53422b` | Use bg-kumo-tint for highlighted Autocomplete items to match Combobox/Select. |

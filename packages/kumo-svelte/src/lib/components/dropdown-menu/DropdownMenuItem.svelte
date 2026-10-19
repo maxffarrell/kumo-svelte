@@ -37,6 +37,7 @@
     class?: string;
     inset?: boolean;
     icon?: Component;
+    iconSnippet?: Snippet<[ { class: string } ]>;
     selected?: boolean;
     variant?: KumoDropdownVariant;
     href?: string;
@@ -51,6 +52,7 @@
     class: className,
     inset = false,
     icon: Icon,
+    iconSnippet,
     selected = false,
     variant = KUMO_DROPDOWN_DEFAULT_VARIANTS.variant,
     href,
@@ -82,13 +84,13 @@
         data-kumo-part="link-item"
         class={cn('flex w-full items-center text-inherit no-underline', props.class as string | undefined)}
       >
-        {#if Icon}<Icon class="mr-2 h-4 w-4" />{/if}
+        {#if iconSnippet}{@render iconSnippet({ class: "mr-2 h-4 w-4" })}{:else if Icon}<Icon class="mr-2 h-4 w-4" />{/if}
         {@render children?.()}
         {#if selected}<span class="inline-flex"><Check class="h-4 w-4" /></span>{/if}
       </a>
     {/snippet}
   {:else}
-    {#if Icon}<Icon class="mr-2 h-4 w-4" />{/if}
+    {#if iconSnippet}{@render iconSnippet({ class: "mr-2 h-4 w-4" })}{:else if Icon}<Icon class="mr-2 h-4 w-4" />{/if}
     {@render children?.()}
     {#if selected}<span class="inline-flex"><Check class="h-4 w-4" /></span>{/if}
   {/if}

@@ -16,3 +16,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `2f9b17fc` | Add LayerDialog.Action with a related-actions menu snippet, native form props, and deprecated Primary compatibility. Document the single-action footer contract. |
 | `dae9cdd6` | Share race-safe copy feedback with timer restart and unmount invalidation across code, breadcrumbs, inline/clipboard/sensitive text, delete-resource and docs copy controls. |
 | `6701f404` | Complete collapsible transitions against effective visibility, including desktop collapse and mobile drawer changes. |
+| `09a9dae3` | Accept an iconSnippet with sizing/spacing props so custom icon classes survive Svelte rendering. |

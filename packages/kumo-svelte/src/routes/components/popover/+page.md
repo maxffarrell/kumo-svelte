@@ -239,3 +239,9 @@ your own element.
 <PropsTable component="Popover.Close" />
 
 </ComponentSection>
+
+## Composable parts
+
+Prefer `Popover.Root`, `Popover.Trigger`, `Popover.Portal`, `Popover.Positioner`, `Popover.Popup`, and `Popover.Arrow`. Put the popup inside the positioner, and the arrow inside the popup. `Popover.Backdrop` and `Popover.Viewport` provide optional unstyled surfaces. The positioner accepts `side`, `align`, `sideOffset`, and `alignOffset`. `--available-height`, `--available-width`, `--anchor-width`, and `--transform-origin` are available on descendants.
+
+`Popover.Content` remains supported as a deprecated wrapper with opacity-only transitions. Bits UI combines positioning and dialog/focus semantics in Content; the separate Popup is a styled surface. Viewport is a plain container (Base UI animated multi-trigger viewport behavior is not available in Bits UI).

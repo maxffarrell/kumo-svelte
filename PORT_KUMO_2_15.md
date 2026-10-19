@@ -37,3 +37,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `5ee4a033` | Leave Enter, Tab and comma untouched during IME composition, including Safari keyCode 229. |
 | `df14b5dd` | Not applicable: React Base UI 1.9.0 dependency update; Svelte uses Bits UI 2.19.0. |
 | `f46e8bc9` | Update Cloudflare orange/yellow brand asset colors, including SVG generation. |
+| `dc7c513f` | Safely decode table-of-contents fragments and retain raw malformed hashes for matching. |

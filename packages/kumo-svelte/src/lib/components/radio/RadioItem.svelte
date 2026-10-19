@@ -8,6 +8,7 @@
   interface RadioGroupContext {
     readonly controlPosition: RadioControlPosition | undefined;
     readonly appearance: RadioAppearance;
+    readonly orientation: "vertical" | "horizontal";
     serializeValue: (value: unknown) => string;
   }
 
@@ -36,6 +37,7 @@
   const group = getContext<RadioGroupContext | undefined>('kumo-radio-group');
   const appearance = $derived(appearanceProp ?? group?.appearance ?? 'default');
   const isCard = $derived(appearance === 'card');
+  const isJoined = $derived(isCard && group?.appearance === 'card');
   const effectiveControlPosition = $derived(group?.controlPosition ?? (isCard ? 'end' : 'start'));
   const controlAtStart = $derived(effectiveControlPosition === 'start');
   const primitiveValue = $derived(group?.serializeValue(value) ?? (typeof value === 'string' ? value : String(value)));
@@ -49,7 +51,7 @@
     data-kumo-part="item"
     class={cn(
       isCard
-        ? 'relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring-2 focus:outline-none focus:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-brand'
+        ? 'relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring focus:outline-none focus:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-brand'
         : 'relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring focus:outline-none after:absolute after:-inset-x-3 after:-inset-y-2',
       variant === 'error' ? 'ring-kumo-danger' : 'ring-kumo-line',
       !disabled &&
@@ -80,7 +82,8 @@
     data-kumo-component="Radio"
     data-kumo-part="item-label"
     class={cn(
-      'm-0 group relative flex items-start gap-3 rounded-lg border border-kumo-hairline bg-kumo-base p-3 transition-colors has-[[data-checked]]:border-kumo-interact has-[[data-checked]]:bg-kumo-tint has-[[data-state=checked]]:border-kumo-interact has-[[data-state=checked]]:bg-kumo-tint',
+      'group relative m-0 flex items-start gap-3 bg-kumo-base p-3 has-[[data-checked]]:bg-kumo-tint has-[[data-state=checked]]:bg-kumo-tint',
+      isJoined ? cn('border-b border-kumo-line bg-clip-padding last:border-b-0', group?.orientation === 'horizontal' && 'odd:border-r [&:last-child:nth-child(odd)]:border-r-0 [&:nth-last-child(2):nth-child(odd)]:border-b-0') : 'rounded-lg border border-kumo-hairline has-[[data-checked]]:border-kumo-interact has-[[data-state=checked]]:border-kumo-interact',
       controlAtStart && 'flex-row-reverse',
       variant === 'error' &&
         'border-kumo-danger has-[[data-state=checked]]:border-kumo-danger has-[[data-state=checked]]:bg-kumo-base',
@@ -88,7 +91,7 @@
         ? 'cursor-not-allowed opacity-50'
         : cn(
             'has-[[data-disabled]]:cursor-not-allowed has-[[data-disabled]]:opacity-50 cursor-pointer',
-            variant !== 'error' && 'hover:not-has-[[data-disabled]]:bg-kumo-tint'
+            variant !== 'error' && 'hover:not-has-[[data-disabled]]:not-has-[[data-checked]]:not-has-[[data-state=checked]]:bg-kumo-elevated'
           ),
       className
     )}

@@ -21,3 +21,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `b909c7fd` | Not applicable: upstream ask-bonk version change; fork maintains its own review workflow. |
 | `8a8535b0` | Not applicable: upstream ask-bonk main tracking; no library behavior changes. |
 | `3fd5b648` | Keep sidebar demo footer triggers aligned with the collapsed rail. |
+| `49317c6c` | Join Radio card groups with shared borders, two-column dividers, and checked-aware hover backgrounds. |

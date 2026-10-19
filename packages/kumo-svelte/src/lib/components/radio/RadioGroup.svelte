@@ -70,6 +70,7 @@
     get controlPosition() {
       return controlPosition;
     },
+    get orientation() { return orientation; },
     get appearance() {
       return appearance;
     },
@@ -85,7 +86,7 @@
   {name}
   onValueChange={handleValueChange}
 >
-  <fieldset class={cn('flex flex-col gap-4 p-0', className)} {disabled}>
+  <fieldset class={cn('flex flex-col p-0', appearance === 'card' ? 'gap-2' : 'gap-4', className)} {disabled}>
     {#if legend}
       <legend class="text-base font-medium text-kumo-default">
         {legend}
@@ -94,9 +95,9 @@
     <div
       class={cn(
         orientation === 'vertical'
-          ? cn('flex flex-col', appearance === 'card' ? 'gap-3' : 'gap-2')
+          ? appearance === 'card' ? 'flex flex-col overflow-hidden rounded-lg ring ring-kumo-line' : 'flex flex-col gap-2'
           : appearance === 'card'
-            ? 'grid grid-cols-2 gap-3'
+            ? 'grid grid-cols-2 overflow-hidden rounded-lg bg-kumo-base ring ring-kumo-line'
             : 'flex flex-row flex-wrap gap-2'
       )}
     >

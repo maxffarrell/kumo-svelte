@@ -31,3 +31,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `86af1a15` | Pad the LayerDialog viewport top to keep control rings visible. Svelte body has no top mask fallback to correct. |
 | `aef723cc` | Hide outside-month dates by default in multi-month calendars; expose showOutsideDays override. |
 | `52827100` | Add group-only segmented Radio appearance with horizontal keyboard navigation, accessible hidden controls and checked/error/disabled styling. |
+| `828866ab` | Remove negative Select separator margins to avoid horizontal overflow. |

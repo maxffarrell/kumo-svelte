@@ -26,6 +26,7 @@
   const componentId = $props.id();
   const contentId = `kumo-sidebar-collapsible-${componentId}`;
   const sidebar = getSidebarContext('Sidebar.Collapsible');
+  const isContentShown = $derived(open && (sidebar.isMobile ? sidebar.openMobile : sidebar.state !== 'collapsed'));
   let previousOpen: boolean | undefined;
   let pendingOpen: boolean | undefined;
   let completionTimer: ReturnType<typeof setTimeout> | undefined;
@@ -40,17 +41,17 @@
 
   $effect(() => {
     if (previousOpen === undefined) {
-      previousOpen = open;
+      previousOpen = isContentShown;
       return;
     }
-    if (open === previousOpen) return;
-    previousOpen = open;
+    if (isContentShown === previousOpen) return;
+    previousOpen = isContentShown;
     clearTimeout(completionTimer);
     if (!onOpenChangeComplete) {
       pendingOpen = undefined;
       return;
     }
-    pendingOpen = open;
+    pendingOpen = isContentShown;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       completeOpenChange();
       return;

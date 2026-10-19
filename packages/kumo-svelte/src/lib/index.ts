@@ -290,3 +290,5 @@ export type {
 export { Tooltip, TooltipProvider } from "./components/tooltip";
 export { cn } from "./utils/cn";
 export * as Primitives from "./primitives";
+
+export * from './components/slider/index.js';

@@ -1,4 +1,6 @@
 <script lang="ts">
+ import { createCopyFeedback } from "#lib/utils/copy-feedback.svelte.js";
+ const feedback = createCopyFeedback();
   import { CloudflareLogo } from '#lib/components/cloudflare-logo/index.js';
   import { DropdownMenu } from '#lib/components/dropdown-menu/index.js';
   import ArrowSquareOut from 'phosphor-svelte/lib/ArrowSquareOut';
@@ -9,13 +11,7 @@
 
   let copied = $state<string | null>(null);
 
-  async function copyToClipboard(text: string, label: string) {
-    await navigator.clipboard.writeText(text);
-    copied = label;
-    setTimeout(() => {
-      copied = null;
-    }, 2000);
-  }
+  async function copyToClipboard(text: string, label: string) { try { if (await feedback.runCopy(() => navigator.clipboard.writeText(text))) copied = label; } catch (error) { console.error('Failed to copy logo SVG:', error); } }
 </script>
 
 <div class="flex items-center gap-4">
@@ -34,13 +30,13 @@
         icon={Cloud}
         onSelect={() => copyToClipboard(generateCloudflareLogoSvg({ variant: 'glyph' }), 'glyph')}
       >
-        {copied === 'glyph' ? 'Copied!' : 'Copy logo as SVG'}
+        {feedback.copied && copied === 'glyph' ? 'Copied!' : 'Copy logo as SVG'}
       </DropdownMenu.Item>
       <DropdownMenu.Item
         icon={Code}
         onSelect={() => copyToClipboard(generateCloudflareLogoSvg({ variant: 'full' }), 'full')}
       >
-        {copied === 'full' ? 'Copied!' : 'Copy full logo as SVG'}
+        {feedback.copied && copied === 'full' ? 'Copied!' : 'Copy full logo as SVG'}
       </DropdownMenu.Item>
       <DropdownMenu.Item
         icon={DownloadSimple}

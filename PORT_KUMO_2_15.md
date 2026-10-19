@@ -14,3 +14,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `81b0ef43` | Expose Portal, Positioner, Popup, Arrow, Backdrop and Viewport alongside deprecated Content. Translate positioning/focus to Bits UI and document Viewport limits. |
 | `462516f9` | Remove runtime deprecated heading warnings while retaining types and compatibility. |
 | `2f9b17fc` | Add LayerDialog.Action with a related-actions menu snippet, native form props, and deprecated Primary compatibility. Document the single-action footer contract. |
+| `dae9cdd6` | Share race-safe copy feedback with timer restart and unmount invalidation across code, breadcrumbs, inline/clipboard/sensitive text, delete-resource and docs copy controls. |

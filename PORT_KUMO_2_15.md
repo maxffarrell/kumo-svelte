@@ -27,3 +27,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `85afbd08` | Add scalar/range Slider using Bits UI, size variants, value formatting, accessible thumb names, docs, navigation and VRT gallery. |
 | `72b3346a` | Not applicable to the CSS-layout Svelte Flow: nodes remain in flex layout and connectors use measured rectangles; no unpositioned absolute-layout phase. |
 | `10b7f667` | Fill Slider indicator to contained thumb edges and center grips, with track padding outside the measured Bits control. |
+| `1cb4773c` | Add reactive nested KumoLocaleProvider defaults for Label generated text and LayerDialog dismissal, with explicit optionalLabel/tooltipAriaLabel overrides. |

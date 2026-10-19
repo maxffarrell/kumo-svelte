@@ -18,6 +18,8 @@
   import Minus from 'phosphor-svelte/lib/Minus';
   import { cn } from '#lib/utils/cn.js';
   import type { Snippet } from 'svelte';
+  import { getKumoLocale } from '#lib/utils/locale.js';
+  const locale = getKumoLocale();
 
   interface Props {
     children?: Snippet;
@@ -100,7 +102,7 @@
     {@render control()}
     <span class="inline-flex items-center gap-1 text-base font-medium text-kumo-default">
       {#if label}{label}{:else}{@render children?.()}{/if}
-      {#if required === false}<span class="text-kumo-subtle">(optional)</span>{/if}
+      {#if required === false}<span class="text-kumo-subtle">{locale.label.optional}</span>{/if}
       {#if labelTooltip}{@render labelTooltip()}{/if}
     </span>
   </label>

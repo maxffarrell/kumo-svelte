@@ -292,3 +292,6 @@ export { cn } from "./utils/cn";
 export * as Primitives from "./primitives";
 
 export * from './components/slider/index.js';
+
+export { default as KumoLocaleProvider } from './utils/KumoLocaleProvider.svelte';
+export { getKumoLocale, type KumoTranslations, type KumoTranslationsPartial } from './utils/locale.js';

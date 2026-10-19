@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { menuRowClasses, autoInsetClasses } from './styles';
   import { DropdownMenu as DropdownMenuPrimitive } from 'bits-ui';
   import type { Component, Snippet } from 'svelte';
   import { cn } from '#lib/utils/cn.js';
@@ -8,11 +9,12 @@
     class?: string;
     inset?: boolean;
     icon?: Component;
+    iconSnippet?: Snippet<[{ class: string }]>;
     value: string;
     [key: string]: unknown;
   }
 
-  let { children, class: className, inset = false, icon: Icon, value, ...rest }: Props = $props();
+  let { children, class: className, inset = false, icon: Icon, iconSnippet, value, ...rest }: Props = $props();
 </script>
 
 <DropdownMenuPrimitive.RadioItem
@@ -20,13 +22,13 @@
   data-kumo-component="DropdownMenu"
   data-kumo-part="radio-item"
   class={cn(
-    'group/radio-item relative flex cursor-default items-center rounded-md px-2 py-1.5 text-base outline-hidden select-none',
+    menuRowClasses, 'group/radio-item',
     'data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-kumo-tint',
     inset && 'pl-8',
     className
   )}
   {...rest}
 >
-  {#if Icon}<Icon class="mr-2 h-4 w-4" />{/if}
+  {#if iconSnippet || Icon}<span data-kumo-part="icon" class="inline-flex shrink-0 items-center">{#if iconSnippet}{@render iconSnippet({ class: "h-4 w-4" })}{:else if Icon}<Icon class="h-4 w-4" />{/if}</span>{/if}
   {@render children?.()}
 </DropdownMenuPrimitive.RadioItem>

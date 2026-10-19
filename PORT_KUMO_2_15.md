@@ -44,3 +44,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `18467591` | Unify dropdown rows, preserve custom snippet icons, auto-inset iconless siblings, expose Portal/Positioner/Popup, and resolve submenu offsets against collision side with Bits UI. |
 | `7e0ff405` | Already equivalent: Flow reads anchor getBoundingClientRect directly in viewport coordinates, including node margin, instead of rebuilding offsets from positioned node data. |
 | `bfb4140e` | Size Loader with SVG width/height attributes so utility sizes can override dimensions, including button spinners. |
+| `69ff967a` | Record the 2.15 parity release as a Svelte minor changeset; leave independent package versioning to Changesets. |

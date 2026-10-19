@@ -35,3 +35,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `543dc8a0` | Use contrast/inverse tokens for Slider value badges and disabled colors. |
 | `2c53422b` | Use bg-kumo-tint for highlighted Autocomplete items to match Combobox/Select. |
 | `5ee4a033` | Leave Enter, Tab and comma untouched during IME composition, including Safari keyCode 229. |
+| `df14b5dd` | Not applicable: React Base UI 1.9.0 dependency update; Svelte uses Bits UI 2.19.0. |

@@ -29,3 +29,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `10b7f667` | Fill Slider indicator to contained thumb edges and center grips, with track padding outside the measured Bits control. |
 | `1cb4773c` | Add reactive nested KumoLocaleProvider defaults for Label generated text and LayerDialog dismissal, with explicit optionalLabel/tooltipAriaLabel overrides. |
 | `86af1a15` | Pad the LayerDialog viewport top to keep control rings visible. Svelte body has no top mask fallback to correct. |
+| `aef723cc` | Hide outside-month dates by default in multi-month calendars; expose showOutsideDays override. |

@@ -40,3 +40,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `dc7c513f` | Safely decode table-of-contents fragments and retain raw malformed hashes for matching. |
 | `d97d751d` | Already preserved: Actions.Primary remains the same component as LayerDialog.Action and retains its deprecated prop type alias. |
 | `17d094ec` | Render the MenuSub guide as an aria-hidden list item to preserve valid list structure. |
+| `cdb7e0fd` | Lift Button/LinkButton text and balance leading icon padding across sizes, preserving square/circle shapes. |

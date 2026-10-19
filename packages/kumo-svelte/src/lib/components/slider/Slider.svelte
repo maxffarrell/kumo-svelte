@@ -23,10 +23,10 @@
  {#if label}<span id={labelId} class={cn('font-medium text-kumo-default', textSize)}>{#if typeof label === 'string'}{label}{:else}{@render label()}{/if}</span>{/if}
  <div class={sliderVariants({ size })}>
  <Primitive.Root type="multiple" value={values} onValueChange={change} onValueCommit={commitValue} {min} {max} {step} {disabled} {name} orientation="horizontal" thumbPositioning={thumbAlignment === 'edge' ? 'contain' : 'exact'} class="relative h-full" {...rest}>
- <Primitive.Range class={cn('absolute h-full bg-kumo-base shadow-sm ring ring-kumo-line', innerRadius)} />
+ <Primitive.Range class={cn('absolute h-full box-content! bg-kumo-overlay pr-2 shadow-sm ring ring-kumo-line', isRange && '-ml-2 pl-2', innerRadius)} />
  {#each values as current, index}
  <Primitive.Thumb {index} aria-label={getAriaLabel?.(index)} aria-labelledby={getAriaLabel ? undefined : label ? labelId : undefined} aria-valuetext={formatter.format(current)} class={cn('group h-full w-4 cursor-grab outline-none focus-visible:ring-2 focus-visible:ring-kumo-focus data-disabled:cursor-not-allowed data-dragging:cursor-grabbing', innerRadius)}>
- <span aria-hidden="true" class={cn('absolute top-1/2 left-1/2 h-1/2 w-0.5 -translate-1/2 rounded-full bg-kumo-contrast/25', isRange && index === 0 ? 'ml-[7px]' : '-ml-[7px]')} />
+ <span aria-hidden="true" class={cn('absolute top-1/2 left-1/2 h-1/2 w-0.5 -translate-1/2 rounded-full bg-kumo-contrast/25')} />
  <span aria-hidden="true" class={cn('absolute top-full left-1/2 mt-[11px] -translate-x-1/2 rounded bg-kumo-brand px-1.5 font-medium whitespace-nowrap text-white tabular-nums', textSize)}>{formatter.format(current)}</span>
  </Primitive.Thumb>
  {/each}

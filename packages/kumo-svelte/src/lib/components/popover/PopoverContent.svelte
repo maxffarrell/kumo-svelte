@@ -38,12 +38,12 @@
 
   let contentClass = $derived(
     cn(
-      'kumo-popover-popup flex origin-(--bits-floating-transform-origin) flex-col rounded-lg bg-kumo-base px-4 py-3 text-sm text-kumo-default',
+      'kumo-popover-popup flex flex-col rounded-lg bg-kumo-base px-4 py-3 text-sm text-kumo-default',
       'z-50',
       'shadow-md outline outline-kumo-line',
-      'transition-[transform,scale,opacity] duration-150',
-      'data-starting-style:scale-90 data-starting-style:opacity-0',
-      'data-ending-style:scale-90 data-ending-style:opacity-0',
+      'transition-opacity duration-150',
+      'data-starting-style:opacity-0',
+      'data-ending-style:opacity-0',
       'data-instant:duration-0',
       className
     )
@@ -52,7 +52,7 @@
 
 <PopoverPrimitive.Portal to={container}>
   <PopoverPrimitive.Content
-    class={contentClass}
+    class="z-50"
     {side}
     {align}
     {sideOffset}
@@ -61,7 +61,8 @@
     customAnchor={anchor ?? customAnchor}
     {...rest}
   >
-    <PopoverPrimitive.Arrow
+
+        <PopoverPrimitive.Arrow
       width={20}
       height={10}
       class={cn(
@@ -87,7 +88,7 @@
         />
       </svg>
     </PopoverPrimitive.Arrow>
-    {@render children?.()}
+    <div class={contentClass}>{@render children?.()}</div>
   </PopoverPrimitive.Content>
 </PopoverPrimitive.Portal>
 

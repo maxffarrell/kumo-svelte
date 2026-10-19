@@ -18,3 +18,4 @@ Each row records an upstream commit in chronological order and its Svelte dispos
 | `6701f404` | Complete collapsible transitions against effective visibility, including desktop collapse and mobile drawer changes. |
 | `09a9dae3` | Accept an iconSnippet with sizing/spacing props so custom icon classes survive Svelte rendering. |
 | `c3b02946` | Replace cnfast with upstream cn 0.4.0 and refresh the dependency lockfile. |
+| `b909c7fd` | Not applicable: upstream ask-bonk version change; fork maintains its own review workflow. |

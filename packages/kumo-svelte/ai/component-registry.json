@@ -5509,6 +5509,21 @@
       "importPath": "kumo-svelte/components/slider",
       "sourceFile": "components/slider",
       "props": {
+        "form": {
+          "type": "string",
+          "optional": true,
+          "description": "ID of an external form that owns the hidden value inputs. Native form reset restores the initial value."
+        },
+        "aria-label": {
+          "type": "string",
+          "optional": true,
+          "description": "Accessible name applied to each thumb when no visible label is provided."
+        },
+        "aria-labelledby": {
+          "type": "string",
+          "optional": true,
+          "description": "IDs of elements naming the thumbs."
+        },
         "value": {
           "type": "number | readonly number[]",
           "optional": true,

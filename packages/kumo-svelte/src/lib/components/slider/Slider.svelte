@@ -14,22 +14,28 @@
   export interface KumoSliderVariantsProps {
     size?: KumoSliderSize;
   }
-  export interface SliderProps extends KumoSliderVariantsProps {
+  export type SliderValue = number | readonly number[];
+  export interface SliderProps<
+    Value extends SliderValue = SliderValue,
+  > extends KumoSliderVariantsProps {
     label?: string | import("svelte").Snippet;
-    value?: number | readonly number[];
-    defaultValue?: number | readonly number[];
+    value?: Value;
+    defaultValue?: Value;
     min?: number;
     max?: number;
     step?: number;
     disabled?: boolean;
     name?: string;
+    form?: string;
+    "aria-label"?: string;
+    "aria-labelledby"?: string;
     format?: Intl.NumberFormatOptions;
     locale?: string;
     getAriaLabel?: (index: number) => string;
     thumbAlignment?: "edge" | "center";
     class?: string;
-    onValueChange?: (value: number | number[]) => void;
-    onValueCommitted?: (value: number | number[]) => void;
+    onValueChange?: (value: Value) => void;
+    onValueCommitted?: (value: Value) => void;
     [key: string]: unknown;
   }
   export function sliderVariants({
@@ -42,7 +48,8 @@
   }
 </script>
 
-<script lang="ts">
+<script lang="ts" generics="Value extends SliderValue = number">
+  import { untrack } from "svelte";
   import { Slider as Primitive } from "bits-ui";
   let {
     label,
@@ -52,18 +59,45 @@
     step = 1,
     disabled = false,
     name,
+    form,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy,
     format,
     locale,
     getAriaLabel,
     thumbAlignment = "edge",
     class: className,
     defaultValue,
-    value = $bindable(defaultValue ?? min),
+    value = $bindable((defaultValue ?? min) as Value),
     onValueChange,
     onValueCommitted,
     ...rest
-  }: SliderProps = $props();
+  }: SliderProps<Value> = $props();
   const labelId = $props.id();
+  let rootElement = $state<HTMLDivElement | null>(null);
+  const initialValue = untrack(() =>
+    Array.isArray(value) ? ([...value] as unknown as Value) : value,
+  );
+  $effect(() => {
+    const owner = form
+      ? document.getElementById(form)
+      : rootElement?.closest("form");
+    if (!(owner instanceof HTMLFormElement)) return;
+    let active = true;
+    const reset = (event: Event) =>
+      queueMicrotask(() => {
+        if (!active || event.defaultPrevented) return;
+        value = Array.isArray(initialValue)
+          ? ([...initialValue] as unknown as Value)
+          : initialValue;
+        onValueChange?.(value);
+      });
+    owner.addEventListener("reset", reset);
+    return () => {
+      active = false;
+      owner.removeEventListener("reset", reset);
+    };
+  });
   const values = $derived(
     Array.isArray(value) ? [...value] : [value as number],
   );
@@ -72,15 +106,16 @@
   const textSize = $derived(size === "sm" ? "text-xs" : "text-sm");
   const innerRadius = $derived(size === "sm" ? "rounded" : "rounded-md");
   function change(next: number[]) {
-    value = isRange ? next : next[0];
-    onValueChange?.(isRange ? next : next[0]);
+    value = (isRange ? next : next[0]) as Value;
+    onValueChange?.(value);
   }
   function commitValue(next: number[]) {
-    onValueCommitted?.(isRange ? next : next[0]);
+    onValueCommitted?.((isRange ? next : next[0]) as Value);
   }
 </script>
 
 <div
+  bind:this={rootElement}
   data-kumo-component="Slider"
   class={cn(
     "flex w-full flex-col gap-2 data-disabled:opacity-50",
@@ -96,6 +131,7 @@
     >{/if}
   <div class={sliderVariants({ size })}>
     <Primitive.Root
+      {...rest}
       type="multiple"
       value={values}
       onValueChange={change}
@@ -107,7 +143,6 @@
       orientation="horizontal"
       thumbPositioning={thumbAlignment === "edge" ? "contain" : "exact"}
       class="relative block h-full w-full touch-none select-none"
-      {...rest}
     >
       <Primitive.Range
         class={cn(
@@ -119,12 +154,9 @@
       {#each values as current, index}
         <Primitive.Thumb
           {index}
-          aria-label={getAriaLabel?.(index)}
-          aria-labelledby={getAriaLabel
-            ? undefined
-            : label
-              ? labelId
-              : undefined}
+          aria-label={getAriaLabel?.(index) ?? ariaLabel}
+          aria-labelledby={ariaLabelledBy ??
+            (!getAriaLabel && !ariaLabel && label ? labelId : undefined)}
           aria-valuetext={formatter.format(current)}
           class={cn(
             "group h-full w-4 cursor-grab outline-none has-focus-visible:ring-2 has-focus-visible:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-focus data-disabled:cursor-not-allowed data-dragging:cursor-grabbing",
@@ -149,6 +181,7 @@
       {#if name}{#each values as current}<input
             type="hidden"
             {name}
+            {form}
             value={current}
             {disabled}
           />{/each}{/if}

@@ -1,6 +1,23 @@
 import type { PropRow } from "../prop-types";
 const rows: PropRow[] = [
   {
+    prop: "form",
+    type: "string",
+    description:
+      "ID of an external form that owns the hidden value inputs. Native form reset restores the initial value.",
+  },
+  {
+    prop: "aria-label",
+    type: "string",
+    description:
+      "Accessible name applied to each thumb when no visible label is provided.",
+  },
+  {
+    prop: "aria-labelledby",
+    type: "string",
+    description: "IDs of elements naming the thumbs.",
+  },
+  {
     prop: "value",
     type: "number | readonly number[]",
     description: "Bindable scalar or range value.",

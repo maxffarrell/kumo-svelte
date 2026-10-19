@@ -33,13 +33,13 @@ describe('deep import validation', () => {
       default: './dist/components/*/index.js'
     });
 
-    expect(components).toEqual(expect.arrayContaining(['code-highlighted', 'link', 'select', 'tooltip']));
+    expect(components).toEqual(expect.arrayContaining(['code-highlighted', 'link', 'select', 'tooltip', 'slider', 'popover', 'dropdown-menu', 'layer-dialog']));
   });
 
   it('emits representative built component deep paths when dist is present', async () => {
     if (!existsSync(distRoot)) return;
 
-    for (const component of ['code-highlighted', 'link', 'select', 'tooltip']) {
+    for (const component of ['code-highlighted', 'link', 'select', 'tooltip', 'slider', 'popover', 'dropdown-menu', 'layer-dialog']) {
       expect(existsSync(join(distRoot, 'components', component, 'index.js'))).toBe(true);
       expect(existsSync(join(distRoot, 'components', component, 'index.d.ts'))).toBe(true);
     }

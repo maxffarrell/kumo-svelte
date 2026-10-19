@@ -12,3 +12,5 @@ Import `Slider` from `kumo-svelte`. Pass `value` with `bind:value` for controlle
 <ComponentExample demo="SliderBasicDemo" />
 
 Both `size="sm"` and `size="base"` are supported. `format` and `locale` use `Intl.NumberFormat` for value badges and accessible value text. Provide `label` or `getAriaLabel(index)` so every thumb has a name. `onValueChange` runs during interaction and `onValueCommitted` runs when the interaction finishes. The layout supports horizontal orientation only. `thumbAlignment="edge"` maps to Bits UI contained thumbs; `"center"` maps to exact positioning.
+
+Provide `aria-label` or `aria-labelledby` when there is no visible label. For ranges, `getAriaLabel(index)` can name each thumb separately. Pass `name` to submit the value with a form, and `form` for an external form ID. Native form reset restores the initial value. Scalar and range bindings preserve their respective callback types.

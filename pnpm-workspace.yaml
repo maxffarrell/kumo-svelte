@@ -31,3 +31,5 @@ minimumReleaseAgeExclude:
   # Stable SvelteKit 3 migration releases explicitly requested for this upgrade.
   - "@sveltejs/kit@3.0.0"
   - "@sveltejs/adapter-cloudflare@8.0.0"
+  # Renovate security update: vite@8.2.4
+  - vite@8.2.4

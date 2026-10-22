@@ -33,3 +33,6 @@ minimumReleaseAgeExclude:
   - "@sveltejs/adapter-cloudflare@8.0.0"
   # Renovate security update: vite@8.2.4
   - vite@8.2.4
+
+# CVE-2026-111497: require patched Node runtimes.
+engineStrict: true

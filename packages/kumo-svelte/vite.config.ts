@@ -6,6 +6,7 @@ import { mdsxConfig } from "./mdsx.config.js";
 import tailwindcss from "@tailwindcss/vite";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import { kumoRegistryPlugin } from "./src/lib/docs/vite-plugin-kumo-registry.ts";
 
@@ -120,5 +121,20 @@ export default defineConfig({
       prerender: { entries: ["*"] },
     }),
   ],
-  resolve: process.env.VITEST ? { conditions: ["browser"] } : undefined,
+  resolve: {
+    // Published #lib imports point at dist. Local docs/tests use source files.
+    alias: [
+      {
+        find: /^#lib$/,
+        replacement: fileURLToPath(
+          new URL("./src/lib/index.ts", import.meta.url),
+        ),
+      },
+      {
+        find: /^#lib\//,
+        replacement: fileURLToPath(new URL("./src/lib/", import.meta.url)),
+      },
+    ],
+    ...(process.env.VITEST ? { conditions: ["browser"] } : {}),
+  },
 });

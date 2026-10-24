@@ -18,6 +18,7 @@ export const LayerDialog = Object.assign(Root, {
   Title,
   Description,
   Body,
+  Action: Primary,
   Actions
 });
 
@@ -30,6 +31,7 @@ export {
   Description as LayerDialogDescription,
   Body as LayerDialogBody,
   Actions as LayerDialogActions,
+  Primary as LayerDialogAction,
   Primary as LayerDialogPrimary
 };
 export {
@@ -45,4 +47,4 @@ export type { LayerDialogTitleProps } from './LayerDialogTitle.svelte';
 export type { LayerDialogDescriptionProps } from './LayerDialogDescription.svelte';
 export type { LayerDialogBodyProps } from './LayerDialogBody.svelte';
 export type { LayerDialogActionsProps } from './LayerDialogActions.svelte';
-export type { LayerDialogPrimaryProps } from './LayerDialogPrimary.svelte';
+export type { LayerDialogActionProps, LayerDialogPrimaryProps } from './LayerDialogPrimary.svelte';

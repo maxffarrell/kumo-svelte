@@ -43,6 +43,7 @@
     yAxisTickCount?: number;
     yAxisMinInterval?: number;
     tooltipValueFormat?: (value: number) => string;
+    tooltipTimestampFormat?: (timestamp: number) => string;
     tooltipFooter?: string;
     tooltipMode?: 'all' | 'single';
     tooltipMaxItems?: number;
@@ -77,6 +78,7 @@
     yAxisTickCount,
     yAxisMinInterval,
     tooltipValueFormat,
+    tooltipTimestampFormat,
     tooltipFooter,
     tooltipMode = 'all',
     tooltipMaxItems = 10,
@@ -225,7 +227,7 @@
   const defaultNumberFormat = new Intl.NumberFormat(undefined, { maximumFractionDigits: 3 });
   const pad = (n: number) => n.toString().padStart(2, '0');
   const formatTimestamp = (ts: number | string | Date): string => {
-    return tooltipDateFormat.format(new Date(ts));
+    return tooltipTimestampFormat?.(new Date(ts).getTime()) ?? tooltipDateFormat.format(new Date(ts));
   };
   const formatAriaTimestamp = (ts: number | string | Date): string => {
     const d = new Date(ts);

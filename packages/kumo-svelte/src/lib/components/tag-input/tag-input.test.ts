@@ -67,3 +67,19 @@ describe("TagInput", () => {
     expect(onValueChange).toHaveBeenLastCalledWith(["one"]);
   });
 });
+
+it.each([{ isComposing: true }, { keyCode: 229 }])(
+  "does not commit IME text (%j)",
+  async (init) => {
+    const onValueChange = vi.fn();
+    render(TagInput, { "aria-label": "IME tags", onValueChange });
+    const input = screen.getByLabelText("IME tags");
+    await fireEvent.input(input, { target: { value: "にほんご" } });
+    for (const key of ["Enter", ",", "Tab"])
+      await fireEvent.keyDown(input, { key, ...init });
+    expect(onValueChange).not.toHaveBeenCalled();
+    expect(input).toHaveValue("にほんご");
+    await fireEvent.keyDown(input, { key: "Enter" });
+    expect(onValueChange).toHaveBeenLastCalledWith(["にほんご"]);
+  },
+);

@@ -1,19 +1,25 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  import Info from 'phosphor-svelte/lib/Info';
-  import { cn } from '#lib/utils/cn.js';
-  import { inputVariants, type KumoInputSize, type KumoInputVariant } from './input-variants';
+  import { getKumoLocale } from "#lib/utils/locale.js";
+  const locale = getKumoLocale();
+  import type { Snippet } from "svelte";
+  import Info from "phosphor-svelte/lib/Info";
+  import { cn } from "#lib/utils/cn.js";
+  import {
+    inputVariants,
+    type KumoInputSize,
+    type KumoInputVariant,
+  } from "./input-variants";
 
-  type Size = 'xs' | 'sm' | 'base' | 'lg';
-  type Variant = 'default' | 'error';
+  type Size = "xs" | "sm" | "base" | "lg";
+  type Variant = "default" | "error";
   type ErrorMatch = keyof ValidityState | true;
   type FieldError = string | { message: string; match: ErrorMatch };
 
   const sizes: Record<Size, string> = {
-    xs: 'h-5 gap-1 rounded-sm px-1.5 text-xs',
-    sm: 'h-6.5 gap-1 rounded-md px-2 text-xs',
-    base: 'h-9 gap-1.5 rounded-lg px-3 text-base',
-    lg: 'h-10 gap-2 rounded-lg px-4 text-base'
+    xs: "h-5 gap-1 rounded-sm px-1.5 text-xs",
+    sm: "h-6.5 gap-1 rounded-md px-2 text-xs",
+    base: "h-9 gap-1.5 rounded-lg px-3 text-base",
+    lg: "h-10 gap-2 rounded-lg px-4 text-base",
   };
 
   interface Props {
@@ -36,7 +42,7 @@
 
   let {
     class: className,
-    size = 'base',
+    size = "base",
     variant,
     invalid = false,
     label,
@@ -44,7 +50,7 @@
     description,
     error,
     passwordManagerIgnore = false,
-    value = $bindable(''),
+    value = $bindable(""),
     onValueChange,
     oninput,
     required,
@@ -55,16 +61,20 @@
   const componentId = $props.id();
   const generatedId = `kumo-input-${componentId}`;
   const inputId = $derived(id ?? generatedId);
-  const descriptionId = $derived(description ? `${inputId}-description` : undefined);
+  const descriptionId = $derived(
+    description ? `${inputId}-description` : undefined,
+  );
   const errorId = $derived(error ? `${inputId}-error` : undefined);
 
   let validity = $state<ValidityState | undefined>();
 
   const hasField = $derived(Boolean(label || error || description));
-  const normalizedVariant = $derived(variant ?? (error || invalid ? 'error' : 'default'));
+  const normalizedVariant = $derived(
+    variant ?? (error || invalid ? "error" : "default"),
+  );
   const showError = $derived.by(() => {
     if (!error) return undefined;
-    if (typeof error === 'string') return error;
+    if (typeof error === "string") return error;
     if (error.match === true) return error.message;
     if (validity?.[error.match]) return error.message;
     return undefined;
@@ -83,21 +93,26 @@
     bind:value
     id={inputId}
     class={cn(
-      'block w-full',
-      inputVariants({ size: size as KumoInputSize, variant: normalizedVariant as KumoInputVariant, focusIndicator: true }),
+      "block w-full",
+      inputVariants({
+        size: size as KumoInputSize,
+        variant: normalizedVariant as KumoInputVariant,
+        focusIndicator: true,
+      }),
       sizes[size],
-      normalizedVariant === 'error'
-        ? '!ring-kumo-danger focus:ring-kumo-danger/50 focus:ring-[1.5px]'
-        : 'focus:ring-kumo-focus/50 focus:ring-[1.5px]',
-      passwordManagerIgnore && 'keeper-ignore',
-      className
+      normalizedVariant === "error"
+        ? "!ring-kumo-danger focus:ring-kumo-danger/50 focus:ring-[1.5px]"
+        : "focus:ring-kumo-focus/50 focus:ring-[1.5px]",
+      passwordManagerIgnore && "keeper-ignore",
+      className,
     )}
     aria-invalid={Boolean(showError || invalid) || undefined}
-    aria-describedby={[descriptionId, errorId].filter(Boolean).join(' ') || undefined}
-    data-1p-ignore={passwordManagerIgnore ? 'true' : undefined}
-    data-bwignore={passwordManagerIgnore ? 'true' : undefined}
-    data-form-type={passwordManagerIgnore ? 'other' : undefined}
-    data-lpignore={passwordManagerIgnore ? 'true' : undefined}
+    aria-describedby={[descriptionId, errorId].filter(Boolean).join(" ") ||
+      undefined}
+    data-1p-ignore={passwordManagerIgnore ? "true" : undefined}
+    data-bwignore={passwordManagerIgnore ? "true" : undefined}
+    data-form-type={passwordManagerIgnore ? "other" : undefined}
+    data-lpignore={passwordManagerIgnore ? "true" : undefined}
     {required}
     oninput={handleInput}
     {...rest}
@@ -107,23 +122,37 @@
 {#if hasField}
   <div class="grid gap-2">
     {#if label}
-      <label class="inline-flex items-center gap-1 text-base font-medium text-kumo-default" for={inputId}>
-        {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
+      <label
+        class="inline-flex items-center gap-1 text-base font-medium text-kumo-default"
+        for={inputId}
+      >
+        {#if typeof label === "function"}{@render label()}{:else}{label}{/if}
         {#if required}<span class="text-kumo-danger">*</span>{/if}
-        {#if required === false}<span class="font-normal text-kumo-subtle">(optional)</span>{/if}
+        {#if required === false}<span class="font-normal text-kumo-subtle"
+            >{locale.label.optional}</span
+          >{/if}
         {#if labelTooltip}
-          <span class="inline-flex text-kumo-muted" title={typeof labelTooltip === 'string' ? labelTooltip : undefined}>
+          <span
+            class="inline-flex text-kumo-muted"
+            title={typeof labelTooltip === "string" ? labelTooltip : undefined}
+          >
             <Info class="size-3.5" aria-hidden="true" />
-            {#if typeof labelTooltip === 'function'}<span class="sr-only">{@render labelTooltip()}</span>{/if}
+            {#if typeof labelTooltip === "function"}<span class="sr-only"
+                >{@render labelTooltip()}</span
+              >{/if}
           </span>
         {/if}
       </label>
     {/if}
     {@render control()}
     {#if showError}
-      <div id={errorId} class="text-sm leading-snug text-kumo-danger">{showError}</div>
+      <div id={errorId} class="text-sm leading-snug text-kumo-danger">
+        {showError}
+      </div>
     {:else if description}
-      <div id={descriptionId} class="text-sm leading-snug text-kumo-subtle">{description}</div>
+      <div id={descriptionId} class="text-sm leading-snug text-kumo-subtle">
+        {description}
+      </div>
     {/if}
   </div>
 {:else}

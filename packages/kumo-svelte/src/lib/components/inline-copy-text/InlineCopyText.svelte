@@ -31,15 +31,15 @@
 </script>
 
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
   import { Text } from '#lib/components/text/index.js';
 
   let { children, value, variant = 'mono-secondary', size, bold, truncate = true, as = 'span', onCopy, labels = {}, class: className, onclick, ...rest }: InlineCopyTextProps = $props();
   let content: HTMLSpanElement;
-  let copied = $state(false);
-  let resetTimer: ReturnType<typeof setTimeout> | undefined;
+  const feedback = createCopyFeedback(1500);
+  const copied = $derived(feedback.copied);
   const copyAction = $derived(labels.copyAction ?? 'Copy to clipboard');
   const copiedLabel = $derived(labels.copied ?? 'Copied');
   const textHoverClasses = $derived(variant === 'mono-secondary' ? 'group-hover/inline-copy:text-kumo-default group-focus-visible/inline-copy:text-kumo-default' : undefined);
@@ -52,22 +52,8 @@
     DANGEROUS_className: textHoverClasses
   } as import('#lib/components/text/index.js').TextProps);
 
-  onDestroy(() => { if (resetTimer) clearTimeout(resetTimer); });
 
-  async function handleClick(event: MouseEvent) {
-    onclick?.(event);
-    if (event.defaultPrevented) return;
-    if (resetTimer) clearTimeout(resetTimer);
-    try {
-      await navigator.clipboard.writeText(value ?? content.textContent ?? '');
-      copied = true;
-      resetTimer = setTimeout(() => { copied = false; resetTimer = undefined; }, 1500);
-      onCopy?.();
-    } catch (error) {
-      copied = false;
-      console.warn('Clipboard copy failed', error);
-    }
-  }
+  async function handleClick(event: MouseEvent) { onclick?.(event); if (event.defaultPrevented) return; try { if (await feedback.runCopy(() => navigator.clipboard.writeText(value ?? content.textContent ?? ''))) onCopy?.(); } catch (error) { console.warn('Clipboard copy failed', error); } }
 </script>
 
 <button type="button" data-kumo-component="InlineCopyText" class={inlineCopyTextClasses(className)} aria-label={copied ? copiedLabel : copyAction} onclick={handleClick} {...rest}>

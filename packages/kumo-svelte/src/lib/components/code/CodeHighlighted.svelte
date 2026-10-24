@@ -35,6 +35,7 @@
 </script>
 
 <script lang="ts">
+  import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import { Button } from '#lib/components/button/index.js';
   import { cn } from '#lib/utils/cn.js';
   import { highlightCode } from '#lib/utils/highlight-code.js';
@@ -68,7 +69,8 @@
     ...rest
   }: Props = $props();
 
-  let copied = $state(false);
+  const feedback = createCopyFeedback(2000);
+  const copied = $derived(feedback.copied);
   const normalizedCode = $derived(
     code
       .replace(/^\n+|\n+$/g, '')
@@ -104,15 +106,7 @@
     )
   );
 
-  async function copyCode() {
-    try {
-      await navigator.clipboard.writeText(normalizedCode);
-      copied = true;
-      setTimeout(() => (copied = false), 2000);
-    } catch (error) {
-      console.error('[Kumo CodeHighlighted] Failed to copy to clipboard:', error);
-    }
-  }
+  async function copyCode() { try { await feedback.runCopy(() => navigator.clipboard.writeText(normalizedCode)); } catch (error) { console.error('[Kumo CodeHighlighted] Failed to copy to clipboard:', error); } }
 </script>
 
 {#snippet copyButton()}

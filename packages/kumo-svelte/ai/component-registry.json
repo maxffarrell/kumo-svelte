@@ -1,5 +1,5 @@
 {
-  "version": "0.13.0",
+  "version": "0.14.0",
   "components": {
     "Autocomplete": {
       "name": "Autocomplete",
@@ -103,7 +103,7 @@
       "colors": [
         "bg-kumo-control",
         "bg-kumo-line",
-        "bg-kumo-overlay",
+        "bg-kumo-tint",
         "border-kumo-line",
         "ring-kumo-brand",
         "ring-kumo-danger",
@@ -1160,11 +1160,18 @@
       "colors": [
         "bg-kumo-base",
         "bg-kumo-contrast",
+        "bg-kumo-elevated",
+        "bg-kumo-tint",
+        "border-kumo-danger",
+        "border-kumo-hairline",
+        "border-kumo-interact",
+        "border-kumo-line",
         "ring-kumo-brand",
         "ring-kumo-contrast",
         "ring-kumo-danger",
         "ring-kumo-focus",
         "ring-kumo-hairline",
+        "ring-kumo-line",
         "text-kumo-danger",
         "text-kumo-default",
         "text-kumo-inverse",
@@ -2610,6 +2617,11 @@
           "type": "Record<string, string | undefined>",
           "optional": true,
           "description": "classNames prop."
+        },
+        "showOutsideDays": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Show outside-month dates; defaults to false when multiple months are visible."
         }
       },
       "colors": [
@@ -3888,6 +3900,16 @@
           "optional": true,
           "default": "false",
           "description": "Renders only the inline label content without the outer label element."
+        },
+        "optionalLabel": {
+          "type": "string | Snippet",
+          "optional": true,
+          "description": "Override the localized optional suffix."
+        },
+        "tooltipAriaLabel": {
+          "type": "string",
+          "optional": true,
+          "description": "Override the localized tooltip button accessible name."
         }
       },
       "colors": [
@@ -4445,10 +4467,13 @@
       "colors": [
         "bg-kumo-base",
         "bg-kumo-contrast",
+        "bg-kumo-control",
+        "bg-kumo-elevated",
         "bg-kumo-tint",
         "border-kumo-danger",
         "border-kumo-hairline",
         "border-kumo-interact",
+        "border-kumo-line",
         "ring-kumo-brand",
         "ring-kumo-danger",
         "ring-kumo-focus",
@@ -4456,6 +4481,7 @@
         "ring-kumo-line",
         "text-kumo-danger",
         "text-kumo-default",
+        "text-kumo-inverse",
         "text-kumo-subtle"
       ],
       "subComponents": {
@@ -5475,6 +5501,116 @@
       },
       "colors": []
     },
+    "Slider": {
+      "name": "Slider",
+      "type": "component",
+      "category": "Input",
+      "description": "Pick a number or range by dragging a thumb along a horizontal track.",
+      "importPath": "kumo-svelte/components/slider",
+      "sourceFile": "components/slider",
+      "props": {
+        "form": {
+          "type": "string",
+          "optional": true,
+          "description": "ID of an external form that owns the hidden value inputs. Native form reset restores the initial value."
+        },
+        "aria-label": {
+          "type": "string",
+          "optional": true,
+          "description": "Accessible name applied to each thumb when no visible label is provided."
+        },
+        "aria-labelledby": {
+          "type": "string",
+          "optional": true,
+          "description": "IDs of elements naming the thumbs."
+        },
+        "value": {
+          "type": "number | readonly number[]",
+          "optional": true,
+          "description": "Bindable scalar or range value."
+        },
+        "defaultValue": {
+          "type": "number | readonly number[]",
+          "optional": true,
+          "description": "Initial value."
+        },
+        "label": {
+          "type": "string | Snippet",
+          "optional": true,
+          "description": "Visible label."
+        },
+        "getAriaLabel": {
+          "type": "(index: number) => string",
+          "optional": true,
+          "description": "Accessible name for each thumb."
+        },
+        "min": {
+          "type": "number",
+          "optional": true,
+          "description": "Minimum; defaults to 0."
+        },
+        "max": {
+          "type": "number",
+          "optional": true,
+          "description": "Maximum; defaults to 100."
+        },
+        "step": {
+          "type": "number",
+          "optional": true,
+          "description": "Step; defaults to 1."
+        },
+        "size": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "sm",
+            "base"
+          ],
+          "description": "Track size."
+        },
+        "disabled": {
+          "type": "boolean",
+          "optional": true,
+          "description": "Disable interaction."
+        },
+        "name": {
+          "type": "string",
+          "optional": true,
+          "description": "Hidden form input name."
+        },
+        "format": {
+          "type": "Intl.NumberFormatOptions",
+          "optional": true,
+          "description": "Number format options."
+        },
+        "locale": {
+          "type": "string",
+          "optional": true,
+          "description": "Number formatting locale."
+        },
+        "onValueChange": {
+          "type": "(value: number | number[]) => void",
+          "optional": true,
+          "description": "Called while changing."
+        },
+        "onValueCommitted": {
+          "type": "(value: number | number[]) => void",
+          "optional": true,
+          "description": "Called when committed."
+        }
+      },
+      "colors": [
+        "bg-kumo-contrast",
+        "bg-kumo-fill",
+        "bg-kumo-overlay",
+        "bg-kumo-recessed",
+        "ring-kumo-focus",
+        "ring-kumo-line",
+        "text-kumo-default",
+        "text-kumo-inverse",
+        "text-kumo-subtle"
+      ]
+    },
     "Switch": {
       "name": "Switch",
       "type": "component",
@@ -6458,6 +6594,11 @@
           "type": "SetOptionOpts",
           "optional": true,
           "description": "Additional options passed as the second argument to chart.setOption(). Defaults to { notMerge: false, lazyUpdate: true }."
+        },
+        "tooltipTimestampFormat": {
+          "type": "(timestamp: number) => string",
+          "optional": true,
+          "description": "Format series and marker timestamps in milliseconds; default is browser locale and time zone."
         }
       },
       "colors": [
@@ -6808,6 +6949,7 @@
       "SensitiveInput",
       "Sidebar",
       "SkeletonLine",
+      "Slider",
       "Switch",
       "Table",
       "TableOfContents",
@@ -6860,7 +7002,8 @@
         "Label",
         "Radio",
         "Select",
-        "SensitiveInput"
+        "SensitiveInput",
+        "Slider"
       ],
       "Layout": [
         "Grid",
@@ -6937,6 +7080,7 @@
         "SensitiveInput",
         "Sidebar",
         "SkeletonLine",
+        "Slider",
         "Switch",
         "Table",
         "TableOfContents",

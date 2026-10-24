@@ -51,14 +51,12 @@
 </script>
 
 <svg
-  width="24"
-  height="24"
+  width={sizeValue}
+  height={sizeValue}
   viewBox="0 0 24 24"
   xmlns="http://www.w3.org/2000/svg"
   stroke="currentColor"
   class={className}
-  style:height={`${sizeValue}px`}
-  style:width={`${sizeValue}px`}
   role="status"
   aria-label={ariaLabel}
   {...rest}

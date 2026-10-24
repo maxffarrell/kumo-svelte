@@ -17,6 +17,8 @@
 
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { getKumoLocale } from '#lib/utils/locale.js';
+  const locale = getKumoLocale();
   import Info from 'phosphor-svelte/lib/Info';
   import { Button } from '#lib/components/button/index.js';
   import { Tooltip } from '#lib/components/tooltip/index.js';
@@ -27,6 +29,8 @@
     for?: string;
     htmlFor?: string;
     showOptional?: boolean;
+    optionalLabel?: string | Snippet;
+    tooltipAriaLabel?: string;
     tooltip?: string | Snippet;
     asContent?: boolean;
     [key: string]: unknown;
@@ -38,6 +42,8 @@
     for: htmlForAlias,
     htmlFor,
     showOptional = false,
+    optionalLabel,
+    tooltipAriaLabel,
     tooltip,
     asContent = false,
     ...rest
@@ -49,11 +55,11 @@
 {#snippet content()}
   {@render children?.()}
   {#if showOptional}
-    <span class="font-normal text-kumo-subtle">(optional)</span>
+    <span class="font-normal text-kumo-subtle">{#if typeof optionalLabel === "function"}{@render optionalLabel()}{:else}{optionalLabel ?? locale.label.optional}{/if}</span>
   {/if}
   {#if tooltip}
     {#snippet tooltipTrigger(props: Record<string, unknown>)}
-      <Button variant="ghost" size="xs" shape="square" aria-label="More information" {...props}>
+      <Button variant="ghost" size="xs" shape="square" aria-label={tooltipAriaLabel ?? locale.label.tooltip} {...props}>
         <Info class="size-4" />
       </Button>
     {/snippet}

@@ -60,7 +60,10 @@ export type {
   GenerateCloudflareLogoSvgOptions,
 } from "./components/cloudflare-logo";
 export { Code, CodeBlock, CodeHighlighted } from "./components/code";
-export type { CodeHighlightedLang, CodeHighlightedVariant } from "./components/code";
+export type {
+  CodeHighlightedLang,
+  CodeHighlightedVariant,
+} from "./components/code";
 export {
   Collapsible,
   CollapsibleDefaultPanel,
@@ -133,6 +136,7 @@ export { Label } from "./components/label";
 export { LayerCard } from "./components/layer-card";
 export {
   LayerDialog,
+  LayerDialogAction,
   LayerDialogActions,
   LayerDialogAlert,
   LayerDialogBody,
@@ -146,6 +150,8 @@ export {
   KUMO_LAYER_DIALOG_VARIANTS,
 } from "./components/layer-dialog";
 export type {
+  LayerDialogActionProps,
+  LayerDialogPrimaryProps,
   KumoLayerDialogSize,
   KumoLayerDialogVerticalAlign,
 } from "./components/layer-dialog";
@@ -178,6 +184,12 @@ export {
 } from "./components/pagination";
 export {
   Popover,
+  PopoverPortal,
+  PopoverPositioner,
+  PopoverPopup,
+  PopoverArrow,
+  PopoverBackdrop,
+  PopoverViewport,
   PopoverClose,
   PopoverContent,
   PopoverDescription,
@@ -290,3 +302,12 @@ export type {
 export { Tooltip, TooltipProvider } from "./components/tooltip";
 export { cn } from "./utils/cn";
 export * as Primitives from "./primitives";
+
+export * from "./components/slider/index.js";
+
+export { default as KumoLocaleProvider } from "./utils/KumoLocaleProvider.svelte";
+export {
+  getKumoLocale,
+  type KumoTranslations,
+  type KumoTranslationsPartial,
+} from "./utils/locale.js";

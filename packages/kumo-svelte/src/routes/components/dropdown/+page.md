@@ -230,3 +230,7 @@ Shows the selected state for a RadioItem. Displays a checkmark by default.
 <PropsTable component="DropdownMenu.RadioItemIndicator" />
 
 </ComponentSection>
+
+<ComponentExample demo="DropdownComposableDemo" />
+
+Compose `DropdownMenu.Portal`, `DropdownMenu.Positioner`, and `DropdownMenu.Popup` when you need separate positioning and surface control. `Content` and `SubContent` include these parts. Rows without icons automatically align with siblings that have icons. Pass `iconSnippet` with a `{ class }` argument for custom styled icons. Submenus use side offset 2 and align offset -6 beside their parent, and 8/0 if collision handling moves them above or below. Offset props accept numbers or functions of `{ side, align }`.

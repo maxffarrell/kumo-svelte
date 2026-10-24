@@ -8,7 +8,7 @@
       '[&>*]:relative [&>*:focus-visible]:z-10 [&>*:has(:focus-visible)]:z-10',
       '[&>*>:is(button,a)]:shadow-none [&>:is(button,a)]:shadow-none',
       '[&>*:not(:first-child):is(button,a)]:rounded-s-none',
-      '[&>*:not(:last-child):is(button,a)]:rounded-e-none',
+      '[&>*:is(button,a):has(~_:is(button,a))]:rounded-e-none',
       '[&>*:not(:first-child)>:is(button,a)]:rounded-s-none',
       '[&>*:not(:last-child)>:is(button,a)]:rounded-e-none',
       '[&>*:not(:first-child)]:-ms-px'

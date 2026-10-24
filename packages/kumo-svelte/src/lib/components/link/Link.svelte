@@ -65,7 +65,7 @@
 </script>
 
 <a
-  class={cn(linkVariants({ variant }), 'group/link inline-flex items-center gap-[0.1875em]', className)}
+  class={cn(linkVariants({ variant }), 'group/link inline-flex items-center gap-[0.1875em] has-[>[data-kumo-component=Badge]]:rounded-full', className)}
   data-kumo-component="Link"
   data-kumo-part="link"
   href={resolvedHref}

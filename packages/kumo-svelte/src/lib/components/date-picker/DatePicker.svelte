@@ -34,6 +34,7 @@
     month?: Date;
     onMonthChange?: (month: Date) => void;
     numberOfMonths?: number;
+    showOutsideDays?: boolean;
     min?: number;
     max?: number;
     required?: boolean;
@@ -64,6 +65,7 @@
     month = $bindable<Date | undefined>(),
     onMonthChange,
     numberOfMonths = 1,
+    showOutsideDays,
     min,
     max,
     required = false,
@@ -386,7 +388,7 @@
                   {#each week as day (day.toISOString())}
                     {@const outside = day.getMonth() !== visibleMonth.getMonth()}
                     {@const dayDisabled = isDisabled(day)}
-                    {@const dayHidden = isHidden(day)}
+                    {@const dayHidden = isHidden(day) || (outside && !(showOutsideDays ?? numberOfMonths === 1))}
                     <td
                       class={cn(
                         'rdp-day',

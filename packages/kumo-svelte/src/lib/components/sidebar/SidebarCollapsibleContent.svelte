@@ -9,7 +9,7 @@
   const collapsible = getContext<CollapsibleContext>('kumo-sidebar-collapsible');
   const sidebar = getSidebarContext('Sidebar.CollapsibleContent');
   let contentEl: HTMLDivElement | null = $state(null);
-  const isOpen = $derived(Boolean(collapsible?.open && sidebar.state !== 'collapsed'));
+  const isOpen = $derived(Boolean(collapsible?.open && (sidebar.isMobile ? sidebar.openMobile : sidebar.state !== 'collapsed')));
 
   function handleTransitionEnd(event: TransitionEvent) {
     if (event.target === event.currentTarget && event.propertyName === 'grid-template-rows') {

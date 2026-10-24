@@ -23,7 +23,7 @@
 </script>
 
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
   import { Button } from '#lib/components/button/index.js';
@@ -68,13 +68,10 @@
     ...rest
   }: Props = $props();
 
-  let copied = $state(false);
+  const feedback = createCopyFeedback(1500);
+  const copied = $derived(feedback.copied);
   let copyFeedbackKey = $state(0);
-  let resetTimer: ReturnType<typeof setTimeout> | undefined;
 
-  onDestroy(() => {
-    if (resetTimer) clearTimeout(resetTimer);
-  });
 
   const sizeConfig = $derived(KUMO_CLIPBOARD_TEXT_VARIANTS.size[size] ?? KUMO_CLIPBOARD_TEXT_VARIANTS.size.lg);
   const tooltipText = $derived(tooltip?.text ?? 'Copy');
@@ -117,21 +114,7 @@
     }
   }
 
-  async function copyToClipboard() {
-    try {
-      await writeClipboard(textToCopy ?? displayText);
-      copied = true;
-      copyFeedbackKey += 1;
-      onCopy?.();
-
-      if (resetTimer) clearTimeout(resetTimer);
-      resetTimer = setTimeout(() => {
-        copied = false;
-      }, 1500);
-    } catch (error) {
-      console.warn('Clipboard copy failed', error);
-    }
-  }
+  async function copyToClipboard() { try { if (await feedback.runCopy(() => writeClipboard(textToCopy ?? displayText))) { copyFeedbackKey += 1; onCopy?.(); } } catch (error) { console.warn('Clipboard copy failed', error); } }
 </script>
 
 {#snippet copyButton()}

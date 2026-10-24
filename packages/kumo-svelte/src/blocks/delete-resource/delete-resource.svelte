@@ -20,6 +20,7 @@
 </script>
 
 <script lang="ts">
+  import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import { Banner } from '#lib/components/banner/index.js';
   import { Button } from '#lib/components/button/index.js';
   import { Dialog } from '#lib/components/dialog/index.js';
@@ -59,8 +60,8 @@
   }: Props = $props();
 
   let confirmationInput = $state('');
-  let copied = $state(false);
-  let copyTimer: ReturnType<typeof setTimeout> | undefined;
+  const feedback = createCopyFeedback(1500);
+  const copied = $derived(feedback.copied);
 
   const normalizedInput = $derived(caseSensitive ? confirmationInput : confirmationInput.toLowerCase());
   const normalizedName = $derived(caseSensitive ? resourceName : resourceName.toLowerCase());
@@ -71,7 +72,7 @@
     onOpenChange?.(nextOpen);
     if (!nextOpen) {
       confirmationInput = '';
-      copied = false;
+      feedback.reset();
     }
   }
 
@@ -80,19 +81,12 @@
     await onDelete();
   }
 
-  async function handleCopy() {
-    await navigator.clipboard.writeText(resourceName);
-    copied = true;
-    if (copyTimer) clearTimeout(copyTimer);
-    copyTimer = setTimeout(() => {
-      copied = false;
-    }, 1500);
-  }
+  async function handleCopy() { try { await feedback.runCopy(() => navigator.clipboard.writeText(resourceName)); } catch (error) { console.warn('Clipboard copy failed', error); } }
 
   $effect(() => {
     if (!open) {
       confirmationInput = '';
-      copied = false;
+      feedback.reset();
     }
   });
 </script>

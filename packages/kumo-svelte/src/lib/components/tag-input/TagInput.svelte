@@ -146,6 +146,7 @@
   function handleKeydown(event: KeyboardEvent) {
     onkeydown?.(event);
     if (event.defaultPrevented) return;
+    if (event.isComposing || event.keyCode === 229) return;
     if (!inputValue && event.key === 'Backspace') {
       setValues(values.slice(0, -1));
       return;

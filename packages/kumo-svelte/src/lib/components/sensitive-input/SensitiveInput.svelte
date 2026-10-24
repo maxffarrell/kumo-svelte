@@ -22,6 +22,7 @@
 </script>
 
 <script lang="ts">
+ import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import Eye from 'phosphor-svelte/lib/Eye';
   import EyeSlash from 'phosphor-svelte/lib/EyeSlash';
   import type { Snippet } from 'svelte';
@@ -94,10 +95,10 @@
 
   let internalValue = $state((() => defaultValue)());
   let mode = $state<Mode>((() => ((value ?? defaultValue).length > 0 ? 'masked' : 'empty'))());
-  let copied = $state(false);
+  const feedback = createCopyFeedback();
+ const copied = $derived(feedback.copied);
   let inputElement: HTMLInputElement | undefined;
   let containerElement: HTMLDivElement | undefined;
-  let copyTimeout: ReturnType<typeof setTimeout> | undefined;
 
   const currentValue = $derived(value ?? internalValue);
   const hasValue = $derived(currentValue.length > 0);
@@ -189,12 +190,10 @@
     onkeydown?.(event);
   }
 
-  async function copyToClipboard(event: MouseEvent) {
-    event.stopPropagation();
+  async function writeClipboard() {
     try {
       if (navigator?.clipboard?.writeText) {
         await navigator.clipboard.writeText(currentValue);
-        showCopied();
         return;
       }
     } catch {
@@ -213,7 +212,6 @@
 
     try {
       document.execCommand('copy');
-      showCopied();
     } finally {
       document.body.removeChild(textarea);
       if (previousRange) {
@@ -223,14 +221,7 @@
     }
   }
 
-  function showCopied() {
-    copied = true;
-    onCopy?.();
-    if (copyTimeout) clearTimeout(copyTimeout);
-    copyTimeout = setTimeout(() => {
-      copied = false;
-    }, 2000);
-  }
+  async function copyToClipboard(event: MouseEvent) { event.stopPropagation(); try { if (await feedback.runCopy(writeClipboard)) onCopy?.(); } catch (error) { console.warn('Clipboard copy failed', error); } }
 </script>
 
 {#snippet sensitiveInput()}

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Popover as PopoverPrimitive } from 'bits-ui';
   import type { Snippet } from 'svelte';
+  import { setPopoverContext } from './context';
   import { cn } from '#lib/utils/cn.js';
   import PopoverContent from './PopoverContent.svelte';
   import PopoverDescription from './PopoverDescription.svelte';
@@ -39,6 +40,7 @@
   }: Props = $props();
 
   let contentClass = $derived(cn('min-w-48', className));
+  setPopoverContext({ get open() { return open; } });
 </script>
 
 {#snippet triggerChild({ props }: { props: Record<string, unknown> })}

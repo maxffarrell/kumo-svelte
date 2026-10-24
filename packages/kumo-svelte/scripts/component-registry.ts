@@ -82,6 +82,7 @@ const categoryByName: Record<string, string> = {
   InputGroup: 'Input',
   Label: 'Input',
   Radio: 'Input',
+  Slider: 'Input',
   Select: 'Input',
   SensitiveInput: 'Input',
   TagInput: 'Input',

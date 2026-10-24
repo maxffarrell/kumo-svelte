@@ -1,6 +1,6 @@
 # Kumo Svelte Component Registry
 
-Version: 0.13.0
+Version: 0.14.0
 
 ## Autocomplete
 
@@ -345,6 +345,14 @@ A skeleton loading placeholder for text content.
 - Category: Feedback
 - Import: `import { SkeletonLine } from "kumo-svelte/primitives/skeleton-line";`
 - Source: `primitives/skeleton-line`
+
+## Slider
+
+Pick a number or range by dragging a thumb along a horizontal track.
+
+- Category: Input
+- Import: `import { Slider } from "kumo-svelte/components/slider";`
+- Source: `components/slider`
 
 ## Switch
 

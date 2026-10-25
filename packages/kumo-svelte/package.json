@@ -104,7 +104,7 @@
     "@types/d3-geo": "^3.1.1",
     "@types/node": "^26.2.0",
     "axe-core": "^4.13.0",
-    "happy-dom": "^20.11.6",
+    "happy-dom": "^21.0.0",
     "jsdom": "^30.0.1",
     "magic-string": "^1.2.2",
     "mdsx": "^0.0.7",

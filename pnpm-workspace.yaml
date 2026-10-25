@@ -35,3 +35,5 @@ minimumReleaseAgeExclude:
   - "@sveltejs/adapter-cloudflare@8.0.0"
   # Renovate security update: vite@8.2.4
   - vite@8.2.4
+  # Renovate security update: happy-dom@21.0.4
+  - happy-dom@21.0.4

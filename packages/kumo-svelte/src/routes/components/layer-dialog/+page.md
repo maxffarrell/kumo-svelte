@@ -40,3 +40,5 @@ LayerDialog renders as a bottom sheet on small screens and a centered dialog on 
 Use `LayerDialog.Action` inside `LayerDialog.Actions`. Pass a `menu` snippet containing `DropdownMenu.Item` children for related outcomes and `menuLabel` for the split trigger name. Native button props such as `form`, `type="submit"`, and `disabled` pass through. `Actions.Primary` remains a deprecated alias. Svelte snippets cannot be inspected as React child arrays; keep exactly one direct action in the footer.
 
 <ComponentExample demo="LayerDialogSplitActionDemo" />
+
+Use `<LayerDialog.Separator />` inside `LayerDialog.Body` to divide sections with a full-width hairline. `LayerDialogSeparator` is also available as a named export.

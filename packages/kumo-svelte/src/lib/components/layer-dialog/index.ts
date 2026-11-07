@@ -5,6 +5,7 @@ import Content from './LayerDialogContent.svelte';
 import Title from './LayerDialogTitle.svelte';
 import Description from './LayerDialogDescription.svelte';
 import Body from './LayerDialogBody.svelte';
+import Separator from './LayerDialogSeparator.svelte';
 import ActionsRoot from './LayerDialogActions.svelte';
 import Primary from './LayerDialogPrimary.svelte';
 
@@ -18,6 +19,7 @@ export const LayerDialog = Object.assign(Root, {
   Title,
   Description,
   Body,
+  Separator,
   Action: Primary,
   Actions
 });
@@ -30,6 +32,7 @@ export {
   Title as LayerDialogTitle,
   Description as LayerDialogDescription,
   Body as LayerDialogBody,
+  Separator as LayerDialogSeparator,
   Actions as LayerDialogActions,
   Primary as LayerDialogAction,
   Primary as LayerDialogPrimary
@@ -48,3 +51,4 @@ export type { LayerDialogDescriptionProps } from './LayerDialogDescription.svelt
 export type { LayerDialogBodyProps } from './LayerDialogBody.svelte';
 export type { LayerDialogActionsProps } from './LayerDialogActions.svelte';
 export type { LayerDialogActionProps, LayerDialogPrimaryProps } from './LayerDialogPrimary.svelte';
+export type { LayerDialogSeparatorProps } from './LayerDialogSeparator.svelte';

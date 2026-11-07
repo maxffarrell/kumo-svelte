@@ -60,3 +60,8 @@ describe('timeseries annotations', () => {
     expect(getApproximateMarkerClusterInterval([100], 5)).toBe(0);
   });
 });
+
+it('calculates intervals from large lazy timestamp iterables without argument spreading', () => {
+ function* timestamps() { for (let n=0;n<300_000;n++) yield n; }
+ expect(getApproximateMarkerClusterInterval(timestamps(),5)).toBe(299_999/5);
+});

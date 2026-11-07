@@ -249,10 +249,10 @@
     if (Number.isInteger(value)) return String(value);
     return defaultNumberFormat.format(value);
   };
-  const getTimestamps = (seriesData: TimeseriesData[], referenceMarkers: TimeseriesMarker[] | undefined): number[] => [
-    ...seriesData.flatMap((series) => series.data.map(([timestamp]) => timestamp)),
-    ...(referenceMarkers?.map((marker) => marker.timestamp) ?? [])
-  ];
+  function* getTimestamps(seriesData: TimeseriesData[], referenceMarkers: TimeseriesMarker[]): Generator<number> {
+    for (const series of seriesData) for (const [timestamp] of series.data) yield timestamp;
+    for (const marker of referenceMarkers) yield marker.timestamp;
+  }
   const getAllTooltipRowsAtTimestamp = (
     seriesData: TimeseriesData[],
     ts: number,
@@ -293,10 +293,10 @@
     const incompleteAfter = incomplete?.after;
     const series: SeriesOption[] = [];
     const seriesType = type === 'bar' ? ({ type: 'bar', stack: 'total' } as const) : ({ type: 'line', showSymbol: false } as const);
-    const markerClusters = clusterTimeseriesMarkers(
+    const markerClusters = markers?.length ? clusterTimeseriesMarkers(
       markers,
       getApproximateMarkerClusterInterval(getTimestamps(data, markers), xAxisTickCount ?? 5)
-    );
+    ) : [];
     const markerAnnotations = buildTimeseriesMarkerAnnotations(markerClusters, {
       color: markerColor,
       labelBackgroundColor: markerLabelBackgroundColor

@@ -120,5 +120,8 @@
   "imports": {
     "#lib": "./dist/index.js",
     "#lib/*": "./dist/*"
+  },
+  "engines": {
+    "node": "^24.22.1 || ^26.12.1"
   }
 }

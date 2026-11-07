@@ -37,3 +37,6 @@ minimumReleaseAgeExclude:
   - vite@8.2.4
   # Renovate security update: happy-dom@21.0.4
   - happy-dom@21.0.4
+
+# CVE-2026-111497: require patched Node runtimes.
+engineStrict: true

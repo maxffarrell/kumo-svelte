@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import "./check-node.js";
 import { add } from './commands/add.js';
 import { ai } from './commands/ai.js';
 import { blocks } from './commands/blocks.js';

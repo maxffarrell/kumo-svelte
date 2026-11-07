@@ -9,3 +9,4 @@ Base: `origin/main` at `56552e71`. Source: `@cloudflare/kumo@2.15.0..@cloudflare
 | `e16f41f8` | Ported: string page drafts validate whole digits and restore invalid input; boundary buttons use >=. Empty totals already have one page in Svelte. |
 | `947065ad` | Ported: stream marker timestamp extents and skip marker work when no markers exist; tested with 300,000 lazy timestamps. |
 | `810d820a` | Ported: reactive xAxisHideLabelOverlap defaults true and is forwarded to the time axis. |
+| `99b17fb6` | Ported: fallback pre/code resets override global backgrounds, borders, padding and corner radius. |

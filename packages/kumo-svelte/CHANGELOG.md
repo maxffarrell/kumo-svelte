@@ -1,5 +1,15 @@
 # kumo-svelte
 
+## 0.18.0
+
+### Minor Changes
+
+- d1c6468: Port Kumo 2.16 and 2.17: read-only TagInput form behavior, validated pagination, large dataset chart handling, masked clipboard values, dialog separators, calendar theme tokens and stable toast bump animations. Target Svelte release 0.17.0.
+
+### Patch Changes
+
+- 98cc9a8: Require patched Node.js 24 or 26 for the CLI to address CVE-2026-111497, and use Node.js 26.12.1 for repository tooling.
+
 ## 0.15.0
 
 ### Minor Changes

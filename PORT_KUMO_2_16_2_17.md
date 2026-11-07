@@ -8,3 +8,4 @@ Base: `origin/main` at `56552e71`. Source: `@cloudflare/kumo@2.15.0..@cloudflare
 | `fedc8a77` | Ported: readOnly, paste insertion into draft selection, accepted-tag form values and conditional native required validation. |
 | `e16f41f8` | Ported: string page drafts validate whole digits and restore invalid input; boundary buttons use >=. Empty totals already have one page in Svelte. |
 | `947065ad` | Ported: stream marker timestamp extents and skip marker work when no markers exist; tested with 300,000 lazy timestamps. |
+| `810d820a` | Ported: reactive xAxisHideLabelOverlap defaults true and is forwarded to the time axis. |

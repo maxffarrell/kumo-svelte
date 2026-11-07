@@ -36,6 +36,7 @@
     thresholds?: TimeseriesThreshold[];
     xAxisName?: string;
     xAxisTickCount?: number;
+    xAxisHideLabelOverlap?: boolean;
     xAxisTickFormat?: (value: number) => string;
     yAxisTickFormat?: (value: number) => string;
     yAxisTickLabelFormat?: (value: number) => string;
@@ -71,6 +72,7 @@
     thresholds,
     xAxisName,
     xAxisTickCount,
+    xAxisHideLabelOverlap = true,
     xAxisTickFormat,
     yAxisTickFormat,
     yAxisTickLabelFormat,
@@ -395,6 +397,7 @@
         splitNumber: xAxisTickCount ?? 5,
         axisLabel: {
           color: axisTextColor,
+          hideOverlap: xAxisHideLabelOverlap,
           ...(xAxisTickFormat && { formatter: (value: number) => xAxisTickFormat(value) })
         }
       },

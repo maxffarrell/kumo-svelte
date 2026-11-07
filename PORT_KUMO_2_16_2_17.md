@@ -25,9 +25,11 @@ Base: `origin/main` at `56552e71`. Source: `@cloudflare/kumo@2.15.0..@cloudflare
 
 - Latest tagged upstream release confirmed via GitHub: `@cloudflare/kumo@2.17.0` (2026-11-02). All 16 commits since 2.15 are represented above, in upstream order. Unreleased `upstream/main` is outside this release port.
 - The runtime changes are ported. React-only generators and React component customization are adapted to this package's Svelte generators, snippets, native calendar, and Bits UI primitives. Native calendar selects remain visible; disabled navigation uses native `disabled` selectors rather than React DayPicker's `aria-disabled` selectors.
-- Full regression/a11y suite passed (474 tests before the additional tooltip, toast-focus and external-form contracts); final CI reruns the complete suite. Native type checking: zero errors/warnings.
+- Full regression/a11y CI suite passed (478 tests, three environment-specific skips); the final release PR reruns the complete suite. Native type checking: zero errors/warnings.
 - Generated 54-component registry; package/declarations, standalone CSS, CLI and production docs builds passed. Extracted `kumo-svelte-0.17.0.tgz` consumer passed type checking and Vite production build with root/deep imports and new APIs.
-- Lint, deployment-description contract tests (13), changeset validation and diff whitespace checks passed.
+- Lint, deployment/runtime contract tests (37), changeset validation and diff whitespace checks passed.
 - Added `/vrt/release-217` plus masked clipboard, read-only tag and dialog-separator gallery scenarios. Interactive browser verification is pending: local browser access is disabled in Work settings and the Mac is locked. This is a validation limitation, not evidence of pixel parity.
 - Existing tooling notices: SvelteKit `config.alias` deprecation and Vitest's nonfatal shutdown timeout. All invoked test/build commands returned success after repairs.
 - Package target is explicitly **0.17.0**. The final Version Packages PR must retain that target while consuming the release/security changesets, rather than automatically advancing the manually-set version to 0.18.0.
+
+Release follow-up: PR #76 merged after all checks passed; Node mitigation PR #75 merged after its current checks passed. Completed API tables for masked ClipboardText/localized labels, TagInput form/read-only props and chart overlap. Version Packages consumes both changesets at exactly 0.17.0.

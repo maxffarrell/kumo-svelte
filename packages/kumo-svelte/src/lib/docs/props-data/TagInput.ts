@@ -1,6 +1,10 @@
 import type { PropRow } from "../prop-types";
 
 const rows: PropRow[] = [
+  { prop: 'readOnly', type: 'boolean', required: false, default: 'false', description: 'Prevents additions/removals while retaining focus and form submission. Also accepts the native readonly alias.' },
+  { prop: 'name', type: 'string', required: false, description: 'Submits each accepted tag as a separate form value; the draft is unnamed.' },
+  { prop: 'form', type: 'string', required: false, description: 'Associates the draft and accepted values with an external form ID.' },
+  { prop: 'required', type: 'boolean', required: false, description: 'Requires an accepted tag. Native read-only validation rules apply.' },
   {
     prop: "value",
     type: "string[]",

@@ -16,3 +16,4 @@ Base: `origin/main` at `56552e71`. Source: `@cloudflare/kumo@2.15.0..@cloudflare
 | `3aa0d59a` | Ported: native scrollbars hidden in LayerDialog and Sidebar viewports while scrolling remains enabled. |
 | `595463b6` | Upstream-only: React primitive/theme generators format their own generated files with Oxfmt. Svelte generators remain authoritative and are regenerated during validation. |
 | `06726b02` | Ported: Field omits empty labels but retains optional/help-only labels. TagInput already omits absent labels. |
+| `4185bb15` | Ported: only the default disabled Tooltip trigger leaves the tab sequence; custom triggers retain their own behavior. |

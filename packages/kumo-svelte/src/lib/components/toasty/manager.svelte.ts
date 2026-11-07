@@ -37,6 +37,7 @@ export interface KumoToastObject<Data extends object = Record<string, unknown>>
   extends KumoToastOptions<Data> {
   id: string;
   transitionStatus?: 'starting' | 'active' | 'ending';
+  updateKey?: number;
 }
 
 export type KumoToastManagerUpdateOptions<Data extends object = Record<string, unknown>> = Partial<
@@ -56,14 +57,8 @@ export class KumoToastManager {
       if (existingToast) {
         if (existingToast.transitionStatus === 'ending') return id;
 
-        this.update(id, { bump: false });
-        nextFrame(() => {
-          this.update(id, {
-            ...options,
-            bump: true,
-            transitionStatus: 'active'
-          });
-        });
+        this.update(id, { bump: options.bump ?? true, ...(options.timeout !== undefined ? { timeout: options.timeout } : {}) });
+        this.#scheduleRemoval(this.toasts.find((toast) => toast.id === id)!);
         return id;
       }
     }
@@ -73,13 +68,14 @@ export class KumoToastManager {
       timeout: 5000,
       ...options,
       transitionStatus: 'starting',
+      updateKey: options.bump ? 1 : 0,
       id
     };
 
     this.toasts = [toast, ...this.toasts].slice(0, 6);
     this.#scheduleRemoval(toast);
     nextFrame(() => {
-      this.update(id, { transitionStatus: 'active' });
+      this.toasts = this.toasts.map((toast) => toast.id === id && toast.transitionStatus === 'starting' ? { ...toast, transitionStatus: 'active' } : toast);
     });
     return id;
   }
@@ -94,7 +90,7 @@ export class KumoToastManager {
     this.toasts = this.toasts.map((toast) => {
       if (toast.id !== id) return toast;
       resolvedOptions = typeof options === 'function' ? options(toast) : options;
-      return { ...toast, ...resolvedOptions };
+      return { ...toast, ...resolvedOptions, bump: resolvedOptions.bump ?? false, updateKey: (toast.updateKey ?? 0) + 1 };
     });
     const toast = this.toasts.find((item) => item.id === id);
     if (

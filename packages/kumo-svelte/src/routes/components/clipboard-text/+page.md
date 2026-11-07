@@ -91,3 +91,5 @@ Shows "Copy" tooltip on hover, "Copied!" toast on click.
 
   <PropsTable component="ClipboardText" />
 </ComponentSection>
+
+Use `masked` to hide the displayed value behind eight bullets. The reveal button toggles visibility; copying always copies the original `textToCopy` or value. Customize `labels.revealAction` and `labels.hideAction` for localization.

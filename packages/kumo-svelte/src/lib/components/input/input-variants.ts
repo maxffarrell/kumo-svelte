@@ -94,7 +94,7 @@ export function inputVariants({
 }: KumoInputVariantsProps = {}) {
   return cn(
     'border-0 bg-kumo-control text-kumo-default ring ring-kumo-line outline-none focus:outline-none',
-    'kumo-input-placeholder disabled:text-kumo-disabled',
+    'kumo-input-placeholder disabled:text-kumo-inactive',
     resolveVariant(
       KUMO_INPUT_VARIANTS,
       { size, variant },

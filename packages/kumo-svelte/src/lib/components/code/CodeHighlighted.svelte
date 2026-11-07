@@ -81,8 +81,8 @@
   const lineCount = $derived(normalizedCode.split('\n').length);
   const isSingleLine = $derived(lineCount === 1);
   const fallbackCodeClasses = $derived(cn(
-    'm-0 min-w-0 flex-1 overflow-x-auto font-mono text-sm leading-relaxed text-kumo-subtle',
-    variant === 'plain' ? 'p-0' : 'p-4'
+    '!m-0 min-w-0 flex-1 overflow-x-auto !rounded-none !border-0 !bg-transparent font-mono text-sm leading-relaxed text-kumo-subtle',
+    variant === 'plain' ? '!p-0' : '!p-4'
   ));
   const highlightedCodeClasses = $derived(cn(
     'kumo-shiki [&_code]:!m-0 [&_code]:!border-0 [&_code]:!bg-transparent [&_code]:!p-0 [&>pre]:!m-0 [&>pre]:!rounded-none [&>pre]:!border-0 [&>pre]:!bg-transparent [&>pre]:font-mono [&>pre]:text-sm [&>pre]:leading-relaxed',
@@ -156,10 +156,10 @@
     {#if showLineNumbers && !isSingleLine}
       <div class="flex w-full">
         {@render lineNumbers()}
-        <pre class={fallbackCodeClasses}><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
+        <pre class={fallbackCodeClasses}><code class="!m-0 !border-0 !bg-transparent !p-0">{normalizedCode}</code></pre>
       </div>
     {:else}
-      <pre class={fallbackCodeClasses}><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
+      <pre class={fallbackCodeClasses}><code class="!m-0 !border-0 !bg-transparent !p-0">{normalizedCode}</code></pre>
     {/if}
   {:then html}
     {#if showLineNumbers && !isSingleLine}

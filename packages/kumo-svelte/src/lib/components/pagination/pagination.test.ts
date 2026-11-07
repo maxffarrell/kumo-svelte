@@ -166,3 +166,12 @@ describe('Pagination', () => {
     });
   });
 });
+
+it('restores invalid page drafts and clamps an empty result set to one page', async () => {
+ const user = userEvent.setup(); const setPage = vi.fn();
+ render(Pagination, { page: 1, perPage: 10, totalCount: 0, setPage });
+ expect(screen.getByRole('button', {name:'Next page'})).toBeDisabled();
+ const input = screen.getByRole('textbox', {name:'Page number'});
+ for (const invalid of ['abc', '1.5', '-2', '1e2']) { await user.clear(input); await user.type(input, invalid); await user.keyboard('{Enter}'); expect(input).toHaveValue('1'); }
+ expect(setPage).not.toHaveBeenCalled();
+});

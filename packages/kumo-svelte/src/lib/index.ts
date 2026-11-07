@@ -140,6 +140,7 @@ export {
   LayerDialogActions,
   LayerDialogAlert,
   LayerDialogBody,
+  LayerDialogSeparator,
   LayerDialogContent,
   LayerDialogDescription,
   LayerDialogPrimary,
@@ -151,6 +152,7 @@ export {
 } from "./components/layer-dialog";
 export type {
   LayerDialogActionProps,
+  LayerDialogSeparatorProps,
   LayerDialogPrimaryProps,
   KumoLayerDialogSize,
   KumoLayerDialogVerticalAlign,

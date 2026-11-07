@@ -32,3 +32,5 @@
     tooltip={{ text: 'Copy', copiedText: 'Copied!', side: 'top' }}
   />
 </Scenario>
+
+<Scenario id="masked" label="masked"><ClipboardText text="private-token" masked /></Scenario>

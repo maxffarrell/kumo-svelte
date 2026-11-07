@@ -94,6 +94,8 @@
 {#snippet defaultTriggerChild({ props }: { props: Record<string, unknown> })}
   <span
     {...props}
+    role="button"
+    tabindex={disabled ? -1 : props.tabindex as number | undefined}
     class={cn(
       'inline-flex h-auto min-h-0 items-center border-none bg-transparent p-0 shadow-none',
       'm-0 cursor-default'

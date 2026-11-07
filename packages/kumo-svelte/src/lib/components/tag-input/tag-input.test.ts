@@ -83,3 +83,32 @@ it.each([{ isComposing: true }, { keyCode: 229 }])(
     expect(onValueChange).toHaveBeenLastCalledWith(["にほんご"]);
   },
 );
+
+it('keeps read-only tags unchanged and submits accepted tags separately', async () => {
+ const view = render(TagInput, { defaultValue: ['one','two'], name: 'tags', readOnly: true, 'aria-label': 'Read only tags' });
+ const input = screen.getByLabelText('Read only tags');
+ expect(input).toHaveAttribute('readonly');
+ expect(screen.getByRole('button', { name: 'Remove one' })).toBeDisabled();
+ await fireEvent.keyDown(input, { key: 'Backspace' });
+ expect(view.container.querySelectorAll('input[type=hidden][name=tags]')).toHaveLength(2);
+ expect(input).not.toHaveAttribute('name');
+});
+it('merges pasted separators at the draft selection', async () => {
+ const onValueChange = vi.fn(); render(TagInput, { onValueChange, 'aria-label': 'Paste tags' });
+ const input = screen.getByLabelText('Paste tags') as HTMLInputElement;
+ await fireEvent.input(input, { target: { value: 'prefix-tail' } }); input.setSelectionRange(7,7);
+ await fireEvent.paste(input, { clipboardData: { getData: () => 'one,two' } });
+ expect(onValueChange).toHaveBeenLastCalledWith(['prefix-one','twotail']);
+});
+
+it('associates accepted values with an external form and requires an accepted tag', async () => {
+ const form = document.createElement('form'); form.id='external-tags'; document.body.append(form);
+ const view = render(TagInput, {name:'tags',form:'external-tags',defaultValue:['one','two'],required:true,'aria-label':'External tags'});
+ expect(new FormData(form).getAll('tags')).toEqual(['one','two']);
+ const input = screen.getByRole('textbox',{name:'External tags'});
+ expect(input).not.toHaveAttribute('required');
+ await fireEvent.click(screen.getByRole('button',{name:'Remove one'}));
+ await fireEvent.click(screen.getByRole('button',{name:'Remove two'}));
+ expect(input).toHaveAttribute('required'); expect(new FormData(form).getAll('tags')).toEqual([]);
+ view.unmount(); form.remove();
+});

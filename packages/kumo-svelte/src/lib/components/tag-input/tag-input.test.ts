@@ -83,3 +83,20 @@ it.each([{ isComposing: true }, { keyCode: 229 }])(
     expect(onValueChange).toHaveBeenLastCalledWith(["にほんご"]);
   },
 );
+
+it('keeps read-only tags unchanged and submits accepted tags separately', async () => {
+ const view = render(TagInput, { defaultValue: ['one','two'], name: 'tags', readOnly: true, 'aria-label': 'Read only tags' });
+ const input = screen.getByLabelText('Read only tags');
+ expect(input).toHaveAttribute('readonly');
+ expect(screen.getByRole('button', { name: 'Remove one' })).toBeDisabled();
+ await fireEvent.keyDown(input, { key: 'Backspace' });
+ expect(view.container.querySelectorAll('input[type=hidden][name=tags]')).toHaveLength(2);
+ expect(input).not.toHaveAttribute('name');
+});
+it('merges pasted separators at the draft selection', async () => {
+ const onValueChange = vi.fn(); render(TagInput, { onValueChange, 'aria-label': 'Paste tags' });
+ const input = screen.getByLabelText('Paste tags') as HTMLInputElement;
+ await fireEvent.input(input, { target: { value: 'prefix-tail' } }); input.setSelectionRange(7,7);
+ await fireEvent.paste(input, { clipboardData: { getData: () => 'one,two' } });
+ expect(onValueChange).toHaveBeenLastCalledWith(['prefix-one','twotail']);
+});

@@ -42,6 +42,11 @@
     error?: TagInputError;
     variant?: KumoInputVariant;
     disabled?: boolean;
+    readOnly?: boolean;
+    readonly?: boolean;
+    name?: string;
+    form?: string;
+    required?: boolean;
     class?: string;
     placeholder?: string;
     id?: string;
@@ -73,6 +78,11 @@
     error,
     variant,
     disabled = false,
+    readonly: readonlyAlias = false,
+    readOnly = readonlyAlias,
+    name,
+    form,
+    required,
     class: className,
     placeholder,
     id,
@@ -145,7 +155,7 @@
 
   function handleKeydown(event: KeyboardEvent) {
     onkeydown?.(event);
-    if (event.defaultPrevented) return;
+    if (event.defaultPrevented || readOnly || disabled) return;
     if (event.isComposing || event.keyCode === 229) return;
     if (!inputValue && event.key === 'Backspace') {
       setValues(values.slice(0, -1));
@@ -158,16 +168,19 @@
 
   function handlePaste(event: ClipboardEvent) {
     onpaste?.(event);
-    if (event.defaultPrevented) return;
+    if (event.defaultPrevented || readOnly || disabled) return;
     const text = event.clipboardData?.getData('text') ?? '';
     if (!/[\n,]/.test(text)) return;
     event.preventDefault();
-    commit(text);
+    const input = event.currentTarget as HTMLInputElement;
+    const start = input.selectionStart ?? inputValue.length;
+    const end = input.selectionEnd ?? start;
+    commit(inputValue.slice(0, start) + text + inputValue.slice(end));
   }
 
   function handleBlur(event: FocusEvent) {
     onblur?.(event);
-    if (!event.defaultPrevented) commit(inputValue);
+    if (!event.defaultPrevented && !readOnly && !disabled) commit(inputValue);
   }
 </script>
 
@@ -189,10 +202,11 @@
           shape="square"
           size="xs"
           variant="ghost"
-          {disabled}
+          disabled={disabled || readOnly}
           onmousedown={(event: MouseEvent) => event.preventDefault()}
           onclick={() => setValues(values.filter((value) => value !== item))}
         />
+        {#if name}<input type="hidden" {name} {form} {disabled} value={item} />{/if}
       </span>
     {/each}
     <input
@@ -203,6 +217,9 @@
       aria-describedby={[descriptionId, errorId].filter(Boolean).join(' ') || undefined}
       class="min-w-32 flex-1 border-0 bg-transparent px-1 py-0.5 outline-none"
       {disabled}
+      readonly={readOnly}
+      {form}
+      required={required && values.length === 0}
       {autocomplete}
       {placeholder}
       value={inputValue}

@@ -185,3 +185,13 @@ it("hides duplicate outside dates in multi-month views and accepts an override",
   });
   expect(view.container.querySelector(".rdp-outside button")).toBeTruthy();
 });
+
+it('marks a range across week boundaries and retains disabled/outside semantics', () => {
+ const {container} = render(DatePicker, { month: fixedMonth, mode:'range', selected:{from:new Date(2024,0,5),to:new Date(2024,0,9)}, disabled:new Date(2024,0,7) });
+ const start = screen.getByRole('button',{name:'Friday, January 5, 2024'}).closest('td');
+ const middle = screen.getByRole('button',{name:'Sunday, January 7, 2024'}).closest('td');
+ const end = screen.getByRole('button',{name:'Tuesday, January 9, 2024'}).closest('td');
+ expect(start).toHaveAttribute('data-range-start'); expect(end).toHaveAttribute('data-range-end');
+ expect(middle).toHaveAttribute('data-range-middle'); expect(middle).toHaveAttribute('data-selected'); expect(middle).toHaveAttribute('data-disabled');
+ expect(container.querySelector('[data-outside]')).toBeTruthy();
+});

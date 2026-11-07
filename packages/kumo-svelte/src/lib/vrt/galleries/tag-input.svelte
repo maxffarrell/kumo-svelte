@@ -18,3 +18,5 @@
 <Scenario id="focus" label="focus" interact={[{ type: 'focus', selector: 'input' }]}>
   <TagInput aria-label="Tags" defaultValue={['frontend']} class="w-[360px]" />
 </Scenario>
+
+<Scenario id="read-only" label="read only"><TagInput aria-label="Read only tags" name="tags" defaultValue={["one", "two"]} readOnly /></Scenario>

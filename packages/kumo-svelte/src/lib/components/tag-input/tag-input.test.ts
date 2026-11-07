@@ -100,3 +100,15 @@ it('merges pasted separators at the draft selection', async () => {
  await fireEvent.paste(input, { clipboardData: { getData: () => 'one,two' } });
  expect(onValueChange).toHaveBeenLastCalledWith(['prefix-one','twotail']);
 });
+
+it('associates accepted values with an external form and requires an accepted tag', async () => {
+ const form = document.createElement('form'); form.id='external-tags'; document.body.append(form);
+ const view = render(TagInput, {name:'tags',form:'external-tags',defaultValue:['one','two'],required:true,'aria-label':'External tags'});
+ expect(new FormData(form).getAll('tags')).toEqual(['one','two']);
+ const input = screen.getByRole('textbox',{name:'External tags'});
+ expect(input).not.toHaveAttribute('required');
+ await fireEvent.click(screen.getByRole('button',{name:'Remove one'}));
+ await fireEvent.click(screen.getByRole('button',{name:'Remove two'}));
+ expect(input).toHaveAttribute('required'); expect(new FormData(form).getAll('tags')).toEqual([]);
+ view.unmount(); form.remove();
+});

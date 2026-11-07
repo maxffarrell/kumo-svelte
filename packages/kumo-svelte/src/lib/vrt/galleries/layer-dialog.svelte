@@ -11,7 +11,7 @@
     <LayerDialog.Content>
       <LayerDialog.Title>Edit profile</LayerDialog.Title>
       <LayerDialog.Description>Update the details associated with this profile.</LayerDialog.Description>
-      <LayerDialog.Body><div class="min-h-40">Profile form content</div></LayerDialog.Body>
+      <LayerDialog.Body><div>Profile form content</div><LayerDialog.Separator /><div class="min-h-40">Second section</div></LayerDialog.Body>
       <LayerDialog.Actions><LayerDialog.Actions.Primary>Save changes</LayerDialog.Actions.Primary></LayerDialog.Actions>
     </LayerDialog.Content>
   </LayerDialog>

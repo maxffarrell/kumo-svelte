@@ -22,7 +22,7 @@
   import CaretLeft from 'phosphor-svelte/lib/CaretLeft';
   import CaretRight from 'phosphor-svelte/lib/CaretRight';
   import { onDestroy, type Snippet } from 'svelte';
-  import { buttonVariants } from '#lib/components/button/index.js';
+  import { Button } from '#lib/components/button/index.js';
   import { cn } from '#lib/utils/cn.js';
 
   type CaptionLayout = 'label' | 'dropdown' | 'dropdown-months' | 'dropdown-years';
@@ -111,7 +111,7 @@
   const rootClass = $derived(cn('rdp-root relative isolate w-fit rounded-xl bg-kumo-base text-sm select-none [--cell-size:--spacing(8)] [--cell-width:--spacing(9)]', classNames?.root, reactClassName, className));
 
   const dayButtonClassName = "flex size-(--cell-size) items-center justify-center rounded-md text-base text-kumo-default tabular-nums transition-colors outline-none cursor-pointer hover:bg-kumo-tint focus-visible:relative focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-kumo-brand [td[data-day][data-disabled]_&]:cursor-not-allowed [td[data-day][data-disabled]_&]:text-kumo-inactive [td[data-day][data-disabled]_&]:hover:bg-transparent [td[data-day][data-outside]:not([data-selected])_&]:text-kumo-inactive [td[data-day][data-today]:not([data-selected],[data-outside])_&]:font-semibold [td[data-day][data-today]:not([data-selected],[data-outside],[data-disabled])_&]:text-kumo-link [td[data-day][data-selected]:not([data-range-middle])_&]:bg-kumo-contrast [td[data-day][data-selected]:not([data-range-middle])_&]:text-kumo-inverse [td[data-day][data-selected]:not([data-range-middle])_&]:hover:bg-kumo-contrast [td[data-day][data-range-middle]:not([data-disabled])_&]:hover:bg-kumo-interact [td[data-day][data-range-start]:not([data-range-end],:last-of-type)_&]:rounded-e-none [td[data-day][data-range-end]:not([data-range-start],:first-of-type)_&]:rounded-s-none";
-  const navButtonClassName = cn(buttonVariants({ variant: "ghost", shape: "square" }), "size-(--cell-size) rounded-md disabled:cursor-not-allowed disabled:opacity-50");
+  const navButtonClassName = "size-(--cell-size) rounded-md disabled:cursor-not-allowed disabled:opacity-50";
 
   function emit(nextSelection: DatePickerSelection) {
     selected = nextSelection;
@@ -444,7 +444,7 @@
 
   {#if !hideNavigation}
   <div class={cn('rdp-nav absolute end-0.5 top-0 z-1 flex items-center gap-1 rtl:[&_svg]:rotate-180', navLayout === 'around' && 'start-0.5 justify-between', classNames?.nav)}>
-    <button
+    <Button variant="ghost" shape="square"
       type="button"
       class={cn('rdp-button_previous', navButtonClassName, classNames?.button_previous)}
       aria-label="Previous month"
@@ -452,8 +452,8 @@
       onclick={() => setMonth(addMonths(displayMonth, -1))}
     >
       <CaretLeft class="rdp-chevron" size={16} aria-hidden="true" />
-    </button>
-    <button
+    </Button>
+    <Button variant="ghost" shape="square"
       type="button"
       class={cn('rdp-button_next', navButtonClassName, classNames?.button_next)}
       aria-label="Next month"
@@ -461,7 +461,7 @@
       onclick={() => setMonth(addMonths(displayMonth, 1))}
     >
       <CaretRight class="rdp-chevron" size={16} aria-hidden="true" />
-    </button>
+    </Button>
   </div>
   {/if}
 

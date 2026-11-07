@@ -158,3 +158,20 @@ it("deduplicates without replacing content, interrupting entrance, or retaining 
  manager.remove('same'); manager.add({ id: 'same', title: 'Revived' });
  expect(manager.toasts[0]).toMatchObject({ title: 'Explicit', transitionStatus: 'ending' });
 });
+
+it('preserves the focused action and surface across duplicate bump animations', async () => {
+ const {default:Toasty} = await import('./Toasty.svelte');
+ const {tick} = await import('svelte');
+ const manager = createKumoToastManager(); render(Toasty,{toastManager:manager});
+ manager.add({id:'stable',title:'Original',timeout:0,actions:[{children:'Repeat',onClick:()=>manager.add({id:'stable',title:'Replacement'})}]});
+ await tick();
+ const action = screen.getByRole('button',{name:'Repeat'});
+ const surface = action.closest('[data-kumo-part=surface]');
+ await userEvent.click(action);
+ expect(action).toHaveFocus(); expect(action.closest('[data-kumo-part=surface]')).toBe(surface);
+ expect(surface?.className).toContain('animate-toast-bump');
+ await userEvent.click(action);
+ expect(action).toHaveFocus(); expect(surface?.className).toContain('animate-toast-bump-alternate');
+ expect(screen.getByText('Original')).toBeInTheDocument(); expect(screen.queryByText('Replacement')).not.toBeInTheDocument();
+ manager.remove('stable');
+});

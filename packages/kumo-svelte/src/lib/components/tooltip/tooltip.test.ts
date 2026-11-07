@@ -63,3 +63,9 @@ describe('Tooltip', () => {
     });
   });
 });
+
+it('removes only a disabled default trigger from the tab sequence', () => {
+ render(TooltipTestHost, {disabled:true});
+ expect(screen.getByText('Trigger label').closest('[data-tooltip-trigger]')).toHaveAttribute('tabindex','-1');
+ expect(screen.getByRole('button',{name:'Hover for help'})).not.toHaveAttribute('tabindex','-1');
+});

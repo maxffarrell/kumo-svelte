@@ -1,6 +1,7 @@
 import type { PropRow } from "../prop-types";
 
 const rows: PropRow[] = [
+  { prop: 'xAxisHideLabelOverlap', type: 'boolean', required: false, default: 'true', description: 'Hides overlapping x-axis labels. Set false to retain all labels.' },
   {
     prop: "echarts",
     type: "any",

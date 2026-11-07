@@ -1,6 +1,7 @@
 import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
+  { prop: 'masked', type: 'boolean', required: false, default: 'false', description: 'Hides the display behind eight bullets until revealed; copying retains the original value.' },
   {
     "prop": "size",
     "type": "'sm' | 'base' | 'lg'",
@@ -34,7 +35,7 @@ const rows: PropRow[] = [
   },
   {
     "prop": "labels",
-    "type": "{ copyAction?: string; }",
+    "type": "{ copyAction?: string; revealAction?: string; hideAction?: string; }",
     "required": false,
     "description": "Accessible labels for internationalization."
   },

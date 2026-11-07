@@ -163,3 +163,5 @@ import { DatePicker } from 'kumo-svelte/components/date-picker';
 </p>
 
 </ComponentSection>
+
+The calendar uses Kumo theme tokens for selected, disabled, outside and range dates. It has no internal padding; use `class="p-3"` or a padded Popover container. `classNames` customizes its native calendar parts. Navigation and range bands respect RTL and reduced motion.

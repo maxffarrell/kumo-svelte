@@ -21,7 +21,8 @@
 <script lang="ts">
   import CaretLeft from 'phosphor-svelte/lib/CaretLeft';
   import CaretRight from 'phosphor-svelte/lib/CaretRight';
-  import type { Snippet } from 'svelte';
+  import { onDestroy, type Snippet } from 'svelte';
+  import { buttonVariants } from '#lib/components/button/index.js';
   import { cn } from '#lib/utils/cn.js';
 
   type CaptionLayout = 'label' | 'dropdown' | 'dropdown-months' | 'dropdown-years';
@@ -94,6 +95,8 @@
   let navigationDirection = $state<'before' | 'after' | undefined>();
   let animationTimer: ReturnType<typeof setTimeout> | undefined;
 
+  onDestroy(() => { if (animationTimer) clearTimeout(animationTimer); });
+
   const displayMonth = $derived(startOfMonth(month ?? internalMonth));
   const visibleMonths = $derived(
     Array.from({ length: Math.max(1, numberOfMonths) }, (_, index) => addMonths(displayMonth, index))
@@ -105,7 +108,10 @@
     !disableNavigation && (!navigationEnd || compareMonths(addMonths(displayMonth, numberOfMonths), navigationEnd) <= 0)
   );
   const showCaptionDropdowns = $derived(captionLayout !== 'label');
-  const rootClass = $derived(cn('rdp-root select-none rounded-xl bg-kumo-base', classNames?.root, reactClassName, className));
+  const rootClass = $derived(cn('rdp-root relative isolate w-fit rounded-xl bg-kumo-base text-sm select-none [--cell-size:--spacing(8)] [--cell-width:--spacing(9)]', classNames?.root, reactClassName, className));
+
+  const dayButtonClassName = "flex size-(--cell-size) items-center justify-center rounded-md text-base text-kumo-default tabular-nums transition-colors outline-none cursor-pointer hover:bg-kumo-tint focus-visible:relative focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-kumo-brand [td[data-day][data-disabled]_&]:cursor-not-allowed [td[data-day][data-disabled]_&]:text-kumo-inactive [td[data-day][data-disabled]_&]:hover:bg-transparent [td[data-day][data-outside]:not([data-selected])_&]:text-kumo-inactive [td[data-day][data-today]:not([data-selected],[data-outside])_&]:font-semibold [td[data-day][data-today]:not([data-selected],[data-outside],[data-disabled])_&]:text-kumo-link [td[data-day][data-selected]:not([data-range-middle])_&]:bg-kumo-contrast [td[data-day][data-selected]:not([data-range-middle])_&]:text-kumo-inverse [td[data-day][data-selected]:not([data-range-middle])_&]:hover:bg-kumo-contrast [td[data-day][data-range-middle]:not([data-disabled])_&]:hover:bg-kumo-interact [td[data-day][data-range-start]:not([data-range-end],:last-of-type)_&]:rounded-e-none [td[data-day][data-range-end]:not([data-range-start],:first-of-type)_&]:rounded-s-none";
+  const navButtonClassName = cn(buttonVariants({ variant: "ghost", shape: "square" }), "size-(--cell-size) rounded-md disabled:cursor-not-allowed disabled:opacity-50");
 
   function emit(nextSelection: DatePickerSelection) {
     selected = nextSelection;
@@ -329,21 +335,22 @@
 </script>
 
 <div class={rootClass} data-nav-layout={navLayout} data-mode={mode} {...rest}>
-  <div class="rdp-months">
+  <div class="rdp-months relative isolate flex flex-col gap-4 sm:flex-row">
     {#each visibleMonths as visibleMonth, index (visibleMonth.toISOString())}
-      <div class={cn('rdp-month', classNames?.month)}>
+      <div class={cn('rdp-month flex flex-col gap-3', classNames?.month)}>
         <div
           class={cn(
-            'rdp-month_caption',
+            'rdp-month_caption flex h-(--cell-size) items-center px-0.5 pe-20',
+            navLayout === 'around' && 'justify-center px-(--cell-size)',
             getAnimationClass('caption', 'enter'),
             classNames?.month_caption
           )}
         >
           {#if showCaptionDropdowns && index === 0}
-            <div class="rdp-dropdowns">
+            <div class="rdp-dropdowns flex items-center gap-1.5">
               {#if captionLayout === 'dropdown' || captionLayout === 'dropdown-months'}
                 <select
-                  class={cn('rdp-dropdown rdp-months_dropdown', classNames?.dropdown, classNames?.months_dropdown)}
+                  class={cn('rdp-dropdown h-7 rounded-md bg-kumo-base px-2 text-kumo-default ring ring-kumo-line focus-visible:ring-2 focus-visible:ring-kumo-brand rdp-months_dropdown', classNames?.dropdown, classNames?.months_dropdown)}
                   aria-label="Choose the month"
                   value={String(displayMonth.getMonth())}
                   disabled={disableNavigation}
@@ -356,7 +363,7 @@
               {/if}
               {#if captionLayout === 'dropdown' || captionLayout === 'dropdown-years'}
                 <select
-                  class={cn('rdp-dropdown rdp-years_dropdown', classNames?.dropdown, classNames?.years_dropdown)}
+                  class={cn('rdp-dropdown h-7 rounded-md bg-kumo-base px-2 text-kumo-default ring ring-kumo-line focus-visible:ring-2 focus-visible:ring-kumo-brand rdp-years_dropdown', classNames?.dropdown, classNames?.years_dropdown)}
                   aria-label="Choose the year"
                   value={String(displayMonth.getFullYear())}
                   disabled={disableNavigation}
@@ -369,46 +376,53 @@
               {/if}
             </div>
           {:else}
-            <span class={cn('rdp-caption_label', classNames?.caption_label)}>{getMonthLabel(visibleMonth)}</span>
+            <span class={cn('rdp-caption_label text-base font-medium text-kumo-default', classNames?.caption_label)}>{getMonthLabel(visibleMonth)}</span>
           {/if}
         </div>
 
-        <div class="rdp-month_grid_wrapper">
-          <table class={cn('rdp-month_grid', classNames?.month_grid)}>
+        <div class="rdp-month_grid_wrapper overflow-hidden">
+          <table class={cn('rdp-month_grid border-collapse', classNames?.month_grid)}>
             <thead aria-hidden="true">
-              <tr class="rdp-weekdays">
+              <tr class="rdp-weekdays flex">
                 {#each getWeekdayLabels() as weekday (weekday)}
-                  <th class={cn('rdp-weekday', classNames?.weekday)} scope="col">{weekday}</th>
+                  <th class={cn('rdp-weekday flex h-5 w-(--cell-width) items-center justify-center text-xs font-normal text-kumo-subtle', classNames?.weekday)} scope="col">{weekday}</th>
                 {/each}
               </tr>
             </thead>
             <tbody class={cn('rdp-weeks', getAnimationClass('weeks', 'enter'))}>
               {#each getWeeks(visibleMonth) as week (week[0].toISOString())}
-                <tr class="rdp-week">
+                <tr class="rdp-week mt-2 flex">
                   {#each week as day (day.toISOString())}
                     {@const outside = day.getMonth() !== visibleMonth.getMonth()}
                     {@const dayDisabled = isDisabled(day)}
                     {@const dayHidden = isHidden(day) || (outside && !(showOutsideDays ?? numberOfMonths === 1))}
                     <td
                       class={cn(
-                        'rdp-day',
+                        'rdp-day relative flex h-(--cell-size) w-(--cell-width) justify-center p-0 text-center data-selected:first-of-type:rounded-s-md data-selected:last-of-type:rounded-e-md data-range-start:data-range-end:bg-none',
                         outside && 'rdp-outside',
-                        dayHidden && 'rdp-hidden',
+                        dayHidden && 'rdp-hidden invisible',
                         isSameDay(day, today) && 'rdp-today',
                         isSelected(day) && 'rdp-selected',
                         dayDisabled && 'rdp-disabled',
-                        isRangeStart(day) && 'rdp-range_start',
-                        isRangeMiddle(day) && 'rdp-range_middle',
-                        isRangeEnd(day) && 'rdp-range_end',
+                        isRangeStart(day) && 'rdp-range_start bg-linear-to-r from-transparent from-50% to-kumo-fill to-50% last-of-type:bg-none rtl:bg-linear-to-l',
+                        isRangeMiddle(day) && 'rdp-range_middle bg-kumo-fill',
+                        isRangeEnd(day) && 'rdp-range_end bg-linear-to-l from-transparent from-50% to-kumo-fill to-50% first-of-type:bg-none rtl:bg-linear-to-r',
                         !dayDisabled && 'rdp-focusable',
                         classNames?.day
                       )}
                       data-day={day.toISOString()}
+                      data-selected={isSelected(day) || isRangeMiddle(day) || undefined}
+                      data-disabled={dayDisabled || undefined}
+                      data-outside={outside || undefined}
+                      data-today={isSameDay(day, today) || undefined}
+                      data-range-start={isRangeStart(day) || undefined}
+                      data-range-middle={isRangeMiddle(day) || undefined}
+                      data-range-end={isRangeEnd(day) || undefined}
                     >
                       {#if !dayHidden}
                         <button
                           type="button"
-                          class={cn('rdp-day_button', classNames?.day_button)}
+                          class={cn('rdp-day_button', dayButtonClassName, classNames?.day_button)}
                           disabled={dayDisabled}
                           aria-label={day.toLocaleDateString(locale, { dateStyle: 'full' })}
                           aria-pressed={isSelected(day)}
@@ -429,10 +443,10 @@
   </div>
 
   {#if !hideNavigation}
-  <div class={cn('rdp-nav', classNames?.nav)}>
+  <div class={cn('rdp-nav absolute end-0.5 top-0 z-1 flex items-center gap-1 rtl:[&_svg]:rotate-180', navLayout === 'around' && 'start-0.5 justify-between', classNames?.nav)}>
     <button
       type="button"
-      class={cn('rdp-button_previous', classNames?.button_previous)}
+      class={cn('rdp-button_previous', navButtonClassName, classNames?.button_previous)}
       aria-label="Previous month"
       disabled={!canNavigatePrevious}
       onclick={() => setMonth(addMonths(displayMonth, -1))}
@@ -441,7 +455,7 @@
     </button>
     <button
       type="button"
-      class={cn('rdp-button_next', classNames?.button_next)}
+      class={cn('rdp-button_next', navButtonClassName, classNames?.button_next)}
       aria-label="Next month"
       disabled={!canNavigateNext}
       onclick={() => setMonth(addMonths(displayMonth, 1))}
@@ -452,7 +466,7 @@
   {/if}
 
   {#if footer}
-    <div class={cn('rdp-footer', classNames?.footer)}>
+    <div class={cn('rdp-footer w-0 min-w-full pt-3', classNames?.footer)}>
       {#if typeof footer === 'string'}
         <span class="text-xs text-kumo-subtle">{footer}</span>
       {:else}

@@ -107,4 +107,4 @@ export const KUMO_SELECT_OPTION_CLASSES = cn(
 export const KUMO_SELECT_GROUP_LABEL_CLASSES =
   'px-3.5 py-1.5 text-sm font-semibold text-kumo-subtle';
 
-export const KUMO_SELECT_SEPARATOR_CLASSES = '-mx-1 my-1 h-px bg-kumo-hairline';
+export const KUMO_SELECT_SEPARATOR_CLASSES = 'my-1 h-px bg-kumo-hairline';

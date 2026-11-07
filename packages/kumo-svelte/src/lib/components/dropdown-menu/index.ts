@@ -1,3 +1,7 @@
+import DropdownMenuSub from './DropdownMenuSub.svelte';
+import DropdownMenuPopup from './DropdownMenuPopup.svelte';
+import DropdownMenuPositioner from './DropdownMenuPositioner.svelte';
+import DropdownMenuPortal from './DropdownMenuPortal.svelte';
 import { DropdownMenu as DropdownMenuPrimitive } from 'bits-ui';
 import DropdownMenuRoot from './DropdownMenu.svelte';
 import DropdownMenuTrigger from './DropdownMenuTrigger.svelte';
@@ -21,10 +25,12 @@ export {
 
 export const DropdownMenu = Object.assign(DropdownMenuRoot, {
   Trigger: DropdownMenuTrigger,
-  Portal: DropdownMenuPrimitive.Portal,
-  Sub: DropdownMenuPrimitive.Sub,
+  Portal: DropdownMenuPortal,
+  Sub: DropdownMenuSub,
   SubTrigger: DropdownMenuSubTrigger,
   SubContent: DropdownMenuSubContent,
+  Positioner: DropdownMenuPositioner,
+  Popup: DropdownMenuPopup,
   Content: DropdownMenuContent,
   Item: DropdownMenuItem,
   LinkItem: DropdownMenuItem,
@@ -39,10 +45,12 @@ export const DropdownMenu = Object.assign(DropdownMenuRoot, {
   Group: DropdownMenuPrimitive.Group
 }) as typeof DropdownMenuRoot & {
   Trigger: typeof DropdownMenuTrigger;
-  Portal: typeof DropdownMenuPrimitive.Portal;
-  Sub: typeof DropdownMenuPrimitive.Sub;
+  Portal: typeof DropdownMenuPortal;
+  Sub: typeof DropdownMenuSub;
   SubTrigger: typeof DropdownMenuSubTrigger;
   SubContent: typeof DropdownMenuSubContent;
+  Positioner: typeof DropdownMenuPositioner;
+  Popup: typeof DropdownMenuPopup;
   Content: typeof DropdownMenuContent;
   Item: typeof DropdownMenuItem;
   LinkItem: typeof DropdownMenuItem;

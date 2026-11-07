@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { Popover as PopoverPrimitive } from 'bits-ui';
-  import type { Snippet } from 'svelte';
-  import { cn } from '#lib/utils/cn.js';
+  import { Popover as PopoverPrimitive } from "bits-ui";
+  import type { Snippet } from "svelte";
+  import { cn } from "#lib/utils/cn.js";
 
-  type PopoverSide = 'top' | 'bottom' | 'left' | 'right';
-  type PopoverAlign = 'start' | 'center' | 'end';
+  type PopoverSide = "top" | "bottom" | "left" | "right";
+  type PopoverAlign = "start" | "center" | "end";
 
   interface Props {
     children?: Snippet;
@@ -13,10 +13,11 @@
     align?: PopoverAlign;
     sideOffset?: number;
     alignOffset?: number;
-    strategy?: 'absolute' | 'fixed';
-    positionMethod?: 'absolute' | 'fixed';
+    strategy?: "absolute" | "fixed";
+    positionMethod?: "absolute" | "fixed";
     anchor?: HTMLElement | { getBoundingClientRect: () => DOMRect } | null;
-    customAnchor?: HTMLElement | { getBoundingClientRect: () => DOMRect } | null;
+    customAnchor?:
+      HTMLElement | { getBoundingClientRect: () => DOMRect } | null;
     container?: HTMLElement | string;
     [key: string]: unknown;
   }
@@ -24,8 +25,8 @@
   let {
     children,
     class: className,
-    side = 'bottom',
-    align = 'center',
+    side = "bottom",
+    align = "center",
     sideOffset = 8,
     alignOffset = 0,
     strategy,
@@ -38,26 +39,26 @@
 
   let contentClass = $derived(
     cn(
-      'kumo-popover-popup flex origin-(--bits-floating-transform-origin) flex-col rounded-lg bg-kumo-base px-4 py-3 text-sm text-kumo-default',
-      'z-50',
-      'shadow-md outline outline-kumo-line',
-      'transition-[transform,scale,opacity] duration-150',
-      'data-starting-style:scale-90 data-starting-style:opacity-0',
-      'data-ending-style:scale-90 data-ending-style:opacity-0',
-      'data-instant:duration-0',
-      className
-    )
+      "kumo-popover-popup flex flex-col rounded-lg bg-kumo-base px-4 py-3 text-sm text-kumo-default",
+      "z-50",
+      "shadow-md outline outline-kumo-line",
+      "transition-opacity duration-150",
+      "data-starting-style:opacity-0",
+      "data-ending-style:opacity-0",
+      "data-instant:duration-0",
+      className,
+    ),
   );
 </script>
 
 <PopoverPrimitive.Portal to={container}>
   <PopoverPrimitive.Content
-    class={contentClass}
+    class="z-50 transition-opacity duration-150 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0"
     {side}
     {align}
     {sideOffset}
     {alignOffset}
-    strategy={strategy ?? positionMethod ?? 'absolute'}
+    strategy={strategy ?? positionMethod ?? "absolute"}
     customAnchor={anchor ?? customAnchor}
     {...rest}
   >
@@ -65,11 +66,11 @@
       width={20}
       height={10}
       class={cn(
-        'kumo-popover-arrow flex',
-        'data-[side=bottom]:-top-2',
-        'data-[side=left]:right-[-13px] data-[side=left]:rotate-90',
-        'data-[side=right]:left-[-13px] data-[side=right]:-rotate-90',
-        'data-[side=top]:-bottom-2 data-[side=top]:rotate-180'
+        "kumo-popover-arrow flex",
+        "data-[side=bottom]:-top-2",
+        "data-[side=left]:right-[-13px] data-[side=left]:rotate-90",
+        "data-[side=right]:left-[-13px] data-[side=right]:-rotate-90",
+        "data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
       )}
     >
       <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
@@ -87,31 +88,31 @@
         />
       </svg>
     </PopoverPrimitive.Arrow>
-    {@render children?.()}
+    <div class={contentClass}>{@render children?.()}</div>
   </PopoverPrimitive.Content>
 </PopoverPrimitive.Portal>
 
 <style>
-  :global(.kumo-popover-arrow[data-side='top']) {
+  :global(.kumo-popover-arrow[data-side="top"]) {
     top: auto !important;
     bottom: -8px !important;
     transform: none !important;
   }
 
-  :global(.kumo-popover-arrow[data-side='bottom']) {
+  :global(.kumo-popover-arrow[data-side="bottom"]) {
     top: -8px !important;
     bottom: auto !important;
     transform: none !important;
   }
 
-  :global(.kumo-popover-arrow[data-side='left']) {
+  :global(.kumo-popover-arrow[data-side="left"]) {
     right: -13px !important;
     left: auto !important;
     transform-origin: center center !important;
     transform: none !important;
   }
 
-  :global(.kumo-popover-arrow[data-side='right']) {
+  :global(.kumo-popover-arrow[data-side="right"]) {
     right: auto !important;
     left: -13px !important;
     transform-origin: center center !important;

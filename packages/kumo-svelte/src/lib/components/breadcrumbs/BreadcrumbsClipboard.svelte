@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
   import { Button } from '#lib/components/button/index.js';
@@ -9,23 +10,10 @@
   }
 
   let { text, ...rest }: Props = $props();
-  let isCopied = $state(false);
-  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  const feedback = createCopyFeedback(2000);
+  const isCopied = $derived(feedback.copied);
 
-  async function handleCopyDeeplink() {
-    if (!text) return;
-
-    try {
-      await navigator.clipboard.writeText(text);
-      isCopied = true;
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        isCopied = false;
-      }, 2000);
-    } catch (err) {
-      console.error('Failed to copy deeplink:', err);
-    }
-  }
+  async function handleCopyDeeplink() { if (!text) return; try { await feedback.runCopy(() => navigator.clipboard.writeText(text)); } catch (error) { console.error('Failed to copy deeplink:', error); } }
 </script>
 
 <Button

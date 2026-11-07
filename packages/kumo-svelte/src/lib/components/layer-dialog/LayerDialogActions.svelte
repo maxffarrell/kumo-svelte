@@ -4,12 +4,14 @@
 
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { getKumoLocale } from '#lib/utils/locale.js';
+  const locale = getKumoLocale();
   import { AlertDialog, Dialog } from 'bits-ui';
   import { Button } from '#lib/components/button/index.js';
   import { getLayerDialogContext } from './context';
   let { children, dismissLabel, class: className }: LayerDialogActionsProps = $props();
   const context = getLayerDialogContext('LayerDialog.Actions');
-  const label = $derived(dismissLabel ?? (context.alert ? 'Cancel' : 'Close'));
+  const label = $derived(dismissLabel ?? (context.alert ? locale.layerDialog.cancel : locale.layerDialog.close));
 </script>
 
 <div data-layer-dialog-actions class={['flex w-full shrink-0 items-center justify-between gap-2 border-t border-kumo-hairline p-4 sm:border-t-0 sm:p-1.5 sm:pt-1.75', className]}>

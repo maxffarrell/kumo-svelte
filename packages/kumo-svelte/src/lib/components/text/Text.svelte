@@ -192,7 +192,6 @@
 </script>
 
 <script lang="ts">
-  import { DEV } from 'esm-env';
 
   let {
     variant = KUMO_TEXT_DEFAULT_VARIANTS.variant,
@@ -217,13 +216,6 @@
   let isMono = $derived(monoVariants.includes(resolvedVariant));
   let Component = $derived(as ?? (isMono || resolvedVariant.startsWith('heading') ? 'span' : 'p'));
 
-  $effect(() => {
-    if (DEV && isDeprecatedHeadingVariant(resolvedVariant)) {
-      console.warn(
-        `[Kumo Text]: variant="${resolvedVariant}" is deprecated. Use variant="heading" and set size and as explicitly.`
-      );
-    }
-  });
   let computedClass = $derived(
     cn(
       'text-kumo-default',

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ReleaseDemo from "#lib/docs/demo-snippets/DropdownComposableDemo.svelte";
   import { Button } from '#lib/components/button/index.js';
   import { DropdownMenu } from '#lib/components/dropdown-menu/index.js';
   import Scenario from '#lib/vrt/Scenario.svelte';
@@ -49,3 +50,5 @@
     </DropdownMenu>
   </div>
 </Scenario>
+
+<Scenario id="release-215" label="Kumo 2.15" interact={[{ type: 'click' }]} capture="page"><ReleaseDemo /></Scenario>

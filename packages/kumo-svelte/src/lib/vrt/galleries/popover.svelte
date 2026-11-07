@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ReleaseDemo from "#lib/docs/demo-snippets/PopoverComposableDemo.svelte";
   import { Button } from '#lib/components/button/index.js';
   import { Popover } from '#lib/components/popover/index.js';
   import Scenario from '#lib/vrt/Scenario.svelte';
@@ -54,3 +55,5 @@
     </Popover>
   </div>
 </Scenario>
+
+<Scenario id="release-215" label="Kumo 2.15" interact={[{ type: 'click' }]} capture="page"><ReleaseDemo /></Scenario>

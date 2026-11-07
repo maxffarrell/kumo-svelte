@@ -215,3 +215,7 @@ Individual radio button within Radio.Group.
 
 <p>Each radio is announced with its label and selection state. The group legend provides context for all options.</p>
 </ComponentSection>
+
+<ComponentExample demo="RadioSegmentedDemo" />
+
+Use `Radio.Group appearance="segmented"` for short, mutually exclusive options. Segmented groups remain on one horizontal line; set the group `legend` prop to label it. Individual items cannot override segmented appearance. Card groups now share one outer border and dividers.

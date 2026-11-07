@@ -24,7 +24,7 @@
   const isUnknownTotal = $derived(!hasKnownTotal && context.hasNextPage !== undefined);
   const showFullControls = $derived(controls === 'full' && !isUnknownTotal);
   const isNextDisabled = $derived(
-    hasKnownTotal ? context.page === context.maxPage : context.hasNextPage !== true
+    hasKnownTotal ? context.page >= context.maxPage : context.hasNextPage !== true
   );
   const pageOptions = $derived(
     Array.from({ length: context.maxPage }, (_, index) => {
@@ -38,11 +38,13 @@
       ? clamp(nextPage, 1, context.maxPage)
       : Math.max(nextPage, 1);
     context.setPage(clamped);
-    context.setEditingPage(clamped);
+    context.setEditingPage(String(clamped));
   }
 
   function commitEditingPage() {
-    commitPage(context.editingPage);
+    const draft = context.editingPage.trim();
+    if (!/^\d+$/.test(draft)) { context.setEditingPage(String(context.page)); return; }
+    commitPage(Number(draft));
   }
 
 </script>
@@ -79,7 +81,7 @@
             onValueChange={(nextPage) => {
               const page = Number(nextPage);
               context.setPage(page);
-              context.setEditingPage(page);
+              context.setEditingPage(String(page));
             }}
           />
         {:else}
@@ -88,7 +90,7 @@
             class="text-center"
             aria-label={context.labels.pageNumber}
             value={context.editingPage}
-            onValueChange={(nextValue: string) => context.setEditingPage(Number(nextValue))}
+            onValueChange={(nextValue: string) => context.setEditingPage(nextValue)}
             onblur={commitEditingPage}
             onkeydown={(event: KeyboardEvent) => {
               if (event.key === 'Enter') commitEditingPage();
@@ -112,7 +114,7 @@
         <InputGroupButton
           variant="secondary"
           aria-label={context.labels.lastPage}
-          disabled={context.page === context.maxPage}
+          disabled={context.page >= context.maxPage}
           onclick={() => commitPage(context.maxPage)}
         >
           <CaretDoubleRight class="size-4" />

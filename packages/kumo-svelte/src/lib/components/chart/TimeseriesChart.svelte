@@ -36,6 +36,7 @@
     thresholds?: TimeseriesThreshold[];
     xAxisName?: string;
     xAxisTickCount?: number;
+    xAxisHideLabelOverlap?: boolean;
     xAxisTickFormat?: (value: number) => string;
     yAxisTickFormat?: (value: number) => string;
     yAxisTickLabelFormat?: (value: number) => string;
@@ -43,6 +44,7 @@
     yAxisTickCount?: number;
     yAxisMinInterval?: number;
     tooltipValueFormat?: (value: number) => string;
+    tooltipTimestampFormat?: (timestamp: number) => string;
     tooltipFooter?: string;
     tooltipMode?: 'all' | 'single';
     tooltipMaxItems?: number;
@@ -70,6 +72,7 @@
     thresholds,
     xAxisName,
     xAxisTickCount,
+    xAxisHideLabelOverlap = true,
     xAxisTickFormat,
     yAxisTickFormat,
     yAxisTickLabelFormat,
@@ -77,6 +80,7 @@
     yAxisTickCount,
     yAxisMinInterval,
     tooltipValueFormat,
+    tooltipTimestampFormat,
     tooltipFooter,
     tooltipMode = 'all',
     tooltipMaxItems = 10,
@@ -225,7 +229,7 @@
   const defaultNumberFormat = new Intl.NumberFormat(undefined, { maximumFractionDigits: 3 });
   const pad = (n: number) => n.toString().padStart(2, '0');
   const formatTimestamp = (ts: number | string | Date): string => {
-    return tooltipDateFormat.format(new Date(ts));
+    return tooltipTimestampFormat?.(new Date(ts).getTime()) ?? tooltipDateFormat.format(new Date(ts));
   };
   const formatAriaTimestamp = (ts: number | string | Date): string => {
     const d = new Date(ts);
@@ -247,10 +251,10 @@
     if (Number.isInteger(value)) return String(value);
     return defaultNumberFormat.format(value);
   };
-  const getTimestamps = (seriesData: TimeseriesData[], referenceMarkers: TimeseriesMarker[] | undefined): number[] => [
-    ...seriesData.flatMap((series) => series.data.map(([timestamp]) => timestamp)),
-    ...(referenceMarkers?.map((marker) => marker.timestamp) ?? [])
-  ];
+  function* getTimestamps(seriesData: TimeseriesData[], referenceMarkers: TimeseriesMarker[]): Generator<number> {
+    for (const series of seriesData) for (const [timestamp] of series.data) yield timestamp;
+    for (const marker of referenceMarkers) yield marker.timestamp;
+  }
   const getAllTooltipRowsAtTimestamp = (
     seriesData: TimeseriesData[],
     ts: number,
@@ -291,10 +295,10 @@
     const incompleteAfter = incomplete?.after;
     const series: SeriesOption[] = [];
     const seriesType = type === 'bar' ? ({ type: 'bar', stack: 'total' } as const) : ({ type: 'line', showSymbol: false } as const);
-    const markerClusters = clusterTimeseriesMarkers(
+    const markerClusters = markers?.length ? clusterTimeseriesMarkers(
       markers,
       getApproximateMarkerClusterInterval(getTimestamps(data, markers), xAxisTickCount ?? 5)
-    );
+    ) : [];
     const markerAnnotations = buildTimeseriesMarkerAnnotations(markerClusters, {
       color: markerColor,
       labelBackgroundColor: markerLabelBackgroundColor
@@ -393,6 +397,7 @@
         splitNumber: xAxisTickCount ?? 5,
         axisLabel: {
           color: axisTextColor,
+          hideOverlap: xAxisHideLabelOverlap,
           ...(xAxisTickFormat && { formatter: (value: number) => xAxisTickFormat(value) })
         }
       },

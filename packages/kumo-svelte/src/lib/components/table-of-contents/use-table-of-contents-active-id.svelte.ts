@@ -89,7 +89,8 @@ export function useTableOfContentsActiveId({
 
     const knownIds = new Set(idsKey.split('\0').filter(Boolean));
     const syncHash = () => {
-      const id = decodeURIComponent(window.location.hash.slice(1));
+      let id = window.location.hash.slice(1);
+      try { id = decodeURIComponent(id); } catch { /* Match literal percent signs using the raw fragment. */ }
       if (id && knownIds.has(id)) selectSection(id);
     };
 

@@ -192,3 +192,7 @@ Individual checkbox within Checkbox.Group.
 
 <p>Checkbox.Group uses semantic <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> elements for proper grouping announcement.</p>
 </ComponentSection>
+
+<ComponentExample demo="CheckboxCardDemo" />
+
+`Checkbox.Group` supports `appearance="card"` with joined borders. `orientation="horizontal"` uses two columns. Items accept rich `label` and `description` snippets. Controls default to the right in cards; set `controlFirst` to override.

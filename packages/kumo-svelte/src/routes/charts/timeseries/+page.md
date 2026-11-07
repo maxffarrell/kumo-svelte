@@ -169,3 +169,9 @@ completes; swap back to <code>loading=false</code> to reveal the chart.
 <ComponentExample demo="LoadingChartDemo" />
 
 </ComponentSection>
+
+### Tooltip timestamps
+
+`tooltipTimestampFormat` receives milliseconds and formats timestamps in series and marker tooltips. The default uses the browser locale and time zone. For UTC, pass `(timestamp) => new Intl.DateTimeFormat(undefined, { timeZone: "UTC", dateStyle: "medium", timeStyle: "medium" }).format(timestamp)`.
+
+`xAxisHideLabelOverlap` defaults to `true`. Set it to `false` to retain overlapping x-axis labels.

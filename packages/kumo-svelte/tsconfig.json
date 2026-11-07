@@ -8,9 +8,29 @@
     "types": [
       "svelte",
       "$app/types"
-    ]
+    ],
+    "paths": {
+      "#lib": [
+        "./src/lib/index.ts"
+      ],
+      "#lib/*": [
+        "./src/lib/*"
+      ],
+      "kumo-svelte": [
+        "./src/lib/index.ts"
+      ],
+      "kumo-svelte/*": [
+        "./src/lib/*"
+      ]
+    }
   },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.svelte", "mdsx.config.js", "vite.config.ts"],
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.svelte",
+    "mdsx.config.js",
+    "vite.config.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist",

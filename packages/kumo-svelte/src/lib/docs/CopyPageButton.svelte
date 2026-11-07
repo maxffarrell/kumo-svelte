@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import CaretDownIcon from 'phosphor-svelte/lib/CaretDownIcon';
   import CheckIcon from 'phosphor-svelte/lib/CheckIcon';
   import CopySimpleIcon from 'phosphor-svelte/lib/CopySimpleIcon';
@@ -14,7 +15,8 @@
   }
 
   let { align = 'end' }: Props = $props();
-  let copied = $state(false);
+  const feedback = createCopyFeedback(2000);
+  const copied = $derived(feedback.copied);
   let open = $state(false);
 
   function getMarkdownUrl() {
@@ -24,24 +26,9 @@
     return `${url.origin}${path}/page.md`;
   }
 
-  function onCopySuccess() {
-    copied = true;
-    setTimeout(() => {
-      copied = false;
-    }, 2000);
-  }
 
-  async function handleCopyMarkdown() {
-    onCopySuccess();
 
-    try {
-      const response = await fetch(getMarkdownUrl());
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      await navigator.clipboard.writeText(await response.text());
-    } catch (error) {
-      console.error('Failed to copy page as Markdown:', error);
-    }
-  }
+  async function handleCopyMarkdown() { try { await feedback.runCopy(async () => { const response = await fetch(getMarkdownUrl()); if (!response.ok) throw new Error(`HTTP ${response.status}`); await navigator.clipboard.writeText(await response.text()); }); } catch (error) { console.error('Failed to copy page as Markdown:', error); } }
 
   async function handleCopyPageLink() {
     try {

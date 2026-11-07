@@ -41,3 +41,5 @@ Use `labels` to translate the fallback input name, tag removal action, invalid-v
 <PropsTable component="TagInput" />
 
 </ComponentSection>
+
+`readOnly` prevents tag edits/removal while keeping focus and form submission. `name` submits each accepted tag separately; the draft has no name. Use `form` for an external form. `required` requires an accepted tag, and is skipped for read-only inputs. Pasting separators merges text at the draft selection.

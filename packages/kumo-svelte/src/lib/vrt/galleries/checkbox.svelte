@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ReleaseDemo from "#lib/docs/demo-snippets/CheckboxCardDemo.svelte";
   import { Checkbox } from '#lib/components/checkbox/index.js';
   import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
@@ -63,3 +64,5 @@
 <Scenario id="click-toggle" label="click toggle" interact={[{ type: 'click' }]}>
   <Checkbox aria-label="Toggle me" />
 </Scenario>
+
+<Scenario id="release-215" label="Kumo 2.15" ><ReleaseDemo /></Scenario>

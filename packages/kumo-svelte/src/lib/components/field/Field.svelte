@@ -83,7 +83,7 @@
 </script>
 
 <div class={cn(fieldVariants({ controlFirst }), className)} {...rest}>
-  {#if label && !hideLabel}
+  {#if (label || showOptional || labelTooltip) && !hideLabel}
     <label class="m-0 select-none text-base font-medium text-kumo-default">
       <Label showOptional={showOptional} tooltip={labelTooltip} asContent>
         {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}

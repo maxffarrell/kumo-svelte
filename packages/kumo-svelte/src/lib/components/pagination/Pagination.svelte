@@ -74,7 +74,7 @@
     ...rest
   }: Props = $props();
 
-  let editingPage = $derived(page);
+  let editingPage = $derived(String(page));
   const effectivePerPage = $derived(perPage ?? (pages ? 1 : undefined));
   const effectiveTotalCount = $derived(totalCount ?? pages);
   const maxPage = $derived(Math.max(1, Math.ceil((effectiveTotalCount ?? 1) / (effectivePerPage ?? 1))));
@@ -117,7 +117,7 @@
     get editingPage() {
       return editingPage;
     },
-    setEditingPage(nextPage: number) {
+    setEditingPage(nextPage: string) {
       editingPage = nextPage;
     },
     get labels() {

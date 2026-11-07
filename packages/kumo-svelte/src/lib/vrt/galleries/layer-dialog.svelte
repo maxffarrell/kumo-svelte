@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ReleaseDemo from "#lib/docs/demo-snippets/LayerDialogSplitActionDemo.svelte";
   import { Button } from '#lib/components/button/index.js';
   import { LayerDialog } from '#lib/components/layer-dialog/index.js';
   import Scenario from '#lib/vrt/Scenario.svelte';
@@ -10,7 +11,7 @@
     <LayerDialog.Content>
       <LayerDialog.Title>Edit profile</LayerDialog.Title>
       <LayerDialog.Description>Update the details associated with this profile.</LayerDialog.Description>
-      <LayerDialog.Body><div class="min-h-40">Profile form content</div></LayerDialog.Body>
+      <LayerDialog.Body><div>Profile form content</div><LayerDialog.Separator /><div class="min-h-40">Second section</div></LayerDialog.Body>
       <LayerDialog.Actions><LayerDialog.Actions.Primary>Save changes</LayerDialog.Actions.Primary></LayerDialog.Actions>
     </LayerDialog.Content>
   </LayerDialog>
@@ -45,3 +46,5 @@
     </LayerDialog.Content>
   </LayerDialog.Alert>
 </Scenario>
+
+<Scenario id="release-215" label="Kumo 2.15" interact={[{ type: 'click' }]} capture="page"><ReleaseDemo /></Scenario>

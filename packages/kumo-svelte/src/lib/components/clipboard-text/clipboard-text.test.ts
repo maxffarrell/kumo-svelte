@@ -81,3 +81,14 @@ describe('ClipboardText', () => {
     });
   });
 });
+
+it('hides secret text until reveal while copying the original and preserving focus', async () => {
+ const user = userEvent.setup(); const writeText = mockClipboard();
+ render(ClipboardText, { text: 'private-token', masked: true });
+ expect(screen.queryByText('private-token')).not.toBeInTheDocument();
+ await user.click(screen.getByRole('button', {name:'Copy to clipboard'}));
+ expect(writeText).toHaveBeenCalledWith('private-token');
+ const reveal = screen.getByRole('button', {name:'Reveal value'});
+ await user.click(reveal); expect(screen.getByText('private-token')).toBeInTheDocument(); expect(reveal).toHaveFocus();
+ await user.click(reveal); expect(screen.queryByText('private-token')).not.toBeInTheDocument(); expect(reveal).toHaveFocus();
+});

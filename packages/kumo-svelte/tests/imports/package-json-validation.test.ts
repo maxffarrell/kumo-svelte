@@ -12,6 +12,7 @@ const packageJson = JSON.parse(await readFile(join(packageRoot, 'package.json'),
   type: string;
   files: string[];
   exports: Record<string, unknown>;
+  imports: Record<string, unknown>;
 };
 
 async function discoverComponents() {
@@ -26,6 +27,10 @@ async function discoverComponents() {
 }
 
 describe('package.json validation', () => {
+  it('keeps published internal imports inside emitted runtime and declaration files', () => {
+    expect(packageJson.imports).toEqual({ '#lib': './dist/index.js', '#lib/*': './dist/*' });
+  });
+
   it('is configured as the Svelte package entry point', () => {
     expect(packageJson.name).toBe('kumo-svelte');
     expect(packageJson.type).toBe('module');

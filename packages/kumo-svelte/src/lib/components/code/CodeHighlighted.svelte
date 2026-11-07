@@ -35,6 +35,7 @@
 </script>
 
 <script lang="ts">
+  import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import { Button } from '#lib/components/button/index.js';
   import { cn } from '#lib/utils/cn.js';
   import { highlightCode } from '#lib/utils/highlight-code.js';
@@ -68,7 +69,8 @@
     ...rest
   }: Props = $props();
 
-  let copied = $state(false);
+  const feedback = createCopyFeedback(2000);
+  const copied = $derived(feedback.copied);
   const normalizedCode = $derived(
     code
       .replace(/^\n+|\n+$/g, '')
@@ -79,8 +81,8 @@
   const lineCount = $derived(normalizedCode.split('\n').length);
   const isSingleLine = $derived(lineCount === 1);
   const fallbackCodeClasses = $derived(cn(
-    'm-0 min-w-0 flex-1 overflow-x-auto font-mono text-sm leading-relaxed text-kumo-subtle',
-    variant === 'plain' ? 'p-0' : 'p-4'
+    '!m-0 min-w-0 flex-1 overflow-x-auto !rounded-none !border-0 !bg-transparent font-mono text-sm leading-relaxed text-kumo-subtle',
+    variant === 'plain' ? '!p-0' : '!p-4'
   ));
   const highlightedCodeClasses = $derived(cn(
     'kumo-shiki [&_code]:!m-0 [&_code]:!border-0 [&_code]:!bg-transparent [&_code]:!p-0 [&>pre]:!m-0 [&>pre]:!rounded-none [&>pre]:!border-0 [&>pre]:!bg-transparent [&>pre]:font-mono [&>pre]:text-sm [&>pre]:leading-relaxed',
@@ -104,15 +106,7 @@
     )
   );
 
-  async function copyCode() {
-    try {
-      await navigator.clipboard.writeText(normalizedCode);
-      copied = true;
-      setTimeout(() => (copied = false), 2000);
-    } catch (error) {
-      console.error('[Kumo CodeHighlighted] Failed to copy to clipboard:', error);
-    }
-  }
+  async function copyCode() { try { await feedback.runCopy(() => navigator.clipboard.writeText(normalizedCode)); } catch (error) { console.error('[Kumo CodeHighlighted] Failed to copy to clipboard:', error); } }
 </script>
 
 {#snippet copyButton()}
@@ -162,10 +156,10 @@
     {#if showLineNumbers && !isSingleLine}
       <div class="flex w-full">
         {@render lineNumbers()}
-        <pre class={fallbackCodeClasses}><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
+        <pre class={fallbackCodeClasses}><code class="!m-0 !border-0 !bg-transparent !p-0">{normalizedCode}</code></pre>
       </div>
     {:else}
-      <pre class={fallbackCodeClasses}><code class="m-0 bg-transparent p-0">{normalizedCode}</code></pre>
+      <pre class={fallbackCodeClasses}><code class="!m-0 !border-0 !bg-transparent !p-0">{normalizedCode}</code></pre>
     {/if}
   {:then html}
     {#if showLineNumbers && !isSingleLine}

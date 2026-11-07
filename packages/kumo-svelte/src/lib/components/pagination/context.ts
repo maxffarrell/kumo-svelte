@@ -28,8 +28,8 @@ export interface PaginationContextValue {
   maxPage: number;
   pageShowingRange: string;
   setPage: (page: number) => void;
-  editingPage: number;
-  setEditingPage: (page: number) => void;
+  editingPage: string;
+  setEditingPage: (page: string) => void;
   labels: Required<PaginationLabels>;
 }
 

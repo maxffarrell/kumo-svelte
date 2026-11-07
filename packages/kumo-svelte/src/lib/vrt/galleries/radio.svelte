@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ReleaseDemo from "#lib/docs/demo-snippets/RadioSegmentedDemo.svelte";
   import { Radio } from '#lib/components/radio/index.js';
   import Scenario from '#lib/vrt/Scenario.svelte';
 </script>
@@ -103,3 +104,5 @@
     <Radio.Item label="Pro" description="Professional use." value="pro" />
   </Radio.Group>
 </Scenario>
+
+<Scenario id="release-215" label="Kumo 2.15" ><ReleaseDemo /></Scenario>

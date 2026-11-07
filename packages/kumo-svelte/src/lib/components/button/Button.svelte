@@ -149,6 +149,13 @@
   let classes = $derived(
     cn(
       buttonVariants({ variant, size, shape }),
+      shape === 'base' && children && cn(
+        size === 'xs' || size === 'sm' ? 'pb-px [--kumo-button-text-lift:0.5px]' : 'pb-0.5 [--kumo-button-text-lift:1px]',
+        (IconComponent || loading) && cn(
+          { xs: 'pl-1', sm: 'pl-1.5', base: 'pl-2.5', lg: 'pl-3.5' }[size],
+          '[&>svg:first-child]:translate-y-(--kumo-button-text-lift) [&>span.relative>svg:first-child]:translate-y-(--kumo-button-text-lift)'
+        )
+      ),
       disabled && 'cursor-not-allowed opacity-50',
       href && 'flex items-center no-underline!',
       className

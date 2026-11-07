@@ -954,6 +954,27 @@ kbd,
   transform-origin: center;
 }
 
+@keyframes toast-bump-alternate {
+  0% {
+    transform: scale(1);
+  }
+
+  20% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-toast-bump-alternate {
+  animation: toast-bump-alternate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) { .animate-toast-bump, .animate-toast-bump-alternate { animation: none; } }
+
 @keyframes clipboard-toast-bump {
   0% {
     transform: scale(1);

@@ -145,3 +145,16 @@ describe("ToastPreview", () => {
     });
   });
 });
+
+it("deduplicates without replacing content, interrupting entrance, or retaining implicit bumps on updates", () => {
+ const manager = createKumoToastManager();
+ manager.add({ id: 'same', title: 'Original', timeout: 0 });
+ manager.add({ id: 'same', title: 'Replacement' });
+ expect(manager.toasts).toHaveLength(1);
+ expect(manager.toasts[0]).toMatchObject({ title: 'Original', transitionStatus: 'starting', bump: true, updateKey: 1 });
+ manager.add({ id: 'same' }); expect(manager.toasts[0].updateKey).toBe(2);
+ manager.update('same', { title: 'Explicit' });
+ expect(manager.toasts[0]).toMatchObject({ title: 'Explicit', bump: false });
+ manager.remove('same'); manager.add({ id: 'same', title: 'Revived' });
+ expect(manager.toasts[0]).toMatchObject({ title: 'Explicit', transitionStatus: 'ending' });
+});

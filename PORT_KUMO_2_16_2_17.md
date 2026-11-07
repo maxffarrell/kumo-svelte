@@ -18,3 +18,4 @@ Base: `origin/main` at `56552e71`. Source: `@cloudflare/kumo@2.15.0..@cloudflare
 | `06726b02` | Ported: Field omits empty labels but retains optional/help-only labels. TagInput already omits absent labels. |
 | `4185bb15` | Ported: only the default disabled Tooltip trigger leaves the tab sequence; custom triggers retain their own behavior. |
 | `7d1c776a` | Ported: token-based calendar, semantic range markers/bands, grid spacing, ghost navigation, padding ownership, RTL and reduced-motion animations; retains native Svelte calendar and visible selects. |
+| `40eaa255` | Ported: duplicate adds preserve content/entrance, refresh timeout, alternate stable surface bump animations without remounting, and explicit updates clear implicit bump intent. |

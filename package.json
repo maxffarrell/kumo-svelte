@@ -34,7 +34,7 @@
     "version": "changeset version",
     "version:beta": "bash ci/versioning/version-beta.sh",
     "ci:post-pr-report": "tsx ci/scripts/post-pr-report.ts",
-    "test:tools": "node --test --import tsx tools/deployments/validate-pr-description.test.ts",
+    "test:tools": "node --test --import tsx tools/deployments/validate-pr-description.test.ts tools/node/check-node.test.ts",
     "preinstall": "node scripts/check-node.mjs"
   },
   "devDependencies": {

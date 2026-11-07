@@ -11,3 +11,4 @@ Base: `origin/main` at `56552e71`. Source: `@cloudflare/kumo@2.15.0..@cloudflare
 | `810d820a` | Ported: reactive xAxisHideLabelOverlap defaults true and is forwarded to the time axis. |
 | `99b17fb6` | Ported: fallback pre/code resets override global backgrounds, borders, padding and corner radius. |
 | `814f1b04` | Upstream release metadata: 2.16 audit complete. Svelte release is combined into the explicitly requested 0.17.0 target. |
+| `c2b2fc4d` | Ported: masked ClipboardText with localized reveal/hide controls and original-value copying. |

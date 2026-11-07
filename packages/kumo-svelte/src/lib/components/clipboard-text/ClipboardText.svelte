@@ -16,7 +16,7 @@
     size = KUMO_CLIPBOARD_TEXT_DEFAULT_VARIANTS.size
   }: { size?: KumoClipboardTextSize } = {}) {
     return cn(
-      'flex items-center overflow-hidden bg-kumo-base px-0 font-mono',
+      'flex items-center gap-0 overflow-hidden bg-kumo-base px-0 font-mono',
       KUMO_CLIPBOARD_TEXT_VARIANTS.size[size].classes
     );
   }
@@ -26,6 +26,8 @@
   import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
+  import Eye from 'phosphor-svelte/lib/Eye';
+  import EyeSlash from 'phosphor-svelte/lib/EyeSlash';
   import { Button } from '#lib/components/button/index.js';
   import { Tooltip } from '#lib/components/tooltip/index.js';
 
@@ -43,6 +45,7 @@
     text?: string;
     value?: string;
     textToCopy?: string;
+    masked?: boolean;
     size?: ClipboardTextSize;
     onCopy?: () => void;
     tooltip?: {
@@ -52,6 +55,8 @@
     };
     labels?: {
       copyAction?: string;
+      revealAction?: string;
+      hideAction?: string;
     };
     [key: string]: unknown;
   }
@@ -61,6 +66,7 @@
     text,
     value,
     textToCopy,
+    masked = false,
     size = KUMO_CLIPBOARD_TEXT_DEFAULT_VARIANTS.size,
     onCopy,
     tooltip,
@@ -71,6 +77,7 @@
   const feedback = createCopyFeedback(1500);
   const copied = $derived(feedback.copied);
   let copyFeedbackKey = $state(0);
+  let revealed = $state(false);
 
 
   const sizeConfig = $derived(KUMO_CLIPBOARD_TEXT_VARIANTS.size[size] ?? KUMO_CLIPBOARD_TEXT_VARIANTS.size.lg);
@@ -161,7 +168,15 @@
   data-kumo-component="ClipboardText"
   {...rest}
 >
-  <span class="grow truncate ps-4 pe-2">{displayText}</span>
+  <span class="grow truncate ps-4 pe-2">{masked && !revealed ? '••••••••' : displayText}</span>
+  {#if masked}
+    <Button size={sizeConfig.buttonSize} variant="ghost"
+      class="rounded-none border-l! border-kumo-line! px-3 focus:ring-kumo-focus/50 focus:ring-inset focus-visible:ring-2 focus-visible:ring-kumo-brand"
+      aria-label={revealed ? (labels.hideAction ?? 'Hide value') : (labels.revealAction ?? 'Reveal value')}
+      aria-pressed={revealed} onclick={() => { revealed = !revealed; }}>
+      {#if revealed}<EyeSlash class="size-4" aria-hidden="true" />{:else}<Eye class="size-4" aria-hidden="true" />{/if}
+    </Button>
+  {/if}
   {#if tooltip}
     <div class="relative">
       <Tooltip side={tooltipSide} content={tooltipText} disabled={copied} trigger={copyButton} />

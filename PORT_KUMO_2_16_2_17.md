@@ -13,3 +13,4 @@ Base: `origin/main` at `56552e71`. Source: `@cloudflare/kumo@2.15.0..@cloudflare
 | `814f1b04` | Upstream release metadata: 2.16 audit complete. Svelte release is combined into the explicitly requested 0.17.0 target. |
 | `c2b2fc4d` | Ported: masked ClipboardText with localized reveal/hide controls and original-value copying. |
 | `890a6abd` | Ported: LayerDialog.Separator and named/type exports render a native full-width separator. |
+| `3aa0d59a` | Ported: native scrollbars hidden in LayerDialog and Sidebar viewports while scrolling remains enabled. |

@@ -1685,3 +1685,6 @@ pre.shiki {
   animation: rdp-fade_out var(--rdp-animation_duration)
     var(--rdp-animation_timing) forwards;
 }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

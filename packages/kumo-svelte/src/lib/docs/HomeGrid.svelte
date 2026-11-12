@@ -158,7 +158,7 @@
     <div
       class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
     >
-      <Select class="w-[200px]" placeholder="Select version" {options} />
+      <Select aria-label="Select version" class="w-[200px]" placeholder="Select version" {options} />
     </div>
   </li>
 

@@ -304,7 +304,7 @@
   label={!hideLabel ? label : undefined}
   {description}
   error={errorMessage}
-  {required}
+  required={label && !hideLabel ? required : undefined}
 >
   {#if label && hideLabel}
     <span class="sr-only">{label}</span>

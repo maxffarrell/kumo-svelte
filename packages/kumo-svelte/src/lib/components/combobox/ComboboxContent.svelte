@@ -52,7 +52,7 @@
   <ComboboxPrimitive.Portal to={container}>
     <ComboboxPrimitive.Content
       class={cn(
-        'z-50 flex max-h-[min(24rem,calc(100vh-8rem))] min-w-[calc(var(--bits-select-anchor-width)+3px)] flex-col overflow-hidden rounded-lg bg-kumo-base py-1.5 text-base text-kumo-default shadow-lg ring ring-kumo-line outline-none',
+        'z-50 flex max-h-[min(var(--bits-combobox-content-available-height),24rem)] max-w-(--bits-combobox-content-available-width) min-w-(--bits-combobox-anchor-width) flex-col overflow-hidden rounded-lg bg-kumo-base py-1.5 text-base text-kumo-default shadow-lg ring ring-kumo-line outline-none',
         className
       )}
       side={side}

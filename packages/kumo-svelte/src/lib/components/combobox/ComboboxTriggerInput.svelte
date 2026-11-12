@@ -10,6 +10,9 @@
     class?: string;
     placeholder?: string;
     size?: ComboboxSize;
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
+    'aria-describedby'?: string;
     clearLabel?: string;
     showOptionsLabel?: string;
     child?: Snippet<[{ props: Record<string, unknown> }]>;
@@ -72,7 +75,7 @@
     )}
     {placeholder}
     aria-invalid={context.invalid || undefined}
-    {...rest}
+    {...Object.fromEntries(Object.entries(rest).filter(([, value]) => value !== undefined))}
   />
 
   <button

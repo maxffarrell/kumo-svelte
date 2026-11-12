@@ -1488,6 +1488,12 @@
       "importPath": "kumo-svelte/components/clipboard-text",
       "sourceFile": "components/clipboard-text",
       "props": {
+        "masked": {
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Hides the display behind eight bullets until revealed; copying retains the original value."
+        },
         "size": {
           "type": "enum",
           "optional": true,
@@ -1521,7 +1527,7 @@
           "description": "Tooltip content."
         },
         "labels": {
-          "type": "{ copyAction?: string; }",
+          "type": "{ copyAction?: string; revealAction?: string; hideAction?: string; }",
           "optional": true,
           "description": "Accessible labels for internationalization."
         },
@@ -4055,7 +4061,11 @@
           "description": "Accessible label."
         }
       },
-      "colors": []
+      "colors": [
+        "bg-kumo-fill",
+        "bg-kumo-recessed",
+        "border-kumo-interact"
+      ]
     },
     "MenuBar": {
       "name": "MenuBar",
@@ -5463,6 +5473,16 @@
       "importPath": "kumo-svelte/primitives/skeleton-line",
       "sourceFile": "primitives/skeleton-line",
       "props": {
+        "variant": {
+          "type": "enum",
+          "optional": true,
+          "values": [
+            "default",
+            "sketch"
+          ],
+          "default": "default",
+          "description": "Choose the standard shimmer or a wireframe with extended corner strokes."
+        },
         "minWidth": {
           "type": "number",
           "optional": true,
@@ -6446,6 +6466,12 @@
       "importPath": "kumo-svelte/components/chart",
       "sourceFile": "components/chart",
       "props": {
+        "xAxisHideLabelOverlap": {
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Hides overlapping x-axis labels. Set false to retain all labels."
+        },
         "echarts": {
           "type": "any",
           "optional": false,

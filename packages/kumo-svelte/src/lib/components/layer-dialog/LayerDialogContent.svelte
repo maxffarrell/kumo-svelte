@@ -75,13 +75,14 @@
     "fixed inset-0 bg-kumo-recessed opacity-80 transition-opacity duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)] data-ending-style:opacity-0 data-starting-style:opacity-0 motion-reduce:transition-none sm:duration-200";
   const viewport = $derived(
     cn(
-      "fixed inset-0 z-50 flex items-end justify-center sm:px-4",
+      // Bits UI unmounts Content, but this positioning wrapper stays in the portal.
+      "pointer-events-none fixed inset-0 z-50 flex items-end justify-center sm:px-4",
       KUMO_LAYER_DIALOG_VARIANTS.verticalAlign[verticalAlign].classes,
     ),
   );
   const content = $derived(
     cn(
-      "group/layer-dialog fixed inset-x-0 bottom-0 flex max-h-[85dvh] min-h-0 w-full max-w-none overflow-visible rounded-t-xl bg-kumo-elevated p-1.5 shadow-[0_20px_25px_-5px_rgb(0_0_0/0.03),0_8px_10px_-6px_rgb(0_0_0/0.03)] ring-1 ring-kumo-hairline transition-[transform,opacity] duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)] data-ending-style:translate-y-full data-starting-style:translate-y-full motion-reduce:transition-none sm:static sm:max-h-full sm:translate-y-0 sm:rounded-xl sm:duration-200 sm:data-ending-style:translate-y-2 sm:data-ending-style:opacity-0 sm:data-starting-style:translate-y-2 sm:data-starting-style:opacity-0",
+      "group/layer-dialog pointer-events-auto fixed inset-x-0 bottom-0 flex max-h-[85dvh] min-h-0 w-full max-w-none overflow-visible rounded-t-xl bg-kumo-elevated p-1.5 shadow-[0_20px_25px_-5px_rgb(0_0_0/0.03),0_8px_10px_-6px_rgb(0_0_0/0.03)] ring-1 ring-kumo-hairline transition-[transform,opacity] duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)] data-ending-style:translate-y-full data-starting-style:translate-y-full motion-reduce:transition-none sm:static sm:max-h-full sm:translate-y-0 sm:rounded-xl sm:duration-200 sm:data-ending-style:translate-y-2 sm:data-ending-style:opacity-0 sm:data-starting-style:translate-y-2 sm:data-starting-style:opacity-0",
       KUMO_LAYER_DIALOG_VARIANTS.size[size].classes,
       className,
     ),

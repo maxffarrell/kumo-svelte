@@ -279,7 +279,7 @@
                 data-kumo-component="Select"
                 data-kumo-part="option"
                 class={cn(
-                  'group mx-1.5 flex cursor-pointer items-center justify-between gap-2 rounded px-2 py-1.5 text-base outline-none',
+                  'group mx-1.5 flex cursor-pointer items-center justify-between gap-2 rounded px-2 py-1.5 text-base outline-none focus-visible:outline-hidden',
                   'focus-visible:z-50 focus-visible:ring-2 focus-visible:ring-kumo-brand focus-visible:ring-inset',
                   'data-[highlighted]:bg-kumo-tint',
                   'data-[disabled]:pointer-events-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50'
@@ -304,7 +304,7 @@
   label={!hideLabel ? label : undefined}
   {description}
   error={errorMessage}
-  {required}
+  required={label && !hideLabel ? required : undefined}
 >
   {#if label && hideLabel}
     <span class="sr-only">{label}</span>

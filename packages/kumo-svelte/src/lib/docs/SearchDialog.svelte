@@ -4,11 +4,13 @@
   import MagnifyingGlassIcon from 'phosphor-svelte/lib/MagnifyingGlassIcon';
   import SquaresFourIcon from 'phosphor-svelte/lib/SquaresFourIcon';
   import StackIcon from 'phosphor-svelte/lib/StackIcon';
+  import { matchSorter } from 'match-sorter';
   import { fade, scale } from 'svelte/transition';
   import { Badge } from '#lib/components/badge/index.js';
   import { cn } from '#lib/utils/cn.js';
   import { CANONICAL_DOCS } from './canonicalDocs';
-  import { componentItems, blockItems, type NavItem } from './nav';
+  import { componentItems, blockItems } from './nav';
+  import { registrySearchEntries } from 'virtual:kumo-registry-search';
 
   interface SearchItem {
     name: string;
@@ -68,7 +70,7 @@
       name: 'Chart Colors',
       description: 'Semantic, categorical, and sequential color guidance for charts.',
       url: '/charts/colors',
-      category: 'Guides',
+      category: 'Charts',
       type: 'page'
     },
     {
@@ -127,20 +129,6 @@
       name: 'Charts',
       description: 'Charts built on ECharts.',
       url: '/charts',
-      category: 'Charts',
-      type: 'page'
-    },
-    {
-      name: 'Timeseries Chart',
-      description: 'A specialized chart for displaying time-based data.',
-      url: '/charts/timeseries',
-      category: 'Charts',
-      type: 'page'
-    },
-    {
-      name: 'Sankey Chart',
-      description: 'A Sankey diagram component for visualizing flow data between nodes using ECharts.',
-      url: '/charts/sankey',
       category: 'Charts',
       type: 'page'
     },
@@ -209,43 +197,40 @@
   let activeIndex = $state(0);
   let inputRef = $state<HTMLInputElement>();
 
-  function slugFromHref(href: string) {
-    return href.split('/').filter(Boolean).at(-1) ?? '';
-  }
-
-  function fromNav(item: NavItem, type: SearchItem['type'], category: string): SearchItem {
-    const slug = slugFromHref(item.href);
-    return {
-      name: slug === 'toast' ? 'Toasty' : item.label,
-      type,
-      description: COMPONENT_DESCRIPTIONS[slug] ?? `${item.label} documentation and examples.`,
-      category,
-      url: item.href
-    };
-  }
-
-  const allItems = $derived([
-    ...STATIC_PAGES,
-    ...CHART_PAGES,
-    ...componentItems
-      .filter((item) => !['/components/code-highlighted', '/components/flow'].includes(item.href))
-      .map((item) => fromNav(item, 'component', 'Components')),
-    ...blockItems.map((item) => fromNav(item, 'block', 'Block'))
+  const componentRoutes: Record<string, string> = {
+    DropdownMenu: '/components/dropdown',
+    Toast: '/components/toast',
+    ResourceListPage: '/blocks/resource-list',
+    TimeseriesChart: '/charts/timeseries',
+    SankeyChart: '/charts/sankey',
+    BubbleMap: '/charts/maps#bubble-map',
+    ChoroplethMap: '/charts/maps#choropleth-map',
+    GlobeMap: '/charts/maps#cloudflare-availability-locations'
+  };
+  const documentedUrls = new Set([
+    ...componentItems.map((item) => item.href),
+    ...blockItems.map((item) => item.href),
+    ...Object.values(componentRoutes)
   ]);
+  const staticItems = [...STATIC_PAGES, ...CHART_PAGES];
+  const staticUrls = new Set(staticItems.map((item) => item.url));
 
-  function score(item: SearchItem, value: string) {
-    const q = value.trim().toLowerCase();
-    if (!q) return 1;
-    const name = item.name.toLowerCase();
-    const description = item.description.toLowerCase();
-    const category = item.category.toLowerCase();
-    if (name === q) return 100;
-    if (name.startsWith(q)) return 80;
-    if (name.includes(q)) return 60;
-    if (category.includes(q)) return 40;
-    if (description.includes(q)) return 20;
-    return 0;
-  }
+  const allItems: SearchItem[] = [
+    ...staticItems,
+    ...registrySearchEntries.flatMap(({ name, type, category, description }) => {
+      const slug = name.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').toLowerCase();
+      const url = componentRoutes[name] ?? `/${type === 'block' ? 'blocks' : 'components'}/${slug}`;
+      if (!documentedUrls.has(url) || staticUrls.has(url)) return [];
+      const docSlug = url.split('/').at(-1) ?? slug;
+      return [{
+        name: name === 'Toast' ? 'Toasty' : name,
+        type,
+        category: category || 'Other',
+        description: COMPONENT_DESCRIPTIONS[docSlug] ?? description,
+        url
+      }];
+    })
+  ];
 
   function groupByCategory(items: SearchItem[]): SearchGroup[] {
     const grouped = new Map<string, SearchItem[]>();
@@ -263,11 +248,12 @@
 
   const filtered = $derived(
     query.trim()
-      ? allItems
-          .map((item) => ({ item, score: score(item, query) }))
-          .filter((entry) => entry.score > 0)
-          .sort((a, b) => b.score - a.score || a.item.name.localeCompare(b.item.name))
-          .map((entry) => entry.item)
+      ? matchSorter(allItems, query.trim(), {
+          keys: (['name', 'description', 'category'] as const).map((key) => ({
+            key,
+            threshold: matchSorter.rankings.CONTAINS
+          }))
+        })
       : allItems
   );
 

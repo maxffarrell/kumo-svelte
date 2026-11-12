@@ -1,11 +1,13 @@
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import type { ComponentRegistry } from './component-registry.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const VIRTUAL_MODULE_ID = 'virtual:kumo-registry';
-const RESOLVED_VIRTUAL_MODULE_ID = `\0${VIRTUAL_MODULE_ID}`;
+const SEARCH_MODULE_ID = 'virtual:kumo-registry-search';
+const resolvedId = (id: string) => `\0${id}`;
 
 export function kumoRegistryPlugin() {
   const registryFiles = {
@@ -17,13 +19,25 @@ export function kumoRegistryPlugin() {
     name: 'vite-plugin-kumo-registry',
 
     resolveId(id: string) {
-      if (id === VIRTUAL_MODULE_ID) {
-        return RESOLVED_VIRTUAL_MODULE_ID;
+      if (id === VIRTUAL_MODULE_ID || id === SEARCH_MODULE_ID) {
+        return resolvedId(id);
       }
     },
 
     async load(id: string) {
-      if (id !== RESOLVED_VIRTUAL_MODULE_ID) return;
+      if (id === resolvedId(SEARCH_MODULE_ID)) {
+        const registry = JSON.parse(await readFile(registryFiles.json, 'utf8')) as ComponentRegistry;
+        const entries = [
+          ...Object.values(registry.components).map(({ name, category, description }) => ({
+            name, category, description, type: 'component'
+          })),
+          ...Object.values(registry.blocks ?? {}).map(({ name, category, description }) => ({
+            name, category, description, type: 'block'
+          }))
+        ];
+        return `export const registrySearchEntries = ${JSON.stringify(entries)};`;
+      }
+      if (id !== resolvedId(VIRTUAL_MODULE_ID)) return;
 
       const [markdown, json] = await Promise.all([
         readFile(registryFiles.markdown, 'utf8').catch(() => ''),
@@ -53,11 +67,11 @@ export const kumoRegistryJson = ${json};
 
       server.watcher.on('change', (file: string) => {
         if (registryFilePaths.some((registryFile) => file.endsWith(registryFile.split('/').pop()!))) {
-          const mod = server.moduleGraph.getModuleById(RESOLVED_VIRTUAL_MODULE_ID);
-          if (mod) {
-            server.moduleGraph.invalidateModule(mod);
-            server.ws.send({ type: 'full-reload' });
-          }
+          const modules = [VIRTUAL_MODULE_ID, SEARCH_MODULE_ID]
+            .map((id) => server.moduleGraph.getModuleById(resolvedId(id)))
+            .filter(Boolean);
+          for (const mod of modules) server.moduleGraph.invalidateModule(mod);
+          if (modules.length) server.ws.send({ type: 'full-reload' });
         }
       });
     }

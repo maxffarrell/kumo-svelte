@@ -29,11 +29,11 @@
         description: 'Small button for secondary actions'
       },
       base: {
-        classes: 'h-9 gap-1.5 rounded-lg px-3 text-base',
+        classes: 'h-9 gap-1.5 rounded-lg px-3 text-base leading-5',
         description: 'Default button size'
       },
       lg: {
-        classes: 'h-10 gap-2 rounded-lg px-4 text-base',
+        classes: 'h-10 gap-2 rounded-lg px-4 text-base leading-5',
         description: 'Large button for primary CTAs'
       }
     },
@@ -100,7 +100,7 @@
     return cn(
       'group flex w-max shrink-0 items-center font-medium select-none',
       'border-0 shadow-xs',
-      'focus:outline-none focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
+      'focus:outline-hidden focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
       'cursor-pointer',
       'disabled:cursor-not-allowed disabled:text-kumo-subtle',
       KUMO_BUTTON_VARIANTS.size[size].classes,
@@ -149,13 +149,8 @@
   let classes = $derived(
     cn(
       buttonVariants({ variant, size, shape }),
-      shape === 'base' && children && cn(
-        size === 'xs' || size === 'sm' ? 'pb-px [--kumo-button-text-lift:0.5px]' : 'pb-0.5 [--kumo-button-text-lift:1px]',
-        (IconComponent || loading) && cn(
-          { xs: 'pl-1', sm: 'pl-1.5', base: 'pl-2.5', lg: 'pl-3.5' }[size],
-          '[&>svg:first-child]:translate-y-(--kumo-button-text-lift) [&>span.relative>svg:first-child]:translate-y-(--kumo-button-text-lift)'
-        )
-      ),
+      shape === 'base' && children && (IconComponent || loading) &&
+        { xs: 'pl-1', sm: 'pl-1.5', base: 'pl-2.5', lg: 'pl-3.5' }[size],
       disabled && 'cursor-not-allowed opacity-50',
       href && 'flex items-center no-underline!',
       className

@@ -104,7 +104,7 @@
     class={cn(
       "peer",
       isCard
-        ? "relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border-0 bg-kumo-base ring focus:ring-kumo-focus focus:outline-none focus-visible:ring-2 focus-visible:ring-kumo-brand data-[state=checked]:bg-kumo-contrast data-[state=checked]:ring-kumo-contrast data-[state=indeterminate]:bg-kumo-contrast data-[state=indeterminate]:ring-kumo-contrast"
+        ? "relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border-0 bg-kumo-base ring focus:ring-kumo-focus focus:outline-hidden focus-visible:ring-2 focus-visible:ring-kumo-brand data-[state=checked]:bg-kumo-contrast data-[state=checked]:ring-kumo-contrast data-[state=indeterminate]:bg-kumo-contrast data-[state=indeterminate]:ring-kumo-contrast"
         : checkboxControlClasses,
       checkboxVariantClasses(variant),
       !disabled &&
@@ -130,7 +130,7 @@
   <div class="flex min-w-0 flex-1 flex-col gap-0.5">
     <span class={cn("text-base text-kumo-default", isCard && "font-medium")}
       >{#if typeof label === "string"}{label}{:else}{@render label()}{/if}</span
-    >{#if description}<span class="text-sm text-kumo-subtle"
+    >{#if description}<span class="text-sm leading-snug text-pretty text-kumo-subtle"
         >{#if typeof description === "string"}{description}{:else}{@render description()}{/if}</span
       >{/if}{@render children?.()}
   </div>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Error %sveltekit.status% — Kumo Svelte</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        display: grid;
+        min-height: 100dvh;
+        margin: 0;
+        place-items: center;
+        background: Canvas;
+        color: CanvasText;
+        font-family: system-ui, sans-serif;
+      }
+      main {
+        box-sizing: border-box;
+        width: min(calc(100% - 2rem), 42rem);
+        border: 1px dashed GrayText;
+        padding: clamp(1.5rem, 6vw, 3rem);
+      }
+      h1 { margin: .25rem 0; }
+      a { color: LinkText; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>Kumo Svelte · %sveltekit.status%</p>
+      <h1>This page couldn’t load</h1>
+      <p>Try again in a moment or return to the documentation.</p>
+      <a href="/">Back to documentation</a>
+    </main>
+  </body>
+</html>

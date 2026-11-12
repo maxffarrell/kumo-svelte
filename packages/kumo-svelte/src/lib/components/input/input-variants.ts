@@ -93,13 +93,14 @@ export function inputVariants({
   focusIndicator = false
 }: KumoInputVariantsProps = {}) {
   return cn(
-    'border-0 bg-kumo-control text-kumo-default ring ring-kumo-line outline-none focus:outline-none',
+    'border-0 bg-kumo-control text-kumo-default ring ring-kumo-line outline-none focus:outline-hidden',
     'kumo-input-placeholder disabled:text-kumo-inactive',
     resolveVariant(
       KUMO_INPUT_VARIANTS,
       { size, variant },
       KUMO_INPUT_DEFAULT_VARIANTS
     ),
+    parentFocusIndicator && 'has-focus-visible:outline-hidden',
     parentFocusIndicator &&
       (variant === 'error'
         ? 'focus-within:ring-kumo-danger/50 focus-within:ring-[1.5px]'

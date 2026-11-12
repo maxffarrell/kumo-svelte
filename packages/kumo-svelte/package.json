@@ -107,6 +107,7 @@
     "happy-dom": "^21.0.0",
     "jsdom": "^30.0.1",
     "magic-string": "^1.2.2",
+    "match-sorter": "8.2.0",
     "mdsx": "^0.0.7",
     "svelte": "^5.57.1",
     "svelte-check-native": "^0.9.6",

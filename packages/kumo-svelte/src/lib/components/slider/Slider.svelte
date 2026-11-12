@@ -159,7 +159,7 @@
             (!getAriaLabel && !ariaLabel && label ? labelId : undefined)}
           aria-valuetext={formatter.format(current)}
           class={cn(
-            "group h-full w-4 cursor-grab outline-none has-focus-visible:ring-2 has-focus-visible:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-focus data-disabled:cursor-not-allowed data-dragging:cursor-grabbing",
+            "group h-full w-4 cursor-grab outline-none has-focus-visible:outline-hidden has-focus-visible:ring-2 has-focus-visible:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-focus data-disabled:cursor-not-allowed data-dragging:cursor-grabbing",
             innerRadius,
           )}
         >

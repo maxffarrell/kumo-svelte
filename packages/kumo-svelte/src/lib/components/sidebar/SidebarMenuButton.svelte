@@ -36,7 +36,7 @@
       !active && 'hover:bg-(--sidebar-active-bg)',
       active && 'bg-(--sidebar-active-bg)',
       'has-[[data-active]]:bg-transparent has-[[data-active]]:hover:bg-(--sidebar-active-bg)',
-      'focus:outline-none focus-visible:bg-(--sidebar-active-bg) focus-visible:text-kumo-strong',
+      'focus:outline-hidden focus-visible:bg-(--sidebar-active-bg) focus-visible:text-kumo-strong',
       className
     )
   );

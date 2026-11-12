@@ -41,6 +41,16 @@ import { SkeletonLine } from 'kumo-svelte/components/loader';
   <a class="underline" href="/installation#ssr-random-values">SSR random values utility</a>.
 </p>
 
+<ComponentSection>
+
+## Sketch
+
+Leave four pixels around a sketch line so the construction strokes remain visible.
+
+<ComponentExample demo="SkeletonLineSketchDemo" />
+
+</ComponentSection>
+
 <!-- Custom Widths -->
 
 <ComponentSection>

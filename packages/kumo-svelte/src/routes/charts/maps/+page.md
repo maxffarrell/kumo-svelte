@@ -176,17 +176,17 @@ Shade regions by value. Data rows are joined to GeoJSON features by <code class=
 
 <ComponentExample demo="ChoroplethMapDemo" code={choroplethMapCode} />
 
+### Cloudflare Availability Locations
+
+Render a boundary-free orthographic globe with hatched land and geographic markers. Drag or use the arrow keys to rotate it; automatic rotation respects reduced-motion preferences and pauses during interaction.
+
+<ComponentExample demo="GlobeMapDemo" code={globeMapCode} />
+
 ### Custom Tooltips
 
 Provide <code class="text-kumo-default">tooltipFormatter</code> when the default name/value tooltip is not enough. The formatter returns HTML rendered by ECharts, so escape user-provided values.
 
 <CodeBlock code={tooltipCode} lang="svelte" />
-
-### Globe Map
-
-Render a boundary-free orthographic globe with hatched land and geographic markers. Drag or use the arrow keys to rotate it; automatic rotation respects reduced-motion preferences and pauses during interaction.
-
-<ComponentExample demo="GlobeMapDemo" code={globeMapCode} />
 
 </ComponentSection>
 

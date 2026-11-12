@@ -25,6 +25,7 @@
     "release": "pnpm build:package && changeset publish",
     "release:beta": "changeset publish --no-git-tag --tag beta",
     "test": "pnpm --filter kumo-svelte test && pnpm test:tools",
+    "test:docs": "playwright test -c ci/docs-browser/playwright.config.ts",
     "fidelity": "tsx tools/fidelity/fidelity-diff.ts",
     "fidelity:gate": "tsx tools/fidelity/fidelity-diff.ts --fail-on-missing",
     "vrt": "playwright test -c ci/visual-regression/playwright.config.ts",

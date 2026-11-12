@@ -110,7 +110,7 @@
   const showCaptionDropdowns = $derived(captionLayout !== 'label');
   const rootClass = $derived(cn('rdp-root relative isolate w-fit rounded-xl bg-kumo-base text-sm select-none [--cell-size:--spacing(8)] [--cell-width:--spacing(9)]', classNames?.root, reactClassName, className));
 
-  const dayButtonClassName = "flex size-(--cell-size) items-center justify-center rounded-md text-base text-kumo-default tabular-nums transition-colors outline-none cursor-pointer hover:bg-kumo-tint focus-visible:relative focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-kumo-brand [td[data-day][data-disabled]_&]:cursor-not-allowed [td[data-day][data-disabled]_&]:text-kumo-inactive [td[data-day][data-disabled]_&]:hover:bg-transparent [td[data-day][data-outside]:not([data-selected])_&]:text-kumo-inactive [td[data-day][data-today]:not([data-selected],[data-outside])_&]:font-semibold [td[data-day][data-today]:not([data-selected],[data-outside],[data-disabled])_&]:text-kumo-link [td[data-day][data-selected]:not([data-range-middle])_&]:bg-kumo-contrast [td[data-day][data-selected]:not([data-range-middle])_&]:text-kumo-inverse [td[data-day][data-selected]:not([data-range-middle])_&]:hover:bg-kumo-contrast [td[data-day][data-range-middle]:not([data-disabled])_&]:hover:bg-kumo-interact [td[data-day][data-range-start]:not([data-range-end],:last-of-type)_&]:rounded-e-none [td[data-day][data-range-end]:not([data-range-start],:first-of-type)_&]:rounded-s-none";
+  const dayButtonClassName = "m-0 border-0 bg-transparent p-0 flex size-(--cell-size) items-center justify-center rounded-md text-base text-kumo-default tabular-nums transition-colors outline-none focus-visible:outline-hidden cursor-pointer hover:bg-kumo-tint focus-visible:relative focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-kumo-brand [td[data-day][data-disabled]_&]:cursor-not-allowed [td[data-day][data-disabled]_&]:text-kumo-inactive [td[data-day][data-disabled]_&]:hover:bg-transparent [td[data-day][data-outside]:not([data-selected])_&]:text-kumo-inactive [td[data-day][data-today]:not([data-selected],[data-outside])_&]:font-semibold [td[data-day][data-today]:not([data-selected],[data-outside],[data-disabled])_&]:text-kumo-link [td[data-day][data-selected]:not([data-range-middle])_&]:bg-kumo-contrast [td[data-day][data-selected]:not([data-range-middle])_&]:text-kumo-inverse [td[data-day][data-selected]:not([data-range-middle])_&]:hover:bg-kumo-contrast [td[data-day][data-range-middle]:not([data-disabled])_&]:hover:bg-kumo-interact [td[data-day][data-range-start]:not([data-range-end],:last-of-type)_&]:rounded-e-none [td[data-day][data-range-end]:not([data-range-start],:first-of-type)_&]:rounded-s-none";
   const navButtonClassName = "size-(--cell-size) rounded-md disabled:cursor-not-allowed disabled:opacity-50";
 
   function emit(nextSelection: DatePickerSelection) {
@@ -382,7 +382,7 @@
 
         <div class="rdp-month_grid_wrapper overflow-hidden">
           <table class={cn('rdp-month_grid border-collapse', classNames?.month_grid)}>
-            <thead aria-hidden="true">
+            <thead class="bg-transparent" aria-hidden="true">
               <tr class="rdp-weekdays flex">
                 {#each getWeekdayLabels() as weekday (weekday)}
                   <th class={cn('rdp-weekday flex h-5 w-(--cell-width) items-center justify-center text-xs font-normal text-kumo-subtle', classNames?.weekday)} scope="col">{weekday}</th>

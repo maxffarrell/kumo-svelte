@@ -61,7 +61,7 @@
     onCheckedChange={handleCheckedChange}
     class={cn(
       'relative inline-flex items-center ring cursor-pointer border-none p-0',
-      'focus:outline-none focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
+      'focus:outline-hidden focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
       'transition-colors duration-150 ease-out motion-reduce:transition-none',
       'disabled:cursor-not-allowed disabled:opacity-50',
       s.track,

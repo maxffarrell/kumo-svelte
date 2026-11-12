@@ -113,7 +113,7 @@
         <DateRangePickerPrimitive.Segment
           part={segment.part}
           class={cn(
-            'rounded-sm px-0.5 outline-none focus:bg-kumo-tint focus:text-kumo-default',
+            'rounded-sm px-0.5 outline-none focus-visible:outline-hidden focus:bg-kumo-tint focus:text-kumo-default',
             segment.part !== 'literal' && segment.value === segment.part ? 'text-kumo-placeholder' : undefined
           )}
         >

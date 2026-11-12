@@ -46,6 +46,24 @@ test("the mobile sidebar opens and closes", async ({ page }) => {
   await expect(sidebar).not.toBeInViewport();
 });
 
+test("Autocomplete sizes its popup from the input anchor", async ({ page }) => {
+  await page.goto("/components/autocomplete");
+  await page.locator("#svelte-announcer").waitFor({ state: "attached" });
+
+  const input = page.getByPlaceholder("Search fruits…", { exact: true });
+  await input.pressSequentially("a");
+
+  const popup = page.locator("[data-combobox-content]").filter({
+    has: page.getByRole("option", { name: "Apple", exact: true }),
+  });
+  await expect(popup).toBeVisible();
+
+  const anchorWidth = (await input.boundingBox())!.width;
+  await expect
+    .poll(async () => Math.abs((await popup.boundingBox())!.width - anchorWidth))
+    .toBeLessThan(2);
+});
+
 test("Combobox sizes its popup from the field anchor", async ({ page }) => {
   await page.goto("/");
   const input = page.getByPlaceholder("Select an issue...");

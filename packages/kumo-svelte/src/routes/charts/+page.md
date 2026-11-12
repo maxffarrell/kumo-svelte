@@ -91,13 +91,6 @@ echarts.use([
   />
 
   <ChartCard
-    title="Bubble Map"
-    description="Plot proportional bubbles over a GeoJSON map."
-    href="/charts/maps"
-    demo="BubbleMapDemo"
-  />
-
-  <ChartCard
     title="Custom Chart"
     description="Examples like pie charts."
     href="/charts/custom"

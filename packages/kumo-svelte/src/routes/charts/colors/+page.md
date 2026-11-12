@@ -6,7 +6,15 @@ contentLayout: "wide"
 ---
 
 <script>
-  import DemoRenderer from '#lib/docs/DemoRenderer.svelte';
+  import ChartColorSystemsDemo from '#lib/docs/demo-snippets/ChartColorSystemsDemo.svelte';
+  import SemanticColorsDemo from '#lib/docs/demo-snippets/SemanticColorsDemo.svelte';
+  import CategoricalBarChartDemo from '#lib/docs/demo-snippets/CategoricalBarChartDemo.svelte';
+  import CategoricalColorsDemo from '#lib/docs/demo-snippets/CategoricalColorsDemo.svelte';
+  import CategoricalCvdDemo from '#lib/docs/demo-snippets/CategoricalCvdDemo.svelte';
+  import CategoricalDonutChartDemo from '#lib/docs/demo-snippets/CategoricalDonutChartDemo.svelte';
+  import CategoricalLineChartDemo from '#lib/docs/demo-snippets/CategoricalLineChartDemo.svelte';
+  import SequentialColorsDemo from '#lib/docs/demo-snippets/SequentialColorsDemo.svelte';
+  import SequentialHeatmapDemo from '#lib/docs/demo-snippets/SequentialHeatmapDemo.svelte';
 </script>
 
 
@@ -22,7 +30,7 @@ To avoid misreading data, we use different color systems based on the data task.
 </p>
 </div>
 
-<DemoRenderer demo="ChartColorSystemsDemo" />
+<ChartColorSystemsDemo />
 
 ## Semantic tokens
 
@@ -36,8 +44,8 @@ Semantic chart colors are derived from our existing badge/status semantic tokens
 </div>
 
 <div class="mb-6 flex flex-col gap-6">
-<DemoRenderer demo="SemanticColorsDemo" />
-<DemoRenderer demo="CategoricalBarChartDemo" />
+<SemanticColorsDemo />
+<CategoricalBarChartDemo />
 </div>
 
 ## Categorical palette
@@ -49,7 +57,7 @@ Use the categorical palette when the data has no inherent polarity. The palette 
 </div>
 
 <div class="mb-6">
-<DemoRenderer demo="CategoricalColorsDemo" />
+<CategoricalColorsDemo />
 </div>
 
 <div class="text-kumo-info bg-kumo-info-tint/50 rounded-lg py-1 px-4 ring ring-kumo-info mb-12">
@@ -63,9 +71,9 @@ Use the categorical palette when the data has no inherent polarity. The palette 
 </div>
 
 <div class="mb-6 flex flex-col gap-8">
-<DemoRenderer demo="CategoricalCvdDemo" />
-<DemoRenderer demo="CategoricalDonutChartDemo" />
-<DemoRenderer demo="CategoricalLineChartDemo" />
+<CategoricalCvdDemo />
+<CategoricalDonutChartDemo />
+<CategoricalLineChartDemo />
 
 <div class="text-kumo-info bg-kumo-info-tint/50 rounded-lg py-1 px-4 ring ring-kumo-info mb-6">
   <span class="font-semibold">Color alone should not be used to convey information.</span> When implementing line charts, ensure that you're using patterns (e.g. dashes/dots) on top of the color palette to differentiate between data points. Since dots and dashes appear lighter, we avoid pairing them with light colors since those lines can fade out.
@@ -89,6 +97,6 @@ dark mode so the most prominent color always corresponds to the highest magnitud
 </div>
 
 <div class="mb-6 flex flex-col gap-6">
-<DemoRenderer demo="SequentialColorsDemo" />
-<DemoRenderer demo="SequentialHeatmapDemo" />
+<SequentialColorsDemo />
+<SequentialHeatmapDemo />
 </div>

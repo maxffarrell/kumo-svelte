@@ -1,7 +1,23 @@
+<script lang="ts" module>
+  export const KUMO_SKELETON_LINE_VARIANTS = {
+    variant: {
+      default: { classes: 'skeleton-line', description: 'Flat bar with a sliding shimmer' },
+      sketch: {
+        classes: 'relative h-2 w-(--skeleton-width)',
+        description: 'Wireframe bar with a sliding shimmer and extended corner strokes'
+      }
+    }
+  } as const;
+
+  export const KUMO_SKELETON_LINE_DEFAULT_VARIANTS = { variant: 'default' } as const;
+  export type KumoSkeletonLineVariant = keyof typeof KUMO_SKELETON_LINE_VARIANTS.variant;
+</script>
+
 <script lang="ts">
   import { useKumoRandom } from '#lib/utils/random.js';
 
   interface Props {
+    variant?: KumoSkeletonLineVariant;
     minWidth?: number;
     maxWidth?: number;
     minDuration?: number;
@@ -14,6 +30,7 @@
   }
 
   let {
+    variant = KUMO_SKELETON_LINE_DEFAULT_VARIANTS.variant,
     minWidth = 30,
     maxWidth = 100,
     minDuration = 1.3,
@@ -34,12 +51,24 @@
 
 {#snippet line()}
   <div
-    class={['skeleton-line', className].filter(Boolean).join(' ')}
+    class={[KUMO_SKELETON_LINE_VARIANTS.variant[variant].classes, className].filter(Boolean).join(' ')}
     style:--skeleton-width={`${width}%`}
     style:--shimmer-duration={`${duration}s`}
     style:--shimmer-delay={`${delay}s`}
+    data-variant={variant === 'sketch' ? variant : undefined}
     {...rest}
-  ></div>
+  >
+    {#if variant === 'sketch'}
+      <div class="absolute inset-0 overflow-hidden rounded-lg bg-kumo-recessed">
+        <div class="sketch-shimmer absolute inset-0 bg-linear-to-r from-transparent via-kumo-contrast/8 to-transparent motion-reduce:animate-none"></div>
+      </div>
+      <div class="absolute -inset-x-1 top-0 h-px bg-kumo-fill"></div>
+      <div class="absolute -inset-x-1 bottom-0 h-px bg-kumo-fill"></div>
+      <div class="absolute -inset-y-1 left-0 w-px bg-kumo-fill"></div>
+      <div class="absolute -inset-y-1 right-0 w-px bg-kumo-fill"></div>
+      <div class="absolute inset-0 rounded-lg border border-kumo-interact"></div>
+    {/if}
+  </div>
 {/snippet}
 
 {#if blockHeight !== undefined}
@@ -62,6 +91,10 @@
   }
 
   @layer base {
+    .sketch-shimmer {
+      animation: shimmer var(--shimmer-duration, 1.5s) var(--shimmer-delay, 0s) infinite ease-in-out;
+    }
+
     :global(.skeleton-line) {
       position: relative;
       overflow: hidden;

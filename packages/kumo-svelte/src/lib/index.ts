@@ -165,7 +165,13 @@ export {
   linkVariants,
 } from "./components/link";
 export type { KumoLinkVariant } from "./components/link";
-export { Loader, SkeletonLine } from "./components/loader";
+export {
+  Loader,
+  SkeletonLine,
+  KUMO_SKELETON_LINE_DEFAULT_VARIANTS,
+  KUMO_SKELETON_LINE_VARIANTS,
+  type KumoSkeletonLineVariant,
+} from "./components/loader";
 export { provideKumoRandom, useKumoRandom } from "./utils/random";
 export { KumoLogo, SvelteLogo } from "./components/logo";
 /** @deprecated Use `Tabs` with `variant="segmented"` instead. */

@@ -2,6 +2,13 @@ import type { PropRow } from '../prop-types';
 
 const rows: PropRow[] = [
   {
+    prop: 'variant',
+    type: '"default" | "sketch"',
+    required: false,
+    default: 'default',
+    description: 'Choose the standard shimmer or a wireframe with extended corner strokes.'
+  },
+  {
     "prop": "minWidth",
     "type": "number",
     "required": false,

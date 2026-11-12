@@ -41,7 +41,7 @@ export function dialogVariants({
   size = KUMO_DIALOG_DEFAULT_VARIANTS.size
 }: { size?: KumoDialogSize } = {}) {
   return cn(
-    'shadow-m ring ring-kumo-line fixed top-8 left-1/2 w-full max-w-[calc(100vw-2rem)] -translate-x-1/2 overflow-hidden rounded-xl bg-kumo-base text-kumo-default duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 sm:top-16',
+    'shadow-m ring ring-kumo-line fixed top-8 left-1/2 w-full max-w-[calc(100vw-2rem)] max-h-[calc(100dvh-4rem)] sm:max-h-[calc(100dvh-6rem)] -translate-x-1/2 overflow-x-hidden overflow-y-auto overscroll-contain *:shrink-0 rounded-xl bg-kumo-base text-kumo-default duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0 sm:top-16',
     KUMO_DIALOG_VARIANTS.size[size].classes
   );
 }

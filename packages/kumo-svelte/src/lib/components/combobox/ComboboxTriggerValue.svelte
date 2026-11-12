@@ -7,7 +7,7 @@
 
   export interface Props {
     class?: string;
-    placeholder?: string;
+    placeholder?: string | Snippet;
     size?: ComboboxSize;
     child?: Snippet<[{ props: Record<string, unknown>; value: string }]>;
     'aria-label'?: string;
@@ -37,7 +37,7 @@
 </script>
 
 {#snippet customTriggerChild({ props }: { props: Record<string, unknown> })}
-  {@render child?.({ props, value: displayValue || placeholder || '' })}
+  {@render child?.({ props, value: displayValue || (typeof placeholder === 'string' ? placeholder : '') })}
 {/snippet}
 
 <ComboboxPrimitive.Trigger
@@ -55,7 +55,7 @@
   data-kumo-part="trigger"
   {...Object.fromEntries(Object.entries(rest).filter(([, value]) => value !== undefined))}
 >
-  <span class="min-w-0 flex-1 truncate">{displayValue || placeholder}</span>
+  <span class="min-w-0 flex-1 truncate">{#if displayValue}{displayValue}{:else if typeof placeholder === 'function'}{@render placeholder()}{:else}{placeholder}{/if}</span>
   <span class={cn('absolute top-1/2 flex -translate-y-1/2 items-center text-kumo-subtle', iconRight[resolvedSize])}>
     <CaretUpDown size={iconSizes[resolvedSize]} class="fill-current" />
   </span>

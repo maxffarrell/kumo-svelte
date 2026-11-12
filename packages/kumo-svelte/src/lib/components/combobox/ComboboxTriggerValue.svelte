@@ -10,6 +10,9 @@
     placeholder?: string;
     size?: ComboboxSize;
     child?: Snippet<[{ props: Record<string, unknown>; value: string }]>;
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
+    'aria-describedby'?: string;
     [key: string]: unknown;
   }
 
@@ -50,7 +53,7 @@
   disabled={context.disabled}
   data-kumo-component="Combobox"
   data-kumo-part="trigger"
-  {...rest}
+  {...Object.fromEntries(Object.entries(rest).filter(([, value]) => value !== undefined))}
 >
   <span class="min-w-0 flex-1 truncate">{displayValue || placeholder}</span>
   <span class={cn('absolute top-1/2 flex -translate-y-1/2 items-center text-kumo-subtle', iconRight[resolvedSize])}>

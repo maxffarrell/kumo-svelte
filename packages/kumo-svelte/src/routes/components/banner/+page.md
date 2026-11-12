@@ -93,6 +93,10 @@ import { Info } from "phosphor-svelte";
 
   <ComponentExample demo="BannerWithActionsDemo" />
 
+Pass `href` to render a navigation action as a link with the same banner styles.
+
+<ComponentExample demo="BannerLinkActionDemo" />
+
 ### Custom content
 
   <ComponentExample demo="BannerCustomContentDemo" />

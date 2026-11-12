@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import { Button } from '#lib/components/button/index.js';
+  import { Button, LinkButton } from '#lib/components/button/index.js';
   import { cn } from '#lib/utils/cn.js';
   import { getBannerActionContext } from './context';
 
@@ -10,6 +10,7 @@
     children?: Snippet;
     class?: string;
     icon?: Component;
+    href?: string;
     variant?: ActionVariant;
     style?: string;
     [key: string]: unknown;
@@ -19,6 +20,7 @@
     children,
     class: className,
     icon,
+    href,
     variant = 'primary',
     style,
     ...rest
@@ -51,6 +53,15 @@
   );
 </script>
 
+{#snippet label()}
+  {@render children?.()}
+{/snippet}
+
+{#if href !== undefined}
+  <LinkButton {href} variant={buttonVariant} size={banner.size === 'xs' ? 'xs' : 'sm'} {icon} class={actionClass} style={actionStyle} data-kumo-component="Banner.Action" {...rest}>
+    {@render label()}
+  </LinkButton>
+{:else}
 <Button
   variant={buttonVariant}
   size={banner.size === 'xs' ? 'xs' : 'sm'}
@@ -62,3 +73,4 @@
 >
   {@render children?.()}
 </Button>
+{/if}

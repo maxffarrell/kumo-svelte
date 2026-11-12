@@ -149,7 +149,7 @@
         {#if typeof label === "string"}{label}{:else}{@render label()}{/if}
       </span>
       {#if description}
-        <span class="text-sm text-kumo-subtle">
+        <span class="text-sm leading-snug text-pretty text-kumo-subtle">
           {#if typeof description === "string"}{description}{:else}{@render description()}{/if}
         </span>
       {/if}

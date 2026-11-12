@@ -28,6 +28,6 @@
     <p class="text-sm text-kumo-danger">{error}</p>
   {/if}
   {#if description}
-    <p class="text-sm text-kumo-subtle">{description}</p>
+    <p class="text-sm leading-snug text-pretty text-kumo-subtle">{description}</p>
   {/if}
 </fieldset>

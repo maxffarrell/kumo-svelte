@@ -2,14 +2,9 @@
   import { page } from '$app/state';
   import Header from '#lib/docs/Header.svelte';
   import { LinkButton } from '#lib/components/button/index.js';
+  import { getErrorPage } from '#lib/docs/error-page.js';
 
-  const notFound = $derived(page.status === 404);
-  const title = $derived(notFound ? 'Page not found' : 'Something went wrong');
-  const description = $derived(
-    notFound
-      ? "This page isn't available. It may have moved, been renamed, or been removed."
-      : page.error?.message || 'An unexpected error occurred.'
-  );
+  const { title, description } = $derived(getErrorPage(page.status));
   let reversed = $state(false);
 </script>
 
@@ -18,7 +13,6 @@
   <meta name="description" content={description} />
 </svelte:head>
 
-{#if notFound}
   <div class="not-found-page flex flex-col">
     <Header />
     <main class="flex flex-1 flex-col lg:pr-12">
@@ -48,6 +42,9 @@
               <div
                 class="order-1 flex w-full flex-col gap-2 text-center @2xl:order-0 @2xl:gap-3 @2xl:text-left group-not-last/row:[&::before,&::after]:absolute group-not-last/row:[&::before,&::after]:-bottom-1 group-not-last/row:[&::before,&::after]:size-1.75 group-not-last/row:[&::before,&::after]:rounded-[1.5px] group-not-last/row:[&::before,&::after]:z-10 group-not-last/row:[&::before,&::after]:ring-1 group-not-last/row:[&::before,&::after]:ring-kumo-line group-not-last/row:[&::before,&::after]:bg-kumo-canvas group-not-last/row:[&::before,&::after]:content-[''] group-not-last/row:after:-left-1 group-not-last/row:before:-right-1"
               >
+                {#if page.status !== 404}
+                  <p class="text-sm font-medium text-kumo-subtle">{page.status}</p>
+                {/if}
                 <h1
                   class="text-2xl font-semibold text-kumo-default @2xl:text-3xl"
                 >
@@ -58,6 +55,11 @@
                 >
                   {description}
                 </p>
+                {#if page.status !== 404}
+                  <div class="mt-2">
+                    <LinkButton href="/" variant="secondary">Back to documentation</LinkButton>
+                  </div>
+                {/if}
               </div>
               <div
                 class="flex w-full items-center justify-center @2xl:justify-end"
@@ -65,8 +67,7 @@
                 <button
                   aria-label="Reverse logo animation"
                   aria-pressed={reversed}
-                  class="not-found-logo-button"
-                  class:is-reversed={reversed}
+                  class={['not-found-logo-button', { 'is-reversed': reversed }]}
                   onclick={() => (reversed = !reversed)}
                   type="button"
                 >
@@ -201,15 +202,6 @@
       </div>
     </main>
   </div>
-{:else}
-  <Header />
-  <main class="mx-auto max-w-3xl space-y-4 px-6 py-16">
-    <h1 class="text-3xl font-semibold">{title}</h1>
-    <p class="text-kumo-subtle">{description}</p>
-    <LinkButton href="/" variant="secondary">Back to documentation</LinkButton>
-  </main>
-{/if}
-
 <style>
   .not-found-page {
     height: calc(100dvh - 3rem);

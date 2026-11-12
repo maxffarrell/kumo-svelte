@@ -28,3 +28,5 @@ The docs fixes are separate from the upstream release commits:
 - The general Colors guide still points to upstream. The local Chart Colors guide renders the semantic, categorical, and sequential demos directly; its Color Palette entry is in the same place as upstream.
 
 To run the production browser checks, install Chromium and WebKit with `pnpm exec playwright install chromium webkit`, then run `pnpm test:docs`. Set `DOCS_TEST_URL` to test an existing preview instead of starting one.
+
+The upstream 2.18 docs ship one custom error page (404). SvelteKit also uses that layout for 500 and other route errors, with status-specific copy and a home link. A standalone HTML fallback covers failures that prevent SvelteKit from rendering the layout.

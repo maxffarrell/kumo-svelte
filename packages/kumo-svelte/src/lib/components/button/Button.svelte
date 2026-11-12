@@ -100,7 +100,7 @@
     return cn(
       'group flex w-max shrink-0 items-center font-medium select-none',
       'border-0 shadow-xs',
-      'focus:outline-none focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
+      'focus:outline-hidden focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
       'cursor-pointer',
       'disabled:cursor-not-allowed disabled:text-kumo-subtle',
       KUMO_BUTTON_VARIANTS.size[size].classes,

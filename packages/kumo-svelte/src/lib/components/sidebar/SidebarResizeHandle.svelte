@@ -61,7 +61,7 @@
     type="button"
     aria-label="Resize sidebar"
     data-sidebar="resize-handle"
-    class={cn('absolute inset-y-0 z-2 hidden w-3 cursor-col-resize after:absolute after:inset-y-0 after:w-0.5 after:bg-transparent hover:after:bg-kumo-hairline focus:outline-none focus-visible:after:bg-kumo-hairline sm:block', sidebar.side === 'left' ? 'right-0 after:right-0' : 'left-0 after:left-0', className)}
+    class={cn('absolute inset-y-0 z-2 hidden w-3 cursor-col-resize after:absolute after:inset-y-0 after:w-0.5 after:bg-transparent hover:after:bg-kumo-hairline focus:outline-hidden focus-visible:after:bg-kumo-hairline sm:block', sidebar.side === 'left' ? 'right-0 after:right-0' : 'left-0 after:left-0', className)}
     onpointerdown={onPointerDown}
     onkeydown={onKeyDown}
     {...rest}

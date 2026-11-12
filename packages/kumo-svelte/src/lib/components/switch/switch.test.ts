@@ -53,7 +53,7 @@ describe('Switch', () => {
       render(Switch, { 'aria-label': 'Focus', checked: true });
       const cls = screen.getByRole('switch', { name: 'Focus' }).className;
       expect(cls).toContain('focus-visible:ring-kumo-brand');
-      expect(cls).toContain('focus:outline-none');
+      expect(cls).toContain('focus:outline-hidden');
     });
   });
 

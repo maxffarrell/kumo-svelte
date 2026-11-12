@@ -14,7 +14,7 @@
   data-kumo-part="trigger"
   aria-expanded={sidebar.open}
   aria-label={sidebar.open ? 'Collapse sidebar' : 'Expand sidebar'}
-  class={cn('flex size-8.5 cursor-pointer items-center justify-center rounded-lg text-kumo-subtle hover:bg-kumo-tint hover:text-kumo-default focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-kumo-brand', className)}
+  class={cn('flex size-8.5 cursor-pointer items-center justify-center rounded-lg text-kumo-subtle hover:bg-kumo-tint hover:text-kumo-default focus:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-kumo-brand', className)}
   onclick={(event) => {
     onclick?.(event);
     sidebar.toggleSidebar();

@@ -66,8 +66,8 @@
     data-kumo-part="item"
     class={cn(
       isCard
-        ? "relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring focus:outline-none focus:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-brand"
-        : "relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring focus:outline-none after:absolute after:-inset-x-3 after:-inset-y-2",
+        ? "relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring focus:outline-hidden focus:ring-kumo-focus focus-visible:ring-2 focus-visible:ring-kumo-brand"
+        : "relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-0 bg-kumo-base ring focus:outline-hidden after:absolute after:-inset-x-3 after:-inset-y-2",
       variant === "error" ? "ring-kumo-danger" : "ring-kumo-line",
       !disabled &&
         variant !== "error" &&

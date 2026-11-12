@@ -5,7 +5,7 @@
   export const KUMO_INLINE_COPY_TEXT_VARIANTS = {} as const;
   export const KUMO_INLINE_COPY_TEXT_DEFAULT_VARIANTS = {} as const;
   export const KUMO_INLINE_COPY_TEXT_STYLING = {
-    baseClasses: 'group/inline-copy flex min-w-0 max-w-full cursor-pointer items-center gap-1 rounded-xs border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kumo-brand'
+    baseClasses: 'group/inline-copy flex min-w-0 max-w-full cursor-pointer items-center gap-1 rounded-xs border-0 bg-transparent p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-kumo-brand'
   } as const;
 
   export interface InlineCopyTextLabels { copyAction?: string; copied?: string; }

@@ -103,7 +103,7 @@
       focusMode === "container"
         ? [
             "overflow-hidden bg-kumo-control ring ring-kumo-line",
-            "focus-within:ring-kumo-focus/50 focus-within:ring-[1.5px]",
+            "focus-within:ring-kumo-focus/50 focus-within:ring-[1.5px] has-focus-visible:outline-hidden",
           ]
         : "isolate overflow-visible bg-kumo-control ring-0 shadow-none",
       "has-[input[aria-invalid=true]]:ring-kumo-danger",
@@ -129,7 +129,7 @@
     {#if focusMode === "hybrid"}
       <div
         data-slot="input-group-container-zone"
-        class="flex min-w-0 flex-1 items-center gap-0 border border-kumo-line focus-within:border-kumo-focus/50 focus-within:z-2"
+        class="flex min-w-0 flex-1 items-center gap-0 border border-kumo-line focus-within:border-kumo-focus/50 focus-within:z-2 has-focus-visible:outline-hidden"
       >
         {@render children?.()}
       </div>

@@ -334,7 +334,7 @@
           data-kumo-part="tab"
           onclick={handleTriggerClick}
           class={cn(
-            'relative z-2 flex items-center rounded bg-transparent whitespace-nowrap focus:outline-none focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
+            'relative z-2 flex items-center rounded bg-transparent whitespace-nowrap forced-colors:focus-visible:-outline-offset-2 focus:outline-hidden focus:ring-kumo-focus/50 focus-visible:ring-2 focus-visible:ring-kumo-brand',
             isOverflowing ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',
             isSm ? 'text-xs' : 'text-base',
             isSegmented &&
@@ -387,7 +387,7 @@
           tabindex={control.visible ? 0 : -1}
           onclick={() => scrollTabs(control.side as 'start' | 'end')}
           class={cn(
-            'absolute inset-y-0 z-3 flex items-center border-0 bg-transparent p-0 transition-opacity duration-150 focus:outline-none focus-visible:[&>span]:ring-2 focus-visible:[&>span]:ring-kumo-brand',
+            'absolute inset-y-0 z-3 flex items-center border-0 bg-transparent p-0 transition-opacity duration-150 focus:outline-hidden focus-visible:[&>span]:ring-2 focus-visible:[&>span]:ring-kumo-brand',
             control.side === 'start' ? 'left-0 justify-start bg-linear-to-r' : 'right-0 justify-end bg-linear-to-l',
             control.visible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
             'from-kumo-recessed via-kumo-recessed/95 to-transparent',

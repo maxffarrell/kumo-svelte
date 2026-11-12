@@ -322,7 +322,7 @@
           aria-label={copied ? 'Copied' : 'Copy to clipboard'}
           data-kumo-component="SensitiveInput"
           data-kumo-part="copy"
-          class="absolute -top-px right-2 m-0 h-auto min-h-0 -translate-y-full cursor-pointer rounded-t-md border-none bg-kumo-brand px-2 py-0.5 text-xs text-white opacity-0 shadow-none transition-opacity hover:brightness-120 focus:ring-kumo-focus/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-kumo-brand group-focus-within/container:opacity-100 group-hover/container:opacity-100"
+          class="absolute -top-px right-2 m-0 h-auto min-h-0 -translate-y-full cursor-pointer rounded-t-md border-none bg-kumo-brand px-2 py-0.5 text-xs text-white opacity-0 shadow-none transition-opacity hover:brightness-120 focus:ring-kumo-focus/50 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-kumo-brand group-focus-within/container:opacity-100 group-hover/container:opacity-100"
         >
           {copied ? 'Copied' : 'Copy'}
         </button>

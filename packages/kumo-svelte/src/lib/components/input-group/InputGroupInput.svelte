@@ -61,7 +61,7 @@
           'hover:z-1 hover:border-kumo-line',
           'focus:z-2 focus:border-kumo-focus/50'
         ]
-      : 'relative z-1 ring-0! shadow-none focus:ring-0! focus:outline-none',
+      : 'relative z-1 ring-0! shadow-none focus:ring-0! focus:outline-hidden',
     className
   )}
   oninput={handleInput}

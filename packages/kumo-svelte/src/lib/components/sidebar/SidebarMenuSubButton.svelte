@@ -10,7 +10,7 @@
       'group/menu-button relative flex min-h-8.5 w-full min-w-0 cursor-pointer items-center gap-2 rounded-lg px-3 py-0 text-sm font-medium text-kumo-default outline-none transition-[color] duration-150',
       !active && 'hover:bg-(--sidebar-active-bg)',
       active && 'bg-(--sidebar-active-bg)',
-      'focus:outline-none focus-visible:bg-(--sidebar-active-bg) focus-visible:text-kumo-strong',
+      'focus:outline-hidden focus-visible:bg-(--sidebar-active-bg) focus-visible:text-kumo-strong',
       className
     )
   );

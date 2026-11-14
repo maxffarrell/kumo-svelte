@@ -33,6 +33,44 @@ test("the homepage sidebar and demos receive pointer input", async ({
   await expect(toggle).toHaveAttribute("aria-pressed", "false");
 });
 
+test("the homepage gallery follows the upstream order and supports tag and range editing", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.locator("#svelte-announcer").waitFor({ state: "attached" });
+  const gallery = page.locator("[data-vr-home-grid]");
+  const cards = await gallery.locator(":scope > li > a").allTextContents();
+  expect(cards.slice(0, 6).map((label) => label.trim())).toEqual([
+    "Button",
+    "Button Group",
+    "Input",
+    "Tag Input",
+    "Select",
+    "Toolbar",
+  ]);
+  await expect(
+    gallery.getByRole("button", { name: "Deploy", exact: true }),
+  ).toBeEnabled();
+  const tagInput = gallery.getByPlaceholder("Add a label");
+  await tagInput.fill("backend");
+  await tagInput.press("Enter");
+  await expect(
+    gallery.getByRole("button", { name: "Remove backend" }),
+  ).toBeVisible();
+  await gallery.getByRole("button", { name: "Remove frontend" }).click();
+  await expect(
+    gallery.getByRole("button", { name: "Remove frontend" }),
+  ).toHaveCount(0);
+
+  const minimum = gallery.getByRole("slider", { name: "Minimum" });
+  await expect(minimum).toHaveAttribute("aria-valuenow", "25");
+  await minimum.press("ArrowRight");
+  await expect(minimum).toHaveAttribute("aria-valuenow", "26");
+  const radio = gallery.getByRole("radiogroup", { name: "Select option" });
+  await radio.getByRole("radio", { name: "Option 2" }).click();
+  await expect(radio.getByRole("radio", { name: "Option 2" })).toBeChecked();
+});
+
 test("the mobile sidebar opens and closes", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
@@ -60,7 +98,9 @@ test("Autocomplete sizes its popup from the input anchor", async ({ page }) => {
 
   const anchorWidth = (await input.boundingBox())!.width;
   await expect
-    .poll(async () => Math.abs((await popup.boundingBox())!.width - anchorWidth))
+    .poll(async () =>
+      Math.abs((await popup.boundingBox())!.width - anchorWidth),
+    )
     .toBeLessThan(2);
 });
 

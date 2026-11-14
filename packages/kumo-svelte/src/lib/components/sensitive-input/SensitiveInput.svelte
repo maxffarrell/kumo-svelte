@@ -245,6 +245,7 @@
         type={mode === 'revealed' ? 'text' : 'password'}
         value={currentValue}
         disabled={disabled}
+        {required}
         readonly={isReadOnly || isMaskedWithValue}
         autocomplete={(autocomplete ?? autoComplete) as never}
         tabindex={isMaskedWithValue ? -1 : 0}

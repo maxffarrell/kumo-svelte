@@ -3,7 +3,7 @@
   import { cn } from '#lib/utils/cn.js';
 
   const LAYER_CARD_SECONDARY_CLASSES =
-    '-my-2 flex items-center gap-2 bg-kumo-elevated p-4 text-base font-medium text-kumo-subtle';
+    '-my-2 flex shrink-0 items-center gap-2 bg-kumo-elevated p-4 text-base font-medium text-kumo-subtle';
 
   interface Props {
     children?: Snippet;

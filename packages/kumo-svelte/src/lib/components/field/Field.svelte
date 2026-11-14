@@ -57,6 +57,8 @@
     children?: Snippet;
     class?: string;
     label?: FieldLabel;
+    labelId?: string;
+    labelFor?: string;
     description?: FieldText;
     error?: FieldError;
     required?: boolean;
@@ -69,6 +71,8 @@
     children,
     class: className,
     label,
+    labelId,
+    labelFor,
     description,
     error,
     required,
@@ -84,7 +88,7 @@
 
 <div class={cn(fieldVariants({ controlFirst }), className)} {...rest}>
   {#if (label || showOptional || labelTooltip) && !hideLabel}
-    <label class="m-0 select-none text-base font-medium text-kumo-default">
+    <label id={labelId} for={labelFor} class="m-0 select-none text-base font-medium text-kumo-default">
       <Label showOptional={showOptional} tooltip={labelTooltip} asContent>
         {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
       </Label>

@@ -71,6 +71,11 @@
   import { Tooltip } from "#lib/components/tooltip/index.js";
   import CommandPaletteBasicDemo from "#lib/docs/demo-snippets/CommandPaletteBasicDemo.svelte";
 
+  import CaretDown from "phosphor-svelte/lib/CaretDown";
+  import { ButtonGroup } from "#lib/components/button-group/index.js";
+  import { TagInput } from "#lib/components/tag-input/index.js";
+  import { Slider } from "#lib/components/slider/index.js";
+
   const options = [
     { label: "All deployed versions", value: "all" },
     { label: "Active versions", value: "active" },
@@ -127,6 +132,16 @@
     </div>
   </li>
 
+  <li class="relative flex aspect-square w-full min-w-0 items-center justify-center self-stretch bg-kumo-canvas">
+    <a id="button-group" href="/components/button-group" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Button Group</a>
+    <div class="flex w-full min-w-0 items-center justify-center p-8 leading-normal tracking-normal">
+      <ButtonGroup aria-label="Deploy">
+        <Button variant="primary">Deploy</Button>
+        <Button variant="primary" shape="square" aria-label="More options" icon={CaretDown} />
+      </ButtonGroup>
+    </div>
+  </li>
+
   <li
     class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
   >
@@ -143,6 +158,13 @@
         <Input placeholder="Type something..." />
         <Input value="Invalid!" variant="error" />
       </div>
+    </div>
+  </li>
+
+  <li class="relative flex aspect-square w-full min-w-0 items-center justify-center self-stretch bg-kumo-canvas">
+    <a id="tag-input" href="/components/tag-input" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Tag Input</a>
+    <div class="flex w-full min-w-0 items-center justify-center p-8 leading-normal tracking-normal">
+      <TagInput class="w-[280px] max-w-full" defaultValue={["frontend", "priority"]} placeholder="Add a label" />
     </div>
   </li>
 
@@ -254,8 +276,6 @@
       <Switch bind:checked={switchToggled} />
     </div>
   </li>
-
-
 
   <li
     class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
@@ -439,6 +459,36 @@
   </li>
 
   <li
+    class="relative flex aspect-square w-full min-w-0 items-center justify-center bg-kumo-canvas"
+  >
+    <a
+      href="/components/layer-dialog"
+      class="absolute top-4 left-4 text-base font-medium text-kumo-subtle"
+      >LayerDialog</a
+    ><LayerDialog.Root
+      ><LayerDialog.Trigger
+        >{#snippet child({ props })}<Button {...props}>Open dialog</Button
+          >{/snippet}</LayerDialog.Trigger
+      ><LayerDialog.Content size="sm"
+        ><LayerDialog.Title>Keyboard shortcuts</LayerDialog.Title
+        ><LayerDialog.Description
+          >Search components and jump to a page.</LayerDialog.Description
+        ><LayerDialog.Body>
+          <div class="flex items-center justify-between gap-4 rounded-lg bg-kumo-elevated px-3 py-2.5">
+            <Text size="sm" variant="secondary">Open command palette</Text>
+            <span aria-label="Command K" class="flex shrink-0 items-center gap-1">
+              {#each ["⌘", "K"] as key (key)}
+                <kbd class="min-w-6 rounded-md bg-kumo-base px-1.5 py-1 text-center text-xs font-medium text-kumo-default ring ring-kumo-line">{key}</kbd>
+              {/each}
+            </span>
+          </div>
+        </LayerDialog.Body
+        ></LayerDialog.Content
+      ></LayerDialog.Root
+    >
+  </li>
+
+  <li
     class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
   >
     <a
@@ -558,6 +608,16 @@
   </li>
 
   <li
+    class="relative flex aspect-square w-full min-w-0 items-center justify-center bg-kumo-canvas"
+  >
+    <a
+      href="/components/cloudflare-logo"
+      class="absolute top-4 left-4 text-base font-medium text-kumo-subtle"
+      >CloudflareLogo</a
+    ><CloudflareLogo class="w-48 max-w-full" />
+  </li>
+
+  <li
     class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
   >
     <a
@@ -658,6 +718,13 @@
     </div>
   </li>
 
+  <li class="relative flex aspect-square w-full min-w-0 items-center justify-center self-stretch bg-kumo-canvas">
+    <a id="slider" href="/components/slider" class="absolute top-4 left-4 text-base font-medium text-kumo-subtle hover:text-kumo-default">Slider</a>
+    <div class="flex w-full min-w-0 items-center justify-center p-8 leading-normal tracking-normal">
+      <Slider defaultValue={[25, 75]} getAriaLabel={(index) => index === 0 ? "Minimum" : "Maximum"} class="w-48" />
+    </div>
+  </li>
+
   <li
     class="relative flex aspect-square w-full min-w-0 self-stretch items-center justify-center bg-kumo-canvas"
   >
@@ -670,7 +737,7 @@
     <div
       class="flex w-full min-w-0 items-center justify-center p-8 tracking-normal leading-normal"
     >
-      <div class="-m-4 scale-85"><DatePicker /></div>
+      <div class="scale-85 bg-kumo-base p-4"><DatePicker /></div>
     </div>
   </li>
 
@@ -945,34 +1012,5 @@
         <Text size="sm">Small subtle text</Text>
       </div>
     </div>
-  </li>
-  <li
-    class="relative flex aspect-square w-full min-w-0 items-center justify-center bg-kumo-canvas"
-  >
-    <a
-      href="/components/cloudflare-logo"
-      class="absolute top-4 left-4 text-base font-medium text-kumo-subtle"
-      >CloudflareLogo</a
-    ><CloudflareLogo class="w-48 max-w-full" />
-  </li>
-  <li
-    class="relative flex aspect-square w-full min-w-0 items-center justify-center bg-kumo-canvas"
-  >
-    <a
-      href="/components/layer-dialog"
-      class="absolute top-4 left-4 text-base font-medium text-kumo-subtle"
-      >LayerDialog</a
-    ><LayerDialog.Root
-      ><LayerDialog.Trigger
-        >{#snippet child({ props })}<Button {...props}>Open dialog</Button
-          >{/snippet}</LayerDialog.Trigger
-      ><LayerDialog.Content size="sm"
-        ><LayerDialog.Title>Keyboard shortcuts</LayerDialog.Title
-        ><LayerDialog.Description
-          >Search components and jump to a page.</LayerDialog.Description
-        ><LayerDialog.Body>Open command palette: ⌘ K</LayerDialog.Body
-        ></LayerDialog.Content
-      ></LayerDialog.Root
-    >
   </li>
 </ul>

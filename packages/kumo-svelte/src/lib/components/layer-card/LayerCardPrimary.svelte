@@ -3,7 +3,7 @@
   import { cn } from '#lib/utils/cn.js';
 
   const LAYER_CARD_PRIMARY_CLASSES =
-    'relative flex flex-col gap-2 overflow-hidden rounded-lg bg-kumo-base p-4 pr-3 text-inherit no-underline ring ring-kumo-fill';
+    'relative flex shrink-0 flex-col gap-2 overflow-hidden rounded-lg bg-kumo-base p-4 pr-3 text-inherit no-underline ring ring-kumo-fill';
 
   interface Props {
     children?: Snippet;

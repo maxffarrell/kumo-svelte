@@ -1,5 +1,11 @@
 # kumo-svelte
 
+## 0.18.1
+
+### Patch Changes
+
+- ec1e490: Match the Autocomplete popup’s minimum width to its input and constrain it to the available space.
+
 ## 0.18.0
 
 ### Minor Changes

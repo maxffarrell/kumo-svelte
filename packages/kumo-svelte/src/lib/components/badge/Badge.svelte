@@ -1,6 +1,6 @@
 <script lang="ts" module>
   export const KUMO_BADGE_BASE_STYLES =
-    'inline-flex w-fit flex-none shrink-0 items-center justify-self-start gap-1 rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap [a:hover_&]:ring [a:hover_&]:ring-current';
+    'inline-flex w-fit flex-none shrink-0 items-center justify-self-start gap-1 rounded-full px-2 py-0.5 text-xs/4 font-medium whitespace-nowrap [a:hover_&]:ring [a:hover_&]:ring-current';
   export const KUMO_BADGE_VARIANTS = {
     primary: 'bg-kumo-badge-inverted text-kumo-badge-inverted',
     secondary: 'bg-kumo-fill text-kumo-badge-neutral-subtle',

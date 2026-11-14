@@ -109,11 +109,12 @@ export function migrate(args: string[]): void {
   }
 
   if (!hasPendingMigrations()) {
-    console.log('No pending token migrations.');
-    console.log('\nYour codebase is up to date with the current Kumo Svelte version.');
-    console.log('Token migrations are only needed when upgrading to versions');
-    console.log('that include breaking changes to token names.');
-    return;
+    const print = outputClasses ? console.log : console.error;
+    print('No pending token migrations.');
+    print('\nYour codebase is up to date with the current Kumo Svelte version.');
+    print('Token migrations are only needed when upgrading to versions');
+    print('that include breaking changes to token names.');
+    if (outputClasses) return;
   }
 
   const direction: Direction = toOld ? 'to-old' : 'to-new';

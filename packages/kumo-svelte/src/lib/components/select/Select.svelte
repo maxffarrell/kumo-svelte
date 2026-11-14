@@ -34,7 +34,10 @@
     loading?: boolean;
     multiple?: boolean;
     size?: Size;
-    label?: string;
+    id?: string;
+    label?: string | Snippet;
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
     hideLabel?: boolean;
     labelTooltip?: string;
     description?: string;
@@ -75,7 +78,10 @@
     loading = false,
     multiple = false,
     size = 'base',
+    id,
     label,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
     hideLabel = false,
     labelTooltip,
     description,
@@ -101,6 +107,10 @@
     updatePositionStrategy,
     ...rest
   }: Props = $props();
+
+  const componentId = $props.id();
+  const triggerId = $derived(id ?? `kumo-select-${componentId}`);
+  const labelId = `kumo-select-label-${componentId}`;
 
   const sizes: Record<Size, string> = {
     xs: 'h-5 rounded-sm px-1.5 text-xs',
@@ -220,7 +230,9 @@
         errorMessage ? 'ring-kumo-danger! focus:ring-kumo-danger/50!' : undefined,
         className
       )}
-      aria-label={rest['aria-label'] as string | undefined}
+      id={triggerId}
+      aria-label={ariaLabel ?? (!label && !ariaLabelledBy ? placeholder : undefined)}
+      aria-labelledby={ariaLabelledBy ?? (!ariaLabel && label ? labelId : undefined)}
       aria-invalid={Boolean(errorMessage) || undefined}
       data-kumo-component="Select"
       data-kumo-part="trigger"
@@ -302,12 +314,16 @@
 <Field
   class={cn(!label || hideLabel ? 'contents' : undefined)}
   label={!hideLabel ? label : undefined}
+  labelId={labelId}
+  labelFor={triggerId}
   {description}
   error={errorMessage}
   required={label && !hideLabel ? required : undefined}
 >
   {#if label && hideLabel}
-    <span class="sr-only">{label}</span>
+    <label id={labelId} for={triggerId} class="sr-only">
+      {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
+    </label>
   {/if}
 
   {#if labelTooltip && !hideLabel}

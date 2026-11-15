@@ -1,7 +1,7 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": ["config:best-practices"],
-	"dependencyDashboard": true,
+	"dependencyDashboard": { "enabled": true },
 	"prConcurrentLimit": 2,
 	"separateMinorPatch": false,
 	"separateMultipleMajor": true,
@@ -9,19 +9,15 @@
 	"timezone": "America/Chicago",
 	"packageRules": [
 		{
-			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-			"automerge": true,
-			"automergeType": "branch"
-		},
-		{
-			"matchDepTypes": ["devDependencies"],
-			"automerge": true,
-			"automergeType": "branch"
-		},
-		{
 			"matchUpdateTypes": ["minor", "patch"],
 			"groupName": "weekly-minor-patch-updates"
 		}
 	],
-	"platformAutomerge": true
+	"platformAutomerge": false,
+	"automerge": true,
+	"automergeType": "pr",
+	"ignoreTests": false,
+	"vulnerabilityAlerts": {
+		"automerge": true
+	}
 }

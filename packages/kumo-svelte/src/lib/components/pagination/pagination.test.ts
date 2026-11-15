@@ -87,7 +87,7 @@ describe('Pagination', () => {
       setPage
     });
 
-    await user.click(screen.getByRole('button', { name: 'Page number' }));
+    await user.click(screen.getByRole('combobox', { name: 'Page number' }));
     await user.click(screen.getByRole('option', { name: '3' }));
 
     expect(setPage).toHaveBeenCalledWith(3);
@@ -137,7 +137,7 @@ describe('Pagination', () => {
     it('uses ring-kumo-hairline on page-size select', () => {
       render(PaginationPageSizeTest);
 
-      const trigger = screen.getByRole('button', { name: 'Page size' });
+      const trigger = screen.getByRole('combobox', { name: 'Page size' });
       expect(trigger.className).toContain('ring-kumo-hairline');
     });
 

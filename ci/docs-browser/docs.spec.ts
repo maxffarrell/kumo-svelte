@@ -16,7 +16,7 @@ test("the homepage sidebar and demos receive pointer input", async ({
   await expect(
     selectExample.getByText("(optional)", { exact: true }),
   ).toHaveCount(0);
-  const select = page.getByRole("button", { name: "Select version" });
+  const select = page.getByRole("combobox", { name: "Select version" });
   await select.click();
   await page.getByRole("option", { name: "Active versions" }).click();
   await expect(select).toContainText("Active versions");
@@ -156,4 +156,53 @@ test("chart color demos render and missing routes return an interactive 404", as
   const logo = page.getByRole("button", { name: "Reverse logo animation" });
   await logo.click();
   await expect(logo).toHaveAttribute("aria-pressed", "true");
+});
+
+test.describe("dropdown motion", () => {
+  test.use({ reducedMotion: "no-preference" });
+
+  test("the homepage dropdown animates open and closed", async ({ page }) => {
+    await page.goto("/");
+    await page.locator("#svelte-announcer").waitFor({ state: "attached" });
+    const trigger = page
+      .locator("li")
+      .filter({ has: page.locator("#dropdown") })
+      .getByRole("button", { name: "Add", exact: true });
+    const popup = page.locator(
+      '[data-kumo-component="DropdownMenu"][data-kumo-part="positioner"]',
+    );
+    const trackOpacityTransition = () =>
+      page.evaluate(() => {
+        const onTransition = (event: TransitionEvent) => {
+          if (
+            event.propertyName === "opacity" &&
+            (event.target as Element).matches(
+              '[data-kumo-component="DropdownMenu"][data-kumo-part="positioner"]',
+            )
+          ) {
+            document.documentElement.dataset.dropdownTransition = "started";
+            document.removeEventListener("transitionrun", onTransition);
+          }
+        };
+        delete document.documentElement.dataset.dropdownTransition;
+        document.addEventListener("transitionrun", onTransition);
+      });
+
+    await trackOpacityTransition();
+    await trigger.click();
+    await expect(page.locator("html")).toHaveAttribute(
+      "data-dropdown-transition",
+      "started",
+    );
+    await expect(popup).toHaveCSS("opacity", "1");
+
+    await trackOpacityTransition();
+    await page.keyboard.press("Escape");
+    await expect(page.locator("html")).toHaveAttribute(
+      "data-dropdown-transition",
+      "started",
+    );
+    await expect(popup).toHaveCount(0);
+    await expect(trigger).toBeFocused();
+  });
 });

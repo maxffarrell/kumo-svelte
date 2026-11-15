@@ -71,7 +71,7 @@
     return cn(
       'flex origin-(--bits-floating-transform-origin) flex-col rounded-md bg-kumo-base px-2.5 py-1.5 text-sm text-kumo-default',
       'shadow-md outline-1 outline-kumo-line',
-      'transition-[transform,scale,opacity] duration-150',
+      'transition-[transform,scale,opacity] duration-150 motion-reduce:transition-none',
       'data-[starting-style]:scale-90 data-[starting-style]:opacity-0',
       'data-[ending-style]:scale-90 data-[ending-style]:opacity-0',
       'data-[instant]:duration-0',

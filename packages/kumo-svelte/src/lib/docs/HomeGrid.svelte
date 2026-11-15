@@ -395,7 +395,9 @@
     >
       <DropdownMenu>
         <DropdownMenu.Trigger>
-          <Button icon={Plus}>Add</Button>
+          {#snippet child({ props })}
+            <Button {...props} icon={Plus}>Add</Button>
+          {/snippet}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
           <DropdownMenu.Item>Worker</DropdownMenu.Item>

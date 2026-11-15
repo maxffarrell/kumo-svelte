@@ -101,14 +101,14 @@
   }: Props = $props();
 
   const backdropClasses =
-    'fixed inset-0 bg-kumo-recessed opacity-80 transition-all duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0';
+    'fixed inset-0 bg-kumo-recessed opacity-80 transition-opacity duration-150 motion-reduce:transition-none data-ending-style:opacity-0 data-starting-style:opacity-0';
 
   let contentClasses = $derived(
     cn(dialogVariants({ size }), className)
   );
 
   const contentStyle = $derived(
-    `transition-property: scale, opacity; transition-timing-function: var(--default-transition-timing-function); --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.03), 0 8px 10px -6px rgb(0 0 0 / 0.03);${style ? ` ${style}` : ''}`
+    `--tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.03), 0 8px 10px -6px rgb(0 0 0 / 0.03);${style ? ` ${style}` : ''}`
   );
 
   function handleInteractOutside(event: Event) {

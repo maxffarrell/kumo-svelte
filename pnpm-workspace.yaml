@@ -41,3 +41,6 @@ minimumReleaseAgeExclude:
 
 # CVE-2026-111497: require patched Node runtimes.
 engineStrict: true
+
+patchedDependencies:
+  deepmerge@4.3.1: patches/deepmerge@4.3.1.patch

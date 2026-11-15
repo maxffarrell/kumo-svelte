@@ -17,7 +17,7 @@ describe("Select", () => {
       options: fruits,
     });
 
-    const trigger = screen.getByRole("button", { name: "Favorite fruit" });
+    const trigger = screen.getByRole("combobox", { name: "Favorite fruit" });
     expect(trigger.getAttribute("data-kumo-component")).toBe("Select");
     expect(trigger.getAttribute("data-kumo-part")).toBe("trigger");
     expect(trigger.getAttribute("aria-expanded")).toBe("false");
@@ -35,14 +35,14 @@ describe("Select", () => {
     });
 
     expect(
-      screen.getByRole("button", { name: "Rows per page" }).textContent,
+      screen.getByRole("combobox", { name: "Rows per page" }).textContent,
     ).toContain("50 rows");
   });
 
   describe("variant fidelity", () => {
     it("uses the Input control surface when closed, open, or disabled", () => {
       render(Select, { "aria-label": "Fruit", options: fruits, disabled: true });
-      const cls = screen.getByRole("button", { name: "Fruit" }).className;
+      const cls = screen.getByRole("combobox", { name: "Fruit" }).className;
       expect(cls).toContain("bg-kumo-control");
       expect(cls).toContain("data-[state=open]:bg-kumo-control");
       expect(cls).toContain("disabled:bg-kumo-control/50");
@@ -59,14 +59,14 @@ describe("Select", () => {
         alignOffset: 2,
         strategy: "fixed",
       });
-      const trigger = screen.getByRole("button", { name: "Fruit" });
+      const trigger = screen.getByRole("combobox", { name: "Fruit" });
       expect(trigger).not.toHaveAttribute("side");
       expect(trigger).not.toHaveAttribute("align");
     });
 
     it("applies selectVariants with button secondary base classes", () => {
       render(Select, { "aria-label": "Fruit", options: fruits });
-      const cls = screen.getByRole("button", { name: "Fruit" }).className;
+      const cls = screen.getByRole("combobox", { name: "Fruit" }).className;
       expect(cls).toContain("justify-between");
       expect(cls).toContain("font-normal");
       expect(cls).toContain("ring-kumo-line");
@@ -79,7 +79,7 @@ describe("Select", () => {
         options: fruits,
         error: "Required",
       });
-      const cls = screen.getByRole("button", { name: "Fruit" }).className;
+      const cls = screen.getByRole("combobox", { name: "Fruit" }).className;
       // cn/tailwind-merge canonicalizes the important modifier to a trailing `!`.
       expect(cls).toContain("ring-kumo-danger");
       expect(cls).toContain("focus:ring-kumo-danger/50");
@@ -91,14 +91,14 @@ describe("Select", () => {
         options: fruits,
         disabled: true,
       });
-      const cls = screen.getByRole("button", { name: "Fruit" }).className;
+      const cls = screen.getByRole("combobox", { name: "Fruit" }).className;
       expect(cls).toContain("cursor-not-allowed");
       expect(cls).toContain("opacity-50");
     });
 
     it("applies size classes via selectVariants", () => {
       render(Select, { "aria-label": "Fruit", options: fruits, size: "lg" });
-      expect(screen.getByRole("button", { name: "Fruit" }).className).toContain(
+      expect(screen.getByRole("combobox", { name: "Fruit" }).className).toContain(
         "h-10",
       );
     });
@@ -109,7 +109,7 @@ describe("Select", () => {
       const user = userEvent.setup();
       render(Select, { "aria-label": "Favorite fruit", options: fruits });
 
-      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
+      const trigger = screen.getByRole("combobox", { name: "Favorite fruit" });
       expect(trigger.getAttribute("aria-expanded")).toBe("false");
 
       await user.click(trigger);
@@ -132,7 +132,7 @@ describe("Select", () => {
         onValueChange,
       });
 
-      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
+      const trigger = screen.getByRole("combobox", { name: "Favorite fruit" });
       trigger.focus();
       await user.keyboard("{ArrowDown}{ArrowDown}{Enter}");
 
@@ -144,7 +144,7 @@ describe("Select", () => {
         "aria-label": "Favorite fruit",
       });
       expect(
-        screen.getByRole("button", { name: "Favorite fruit" }).textContent,
+        screen.getByRole("combobox", { name: "Favorite fruit" }).textContent,
       ).toContain("Banana");
     });
 
@@ -157,7 +157,7 @@ describe("Select", () => {
         onValueChange,
       });
 
-      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
+      const trigger = screen.getByRole("combobox", { name: "Favorite fruit" });
       trigger.focus();
       await user.keyboard("{ArrowDown}{ArrowDown}{Enter}");
 
@@ -171,7 +171,7 @@ describe("Select", () => {
         disabled: true,
       });
 
-      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
+      const trigger = screen.getByRole("combobox", { name: "Favorite fruit" });
       expect(trigger).toBeDisabled();
       expect(trigger.getAttribute("aria-expanded")).toBe("false");
     });
@@ -180,7 +180,7 @@ describe("Select", () => {
       const user = userEvent.setup();
       render(Select, { "aria-label": "Favorite fruit", options: fruits });
 
-      const trigger = screen.getByRole("button", { name: "Favorite fruit" });
+      const trigger = screen.getByRole("combobox", { name: "Favorite fruit" });
       trigger.focus();
       expect(document.activeElement).toBe(trigger);
 

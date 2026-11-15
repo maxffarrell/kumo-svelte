@@ -1,5 +1,13 @@
 # kumo-svelte
 
+## 0.18.1
+
+### Patch Changes
+
+- ec1e490: Match the Autocomplete popup’s minimum width to its input and constrain it to the available space.
+- b884443: Port Kumo 2.18.1 fixes for dialog scrolling, badge and ghost button styling, required sensitive inputs, radio and select accessible names, and CLI migration output.
+- 8375745: Restore dropdown and popover entrance and exit transitions to match Kumo. Restore Layer Dialog’s slide transition and respect reduced-motion preferences for dialogs, the command palette, and tooltips, and update dependencies with security fixes.
+
 ## 0.18.0
 
 ### Minor Changes

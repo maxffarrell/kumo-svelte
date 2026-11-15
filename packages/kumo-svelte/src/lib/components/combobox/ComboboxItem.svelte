@@ -13,7 +13,7 @@
     [key: string]: unknown;
   }
 
-  let { children, class: className, value, disabled, ...rest }: Props = $props();
+  let { children: itemChildren, class: className, value, disabled, ...rest }: Props = $props();
   const context = getComboboxContext('Combobox.Item');
   const item = $derived.by(() => {
     const normalized = normalizeComboboxItem(value);
@@ -37,7 +37,7 @@
   {...rest}
 >
   {#snippet children({ selected })}
-    <span class="col-start-1 min-w-0 truncate">{@render children?.()}</span>
+    <span class="col-start-1 min-w-0 truncate">{@render itemChildren?.()}</span>
     {#if selected}
       <Check class="col-start-2 size-4 self-center text-kumo-default" aria-hidden="true" />
     {/if}

@@ -3,7 +3,7 @@
   import { loadGallery } from '#lib/vrt/registry.js';
 
   const slug = $derived(page.params.component);
-  const gallery = $derived(loadGallery(slug));
+  const gallery = $derived(slug ? loadGallery(slug) : Promise.resolve(null));
 </script>
 
 <svelte:head>

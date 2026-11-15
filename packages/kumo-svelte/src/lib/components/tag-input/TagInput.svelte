@@ -30,6 +30,7 @@
   import { cn } from '#lib/utils/cn.js';
 
   interface Props {
+    'aria-label'?: string;
     value?: string[];
     defaultValue?: string[];
     onValueChange?: (value: string[]) => void;

@@ -19,8 +19,8 @@ permissions:
 
 jobs:
   check:
-    # Don't check the Version Packages PR
-    if: github.head_ref != 'changeset-release/main'
+    # Release and dependency PRs use generated descriptions.
+    if: github.head_ref != 'changeset-release/main' && github.event.pull_request.user.login != 'renovate[bot]'
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-add-pr
       cancel-in-progress: true

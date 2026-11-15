@@ -99,7 +99,7 @@ describe('Toolbar', () => {
   it('composes Select and Combobox triggers as toolbar controls', async () => {
     render(ToolbarTestHost);
 
-    const select = screen.getByRole('button', { name: 'Sort records' });
+    const select = screen.getByRole('combobox', { name: 'Sort records' });
     expect(select.className).toContain('rounded-none');
     expect(screen.getByRole('combobox', { name: 'Filter status' }).className).toContain('rounded-none');
 

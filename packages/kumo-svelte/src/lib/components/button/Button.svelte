@@ -111,6 +111,8 @@
   }
 
   interface Props {
+    'aria-label'?: string;
+    'aria-labelledby'?: string;
     children?: Snippet;
     class?: string;
     icon?: Component;

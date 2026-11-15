@@ -64,6 +64,6 @@
   alignOffset={alignment}
   data-kumo-component="DropdownMenu"
   data-kumo-part="positioner"
-  class={["z-50 outline-hidden duration-150 data-[state=closed]:animate-out data-[state=closed]:fade-out-0", className]}
+  class={["z-50 outline-hidden origin-(--bits-floating-transform-origin) transition-[scale,opacity] duration-150 motion-reduce:transition-none data-starting-style:opacity-0 data-ending-style:opacity-0 data-starting-style:scale-95 data-ending-style:scale-95", className]}
   {...rest}>{@render children?.()}</Content
 >

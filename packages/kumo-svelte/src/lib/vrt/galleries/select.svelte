@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Select } from '#lib/components/select/index.js';
+  import { Select as SelectPrimitive } from 'bits-ui';
   import Scenario from '#lib/vrt/Scenario.svelte';
 
   const sizes = ['xs', 'sm', 'base', 'lg'] as const;
@@ -71,17 +72,17 @@
 
 <Scenario id="with-groups" label="with groups">
   <Select aria-label="Timezone" class="w-[260px]" placeholder="Select timezone...">
-    <Select.Group>
-      <Select.GroupLabel>North America</Select.GroupLabel>
-      <Select.Option value="est" label="Eastern (EST)" />
-      <Select.Option value="cst" label="Central (CST)" />
-      <Select.Option value="pst" label="Pacific (PST)" />
-    </Select.Group>
-    <Select.Separator />
-    <Select.Group>
-      <Select.GroupLabel>Europe</Select.GroupLabel>
-      <Select.Option value="gmt" label="GMT" />
-      <Select.Option value="cet" label="Central European (CET)" />
-    </Select.Group>
+    <SelectPrimitive.Group>
+      <SelectPrimitive.GroupHeading>North America</SelectPrimitive.GroupHeading>
+      <SelectPrimitive.Item value="est" label="Eastern (EST)" />
+      <SelectPrimitive.Item value="cst" label="Central (CST)" />
+      <SelectPrimitive.Item value="pst" label="Pacific (PST)" />
+    </SelectPrimitive.Group>
+    <div role="separator" class="my-1 border-t border-kumo-line"></div>
+    <SelectPrimitive.Group>
+      <SelectPrimitive.GroupHeading>Europe</SelectPrimitive.GroupHeading>
+      <SelectPrimitive.Item value="gmt" label="GMT" />
+      <SelectPrimitive.Item value="cet" label="Central European (CET)" />
+    </SelectPrimitive.Group>
   </Select>
 </Scenario>

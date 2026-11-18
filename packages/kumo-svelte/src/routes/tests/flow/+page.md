@@ -11,3 +11,6 @@ description: "Flow visual regression page."
   import PropsTable from '#lib/docs/PropsTable.svelte';
 </script>
 
+## Code block in a node
+
+<ComponentExample demo="FlowWithCodeBlockDemo" />

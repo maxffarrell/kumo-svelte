@@ -121,6 +121,7 @@ test("search opens BubbleMap on Maps without a duplicate Charts card", async ({
   page,
 }) => {
   await page.goto("/charts");
+  await page.locator("#svelte-announcer").waitFor({ state: "attached" });
   await expect(
     page.getByRole("heading", { name: "Available Charts" }),
   ).toBeVisible();
@@ -205,4 +206,52 @@ test.describe("dropdown motion", () => {
     await expect(popup).toHaveCount(0);
     await expect(trigger).toBeFocused();
   });
+});
+
+test("Flow without a canvas leaves code selectable", async ({ page }) => {
+  await page.goto("/tests/flow");
+  await page.locator("#svelte-announcer").waitFor({ state: "attached" });
+  const flow = page.locator('[data-testid="flow-contents"]').locator("..");
+  const code = flow.locator("pre").filter({ hasText: "export default" });
+  await expect(code).toBeVisible();
+  await code.scrollIntoViewIfNeeded();
+
+  await expect(flow).not.toHaveCSS("cursor", "grab");
+  const textRange = await code.evaluate((element) => {
+    const text = element.querySelector(".line") ?? element;
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    const { x, y, width, height } = range.getBoundingClientRect();
+    return { x, y, width, height };
+  });
+
+  const y = textRange.y + textRange.height / 2;
+  const bounds = (await flow.boundingBox())!;
+  await page.mouse.move(textRange.x + 1, bounds.y + 2);
+  await page.mouse.down();
+  await page.mouse.move(textRange.x + textRange.width - 1, y, { steps: 10 });
+  await expect(page.locator("body")).not.toHaveCSS("cursor", "grabbing");
+  await expect(page.locator("body")).not.toHaveCSS("user-select", "none");
+  await page.mouse.up();
+  await expect
+    .poll(() => page.evaluate(() => window.getSelection()?.toString()))
+    .toContain("export");
+});
+
+test("Breadcrumbs localizes built-in labels and mirrors its separators", async ({
+  page,
+}) => {
+  await page.goto("/components/breadcrumbs");
+  const trail = page.getByRole("navigation", { name: "مسار التنقل" });
+  await expect(trail).toBeVisible();
+  const copy = trail.getByRole("button", { name: "نسخ" });
+  await copy.hover();
+  await expect(
+    page.locator("[data-tooltip-content]").filter({ hasText: "انقر للنسخ" }),
+  ).toBeVisible();
+  await expect(trail).toHaveCSS("margin-left", "16px");
+  await expect(trail.locator('[aria-hidden="true"] > svg').first()).toHaveCSS(
+    "rotate",
+    "180deg",
+  );
 });

@@ -35,7 +35,7 @@
     size = KUMO_BREADCRUMBS_DEFAULT_VARIANTS.size
   }: KumoBreadcrumbsVariantsProps = {}) {
     return cn(
-      'group mr-4 flex min-w-0 grow items-center overflow-hidden whitespace-nowrap',
+      'group me-4 flex min-w-0 grow items-center overflow-hidden whitespace-nowrap',
       KUMO_BREADCRUMBS_VARIANTS.size[size]?.classes ??
         KUMO_BREADCRUMBS_VARIANTS.size[KUMO_BREADCRUMBS_DEFAULT_VARIANTS.size].classes
     );
@@ -56,6 +56,7 @@
 </script>
 
 <script lang="ts">
+  import { getKumoLocale } from '#lib/utils/locale.js';
   import BreadcrumbsCurrent from './BreadcrumbsCurrent.svelte';
   import BreadcrumbsLink from './BreadcrumbsLink.svelte';
   import BreadcrumbsSeparator from './BreadcrumbsSeparator.svelte';
@@ -65,6 +66,8 @@
     class?: string;
     className?: string;
     items?: BreadcrumbsItem[];
+    /** Overrides the breadcrumb landmark name from KumoLocaleProvider. */
+    'aria-label'?: string;
     [key: string]: unknown;
   }
 
@@ -74,13 +77,15 @@
     className: classNameAlias,
     size = KUMO_BREADCRUMBS_DEFAULT_VARIANTS.size,
     items = [],
+    'aria-label': ariaLabel,
     ...rest
   }: Props = $props();
 
+  const locale = getKumoLocale();
   const mobileItems = $derived(getMobileItems(items));
 </script>
 
-<nav class={cn(breadcrumbsVariants({ size }), className, classNameAlias)} aria-label="breadcrumb" {...rest}>
+<nav class={cn(breadcrumbsVariants({ size }), className, classNameAlias)} aria-label={ariaLabel ?? locale.breadcrumbs.label} {...rest}>
   {#if children}
     {@render children()}
   {:else if items.length > 0}

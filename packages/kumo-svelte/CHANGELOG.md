@@ -1,5 +1,11 @@
 # kumo-svelte
 
+## 0.19.0
+
+### Minor Changes
+
+- c96add1: Port Kumo 2.19.0. Breadcrumbs now supports localized landmark and clipboard labels, and its separators and end margin follow the layout direction. Flow includes a selectable code-block example for diagrams with the canvas disabled.
+
 ## 0.18.1
 
 ### Patch Changes

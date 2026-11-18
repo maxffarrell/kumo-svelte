@@ -210,11 +210,16 @@ test.describe("dropdown motion", () => {
 test("Flow without a canvas leaves code selectable", async ({ page }) => {
   await page.goto("/tests/flow");
   await page.locator("#svelte-announcer").waitFor({ state: "attached" });
-  const code = page.locator("pre").filter({ hasText: "export default" }).first();
+  const code = page
+    .locator("pre")
+    .filter({ hasText: "export default" })
+    .first();
   await expect(code).toBeVisible();
   await code.scrollIntoViewIfNeeded();
 
-  const flow = code.locator('xpath=ancestor::*[@data-testid="flow-contents"]/..');
+  const flow = code.locator(
+    'xpath=ancestor::*[@data-testid="flow-contents"]/..',
+  );
   await expect(flow).not.toHaveCSS("cursor", "grab");
   const textRange = await code.evaluate((element) => {
     const text = element.querySelector(".line") ?? element;
@@ -232,6 +237,24 @@ test("Flow without a canvas leaves code selectable", async ({ page }) => {
   await expect(page.locator("body")).not.toHaveCSS("cursor", "grabbing");
   await expect(page.locator("body")).not.toHaveCSS("user-select", "none");
   await page.mouse.up();
-  await expect.poll(() => page.evaluate(() => window.getSelection()?.toString()))
+  await expect
+    .poll(() => page.evaluate(() => window.getSelection()?.toString()))
     .toContain("export");
+});
+
+test("Breadcrumbs localizes built-in labels and mirrors its separators", async ({
+  page,
+}) => {
+  await page.goto("/components/breadcrumbs");
+  const trail = page.getByRole("navigation", { name: "مسار التنقل" });
+  await expect(trail).toBeVisible();
+  await expect(trail.getByRole("button", { name: "نسخ" })).toHaveAttribute(
+    "title",
+    "انقر للنسخ",
+  );
+  await expect(trail).toHaveCSS("margin-left", "16px");
+  await expect(trail.locator('[aria-hidden="true"] > svg').first()).toHaveCSS(
+    "rotate",
+    "180deg",
+  );
 });

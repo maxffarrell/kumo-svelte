@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getKumoLocale } from '#lib/utils/locale.js';
   import { createCopyFeedback } from '#lib/utils/copy-feedback.svelte.js';
   import Check from 'phosphor-svelte/lib/Check';
   import Copy from 'phosphor-svelte/lib/Copy';
@@ -10,6 +11,7 @@
   }
 
   let { text, ...rest }: Props = $props();
+  const locale = getKumoLocale();
   const feedback = createCopyFeedback(2000);
   const isCopied = $derived(feedback.copied);
 
@@ -22,8 +24,8 @@
   size="sm"
   class="opacity-0 transition-[opacity] group-hover:opacity-100"
   onclick={handleCopyDeeplink}
-  title="Click to copy"
-  aria-label="Copy"
+  title={locale.breadcrumbs.copyTooltip}
+  aria-label={locale.breadcrumbs.copy}
   {...rest}
 >
   {#if isCopied}

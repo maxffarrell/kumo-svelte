@@ -73,6 +73,23 @@ import { Breadcrumbs } from 'kumo-svelte/components/breadcrumbs';
 
 <ComponentSection>
 
+## Localization
+
+Use `KumoLocaleProvider` to translate the breadcrumb landmark name
+(`breadcrumbs.label`), the clipboard button name (`breadcrumbs.copy`), and its
+tooltip (`breadcrumbs.copyTooltip`). The default strings are “breadcrumb”,
+“Copy”, and “Click to copy”.
+
+Pass `aria-label` to `Breadcrumbs` to override the landmark name for an individual trail.
+In a container with `dir="rtl"`, the separators point left and the trail’s end
+margin moves to the left.
+
+<ComponentExample demo="BreadcrumbsLocalizedDemo" />
+
+</ComponentSection>
+
+<ComponentSection>
+
 ## API Reference
 
 ### Breadcrumbs

@@ -206,3 +206,32 @@ test.describe("dropdown motion", () => {
     await expect(trigger).toBeFocused();
   });
 });
+
+test("Flow without a canvas leaves code selectable", async ({ page }) => {
+  await page.goto("/tests/flow");
+  await page.locator("#svelte-announcer").waitFor({ state: "attached" });
+  const code = page.locator("pre").filter({ hasText: "export default" }).first();
+  await expect(code).toBeVisible();
+  await code.scrollIntoViewIfNeeded();
+
+  const flow = code.locator('xpath=ancestor::*[@data-testid="flow-contents"]/..');
+  await expect(flow).not.toHaveCSS("cursor", "grab");
+  const textRange = await code.evaluate((element) => {
+    const text = element.querySelector(".line") ?? element;
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    const { x, y, width, height } = range.getBoundingClientRect();
+    return { x, y, width, height };
+  });
+
+  const y = textRange.y + textRange.height / 2;
+  const bounds = (await flow.boundingBox())!;
+  await page.mouse.move(textRange.x + 1, bounds.y + 2);
+  await page.mouse.down();
+  await page.mouse.move(textRange.x + textRange.width - 1, y, { steps: 10 });
+  await expect(page.locator("body")).not.toHaveCSS("cursor", "grabbing");
+  await expect(page.locator("body")).not.toHaveCSS("user-select", "none");
+  await page.mouse.up();
+  await expect.poll(() => page.evaluate(() => window.getSelection()?.toString()))
+    .toContain("export");
+});

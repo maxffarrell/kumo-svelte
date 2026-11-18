@@ -121,6 +121,7 @@ test("search opens BubbleMap on Maps without a duplicate Charts card", async ({
   page,
 }) => {
   await page.goto("/charts");
+  await page.locator("#svelte-announcer").waitFor({ state: "attached" });
   await expect(
     page.getByRole("heading", { name: "Available Charts" }),
   ).toBeVisible();
@@ -210,16 +211,11 @@ test.describe("dropdown motion", () => {
 test("Flow without a canvas leaves code selectable", async ({ page }) => {
   await page.goto("/tests/flow");
   await page.locator("#svelte-announcer").waitFor({ state: "attached" });
-  const code = page
-    .locator("pre")
-    .filter({ hasText: "export default" })
-    .first();
+  const flow = page.locator('[data-testid="flow-contents"]').locator("..");
+  const code = flow.locator("pre").filter({ hasText: "export default" });
   await expect(code).toBeVisible();
   await code.scrollIntoViewIfNeeded();
 
-  const flow = code.locator(
-    'xpath=ancestor::*[@data-testid="flow-contents"]/..',
-  );
   await expect(flow).not.toHaveCSS("cursor", "grab");
   const textRange = await code.evaluate((element) => {
     const text = element.querySelector(".line") ?? element;
@@ -248,10 +244,11 @@ test("Breadcrumbs localizes built-in labels and mirrors its separators", async (
   await page.goto("/components/breadcrumbs");
   const trail = page.getByRole("navigation", { name: "مسار التنقل" });
   await expect(trail).toBeVisible();
-  await expect(trail.getByRole("button", { name: "نسخ" })).toHaveAttribute(
-    "title",
-    "انقر للنسخ",
-  );
+  const copy = trail.getByRole("button", { name: "نسخ" });
+  await copy.hover();
+  await expect(
+    page.locator("[data-tooltip-content]").filter({ hasText: "انقر للنسخ" }),
+  ).toBeVisible();
   await expect(trail).toHaveCSS("margin-left", "16px");
   await expect(trail.locator('[aria-hidden="true"] > svg').first()).toHaveCSS(
     "rotate",

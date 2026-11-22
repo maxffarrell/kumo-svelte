@@ -19,12 +19,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 1
-      - id: cache-semgrep
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-        with:
-          path: ~/.local
-          key: semgrep-1.160.0-${{ runner.os }}-${{ runner.arch }}
-      - if: steps.cache-semgrep.outputs.cache-hit != 'true'
-        run: pip install --user semgrep==1.160.0
-      - run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - run: semgrep scan --config=auto
+      - name: Install Semgrep
+        run: |
+          python3 -m venv "$RUNNER_TEMP/semgrep"
+          "$RUNNER_TEMP/semgrep/bin/python" -m pip install semgrep==1.160.0
+      - run: '"$RUNNER_TEMP/semgrep/bin/semgrep" scan --config=auto'

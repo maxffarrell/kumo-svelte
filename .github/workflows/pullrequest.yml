@@ -25,7 +25,7 @@ jobs:
     # Renovate generates dependency PRs without release notes.
     if: github.event.pull_request.user.login != 'renovate[bot]'
     timeout-minutes: 2
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -37,7 +37,7 @@ jobs:
 
   build:
     timeout-minutes: 5
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -55,7 +55,7 @@ jobs:
 
   lint:
     timeout-minutes: 5
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -65,7 +65,7 @@ jobs:
 
   typecheck:
     timeout-minutes: 5
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -75,7 +75,7 @@ jobs:
 
   test:
     timeout-minutes: 5
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-26.04-arm
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:

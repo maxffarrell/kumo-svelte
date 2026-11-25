@@ -1,7 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "kumo-svelte",
-  "main": ".svelte-kit/cloudflare/_worker.js",
   "account_id": "ecb6cf90208469786cff01f71ef0a8cd",
   "compatibility_date": "2026-05-16",
   "compatibility_flags": ["nodejs_als"],
@@ -9,7 +8,6 @@
   "preview_urls": true,
   "assets": {
     "binding": "ASSETS",
-    "directory": ".svelte-kit/cloudflare",
     "html_handling": "auto-trailing-slash"
   },
   "routes": [

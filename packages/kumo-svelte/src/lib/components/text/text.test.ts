@@ -15,6 +15,17 @@ describe("Text", () => {
     expect(textVariants({ variant: "mono" })).toContain("text-sm/[inherit]");
   });
 
+  it("allows a copy variant to render a semantic heading", () => {
+    const { container } = render(Text, {
+      as: "h2",
+      variant: "secondary",
+      size: "base",
+      bold: true,
+    });
+    const heading = container.querySelector("h2");
+    expect(heading).toHaveClass("text-kumo-subtle", "font-bold");
+  });
+
   it("renders the new heading variant as a span by default", () => {
     const { container } = render(Text, { variant: "heading" });
     const heading = container.querySelector("span")!;

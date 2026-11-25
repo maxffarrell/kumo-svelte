@@ -17,7 +17,7 @@
     {/snippet}
     <div class="mb-4 flex items-start justify-between gap-4">
       <h2 class="text-2xl font-semibold">Resource Actions</h2>
-      <Button variant="secondary" shape="square" aria-label="Close" onclick={() => (open = false)}>
+      <Button variant="ghost" shape="square" aria-label="Close" onclick={() => (open = false)}>
         <X />
       </Button>
     </div>

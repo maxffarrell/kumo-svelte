@@ -75,7 +75,7 @@
 [data-overflowing] {
   @supports (animation-timeline: scroll()) {
     mask-image: linear-gradient(
-      to right,
+      var(--scroll-fade-direction, to right),
       transparent,
       white calc(var(--fade-left-n) * var(--scroll-fade-width, 3rem)),
       white calc(100% - var(--fade-right-n) * var(--scroll-fade-width, 3rem)),
@@ -94,6 +94,10 @@
 
 .kumo-tabs-list {
   overscroll-behavior-x: contain;
+
+  &:dir(rtl) {
+    --scroll-fade-direction: to left;
+  }
 }
 
 @supports (animation-timeline: scroll()) {
@@ -342,6 +346,10 @@
     oklch(55.4% 0.135 66.442 / 0.5)
   );
 
+  --color-kumo-badge-secondary: light-dark(
+    var(--color-kumo-neutral-125, oklch(96.5% 0 0)),
+    var(--color-neutral-800, oklch(26.9% 0 0))
+  );
   --color-kumo-badge-red: light-dark(
     var(--color-red-600, oklch(57.7% 0.245 27.325)),
     var(--color-red-700, oklch(50.5% 0.213 27.518))
@@ -398,7 +406,7 @@
   --text-xs: 12px;
   --text-xs--line-height: calc(1 / 0.75);
   --text-sm: 13px;
-  --text-sm--line-height: calc(1 / 0.85);
+  --text-sm--line-height: calc(1.25 / 0.875);
   --text-base: 14px;
   --text-base--line-height: 1.5;
   --text-lg: 16px;
@@ -476,6 +484,7 @@
       --color-yellow-100,
       oklch(97.3% 0.071 103.193)
     );
+    --color-kumo-badge-secondary: var(--color-kumo-neutral-125, oklch(96.5% 0 0));
     --color-kumo-badge-red: var(--color-red-600, oklch(57.7% 0.245 27.325));
     --color-kumo-badge-orange: var(--color-orange-650, oklch(81.5% 0.197 76));
     --color-kumo-badge-orange-subtle: var(
@@ -563,6 +572,7 @@
     --color-kumo-success: var(--color-emerald-400, oklch(76.5% 0.177 163.223));
     --color-kumo-banner-info: oklch(37.9% 0.146 265.522 / 0.5);
     --color-kumo-banner-warning: oklch(55.4% 0.135 66.442 / 0.5);
+    --color-kumo-badge-secondary: var(--color-neutral-800, oklch(26.9% 0 0));
     --color-kumo-badge-red: var(--color-red-700, oklch(50.5% 0.213 27.518));
     --color-kumo-badge-orange: var(--color-orange-650, oklch(81.5% 0.197 76));
     --color-kumo-badge-orange-subtle: var(

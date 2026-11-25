@@ -14,7 +14,7 @@
 
   export const KUMO_TOAST_VARIANTS = {
     close: {
-      classes: 'absolute top-2 right-2 size-5 rounded text-kumo-subtle hover:bg-current/15',
+      classes: 'absolute top-2 end-2 size-5 rounded text-kumo-subtle hover:bg-current/15',
       description: 'Button-based close control with variant-aware hover tint'
     },
     variant: {
@@ -78,6 +78,23 @@
     container
   }: Props = $props();
 
+  let directionAnchor = $state<HTMLSpanElement>();
+  let direction = $state<'ltr' | 'rtl'>('ltr');
+
+  $effect(() => {
+    const anchor = directionAnchor;
+    if (!anchor) return;
+    const updateDirection = () => {
+      direction = getComputedStyle(anchor).direction === 'rtl' ? 'rtl' : 'ltr';
+    };
+    const observer = new MutationObserver(updateDirection);
+    for (let node: HTMLElement | null = anchor; node; node = node.parentElement) {
+      observer.observe(node, { attributes: true, attributeFilter: ['dir'] });
+    }
+    updateDirection();
+    return () => observer.disconnect();
+  });
+
   let expanded = $state(false);
   let toastHeights = $state<Record<string, number>>({});
   let viewportNode = $state<HTMLDivElement>();
@@ -104,6 +121,60 @@
       },
       destroy() {
         resizeObserver.disconnect();
+      }
+    };
+  }
+
+  function swipeToast(node: HTMLElement, id: string) {
+    let start: { x: number; y: number; pointerId: number } | undefined;
+
+    function pointerDown(event: PointerEvent) {
+      if (event.button !== 0 || !event.isPrimary ||
+          (event.target instanceof Element && event.target.closest('button, a, input, select, textarea'))) return;
+      start = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+      node.setPointerCapture(event.pointerId);
+    }
+
+    function movement(event: PointerEvent) {
+      if (!start || event.pointerId !== start.pointerId) return;
+      const offsetX = event.clientX - start.x;
+      const x = direction === 'rtl' ? Math.min(0, offsetX) : Math.max(0, offsetX);
+      const y = Math.max(0, event.clientY - start.y);
+      return Math.abs(x) > y ? { x, y: 0 } : { x: 0, y };
+    }
+
+    function pointerMove(event: PointerEvent) {
+      const distance = movement(event);
+      if (!distance) return;
+      node.dataset.swiping = '';
+      node.style.setProperty('--toast-swipe-movement-x', `${distance.x}px`);
+      node.style.setProperty('--toast-swipe-movement-y', `${distance.y}px`);
+    }
+
+    function finish(event: PointerEvent) {
+      const distance = movement(event);
+      if (!distance) return;
+      start = undefined;
+      delete node.dataset.swiping;
+      if (event.type === 'pointerup' && (Math.abs(distance.x) >= 40 || distance.y >= 40)) {
+        node.dataset.swipeDirection = distance.y ? 'down' : direction === 'rtl' ? 'left' : 'right';
+        toastManager.remove(id);
+      } else {
+        node.style.removeProperty('--toast-swipe-movement-x');
+        node.style.removeProperty('--toast-swipe-movement-y');
+      }
+    }
+
+    node.addEventListener('pointerdown', pointerDown);
+    node.addEventListener('pointermove', pointerMove);
+    node.addEventListener('pointerup', finish);
+    node.addEventListener('lostpointercapture', finish);
+    return {
+      destroy() {
+        node.removeEventListener('pointerdown', pointerDown);
+        node.removeEventListener('pointermove', pointerMove);
+        node.removeEventListener('pointerup', finish);
+        node.removeEventListener('lostpointercapture', finish);
       }
     };
   }
@@ -139,9 +210,7 @@
       `--toast-index:${index}`,
       `--toast-height:${height}px`,
       `--toast-frontmost-height:${frontmostHeight}px`,
-      `--toast-offset-y:${toastOffset(index)}px`,
-      '--toast-swipe-movement-x:0px',
-      '--toast-swipe-movement-y:0px'
+      `--toast-offset-y:${toastOffset(index)}px`
     ].join(';');
   }
 
@@ -189,14 +258,16 @@
   setKumoToastManager(() => toastManager);
 </script>
 
+<span hidden bind:this={directionAnchor}></span>
 {@render children?.(toastManager)}
 
 {#if toastItems.length}
   <Portal to={container}>
     <div
       bind:this={viewportNode}
+      dir={direction}
       class={cn(
-        'fixed top-auto right-4 bottom-4 z-[1000] mx-auto flex h-[var(--toast-frontmost-height,var(--toast-height,80px))] w-[calc(100%-2rem)] overflow-visible data-[expanded]:h-[var(--toast-stack-height)] sm:right-8 sm:bottom-8 sm:w-[340px]',
+        'fixed top-auto end-4 bottom-4 z-[1000] mx-auto flex h-[var(--toast-frontmost-height,var(--toast-height,80px))] w-[calc(100%-2rem)] overflow-visible data-[expanded]:h-[var(--toast-stack-height)] sm:end-8 sm:bottom-8 sm:w-[340px]',
         className
       )}
       style={viewportStyle}
@@ -212,17 +283,18 @@
       {#each toastItems as toast, toastIndex (toast.id)}
         <div
           use:measureToast={toast.id}
+          use:swipeToast={toast.id}
           class={cn(
-            'absolute right-0 bottom-0 left-auto z-[calc(1000-var(--toast-index))] mr-0 h-[var(--height)] w-full origin-bottom select-none',
-            'rounded-xl motion-reduce:[transition-property:opacity]',
-            '[--gap:0.75rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]',
-            '[transform:translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))] [transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]',
-            "after:absolute after:top-full after:left-0 after:h-[calc(var(--gap)+1px)] after:w-full after:content-['']",
-            'data-[ending-style]:opacity-0 data-[expanded]:h-[var(--toast-height)] data-[expanded]:[transform:translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--offset-y)))] data-[limited]:opacity-0 data-[starting-style]:[transform:translateY(150%)]',
-            'data-[ending-style]:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))] data-[expanded]:data-[ending-style]:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))]',
-            'data-[ending-style]:data-[swipe-direction=left]:[transform:translateX(calc(var(--toast-swipe-movement-x)-150%))_translateY(var(--offset-y))] data-[expanded]:data-[ending-style]:data-[swipe-direction=left]:[transform:translateX(calc(var(--toast-swipe-movement-x)-150%))_translateY(var(--offset-y))]',
-            'data-[ending-style]:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x)+150%))_translateY(var(--offset-y))] data-[expanded]:data-[ending-style]:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x)+150%))_translateY(var(--offset-y))]',
-            'data-[ending-style]:data-[swipe-direction=up]:[transform:translateY(calc(var(--toast-swipe-movement-y)-150%))] data-[expanded]:data-[ending-style]:data-[swipe-direction=up]:[transform:translateY(calc(var(--toast-swipe-movement-y)-150%))]',
+            'absolute end-0 bottom-0 start-auto z-[calc(1000-var(--toast-index))] me-0 h-[var(--height)] w-full origin-bottom select-none',
+            'touch-none rounded-xl data-[swiping]:[transition-duration:0ms] motion-reduce:[transition-property:opacity]',
+            '[--gap:0.75rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y,0px))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]',
+            '[transform:translateX(var(--toast-swipe-movement-x,0px))_translateY(calc(var(--toast-swipe-movement-y,0px)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))] [transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s]',
+            "after:absolute after:top-full after:start-0 after:h-[calc(var(--gap)+1px)] after:w-full after:content-['']",
+            'data-[ending-style]:opacity-0 data-[expanded]:h-[var(--toast-height)] data-[expanded]:[transform:translateX(var(--toast-swipe-movement-x,0px))_translateY(calc(var(--offset-y)))] data-[limited]:opacity-0 data-[starting-style]:[transform:translateY(150%)]',
+            'data-[ending-style]:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y,0px)+150%))] data-[expanded]:data-[ending-style]:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y,0px)+150%))]',
+            'data-[ending-style]:data-[swipe-direction=left]:[transform:translateX(calc(var(--toast-swipe-movement-x,0px)-150%))_translateY(var(--offset-y))] data-[expanded]:data-[ending-style]:data-[swipe-direction=left]:[transform:translateX(calc(var(--toast-swipe-movement-x,0px)-150%))_translateY(var(--offset-y))]',
+            'data-[ending-style]:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x,0px)+150%))_translateY(var(--offset-y))] data-[expanded]:data-[ending-style]:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x,0px)+150%))_translateY(var(--offset-y))]',
+            'data-[ending-style]:data-[swipe-direction=up]:[transform:translateY(calc(var(--toast-swipe-movement-y,0px)-150%))] data-[expanded]:data-[ending-style]:data-[swipe-direction=up]:[transform:translateY(calc(var(--toast-swipe-movement-y,0px)-150%))]',
             '[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:[transform:translateY(150%)]'
           )}
           style={toastStyle(toast.id, toastIndex)}

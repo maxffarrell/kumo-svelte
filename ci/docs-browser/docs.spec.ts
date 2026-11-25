@@ -4,6 +4,7 @@ test("the homepage sidebar and demos receive pointer input", async ({
   page,
 }) => {
   await page.goto("/");
+  await page.locator("#svelte-announcer").waitFor({ state: "attached" });
   const toggle = page.getByRole("button", { name: "Toggle sidebar" });
   await toggle.click();
   await expect(toggle).toHaveAttribute("aria-pressed", "false");

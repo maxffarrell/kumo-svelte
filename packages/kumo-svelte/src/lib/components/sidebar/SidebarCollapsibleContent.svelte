@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { getContext } from 'svelte';
+  import { getContext, untrack } from 'svelte';
+  import { scrollWithinViewport } from './scroll-within-viewport';
   import { cn } from '#lib/utils/cn.js';
   import { getSidebarContext } from './context';
   interface CollapsibleContext { get open(): boolean; get contentId(): string; get autoScrollOnOpen(): boolean; toggle(): void; completeOpenChange(): void; }
@@ -17,17 +18,19 @@
     }
   }
 
+  let previousOpen: boolean | undefined;
   $effect(() => {
-    if (!isOpen || !collapsible?.autoScrollOnOpen || !contentEl) return;
+    const open = Boolean(collapsible?.open);
+    const justOpened = open && previousOpen === false;
+    previousOpen = open;
+    if (!justOpened) return;
 
+    // Expanding the sidebar can reveal a section that was already open.
+    if (!untrack(() => isOpen && collapsible?.autoScrollOnOpen)) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const timeout = window.setTimeout(() => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      contentEl?.scrollIntoView({
-        block: 'nearest',
-        behavior: prefersReducedMotion ? 'auto' : 'smooth'
-      });
-    }, sidebar.animationDuration);
-
+      if (isOpen && contentEl) scrollWithinViewport(contentEl, { behavior: 'smooth' });
+    }, reducedMotion ? 0 : sidebar.animationDuration);
     return () => window.clearTimeout(timeout);
   });
 </script>

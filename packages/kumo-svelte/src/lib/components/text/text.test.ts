@@ -3,16 +3,27 @@ import { describe, expect, it, vi } from "vitest";
 import Text, { textVariants } from "./Text.svelte";
 
 describe("Text", () => {
-  it("inherits line height for non-heading sizes", () => {
+  it("uses token line heights for non-heading sizes", () => {
     for (const [size, expected] of [
-      ["xs", "text-xs/[inherit]"],
-      ["sm", "text-sm/[inherit]"],
-      ["base", "text-base/[inherit]"],
-      ["lg", "text-lg/[inherit]"],
+      ["xs", "text-xs"],
+      ["sm", "text-sm"],
+      ["base", "text-base"],
+      ["lg", "text-lg"],
     ] as const) {
-      expect(textVariants({ variant: "body", size })).toContain(expected);
+      expect(textVariants({ variant: "body", size }).split(/\s+/)).toContain(expected);
     }
-    expect(textVariants({ variant: "mono" })).toContain("text-sm/[inherit]");
+    expect(textVariants({ variant: "mono" }).split(/\s+/)).toContain("text-sm");
+  });
+
+  it("allows a copy variant to render a semantic heading", () => {
+    const { container } = render(Text, {
+      as: "h2",
+      variant: "secondary",
+      size: "base",
+      bold: true,
+    });
+    const heading = container.querySelector("h2");
+    expect(heading).toHaveClass("text-kumo-subtle", "font-medium");
   });
 
   it("renders the new heading variant as a span by default", () => {

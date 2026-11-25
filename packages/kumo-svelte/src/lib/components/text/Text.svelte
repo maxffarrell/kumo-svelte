@@ -50,19 +50,19 @@
     },
     size: {
       xs: {
-        classes: 'text-xs/[inherit]',
+        classes: 'text-xs',
         description: 'Extra small text'
       },
       sm: {
-        classes: 'text-sm/[inherit]',
+        classes: 'text-sm',
         description: 'Small text'
       },
       base: {
-        classes: 'text-base/[inherit]',
+        classes: 'text-base',
         description: 'Default text size'
       },
       lg: {
-        classes: 'text-lg/[inherit]',
+        classes: 'text-lg',
         description: 'Large text'
       }
     }

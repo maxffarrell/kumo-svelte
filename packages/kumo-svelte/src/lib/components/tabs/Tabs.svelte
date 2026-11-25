@@ -99,6 +99,7 @@
   }: Props = $props();
 
   let listEl: HTMLDivElement | null = $state(null);
+  let isRtl = $state(false);
   let isOverflowing = $state(false);
   let canScrollStart = $state(false);
   let canScrollEnd = $state(false);
@@ -128,8 +129,9 @@
       canScrollEnd = false;
       return;
     }
+    isRtl = getComputedStyle(listEl).direction === "rtl";
     const maxScrollLeft = Math.max(0, listEl.scrollWidth - listEl.clientWidth);
-    const scrollLeft = Math.min(Math.max(0, listEl.scrollLeft), maxScrollLeft);
+    const scrollLeft = Math.min(Math.max(0, isRtl ? -listEl.scrollLeft : listEl.scrollLeft), maxScrollLeft);
     isOverflowing = maxScrollLeft > 1;
     canScrollStart = scrollLeft > 1;
     canScrollEnd = maxScrollLeft - scrollLeft > 1;
@@ -249,7 +251,8 @@
       distance += tab.offsetWidth;
     }
     const amount = distance || listEl.clientWidth;
-    listEl.scrollBy({ left: direction === 'start' ? -amount : amount, behavior: 'smooth' });
+    const towardEnd = direction === 'end' ? amount : -amount;
+    listEl.scrollBy({ left: isRtl ? -towardEnd : towardEnd, behavior: 'smooth' });
   }
 
   $effect(() => {
@@ -374,9 +377,10 @@
 
     {#if isSegmented}
       {#each [
-        { side: 'start', visible: canScrollStart, label: labels.scrollStart ?? 'Scroll tabs left' },
-        { side: 'end', visible: canScrollEnd, label: labels.scrollEnd ?? 'Scroll tabs right' }
-      ] as control}
+        { side: 'start', visible: canScrollStart, label: labels.scrollStart ?? (isRtl ? 'Scroll tabs right' : 'Scroll tabs left') },
+        { side: 'end', visible: canScrollEnd, label: labels.scrollEnd ?? (isRtl ? 'Scroll tabs left' : 'Scroll tabs right') }
+      ] as control (control.side)}
+        {@const isLeft = (control.side === 'start') !== isRtl}
         <button
           type="button"
           data-kumo-component="Tabs"
@@ -388,15 +392,15 @@
           onclick={() => scrollTabs(control.side as 'start' | 'end')}
           class={cn(
             'absolute inset-y-0 z-3 flex items-center border-0 bg-transparent p-0 transition-opacity duration-150 focus:outline-hidden focus-visible:[&>span]:ring-2 focus-visible:[&>span]:ring-kumo-brand',
-            control.side === 'start' ? 'left-0 justify-start bg-linear-to-r' : 'right-0 justify-end bg-linear-to-l',
+            isLeft ? 'left-0 justify-start bg-linear-to-r' : 'right-0 justify-end bg-linear-to-l',
             control.visible ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
             'from-kumo-recessed via-kumo-recessed/95 to-transparent',
             isSm ? 'w-8 rounded-md' : 'w-10 rounded-lg'
           )}
         >
-          <span class={cn('flex items-center justify-center text-kumo-subtle transition-colors hover:text-kumo-default', isSm ? 'size-5 rounded-sm' : 'size-6 rounded-md', control.side === 'start' ? 'ml-1' : 'mr-1')}>
+          <span class={cn('flex items-center justify-center text-kumo-subtle transition-colors hover:text-kumo-default', isSm ? 'size-5 rounded-sm' : 'size-6 rounded-md', isLeft ? 'ml-1' : 'mr-1')}>
             <svg viewBox="0 0 16 16" fill="none" class="size-3.5" aria-hidden="true">
-              <path d={control.side === 'start' ? 'M9.25 4.25L5.75 8L9.25 11.75' : 'M6.75 4.25L10.25 8L6.75 11.75'} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              <path d={isLeft ? 'M9.25 4.25L5.75 8L9.25 11.75' : 'M6.75 4.25L10.25 8L6.75 11.75'} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
             </svg>
           </span>
         </button>

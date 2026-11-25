@@ -75,7 +75,7 @@
 [data-overflowing] {
   @supports (animation-timeline: scroll()) {
     mask-image: linear-gradient(
-      to right,
+      var(--scroll-fade-direction, to right),
       transparent,
       white calc(var(--fade-left-n) * var(--scroll-fade-width, 3rem)),
       white calc(100% - var(--fade-right-n) * var(--scroll-fade-width, 3rem)),
@@ -94,6 +94,10 @@
 
 .kumo-tabs-list {
   overscroll-behavior-x: contain;
+
+  &:dir(rtl) {
+    --scroll-fade-direction: to left;
+  }
 }
 
 @supports (animation-timeline: scroll()) {

@@ -1,5 +1,12 @@
 # kumo-svelte
 
+## 0.19.1
+
+### Patch Changes
+
+- 8e0fb86: Port Kumo 2.19.1. Mirror Toast and Tabs behavior in RTL, align Badge and Text tokens, update Dialog examples, and keep Sidebar autoscroll inside its own viewport. Update compatible dependencies and migrate the docs to SvelteKit's Cloudflare adapter 9 Worker output.
+- 3b419f4: Match Layer Dialog's inset content panel, desktop footer, and mobile sheet styling to Kumo. Keep the title and actions visible while long content scrolls and add the upstream examples to the docs.
+
 ## 0.19.0
 
 ### Minor Changes

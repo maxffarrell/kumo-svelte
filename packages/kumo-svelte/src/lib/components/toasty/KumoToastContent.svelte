@@ -44,14 +44,14 @@
 
 <div class={cn('absolute inset-0 rounded-xl bg-kumo-base/90', toast.variant && backgroundClasses[toast.variant])}></div>
 <div
-  class="isolate flex flex-col gap-1 transition-opacity [transition-duration:250ms] data-[behind]:pointer-events-none data-[behind]:opacity-0 data-[expanded]:pointer-events-auto data-[expanded]:opacity-100"
+  class="isolate flex flex-col gap-1 pe-6 transition-opacity [transition-duration:250ms] data-[behind]:pointer-events-none data-[behind]:opacity-0 data-[expanded]:pointer-events-auto data-[expanded]:opacity-100"
   data-behind={behind ? '' : undefined}
   data-expanded={expanded ? '' : undefined}
 >
   {#if toast.content}
     {@render toast.content()}
   {:else}
-    <div class="flex items-start gap-2 pr-5">
+    <div class="flex items-start gap-2">
       {#if Icon}
         <Icon data-toast-icon class="mt-0.5 h-4 w-4 shrink-0" weight="fill" />
       {/if}
@@ -79,7 +79,7 @@
   <Button
     data-kumo-component="Toast"
     data-kumo-part="close"
-    class={cn('absolute top-2 right-2 size-5 rounded text-kumo-subtle hover:bg-current/15', toast.variant && closeClasses[toast.variant])}
+    class={cn('absolute top-2 end-2 size-5 rounded text-kumo-subtle hover:bg-current/15', toast.variant && closeClasses[toast.variant])}
     aria-label="Close"
     variant="ghost"
     size="sm"

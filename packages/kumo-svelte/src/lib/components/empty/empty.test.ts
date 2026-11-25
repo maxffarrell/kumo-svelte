@@ -19,7 +19,7 @@ describe('Empty', () => {
     const description = screen.getByText('Try adjusting your search.');
     expect(title.className).toContain('text-xl');
     expect(title.className).toContain('font-semibold');
-    expect(description.className).toContain('text-base/[inherit]');
+    expect(description.classList).toContain('text-base');
     expect(description.className).toContain('text-balance');
     expect(title.parentElement).toBe(description.parentElement);
     expect(title.parentElement?.className).toContain('gap-2.5');
@@ -28,7 +28,7 @@ describe('Empty', () => {
   it('renders a secondary base heading without a description', () => {
     render(Empty, { title: 'Nothing here' });
     const title = screen.getByRole('heading', { name: 'Nothing here' });
-    expect(title.className).toContain('text-base/[inherit]');
+    expect(title.classList).toContain('text-base');
     expect(title.className).toContain('text-kumo-subtle');
     expect(title.className).not.toContain('font-semibold');
   });

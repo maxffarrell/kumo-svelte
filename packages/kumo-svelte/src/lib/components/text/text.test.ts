@@ -10,9 +10,9 @@ describe("Text", () => {
       ["base", "text-base"],
       ["lg", "text-lg"],
     ] as const) {
-      expect(textVariants({ variant: "body", size })).toContain(expected);
+      expect(textVariants({ variant: "body", size }).split(/\s+/)).toContain(expected);
     }
-    expect(textVariants({ variant: "mono" })).toContain("text-sm");
+    expect(textVariants({ variant: "mono" }).split(/\s+/)).toContain("text-sm");
   });
 
   it("allows a copy variant to render a semantic heading", () => {

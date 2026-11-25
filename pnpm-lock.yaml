@@ -10,7 +10,7 @@ overrides:
   read-yaml-file: 3.0.0
   sharp@<0.35.5: 0.35.5
   shell-quote@<1.11.0: 1.12.0
-  source-map-js@<1.2.2: 1.2.3
+  source-map-js@<1.2.2: 1.2.4
   undici: 7.30.2
   ws: 8.23.0
 
@@ -2358,10 +2358,6 @@ packages:
     resolution: {integrity: sha512-2WCqLdt12eN6ehLI50S2/ZxoowXU3DD1KVPRyVP0WEsFahrGZZmCdq1K59qjJljMRIDTwx1D9YaRK+hDneBUMg==}
     engines: {node: '>=20'}
 
-  source-map-js@1.2.3:
-    resolution: {integrity: sha512-xj+WrAkyv5Qp+t7r9N5HvCBu7g1qOe6CKRNpq22X1GGcPEQADFU54v5qsPVs3/vrUFQ7XivFrcAVKA2stI0kWA==}
-    engines: {node: '>=0.10.0'}
-
   source-map-js@1.2.4:
     resolution: {integrity: sha512-J7ZjMvHd9O1fcT/5V09QWaaSl2BbWx3F6O08spde82Namf9UB0GxRVIPiNbVsdKkoizHiSpTodo3vp2bAy91MA==}
     engines: {node: '>=6.0.0'}
@@ -3524,7 +3520,7 @@ snapshots:
       jiti: 2.7.0
       lightningcss: 1.33.0
       magic-string: 1.4.5
-      source-map-js: 1.2.3
+      source-map-js: 1.2.4
       tailwindcss: 4.3.5
 
   '@tailwindcss/oxide-android-arm64@4.3.5':
@@ -4784,8 +4780,6 @@ snapshots:
       totalist: 3.0.1
 
   sisteransi@2.0.0: {}
-
-  source-map-js@1.2.3: {}
 
   source-map-js@1.2.4: {}
 

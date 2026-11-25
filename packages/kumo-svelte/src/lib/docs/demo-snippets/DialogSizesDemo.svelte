@@ -27,7 +27,7 @@
 
       <div class="mb-4 flex items-start justify-between gap-4">
         <h2 class="text-2xl font-semibold">{label} Dialog</h2>
-        <Button variant="secondary" shape="square" aria-label="Close" onclick={() => (openBySize[size] = false)}>
+        <Button variant="ghost" shape="square" aria-label="Close" onclick={() => (openBySize[size] = false)}>
           <X />
         </Button>
       </div>

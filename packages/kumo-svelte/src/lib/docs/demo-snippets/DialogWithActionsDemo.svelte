@@ -12,11 +12,11 @@
     class="p-8"
   >
     {#snippet trigger(props)}
-      <Button {...props}>Delete</Button>
+      <Button {...props}>Save changes</Button>
     {/snippet}
     <div class="mb-4 flex items-start justify-between gap-4">
-      <h2 class="text-2xl font-semibold">Modal Title</h2>
-      <Button variant="secondary" shape="square" aria-label="Close" onclick={() => (open = false)}>
+      <h2 class="text-2xl font-semibold">Save changes</h2>
+      <Button variant="ghost" shape="square" aria-label="Close" onclick={() => (open = false)}>
         <X />
       </Button>
     </div>
@@ -26,7 +26,7 @@
     </p>
     <div class="mt-8 flex justify-end gap-2">
       <Button variant="secondary" onclick={() => (open = false)}>Cancel</Button>
-      <Button variant="destructive" onclick={() => (open = false)}>Delete</Button>
+      <Button variant="primary" onclick={() => (open = false)}>Save</Button>
     </div>
   </Dialog>
 </div>

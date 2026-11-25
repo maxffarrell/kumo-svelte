@@ -183,6 +183,8 @@ Dialog containing a Dropdown menu.
 
 <ComponentSection>
 
+Use `role="alertdialog"` for destructive confirmations. Keep explicit response buttons such as Cancel and Delete in the footer and omit the header close button.
+
 ## API Reference
 
 ### Dialog

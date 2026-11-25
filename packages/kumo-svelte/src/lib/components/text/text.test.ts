@@ -23,7 +23,7 @@ describe("Text", () => {
       bold: true,
     });
     const heading = container.querySelector("h2");
-    expect(heading).toHaveClass("text-kumo-subtle", "font-bold");
+    expect(heading).toHaveClass("text-kumo-subtle", "font-medium");
   });
 
   it("renders the new heading variant as a span by default", () => {

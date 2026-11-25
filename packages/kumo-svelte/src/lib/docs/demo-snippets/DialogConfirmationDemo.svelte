@@ -7,7 +7,7 @@
 </script>
 
 <div class="flex min-h-24 w-full items-center justify-center">
-  <Dialog bind:open disablePointerDismissal class="p-8">
+  <Dialog bind:open role="alertdialog" class="p-8">
     {#snippet trigger(props)}
       <Button variant="destructive" {...props}>Delete Project</Button>
     {/snippet}

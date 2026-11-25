@@ -25,7 +25,7 @@
     {/snippet}
     <div class="mb-4 flex items-start justify-between gap-4">
       <h2 class="text-2xl font-semibold">Create Resource</h2>
-      <Button variant="secondary" shape="square" aria-label="Close" onclick={() => (open = false)}>
+      <Button variant="ghost" shape="square" aria-label="Close" onclick={() => (open = false)}>
         <X />
       </Button>
     </div>
@@ -43,7 +43,7 @@
     </Combobox>
     <div class="mt-8 flex justify-end gap-2">
       <Button variant="secondary" onclick={() => (open = false)}>Cancel</Button>
-      <Button variant="primary">Create</Button>
+      <Button variant="primary" onclick={() => (open = false)}>Create</Button>
     </div>
   </Dialog>
 </div>

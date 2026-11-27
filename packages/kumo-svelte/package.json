@@ -96,7 +96,7 @@
     "@sveltejs/adapter-cloudflare": "9.0.0",
     "@sveltejs/kit": "3.4.0",
     "@sveltejs/package": "3.0.3",
-    "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "@sveltejs/vite-plugin-svelte": "7.3.2",
     "@tailwindcss/vite": "4.3.5",
     "@testing-library/jest-dom": "8.0.0",
     "@testing-library/svelte": "5.4.2",
@@ -115,7 +115,7 @@
     "typescript": "6.0.3",
     "vite": "8.3.8",
     "vitest": "5.1.1",
-    "wrangler": "4.166.0"
+    "wrangler": "4.167.0"
   },
   "imports": {
     "#lib": "./dist/index.js",
